@@ -1,0 +1,63 @@
+{
+  "totals": {
+    "total_examples_in_gens": 54,
+    "examples_with_any_eval": 46,
+    "total_doc_pairs_evaluated": 385,
+    "correct_doc_pairs": 379,
+    "micro_accuracy_doc_level": 98.44
+  },
+  "overall": {
+    "macro_f1": 0.9817,
+    "verdict_labels": [
+      "supports",
+      "partially supports",
+      "irrelevant"
+    ],
+    "per_class": {
+      "supports": {
+        "precision": 0.9783,
+        "recall": 0.9956,
+        "f1": 0.9868
+      },
+      "partially supports": {
+        "precision": 0.9891,
+        "recall": 0.9891,
+        "f1": 0.9891
+      },
+      "irrelevant": {
+        "precision": 1.0,
+        "recall": 0.9403,
+        "f1": 0.9692
+      }
+    },
+    "confusion_matrix": {
+      "supports": {
+        "supports": 225,
+        "partially supports": 1,
+        "irrelevant": 0
+      },
+      "partially supports": {
+        "supports": 1,
+        "partially supports": 91,
+        "irrelevant": 0
+      },
+      "irrelevant": {
+        "supports": 4,
+        "partially supports": 0,
+        "irrelevant": 63
+      }
+    }
+  },
+  "error_counts": {
+    "json_array_parse_error: Expecting ',' delimiter: line 2 column 368 (char 369)": 1,
+    "think_block_not_unique": 4,
+    "think_block_missing_or_misaligned": 2,
+    "docs_missing_in_pred": 8,
+    "json_array_parse_error: Expecting ',' delimiter: line 2 column 530 (char 531)": 1
+  },
+  "notes": {
+    "canon_source": "data/splits/test_v5.jsonl",
+    "gens_source": "outputs/monolithic/oracle3/test/baseline_oracle3_test.sanitized.jsonl",
+    "description": "Doc-level verdict comparison between Stage-3 per_doc_notes and text-mode v5 outputs."
+  }
+}
