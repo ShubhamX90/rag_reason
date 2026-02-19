@@ -37,6 +37,19 @@ USER_PROMPT_PATH      = PROJECT_ROOT / "prompts" / "user_monolithic.txt"
 MONOLITHIC_MAX_TOKENS = 3000
 
 
+import re as _re
+
+def sanitize_custom_id(s: str) -> str:
+    """
+    Ensure the string satisfies Anthropic's custom_id constraint:
+      ^[a-zA-Z0-9_-]{1,64}$
+    Any disallowed character is replaced with '_', then truncated to 64 chars.
+    An empty result falls back to 'id'.
+    """
+    sanitized = _re.sub(r"[^a-zA-Z0-9_\-]", "_", s)[:64]
+    return sanitized or "id"
+
+
 def load_text(path: Path) -> str:
     return path.read_text(encoding="utf-8")
 
@@ -93,7 +106,7 @@ def main() -> None:
     if batch_id is None:
         reqs = [
             {
-                "custom_id": record.get("id", f"rec_{i}"),
+                "custom_id": sanitize_custom_id(record.get("id", f"rec_{i}")),
                 "system":    system_prompt,
                 "user":      fill_user_prompt(user_template, record),
             }
@@ -118,7 +131,7 @@ def main() -> None:
         for record in records:
             rec_id  = record.get("id", "")
             doc_ids = [d.get("doc_id", "") for d in record.get("retrieved_docs", [])]
-            res     = result_map.get(rec_id)
+            res     = result_map.get(sanitize_custom_id(rec_id))
 
             if res and not res.get("error"):
                 parsed, errors = parse_monolithic(res["content"], expected_doc_ids=doc_ids)

@@ -253,9 +253,16 @@ class LLMClient:
                 return self._call_sync(system, user, max_tokens, extra_headers)
             except Exception as exc:
                 last_err = exc
+                status = getattr(exc, "status_code", None)
+                # Non-retryable: bad request, auth, not found — fail immediately
+                if status in (400, 401, 403, 404):
+                    raise
                 if attempt < self.max_retries - 1:
+                    # 429 rate-limit: back off much longer
+                    if status == 429:
+                        backoff = max(backoff, 15.0)
                     time.sleep(backoff)
-                    backoff = min(backoff * 2, 30.0)
+                    backoff = min(backoff * 2, 60.0)
         raise last_err
 
     def _call_sync(
@@ -297,9 +304,16 @@ class LLMClient:
                 return await self._call_async(system, user, max_tokens, extra_headers)
             except Exception as exc:
                 last_err = exc
+                status = getattr(exc, "status_code", None)
+                # Non-retryable: bad request, auth, not found — fail immediately
+                if status in (400, 401, 403, 404):
+                    raise
                 if attempt < self.max_retries - 1:
+                    # 429 rate-limit: back off much longer
+                    if status == 429:
+                        backoff = max(backoff, 15.0)
                     await asyncio.sleep(backoff)
-                    backoff = min(backoff * 2, 30.0)
+                    backoff = min(backoff * 2, 60.0)
         raise last_err
 
     async def _call_async(
@@ -588,7 +602,21 @@ class LLMClient:
         while time.time() < deadline:
             status = self.poll_batch(batch_id)
             if verbose:
-                print(f"  [batch {batch_id[:14]}…] status={status['processing_status']}")
+                c = status.get("request_counts", {})
+                if self.provider == Provider.ANTHROPIC:
+                    print(
+                        f"  [batch {batch_id[:14]}…] "
+                        f"status={status['processing_status']}  "
+                        f"done={c.get('succeeded', 0) + c.get('errored', 0)}  "
+                        f"processing={c.get('processing', 0)}"
+                    )
+                else:
+                    print(
+                        f"  [batch {batch_id[:14]}…] "
+                        f"status={status['processing_status']}  "
+                        f"completed={c.get('completed', 0)}  "
+                        f"failed={c.get('failed', 0)}"
+                    )
             if status["processing_status"] in terminal:
                 break
             await asyncio.sleep(poll_interval)
@@ -596,7 +624,7 @@ class LLMClient:
             raise TimeoutError(f"Batch {batch_id} did not complete within {_BATCH_MAX_WAIT_H}h")
 
         # Result collection is I/O but not async-native — run in executor
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
         return await loop.run_in_executor(
             None,
             lambda: (
