@@ -1,4 +1,4 @@
-# RAG Dataset Annotation Pipeline
+# RAG Dataset Annotation Pipeline (v2)
 
 A multi-stage annotation pipeline for conflict-aware Retrieval-Augmented Generation (RAG) datasets.
 Powered by **Anthropic claude-sonnet-4-6** (primary) and **Qwen 2.5 via OpenRouter** (reproducibility).
