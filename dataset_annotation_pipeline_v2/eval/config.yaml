@@ -3,7 +3,7 @@ model: claude-sonnet-4-6
 
 model_params:
   temperature: 0.0
-  max_tokens: 2048
+  max_tokens: 4096
 
 prompts:
   system: prompts/system.j2
@@ -26,40 +26,24 @@ validation:
   mode: json_schema
   schema:
     type: object
-    required: [per_doc_notes_eval, abstention_eval, answer_eval, overall, summary]
+    required: [per_doc_notes, expected_response]
     properties:
-      per_doc_notes_eval:
+      per_doc_notes:
         type: array
         items:
           type: object
-          required: [doc_id, verdict_correct, key_fact_accurate, source_quality_correct, issues]
+          required: [doc_id, verdict]
           properties:
             doc_id: {type: string}
-            verdict_correct: {type: boolean}
-            key_fact_accurate: {type: boolean}
-            source_quality_correct: {type: boolean}
-            issues: {type: array, items: {type: string}}
-      abstention_eval:
+            verdict:
+              type: string
+              enum: [supports, partially supports, irrelevant]
+      expected_response:
         type: object
-        required: [correct, expected_abstain, actual_abstain, reason]
+        required: [answer, abstain]
         properties:
-          correct: {type: boolean}
-          expected_abstain: {type: boolean}
-          actual_abstain: {type: boolean}
-          reason: {type: string}
-      answer_eval:
-        type: object
-        required: [follows_conflict_rule, citations_valid, evidence_array_correct, issues]
-        properties:
-          follows_conflict_rule: {type: boolean}
-          citations_valid: {type: boolean}
-          evidence_array_correct: {type: boolean}
-          issues: {type: array, items: {type: string}}
-      overall:
-        type: string
-        enum: [pass, fail, partial]
-      summary:
-        type: string
+          answer: {type: string}
+          abstain: {type: boolean}
 
 output:
   include_raw_output: true

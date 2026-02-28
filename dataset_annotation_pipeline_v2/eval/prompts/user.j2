@@ -1,16 +1,8 @@
-Below is a complete RAG annotation record. Evaluate it according to your instructions.
-
-==============================================================
-RECORD ID: {{ id }}
-==============================================================
-
 ## QUERY
 {{ query }}
 
-## CONFLICT CLASSIFICATION
-- Conflict Type        : {{ conflict_type }}
-- Answerable Under Evidence: {{ answerable_under_evidence }}
-- Conflict Reason      : {{ conflict_reason if conflict_reason else "(none provided)" }}
+## CONFLICT TYPE
+{{ conflict_type }}
 
 ==============================================================
 ## RETRIEVED DOCUMENTS ({{ retrieved_docs | length }} total)
@@ -24,33 +16,5 @@ Snippet:
 
 {% endfor %}
 ==============================================================
-## PER-DOCUMENT NOTES (annotator's evaluation of each doc)
-==============================================================
-{% for note in per_doc_notes %}
---- Note for {{ note.doc_id }} ---
-Verdict        : {{ note.verdict }}
-Key Fact       : {{ note.key_fact }}
-Quote          : {{ note.quote if note.quote else "(none)" }}
-Source Quality : {{ note.source_quality }}
-Verdict Reason : {{ note.verdict_reason if note.verdict_reason else "(none)" }}
 
-{% endfor %}
-==============================================================
-## EXPECTED RESPONSE (what needs to be validated)
-==============================================================
-Abstain        : {{ expected_response.abstain }}
-Abstain Reason : {{ expected_response.abstain_reason if expected_response.abstain_reason else "(none)" }}
-
-Answer:
-{{ expected_response.answer }}
-
-Evidence Array (cited doc_ids, credibility-ordered):
-{% if expected_response.evidence and expected_response.evidence | length > 0 %}
-{% for ev in expected_response.evidence %}  - {{ ev }}
-{% endfor %}
-{% else %}  (empty)
-{% endif %}
-
-==============================================================
-
-Output your evaluation as a single JSON object. No other text.
+Output your annotation as a single JSON object. No other text.
