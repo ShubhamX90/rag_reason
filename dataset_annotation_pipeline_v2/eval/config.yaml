@@ -1,0 +1,67 @@
+provider: anthropic
+model: claude-sonnet-4-6
+
+model_params:
+  temperature: 0.0
+  max_tokens: 2048
+
+prompts:
+  system: prompts/system.j2
+  user:   prompts/user.j2
+
+io:
+  input:  ../data/stage3_outputs/stage3_qwen72b.jsonl
+  output: data/eval_output.jsonl
+  id_field: id
+
+concurrency: 4
+
+retry:
+  max_attempts: 4
+  base_delay: 2.0
+  max_delay: 60.0
+  non_retryable_status: [400, 401, 403, 404]
+
+validation:
+  mode: json_schema
+  schema:
+    type: object
+    required: [per_doc_notes_eval, abstention_eval, answer_eval, overall, summary]
+    properties:
+      per_doc_notes_eval:
+        type: array
+        items:
+          type: object
+          required: [doc_id, verdict_correct, key_fact_accurate, source_quality_correct, issues]
+          properties:
+            doc_id: {type: string}
+            verdict_correct: {type: boolean}
+            key_fact_accurate: {type: boolean}
+            source_quality_correct: {type: boolean}
+            issues: {type: array, items: {type: string}}
+      abstention_eval:
+        type: object
+        required: [correct, expected_abstain, actual_abstain, reason]
+        properties:
+          correct: {type: boolean}
+          expected_abstain: {type: boolean}
+          actual_abstain: {type: boolean}
+          reason: {type: string}
+      answer_eval:
+        type: object
+        required: [follows_conflict_rule, citations_valid, evidence_array_correct, issues]
+        properties:
+          follows_conflict_rule: {type: boolean}
+          citations_valid: {type: boolean}
+          evidence_array_correct: {type: boolean}
+          issues: {type: array, items: {type: string}}
+      overall:
+        type: string
+        enum: [pass, fail, partial]
+      summary:
+        type: string
+
+output:
+  include_raw_output: true
+  include_parsed: true
+  include_meta: true
