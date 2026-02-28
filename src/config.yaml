@@ -1,0 +1,39 @@
+provider: anthropic          # "anthropic" | "openai"
+model: claude-sonnet-4-6     # omit to use provider default
+
+model_params:
+  temperature: 0.0
+  max_tokens: 1024
+
+prompts:
+  system: prompts/system.j2
+  user: prompts/user.j2
+
+io:
+  input: data/input.jsonl
+  output: data/output.jsonl
+  id_field: id               # field used for resume dedup; null = use line index
+
+concurrency: 8
+
+retry:
+  max_attempts: 4
+  base_delay: 1.0            # seconds; doubled each retry
+  max_delay: 60.0
+  non_retryable_status: [400, 401, 403, 404]
+
+validation:
+  mode: none                 # "none" | "regex" | "json_schema"
+  # mode: regex
+  # pattern: '^\s*\{'
+  # mode: json_schema
+  # schema:
+  #   type: object
+  #   required: [answer]
+  #   properties:
+  #     answer: {type: string}
+
+output:
+  include_raw_output: true   # adds llm_output field
+  include_parsed: true       # adds llm_parsed field (JSON or null)
+  include_meta: true         # adds _pipeline_meta field
