@@ -285,8 +285,14 @@ class LLMClient:
                     {"role": "system", "content": system},
                     {"role": "user",   "content": user},
                 ],
+                extra_body={"include_reasoning": True} if self.provider == Provider.OPENROUTER else None,
             )
-            return resp.choices[0].message.content or ""
+            msg = resp.choices[0].message
+            content = msg.content or ""
+            reasoning = getattr(msg, "reasoning", "")
+            if reasoning:
+                return f"<think>\n{reasoning}\n</think>\n" + content
+            return content
 
     # ── Async completion ──────────────────────────────────────────
 
@@ -336,8 +342,14 @@ class LLMClient:
                     {"role": "system", "content": system},
                     {"role": "user",   "content": user},
                 ],
+                extra_body={"include_reasoning": True} if self.provider == Provider.OPENROUTER else None,
             )
-            return resp.choices[0].message.content or ""
+            msg = resp.choices[0].message
+            content = msg.content or ""
+            reasoning = getattr(msg, "reasoning", "")
+            if reasoning:
+                return f"<think>\n{reasoning}\n</think>\n" + content
+            return content
 
     # ── Batch API ─────────────────────────────────────────────────
 

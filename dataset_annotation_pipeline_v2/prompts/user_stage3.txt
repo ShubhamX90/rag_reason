@@ -26,11 +26,12 @@ Decision rules:
    - expected_response.abstain = true
    - expected_response.answer = "CANNOT ANSWER, INSUFFICIENT EVIDENCE"
    - expected_response.evidence = []
-   - expected_response.abstain_reason = concise justification naming doc_ids (e.g., “All documents d1–d9 are irrelevant or insufficient to answer the query.”)
+   - expected_response.abstain_reason = concise justification naming doc_ids (e.g., "All documents d1–d9 are irrelevant or insufficient to answer the query.")
 
 3) You must explicitly evaluate every retrieved document in the <think> block.  
    Omitting or grouping docs will be treated as an error.  
-   Abstain only if *none* of the docs support or partially support the query.
+   Abstain if ALL docs are "irrelevant", OR if all non-irrelevant docs are "partially supports" and together they still cannot address the query.
+   If at least one doc is "supports", NEVER abstain.
 
 4) Apply the EXPECTED BEHAVIOR RULES corresponding to the given conflict_type for tone and reasoning structure.
 

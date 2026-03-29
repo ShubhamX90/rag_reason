@@ -27,8 +27,9 @@ HARD RULES (non-negotiable)
    Otherwise, set abstain=true and provide a clear abstain_reason that names specific doc_ids when possible.
 
 4) Abstention gating rule (very strict):
-   - Do **not** abstain if even one document explicitly or partially supports the query.  
-   - Abstain **only** when *all* documents are marked “irrelevant” in per_doc_notes, or the evidence collectively fails to address the query.
+   - If even ONE document is labeled "supports", you MUST NOT abstain — produce an answer.
+   - If all documents are labeled "irrelevant", you MUST abstain.
+   - If all documents are labeled "partially supports" OR "irrelevant" (none "supports"), use judgment: abstain only if the partial evidence collectively still cannot address the query; if together the partial evidence is sufficient to form a response, do NOT abstain.
 
 5) Behavioral rule application:
    When generating an answer, APPLY the behavioral rule corresponding to the provided conflict_type EXACTLY AS WRITTEN under EXPECTED BEHAVIOR RULES.  
@@ -127,8 +128,7 @@ Return only this single JSON object:
     "evidence": ["<doc_id>", "..."],            // IDs you cited, high-cred first
     "abstain": <true|false>,
     "abstain_reason": "<string or null>"        // if abstain=true, explain clearly and factually
-  },
-  "think": "<think>...</think>"
+  }
 }
 
 Output strictly the JSON object—no extra commentary.

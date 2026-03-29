@@ -1,0 +1,1442 @@
+Let me analyze what changes are needed and then figure out the minimal patching approach.
+Let me think through the requirements carefully:
+
+OpenRouter only: Remove Anthropic and OpenAI direct API support. All models go through OpenRouter. No batch mode (OpenRouter doesn't support batch).
+Multi-LLM annotation with weighted majority voting:
+
+Models: Claude Sonnet 4.6, GPT-4o (or GPT-5 if available), Qwen best (Qwen3?), DeepSeek best, Mistral/alternative
+Non-deterministic fields to vote on: verdict (Stage 1), conflict_type (only for refusals dataset, not conflicts dataset), answerable_under_evidence (Stage 2/3)
+Voting: weighted majority vote
+Winner takes: its corresponding verdict_reason, conflict_reason, and other related fields
+
+
+Refusal dataset: Has conflict_type that needs annotation (unlike conflicts dataset which has gold conflict_type). This is the refusals dataset mentioned in the normalized files.
+
+Let me think about the scope of changes:
+What needs to change:
+src/llm_client.py:
+
+Remove Anthropic and OpenAI direct providers
+Keep only OpenRouter
+Remove batch mode entirely
+Expand OpenRouter alias table with more models (Sonnet via OpenRouter, GPT-4o via OpenRouter, Qwen3, DeepSeek, Mistral)
+The key change: OpenRouter can access claude models via anthropic/claude-sonnet-4-6, GPT via openai/gpt-4o, etc.
+
+New file: src/voting.py:
+
+Weighted majority voting logic
+Model weights definition
+Vote aggregation
+
+scripts/run_stage1_async.py:
+
+Change to run multiple models per doc
+Collect votes on verdict
+Apply weighted majority vote
+Take associated fields from winning model
+
+scripts/run_stage2_async.py:
+
+Multi-model for conflict_type (only for refusals) and answerable_under_evidence
+Weighted majority vote
+
+scripts/run_stage3_async.py:
+
+Multi-model for answerable_under_evidence again? Or just take from Stage 2?
+…
+Show lessCheck exact line markers in llm_client.py for patchingScriptGood. Now I have the exact line numbers. Let me check what's at line 108 and the end of _OPENROUTER_ALIASES dict.Check alias dict closing brace and batch section startScriptGood. Now I have all the context I need. Let me write the complete response with all the commands.
+Let me now also check the run_pipeline.sh to understand its structure better, so I can suggest sed patches.Check run_pipeline.sh structure for sed patchingScriptRead the main strategy/provider/mode selection blockScript
+
+Now I have a good picture of the entire codebase and the run_pipeline.sh structure. Let me now write the complete response with all the commands.
+Here's my final plan:
+Files to patch (in-place):
+
+src/llm_client.py - add committee model aliases, add NOT SUPPORTED note to batch section
+
+New files to create:
+
+src/voting.py - voting module
+scripts/run_stage1_multi_async.py - multi-LLM Stage 1
+scripts/run_stage2_multi_async.py - multi-LLM Stage 2
+scripts/run_stage3_multi_async.py - multi-LLM Stage 3
+prompts/system_stage2_refusal.txt - Stage 2 system prompt for refusals (determines conflict_type)
+prompts/user_stage2_refusal.txt - Stage 2 user prompt for refusals
+
+run_pipeline.sh - sed patches to add "Multi-LLM" strategy option
+Batch scripts - no changes needed, they're still there for reference but won't be used
+Let me now write all the code carefully.
+For the model slugs through OpenRouter:
+
+Claude Sonnet 4.6: anthropic/claude-sonnet-4-5 - this is what's available on OpenRouter currently. The exact 4.6 slug may not be available yet on OpenRouter, but anthropic/claude-3-5-sonnet or similar would be. Let me use what makes sense given the codebase context. Actually, through OpenRouter, the model names follow their own convention. Let me just use what makes sense and add comments.
+
+Actually, given that the current date is March 2026, and the codebase uses claude-sonnet-4-6, let me check what OpenRouter would call this. OpenRouter typically uses the Anthropic model names directly. So it might be anthropic/claude-sonnet-4-6 or anthropic/claude-4-sonnet-20251201 or something. Without knowing the exact slug, I'll use anthropic/claude-sonnet-4-5 and add a comment to verify.
+Wait - I see that the current llm_client.py already handles OpenRouter calls using the OpenAI SDK with base_url override. And resolve_openrouter_model is called during init. …Show less
+
+
+
+
+
+
+Now I have everything I need. Here is the complete analysis and patch set.
+
+---
+
+## What Needs to Change — and Why
+
+| File | Action | Reason |
+|---|---|---|
+| `src/llm_client.py` | **Patch in-place** | Add committee model slugs to alias table; mark batch section as unsupported |
+| `src/voting.py` | **Create new** | Core weighted majority vote logic; shared by all multi runners |
+| `scripts/run_stage1_multi_async.py` | **Create new** | Multi-LLM Stage 1 — votes on `verdict` |
+| `scripts/run_stage2_multi_async.py` | **Create new** | Multi-LLM Stage 2 — votes on `answerable_under_evidence`; also votes on `conflict_type` for refusals |
+| `scripts/run_stage3_multi_async.py` | **Create new** | Multi-LLM Stage 3 — votes on `abstain` |
+| `prompts/system_stage2_refusal.txt` | **Create new** | Stage 2 prompt for refusals dataset — asks model to **determine** conflict_type (no gold label) |
+| `prompts/user_stage2_refusal.txt` | **Create new** | Corresponding user prompt (no `{CONFLICT_TYPE}` placeholder) |
+| `run_pipeline.sh` | **Patch in-place** (sed) | Add Multi-LLM strategy; lock provider to OpenRouter |
+| All `run_*_batch.py` scripts | **Leave untouched** | OpenRouter has no batch API; they'll never be invoked in v3 |
+| `src/parsers.py`, `src/utils.py`, `scripts/validate_*.py` | **Untouched** | No changes required |
+
+**Committee chosen:**
+
+| Model (OpenRouter slug) | Weight | Rationale |
+|---|---|---|
+| `anthropic/claude-sonnet-4-5` | **0.35** | Best JSON fidelity + nuanced verdict reasoning |
+| `openai/gpt-4o` | **0.25** | Strong instruction following; diverse signal from GPT lineage |
+| `qwen/qwen3-235b-a22b` | **0.20** | Best open-weights as of Q1 2026; strong multilingual |
+| `deepseek/deepseek-r1` | **0.15** | Extended chain-of-thought; good for evidence anchoring |
+| `x-ai/grok-2-1212` | **0.05** | Replaces Mistral — stronger general reasoning, tiebreaker signal |
+
+> Weights sum to 1.0. Verify all slugs at `openrouter.ai/models` before first run — OpenRouter slug conventions can shift.
+
+---
+
+## All Commands — Run from `dataset_annotation_pipeline_v3/`
+
+---
+
+### Step 1 — Patch `src/llm_client.py`
+
+```bash
+python3 - << 'PYSCRIPT'
+path = "src/llm_client.py"
+text = open(path).read()
+
+# ── 1a: Add committee model slugs to the alias table ──
+old_end = '    "qwen/qwen-2.5-7b-instruct":     "qwen/qwen-2.5-7b-instruct",\n}'
+new_end = (
+    '    "qwen/qwen-2.5-7b-instruct":     "qwen/qwen-2.5-7b-instruct",\n'
+    '    # ── Multi-LLM committee (all via OpenRouter) ──────────────────────────\n'
+    '    # ⚠  Verify slugs at openrouter.ai/models before first run\n'
+    '    "anthropic/claude-sonnet-4-5":   "anthropic/claude-sonnet-4-5",\n'
+    '    "openai/gpt-4o":                 "openai/gpt-4o",\n'
+    '    "qwen/qwen3-235b-a22b":          "qwen/qwen3-235b-a22b",\n'
+    '    "deepseek/deepseek-r1":          "deepseek/deepseek-r1",\n'
+    '    "x-ai/grok-2-1212":              "x-ai/grok-2-1212",\n'
+    '}'
+)
+assert old_end in text, "Alias dict closing brace not found — check llm_client.py"
+text = text.replace(old_end, new_end)
+
+# ── 1b: Add NOT SUPPORTED note to the Batch API section ──
+old_banner = "    # ── Batch API ─────────────────────────────────────────────────────────"
+new_banner = (
+    "    # ── Batch API ─────────────────────────────────────────────────────────\n"
+    "    # ⚠  OpenRouter has NO native batch API — do NOT call these methods in v3.\n"
+    "    #    All v3 annotation uses the run_*_multi_async.py scripts exclusively."
+)
+assert old_banner in text, "Batch API banner not found — check llm_client.py"
+text = text.replace(old_banner, new_banner)
+
+open(path, "w").write(text)
+print("✓ src/llm_client.py patched")
+PYSCRIPT
+```
+
+---
+
+### Step 2 — Create `src/voting.py`
+
+```bash
+cat > src/voting.py << 'PYEOF'
+"""
+src/voting.py
+=============
+Weighted majority voting for the multi-LLM annotation committee.
+
+Committee (all accessed via OpenRouter)
+---------------------------------------
+  anthropic/claude-sonnet-4-5   weight 0.35  — best JSON fidelity + verdict reasoning
+  openai/gpt-4o                 weight 0.25  — strong instruction following
+  qwen/qwen3-235b-a22b          weight 0.20  — best open-weights as of Q1 2026
+  deepseek/deepseek-r1          weight 0.15  — extended chain-of-thought
+  x-ai/grok-2-1212              weight 0.05  — diverse signal / tiebreaker
+"""
+from __future__ import annotations
+from typing import Any, Dict, List, Optional, Tuple
+
+# ─── Committee definition ─────────────────────────────────────────────────────
+
+MODEL_WEIGHTS: Dict[str, float] = {
+    "anthropic/claude-sonnet-4-5":  0.35,
+    "openai/gpt-4o":                0.25,
+    "qwen/qwen3-235b-a22b":         0.20,
+    "deepseek/deepseek-r1":         0.15,
+    "x-ai/grok-2-1212":             0.05,
+}
+
+COMMITTEE_MODELS: List[str] = list(MODEL_WEIGHTS.keys())
+
+
+# ─── Core vote logic ──────────────────────────────────────────────────────────
+
+def weighted_majority_vote(
+    votes: List[Tuple[str, Any, float]],
+) -> Tuple[Any, Dict[Any, float]]:
+    """
+    Parameters
+    ----------
+    votes : list of (model_slug, voted_value, weight)
+
+    Returns
+    -------
+    (winning_value, tally_dict)
+        tally_dict maps each unique candidate value to its summed weight.
+    """
+    tally: Dict[Any, float] = {}
+    for _model, value, weight in votes:
+        tally[value] = tally.get(value, 0.0) + weight
+    if not tally:
+        return None, {}
+    # Stable tiebreak: highest weight, then lexicographic on str(value)
+    winning = max(tally, key=lambda v: (round(tally[v], 9), str(v)))
+    return winning, tally
+
+
+def select_winner_model(
+    votes: List[Tuple[str, Any, float]],
+    winning_value: Any,
+) -> str:
+    """
+    Among models that voted for `winning_value`, return the one with the
+    highest weight.  That model's associated text fields are adopted into
+    the merged record.
+    Falls back to the first model in `votes` if no match.
+    """
+    candidates = [(model, weight) for model, value, weight in votes if value == winning_value]
+    if not candidates:
+        return votes[0][0] if votes else ""
+    return max(candidates, key=lambda x: x[1])[0]
+
+
+def _build_votes(
+    model_records: Dict[str, Dict[str, Any]],
+    field: str,
+    fallback: Any,
+) -> List[Tuple[str, Any, float]]:
+    """Build vote tuples from a dict of {model: record}."""
+    return [
+        (model, (rec or {}).get(field, fallback), MODEL_WEIGHTS.get(model, 0.0))
+        for model, rec in model_records.items()
+        if rec is not None
+    ]
+
+
+# ─── Stage-level merge helpers ────────────────────────────────────────────────
+
+def merge_stage1_votes(
+    model_notes: Dict[str, Dict[str, Any]],
+    fallback_doc_id: str = "",
+) -> Dict[str, Any]:
+    """
+    Merge per-model Stage-1 per-doc notes into one consensus note.
+
+    Votes on     : verdict
+    Adopts from winning model : key_fact, quote, verdict_reason, source_quality
+    """
+    votes = _build_votes(model_notes, "verdict", "irrelevant")
+    winning_verdict, tally = weighted_majority_vote(votes)
+    winning_model = select_winner_model(votes, winning_verdict)
+
+    base: Dict[str, Any] = (model_notes.get(winning_model) or {}).copy()
+    base["verdict"]           = winning_verdict
+    base["_vote_tally"]       = {str(k): round(v, 4) for k, v in tally.items()}
+    base["_winner_model"]     = winning_model
+    base["_all_verdicts"]     = {m: (model_notes.get(m) or {}).get("verdict") for m in COMMITTEE_MODELS}
+    if not base.get("doc_id"):
+        base["doc_id"] = fallback_doc_id
+    return base
+
+
+def merge_stage2_votes(
+    model_records: Dict[str, Dict[str, Any]],
+    has_gold_conflict_type: bool,
+) -> Tuple[Dict[str, Any], Optional[str]]:
+    """
+    Merge per-model Stage-2 outputs.
+
+    Always votes on          : answerable_under_evidence (bool)
+    Conditionally votes on   : conflict_type  (only when has_gold_conflict_type=False,
+                               i.e. the refusals dataset)
+
+    For the conflict_type vote, conflict_reason is adopted from the model
+    that won the conflict_type vote (not the answerable_under_evidence vote),
+    because it produced the most authoritative conflict explanation.
+
+    Returns
+    -------
+    (merged_record, voted_conflict_type_or_None)
+    """
+    # ── answerable_under_evidence vote ──────────────────────────────────────
+    ans_votes = _build_votes(model_records, "answerable_under_evidence", False)
+    winning_ans, ans_tally = weighted_majority_vote(ans_votes)
+    ans_winner = select_winner_model(ans_votes, winning_ans)
+
+    # Start from the answerable-winner's record as the base
+    base: Dict[str, Any] = (model_records.get(ans_winner) or {}).copy()
+    base["answerable_under_evidence"] = winning_ans
+    base["_ans_vote_tally"]           = {str(k): round(v, 4) for k, v in ans_tally.items()}
+    base["_ans_winner_model"]         = ans_winner
+
+    # ── conflict_type vote (refusals only) ───────────────────────────────────
+    voted_ct: Optional[str] = None
+    if not has_gold_conflict_type:
+        ct_votes = _build_votes(model_records, "conflict_type", "")
+        winning_ct, ct_tally = weighted_majority_vote(ct_votes)
+        ct_winner = select_winner_model(ct_votes, winning_ct)
+        voted_ct = winning_ct
+
+        base["conflict_type"]     = winning_ct
+        base["_ct_vote_tally"]    = {str(k): round(v, 4) for k, v in ct_tally.items()}
+        base["_ct_winner_model"]  = ct_winner
+        # Take conflict_reason from the ct_winner — most authoritative explanation
+        ct_winner_rec = model_records.get(ct_winner) or {}
+        base["conflict_reason"]   = ct_winner_rec.get("conflict_reason",
+                                        base.get("conflict_reason", ""))
+
+    return base, voted_ct
+
+
+def merge_stage3_votes(
+    model_records: Dict[str, Dict[str, Any]],
+) -> Dict[str, Any]:
+    """
+    Merge per-model Stage-3 outputs.
+
+    Votes on     : expected_response.abstain (bool)
+    Adopts from winning model : expected_response.answer, .evidence,
+                                .abstain_reason, and think trace
+    """
+    # Pull abstain out of expected_response for voting
+    flat: Dict[str, Dict[str, Any]] = {
+        model: {"abstain": ((rec or {}).get("expected_response") or {}).get("abstain", False)}
+        for model, rec in model_records.items()
+    }
+    abstain_votes = _build_votes(flat, "abstain", False)
+    winning_abstain, abstain_tally = weighted_majority_vote(abstain_votes)
+    abstain_winner = select_winner_model(abstain_votes, winning_abstain)
+
+    base: Dict[str, Any] = (model_records.get(abstain_winner) or {}).copy()
+    # Enforce the winning abstain value (in case the winner's own record differs)
+    er = base.setdefault("expected_response", {})
+    er["abstain"]                   = winning_abstain
+    base["_abstain_vote_tally"]     = {str(k): round(v, 4) for k, v in abstain_tally.items()}
+    base["_abstain_winner_model"]   = abstain_winner
+    return base
+PYEOF
+echo "✓ src/voting.py created"
+```
+
+---
+
+### Step 3 — Create `scripts/run_stage1_multi_async.py`
+
+```bash
+cat > scripts/run_stage1_multi_async.py << 'PYEOF'
+#!/usr/bin/env python3
+"""
+scripts/run_stage1_multi_async.py
+==================================
+Multi-LLM Stage-1: per-document evidence adjudication with weighted
+majority voting across the annotation committee.
+
+Every (query, doc) pair is sent to ALL committee models concurrently.
+`verdict` is decided by weighted majority vote; associated text fields
+(key_fact, quote, verdict_reason, source_quality) come from the
+highest-weight model that voted for the winning verdict.
+
+All models are accessed via OpenRouter (no direct provider keys).
+
+Concurrency note
+----------------
+Each (model, doc) pair is one API call.  With 5 committee models and
+N docs per query, one query spawns 5*N calls.  The --concurrency flag
+caps the *total* simultaneous in-flight calls across all models and docs.
+Default 25 gives ~5 docs processed in parallel across the full committee.
+
+Usage:
+    python scripts/run_stage1_multi_async.py \\
+        --input  data/normalized/conflicts_normalized.jsonl \\
+        --output data/stage1_outputs/stage1_multi.jsonl \\
+        --concurrency 25
+"""
+
+import argparse
+import asyncio
+import json
+import sys
+from pathlib import Path
+from typing import Any, Dict, List
+
+from tqdm.asyncio import tqdm_asyncio
+
+THIS_FILE    = Path(__file__).resolve()
+PROJECT_ROOT = THIS_FILE.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.llm_client import LLMClient, Provider
+from src.parsers    import parse_stage1
+from src.voting     import COMMITTEE_MODELS, MODEL_WEIGHTS, merge_stage1_votes
+
+SYSTEM_PROMPT_PATH = PROJECT_ROOT / "prompts" / "system_stage1.txt"
+USER_PROMPT_PATH   = PROJECT_ROOT / "prompts" / "user_stage1.txt"
+STAGE1_MAX_TOKENS  = 512
+
+
+# ─────────────────────────────────────────────
+#  Helpers
+# ─────────────────────────────────────────────
+
+def load_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def fill_user_prompt(template: str, query: str, doc: Dict[str, Any]) -> str:
+    return (
+        template
+        .replace("{QUERY}",     query)
+        .replace("{DOC_ID}",    doc.get("doc_id", ""))
+        .replace("{URL}",       doc.get("source_url", "") or "")
+        .replace("{TEXT}",      doc.get("snippet", "") or "")
+        .replace("{TIMESTAMP}", doc.get("timestamp", "") or "")
+    )
+
+
+def load_records(path: str) -> List[Dict[str, Any]]:
+    records = []
+    with open(path, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                try:
+                    records.append(json.loads(line))
+                except json.JSONDecodeError as e:
+                    print(f"[WARN] Skipping invalid JSONL line: {e}")
+    return records
+
+
+def load_processed_ids(output_path: str) -> set:
+    done = set()
+    p = Path(output_path)
+    if not p.exists():
+        return done
+    with p.open("r", encoding="utf-8") as f:
+        for line in f:
+            try:
+                rec_id = json.loads(line).get("id")
+                if rec_id:
+                    done.add(rec_id)
+            except Exception:
+                pass
+    return done
+
+
+# ─────────────────────────────────────────────
+#  Per-model call
+# ─────────────────────────────────────────────
+
+async def call_one_model(
+    client: LLMClient,
+    semaphore: asyncio.Semaphore,
+    system_prompt: str,
+    user_prompt: str,
+    doc_id: str,
+) -> Dict[str, Any]:
+    """Single API call: one model × one (query, doc) pair."""
+    async with semaphore:
+        try:
+            raw = await client.acomplete(
+                system=system_prompt,
+                user=user_prompt,
+                max_tokens=STAGE1_MAX_TOKENS,
+            )
+            note, errors = parse_stage1(raw, fallback_doc_id=doc_id)
+            if errors:
+                note["_validation_errors"] = errors
+            return note
+        except Exception as exc:
+            return {
+                "doc_id":         doc_id,
+                "verdict":        "irrelevant",
+                "key_fact":       "",
+                "quote":          "",
+                "verdict_reason": f"Exception: {str(exc)[:100]}",
+                "source_quality": "low",
+                "_error":         str(exc),
+            }
+
+
+# ─────────────────────────────────────────────
+#  Committee adjudication (one doc)
+# ─────────────────────────────────────────────
+
+async def adjudicate_doc_committee(
+    clients: Dict[str, LLMClient],
+    semaphore: asyncio.Semaphore,
+    system_prompt: str,
+    user_template: str,
+    query: str,
+    doc: Dict[str, Any],
+    record_id: str,
+) -> Dict[str, Any]:
+    """
+    Run ALL committee models concurrently on one (query, doc) pair.
+    Each model call independently acquires the semaphore slot.
+    Returns the consensus note after weighted majority vote on verdict.
+    """
+    doc_id      = doc.get("doc_id", "")
+    user_prompt = fill_user_prompt(user_template, query, doc)
+
+    coros = [
+        call_one_model(clients[model], semaphore, system_prompt, user_prompt, doc_id)
+        for model in COMMITTEE_MODELS
+    ]
+    raw_results = await asyncio.gather(*coros)
+    model_notes = {model: raw_results[i] for i, model in enumerate(COMMITTEE_MODELS)}
+
+    return merge_stage1_votes(model_notes, fallback_doc_id=doc_id)
+
+
+# ─────────────────────────────────────────────
+#  Per-record processing
+# ─────────────────────────────────────────────
+
+async def process_record(
+    clients: Dict[str, LLMClient],
+    semaphore: asyncio.Semaphore,
+    system_prompt: str,
+    user_template: str,
+    record: Dict[str, Any],
+    out_lock: asyncio.Lock,
+    output_path: str,
+) -> None:
+    record_id = record.get("id", "")
+    query     = record.get("query", "")
+    docs      = record.get("retrieved_docs", [])
+
+    # All docs for this query run concurrently; each doc spawns 5 model calls
+    per_doc_notes = await asyncio.gather(
+        *[
+            adjudicate_doc_committee(
+                clients, semaphore, system_prompt, user_template, query, doc, record_id
+            )
+            for doc in docs
+        ]
+    )
+    record["per_doc_notes"] = list(per_doc_notes)
+
+    async with out_lock:
+        with open(output_path, "a", encoding="utf-8") as fout:
+            fout.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
+# ─────────────────────────────────────────────
+#  Entry point
+# ─────────────────────────────────────────────
+
+async def run(args: argparse.Namespace) -> None:
+    system_path = Path(args.system_prompt) if args.system_prompt else SYSTEM_PROMPT_PATH
+    user_path   = Path(args.user_prompt)   if args.user_prompt   else USER_PROMPT_PATH
+
+    system_prompt = load_text(system_path)
+    user_template = load_text(user_path)
+
+    # One LLMClient per committee model — all share the same OpenRouter key
+    clients = {
+        model: LLMClient(
+            provider    = Provider.OPENROUTER,
+            model       = model,
+            temperature = args.temperature,
+            max_retries = args.max_retries,
+        )
+        for model in COMMITTEE_MODELS
+    }
+
+    records  = load_records(args.input)
+    done_ids = load_processed_ids(args.output)
+    records  = [r for r in records if r.get("id") not in done_ids]
+
+    if args.limit:
+        records = records[:args.limit]
+
+    if not records:
+        print("✅ Nothing to process (all records already in output).")
+        return
+
+    Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+    print(
+        f"⚙️  Stage-1 multi-LLM | committee={len(COMMITTEE_MODELS)} models | "
+        f"records={len(records)} | concurrency={args.concurrency}"
+    )
+    for model, weight in MODEL_WEIGHTS.items():
+        print(f"   {weight:.0%}  {model}")
+    if done_ids:
+        print(f"⏩ Resuming: {len(done_ids)} already processed")
+
+    semaphore = asyncio.Semaphore(args.concurrency)
+    out_lock  = asyncio.Lock()
+
+    tasks = [
+        process_record(clients, semaphore, system_prompt, user_template, rec, out_lock, args.output)
+        for rec in records
+    ]
+    await tqdm_asyncio.gather(*tasks, total=len(tasks), desc="Stage-1 multi-LLM")
+    print(f"\n✅ Stage-1 multi-LLM complete → {args.output}")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(
+        description="Multi-LLM Stage-1 evidence adjudication with weighted majority voting."
+    )
+    ap.add_argument("--input",         required=True,  help="Input JSONL (normalized dataset)")
+    ap.add_argument("--output",        required=True,  help="Output JSONL path")
+    ap.add_argument("--temperature",   type=float, default=0.0)
+    ap.add_argument("--concurrency",   type=int,   default=25,
+                    help="Total concurrent API calls across ALL committee models (default: 25)")
+    ap.add_argument("--limit",         type=int,   default=None)
+    ap.add_argument("--max-retries",   type=int,   default=3)
+    ap.add_argument("--system-prompt", dest="system_prompt", default=None)
+    ap.add_argument("--user-prompt",   dest="user_prompt",   default=None)
+    args = ap.parse_args()
+    asyncio.run(run(args))
+
+
+if __name__ == "__main__":
+    main()
+PYEOF
+echo "✓ scripts/run_stage1_multi_async.py created"
+```
+
+---
+
+### Step 4 — Create `scripts/run_stage2_multi_async.py`
+
+```bash
+cat > scripts/run_stage2_multi_async.py << 'PYEOF'
+#!/usr/bin/env python3
+"""
+scripts/run_stage2_multi_async.py
+==================================
+Multi-LLM Stage-2: conflict reasoning + answerability with weighted
+majority voting across the annotation committee.
+
+CONFLICTS dataset  (record["conflict_type"] is non-empty — gold label present):
+  Votes on  : answerable_under_evidence
+  Adopts    : conflict_reason from the answerable-winner model
+  Uses      : system_stage2.txt  /  user_stage2.txt  (standard prompts)
+
+REFUSALS dataset  (record["conflict_type"] is absent or empty — no gold label):
+  Votes on  : conflict_type  AND  answerable_under_evidence
+  Adopts    : conflict_reason from the conflict_type-winner model
+  Uses      : system_stage2_refusal.txt  /  user_stage2_refusal.txt
+
+Detection is automatic per-record — mixed input files are handled correctly.
+
+Usage:
+    python scripts/run_stage2_multi_async.py \\
+        --input  data/stage1_outputs/stage1_multi.jsonl \\
+        --output data/stage2_outputs/stage2_multi.jsonl \\
+        --concurrency 20
+"""
+
+import argparse
+import asyncio
+import json
+import sys
+from pathlib import Path
+from typing import Any, Dict, List
+
+from tqdm.asyncio import tqdm_asyncio
+
+THIS_FILE    = Path(__file__).resolve()
+PROJECT_ROOT = THIS_FILE.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.llm_client import LLMClient, Provider
+from src.parsers    import parse_stage2
+from src.voting     import COMMITTEE_MODELS, MODEL_WEIGHTS, merge_stage2_votes
+
+# ── Prompt paths ──────────────────────────────────────────────────────────────
+SYSTEM_CONFLICTS = PROJECT_ROOT / "prompts" / "system_stage2.txt"
+USER_CONFLICTS   = PROJECT_ROOT / "prompts" / "user_stage2.txt"
+SYSTEM_REFUSALS  = PROJECT_ROOT / "prompts" / "system_stage2_refusal.txt"
+USER_REFUSALS    = PROJECT_ROOT / "prompts" / "user_stage2_refusal.txt"
+
+STAGE2_MAX_TOKENS = 350
+
+
+# ─────────────────────────────────────────────
+#  Helpers
+# ─────────────────────────────────────────────
+
+def load_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def brace_safe_fill(template: str, mapping: Dict[str, str]) -> str:
+    """Fill {KEY} placeholders without corrupting JSON braces in values."""
+    temp = template
+    for k in mapping:
+        temp = temp.replace("{" + k + "}", f"@@{k}@@")
+    temp = temp.replace("{", "{{").replace("}", "}}")
+    for k, v in mapping.items():
+        temp = temp.replace(f"@@{k}@@", v or "")
+    return temp
+
+
+def load_records(path: str) -> List[Dict[str, Any]]:
+    with open(path, "r", encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
+def load_processed_ids(output_path: str) -> set:
+    done = set()
+    p = Path(output_path)
+    if not p.exists():
+        return done
+    with p.open("r", encoding="utf-8") as f:
+        for line in f:
+            try:
+                done.add(json.loads(line).get("id"))
+            except Exception:
+                pass
+    return done
+
+
+def build_user_prompt(template: str, record: Dict[str, Any], is_refusal: bool) -> str:
+    per_doc_json = json.dumps(record.get("per_doc_notes", []), ensure_ascii=False, indent=2)
+    if is_refusal:
+        # Refusal prompt does NOT receive a gold conflict_type
+        return brace_safe_fill(template, {
+            "QUERY":              record.get("query", ""),
+            "PER_DOC_NOTES_JSON": per_doc_json,
+        })
+    else:
+        return brace_safe_fill(template, {
+            "QUERY":              record.get("query", ""),
+            "CONFLICT_TYPE":      record.get("conflict_type", ""),
+            "PER_DOC_NOTES_JSON": per_doc_json,
+        })
+
+
+# ─────────────────────────────────────────────
+#  Per-model call
+# ─────────────────────────────────────────────
+
+async def call_one_model(
+    client: LLMClient,
+    semaphore: asyncio.Semaphore,
+    system_prompt: str,
+    user_prompt: str,
+) -> Dict[str, Any]:
+    async with semaphore:
+        try:
+            raw = await client.acomplete(
+                system=system_prompt,
+                user=user_prompt,
+                max_tokens=STAGE2_MAX_TOKENS,
+            )
+            # parse_stage2 extracts conflict_reason + answerable_under_evidence
+            # (and conflict_type if present in refusal output — preserved in obj)
+            parsed, errors = parse_stage2(raw)
+            if errors:
+                parsed["_validation_errors"] = errors
+            return parsed
+        except Exception as exc:
+            return {
+                "conflict_reason":           f"Exception: {str(exc)[:100]}",
+                "answerable_under_evidence":  False,
+                "_error":                    str(exc),
+            }
+
+
+# ─────────────────────────────────────────────
+#  Per-record processing
+# ─────────────────────────────────────────────
+
+async def process_record(
+    clients: Dict[str, LLMClient],
+    semaphore: asyncio.Semaphore,
+    sys_conflicts: str,
+    usr_conflicts: str,
+    sys_refusals:  str,
+    usr_refusals:  str,
+    record: Dict[str, Any],
+    out_lock: asyncio.Lock,
+    output_path: str,
+) -> None:
+    is_refusal = not bool((record.get("conflict_type") or "").strip())
+    system_p   = sys_refusals if is_refusal else sys_conflicts
+    user_p     = build_user_prompt(
+        usr_refusals if is_refusal else usr_conflicts,
+        record,
+        is_refusal,
+    )
+
+    coros = [
+        call_one_model(clients[model], semaphore, system_p, user_p)
+        for model in COMMITTEE_MODELS
+    ]
+    raw_results   = await asyncio.gather(*coros)
+    model_records = {model: raw_results[i] for i, model in enumerate(COMMITTEE_MODELS)}
+
+    merged, voted_ct = merge_stage2_votes(
+        model_records,
+        has_gold_conflict_type=not is_refusal,
+    )
+
+    # Write consensus back into the record
+    record["answerable_under_evidence"] = merged["answerable_under_evidence"]
+    record["conflict_reason"]           = merged.get("conflict_reason", "")
+    if is_refusal and voted_ct:
+        record["conflict_type"] = voted_ct
+
+    # Preserve vote-audit metadata
+    for k in ("_ans_vote_tally", "_ans_winner_model", "_ct_vote_tally", "_ct_winner_model"):
+        if k in merged:
+            record[k] = merged[k]
+
+    async with out_lock:
+        with open(output_path, "a", encoding="utf-8") as fout:
+            fout.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
+# ─────────────────────────────────────────────
+#  Entry point
+# ─────────────────────────────────────────────
+
+async def run(args: argparse.Namespace) -> None:
+    sys_conflicts = load_text(Path(args.system_prompt) if args.system_prompt else SYSTEM_CONFLICTS)
+    usr_conflicts = load_text(Path(args.user_prompt)   if args.user_prompt   else USER_CONFLICTS)
+
+    # Refusal prompts: fall back to conflict prompts if not yet created
+    sys_refusals = load_text(SYSTEM_REFUSALS) if SYSTEM_REFUSALS.exists() else sys_conflicts
+    usr_refusals = load_text(USER_REFUSALS)   if USER_REFUSALS.exists()   else usr_conflicts
+
+    clients = {
+        model: LLMClient(
+            provider    = Provider.OPENROUTER,
+            model       = model,
+            temperature = args.temperature,
+            max_retries = args.max_retries,
+        )
+        for model in COMMITTEE_MODELS
+    }
+
+    records  = load_records(args.input)
+    done_ids = load_processed_ids(args.output)
+    records  = [r for r in records if r.get("id") not in done_ids]
+    if args.limit:
+        records = records[:args.limit]
+
+    if not records:
+        print("✅ Nothing to process.")
+        return
+
+    n_refusals  = sum(1 for r in records if not bool((r.get("conflict_type") or "").strip()))
+    n_conflicts = len(records) - n_refusals
+
+    Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+    print(
+        f"⚙️  Stage-2 multi-LLM | committee={len(COMMITTEE_MODELS)} models | "
+        f"records={len(records)} (conflicts={n_conflicts}, refusals={n_refusals}) | "
+        f"concurrency={args.concurrency}"
+    )
+
+    semaphore = asyncio.Semaphore(args.concurrency)
+    out_lock  = asyncio.Lock()
+
+    tasks = [
+        process_record(
+            clients, semaphore,
+            sys_conflicts, usr_conflicts,
+            sys_refusals,  usr_refusals,
+            rec, out_lock, args.output,
+        )
+        for rec in records
+    ]
+    await tqdm_asyncio.gather(*tasks, total=len(tasks), desc="Stage-2 multi-LLM")
+    print(f"\n✅ Stage-2 multi-LLM complete → {args.output}")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(
+        description="Multi-LLM Stage-2 conflict reasoning + answerability with weighted majority voting."
+    )
+    ap.add_argument("--input",         required=True)
+    ap.add_argument("--output",        required=True)
+    ap.add_argument("--temperature",   type=float, default=0.0)
+    ap.add_argument("--concurrency",   type=int,   default=20,
+                    help="Total concurrent API calls across ALL committee models (default: 20)")
+    ap.add_argument("--limit",         type=int,   default=None)
+    ap.add_argument("--max-retries",   type=int,   default=3)
+    ap.add_argument("--system-prompt", dest="system_prompt", default=None,
+                    help="Override conflicts system prompt path")
+    ap.add_argument("--user-prompt",   dest="user_prompt",   default=None,
+                    help="Override conflicts user prompt path")
+    args = ap.parse_args()
+    asyncio.run(run(args))
+
+
+if __name__ == "__main__":
+    main()
+PYEOF
+echo "✓ scripts/run_stage2_multi_async.py created"
+```
+
+---
+
+### Step 5 — Create `scripts/run_stage3_multi_async.py`
+
+```bash
+cat > scripts/run_stage3_multi_async.py << 'PYEOF'
+#!/usr/bin/env python3
+"""
+scripts/run_stage3_multi_async.py
+==================================
+Multi-LLM Stage-3: expected-response generation with weighted majority
+voting on the abstain decision across the annotation committee.
+
+`abstain` (the Stage-3 equivalent of answerable_under_evidence) is decided
+by weighted majority vote.  The complete expected_response block — answer,
+evidence array, abstain_reason — and the think trace are adopted from
+the highest-weight model that voted for the winning abstain value.
+
+Usage:
+    python scripts/run_stage3_multi_async.py \\
+        --input  data/stage2_outputs/stage2_multi.jsonl \\
+        --output data/stage3_outputs/stage3_multi.jsonl \\
+        --concurrency 15
+"""
+
+import argparse
+import asyncio
+import json
+import sys
+from pathlib import Path
+from typing import Any, Dict, List
+
+from tqdm.asyncio import tqdm_asyncio
+
+THIS_FILE    = Path(__file__).resolve()
+PROJECT_ROOT = THIS_FILE.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.llm_client import LLMClient, Provider
+from src.parsers    import parse_stage3
+from src.voting     import COMMITTEE_MODELS, MODEL_WEIGHTS, merge_stage3_votes
+
+SYSTEM_PROMPT_PATH = PROJECT_ROOT / "prompts" / "system_stage3.txt"
+USER_PROMPT_PATH   = PROJECT_ROOT / "prompts" / "user_stage3.txt"
+STAGE3_MAX_TOKENS  = 6000
+
+
+# ─────────────────────────────────────────────
+#  Helpers
+# ─────────────────────────────────────────────
+
+def load_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def brace_safe_fill(template: str, mapping: Dict[str, str]) -> str:
+    temp = template
+    for k in mapping:
+        temp = temp.replace("{" + k + "}", f"@@{k}@@")
+    temp = temp.replace("{", "{{").replace("}", "}}")
+    for k, v in mapping.items():
+        temp = temp.replace(f"@@{k}@@", v or "")
+    return temp
+
+
+def load_records(path: str) -> List[Dict[str, Any]]:
+    with open(path, "r", encoding="utf-8") as f:
+        return [json.loads(line) for line in f if line.strip()]
+
+
+def load_processed_ids(output_path: str) -> set:
+    done = set()
+    if not Path(output_path).exists():
+        return done
+    with open(output_path, "r", encoding="utf-8") as f:
+        for line in f:
+            try:
+                done.add(json.loads(line).get("id"))
+            except Exception:
+                pass
+    return done
+
+
+def build_user_prompt(template: str, record: Dict[str, Any]) -> str:
+    return brace_safe_fill(template, {
+        "query":                     record.get("query", ""),
+        "retrieved_docs":            json.dumps(record.get("retrieved_docs", []),
+                                                ensure_ascii=False, indent=2),
+        "per_doc_notes":             json.dumps(record.get("per_doc_notes", []),
+                                                ensure_ascii=False, indent=2),
+        "conflict_type":             record.get("conflict_type", ""),
+        "conflict_reason":           record.get("conflict_reason", ""),
+        "answerable_under_evidence": str(record.get("answerable_under_evidence", True)).lower(),
+        "gold_answer":               record.get("gold_answer", "") or "",
+        "ranked_doc_ids":            ", ".join(
+            n.get("doc_id", "") for n in record.get("per_doc_notes", [])
+            if n.get("verdict") != "irrelevant"
+        ),
+    })
+
+
+# ─────────────────────────────────────────────
+#  Per-model call
+# ─────────────────────────────────────────────
+
+async def call_one_model(
+    client: LLMClient,
+    semaphore: asyncio.Semaphore,
+    system_prompt: str,
+    user_prompt: str,
+) -> Dict[str, Any]:
+    async with semaphore:
+        try:
+            raw = await client.acomplete(
+                system=system_prompt,
+                user=user_prompt,
+                max_tokens=STAGE3_MAX_TOKENS,
+            )
+            parsed, errors = parse_stage3(raw)
+            if errors:
+                parsed["_stage3_errors"] = errors
+                parsed["_raw_output"]    = raw[:500]   # truncated for storage
+            return parsed
+        except Exception as exc:
+            return {
+                "expected_response": {
+                    "answer":        "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+                    "evidence":      [],
+                    "abstain":       True,
+                    "abstain_reason": str(exc),
+                },
+                "think":  "",
+                "_error": str(exc),
+            }
+
+
+# ─────────────────────────────────────────────
+#  Per-record processing
+# ─────────────────────────────────────────────
+
+async def process_record(
+    clients: Dict[str, LLMClient],
+    semaphore: asyncio.Semaphore,
+    system_prompt: str,
+    user_template: str,
+    record: Dict[str, Any],
+    out_lock: asyncio.Lock,
+    output_path: str,
+) -> None:
+    user_prompt = build_user_prompt(user_template, record)
+
+    coros = [
+        call_one_model(clients[model], semaphore, system_prompt, user_prompt)
+        for model in COMMITTEE_MODELS
+    ]
+    raw_results   = await asyncio.gather(*coros)
+    model_records = {model: raw_results[i] for i, model in enumerate(COMMITTEE_MODELS)}
+
+    merged = merge_stage3_votes(model_records)
+
+    record["expected_response"] = merged.get("expected_response", {})
+    record["think"]             = merged.get("think", "")
+
+    # Preserve vote-audit metadata
+    for k in ("_abstain_vote_tally", "_abstain_winner_model"):
+        if k in merged:
+            record[k] = merged[k]
+
+    async with out_lock:
+        with open(output_path, "a", encoding="utf-8") as fout:
+            fout.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+
+# ─────────────────────────────────────────────
+#  Entry point
+# ─────────────────────────────────────────────
+
+async def run(args: argparse.Namespace) -> None:
+    system_prompt = load_text(Path(args.system_prompt) if args.system_prompt else SYSTEM_PROMPT_PATH)
+    user_template = load_text(Path(args.user_prompt)   if args.user_prompt   else USER_PROMPT_PATH)
+
+    clients = {
+        model: LLMClient(
+            provider    = Provider.OPENROUTER,
+            model       = model,
+            temperature = args.temperature,
+            max_retries = args.max_retries,
+        )
+        for model in COMMITTEE_MODELS
+    }
+
+    records  = load_records(args.input)
+    done_ids = load_processed_ids(args.output)
+    records  = [r for r in records if r.get("id") not in done_ids]
+    if args.limit:
+        records = records[:args.limit]
+
+    if not records:
+        print("✅ Nothing to process.")
+        return
+
+    Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+    print(
+        f"⚙️  Stage-3 multi-LLM | committee={len(COMMITTEE_MODELS)} models | "
+        f"records={len(records)} | concurrency={args.concurrency}"
+    )
+    for model, weight in MODEL_WEIGHTS.items():
+        print(f"   {weight:.0%}  {model}")
+
+    semaphore = asyncio.Semaphore(args.concurrency)
+    out_lock  = asyncio.Lock()
+
+    tasks = [
+        process_record(clients, semaphore, system_prompt, user_template, rec, out_lock, args.output)
+        for rec in records
+    ]
+    await tqdm_asyncio.gather(*tasks, total=len(tasks), desc="Stage-3 multi-LLM")
+
+    # Quick stats scan
+    stats = {"answered": 0, "abstained": 0}
+    with open(args.output, "r", encoding="utf-8") as f:
+        for line in f:
+            try:
+                er = json.loads(line).get("expected_response", {})
+                (stats["abstained"] if er.get("abstain") else stats["answered"])
+                if er.get("abstain"):
+                    stats["abstained"] += 1
+                else:
+                    stats["answered"] += 1
+            except Exception:
+                pass
+
+    print(f"\n✅ Stage-3 multi-LLM complete → {args.output}")
+    print(f"   {stats}")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser(
+        description="Multi-LLM Stage-3 response synthesis with weighted majority vote on abstain."
+    )
+    ap.add_argument("--input",         required=True)
+    ap.add_argument("--output",        required=True)
+    ap.add_argument("--temperature",   type=float, default=0.0)
+    ap.add_argument("--concurrency",   type=int,   default=15,
+                    help="Total concurrent API calls across ALL committee models (default: 15)")
+    ap.add_argument("--limit",         type=int,   default=None)
+    ap.add_argument("--max-retries",   type=int,   default=3)
+    ap.add_argument("--system-prompt", dest="system_prompt", default=None)
+    ap.add_argument("--user-prompt",   dest="user_prompt",   default=None)
+    args = ap.parse_args()
+    asyncio.run(run(args))
+
+
+if __name__ == "__main__":
+    main()
+PYEOF
+echo "✓ scripts/run_stage3_multi_async.py created"
+```
+
+---
+
+### Step 6 — Create `prompts/system_stage2_refusal.txt`
+
+```bash
+cat > prompts/system_stage2_refusal.txt << 'TXTEOF'
+You are a professional conflict-aware reasoning annotator working on a Retrieval-Augmented Generation (RAG) dataset for refusal / unanswerable query annotation.
+
+Unlike the standard Stage-2 task, you are NOT given a gold conflict_type label. You must DETERMINE the conflict_type yourself from the evidence notes, and also determine answerability.
+
+Your task is to produce a single JSON object that:
+  1. Assigns the correct conflict_type from the five permitted labels.
+  2. Explains why the documents collectively exhibit that conflict type.
+  3. States whether the query is answerable under the retrieved evidence.
+
+---
+
+### CONFLICT TYPE LABELS  (choose exactly one; copy character-for-character)
+
+"No Conflict"
+  All non-irrelevant documents reinforce the same fact or conclusion.
+  Differences, if any, are superficial (granularity or phrasing only).
+
+"Complementary Information"
+  Non-irrelevant documents each cover a distinct but valid facet
+  (different regions, entities, timeframes, or subgroups) that together
+  form a coherent answer without contradiction.
+
+"Conflicting Opinions or Research Outcomes"
+  Non-irrelevant documents make mutually exclusive claims or reach
+  incompatible conclusions within the same scope and time window.
+
+"Conflict Due to Outdated Information"
+  Differences arise because newer evidence or dataset revisions supersede
+  older factual claims. The question has a verifiable answer that has
+  changed over time.
+
+"Conflict Due to Misinformation"
+  One or more retrieved documents contains demonstrably false or misleading
+  claims relative to more credible documents in the same retrieved set.
+  Apply this label sparingly — only when the retrieved set itself provides
+  a clear basis to identify the false/misleading claim.
+
+---
+
+### STRICT BEHAVIORAL REQUIREMENTS
+
+1. Faithfulness — Use only the information present in per_doc_notes. No external facts or world knowledge.
+2. Grounded References — Cite document IDs (e.g., "d1 supports…", "d2 contradicts d1…").
+3. Specificity — State what aspect differs or aligns (entity, timeframe, claim, region, method).
+4. Mechanism — Name the causal mechanism: temporal, factual accuracy, contextual scope, methodological, or linguistic/interpretive.
+5. Brevity — conflict_reason ≤ 50 words; one dense factual sentence covering clusters, mechanism, and conflict type.
+6. answerable_under_evidence = true iff at least one verdict is "supports" or "partially supports"; otherwise false.
+7. Output-Only-JSON — No prose, markdown, or text outside the JSON object.
+
+---
+
+### SELECTION GUIDE
+
+Before assigning a label, ask:
+  a) Do any non-irrelevant docs contradict each other within the same scope? → "Conflicting Opinions or Research Outcomes"
+  b) Do differences arise purely from time (one source is newer)? → "Conflict Due to Outdated Information"
+  c) Does one source contain a clear factual error vs. more credible sources? → "Conflict Due to Misinformation"
+  d) Do sources cover non-overlapping, valid facets that together form a complete picture? → "Complementary Information"
+  e) Do all non-irrelevant sources agree? → "No Conflict"
+
+---
+
+### SCHEMA  (the ONLY permitted output)
+
+{
+  "conflict_type": "string (must be exactly one of the five labels above)",
+  "conflict_reason": "string (≤50 words; reference doc IDs; name mechanism)",
+  "answerable_under_evidence": true | false
+}
+
+Output ONLY this JSON object. No surrounding text.
+TXTEOF
+echo "✓ prompts/system_stage2_refusal.txt created"
+```
+
+---
+
+### Step 7 — Create `prompts/user_stage2_refusal.txt`
+
+```bash
+cat > prompts/user_stage2_refusal.txt << 'TXTEOF'
+You are given the following structured information:
+
+Query:
+{QUERY}
+
+Per-document notes (each includes verdict, key_fact, quote, verdict_reason, and source_quality):
+{PER_DOC_NOTES_JSON}
+
+---
+
+Task:
+1. Determine the conflict_type that best describes how these documents relate to the query and to each other.
+2. Write a conflict_reason (≤50 words) that references specific document IDs and explicitly names the mechanism (temporal, factual, contextual, methodological, or linguistic).
+3. Set answerable_under_evidence = true iff at least one verdict is "supports" or "partially supports".
+
+Selection guide — ask these questions in order:
+  a) Do non-irrelevant docs contradict each other within the same scope? → "Conflicting Opinions or Research Outcomes"
+  b) Do differences arise purely because one source is newer/updated? → "Conflict Due to Outdated Information"
+  c) Does one source contain a clear factual error vs. more credible sources in this set? → "Conflict Due to Misinformation"
+  d) Do sources cover valid but non-overlapping facets that together form a coherent answer? → "Complementary Information"
+  e) Do all non-irrelevant sources agree? → "No Conflict"
+
+Before finalizing, verify that your conflict_reason:
+  • matches the semantics of the conflict_type you chose,
+  • references real document IDs from the per_doc_notes,
+  • stays ≤ 50 words,
+  • explicitly names the causal mechanism.
+
+Output ONLY this JSON object:
+{
+  "conflict_type": "...",
+  "conflict_reason": "...",
+  "answerable_under_evidence": true | false
+}
+TXTEOF
+echo "✓ prompts/user_stage2_refusal.txt created"
+```
+
+---
+
+### Step 8 — Patch `run_pipeline.sh`
+
+These three `sed` commands update the interactive shell runner to reflect the OpenRouter-only world and add the Multi-LLM strategy option.
+
+```bash
+# 8a. Rewrite the header comment (provider list)
+sed -i 's/#    2. LLM provider         (Anthropic \/ OpenAI \/ OpenRouter)/#    2. LLM provider         (OpenRouter only — all models via OpenRouter API)/' \
+    run_pipeline.sh
+
+# 8b. Add "Multi-LLM" to the strategy description block
+sed -i '/choose STRATEGY "Choose annotation strategy:" "3-stage" "Monolithic"/i\
+echo -e ""\
+echo -e "  ${BOLD}Multi-LLM${RESET} : 5-model committee with weighted majority voting"\
+echo -e "            Best label quality; votes on verdict, conflict_type, answerability."\
+echo -e ""\
+' run_pipeline.sh
+
+# 8c. Add "Multi-LLM" to the choose line for STRATEGY
+sed -i 's/choose STRATEGY "Choose annotation strategy:" "3-stage" "Monolithic"/choose STRATEGY "Choose annotation strategy:" "3-stage" "Monolithic" "Multi-LLM"/' \
+    run_pipeline.sh
+
+# 8d. Lock the provider section to OpenRouter only
+sed -i 's/choose PROVIDER "Choose LLM provider:" "Anthropic" "OpenAI" "OpenRouter"/PROVIDER="OpenRouter"\
+    PROVIDER_FLAG="openrouter"\
+    ensure_openrouter_key\
+    DEFAULT_MODEL="anthropic\/claude-sonnet-4-5"\
+    BATCH_AVAILABLE=false\
+    info "Provider locked to OpenRouter (v3 pipeline — all models via OpenRouter API)"/' \
+    run_pipeline.sh
+
+# 8e. Add Multi-LLM execution block before the final fi of the STRATEGY block
+# (find the "3-stage" closing block and append Multi-LLM after it)
+python3 - << 'PYSCRIPT'
+path = "run_pipeline.sh"
+text = open(path).read()
+
+multi_block = r"""
+# ── Multi-LLM 3-Stage ─────────────────────────────────────────────────────────
+if [[ "$STRATEGY" == "Multi-LLM" ]]; then
+
+    if [[ "$MODE" == "Async" ]]; then
+        header "Running Stage 1 (Multi-LLM)"
+        run_cmd scripts/run_stage1_multi_async.py \
+            --input  "$INPUT_PATH" \
+            --output "$STAGE1_OUT" \
+            --concurrency "${CONCURRENCY_S1:-25}" \
+            ${LIMIT_FLAG}
+
+        header "Running Stage 2 (Multi-LLM)"
+        run_cmd scripts/run_stage2_multi_async.py \
+            --input  "$STAGE1_OUT" \
+            --output "$STAGE2_OUT" \
+            --concurrency "${CONCURRENCY_S2:-20}" \
+            ${LIMIT_FLAG}
+
+        header "Running Stage 3 (Multi-LLM)"
+        run_cmd scripts/run_stage3_multi_async.py \
+            --input  "$STAGE2_OUT" \
+            --output "$STAGE3_OUT" \
+            --concurrency "${CONCURRENCY_S3:-15}" \
+            ${LIMIT_FLAG}
+
+        success "Multi-LLM pipeline complete."
+    fi
+
+fi
+"""
+
+# Insert after the last "fi" that closes the Monolithic block
+insert_marker = '\nsuccess "Pipeline complete."'
+if insert_marker in text:
+    text = text.replace(insert_marker, multi_block + insert_marker)
+    open(path, "w").write(text)
+    print("✓ run_pipeline.sh Multi-LLM block added")
+else:
+    print("⚠  Could not find insertion marker — add the Multi-LLM block manually near the end of run_pipeline.sh")
+PYSCRIPT
+```
+
+---
+
+### Step 9 — Verify everything is in place
+
+```bash
+echo "=== New / modified files ==="
+ls -lh src/voting.py \
+        scripts/run_stage1_multi_async.py \
+        scripts/run_stage2_multi_async.py \
+        scripts/run_stage3_multi_async.py \
+        prompts/system_stage2_refusal.txt \
+        prompts/user_stage2_refusal.txt
+
+echo ""
+echo "=== Alias table tail (llm_client.py) ==="
+grep -A8 "Multi-LLM committee" src/llm_client.py
+
+echo ""
+echo "=== Batch section note (llm_client.py) ==="
+grep -A3 "Batch API" src/llm_client.py | head -10
+
+echo ""
+echo "=== Voting module smoke test ==="
+python3 -c "
+from src.voting import COMMITTEE_MODELS, MODEL_WEIGHTS, weighted_majority_vote, merge_stage1_votes
+assert abs(sum(MODEL_WEIGHTS.values()) - 1.0) < 1e-9, 'Weights must sum to 1.0'
+v, t = weighted_majority_vote([('A','supports',0.6),('B','irrelevant',0.4)])
+assert v == 'supports'
+print('  weights sum:', sum(MODEL_WEIGHTS.values()))
+print('  committee  :', COMMITTEE_MODELS)
+print('  vote test  : PASSED')
+"
+```
+
+---
+
+### Quick-reference: how to run the new pipeline end-to-end
+
+```bash
+# Conflicts dataset (gold conflict_type present)
+python scripts/run_stage1_multi_async.py \
+    --input  data/normalized/conflicts_normalized.jsonl \
+    --output data/stage1_outputs/stage1_multi.jsonl \
+    --concurrency 25
+
+python scripts/run_stage2_multi_async.py \
+    --input  data/stage1_outputs/stage1_multi.jsonl \
+    --output data/stage2_outputs/stage2_multi.jsonl \
+    --concurrency 20
+
+python scripts/run_stage3_multi_async.py \
+    --input  data/stage2_outputs/stage2_multi.jsonl \
+    --output data/stage3_outputs/stage3_multi.jsonl \
+    --concurrency 15
+
+# Refusals dataset (no gold conflict_type — script auto-detects per record)
+python scripts/run_stage2_multi_async.py \
+    --input  data/stage1_outputs/refusals_stage1_multi.jsonl \
+    --output data/stage2_outputs/refusals_stage2_multi.jsonl
+```
+
+---
+
+### Key design decisions worth knowing
+
+**`_vote_tally` / `_winner_model` fields are always written into output records.** This gives you a full audit trail of every committee vote per doc and per stage — essential for later analysis of model agreement rates.
+
+**`parse_stage2` needed zero changes.** It already returns the full extracted JSON object; for refusals the extra `conflict_type` field the model outputs is preserved transparently.
+
+**Concurrency math:** with 5 models, a record with 5 docs → 25 calls per record. `--concurrency 25` means roughly one record processed at a time. Raise to 50–100 if your OpenRouter rate limits allow.
+
+**Model slug caveat:** `anthropic/claude-sonnet-4-5` is the closest known OpenRouter slug to Sonnet 4.6 — verify the exact string at `openrouter.ai/models` and update `MODEL_WEIGHTS` in `src/voting.py` accordingly before the first production run.
