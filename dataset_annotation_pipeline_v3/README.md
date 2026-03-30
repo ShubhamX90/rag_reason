@@ -90,6 +90,7 @@ Each main strategy can be run in one of two ways:
 | **Batch** | Anthropic/OpenAI batch APIs | **discounted where supported** | Single-LLM only |
 
 > **Multi-LLM committee runs are async-only.** Batch mode applies only to the legacy single-LLM path.
+> Multi-LLM runs and OpenRouter monolithic async runs also save a JSON cost sidecar by default: `<output>_cost_report.json`.
 
 ---
 
@@ -230,6 +231,14 @@ python scripts/run_stage3_multi_async.py \
     --output data/stage3_outputs/stage3_multi.jsonl
 ```
 
+Each run will also save a cost report JSON next to the output file, for example:
+
+```text
+data/stage1_outputs/stage1_multi_cost_report.json
+data/stage2_outputs/stage2_multi_cost_report.json
+data/stage3_outputs/stage3_multi_cost_report.json
+```
+
 For the refusals dataset, Stage 2 uses:
 
 ```bash
@@ -245,6 +254,12 @@ python scripts/run_stage2_multi_async.py \
 python scripts/run_monolithic_multi_async.py \
     --input  data/normalized/conflicts_normalized.jsonl \
     --output data/monolithic_outputs/monolithic_multi.jsonl
+```
+
+You can override the default cost-report path with:
+
+```bash
+--cost-report path/to/custom_cost_report.json
 ```
 
 ---

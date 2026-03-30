@@ -46,7 +46,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from src.llm_client import LLMClient, Provider
 from src.parsers    import parse_stage3
 from src.voting     import COMMITTEE_MODELS, MODEL_WEIGHTS, merge_stage3_votes
-from src.cost_tracker import CostTracker
+from src.cost_tracker import CostTracker, default_cost_report_path
 
 SYSTEM_PROMPT_PATH = PROJECT_ROOT / "prompts" / "system_stage3.txt"
 USER_PROMPT_PATH   = PROJECT_ROOT / "prompts" / "user_stage3.txt"
@@ -259,7 +259,8 @@ async def run(args: argparse.Namespace) -> None:
     print(f"   {stats}")
 
     # ── Fetch exact costs from OpenRouter and print breakdown ─────────────
-    await tracker.fetch_and_report()
+    report_path = args.cost_report or default_cost_report_path(args.output)
+    await tracker.fetch_and_report(save_json_path=report_path)
 
 
 def main() -> None:
@@ -279,6 +280,8 @@ def main() -> None:
     ap.add_argument("--max-retries",   type=int,   default=3)
     ap.add_argument("--system-prompt", dest="system_prompt", default=None)
     ap.add_argument("--user-prompt",   dest="user_prompt",   default=None)
+    ap.add_argument("--cost-report",   dest="cost_report",   default=None,
+                    help="Path to save cost report JSON (default: <output>_cost_report.json)")
     args = ap.parse_args()
     asyncio.run(run(args))
 

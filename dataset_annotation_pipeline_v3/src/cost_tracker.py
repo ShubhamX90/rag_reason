@@ -26,11 +26,14 @@ tasks (the event loop runs in one thread, but Lock is still correct here).
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import threading
 import time
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple
+from dataclasses import asdict, dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 # Max concurrent requests to the generation endpoint during the cost fetch.
 _COST_FETCH_CONCURRENCY = 30
@@ -206,13 +209,59 @@ class CostTracker:
                 f"(shown as $0.00 above). Generation IDs saved to tracker.records."
             )
 
-    async def fetch_and_report(self) -> float:
+    def summary_dict(self) -> Dict[str, Any]:
+        total_cost = sum(r.cost_usd for r in self._records)
+        total_in = sum(r.prompt_tokens for r in self._records)
+        total_out = sum(r.completion_tokens for r in self._records)
+
+        model_stats: Dict[str, Dict[str, Any]] = {}
+        for r in self._records:
+            s = model_stats.setdefault(r.model, {
+                "model": r.model,
+                "calls": 0,
+                "prompt_tokens": 0,
+                "completion_tokens": 0,
+                "cost_usd": 0.0,
+            })
+            s["calls"] += 1
+            s["prompt_tokens"] += r.prompt_tokens
+            s["completion_tokens"] += r.completion_tokens
+            s["cost_usd"] += r.cost_usd
+
+        models = sorted(
+            model_stats.values(),
+            key=lambda item: (-item["cost_usd"], item["model"]),
+        )
+        records = [asdict(r) for r in self._records]
+
+        return {
+            "stage": self.stage,
+            "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+            "calls": len(self._records),
+            "total_prompt_tokens": total_in,
+            "total_completion_tokens": total_out,
+            "total_cost_usd": total_cost,
+            "fetch_error_count": sum(1 for r in self._records if r.fetch_error),
+            "models": models,
+            "records": records,
+        }
+
+    def save_json(self, path: str) -> None:
+        out_path = Path(path)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        with out_path.open("w", encoding="utf-8") as f:
+            json.dump(self.summary_dict(), f, ensure_ascii=False, indent=2)
+        print(f"  💾  Cost report saved → {out_path}")
+
+    async def fetch_and_report(self, save_json_path: Optional[str] = None) -> float:
         """
         Convenience: fetch costs then print report.
         Returns total cost in USD.
         """
         await self.fetch_costs()
         self.report()
+        if save_json_path:
+            self.save_json(save_json_path)
         return sum(r.cost_usd for r in self._records)
 
     # ── Accessors ────────────────────────────────────────────────────────────
@@ -245,3 +294,8 @@ def _get_openrouter_key() -> str:
             "OPENROUTER_API_KEY not set. Export it or write it to ~/.openrouter_key"
         )
     return key
+
+
+def default_cost_report_path(output_path: str) -> str:
+    p = Path(output_path)
+    return str(p.with_name(f"{p.stem}_cost_report.json"))

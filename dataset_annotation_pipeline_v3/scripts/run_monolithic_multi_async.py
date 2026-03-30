@@ -49,7 +49,7 @@ from src.voting       import (
     COMMITTEE_MODELS, MODEL_WEIGHTS,
     weighted_majority_vote, select_winner_model, _build_votes,
 )
-from src.cost_tracker import CostTracker
+from src.cost_tracker import CostTracker, default_cost_report_path
 
 SYSTEM_PROMPT_PATH    = PROJECT_ROOT / "prompts" / "system_monolithic.txt"
 USER_PROMPT_PATH      = PROJECT_ROOT / "prompts" / "user_monolithic.txt"
@@ -405,7 +405,8 @@ async def run(args: argparse.Namespace) -> None:
     print(f"   answered={answered}  abstained={abstained}  errors={errors_count}")
 
     # ── Fetch exact costs from OpenRouter and print breakdown ─────────────────
-    await tracker.fetch_and_report()
+    report_path = args.cost_report or default_cost_report_path(args.output)
+    await tracker.fetch_and_report(save_json_path=report_path)
 
 
 def main() -> None:
@@ -436,6 +437,8 @@ def main() -> None:
                     help="Override system prompt path (default: prompts/system_monolithic.txt)")
     ap.add_argument("--user-prompt",   dest="user_prompt",   default=None,
                     help="Override user prompt path (default: prompts/user_monolithic.txt)")
+    ap.add_argument("--cost-report",   dest="cost_report",   default=None,
+                    help="Path to save cost report JSON (default: <output>_cost_report.json)")
     args = ap.parse_args()
     asyncio.run(run(args))
 
