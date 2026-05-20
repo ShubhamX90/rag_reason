@@ -1,135 +1,294 @@
 # rag_eval/metrics.py
 # -*- coding: utf-8 -*-
 """
-Utility Functions for CATS v2.0 Metrics
---------------------------------------
-Provides helper functions for claim extraction and basic metrics.
+Utility functions for CATS v2.0 metrics.
+
+Provides:
+  • refusal detection (unified regex over both startswith and substring patterns)
+  • claim extraction (filters citation noise and tiny fragments before NLI)
+  • per-sample binary GR (renamed to gr_accuracy_from_flags — the old name F1 was misleading)
+  • dataset-level F1 (compute_f1_gr) computed from TP/FP/FN/TN counts
 """
 
-from typing import List
-from nltk import sent_tokenize
 import re
+from typing import List, Dict
+from nltk import sent_tokenize
+
+
+# --------------------
+# Refusal detection
+# --------------------
+# Unified refusal patterns. The previous version mixed startswith and substring
+# checks inconsistently; this single regex covers both English-language refusal
+# phrasings and the "CANNOT ANSWER, INSUFFICIENT EVIDENCE" stylized outputs the
+# models in this benchmark produce. Case-insensitive substring match.
+_REFUSAL_REGEX = re.compile(
+    r"\b("
+    r"cannot\s+answer|can't\s+answer|cant\s+answer"
+    r"|i\s+cannot|i\s+can't|i\s+cant"
+    r"|i'?m\s+unable|i\s+am\s+unable"
+    r"|unable\s+to\s+(?:answer|determine|conclude)"
+    r"|insufficient\s+(?:evidence|information|context)"
+    r"|no\s+(?:reliable\s+)?(?:evidence|information)\s+to\s+answer"
+    r"|(?:do\s*n'?t|does\s*n'?t)\s+have\s+(?:enough|sufficient)\s+information"
+    r"|not\s+enough\s+(?:evidence|information|context)"
+    r"|cannot\s+(?:determine|conclude|establish)"
+    r")\b",
+    re.IGNORECASE,
+)
 
 
 def answered_flags(outputs: List[str]) -> List[bool]:
     """
-    Detect if each output is a real answer (vs refusal).
-    Returns list of booleans indicating if each output contains an answer.
+    Detect if each output is a real answer (vs a refusal/abstain).
+    Returns parallel list of bools: True if output looks like an answer.
     """
     flags = []
     for o in outputs:
-        text = (o or "").strip().lower()
-        
-        # Check for refusal patterns
-        is_refusal = (
-            len(text) == 0 or
-            text.startswith("i cannot") or
-            text.startswith("i can't") or
-            text.startswith("i am unable") or
-            "cannot answer" in text or
-            "can't answer" in text or
-            "don't have enough information" in text or
-            "insufficient information" in text
-        )
-        
+        text = (o or "").strip()
+        if not text:
+            flags.append(False)
+            continue
+        is_refusal = bool(_REFUSAL_REGEX.search(text))
         flags.append(not is_refusal)
-    
     return flags
+
+
+# --------------------
+# Claim extraction
+# --------------------
+# Patterns that mark "this sentence is just citation/meta text, not a substantive claim"
+_CITATION_ONLY = re.compile(r"^\s*[\[\(\s,]*(?:d\d+|\[\d+\])(?:[\s,]*(?:d\d+|\[\d+\]))*[\s\.\]\)]*$", re.IGNORECASE)
+
+# Anaphoric meta-references to citations: "all explicitly state this fact",
+# "these sources confirm", "provide evidence supporting this link", etc.
+# Two patterns:
+#  (a) starts with an anaphoric quantifier ("all", "these", "those", "both",
+#      "the documents") followed by a verb of saying.
+#  (b) starts directly with a verb of saying (left behind after a leading
+#      citation list was stripped, e.g., "d1, d3, and d5 [provide evidence...]"
+#      → "provide evidence supporting this link").
+_META_REFERENCE = re.compile(
+    r"^\s*("
+    r"(all|these|those|both|they|the\s+(documents|sources|references|citations))\b"
+    r".{0,30}?\b(state|say|report|confirm|show|indicate|provide|mention|explicitly|note|claim|support)\b"
+    r"|"
+    r"(state|states|stated|say|says|report|reports|reported|confirm|confirms|confirmed"
+    r"|show|shows|showed|indicate|indicates|indicated|provide|provides|provided"
+    r"|mention|mentions|mentioned|note|notes|noted|claim|claims|claimed|support|supports|supported)\b"
+    r")",
+    re.IGNORECASE,
+)
+
+
+def _strip_citations_inplace(text: str) -> str:
+    """Remove citation markers from a sentence before NLI.
+
+    Handles bracketed (`[d1]`, `[1]`, `(d2)`) and bare (`d1, d3, d5`) citation
+    forms. Bare doc IDs are only stripped when they appear in a comma-separated
+    list at the start of a sentence — this matches the citation idiom without
+    deleting legitimate uses of `d1` in mid-sentence prose.
+
+    Also cleans up the comma/conjunction debris ", , , and" left behind so
+    NLI doesn't see "all explicitly state this fact" as a stand-alone claim.
+    """
+    # Bracketed forms
+    text = re.sub(r"\[\s*d\d+\s*\]", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\[\s*\d+\s*\]", "", text)
+    text = re.sub(r"\(\s*d\d+\s*\)", "", text, flags=re.IGNORECASE)
+
+    # Bare doc-id lists at sentence start: "d1, d3, and d5 ..." → " ..."
+    text = re.sub(
+        r"^\s*d\d+(?:\s*,\s*(?:and\s+)?d\d+)+\b",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+    # Or appearing as a list elsewhere: ", d1, d3, d5 "
+    text = re.sub(
+        r"(?:,\s*)?d\d+(?:\s*,\s*(?:and\s+)?d\d+){2,}\b",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+
+    # Collapse comma-and-comma debris
+    text = re.sub(r"(?:\s*,\s*){2,}", ", ", text)
+    text = re.sub(r"^\s*[,\s]+", "", text)
+    text = re.sub(r"\s*,\s*(and|or)\b\s*", " ", text, flags=re.IGNORECASE)
+    text = re.sub(r"^\s*(and|or)\s+", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\s{2,}", " ", text).strip(" ,;:")
+    return text
 
 
 def extract_claims_by_sentence(answer_text: str, max_claims: int = 12) -> List[str]:
     """
-    Split answer text into candidate claims (sentences).
-    
-    Args:
-        answer_text: The model's answer text
-        max_claims: Maximum number of claims to extract
-    
-    Returns:
-        List of claim sentences (up to max_claims)
+    Split answer into candidate claims (sentences) suitable for NLI.
+
+    Pre-processing applied before sentence-splitting:
+      • Protects "Lyndon B. Johnson"-style initials from being split mid-name
+        by temporarily replacing the period after a single capital initial.
+      • Strips bracket citations like [d1], [1], (d2) from each sentence
+        because NLI on a sentence that's just citations gives garbage.
+
+    Post-processing:
+      • Drops sentences that are <= 4 words or pure citation noise.
     """
     if not answer_text:
         return []
-    
-    try:
-        # Use NLTK to tokenize sentences
-        sents = sent_tokenize(answer_text or "")
-        # Filter out empty sentences and strip whitespace
-        sents = [s.strip() for s in sents if s.strip()]
-        # Return up to max_claims
-        return sents[:max_claims]
-    except Exception as e:
-        # Fallback: simple split on periods
-        sents = [s.strip() + "." for s in answer_text.split(".") if s.strip()]
-        return sents[:max_claims]
 
+    text = answer_text
+
+    # Pre-tokenization protection — NLTK splits sentences on `.` and routinely
+    # destroys text that contains periods inside tokens. Replace every "safe"
+    # period with the sentinel <DOT>, restore it after sentence-splitting.
+    #
+    # The qwen-monolithic run shows these failures repeatedly:
+    #   • initials   "Lyndon B. Johnson"        → ["Lyndon B.", "Johnson was..."]
+    #   • decimals   "17.83%", "$1.8 billion"   → ["...with 17.", "83%..."]
+    #   • domains    "a.COM domain"             → ["a.", "COM domain..."]
+    #   • company    "Phoenix Mills Co. Ltd."   → ["...Co.", "Ltd.", "..."]
+    #   • Mr./Dr./Inc./vs./etc.
+
+    # 1. Initials before a capitalized word: "Lyndon B. Johnson"
+    text = re.sub(r"\b([A-Z])\.(?=\s+[A-Z])", r"\1<DOT>", text)
+
+    # 2. Decimal numbers (and percentages/currency): "1.8", "17.83", "$2.5"
+    text = re.sub(r"(\d)\.(\d)", r"\1<DOT>\2", text)
+
+    # 3. Domain extensions and any "a.UPPERCASE" pattern: ".COM", ".NET", "a.com"
+    text = re.sub(r"\b([a-zA-Z])\.([A-Za-z]{2,4})\b", r"\1<DOT>\2", text)
+
+    # 4. Common abbreviations that end with `.` and should not split.
+    _ABBREV = (
+        "Inc", "Ltd", "Co", "Corp", "Mr", "Mrs", "Ms", "Dr", "Prof", "St", "Sr", "Jr",
+        "vs", "etc", "e\\.g", "i\\.e", "Fig", "Vol", "No", "Ave", "Blvd", "Mt",
+    )
+    for ab in _ABBREV:
+        text = re.sub(rf"\b({ab})\.", rf"\1<DOT>", text)
+
+    try:
+        sents = sent_tokenize(text)
+    except Exception:
+        sents = [s + "." for s in text.split(".") if s.strip()]
+
+    out: List[str] = []
+    for s in sents:
+        s = s.replace("<DOT>", ".").strip()
+        if not s:
+            continue
+
+        stripped = _strip_citations_inplace(s)
+        if not stripped:
+            continue
+
+        # Drop pure-citation sentences and very short fragments.
+        if _CITATION_ONLY.match(stripped):
+            continue
+
+        # Drop anaphoric meta-references like "all explicitly state this fact"
+        # that survive citation stripping but say nothing substantive on their own.
+        if _META_REFERENCE.match(stripped):
+            continue
+
+        words = stripped.split()
+        if len(words) < 4:
+            continue
+
+        # Heuristic: if the sentence has no content word of >=5 chars,
+        # it's almost certainly a meta-citation fragment, not a claim.
+        if not any(len(w.strip(".,;:!?")) >= 5 for w in words):
+            continue
+
+        out.append(stripped)
+        if len(out) >= max_claims:
+            break
+
+    return out
+
+
+# --------------------
+# Citations
+# --------------------
 
 def extract_bracket_citations(answer_text: str) -> List[str]:
-    """
-    Extract [dX] style citations from answer text.
-    
-    Args:
-        answer_text: Text potentially containing citations like [d1], [d2]
-    
-    Returns:
-        List of doc IDs referenced
-    """
+    """Extract [dX] style citations from answer text, preserving first-seen order."""
     if not answer_text:
         return []
-    
-    # Find all [dX] patterns
-    pattern = r'\[(d\d+)\]'
-    citations = re.findall(pattern, answer_text)
-    
-    # Return unique citations while preserving order
-    seen = set()
-    unique_citations = []
-    for cite in citations:
-        if cite not in seen:
-            unique_citations.append(cite)
-            seen.add(cite)
-    
-    return unique_citations
+    citations = re.findall(r"\[(d\d+)\]", answer_text, flags=re.IGNORECASE)
+    seen: set = set()
+    out: List[str] = []
+    for c in citations:
+        c_lower = c.lower()
+        if c_lower not in seen:
+            out.append(c_lower)
+            seen.add(c_lower)
+    return out
 
 
-def f1_gr_from_flags(pred_answered: bool, gold_answerable: bool) -> float:
+# --------------------
+# Grounded-Refusal metrics
+# --------------------
+
+def gr_accuracy_from_flags(pred_answered: bool, gold_answerable: bool) -> float:
     """
-    Per-item F1_GR proxy (grounded refusal).
-    Measures if the model correctly decided to answer or refuse.
-    
-    Args:
-        pred_answered: Whether model provided an answer (vs refused)
-        gold_answerable: Whether the question is answerable from docs
-    
-    Returns:
-        1.0 if prediction matches gold, 0.0 otherwise
+    Per-sample binary correctness of the answer/refuse decision.
+
+    Renamed from f1_gr_from_flags because per-sample it is not an F1 — it is
+    a 0/1 indicator. The dataset-level F1 is computed by compute_f1_gr below.
     """
     return 1.0 if int(pred_answered) == int(gold_answerable) else 0.0
 
 
+# Backward-compatible alias (deprecate later)
+f1_gr_from_flags = gr_accuracy_from_flags
+
+
+def compute_f1_gr(pred_answered_list: List[bool], gold_answerable_list: List[bool]) -> Dict[str, float]:
+    """
+    Compute proper precision/recall/F1 for the grounded-refusal task across
+    the whole dataset.
+
+    Treats `answered` as the positive class:
+      • TP = pred answered & gold answerable
+      • FP = pred answered & gold NOT answerable
+      • FN = pred refused  & gold answerable
+      • TN = pred refused  & gold NOT answerable
+    """
+    if len(pred_answered_list) != len(gold_answerable_list):
+        raise ValueError("List lengths must match")
+
+    tp = sum(1 for p, g in zip(pred_answered_list, gold_answerable_list) if p and g)
+    fp = sum(1 for p, g in zip(pred_answered_list, gold_answerable_list) if p and not g)
+    fn = sum(1 for p, g in zip(pred_answered_list, gold_answerable_list) if not p and g)
+    tn = sum(1 for p, g in zip(pred_answered_list, gold_answerable_list) if not p and not g)
+
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0
+    accuracy = (tp + tn) / max(1, len(pred_answered_list))
+
+    return {
+        "tp": tp, "fp": fp, "fn": fn, "tn": tn,
+        "precision": precision, "recall": recall,
+        "f1": f1, "accuracy": accuracy,
+    }
+
+
+# --------------------
+# Text normalization helpers
+# --------------------
+
 def normalize_answer(text: str) -> str:
-    """
-    Normalize text for comparison.
-    Lowercase, remove extra spaces, punctuation.
-    """
+    """Lowercase, strip punctuation, collapse whitespace."""
     import string
-    
-    text = text.lower()
-    # Remove punctuation
-    text = text.translate(str.maketrans('', '', string.punctuation))
-    # Normalize whitespace
-    text = ' '.join(text.split())
-    
-    return text
+    text = (text or "").lower()
+    text = text.translate(str.maketrans("", "", string.punctuation))
+    return " ".join(text.split())
 
 
 def remove_citations(text: str) -> str:
-    """
-    Remove citation markers like [1], [d1], etc. from text.
-    """
-    # Remove [number] or [dNumber] patterns
-    text = re.sub(r'\[\d+\]', '', text)
-    text = re.sub(r'\[d\d+\]', '', text)
-    # Clean up extra spaces
-    text = ' '.join(text.split())
-    return text
+    """Remove [N] and [dN] citation markers and collapse whitespace."""
+    text = re.sub(r"\[\d+\]", "", text or "")
+    text = re.sub(r"\[d\d+\]", "", text)
+    return " ".join(text.split())

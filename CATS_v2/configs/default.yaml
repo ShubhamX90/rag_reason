@@ -1,24 +1,38 @@
 # CATS v2.0 Default Configuration
+# This YAML is loaded by run_evaluation.py when --config is passed.
 
-# Evaluation settings
-conflict_eval:
-  enable: true
-  use_judge_committee: true
-  committee:
-    voting_strategy: "weighted_majority"
-    confidence_threshold: 0.6
-    use_async: true
-    max_concurrent_requests: 10
-
-# Output settings
+# Output settings (these override --output-dir if both are set)
 outputs_dir: "outputs"
 report_md: "outputs/eval_report.md"
 detailed_results_json: "outputs/detailed_results.json"
 
 # Pipeline settings
 pipeline:
-  use_async_evaluation: true
-  max_workers: 10
   batch_size: 50
-  show_progress: true
   verbose: true
+
+# Conflict evaluation settings
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true   # carve-out: correct refusals get full credit on all metrics
+  require_cross_doc_verification: false
+  max_claims_per_answer: 5
+
+  committee:
+    voting_strategy: "weighted_majority"   # majority | weighted_majority | unanimous
+    max_concurrent_requests: 50
+
+    # Override default judge priorities here without editing config.py.
+    # Higher number = more weight in weighted_majority voting.
+    priority_overrides:
+      claude-3-5-haiku-20241022: 2
+      deepseek/deepseek-r1:      3
+      qwen/qwen-2.5-7b-instruct: 1
+      mistralai/mistral-nemo:    1
+
+  # NLI judge for factual grounding (default: Claude Sonnet 4.6).
+  # Leave commented to use the built-in get_sonnet_nli_judge().
+  # nli_judge:
+  #   model_id: "claude-sonnet-4-6"
+  #   provider: "anthropic"

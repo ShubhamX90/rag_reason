@@ -213,15 +213,14 @@ async def evaluate_single_file(
         if "conflict_overall" in results:
             overall = results["conflict_overall"]
             logger.info(f"Samples evaluated: {overall['n']}")
-            logger.info(f"F1_GR: {overall['f1_gr']:.3f}")
+            logger.info(f"GR Accuracy: {overall['gr_accuracy']:.3f}")
             logger.info(f"Behavior Adherence: {overall['behavior']:.3f}")
             logger.info(f"Factual Grounding: {overall['factual_grounding']:.3f}")
             logger.info(f"Single-Truth Recall: {overall['single_truth_recall']:.3f}")
-            
-            # CATS Score
+
             import numpy as np
             cats_score = np.mean([
-                overall['f1_gr'],
+                overall['gr_accuracy'],
                 overall['behavior'],
                 overall['factual_grounding'],
                 overall['single_truth_recall']

@@ -8,11 +8,12 @@ Enhanced RAG evaluation with multi-LLM judge committee.
 
 from .config import (
     EvaluationConfig,
-    EnhancedTrustScoreConfig,
     EnhancedConflictEvalConfig,
     JudgeCommitteeConfig,
+    DEFAULT_JUDGE_PRIORITIES,
     create_default_committee,
     create_conservative_committee,
+    get_sonnet_nli_judge,
 )
 from .evaluator import EnhancedEvaluator
 from .data import load_dataset, read_jsonl, write_jsonl
@@ -21,9 +22,9 @@ from .logging_config import logger, setup_file_logging
 __version__ = "2.0.0"
 __all__ = [
     "EvaluationConfig",
-    "EnhancedTrustScoreConfig",
     "EnhancedConflictEvalConfig",
     "JudgeCommitteeConfig",
+    "DEFAULT_JUDGE_PRIORITIES",
     "EnhancedEvaluator",
     "load_dataset",
     "read_jsonl",
@@ -32,4 +33,5 @@ __all__ = [
     "setup_file_logging",
     "create_default_committee",
     "create_conservative_committee",
+    "get_sonnet_nli_judge",
 ]

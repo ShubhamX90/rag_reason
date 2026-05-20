@@ -43,6 +43,11 @@ def behavior_judge_prompt(query: str, answer: str, conflict_type: int) -> str:
     expected behavior for the given conflict type (how it handles multiple
     sources, uncertainty, disagreement, etc.), NOT whether the answer is
     factually correct.
+
+    A valid refusal ("CANNOT ANSWER, INSUFFICIENT EVIDENCE") is adherent
+    when the retrieved documents do not actually support a confident answer,
+    regardless of conflict type — refusal is always an acceptable behavior
+    when the evidence is genuinely insufficient.
     """
     rubric = BEHAVIOR_RUBRIC.get(conflict_type, BEHAVIOR_RUBRIC[1])
     return f"""
@@ -56,26 +61,28 @@ Behavior means:
 Given:
 - A user query
 - A model-generated answer
-- A conflict type with an expected behavior rubric
+- A conflict type with ONE expected behavior rubric (shown below)
 
 Your task:
-Decide whether the model's answer **follows the expected behavior** for this conflict type.
+Decide whether the model's answer **follows the expected behavior** for THIS specific conflict type only.
 
 Conflict Type: {conflict_type}
-Expected Behavior (rubric):
-{BEHAVIOR_RUBRIC}
+Expected Behavior for this conflict type:
+{rubric}
 
 Instructions:
-- If the answer clearly follows the expected behavior, set "adherent": true.
+- Judge the answer ONLY against the rubric shown above. Do not invoke rubrics for other conflict types.
+- If the answer is a refusal ("CANNOT ANSWER" / "INSUFFICIENT EVIDENCE") AND the retrieved evidence genuinely does not support an answer, treat the refusal as adherent.
+- If the answer clearly follows the expected behavior for this conflict type, set "adherent": true.
 - If the answer clearly violates or ignores the expected behavior, set "adherent": false.
 - Ignore factual correctness; only judge how the answer behaves relative to the rubric.
-- The "rationale" should briefly point to the key aspects of the answer's behavior
-  (for example, whether it mentions multiple viewpoints, reconciles partial info,
-  prioritizes newer evidence, corrects misinformation, etc.).
+- The "rationale" should briefly cite the key aspects of the answer's behavior.
+- The "confidence" should reflect how certain you are in YOUR adherent decision, between 0.0 (coin flip) and 1.0 (clearly correct call). Use 0.5 if you are uncertain.
 
 Return ONLY a JSON object with fields:
   "adherent": true or false,
-  "rationale": "short explanation"
+  "rationale": "short explanation",
+  "confidence": 0.0 to 1.0
 
 Query:
 {query}
@@ -115,7 +122,8 @@ Rules:
 
 Return ONLY a JSON object:
 {{
-  "relation": "entails" | "contradicts" | "neutral"
+  "relation": "entails" | "contradicts" | "neutral",
+  "confidence": 0.0 to 1.0
 }}
 
 Premise (evidence from retrieved document):
@@ -129,28 +137,33 @@ Hypothesis (claim from model answer):
 def single_truth_recall_prompt(gold_answer: str, model_answer: str) -> str:
     """
     Prompt for LLM-as-a-judge to decide if the gold factual answer is
-    present in the candidate model answer (possibly paraphrased or with
-    extra context).
+    the model's actual stated answer (not just mentioned in passing).
 
-    Output must be ONLY a JSON object of the form:
-      {
-        "adherent": true/false,   // true if gold answer is present
-        "rationale": "short explanation"
-      }
+    The judge must check that the gold is the answer the model is *asserting*,
+    not merely a string that appears somewhere in the response (e.g., quoted
+    from a document the model is rejecting, or listed alongside the actual
+    answer).
     """
     return f"""
-You are checking whether a candidate answer correctly contains a given factual answer.
-Consider paraphrases, equivalent wording, and logically equivalent statements as MATCHING.
+You are checking whether a candidate answer **asserts** a given factual answer as its conclusion.
+
+This is a strict test. The candidate answer must be *committing* to the gold answer as its claim.
+It is NOT enough that the gold answer appears as a quoted snippet, as one of several alternatives
+that the model is comparing, or as text the model is dismissing.
+
+Examples:
+- Gold: "1759". Candidate: "The latest count is 1,759 tornadoes." -> adherent: true.
+- Gold: "1759". Candidate: "Source d4 reports 1,759 but the answer is 658." -> adherent: false (model commits to 658).
+- Gold: "Stephen Curry". Candidate: "Stephen Curry has the highest contract." -> adherent: true.
+- Gold: "yes". Candidate: "The evidence is mixed; cannot say yes or no." -> adherent: false.
+
+Consider paraphrases and equivalent wording as MATCHING when the model is committing to that paraphrase.
+Misspellings or formatting differences are acceptable (e.g., "Stephan" matches "Stephen").
 
 Return ONLY a JSON object with fields:
   "adherent": true or false,
-  "rationale": short string explanation.
-
-The interpretation:
-  - "adherent": true  -> the candidate answer DOES clearly state the gold answer
-                         (possibly paraphrased or with additional context).
-  - "adherent": false -> the candidate answer does NOT contain the gold answer
-                         or states something incompatible.
+  "rationale": short string explanation,
+  "confidence": 0.0 to 1.0 (your certainty in the adherent decision).
 
 Gold factual answer:
 {gold_answer}

@@ -35,6 +35,83 @@ from rag_eval import (
 from rag_eval.config import EnhancedConflictEvalConfig
 
 
+def _load_yaml_config(path: str) -> dict:
+    """Load YAML config file. Returns {} if path is None or file unreadable."""
+    if not path:
+        return {}
+    try:
+        import yaml  # PyYAML
+    except ImportError:
+        logger.warning("PyYAML not installed; --config will be ignored. Run: pip install pyyaml")
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+        logger.info(f"Loaded config from {path}")
+        return data
+    except FileNotFoundError:
+        logger.error(f"Config file not found: {path}")
+        return {}
+    except Exception as e:
+        logger.error(f"Failed to parse YAML config {path}: {e}")
+        return {}
+
+
+def _apply_yaml_to_config(yaml_data: dict, config: EvaluationConfig, args) -> EvaluationConfig:
+    """Overlay parsed YAML onto a base EvaluationConfig.
+
+    Honors: outputs_dir, report_md, detailed_results_json,
+    pipeline.*, conflict_eval.* (committee voting_strategy / max_concurrent_requests
+    / priority_overrides, correct_refusal_full_credit, require_cross_doc_verification,
+    max_claims_per_answer).
+    """
+    if not yaml_data:
+        return config
+
+    # Top-level paths
+    for k in ("outputs_dir", "report_md", "detailed_results_json"):
+        if k in yaml_data:
+            setattr(config, k, yaml_data[k])
+
+    # Pipeline section
+    pipeline_section = yaml_data.get("pipeline") or {}
+    for k in ("batch_size", "verbose", "show_progress", "skip_on_error"):
+        if k in pipeline_section:
+            setattr(config.pipeline, k, pipeline_section[k])
+
+    # Conflict-eval section
+    ce = yaml_data.get("conflict_eval") or {}
+    for k in ("correct_refusal_full_credit", "require_cross_doc_verification",
+              "max_claims_per_answer", "allow_paraphrases", "aggregate_by_conflict_type"):
+        if k in ce:
+            setattr(config.conflict, k, ce[k])
+
+    # Committee section: voting strategy + priority overrides
+    committee_section = ce.get("committee") or {}
+    if config.conflict.committee is not None:
+        if "voting_strategy" in committee_section:
+            config.conflict.committee.voting_strategy = committee_section["voting_strategy"]
+        if "max_concurrent_requests" in committee_section:
+            config.conflict.committee.max_concurrent_requests = int(committee_section["max_concurrent_requests"])
+
+        # Apply priority overrides — rebuild the committee with new priorities.
+        overrides = committee_section.get("priority_overrides")
+        if overrides:
+            from rag_eval.config import create_default_committee, create_conservative_committee
+            if args.committee == "conservative":
+                config.conflict.committee = create_conservative_committee(
+                    priority_overrides=overrides,
+                    max_concurrent_requests=config.conflict.committee.max_concurrent_requests,
+                )
+            else:
+                config.conflict.committee = create_default_committee(
+                    priority_overrides=overrides,
+                    max_concurrent_requests=config.conflict.committee.max_concurrent_requests,
+                )
+
+    return config
+
+
 def parse_args():
     parser = argparse.ArgumentParser(
         description="CATS v2.0 - Enhanced RAG Evaluation Pipeline"
@@ -141,7 +218,12 @@ def setup_config(args, input_file: str, output_dir: str) -> EvaluationConfig:
     else:
         config.conflict.use_judge_committee = False
         logger.info("Using single judge mode")
-    
+
+    # Apply YAML config overrides (if --config was passed). YAML wins over CLI
+    # for fields it specifies; CLI args remain authoritative for everything else.
+    yaml_data = _load_yaml_config(args.config)
+    config = _apply_yaml_to_config(yaml_data, config, args)
+
     return config
 
 
@@ -199,15 +281,21 @@ async def process_single_file(args, input_file: str, file_idx: int, total: int):
             overall = results["conflict_overall"]
             logger.info("\nMetrics Summary:")
             logger.info(f"  Samples evaluated: {overall['n']}")
-            logger.info(f"  F1_GR: {overall['f1_gr']:.3f}")
+            logger.info(f"  GR Accuracy: {overall['gr_accuracy']:.3f}")
             logger.info(f"  Behavior Adherence: {overall['behavior']:.3f}")
             logger.info(f"  Factual Grounding: {overall['factual_grounding']:.3f}")
-            logger.info(f"  Single-Truth Recall: {overall['single_truth_recall']:.3f}")
-            
-            # CATS Score
+            logger.info(f"  Single-Truth Recall: {overall['single_truth_recall']:.3f}"
+                        f" (n_applicable={overall.get('single_truth_recall_n', 0)})")
+
+            # Dataset-level F1 (proper precision/recall over TP/FP/FN)
+            if "gr_dataset_metrics" in results and results["gr_dataset_metrics"]:
+                g = results["gr_dataset_metrics"]
+                logger.info(f"  GR Dataset F1: {g['f1']:.3f} "
+                            f"(P={g['precision']:.3f}, R={g['recall']:.3f})")
+
             import numpy as np
             cats_score = np.mean([
-                overall['f1_gr'],
+                overall['gr_accuracy'],
                 overall['behavior'],
                 overall['factual_grounding'],
                 overall['single_truth_recall']
