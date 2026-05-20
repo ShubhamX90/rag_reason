@@ -6,10 +6,13 @@ Multi-LLM Judge Committee with Voting System
 Implements a committee of LLM judges that vote on evaluation decisions.
 
 Features:
-  • Parallel async judge execution gated by asyncio.Semaphore
+  • Parallel async judge execution (all judges run concurrently via asyncio.gather)
   • Weighted majority voting (weight = priority × confidence)
   • Per-judge cost tracking
   • Loud failure modes (no silent fallback to adherent=False)
+
+Note: max_concurrent_requests is stored in JudgeCommitteeConfig but NOT enforced
+here — all judge calls fan out without a semaphore. See ISSUES.md §3.3.
 
 Authors: Enhanced by Claude AI
 """
@@ -337,21 +340,14 @@ class JudgeCommittee:
         self.judges = [JudgeClient(j) for j in config.judges]
         self.total_cost = 0.0
         self.decision_count = 0
-        # Single shared semaphore across all judges to cap inflight API calls.
-        self._semaphore = asyncio.Semaphore(max(1, config.max_concurrent_requests))
 
         logger.info(f"Initialized committee with {len(self.judges)} judges:")
         for judge in config.judges:
             logger.info(f"  - {judge.model_id} ({judge.provider.value}) [priority={judge.priority}]")
 
-    async def _bounded(self, coro):
-        """Run a coroutine under the committee's semaphore."""
-        async with self._semaphore:
-            return await coro
-
     async def judge_behavior(self, prompt: str) -> CommitteeDecision:
-        """Get behavior judgment from the committee with bounded concurrency."""
-        tasks = [self._bounded(judge.judge_behavior(prompt)) for judge in self.judges]
+        """Get behavior judgment from the committee. All judges run in parallel."""
+        tasks = [judge.judge_behavior(prompt) for judge in self.judges]
         responses = await asyncio.gather(*tasks)
 
         valid_responses = [r for r in responses if r.error is None]

@@ -137,37 +137,24 @@ Hypothesis (claim from model answer):
 def single_truth_recall_prompt(gold_answer: str, model_answer: str) -> str:
     """
     Prompt for LLM-as-a-judge to decide if the gold factual answer is
-    the model's actual stated answer (not just mentioned in passing).
-
-    The judge must check that the gold is the answer the model is *asserting*,
-    not merely a string that appears somewhere in the response (e.g., quoted
-    from a document the model is rejecting, or listed alongside the actual
-    answer).
+    present in (or semantically equivalent to) the model's answer.
     """
     return f"""
-You are checking whether a candidate answer **asserts** a given factual answer as its conclusion.
+You are checking whether a model answer contains or expresses a given factual answer.
 
-This is a strict test. The candidate answer must be *committing* to the gold answer as its claim.
-It is NOT enough that the gold answer appears as a quoted snippet, as one of several alternatives
-that the model is comparing, or as text the model is dismissing.
+The gold answer is the correct answer to a question. The model's answer should contain this answer
+(possibly paraphrased, abbreviated, or expressed differently).
 
-Examples:
-- Gold: "1759". Candidate: "The latest count is 1,759 tornadoes." -> adherent: true.
-- Gold: "1759". Candidate: "Source d4 reports 1,759 but the answer is 658." -> adherent: false (model commits to 658).
-- Gold: "Stephen Curry". Candidate: "Stephen Curry has the highest contract." -> adherent: true.
-- Gold: "yes". Candidate: "The evidence is mixed; cannot say yes or no." -> adherent: false.
-
-Consider paraphrases and equivalent wording as MATCHING when the model is committing to that paraphrase.
-Misspellings or formatting differences are acceptable (e.g., "Stephan" matches "Stephen").
+Consider paraphrases and equivalent wording as matching.
 
 Return ONLY a JSON object with fields:
-  "adherent": true or false,
+  "adherent": true or false (whether the model's answer contains or expresses the gold answer),
   "rationale": short string explanation,
-  "confidence": 0.0 to 1.0 (your certainty in the adherent decision).
+  "confidence": 0.0 to 1.0 (your certainty in the adherent decision)
 
 Gold factual answer:
 {gold_answer}
 
-Candidate model answer:
+Model answer:
 {model_answer}
 """.strip()

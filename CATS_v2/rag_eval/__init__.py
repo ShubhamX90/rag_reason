@@ -9,6 +9,7 @@ Enhanced RAG evaluation with multi-LLM judge committee.
 from .config import (
     EvaluationConfig,
     EnhancedConflictEvalConfig,
+    EnhancedTrustScoreConfig,
     JudgeCommitteeConfig,
     DEFAULT_JUDGE_PRIORITIES,
     create_default_committee,
@@ -24,6 +25,7 @@ __version__ = "2.0.0"
 __all__ = [
     "EvaluationConfig",
     "EnhancedConflictEvalConfig",
+    "EnhancedTrustScoreConfig",
     "JudgeCommitteeConfig",
     "DEFAULT_JUDGE_PRIORITIES",
     "EnhancedEvaluator",

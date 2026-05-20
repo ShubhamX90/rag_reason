@@ -574,7 +574,200 @@ The model isn't ungrounded; the claim-extractor is over-splitting.
 
 ---
 
-## 7. Summary table
+## 7. Additional logical issues found by deep-reading the qwen run
+
+These issues were discovered by reading every sample in
+`outputs/untuned_generations/qwen/monolithic/e2e/detailed_results.json` and
+checking whether the logged input/output/metric values made logical sense.
+None of these is currently fixed in code.
+
+### N1 — Correct refusals are triple-penalized
+
+**Severity:** P0 (composite CATS score is wrong by design for correct refusals)
+**Files:** [rag_eval/evaluator.py](CATS_v2/rag_eval/evaluator.py), [rag_eval/conflict_eval.py](CATS_v2/rag_eval/conflict_eval.py)
+**Evidence:** Sample `#0463` (Type 1, model output: "CANNOT ANSWER, INSUFFICIENT EVIDENCE", gold unanswerable).
+
+| Metric              | Actual score | Why it is wrong                                          |
+|---------------------|--------------|----------------------------------------------------------|
+| `gr_accuracy`       | 1.0          | Correct — pred=False AND gold=False, so accuracy = 1    |
+| `behavior_score`    | 0.0          | "No Conflict" rubric expects a direct answer; refusal fails |
+| `factual_grounding` | 0.0          | No claims extracted from refusal text                   |
+| `single_truth_recall` | 0.0        | No answer to recall the gold from                       |
+| **CATS composite**  | **0.25**     | "model failed" verdict on a correctly-handled sample    |
+
+When `pred_answered=False` AND `gold_answerable=False`, the model made exactly
+the right call. All downstream metrics (behavior, grounding, recall) zero out on
+an answer that doesn't exist — they are measuring the wrong thing.
+
+**Fix:** When `pred_answered=False AND gold_answerable=False`, skip the behavior/
+grounding/recall calls and record all metrics as 1.0 with a `skipped: "correct_refusal"`
+sentinel so the result is auditable.
+
+---
+
+### N2 — Recall judges count gold strings *mentioned* but not *asserted*
+
+**Severity:** P1 (false-positive recall on answers that explicitly reject the gold)
+**Files:** [rag_eval/judge_prompts.py](CATS_v2/rag_eval/judge_prompts.py), [rag_eval/conflict_eval.py](CATS_v2/rag_eval/conflict_eval.py)
+**Evidence:** Sample `#0085` (Type 4, gold="at least 1,759", model output committed to "658" but quoted "1,759" from a document it was contrasting).
+
+The recall prompt asks if the gold answer "appears in" the model answer. It does —
+the model cited "1,759" — but the model's actual conclusion was "658". The
+committee voted 3-of-4 that the gold was present, giving `single_truth_recall=1.0`
+even though the model gave the wrong number.
+
+**Fix:** Rewrite `single_truth_recall_prompt` to ask the judge whether the model
+is *asserting* the gold as its answer, not whether the gold string is *mentioned*
+anywhere. Provide explicit examples like:
+- Gold "1,759"; Candidate "Source d4 reports 1,759 but the answer is 658" → false
+(model commits to 658, not 1,759).
+
+---
+
+### N3 — Dataset has misspelled gold answers; recall gives split verdicts
+
+**Severity:** P2 (data quality; manifests as recall instability)
+**Evidence:** Sample `#0042` (gold="Chiliwack" — 1 'l'; correct spelling "Chilliwack" — 2 'l's).
+The model said "Chilliwack" (correct). The committee voted 2-2 on whether
+"Chilliwack" matches "Chiliwack", producing partial credit.
+
+**Fix:** Either instruct the recall judge to accept minor spelling variations as
+matches, or clean the gold answer strings in the dataset. Code-level fix alone
+can't catch all typos; dataset cleanup is needed.
+
+---
+
+### N4 — `votes_for: 2, votes_against: 2` ties are broken by weighted priority, not documented
+
+**Severity:** P2 (surprising behavior; hard to audit without explanation)
+**Evidence:** Samples `#0066`, `#0204`, `#0321`. In all three, a 2-2 raw-vote
+tie was broken by DeepSeek's priority=3, which was sufficient to tip the
+weighted total. The committee report shows `votes_for=2, votes_against=2` but
+`adherent=True` — confusing without knowing the weighting.
+
+**Fix (documentation):** In `CommitteeDecision.to_dict()`, also emit
+`weighted_for` and `weighted_against` alongside the raw vote counts. Callers
+reading the JSON will then understand how the tie was resolved without
+re-implementing the voting math.
+
+---
+
+### N5 — `gold_answer` typos in the dataset cause nondeterministic recall
+
+**Severity:** P2 (data quality)
+**Evidence:** "Stephan Curry" (#0061; correct: "Stephen Curry"). The recall
+judge sometimes treats "Stephen" as matching "Stephan" (acceptable spelling
+variation) and sometimes doesn't. This is consistent with N3 — the root cause
+is dataset-level annotation errors that propagate into the metric.
+
+**Fix:** Data cleanup is the primary fix. As a code mitigation, see N2/N3 above
+(instruct the recall judge to accept minor spelling variations).
+
+---
+
+### N6 — Type 4 samples score `behavior=1.0` even when the model gives an outdated answer
+
+**Severity:** P1 (behavior metric completely misses the Type 4 failure mode)
+**Files:** [rag_eval/judge_prompts.py](CATS_v2/rag_eval/judge_prompts.py)
+**Evidence:** Sample `#0113` (gold="2023", model confidently answered "2020",
+`behavior_score=1.0`, `factual_grounding=1.0`, `single_truth_recall=0.5`).
+
+The behavior judge is told to check if the model "Prioritises the up-to-date
+information" (Type 4 rubric). But the judge has **no access to document dates**
+— it can only read the answer text. The model's "2020" answer reads as a
+confident direct answer, so the judge marks it adherent. Only recall (which
+checks against the gold "2023") catches the mistake, and only at half credit.
+
+**Fix:** Pass `retrieved_docs[i].date` into the behavior judge prompt for
+Type 4 (and Type 5) samples. The judge needs to see what "up-to-date" means in
+context. Without dates, the Type 4 behavior metric is measuring answer
+confidence, not temporal correctness.
+
+---
+
+### N7 — DeepSeek dominates tail latency; the committee wall-time is single-model bound
+
+**Severity:** P2 (cost/runtime)
+**Files:** [rag_eval/config.py](CATS_v2/rag_eval/config.py), [rag_eval/judge_committee.py](CATS_v2/rag_eval/judge_committee.py)
+**Evidence:** In the qwen run, per-sample `total_latency_ms` values routinely
+reach 30-45 seconds, of which DeepSeek alone takes 20-40 seconds (samples
+`#0254`, `#0215`, `#0339`). Haiku, Qwen, and Mistral together usually finish
+under 9 seconds. The committee waits for all judges (`asyncio.gather`) so a
+single slow judge controls wall time.
+
+**Fix options:**
+- Use `--committee conservative` (no DeepSeek) for large runs.
+- Add a per-judge timeout: if a judge doesn't respond within N seconds, treat
+  it as an error and exclude from voting.
+- Implement `asyncio.wait` with `return_when=FIRST_COMPLETED` and a timeout
+  threshold, voting on whoever responded in time.
+
+---
+
+### N8 — Mistral cost is always reported as $0.00 even when OpenRouter uses a paid fallback
+
+**Severity:** P2 (cost under-estimation)
+**Files:** [rag_eval/config.py](CATS_v2/rag_eval/config.py)
+**Evidence:** Every sample in the qwen run shows `"cost": 0.0` for the Mistral
+row. This matches `cost_per_1k_input=0.0, cost_per_1k_output=0.0` in
+`get_mistral_nemo_judge()`. However, OpenRouter sometimes silently falls over to
+a paid tier when the free tier is rate-limited. In that case the actual run cost
+is slightly under-reported because the cost tracking is based on the configured
+price, not on the OpenRouter invoice.
+
+**Fix:** Either query the OpenRouter `/api/v1/generation` endpoint after each
+call to get actual billed cost, or at least emit a warning when cost is 0 but
+the model is known to have a paid fallback.
+
+---
+
+### N9 — `factual_grounding_score=1.0` when `total_claims=2` but `claim_details=[]`
+
+**Severity:** P1 (inconsistent output schema; downstream tools break on the mismatch)
+**Files:** [rag_eval/conflict_eval.py](CATS_v2/rag_eval/conflict_eval.py)
+**Evidence:** Sample `#0471` (Type 5). When `support_docs` is empty (no doc
+notes marked as supporting), `enhanced_factual_grounding` returns early with:
+
+```python
+return {
+    "grounding_ratio": 0.0,
+    "supported_claims": 0,
+    "total_claims": len(claims),  # e.g. 2
+    "claim_details": [],          # empty — inconsistent with total_claims=2
+}
+```
+
+Any downstream code that zips `claim_details` with extracted claims gets
+mis-aligned output. `len(claim_details) != total_claims` violates the implicit
+contract of the return schema.
+
+**Fix:** When returning early for empty support_docs, either:
+(a) populate `claim_details` with one `{claim, supported=False, ...}` entry per
+claim so the list length always equals `total_claims`, or
+(b) set `total_claims=0` (but this loses the information that claims were extracted).
+Option (a) is preferred.
+
+---
+
+### N10 — Aggregator includes correct-refusal zeros in the metric mean
+
+**Severity:** P1 (downstream of N1)
+**Files:** [rag_eval/evaluator.py](CATS_v2/rag_eval/evaluator.py)
+
+When a model correctly refuses (N1), `behavior_score=0.0`, `factual_grounding=0.0`,
+`single_truth_recall=0.0` are recorded. The `_aggregate_results` loop averages
+these zeros into the overall means. This drags all three aggregate metrics down
+for models that correctly refuse unanswerable questions — exactly the opposite of
+what the evaluation should reward.
+
+**Fix:** Implement the carve-out described in N1. As a secondary fix, at
+minimum, track and report separately: (a) the number of correct refusals, and (b)
+the metric averages both with and without correct refusals, so the degradation is
+visible in the report.
+
+---
+
+## 8. Summary table
 
 | ID  | Severity | Where                          | One-line                                                                 |
 |-----|----------|--------------------------------|--------------------------------------------------------------------------|

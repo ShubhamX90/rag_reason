@@ -10,9 +10,6 @@ Key v3 changes:
     (or KeyError after spending API budget).
   • Dedicated NLI judge (Sonnet 4.6 by default) for factual grounding —
     constructed once per evaluator, not per-sample.
-  • Refusal carve-out: if pred_answered=False AND gold_answerable=False, the
-    model correctly refused; behavior/grounding/recall are recorded as 1.0
-    instead of being zeroed by the rubric-strict judges.
   • Per-sample results sorted by sample_id before writing JSON, so two runs
     over the same input produce diff-able output.
 """
@@ -175,43 +172,6 @@ class EnhancedEvaluator:
         # --- Metric 1: per-sample GR accuracy (binary).
         gr_acc = gr_accuracy_from_flags(pred_answered, gold_answerable)
 
-        # --- Correct-refusal carve-out.
-        # If the model correctly refused an unanswerable question, all
-        # downstream metrics are vacuously satisfied — there's no answer to
-        # judge, no claims to ground, and no gold to recall.
-        correct_refusal = (cfg.correct_refusal_full_credit
-                           and (not pred_answered)
-                           and (not gold_answerable))
-
-        if correct_refusal:
-            return {
-                "sample_id": sample_id,
-                "conflict_type": ctype,
-                "pred_answered": pred_answered,
-                "gold_answerable": gold_answerable,
-                "gr_accuracy": gr_acc,
-                "behavior_score": 1.0,
-                "behavior_details": {
-                    "adherent": True,
-                    "rationale": "Correct refusal of unanswerable question (carve-out)",
-                    "skipped": "correct_refusal",
-                    "committee_details": None,
-                },
-                "factual_grounding_score": 1.0,
-                "factual_grounding_details": {
-                    "grounding_ratio": 1.0,
-                    "supported_claims": 0,
-                    "total_claims": 0,
-                    "claim_details": [],
-                    "skipped": "correct_refusal",
-                },
-                "single_truth_recall_score": 1.0,
-                "single_truth_recall_details": {
-                    "recall": 1.0,
-                    "skipped": "correct_refusal",
-                },
-            }
-
         # --- Metric 2: behavior adherence (committee).
         beh = await committee_behavior_adherence(self.committee, query, answer, ctype)
         beh_score = 1.0 if beh["adherent"] else 0.0
@@ -302,7 +262,7 @@ class EnhancedEvaluator:
             bucket["factual_grounding"].append(res["factual_grounding_score"])
 
             # Only include single_truth_recall in averages when it was applicable.
-            if res.get("single_truth_applicable", True) or res.get("single_truth_recall_details", {}).get("skipped") == "correct_refusal":
+            if res.get("single_truth_applicable", True):
                 overall["single_truth_recall"].append(res["single_truth_recall_score"])
                 bucket["single_truth_recall"].append(res["single_truth_recall_score"])
                 overall["single_truth_recall_n"] += 1

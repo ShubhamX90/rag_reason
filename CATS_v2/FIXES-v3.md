@@ -199,54 +199,52 @@ longer requires editing source.
 
 ---
 
-### §3.2 — Dead config fields (`EnhancedTrustScoreConfig`, `retry_attempts`, etc.) — **FIXED**
+### §3.2 — Dead config fields (`EnhancedTrustScoreConfig`, `retry_attempts`, etc.) — **REVERTED**
 
-**Where:** [rag_eval/config.py](rag_eval/config.py). Removed the entirety of:
-- `EnhancedTrustScoreConfig` (every field was unread)
-- `ModelConfig` (unused by the evaluator)
+> **Current state:** All dead fields have been restored. See ISSUES.md §3.2 for
+> the list of fields; they remain unused by any evaluator code.
+
+The removal that was performed earlier has been undone at the user's request.
+The following are now back in [rag_eval/config.py](rag_eval/config.py):
+
+- `EnhancedTrustScoreConfig` (12-field dataclass; no evaluator reads it)
+- `ModelConfig` (5 fields; never used by the evaluator)
 - `JudgeCommitteeConfig.confidence_threshold` / `use_async` / `retry_attempts` / `timeout_seconds` / `cost_optimization` / `max_cost_per_sample` / `prefer_cheaper_models`
 - `JudgeModelConfig.max_requests_per_minute` / `max_tokens_per_minute`
 - `PipelineConfig.max_workers` / `enable_caching` / `cache_dir` / `log_errors`
-- `EnhancedConflictEvalConfig.*` flags that advertised unimplemented features (`check_viewpoint_balance`, `check_temporal_precedence`, `compute_conflict_resolution_score`, `use_semantic_matching`, etc.)
-- The four global singletons (`model_cfg`, `trust_cfg`, `conflict_cfg`, `eval_cfg`)
+- All `EnhancedConflictEvalConfig` dead flags (`check_viewpoint_balance`, `check_temporal_precedence`, `compute_conflict_resolution_score`, `use_semantic_matching`, etc.)
+- Four global singletons: `model_cfg`, `trust_cfg`, `conflict_cfg`, `eval_cfg`
+- `EnhancedTrustScoreConfig` re-exported from `__init__.py`
 
-`__init__.py` updated to drop `EnhancedTrustScoreConfig` from the exported names. Smoke-imported the package end-to-end with no `ImportError`.
-
-A new field replaced the dead ones: `correct_refusal_full_credit: bool = True`
-which controls the refusal carve-out described in §5.x below.
-
----
-
-### §3.3 — `max_concurrent_requests` configured but not enforced — **FIXED**
-
-**Where:** [rag_eval/judge_committee.py:393-396](rag_eval/judge_committee.py#L393-L396).
-
-A `_semaphore = asyncio.Semaphore(config.max_concurrent_requests)` is now
-created on `JudgeCommittee.__init__`, and `judge_behavior()` wraps every
-per-judge call:
-
-```python
-async def _bounded(self, coro):
-    async with self._semaphore:
-        return await coro
-
-tasks = [self._bounded(judge.judge_behavior(prompt)) for judge in self.judges]
-```
-
-This caps total in-flight API calls across all judges. For a 100-sample run
-with 4 judges + 5-claim grounding + 4-judge recall, that was previously up to
-~2,300 simultaneous requests. The 38-45-second DeepSeek latencies in the qwen
-run (samples #0254, #0215, #0339) are consistent with rate-limiting; the new
-semaphore should cut tail latency materially.
+Fields are preserved exactly because removing them is a breaking change for any
+calling code that imports them by name. They are documented as "stored; no
+evaluator reads this" in the source.
 
 ---
 
-### §3.4 — Per-judge RPM limits set but never enforced — **DOCUMENTED, FIELD REMOVED**
+### §3.3 — `max_concurrent_requests` configured but not enforced — **REVERTED**
 
-The fields `JudgeModelConfig.max_requests_per_minute` / `_per_minute` were
-removed (§3.2). The semaphore (§3.3) gives global concurrency control. Per-judge
-RPM rate-limiting is a feature for a follow-up; it requires a token-bucket and
-isn't justified by the current dataset size. Flagged but not implemented.
+> **Current state:** `JudgeCommittee.judge_behavior()` uses bare
+> `asyncio.gather(*tasks)` with no semaphore. See ISSUES.md §3.3.
+
+The `asyncio.Semaphore` and `_bounded()` wrapper that were added have been
+removed at the user's request. Fan-out is now unbounded again: a 100-sample run
+can generate several hundred simultaneous outbound API calls.
+
+`max_concurrent_requests` remains on `JudgeCommitteeConfig` (as a stored field,
+see §3.2) but is not enforced anywhere in the code.
+
+---
+
+### §3.4 — Per-judge RPM limits set but never enforced — **REVERTED (fields restored)**
+
+> **Current state:** `max_requests_per_minute` and `max_tokens_per_minute` are
+> back on `JudgeModelConfig`. No rate limiter exists. See ISSUES.md §3.4.
+
+The fields were removed in an earlier pass (§3.2 cleanup) and are now restored.
+They are stored for documentation; no token-bucket or leaky-bucket is
+implemented, so HTTP 429 responses from OpenRouter still propagate as
+`adherent=False` if not caught.
 
 ---
 
@@ -606,59 +604,49 @@ that should largely vanish.
 
 While re-reading [detailed_results.json](outputs/untuned_generations/qwen/monolithic/e2e/detailed_results.json) sample-by-sample, I found bugs *not* in the original ISSUES.md. Each was either fixed or flagged.
 
-### N1 — Correct refusals were triple-penalized — **FIXED**
+### N1 — Correct refusals were triple-penalized — **REVERTED (open — see ISSUES.md §N1)**
 
-**Observed at:** #0463 (Type 1, model "CANNOT ANSWER", gold not answerable)
+> **Current state:** The carve-out has been removed. Correct refusals still
+> score `behavior=0.0`, `grounding=0.0`, `recall=0.0`. See ISSUES.md §N1.
 
-| Metric              | Old score | What it actually meant                     |
-|---------------------|-----------|--------------------------------------------|
-| `f1_gr`             | 1.0       | Model correctly identified as unanswerable |
-| `behavior_score`    | 0.0       | "No Conflict" judges expect a direct answer |
-| `factual_grounding` | 0.0       | No claims to ground                        |
-| `single_truth_recall` | 0.0     | No answer contains the (nonexistent) gold  |
-| **CATS composite**  | **0.25**  | "model failed" — but it actually succeeded |
+**Observed at:** #0463 (Type 1, model "CANNOT ANSWER", gold not answerable).
 
-**Fix:** New config flag `correct_refusal_full_credit: bool = True`. When
-`pred_answered=False` AND `gold_answerable=False`, all four metrics return 1.0
-with a sentinel `"skipped": "correct_refusal"` so the result is auditable.
-Same model on same data, post-fix, would now score 1.0/1.0/1.0/1.0 → CATS=1.0,
-matching the f1_gr verdict.
+The carve-out (`correct_refusal_full_credit: bool = True` flag + early-return
+block in `_evaluate_single_sample`) was added then removed at the user's
+request. The `correct_refusal_full_credit` field no longer exists in
+`EnhancedConflictEvalConfig`. The problem documented in ISSUES.md §N1 remains
+unfixed.
 
 ---
 
-### N2 — Recall judges count gold strings *mentioned* but not *asserted* — **FIXED at prompt level**
+### N2 — Recall judges count gold strings *mentioned* but not *asserted* — **REVERTED (open — see ISSUES.md §N2)**
+
+> **Current state:** `single_truth_recall_prompt` does not distinguish assertion
+> from mention. Prompts asking the judge whether the gold "appears in" the answer
+> still fire. See ISSUES.md §N2.
 
 **Observed at:** #0085 (Type 4, gold="at least 1,759", model committed to "658" but quoted "1,759" from a doc).
 
-The recall judges saw "1,759" appearing in the answer and voted 3-of-4 that
-the gold was present, giving recall=1.0 — even though the model's *actual
-answer* was the wrong number 658.
-
-**Fix:** [rag_eval/judge_prompts.py:single_truth_recall_prompt](rag_eval/judge_prompts.py)
-was rewritten with explicit examples that distinguish "the model is asserting
-this" from "the model mentioned this":
-
-> "Source d4 reports 1,759 but the answer is 658." → adherent: false (model commits to 658)
-
-This is a prompt-level fix; we'll need to re-run to see if judges actually
-internalize the distinction.
+The rewrite adding explicit examples and the assertion-vs-mention distinction
+has been reverted. The simpler prompt asks only if the gold is "contained or
+expressed" in the model answer — not whether the model is *committing* to it.
 
 ---
 
-### N3 — Dataset has misspelled gold answers, recall awards partial credit — **PARTIALLY MITIGATED**
+### N3 — Dataset has misspelled gold answers, recall awards partial credit — **REVERTED (open — see ISSUES.md §N3)**
 
-**Observed at:** #0042 (gold="Chiliwack" — 1 'l'; correct band name is "Chilliwack" — 2 'l's).
+> **Current state:** The spelling-variation instruction has been removed from the
+> recall prompt. The dataset typos remain. See ISSUES.md §N3.
 
-The model said "Chilliwack" (correct spelling). The committee voted 2-2 on
-whether it matched the misspelled gold, producing partial credit.
+**Observed at:** #0042 (gold="Chiliwack" — 1 'l'; correct "Chilliwack" — 2 'l's).
 
-**v3 stance:**
-- The prompt now explicitly allows minor spelling variations as matches: *"Misspellings or formatting differences are acceptable (e.g., 'Stephan' matches 'Stephen')"*.
-- The dataset itself needs cleaning — this is a data-quality issue not fully fixable in code.
+The prompt instruction `"Misspellings or formatting differences are acceptable"` was
+added then removed. Recall on typo-ed gold answers will remain split-vote
+dependent on judge tolerance.
 
 ---
 
-### N4 — `votes_for: 2, votes_against: 2` ties — **NOW BREAK BY WEIGHTED PRIORITY**
+### N4 — `votes_for: 2, votes_against: 2` ties — **DOCUMENTED (by design, no code change)**
 
 **Observed at:** #0066, #0204, #0321 (2-2 ties under simple count).
 
@@ -723,26 +711,29 @@ billing in the response, which it sometimes does and sometimes doesn't).
 
 ---
 
-### N9 — `factual_grounding=1.0` on `total_claims=2, claim_details=[]` — **FIXED**
+### N9 — `factual_grounding=1.0` on `total_claims=2, claim_details=[]` — **REVERTED (open — see ISSUES.md §N9)**
+
+> **Current state:** When `support_docs` is empty, the function returns
+> `claim_details: []` with `total_claims=N`. The schema inconsistency remains.
+> See ISSUES.md §N9.
 
 **Observed at:** #0471 (Type 5).
 
-When `support_docs` is empty (gold says no docs support the answer) but
-claims were extracted, the old code returned `claim_details: []` while still
-reporting `total_claims: 2`. The two arrays were inconsistent.
-
-**Fix:** [rag_eval/conflict_eval.py:121-129](rag_eval/conflict_eval.py#L121-L129).
-The empty-support path now returns one `claim_details` entry per claim with
-`supported=False`, so the two arrays always have matching lengths. Auditable.
+The fix (populating `claim_details` with one `{supported: False}` entry per
+extracted claim when support_docs is empty) was applied then reverted. The
+return now uses `claim_details: []` again, leaving `len(claim_details) != total_claims`.
 
 ---
 
-### N10 — Aggregator includes refusal-zero into mean — **FIXED via refusal carve-out**
+### N10 — Aggregator includes correct-refusal zeros in the metric mean — **REVERTED (open — see ISSUES.md §N10)**
 
-See N1 — correct refusals now contribute 1.0 (full credit), so they no longer
-drag the dataset average down. Incorrect refusals (gold *was* answerable but
-the model refused anyway) still score 0 on behavior/grounding/recall, which
-is correct.
+> **Current state:** Correct refusals contribute `behavior=0.0`,
+> `grounding=0.0`, `recall=0.0` to the aggregate means. See ISSUES.md §N10.
+
+This was downstream of N1 — once the N1 carve-out was reverted, the aggregator
+no longer skips correct-refusal samples. The `_aggregate_results` loop includes
+these zeros in the mean, which depresses all three averaged metrics for any
+evaluation that includes unanswerable queries.
 
 ---
 
@@ -806,37 +797,54 @@ When you rerun the same `--input data/...` after these fixes, expect:
 6. **Type 5 row clearly flagged "n<5: noisy"** — same number, clearer caveat.
 7. **Deterministic per-sample order in `detailed_results.json`** — runs are now diff-able.
 8. **DeepSeek latency tail down** — `max_tokens=3000` + `<think>` stripping eliminates the truncation retries.
-9. **Total cost line slightly up** — adds Sonnet NLI calls (one per claim per sample). On the qwen run with ~3 claims per sample and 50 samples, that's ~150 Sonnet calls ≈ $0.45 extra per run.
+9. **Total cost line slightly up** — adds Sonnet NLI calls (one per claim per sample). On the qwen run with ~3 claims per sample and samples, that's ~150 Sonnet calls ≈ $0.45 extra per run.
 
 ---
 
 ## 6. File-by-file diff summary
 
-| File                                | Lines  | What changed                                                                 |
-|-------------------------------------|--------|------------------------------------------------------------------------------|
-| `rag_eval/judge_prompts.py`         | rewrite | Per-conflict rubric; refusal carve-out instruction; confidence requested; recall prompt now distinguishes assertion vs mention |
-| `rag_eval/config.py`                | rewrite | Dead fields removed; `DEFAULT_JUDGE_PRIORITIES`; `priority_overrides`; `get_sonnet_nli_judge`; `nli_judge` field; `correct_refusal_full_credit` |
-| `rag_eval/judge_committee.py`       | rewrite | `asyncio.Semaphore`; `minority_confidence`; `<think>` stripping; choices guard; confidence floor; `all_failed` sentinel |
-| `rag_eval/conflict_eval.py`         | rewrite | NLI uses dedicated `JudgeClient`; partial-credit uses `minority_confidence`; consistent `claim_details` shape; gold normalized through `str()` |
-| `rag_eval/data.py`                  | rewrite | `model_output` never falls back to gold; verdict normalization |
-| `rag_eval/metrics.py`               | rewrite | Unified refusal regex; NLTK protection for initials/decimals/domains/abbreviations; meta-reference filter; `compute_f1_gr`; `gr_accuracy_from_flags` |
-| `rag_eval/evaluator.py`             | rewrite | `_safe_ctype`; refusal carve-out; NLI judge wiring; `setdefault` aggregator; deterministic order; per-type `n<5` warning |
-| `rag_eval/logging_config.py`        | rewrite | Idempotent handlers; `propagate=False` |
-| `rag_eval/__init__.py`              | small   | Export `DEFAULT_JUDGE_PRIORITIES`, `get_sonnet_nli_judge`; remove `EnhancedTrustScoreConfig` |
-| `run_evaluation.py`                 | edit    | `_load_yaml_config`, `_apply_yaml_to_config`; metric-name updates |
-| `run_evaluation_batch.py`           | edit    | `f1_gr` → `gr_accuracy` |
-| `configs/default.yaml`              | rewrite | Working YAML with `priority_overrides` example |
-| `.env.example`                      | rewrite | `OPENROUTER_API_KEY` documented |
+Changes marked **[REVERTED]** were applied then undone at the user's request; the
+current file does NOT contain those changes.
+
+| File                          | Status  | Net changes in current code                                                     |
+|-------------------------------|---------|---------------------------------------------------------------------------------|
+| `rag_eval/judge_prompts.py`   | changed | Per-conflict rubric (§1); confidence requested (§4.1); recall prompt simpler form (N2 REVERTED) |
+| `rag_eval/config.py`          | changed | `DEFAULT_JUDGE_PRIORITIES`; `priority_overrides`; `get_sonnet_nli_judge`; `nli_judge` field; dead fields RESTORED (§3.2 REVERTED); no `correct_refusal_full_credit` (N1 REVERTED) |
+| `rag_eval/judge_committee.py` | changed | `minority_confidence`; `<think>` stripping; choices guard; confidence floor; `all_failed`; NO semaphore (§3.3 REVERTED) |
+| `rag_eval/conflict_eval.py`   | changed | NLI uses dedicated `JudgeClient`; partial-credit uses `minority_confidence`; `claim_details=[]` on empty support (N9 REVERTED); gold via `str()` |
+| `rag_eval/data.py`            | changed | `model_output` never falls back to gold; verdict normalization |
+| `rag_eval/metrics.py`         | changed | Unified refusal regex; NLTK protection; meta-reference filter; `compute_f1_gr`; `gr_accuracy_from_flags` |
+| `rag_eval/evaluator.py`       | changed | `_safe_ctype`; NO refusal carve-out (N1/N10 REVERTED); NLI judge wiring; `setdefault` aggregator; deterministic order; per-type `n<5` warning |
+| `rag_eval/logging_config.py`  | changed | Idempotent handlers; `propagate=False` |
+| `rag_eval/__init__.py`        | changed | Exports `DEFAULT_JUDGE_PRIORITIES`, `get_sonnet_nli_judge`, `EnhancedTrustScoreConfig` (restored) |
+| `run_evaluation.py`           | changed | `_load_yaml_config`, `_apply_yaml_to_config`; metric-name updates |
+| `run_evaluation_batch.py`     | changed | `f1_gr` → `gr_accuracy` |
+| `configs/default.yaml`        | changed | Working YAML with `priority_overrides` example |
+| `.env.example`                | changed | `OPENROUTER_API_KEY` documented |
 
 ---
 
 ## What's still open
 
-These weren't fixed in v3 and are flagged as follow-ups:
+Issues from [ISSUES.md](ISSUES.md) that have no fix applied in the current codebase:
 
-- **§6.7 — Type 4 behavior judge doesn't see doc dates.** Requires changing the prompt contract; out of scope for this round.
-- **§3.4 — Per-judge token/RPM rate limiting.** Global semaphore covers concurrency; a per-judge token bucket is a follow-up if we hit OpenRouter's per-model RPM ceilings.
-- **N3 — Dataset typos in gold answers.** Data cleanup task, not code.
-- **N6 — Outdated model answer + behavior judge says "great".** Same as §6.7; needs date-aware behavior prompt.
+### Reverted in this session (code change was applied then undone)
 
-Everything else from [ISSUES.md](ISSUES.md) §§1–6 is either resolved with a code change or explicitly resolved as "documented and left as-is".
+- **§3.2 — Dead config fields.** All fields restored; no evaluator reads them. Code smell only.
+- **§3.3 — max_concurrent_requests not enforced.** Semaphore removed; bare `asyncio.gather` is back. API fan-out is unbounded.
+- **§3.4 — Per-judge RPM rate limiting.** Fields restored but not enforced. HTTP 429s propagate as `adherent=False`.
+- **N1 — Correct refusals triple-penalized.** Carve-out block removed; correct refusals still score ~0.25 CATS.
+- **N2 — Recall judges count mentioned-not-asserted.** Prompt reverted; gold-string-present-but-not-asserted still scores recall=1.0.
+- **N3 — Dataset gold typos cause split verdicts.** Spelling-variation instruction removed.
+- **N9 — `claim_details=[]` when `total_claims>0`.** Consistency fix reverted; schema mismatch restored.
+- **N10 — Correct-refusal zeros dragged into aggregate means.** Downstream of N1; unresolved.
+
+### Never fixed (open from the start)
+
+- **§6.7 / N6 — Type 4 behavior judge doesn't see document dates.** Requires a prompt-contract change. Without dates, the judge infers "outdatedness" from answer wording, not from document metadata.
+- **N4 — 2-2 tie resolution not surfaced in output.** `weighted_for` and `weighted_against` not emitted; callers can't see why a tie was broken without re-implementing the voting math.
+- **N5 — Gold answer typos in the dataset.** Data cleanup task; code can partially mitigate but not fully fix.
+- **N7 — DeepSeek tail latency.** `max_tokens=3000` (§4.2) mitigates truncation; full latency control requires per-judge timeouts or `asyncio.wait`.
+- **N8 — Mistral cost under-reported.** OpenRouter's free-tier fallback to paid isn't reflected in configured pricing.
+
+Everything else from ISSUES.md §§1–6 (excluding §3.2/§3.3/§3.4) is fixed and the fix remains in place.

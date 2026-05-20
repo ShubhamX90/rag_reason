@@ -134,10 +134,7 @@ async def enhanced_factual_grounding(
             "grounding_ratio": 0.0,
             "supported_claims": 0,
             "total_claims": len(claims),
-            "claim_details": [
-                {"claim": c, "supported": False, "support_count": 0, "supporting_docs": []}
-                for c in claims
-            ],
+            "claim_details": [],
         }
 
     claim_details = []
