@@ -26,6 +26,7 @@ tasks (the event loop runs in one thread, but Lock is still correct here).
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import os
 import threading
@@ -209,42 +210,122 @@ class CostTracker:
                 f"(shown as $0.00 above). Generation IDs saved to tracker.records."
             )
 
-    def summary_dict(self) -> Dict[str, Any]:
-        total_cost = sum(r.cost_usd for r in self._records)
-        total_in = sum(r.prompt_tokens for r in self._records)
-        total_out = sum(r.completion_tokens for r in self._records)
+    def _summary_dict_for_records(
+        self,
+        records_source: List[Dict[str, Any]],
+        *,
+        generated_at_utc: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        total_cost = sum(float(r.get("cost_usd", 0.0) or 0.0) for r in records_source)
+        total_in = sum(int(r.get("prompt_tokens", 0) or 0) for r in records_source)
+        total_out = sum(int(r.get("completion_tokens", 0) or 0) for r in records_source)
 
         model_stats: Dict[str, Dict[str, Any]] = {}
-        for r in self._records:
-            s = model_stats.setdefault(r.model, {
-                "model": r.model,
+        for r in records_source:
+            model = str(r.get("model", ""))
+            s = model_stats.setdefault(model, {
+                "model": model,
                 "calls": 0,
                 "prompt_tokens": 0,
                 "completion_tokens": 0,
                 "cost_usd": 0.0,
             })
             s["calls"] += 1
-            s["prompt_tokens"] += r.prompt_tokens
-            s["completion_tokens"] += r.completion_tokens
-            s["cost_usd"] += r.cost_usd
+            s["prompt_tokens"] += int(r.get("prompt_tokens", 0) or 0)
+            s["completion_tokens"] += int(r.get("completion_tokens", 0) or 0)
+            s["cost_usd"] += float(r.get("cost_usd", 0.0) or 0.0)
 
         models = sorted(
             model_stats.values(),
             key=lambda item: (-item["cost_usd"], item["model"]),
         )
-        records = [asdict(r) for r in self._records]
 
         return {
             "stage": self.stage,
-            "generated_at_utc": datetime.now(timezone.utc).isoformat(),
-            "calls": len(self._records),
+            "generated_at_utc": generated_at_utc or datetime.now(timezone.utc).isoformat(),
+            "calls": len(records_source),
             "total_prompt_tokens": total_in,
             "total_completion_tokens": total_out,
             "total_cost_usd": total_cost,
-            "fetch_error_count": sum(1 for r in self._records if r.fetch_error),
+            "fetch_error_count": sum(1 for r in records_source if r.get("fetch_error")),
             "models": models,
-            "records": records,
+            "records": records_source,
         }
+
+    def summary_dict(self) -> Dict[str, Any]:
+        records = [asdict(r) for r in self._records]
+        return self._summary_dict_for_records(records)
+
+    def cumulative_summary_from_ledger(self, ledger_path: str) -> Dict[str, Any]:
+        records = _dedupe_ledger_records(_read_ledger_records(Path(ledger_path)))
+        return self._summary_dict_for_records(records)
+
+    def append_ledger(self, ledger_path: str) -> int:
+        """
+        Append this run's fetched call records to an append-only JSONL ledger.
+
+        Existing generation IDs are not appended again, so re-running report
+        generation for the same calls remains idempotent. Returns the number of
+        newly appended ledger rows.
+        """
+        path = Path(ledger_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+
+        existing = _ledger_records_by_generation_id(path)
+        appended = 0
+        run_id = _run_id_for_records(self._records)
+
+        with path.open("a", encoding="utf-8") as f:
+            for rec in self._records:
+                old = existing.get(rec.generation_id)
+                is_correction = bool(
+                    old
+                    and old.get("fetch_error")
+                    and not rec.fetch_error
+                )
+                if old and not is_correction:
+                    continue
+                row = asdict(rec)
+                row["ledger_appended_at_utc"] = datetime.now(timezone.utc).isoformat()
+                row["run_id"] = run_id
+                f.write(json.dumps(row, ensure_ascii=False) + "\n")
+                existing[rec.generation_id] = row
+                appended += 1
+
+        print(f"  🧾  Cost ledger appended {appended} row(s) → {path}")
+        return appended
+
+    def save_cumulative_summary_json(self, ledger_path: str, summary_path: str) -> None:
+        out_path = Path(summary_path)
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        summary = self.cumulative_summary_from_ledger(ledger_path)
+        with out_path.open("w", encoding="utf-8") as f:
+            json.dump(summary, f, ensure_ascii=False, indent=2)
+        print(f"  🧾  Cumulative cost summary saved → {out_path}")
+
+    def print_cumulative_summary(self, ledger_path: str) -> None:
+        summary = self.cumulative_summary_from_ledger(ledger_path)
+        if not summary["calls"]:
+            return
+
+        total_cost = summary["total_cost_usd"]
+        total_cost_str = f"${total_cost:.5f}" if total_cost < 1 else f"${total_cost:.4f}"
+        print(
+            f"  🧾  Cumulative ledger total ({self.stage}): "
+            f"{summary['calls']} calls, {summary['total_prompt_tokens']:,} in / "
+            f"{summary['total_completion_tokens']:,} out, {total_cost_str}"
+        )
+
+    def save_cumulative_ledger(
+        self,
+        ledger_path: str,
+        summary_path: Optional[str] = None,
+    ) -> int:
+        appended = self.append_ledger(ledger_path)
+        self.print_cumulative_summary(ledger_path)
+        if summary_path:
+            self.save_cumulative_summary_json(ledger_path, summary_path)
+        return appended
 
     def save_json(self, path: str) -> None:
         out_path = Path(path)
@@ -253,7 +334,12 @@ class CostTracker:
             json.dump(self.summary_dict(), f, ensure_ascii=False, indent=2)
         print(f"  💾  Cost report saved → {out_path}")
 
-    async def fetch_and_report(self, save_json_path: Optional[str] = None) -> float:
+    async def fetch_and_report(
+        self,
+        save_json_path: Optional[str] = None,
+        ledger_jsonl_path: Optional[str] = None,
+        cumulative_summary_path: Optional[str] = None,
+    ) -> float:
         """
         Convenience: fetch costs then print report.
         Returns total cost in USD.
@@ -262,6 +348,11 @@ class CostTracker:
         self.report()
         if save_json_path:
             self.save_json(save_json_path)
+        if ledger_jsonl_path:
+            self.save_cumulative_ledger(
+                ledger_jsonl_path,
+                summary_path=cumulative_summary_path,
+            )
         return sum(r.cost_usd for r in self._records)
 
     # ── Accessors ────────────────────────────────────────────────────────────
@@ -299,3 +390,79 @@ def _get_openrouter_key() -> str:
 def default_cost_report_path(output_path: str) -> str:
     p = Path(output_path)
     return str(p.with_name(f"{p.stem}_cost_report.json"))
+
+
+def default_cost_ledger_path(output_path: str) -> str:
+    p = Path(output_path)
+    return str(p.with_name(f"{p.stem}_cost_ledger.jsonl"))
+
+
+def default_cumulative_cost_report_path(output_path: str) -> str:
+    p = Path(output_path)
+    return str(p.with_name(f"{p.stem}_cost_cumulative.json"))
+
+
+def _read_ledger_records(path: Path) -> List[Dict[str, Any]]:
+    if not path.exists():
+        return []
+    rows: List[Dict[str, Any]] = []
+    with path.open("r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                row = json.loads(line)
+                if isinstance(row, dict):
+                    rows.append(row)
+            except json.JSONDecodeError:
+                continue
+    return rows
+
+
+def _ledger_records_by_generation_id(path: Path) -> Dict[str, Dict[str, Any]]:
+    return {
+        str(row["generation_id"]): row
+        for row in _dedupe_ledger_records(_read_ledger_records(path))
+        if row.get("generation_id")
+    }
+
+
+def _dedupe_ledger_records(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Collapse append-only ledger rows to one effective row per generation.
+
+    Normal resume/report calls append each generation once. If a previous cost
+    fetch had an error and a later run appends a successful correction for the
+    same generation_id, prefer the successful row so cumulative totals repair
+    themselves without rewriting ledger history.
+    """
+    by_id: Dict[str, Dict[str, Any]] = {}
+    no_id: List[Dict[str, Any]] = []
+    for row in rows:
+        generation_id = row.get("generation_id")
+        if not generation_id:
+            no_id.append(row)
+            continue
+        key = str(generation_id)
+        current = by_id.get(key)
+        if current is None:
+            by_id[key] = row
+            continue
+        current_failed = bool(current.get("fetch_error"))
+        row_succeeded = not bool(row.get("fetch_error"))
+        if current_failed and row_succeeded:
+            by_id[key] = row
+            continue
+        current_time = str(current.get("ledger_appended_at_utc", ""))
+        row_time = str(row.get("ledger_appended_at_utc", ""))
+        if current_failed == bool(row.get("fetch_error")) and row_time > current_time:
+            by_id[key] = row
+    return no_id + list(by_id.values())
+
+
+def _run_id_for_records(records: List[_CallRecord]) -> str:
+    material = "|".join(sorted(r.generation_id for r in records if r.generation_id))
+    if not material:
+        material = datetime.now(timezone.utc).isoformat()
+    return hashlib.sha256(material.encode("utf-8")).hexdigest()[:16]

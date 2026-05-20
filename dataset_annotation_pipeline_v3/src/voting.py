@@ -15,7 +15,7 @@ Committee
                                                   ($0.195/$1.56/M vs $0.26/$2.08/M output)
   deepseek/deepseek-v3.2           weight 0.15  — DeepSeek V3.2 (much cheaper than R1; R1’s
                                                   extended CoT is unnecessary for JSON annotation)
-  x-ai/grok-4.1-fast              weight 0.10  — fast Grok 4.1; diverse signal / tiebreaker
+  mistralai/mistral-small-2603    weight 0.10  — low-cost fifth seat; diverse non-xAI signal
 
 Weights sum to 1.0.  To change the committee or rebalance, only edit MODEL_WEIGHTS here —
 all multi_async scripts read from this single source of truth.
@@ -33,7 +33,7 @@ MODEL_WEIGHTS: Dict[str, float] = {
     "openai/gpt-5.4":               0.25,
     "qwen/qwen3.5-27b":             0.20,   # comparable to 122B per Qwen docs; ~40% cheaper
     "deepseek/deepseek-v3.2":       0.15,
-    "x-ai/grok-4.1-fast":           0.10,
+    "mistralai/mistral-small-2603": 0.10,
 }
 
 COMMITTEE_MODELS: List[str] = list(MODEL_WEIGHTS.keys())

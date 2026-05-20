@@ -54,7 +54,12 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from src.llm_client import LLMClient, Provider
 from src.parsers    import parse_stage2, parse_stage2_refusal
 from src.voting     import COMMITTEE_MODELS, MODEL_WEIGHTS, merge_stage2_votes
-from src.cost_tracker import CostTracker, default_cost_report_path
+from src.cost_tracker import (
+    CostTracker,
+    default_cost_ledger_path,
+    default_cost_report_path,
+    default_cumulative_cost_report_path,
+)
 
 # ── Prompt paths ──────────────────────────────────────────────────────────────
 SYSTEM_CONFLICTS = PROJECT_ROOT / "prompts" / "system_stage2.txt"
@@ -131,6 +136,7 @@ async def call_one_model(
     user_prompt: str,
     is_refusal: bool,
     tracker: CostTracker,
+    cache_enabled: bool,
 ) -> Dict[str, Any]:
     """One API call: one committee model for one record."""
     async with semaphore:
@@ -140,6 +146,8 @@ async def call_one_model(
                 user=user_prompt,
                 max_tokens=STAGE2_MAX_TOKENS,
                 cost_tracker=tracker,
+                cache_enabled=cache_enabled,
+                cache_namespace="stage2_multi_refusal" if is_refusal else "stage2_multi",
             )
             if is_refusal:
                 parsed, errors = parse_stage2_refusal(raw)
@@ -173,10 +181,14 @@ async def process_record(
     out_lock: asyncio.Lock,
     output_path: str,
     tracker: CostTracker,
+    cache_enabled: bool,
 ) -> None:
     # Run all committee models concurrently for this single record
     coros = [
-        call_one_model(clients[model], semaphore, system_prompt, user_prompt, is_refusal, tracker)
+        call_one_model(
+            clients[model], semaphore, system_prompt, user_prompt,
+            is_refusal, tracker, cache_enabled
+        )
         for model in COMMITTEE_MODELS
     ]
     raw_results   = await asyncio.gather(*coros)
@@ -265,6 +277,7 @@ async def run(args: argparse.Namespace) -> None:
         print(f"   {weight:.0%}  {model}")
     if done_ids:
         print(f"⏩ Resuming: {len(done_ids)} already processed")
+    print(f"   cache={'on' if args.use_cache else 'off'}")
 
     semaphore = asyncio.Semaphore(args.concurrency)
     out_lock  = asyncio.Lock()
@@ -283,6 +296,7 @@ async def run(args: argparse.Namespace) -> None:
             rec, is_refusal,
             out_lock, args.output,
             tracker,
+            args.use_cache,
         )
         for rec in records
     ]
@@ -291,7 +305,16 @@ async def run(args: argparse.Namespace) -> None:
 
     # ── Fetch exact costs from OpenRouter and print breakdown ─────────────
     report_path = args.cost_report or default_cost_report_path(args.output)
-    await tracker.fetch_and_report(save_json_path=report_path)
+    ledger_path = args.cost_ledger or default_cost_ledger_path(args.output)
+    cumulative_path = (
+        args.cumulative_cost_report
+        or default_cumulative_cost_report_path(args.output)
+    )
+    await tracker.fetch_and_report(
+        save_json_path=report_path,
+        ledger_jsonl_path=ledger_path,
+        cumulative_summary_path=cumulative_path,
+    )
 
 
 def main() -> None:
@@ -324,6 +347,12 @@ def main() -> None:
                     help="Override conflicts user prompt path (ignored in refusal-mode)")
     ap.add_argument("--cost-report",   dest="cost_report",   default=None,
                     help="Path to save cost report JSON (default: <output>_cost_report.json)")
+    ap.add_argument("--cost-ledger",   dest="cost_ledger",   default=None,
+                    help="Path to append cumulative cost ledger JSONL (default: <output>_cost_ledger.jsonl)")
+    ap.add_argument("--cumulative-cost-report", dest="cumulative_cost_report", default=None,
+                    help="Path to save cumulative cost summary JSON (default: <output>_cost_cumulative.json)")
+    ap.add_argument("--use-cache",     dest="use_cache", action="store_true", default=False,
+                    help="Reuse/write local raw-response cache for exact matching calls")
     args = ap.parse_args()
     asyncio.run(run(args))
 

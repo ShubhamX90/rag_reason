@@ -1,0 +1,32 @@
+You are given the following structured information about a refusal-required RAG annotation sample.
+
+GROUND TRUTH:
+This query is from the refusals dataset. The final expected response must refuse to answer from the retrieved evidence.
+
+Query:
+{QUERY}
+
+Provided conflict_type label:
+{CONFLICT_TYPE}
+
+Per-document notes:
+{PER_DOC_NOTES_JSON}
+
+Task:
+Analyze the per-document notes and produce the Stage-2 JSON object.
+
+Rules:
+- Use the provided conflict_type unless the per_doc_notes make it impossible to describe coherently.
+- Ground conflict_reason only in the per_doc_notes.
+- Mention specific doc IDs.
+- Keep conflict_reason <= 50 words.
+- Because this is a refusal-required sample, set answerable_under_evidence to false.
+
+Output exactly:
+{
+  "conflict_type": "string",
+  "conflict_reason": "string",
+  "answerable_under_evidence": false
+}
+
+Output only the JSON object. No markdown, no commentary.

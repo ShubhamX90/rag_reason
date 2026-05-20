@@ -1,0 +1,25 @@
+You are given a refusal-required query, retrieved documents, and a GIVEN conflict type label.
+
+GROUND TRUTH:
+This sample is from the refusals dataset. The final answer must refuse.
+
+Query:
+{query}
+
+GIVEN conflict type label:
+<CONFLICT_LABEL>{conflict_type}</CONFLICT_LABEL>
+
+Retrieved documents:
+{retrieved_docs_json}
+
+Task:
+Perform monolithic annotation using the system prompt contract:
+- evaluate every document,
+- produce the conflict label line using the provided conflict_type,
+- explain the evidence pattern,
+- then refuse in the final answer.
+
+The final answer must be exactly:
+CANNOT ANSWER, INSUFFICIENT EVIDENCE
+
+Do not answer the query directly. Use only the retrieved snippets. Begin now.

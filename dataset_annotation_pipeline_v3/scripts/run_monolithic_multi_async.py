@@ -20,7 +20,7 @@ Committee (from src/voting.py):
   openai/gpt-5.4               weight 0.25
   qwen/qwen3.5-27b             weight 0.20
   deepseek/deepseek-v3.2       weight 0.15
-  x-ai/grok-4.1-fast           weight 0.10
+  mistralai/mistral-small-2603 weight 0.10
 
 Usage:
     python scripts/run_monolithic_multi_async.py \\
@@ -49,7 +49,12 @@ from src.voting       import (
     COMMITTEE_MODELS, MODEL_WEIGHTS,
     weighted_majority_vote, select_winner_model, _build_votes,
 )
-from src.cost_tracker import CostTracker, default_cost_report_path
+from src.cost_tracker import (
+    CostTracker,
+    default_cost_ledger_path,
+    default_cost_report_path,
+    default_cumulative_cost_report_path,
+)
 
 SYSTEM_PROMPT_PATH    = PROJECT_ROOT / "prompts" / "system_monolithic.txt"
 USER_PROMPT_PATH      = PROJECT_ROOT / "prompts" / "user_monolithic.txt"
@@ -115,6 +120,7 @@ async def call_one_model(
     user_prompt: str,
     doc_ids: List[str],
     tracker: CostTracker,
+    cache_enabled: bool,
 ) -> Optional[Dict[str, Any]]:
     """
     One API call: one committee model for one query (monolithic).
@@ -127,6 +133,8 @@ async def call_one_model(
                 user=user_prompt,
                 max_tokens=MONOLITHIC_MAX_TOKENS,
                 cost_tracker=tracker,
+                cache_enabled=cache_enabled,
+                cache_namespace="monolithic_multi",
             )
             parsed, errors = parse_monolithic(raw, expected_doc_ids=doc_ids)
             if errors:
@@ -295,13 +303,16 @@ async def process_record(
     out_lock: asyncio.Lock,
     output_path: str,
     tracker: CostTracker,
+    cache_enabled: bool,
 ) -> None:
     doc_ids    = [d.get("doc_id", "") for d in record.get("retrieved_docs", [])]
     user_prompt = fill_user_prompt(user_template, record)
 
     # Fire ALL 5 committee models concurrently — each acquires semaphore independently
     coros = [
-        call_one_model(clients[model], semaphore, system_prompt, user_prompt, doc_ids, tracker)
+        call_one_model(
+            clients[model], semaphore, system_prompt, user_prompt, doc_ids, tracker, cache_enabled
+        )
         for model in COMMITTEE_MODELS
     ]
     raw_results  = await asyncio.gather(*coros)
@@ -371,6 +382,7 @@ async def run(args: argparse.Namespace) -> None:
         print(f"   {weight:.0%}  {model}")
     if done_ids:
         print(f"⏩ Resuming: {len(done_ids)} already processed")
+    print(f"   cache={'on' if args.use_cache else 'off'}")
 
     semaphore = asyncio.Semaphore(args.concurrency)
     out_lock  = asyncio.Lock()
@@ -381,6 +393,7 @@ async def run(args: argparse.Namespace) -> None:
             clients, semaphore,
             system_prompt, user_template,
             rec, out_lock, args.output, tracker,
+            args.use_cache,
         )
         for rec in records
     ]
@@ -406,7 +419,16 @@ async def run(args: argparse.Namespace) -> None:
 
     # ── Fetch exact costs from OpenRouter and print breakdown ─────────────────
     report_path = args.cost_report or default_cost_report_path(args.output)
-    await tracker.fetch_and_report(save_json_path=report_path)
+    ledger_path = args.cost_ledger or default_cost_ledger_path(args.output)
+    cumulative_path = (
+        args.cumulative_cost_report
+        or default_cumulative_cost_report_path(args.output)
+    )
+    await tracker.fetch_and_report(
+        save_json_path=report_path,
+        ledger_jsonl_path=ledger_path,
+        cumulative_summary_path=cumulative_path,
+    )
 
 
 def main() -> None:
@@ -439,6 +461,12 @@ def main() -> None:
                     help="Override user prompt path (default: prompts/user_monolithic.txt)")
     ap.add_argument("--cost-report",   dest="cost_report",   default=None,
                     help="Path to save cost report JSON (default: <output>_cost_report.json)")
+    ap.add_argument("--cost-ledger",   dest="cost_ledger",   default=None,
+                    help="Path to append cumulative cost ledger JSONL (default: <output>_cost_ledger.jsonl)")
+    ap.add_argument("--cumulative-cost-report", dest="cumulative_cost_report", default=None,
+                    help="Path to save cumulative cost summary JSON (default: <output>_cost_cumulative.json)")
+    ap.add_argument("--use-cache",     dest="use_cache", action="store_true", default=False,
+                    help="Reuse/write local raw-response cache for exact matching calls")
     args = ap.parse_args()
     asyncio.run(run(args))
 

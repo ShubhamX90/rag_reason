@@ -50,6 +50,8 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional
 if TYPE_CHECKING:
     from src.cost_tracker import CostTracker
 
+from src.llm_cache import build_cache_key, read_cached_response, write_cached_response
+
 
 # ─────────────────────────────────────────────
 #  Lazy imports
@@ -125,6 +127,10 @@ _OPENROUTER_ALIASES: Dict[str, str] = {
     "qwen3.5-27b":                   "qwen/qwen3.5-27b",
     "deepseek-v3.2":                 "deepseek/deepseek-v3.2",
     "deepseek":                      "deepseek/deepseek-v3.2",
+    "mistral-small-4":               "mistralai/mistral-small-2603",
+    "mistral-small4":                "mistralai/mistral-small-2603",
+    "mistral4":                      "mistralai/mistral-small-2603",
+    "mistralai/mistral-small-4":     "mistralai/mistral-small-2603",
     "grok-4.1-fast":                 "x-ai/grok-4.1-fast",
     "grok":                          "x-ai/grok-4.1-fast",
 }
@@ -324,14 +330,54 @@ class LLMClient:
         max_tokens: int = 1024,
         extra_headers: Optional[Dict] = None,
         cost_tracker: Optional["CostTracker"] = None,
+        cache_enabled: bool = False,
+        cache_namespace: Optional[str] = None,
     ) -> str:
         """Non-blocking completion with exponential back-off retries."""
+        cache_key = None
+        namespace = cache_namespace or self.provider.value
+        request_options = {
+            "api": "chat.completions",
+            "extra_body": (
+                {"include_reasoning": True}
+                if self.provider == Provider.OPENROUTER
+                else None
+            ),
+        }
+        if cache_enabled:
+            cache_key = build_cache_key(
+                provider=self.provider.value,
+                model=self.model,
+                system=system,
+                user=user,
+                max_tokens=max_tokens,
+                temperature=self.temperature,
+                request_options=request_options,
+            )
+            cached = read_cached_response(cache_key, namespace=namespace)
+            if cached is not None:
+                return cached
+
         backoff, last_err = 1.0, RuntimeError("Unknown error")
         for attempt in range(self.max_retries):
             try:
-                return await self._call_async(
+                response_text = await self._call_async(
                     system, user, max_tokens, extra_headers, cost_tracker
                 )
+                if cache_enabled and cache_key is not None:
+                    write_cached_response(
+                        cache_key=cache_key,
+                        namespace=namespace,
+                        response_text=response_text,
+                        metadata={
+                            "provider": self.provider.value,
+                            "model": self.model,
+                            "temperature": self.temperature,
+                            "max_tokens": max_tokens,
+                            "request_options": request_options,
+                        },
+                    )
+                return response_text
             except Exception as exc:
                 last_err = exc
                 status = getattr(exc, "status_code", None)
