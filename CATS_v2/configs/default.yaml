@@ -26,13 +26,14 @@ conflict_eval:
     # Override default judge priorities here without editing config.py.
     # Higher number = more weight in weighted_majority voting.
     priority_overrides:
-      claude-3-5-haiku-20241022: 2
+      claude-sonnet-4-6:         3
       deepseek/deepseek-r1:      3
       qwen/qwen-2.5-7b-instruct: 1
       mistralai/mistral-nemo:    1
 
   # NLI judge for factual grounding (default: Claude Sonnet 4.6).
-  # Leave commented to use the built-in get_sonnet_nli_judge().
+  # The NLI judge is a separate JudgeClient instance from the Sonnet judge
+  # inside the committee — its API calls and cost are tracked separately.
   # nli_judge:
   #   model_id: "claude-sonnet-4-6"
   #   provider: "anthropic"

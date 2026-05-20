@@ -25,7 +25,7 @@ nano .env
 Add these lines (replace with your actual keys):
 
 ```bash
-# Anthropic API Key (for Claude Haiku)
+# Anthropic API Key (for Claude Sonnet 4.6 — committee judge + NLI judge)
 ANTHROPIC_API_KEY=sk-ant-api03-your-actual-key-here
 
 # OpenRouter API Key (for DeepSeek, Qwen)
@@ -81,7 +81,7 @@ python run_evaluation.py \
 
 **Symptom**: 
 ```
-Judge claude-haiku error: "Could not resolve authentication method"
+Judge claude-sonnet-4-6 error: "Could not resolve authentication method"
 Judge qwen error: "Client error '401 Unauthorized'"
 ```
 
@@ -120,7 +120,7 @@ curl https://api.anthropic.com/v1/messages \
   -H "x-api-key: YOUR_ANTHROPIC_KEY" \
   -H "anthropic-version: 2023-06-01" \
   -H "content-type: application/json" \
-  -d '{"model":"claude-haiku-3-5-20241022","max_tokens":10,"messages":[{"role":"user","content":"test"}]}'
+  -d '{"model":"claude-sonnet-4-6","max_tokens":10,"messages":[{"role":"user","content":"test"}]}'
 
 # Test OpenRouter
 curl https://openrouter.ai/api/v1/chat/completions \
@@ -223,7 +223,7 @@ If you're still getting errors:
    if key:
        client = anthropic.Anthropic(api_key=key)
        message = client.messages.create(
-           model="claude-haiku-3-5-20241022",
+           model="claude-sonnet-4-6",
            max_tokens=10,
            messages=[{"role": "user", "content": "test"}]
        )

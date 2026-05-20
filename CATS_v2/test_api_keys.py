@@ -87,7 +87,7 @@ if anthropic_key and anthropic_key.startswith("sk-ant-"):
         async def test_anthropic():
             client = anthropic.AsyncAnthropic(api_key=anthropic_key)
             response = await client.messages.create(
-                model="claude-3-5-haiku-20241022",
+                model="claude-sonnet-4-6",
                 max_tokens=10,
                 messages=[{"role": "user", "content": "Say 'test'"}]
             )

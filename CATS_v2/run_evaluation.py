@@ -138,7 +138,7 @@ def parse_args():
         type=str,
         choices=["default", "conservative", "none"],
         default="default",
-        help="Judge committee preset: default (Haiku+DeepSeek+Qwen), conservative (cheaper), none (single judge)"
+        help="Judge committee preset: default (Sonnet 4.6 + DeepSeek + Qwen + Mistral), conservative (no DeepSeek), none (single judge)"
     )
     
     # Configuration
@@ -210,7 +210,7 @@ def setup_config(args, input_file: str, output_dir: str) -> EvaluationConfig:
     if args.committee == "default":
         config.conflict.use_judge_committee = True
         config.conflict.committee = create_default_committee()
-        logger.info("Using default judge committee (Haiku + DeepSeek + Qwen + Mistral)")
+        logger.info("Using default judge committee (Sonnet 4.6 + DeepSeek + Qwen + Mistral)")
     elif args.committee == "conservative":
         config.conflict.use_judge_committee = True
         config.conflict.committee = create_conservative_committee()

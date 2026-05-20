@@ -13,6 +13,7 @@ from .config import (
     DEFAULT_JUDGE_PRIORITIES,
     create_default_committee,
     create_conservative_committee,
+    get_sonnet_judge,
     get_sonnet_nli_judge,
 )
 from .evaluator import EnhancedEvaluator
@@ -33,5 +34,6 @@ __all__ = [
     "setup_file_logging",
     "create_default_committee",
     "create_conservative_committee",
+    "get_sonnet_judge",
     "get_sonnet_nli_judge",
 ]

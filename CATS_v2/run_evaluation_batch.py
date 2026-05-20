@@ -68,7 +68,7 @@ def parse_args():
         type=str,
         choices=["default", "conservative", "none"],
         default="default",
-        help="Judge committee preset: default (Haiku+DeepSeek+Qwen), conservative (cheaper), none (single judge)"
+        help="Judge committee preset: default (Sonnet 4.6 + DeepSeek + Qwen + Mistral), conservative (no DeepSeek), none (single judge)"
     )
     
     # Configuration

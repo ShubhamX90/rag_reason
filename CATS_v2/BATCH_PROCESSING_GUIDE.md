@@ -52,18 +52,18 @@ python run_evaluation_batch.py \
 ```bash
 # Default committee (recommended)
 --committee default
-# Uses: Haiku + DeepSeek + Qwen + Mistral
-# Cost: ~$0.05 per 3 samples
+# Uses: Sonnet 4.6 + DeepSeek + Qwen + Mistral
+# Cost: ~$0.06 per 3 samples (Sonnet > Haiku on cost but strictly stronger results)
 
 # Conservative committee (cheaper)
 --committee conservative
-# Uses: Haiku + Qwen + Mistral
-# Cost: ~$0.03 per 3 samples
+# Uses: Sonnet 4.6 + Qwen + Mistral
+# Cost: ~$0.04 per 3 samples
 
 # No committee (single judge)
 --committee none
-# Uses: Only Haiku
-# Cost: ~$0.015 per 3 samples
+# Uses: Only Sonnet 4.6
+# Cost: ~$0.020 per 3 samples
 ```
 
 ## Output Structure
@@ -91,8 +91,9 @@ Expected costs with default committee:
 - 100 samples: ~$1.50-2.00
 
 Per-model breakdown:
-- Haiku: ~$0.0045 per 3 samples
-- DeepSeek: ~$0.0058 per 3 samples  
+- Sonnet 4.6 (committee): ~$0.018 per 3 samples
+- Sonnet 4.6 (NLI judge, separate instance): ~$0.020 per 3 samples
+- DeepSeek: ~$0.0058 per 3 samples
 - Qwen: ~$0.0002 per 3 samples
 - Mistral: ~$0.00 (free tier)
 

@@ -10,7 +10,7 @@ CATS v2.0 is a significantly upgraded evaluation pipeline for Retrieval-Augmente
 
 ✨ **Multi-LLM Judge Committee**
 - Implements voting mechanism with multiple LLM judges
-- Supports Anthropic Claude (Haiku) and OpenRouter models (DeepSeek, Qwen, etc.)
+- Supports Anthropic Claude (Sonnet 4.6) and OpenRouter models (DeepSeek, Qwen, etc.)
 - Weighted majority voting with confidence scoring
 - Cost-optimized model selection
 
@@ -30,7 +30,7 @@ CATS v2.0 is a significantly upgraded evaluation pipeline for Retrieval-Augmente
 ## 📋 Requirements
 
 - Python 3.8+
-- Anthropic API key (for Claude Haiku)
+- Anthropic API key (for Claude Sonnet 4.6 — used by both the committee judge and the dedicated NLI judge)
 - OpenRouter API key (for DeepSeek, Qwen, etc.)
 
 ## 🚀 Quick Start
@@ -58,7 +58,7 @@ chmod +x scripts/*.sh
 Edit `.env` file:
 
 ```bash
-# Anthropic API (for Claude Haiku)
+# Anthropic API (for Claude Sonnet 4.6 — committee judge + NLI judge)
 ANTHROPIC_API_KEY=sk-ant-your-key-here
 
 # OpenRouter API (for DeepSeek, Qwen, etc.)
@@ -144,24 +144,25 @@ python run_evaluation.py --input data/input.jsonl --committee default --verbose
 ### Judge Committee Options
 
 #### 1. Default Committee (Recommended)
-- **Claude Haiku 3.5** (Anthropic) - Fast, high-quality
+- **Claude Sonnet 4.6** (Anthropic) - Strong reasoning, strict rubric adherence
 - **DeepSeek R1** (OpenRouter) - Strong reasoning
-- **Qwen 3 8B** (OpenRouter) - Balanced performance
-- **Mistral Nemo Free** (OpenRouter) - Zero cost, good quality
-- **Cost**: ~$0.005-0.01 per sample (reduced with free model)
-- **Speed**: Parallel async execution with high concurrency
+- **Qwen 2.5 7B** (OpenRouter) - Balanced performance
+- **Mistral Nemo** (OpenRouter) - Zero/low cost
+- **NLI judge (separate)**: **Claude Sonnet 4.6** for factual grounding
+- **Cost**: ~$0.015-0.025 per sample (Sonnet costs more than Haiku but with stronger results)
+- **Speed**: Parallel async execution with `max_concurrent_requests` semaphore
 
 #### 2. Conservative Committee (Budget-Friendly)
-- **Claude Haiku 3.5** (Anthropic)
-- **Qwen 3 8B** (OpenRouter)
-- **Mistral Nemo Free** (OpenRouter) - Zero cost
-- **Cost**: ~$0.005-0.01 per sample
-- **Speed**: Fast with free tier inclusion
+- **Claude Sonnet 4.6** (Anthropic)
+- **Qwen 2.5 7B** (OpenRouter)
+- **Mistral Nemo** (OpenRouter)
+- **Cost**: ~$0.010-0.020 per sample
+- **Speed**: Fast (no DeepSeek tail latency)
 
 #### 3. Single Judge (Fastest)
-- Uses Claude Haiku only
+- Uses Claude Sonnet 4.6 only
 - No committee voting
-- **Cost**: ~$0.003-0.005 per sample
+- **Cost**: ~$0.008-0.015 per sample
 - **Speed**: Fastest, no consensus delay
 
 ### Voting Strategy
@@ -297,7 +298,7 @@ Check the cost summary in evaluation report:
 
 ### Per-Model Costs
 
-#### claude-3-5-haiku-20241022
+#### claude-sonnet-4-6
 - Total: $0.0450
 - Requests: 100
 - Avg/Request: $0.000450

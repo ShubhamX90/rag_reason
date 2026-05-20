@@ -143,13 +143,17 @@ class EvaluationConfig:
 # Modular judge priorities — tune the committee without editing factory code
 # --------------------
 DEFAULT_JUDGE_PRIORITIES: Dict[str, int] = {
-    "claude-3-5-haiku-20241022": 2,
+    # Anthropic Sonnet 4.6 is now the default Anthropic judge for both the
+    # behavior committee and as the dedicated NLI judge (replacing the
+    # previously-used Claude 3.5 Haiku — Sonnet is stronger at strict NLI
+    # and at distinguishing the conflict-type rubrics).
+    "claude-sonnet-4-6":         3,
     "deepseek/deepseek-r1":      3,
     "qwen/qwen-2.5-7b-instruct": 1,
     "mistralai/mistral-nemo":    1,
-    # Sonnet is used as NLI judge by default; included here so the same map
-    # can be reused if you ever add Sonnet to the behavior committee.
-    "claude-sonnet-4-6":         3,
+    # Back-compat entry: kept so any pre-existing config that still names
+    # Haiku gets a sensible weight (without forcing a YAML change).
+    "claude-3-5-haiku-20241022": 2,
 }
 
 
@@ -161,18 +165,29 @@ def _resolve_priority(model_id: str, priority_overrides: Optional[Dict[str, int]
 # --------------------
 # Predefined Judge Configurations
 # --------------------
-def get_haiku_judge(priority_overrides: Optional[Dict[str, int]] = None) -> JudgeModelConfig:
-    """Anthropic Claude Haiku - Fast and economical."""
+def get_sonnet_judge(priority_overrides: Optional[Dict[str, int]] = None) -> JudgeModelConfig:
+    """Claude Sonnet 4.6 — Anthropic judge for the behavior committee.
+
+    Replaces the previous Claude 3.5 Haiku committee judge. Sonnet is
+    strictly stronger on this evaluation: the qwen-monolithic run showed
+    Haiku misapplying conflict-type rubrics on samples #0244 / #0046 /
+    #0471 — Sonnet picks the correct rubric far more reliably.
+    """
     return JudgeModelConfig(
-        model_id="claude-3-5-haiku-20241022",
+        model_id="claude-sonnet-4-6",
         provider=APIProvider.ANTHROPIC,
         temperature=0.0,
-        max_tokens=500,
-        cost_per_1k_input=0.001,
-        cost_per_1k_output=0.005,
-        priority=_resolve_priority("claude-3-5-haiku-20241022", priority_overrides),
+        max_tokens=800,
+        cost_per_1k_input=0.003,
+        cost_per_1k_output=0.015,
+        priority=_resolve_priority("claude-sonnet-4-6", priority_overrides),
         api_key_env="ANTHROPIC_API_KEY",
     )
+
+
+# Backward-compatibility alias. Old callers that import `get_haiku_judge`
+# still work; they now get the Sonnet 4.6 judge under the hood.
+get_haiku_judge = get_sonnet_judge
 
 
 def get_deepseek_judge(priority_overrides: Optional[Dict[str, int]] = None) -> JudgeModelConfig:
@@ -228,10 +243,10 @@ def get_mistral_nemo_judge(priority_overrides: Optional[Dict[str, int]] = None) 
 def get_sonnet_nli_judge() -> JudgeModelConfig:
     """Claude Sonnet 4.6 — dedicated NLI judge for factual grounding.
 
-    Sonnet is stronger than Haiku at strict NLI (rejecting meta-claims like
-    "considered real based on the evidence" that Haiku tends to entail). Used
-    as the single NLI judge in enhanced_factual_grounding; not part of the
-    behavior voting committee.
+    Used as the single NLI judge in `enhanced_factual_grounding`. Sonnet 4.6
+    is also used inside the behavior committee (see `get_sonnet_judge`); the
+    NLI judge is a separate `JudgeClient` instance with its own request
+    counter and token budget so cost is tracked independently.
     """
     return JudgeModelConfig(
         model_id="claude-sonnet-4-6",
@@ -251,11 +266,13 @@ def create_default_committee(
 ) -> JudgeCommitteeConfig:
     """
     Create the default 4-judge behavior committee.
+
+    Composition: Sonnet 4.6 + DeepSeek R1 + Qwen 2.5 7B + Mistral Nemo.
     Pass priority_overrides={"deepseek/deepseek-r1": 1, ...} to retune.
     """
     return JudgeCommitteeConfig(
         judges=[
-            get_haiku_judge(priority_overrides),
+            get_sonnet_judge(priority_overrides),
             get_deepseek_judge(priority_overrides),
             get_qwen_judge(priority_overrides),
             get_mistral_nemo_judge(priority_overrides),
@@ -270,11 +287,11 @@ def create_conservative_committee(
     max_concurrent_requests: int = 50,
 ) -> JudgeCommitteeConfig:
     """
-    Cost-effective committee (no DeepSeek): Haiku + Qwen + Mistral Nemo.
+    Cost-effective committee (no DeepSeek): Sonnet 4.6 + Qwen + Mistral Nemo.
     """
     return JudgeCommitteeConfig(
         judges=[
-            get_haiku_judge(priority_overrides),
+            get_sonnet_judge(priority_overrides),
             get_qwen_judge(priority_overrides),
             get_mistral_nemo_judge(priority_overrides),
         ],

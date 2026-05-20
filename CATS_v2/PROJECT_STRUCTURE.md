@@ -69,11 +69,15 @@ CATS_v2/
   - Paths, pipeline settings, subsystem configs
 
 **Key Functions**:
-- `get_haiku_judge()`: Anthropic Claude Haiku preset
+- `get_sonnet_judge()`: Anthropic Claude Sonnet 4.6 preset (committee judge)
+- `get_sonnet_nli_judge()`: Claude Sonnet 4.6 preset (dedicated NLI judge)
+- `get_haiku_judge`: backward-compat alias → `get_sonnet_judge`
 - `get_deepseek_judge()`: DeepSeek R1 preset
-- `get_qwen_judge()`: Qwen 3 8B preset
-- `create_default_committee()`: Balanced committee
-- `create_conservative_committee()`: Budget-friendly committee
+- `get_qwen_judge()`: Qwen 2.5 7B preset
+- `get_mistral_nemo_judge()`: Mistral Nemo preset
+- `create_default_committee()`: Sonnet 4.6 + DeepSeek + Qwen + Mistral
+- `create_conservative_committee()`: Sonnet 4.6 + Qwen + Mistral (no DeepSeek)
+- `DEFAULT_JUDGE_PRIORITIES`: dict — modular per-model priorities for weighted voting
 
 ### `rag_eval/judge_committee.py`
 **Purpose**: Multi-LLM judge voting system
