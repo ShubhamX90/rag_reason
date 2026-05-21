@@ -438,8 +438,10 @@ if [[ "$STRATEGY" == "3-stage" ]]; then
 
     if [[ "$LLM_APPROACH" == "Multi-LLM" ]]; then
         STAGE2_REFUSAL_FLAG=""
+        STAGE3_REFUSAL_FLAG=""
         if [[ "$DATASET_KIND" == "refusals" ]]; then
             STAGE2_REFUSAL_FLAG="--refusal-mode"
+            STAGE3_REFUSAL_FLAG="--refusal-mode"
         fi
 
         header "Running Stage 1 (Multi-LLM)"
@@ -475,6 +477,7 @@ if [[ "$STRATEGY" == "3-stage" ]]; then
         run_cmd scripts/run_stage3_multi_async.py \
             --input "$STAGE2_OUT" \
             --output "$STAGE3_OUT" \
+            $STAGE3_REFUSAL_FLAG \
             --concurrency "$CONCURRENCY_S3" \
             ${LIMIT_FLAG}
 
@@ -585,11 +588,18 @@ if [[ "$STRATEGY" == "3-stage" ]]; then
 elif [[ "$STRATEGY" == "Monolithic" ]]; then
 
     if [[ "$LLM_APPROACH" == "Multi-LLM" ]]; then
+        MONO_REFUSAL_FLAG=""
+        if [[ "$DATASET_KIND" == "refusals" ]]; then
+            MONO_REFUSAL_FLAG="--refusal-mode"
+        fi
+
         header "Running Monolithic Annotation (Multi-LLM)"
         run_cmd scripts/run_monolithic_multi_async.py \
             --input "$INPUT_PATH" \
             --output "$MONO_OUT" \
             --concurrency "$CONCURRENCY" \
+            $MONO_REFUSAL_FLAG \
+            --use-cache \
             ${LIMIT_FLAG}
 
     elif [[ "$MODE" == "Async" ]]; then

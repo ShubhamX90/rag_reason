@@ -19,6 +19,11 @@ key_fact:
 - ONE sentence strictly entailed by the snippet.
 - Every concrete value in key_fact (names/dates/locations/numbers) must appear in the snippet.
 
+quote:
+- A short verbatim span copied from the snippet that directly supports key_fact.
+- Use an exact substring from the snippet; do not paraphrase.
+- If verdict is "irrelevant", set quote to "".
+
 verdict_reason (<=80 words):
 - Must justify the verdict using only what the snippet states.
 - Do NOT add new facts, sources, or interpretations beyond what the snippet states.
@@ -69,6 +74,16 @@ VERDICT HEURISTICS & THRESHOLDS
 8) Factual identification (“Who/What/Where/When”):
   • supports if the snippet names the entity and the required status (current/latest/official) clearly.
   • Otherwise partially supports.
+
+9) Exact count / tally questions:
+  • If the retrieved snippets explicitly enumerate the relevant entities or give an exact count, answer with that exact count.
+  • If an exact count can be derived directly from the retrieved snippets without outside knowledge, derive it carefully and answer with the exact count.
+  • If the snippets show only examples, approximations, ranges, or partial lists, do not invent a precise count; say the exact count cannot be determined from the retrieved evidence.
+
+10) Ambiguous scope:
+  • Do not silently assume a country, region, organization, or time scope unless the query or evidence clearly makes that scope primary.
+  • If the evidence points to more than one plausible scope, state the scope explicitly in the first sentence and answer within that scope.
+  • If the query is broad and the evidence is mixed by jurisdiction or definition, do not overgeneralize from one country-specific source.
 
 ###############################
 SOURCE PREFERENCE & CITATION POLICY
@@ -158,6 +173,7 @@ ANTI-FAILURE GUARDS
 - The label line must use an EM DASH with spaces: " — ".
 - conflict_reason <= 50 words.
 - At least 80% of final-answer sentences include [dX] (unless abstaining).
+- A non-abstain final answer with zero [dX] citations is invalid.
 - Use only in-range citations; never cite out-of-bounds.
 - No new facts; adhere to length budgets.
 - End with [[END-OF-ANSWER]].
@@ -181,6 +197,7 @@ The string "<think>" must appear EXACTLY ONCE in the entire output, and it must 
    "verdict":"supports|partially supports|irrelevant",
    "verdict_reason":"<=80 words; faithful paraphrase from the snippet; no new facts",
    "key_fact":"<=80 words if verdict is not 'irrelevant', else empty string",
+   "quote":"short verbatim snippet support if verdict is not 'irrelevant', else empty string",
    "source_quality":"high|low"}
   , ... one object per doc, in order ...
 ]
@@ -189,7 +206,7 @@ Requirements:
 - The array must be syntactically valid JSON (no trailing commas).
 - Never fabricate, skip, or reorder doc_ids.
 - Do NOT write doc-id ranges like "d1–d5" anywhere (array or prose).
-- If verdict is "irrelevant", set key_fact to "" (empty string).
+- If verdict is "irrelevant", set key_fact to "" (empty string) and quote to "".
 
 (B) ONE BLANK LINE.
 
@@ -228,8 +245,11 @@ FINAL ANSWER REQUIREMENTS
 
 - Otherwise: write 2–4 sentences (4–5 for simple unanimous facts).
   Use bracketed citations [dX]; at least 80% of sentences MUST include at least one [dX].
+  Every factual sentence should include at least one [dX] citation whenever possible; never output a non-abstain answer with zero citations.
   Cite only existing doc_ids (d1…dN); never cite [dK] where K is outside {1…N}.
   Prefer ordering of cited docs by credibility (docs you labeled source_quality="high" first, then "low"), then by utility.
+  For exact-count questions, prefer a precise count when the retrieved evidence directly supports it; otherwise explicitly say the exact count cannot be determined from the retrieved evidence.
+  For broad or ambiguous queries, name the scope you are answering within instead of implying a universal answer that the snippets do not establish.
 
 6) A line that is exactly  [[END-OF-ANSWER]]
 

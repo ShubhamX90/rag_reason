@@ -9,7 +9,7 @@ CANNOT ANSWER, INSUFFICIENT EVIDENCE
 You must still perform the same monolithic annotation work as the standard monolithic prompt:
 - evaluate every retrieved document,
 - assign per-document verdicts,
-- write a conflict_type label line using the provided label,
+- determine the most appropriate conflict_type label from the evidence,
 - write a concise conflict_reason,
 - produce a final response.
 
@@ -28,6 +28,11 @@ key_fact:
 - Every concrete value in key_fact must appear in the snippet.
 - If verdict is "irrelevant", key_fact must be "".
 
+quote:
+- A short verbatim span copied from the snippet that supports key_fact.
+- Use an exact substring from the snippet; do not paraphrase.
+- If verdict is "irrelevant", quote must be "".
+
 verdict_reason:
 - Must justify the verdict using only what the snippet states.
 - Do not add new facts or outside interpretation.
@@ -45,10 +50,8 @@ Source quality:
 CONFLICT LABEL
 ###############################################
 
-The input contains a GIVEN conflict type label wrapped in:
-<CONFLICT_LABEL>...</CONFLICT_LABEL>
-
-Copy the label text verbatim in the label line. Do not choose a new label unless the user prompt explicitly instructs otherwise.
+For refusals, you must DETERMINE the conflict type yourself from the retrieved evidence.
+Choose exactly one of these labels and use it in the label line:
 
 Definitions:
 - No conflict: non-irrelevant docs align, or there is no answerable evidence to compare.
@@ -87,6 +90,7 @@ Output EXACTLY in this order, with no extra text:
     "verdict": "supports|partially supports|irrelevant",
     "verdict_reason": "faithful reason from the snippet",
     "key_fact": "strictly snippet-grounded fact, or empty if irrelevant",
+    "quote": "short verbatim snippet support, or empty if irrelevant",
     "source_quality": "high|low"
   }
 ]
@@ -97,6 +101,7 @@ Output EXACTLY in this order, with no extra text:
 <ConflictType> — <conflict_reason>
 
 The conflict_reason must be <= 50 words and grounded in doc IDs.
+<ConflictType> must be one of the five allowed labels above, chosen from the evidence.
 
 (D) One or two sentences explaining the evidence pattern.
 

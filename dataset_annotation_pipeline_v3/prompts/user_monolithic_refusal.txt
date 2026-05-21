@@ -1,4 +1,4 @@
-You are given a refusal-required query, retrieved documents, and a GIVEN conflict type label.
+You are given a refusal-required query and retrieved documents.
 
 GROUND TRUTH:
 This sample is from the refusals dataset. The final answer must refuse.
@@ -6,16 +6,13 @@ This sample is from the refusals dataset. The final answer must refuse.
 Query:
 {query}
 
-GIVEN conflict type label:
-<CONFLICT_LABEL>{conflict_type}</CONFLICT_LABEL>
-
 Retrieved documents:
 {retrieved_docs_json}
 
 Task:
 Perform monolithic annotation using the system prompt contract:
 - evaluate every document,
-- produce the conflict label line using the provided conflict_type,
+- determine the conflict label line from the retrieved evidence,
 - explain the evidence pattern,
 - then refuse in the final answer.
 

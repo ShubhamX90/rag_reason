@@ -72,6 +72,7 @@ class CostTracker:
     def __init__(self, stage: str = "unknown") -> None:
         self.stage     = stage
         self._records: List[_CallRecord] = []
+        self._missing_generation_records: List[Dict[str, Any]] = []
         self._lock     = threading.Lock()
 
     # ── Recording ────────────────────────────────────────────────────────────
@@ -93,6 +94,26 @@ class CostTracker:
         )
         with self._lock:
             self._records.append(rec)
+
+    def record_missing_generation(
+        self,
+        model: str,
+        prompt_tokens: int,
+        completion_tokens: int,
+        reason: str = "missing_generation_id",
+    ) -> None:
+        """
+        Record a successful OpenRouter call that returned no generation ID, so
+        exact cost cannot be fetched later from the generation endpoint.
+        """
+        with self._lock:
+            self._missing_generation_records.append({
+                "model": model,
+                "stage": self.stage,
+                "prompt_tokens": int(prompt_tokens or 0),
+                "completion_tokens": int(completion_tokens or 0),
+                "reason": reason,
+            })
 
     # ── Cost fetching ────────────────────────────────────────────────────────
 
@@ -162,8 +183,18 @@ class CostTracker:
 
     def report(self) -> None:
         """Print a formatted cost breakdown. Call after fetch_costs()."""
-        if not self._records:
+        if not self._records and not self._missing_generation_records:
             print(f"\n💰 Cost report ({self.stage}): no calls recorded.")
+            return
+        if not self._records and self._missing_generation_records:
+            total_in = sum(r["prompt_tokens"] for r in self._missing_generation_records)
+            total_out = sum(r["completion_tokens"] for r in self._missing_generation_records)
+            print(f"\n💰 Cost report ({self.stage}): no exact-cost calls recorded.")
+            print(
+                f"  ⚠  {len(self._missing_generation_records)} successful OpenRouter call(s) "
+                f"returned without a generation ID, so exact cost could not be fetched."
+            )
+            print(f"  📊  Token usage from those calls: {total_in:,} in / {total_out:,} out")
             return
 
         total_cost   = sum(r.cost_usd for r in self._records)
@@ -209,6 +240,14 @@ class CostTracker:
                 f"\n  ⚠  {len(fetch_errors)} call(s) had cost-fetch errors "
                 f"(shown as $0.00 above). Generation IDs saved to tracker.records."
             )
+        if self._missing_generation_records:
+            miss_in = sum(r["prompt_tokens"] for r in self._missing_generation_records)
+            miss_out = sum(r["completion_tokens"] for r in self._missing_generation_records)
+            print(
+                f"  ⚠  {len(self._missing_generation_records)} successful OpenRouter call(s) "
+                f"returned without a generation ID; exact cost unavailable "
+                f"({miss_in:,} in / {miss_out:,} out)."
+            )
 
     def _summary_dict_for_records(
         self,
@@ -248,6 +287,10 @@ class CostTracker:
             "total_completion_tokens": total_out,
             "total_cost_usd": total_cost,
             "fetch_error_count": sum(1 for r in records_source if r.get("fetch_error")),
+            "missing_generation_call_count": len(self._missing_generation_records),
+            "missing_generation_prompt_tokens": sum(r["prompt_tokens"] for r in self._missing_generation_records),
+            "missing_generation_completion_tokens": sum(r["completion_tokens"] for r in self._missing_generation_records),
+            "missing_generation_models": self._missing_generation_records,
             "models": models,
             "records": records_source,
         }

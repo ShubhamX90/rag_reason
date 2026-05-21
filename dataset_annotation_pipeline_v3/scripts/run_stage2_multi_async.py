@@ -12,16 +12,11 @@ CONFLICTS dataset  (run WITHOUT --refusal-mode):
     Prompts   : system_stage2.txt / user_stage2.txt  (conflict_type given verbatim)
 
 REFUSALS dataset  (run WITH --refusal-mode):
-    Use this when you want the committee to re-annotate conflict_type from
-    evidence instead of trusting the existing field in the record.
-    Votes on  : conflict_type  AND  answerable_under_evidence  (independently)
-    Adopts    : conflict_reason from the conflict_type-vote winner
-    Prompts   : system_stage2_refusal.txt / user_stage2_refusal.txt
-                (model independently determines conflict_type from evidence)
-
-The voted conflict_type for refusals is written back into the record,
-replacing the pre-existing label in the input record. The original label is
-preserved in a _gold_conflict_type field for reference/analysis.
+    Use this when the refusal requirement is ground truth for the run.
+    Votes on   : conflict_type  AND  answerable_under_evidence  (independently)
+    Adopts     : conflict_reason from the conflict_type-vote winner
+    Prompts    : system_stage2_refusal.txt / user_stage2_refusal.txt
+                 (model knows the sample is refusal-required and still annotates conflict_type)
 
 Usage:
     # Conflicts (human-annotated conflict_type — no re-annotation)
@@ -118,7 +113,7 @@ def build_user_prompt_conflicts(template: str, record: Dict[str, Any]) -> str:
 
 
 def build_user_prompt_refusals(template: str, record: Dict[str, Any]) -> str:
-    """Build Stage-2 user prompt for the refusals dataset (no gold conflict_type given)."""
+    """Build Stage-2 user prompt for refusal-required samples."""
     return brace_safe_fill(template, {
         "QUERY":              record.get("query", ""),
         "PER_DOC_NOTES_JSON": json.dumps(record.get("per_doc_notes", []), ensure_ascii=False, indent=2),
@@ -236,7 +231,7 @@ async def run(args: argparse.Namespace) -> None:
             )
         system_prompt = load_text(SYSTEM_REFUSALS)
         user_template = load_text(USER_REFUSALS)
-        mode_label    = "REFUSAL (committee re-annotates conflict_type)"
+        mode_label    = "REFUSAL (ground-truth refusal; committee votes conflict_type)"
     else:
         system_prompt = load_text(
             Path(args.system_prompt) if args.system_prompt else SYSTEM_CONFLICTS
@@ -323,7 +318,7 @@ def main() -> None:
             "Multi-LLM Stage-2 conflict reasoning + answerability with weighted majority voting.\n"
             "All committee models are accessed via OpenRouter.\n\n"
             "  Default (no --refusal-mode): CONFLICTS dataset — gold conflict_type used as-is.\n"
-            "  With --refusal-mode: REFUSALS dataset — committee re-annotates conflict_type."
+            "  With --refusal-mode: REFUSALS dataset — refusal is ground truth; committee still votes conflict_type."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -333,8 +328,8 @@ def main() -> None:
                     help="Output JSONL path")
     ap.add_argument("--refusal-mode",  dest="refusal_mode", action="store_true", default=False,
                     help=(
-                        "Activate refusal mode: committee independently determines conflict_type "
-                        "from evidence instead of using the input field."
+                        "Activate refusal ground-truth mode: committee still votes conflict_type "
+                        "while producing refusal-oriented Stage-2 annotations."
                     ))
     ap.add_argument("--temperature",   type=float, default=0.0)
     ap.add_argument("--concurrency",   type=int,   default=20,

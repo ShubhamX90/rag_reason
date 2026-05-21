@@ -4,7 +4,7 @@ scripts/run_monolithic_multi_async.py
 ======================================
 Multi-LLM Committee version of the MONOLITHIC annotation strategy.
 
-Each query record is sent to ALL 5 committee models (via OpenRouter) using
+Each query record is sent to ALL committee models (via OpenRouter) using
 the same monolithic prompt. Results are merged via weighted majority voting:
 
   • Per-doc verdict          : voted across models (like stage1 merge)
@@ -16,11 +16,10 @@ All models are accessed via OpenRouter (OPENROUTER_API_KEY required).
 No direct Anthropic or OpenAI keys are used.
 
 Committee (from src/voting.py):
-  anthropic/claude-sonnet-4.6  weight 0.30
-  openai/gpt-5.4               weight 0.25
-  qwen/qwen3.5-27b             weight 0.20
-  deepseek/deepseek-v3.2       weight 0.15
-  mistralai/mistral-small-2603 weight 0.10
+  anthropic/claude-sonnet-4.6  weight 0.35
+  openai/gpt-5.4               weight 0.30
+  deepseek/deepseek-v3.2       weight 0.20
+  mistralai/mistral-small-2603 weight 0.15
 
 Usage:
     python scripts/run_monolithic_multi_async.py \\
@@ -56,8 +55,10 @@ from src.cost_tracker import (
     default_cumulative_cost_report_path,
 )
 
-SYSTEM_PROMPT_PATH    = PROJECT_ROOT / "prompts" / "system_monolithic.txt"
-USER_PROMPT_PATH      = PROJECT_ROOT / "prompts" / "user_monolithic.txt"
+SYSTEM_PROMPT_PATH            = PROJECT_ROOT / "prompts" / "system_monolithic.txt"
+USER_PROMPT_PATH              = PROJECT_ROOT / "prompts" / "user_monolithic.txt"
+SYSTEM_PROMPT_REFUSAL_PATH    = PROJECT_ROOT / "prompts" / "system_monolithic_refusal.txt"
+USER_PROMPT_REFUSAL_PATH      = PROJECT_ROOT / "prompts" / "user_monolithic_refusal.txt"
 MONOLITHIC_MAX_TOKENS = 3000
 
 
@@ -217,6 +218,7 @@ def _merge_per_doc_notes(
 def merge_monolithic_votes(
     model_results: Dict[str, Optional[Dict[str, Any]]],
     doc_ids: List[str],
+    is_refusal: bool,
 ) -> Dict[str, Any]:
     """
     Merge per-model monolithic outputs.
@@ -224,9 +226,11 @@ def merge_monolithic_votes(
     Votes on:
       • per-doc verdict (per doc_id, like stage-1 merge)
       • abstain flag in expected_response (like stage-3 merge)
+      • conflict_type_label (refusals only)
 
     Adopts text fields from the highest-weight model that voted for the
-    winning abstain value (conflict_reason, expected_response, think).
+    winning abstain value (expected_response, think). For refusals,
+    conflict_reason is instead adopted from the conflict-type vote winner.
     """
     # ── 1. Per-doc verdict voting ────────────────────────────────────────────
     merged_per_doc = _merge_per_doc_notes(model_results, doc_ids)
@@ -275,12 +279,44 @@ def merge_monolithic_votes(
     er = base.setdefault("expected_response", {})
     er["abstain"] = winning_abstain
 
-    # answerable_under_evidence: derived from voted per_doc_notes
-    non_irr = [
-        n for n in merged_per_doc
-        if n.get("verdict") in ("supports", "partially supports")
-    ]
-    base["answerable_under_evidence"] = len(non_irr) > 0
+    if is_refusal:
+        # Refusal runs are intentionally non-answerable, even when some
+        # retrieved docs are partially relevant.
+        base["answerable_under_evidence"] = False
+    else:
+        # answerable_under_evidence: derived from voted per_doc_notes
+        non_irr = [
+            n for n in merged_per_doc
+            if n.get("verdict") in ("supports", "partially supports")
+        ]
+        base["answerable_under_evidence"] = len(non_irr) > 0
+
+    if is_refusal:
+        ct_votes = [
+            (model, (res or {}).get("conflict_type_label", ""), MODEL_WEIGHTS.get(model, 0.0))
+            for model, res in model_results.items()
+            if res is not None and (res or {}).get("conflict_type_label", "")
+        ]
+        if not ct_votes:
+            base["conflict_type"] = ""
+            base["conflict_reason"] = ""
+            base["_ct_vote_tally"] = {}
+            base["_ct_winner_model"] = ""
+            base["_abstain_vote_tally"]   = {str(k): round(v, 4) for k, v in abstain_tally.items()}
+            base["_abstain_winner_model"] = abstain_winner
+            base["_annotation_strategy"]  = "monolithic_multi"
+            return base
+
+        winning_ct, ct_tally = weighted_majority_vote(ct_votes)
+        ct_winner = select_winner_model(ct_votes, winning_ct)
+        ct_winner_rec = model_results.get(ct_winner) or {}
+
+        base["conflict_type"] = winning_ct
+        base["conflict_reason"] = ct_winner_rec.get(
+            "conflict_reason", base.get("conflict_reason", "")
+        )
+        base["_ct_vote_tally"] = {str(k): round(v, 4) for k, v in ct_tally.items()}
+        base["_ct_winner_model"] = ct_winner
 
     # Audit fields
     base["_abstain_vote_tally"]   = {str(k): round(v, 4) for k, v in abstain_tally.items()}
@@ -304,11 +340,12 @@ async def process_record(
     output_path: str,
     tracker: CostTracker,
     cache_enabled: bool,
+    is_refusal: bool,
 ) -> None:
     doc_ids    = [d.get("doc_id", "") for d in record.get("retrieved_docs", [])]
     user_prompt = fill_user_prompt(user_template, record)
 
-    # Fire ALL 5 committee models concurrently — each acquires semaphore independently
+    # Fire all committee models concurrently — each acquires semaphore independently
     coros = [
         call_one_model(
             clients[model], semaphore, system_prompt, user_prompt, doc_ids, tracker, cache_enabled
@@ -318,13 +355,18 @@ async def process_record(
     raw_results  = await asyncio.gather(*coros)
     model_results = {model: raw_results[i] for i, model in enumerate(COMMITTEE_MODELS)}
 
-    merged = merge_monolithic_votes(model_results, doc_ids)
+    merged = merge_monolithic_votes(model_results, doc_ids, is_refusal=is_refusal)
+
+    if is_refusal and "conflict_type" in record:
+        record["_gold_conflict_type"] = record["conflict_type"]
 
     # Write merged fields back into the record
     for key in (
         "per_doc_notes", "conflict_reason", "answerable_under_evidence",
+        "conflict_type",
         "expected_response", "think", "_annotation_strategy",
         "_abstain_vote_tally", "_abstain_winner_model",
+        "_ct_vote_tally", "_ct_winner_model",
         "_monolithic_errors", "_all_models_failed",
     ):
         if key in merged:
@@ -344,11 +386,17 @@ async def process_record(
 # ─────────────────────────────────────────────
 
 async def run(args: argparse.Namespace) -> None:
+    default_system_prompt = (
+        SYSTEM_PROMPT_REFUSAL_PATH if args.refusal_mode else SYSTEM_PROMPT_PATH
+    )
+    default_user_prompt = (
+        USER_PROMPT_REFUSAL_PATH if args.refusal_mode else USER_PROMPT_PATH
+    )
     system_prompt = load_text(
-        Path(args.system_prompt) if args.system_prompt else SYSTEM_PROMPT_PATH
+        Path(args.system_prompt) if args.system_prompt else default_system_prompt
     )
     user_template = load_text(
-        Path(args.user_prompt) if args.user_prompt else USER_PROMPT_PATH
+        Path(args.user_prompt) if args.user_prompt else default_user_prompt
     )
 
     # One LLMClient per committee model — all via OpenRouter
@@ -393,7 +441,7 @@ async def run(args: argparse.Namespace) -> None:
             clients, semaphore,
             system_prompt, user_template,
             rec, out_lock, args.output, tracker,
-            args.use_cache,
+            args.use_cache, args.refusal_mode,
         )
         for rec in records
     ]
@@ -435,9 +483,12 @@ def main() -> None:
     ap = argparse.ArgumentParser(
         description=(
             "Multi-LLM Committee Monolithic annotation.\n"
-            "Sends the monolithic prompt to ALL 5 committee models via OpenRouter,\n"
-            "then merges via weighted majority voting (per-doc verdict + abstain).\n"
-            "Only OPENROUTER_API_KEY is needed."
+            "Sends the monolithic prompt to all committee models via OpenRouter,\n"
+            "then merges via weighted majority voting (per-doc verdict + abstain,\n"
+            "plus conflict_type voting in refusal mode).\n"
+            "Only OPENROUTER_API_KEY is needed.\n\n"
+            "Default (no --refusal-mode): CONFLICTS dataset.\n"
+            "With --refusal-mode: REFUSALS dataset prompts are used automatically."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -449,16 +500,18 @@ def main() -> None:
     ap.add_argument("--concurrency",   type=int,   default=10,
                     help=(
                         "Total concurrent API calls across ALL committee models "
-                        "(default: 10 ≈ 2 records × 5 models in parallel)"
+                        "(default: 10; tune based on provider latency and limits)"
                     ))
     ap.add_argument("--limit",         type=int,   default=None,
                     help="Max records to process (default: all)")
     ap.add_argument("--max-retries",   type=int,   default=3,
                     help="Retries per failed API call (default: 3)")
+    ap.add_argument("--refusal-mode",  dest="refusal_mode", action="store_true", default=False,
+                    help="Use refusal-specific monolithic prompts for refusals dataset")
     ap.add_argument("--system-prompt", dest="system_prompt", default=None,
-                    help="Override system prompt path (default: prompts/system_monolithic.txt)")
+                    help="Override system prompt path (default depends on refusal-mode)")
     ap.add_argument("--user-prompt",   dest="user_prompt",   default=None,
-                    help="Override user prompt path (default: prompts/user_monolithic.txt)")
+                    help="Override user prompt path (default depends on refusal-mode)")
     ap.add_argument("--cost-report",   dest="cost_report",   default=None,
                     help="Path to save cost report JSON (default: <output>_cost_report.json)")
     ap.add_argument("--cost-ledger",   dest="cost_ledger",   default=None,

@@ -14,10 +14,10 @@ All models are accessed via OpenRouter (OPENROUTER_API_KEY required).
 
 Concurrency
 -----------
-Each (model × doc) pair is one API call.  With 5 committee models and
-N docs per query, one query spawns 5×N calls.  The --concurrency flag
+Each (model × doc) pair is one API call. With the current 4-model committee and
+N docs per query, one query spawns 4×N calls. The --concurrency flag
 caps *total* simultaneous in-flight calls across all models and docs.
-Default 25 ≈ one record (5 docs × 5 models) processed in parallel.
+Default 25 is enough to keep multiple docs in flight for one record.
 
 Usage:
     # Conflicts dataset

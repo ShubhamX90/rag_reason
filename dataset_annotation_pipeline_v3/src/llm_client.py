@@ -72,6 +72,22 @@ def _openai():
         raise ImportError("Run:  pip install openai")
 
 
+def _response_to_dict(resp: Any) -> Dict[str, Any]:
+    """Best-effort conversion of an SDK response object into a plain dict."""
+    if isinstance(resp, dict):
+        return resp
+    for attr in ("model_dump", "to_dict", "dict"):
+        fn = getattr(resp, attr, None)
+        if callable(fn):
+            try:
+                data = fn()
+                if isinstance(data, dict):
+                    return data
+            except Exception:
+                pass
+    return {}
+
+
 # ─────────────────────────────────────────────
 #  Enums & Defaults
 # ─────────────────────────────────────────────
@@ -422,22 +438,44 @@ class LLMClient:
             msg = resp.choices[0].message
             content = msg.content or ""
             reasoning = getattr(msg, "reasoning", "")
+            resp_dict = _response_to_dict(resp)
 
             # ── Cost tracking (OpenRouter only) ──────────────────────────
             # OpenRouter returns a generation ID in resp.id that can be
             # queried against GET /api/v1/generation?id=<gen_id> for the
             # exact USD cost. We record it here if a tracker was supplied.
             if self.provider == Provider.OPENROUTER and cost_tracker is not None:
-                gen_id = getattr(resp, "id", "") or ""
-                usage  = getattr(resp, "usage", None)
-                prompt_tokens     = getattr(usage, "prompt_tokens",     0) if usage else 0
-                completion_tokens = getattr(usage, "completion_tokens", 0) if usage else 0
+                model_extra = getattr(resp, "model_extra", None)
+                if not isinstance(model_extra, dict):
+                    model_extra = {}
+                gen_id = (
+                    getattr(resp, "id", "") or
+                    model_extra.get("id", "") or
+                    model_extra.get("generation_id", "") or
+                    resp_dict.get("id", "") or
+                    resp_dict.get("generation_id", "") or
+                    ""
+                )
+                usage = getattr(resp, "usage", None)
+                usage_dict = resp_dict.get("usage", {}) if isinstance(resp_dict, dict) else {}
+                prompt_tokens = (
+                    getattr(usage, "prompt_tokens", 0) if usage else 0
+                ) or int(usage_dict.get("prompt_tokens", 0) or usage_dict.get("input_tokens", 0) or 0)
+                completion_tokens = (
+                    getattr(usage, "completion_tokens", 0) if usage else 0
+                ) or int(usage_dict.get("completion_tokens", 0) or usage_dict.get("output_tokens", 0) or 0)
                 if gen_id:
                     cost_tracker.record(
                         generation_id     = gen_id,
                         model             = self.model,
                         prompt_tokens     = prompt_tokens,
                         completion_tokens = completion_tokens,
+                    )
+                else:
+                    cost_tracker.record_missing_generation(
+                        model=self.model,
+                        prompt_tokens=prompt_tokens,
+                        completion_tokens=completion_tokens,
                     )
             # ─────────────────────────────────────────────────────────────
 

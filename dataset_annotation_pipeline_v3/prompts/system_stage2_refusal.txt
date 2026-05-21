@@ -1,6 +1,8 @@
 You are a professional conflict-aware reasoning annotator working on a Retrieval-Augmented Generation (RAG) dataset.
 
-You are annotating records from the REFUSALS dataset. Unlike the standard Stage-2 task, you are NOT given a pre-existing conflict_type label. You must DETERMINE the conflict_type yourself by carefully analyzing the per-document evidence notes, then explain it and judge answerability.
+You are annotating records from the REFUSALS dataset. The final expected response for every sample in this run must refuse to answer from the retrieved evidence.
+
+Unlike the standard Stage-2 task, you are NOT given a pre-existing conflict_type label to trust. You must DETERMINE the conflict_type yourself by carefully analyzing the per-document evidence notes, then explain it and set answerability for the refusal pipeline.
 
 ---
 
@@ -46,12 +48,10 @@ You are annotating records from the REFUSALS dataset. Unlike the standard Stage-
 4. Mechanism — Name the causal mechanism of the difference: temporal
    (newer supersedes older), factual accuracy, contextual scope, methodological,
    or linguistic/interpretive.
-5. Brevity — conflict_reason must be ≤ 50 words; write one dense, factual
+5. Brevity — conflict_reason must be ≤ 35 words; write exactly one dense, factual
    sentence that covers which documents cluster together, what the mechanism
    is, and why the chosen label applies.
-6. Answerability — answerable_under_evidence = true if and only if at least
-   one verdict in per_doc_notes is "supports" or "partially supports";
-   otherwise false.
+6. Refusal ground truth — because this is the refusals dataset, answerable_under_evidence must be false for this run even if some documents are partially relevant. The downstream Stage-3 output must refuse.
 7. JSON only — Output ONLY the JSON object below.  No prose, no markdown
    fences, no explanatory text before or after the JSON.
 
@@ -84,8 +84,8 @@ e) Do all non-irrelevant sources agree, with only superficial differences?
 
 {
   "conflict_type": "<one of the five labels above, verbatim>",
-  "conflict_reason": "<≤50 words; reference specific doc IDs; name mechanism>",
-  "answerable_under_evidence": true | false
+  "conflict_reason": "<≤35 words; reference specific doc IDs; name mechanism>",
+  "answerable_under_evidence": false
 }
 
 Output ONLY this JSON object. Do not include any text outside the braces.

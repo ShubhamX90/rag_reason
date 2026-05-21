@@ -7,15 +7,12 @@ All models are accessed via OpenRouter — no direct-provider keys used.
 
 Committee
 ---------
-  anthropic/claude-sonnet-4.6      weight 0.30  — primary annotator; best JSON fidelity + nuanced
+  anthropic/claude-sonnet-4.6      weight 0.35  — primary annotator; best JSON fidelity + nuanced
                                                   verdict and conflict reasoning
-  openai/gpt-5.4                   weight 0.25  — strong instruction following; diverse GPT signal
-  qwen/qwen3.5-27b                 weight 0.20  — 27B dense; Qwen's own docs state performance
-                                                  "comparable to 122B-A10B" at ~40% lower cost
-                                                  ($0.195/$1.56/M vs $0.26/$2.08/M output)
-  deepseek/deepseek-v3.2           weight 0.15  — DeepSeek V3.2 (much cheaper than R1; R1’s
+  openai/gpt-5.4                   weight 0.30  — strong instruction following; diverse GPT signal
+  deepseek/deepseek-v3.2           weight 0.20  — DeepSeek V3.2 (much cheaper than R1; R1’s
                                                   extended CoT is unnecessary for JSON annotation)
-  mistralai/mistral-small-2603    weight 0.10  — low-cost fifth seat; diverse non-xAI signal
+  mistralai/mistral-small-2603    weight 0.15  — low-cost fourth seat; diverse non-xAI signal
 
 Weights sum to 1.0.  To change the committee or rebalance, only edit MODEL_WEIGHTS here —
 all multi_async scripts read from this single source of truth.
@@ -29,11 +26,10 @@ from typing import Any, Dict, List, Optional, Tuple
 # ─── Committee definition ─────────────────────────────────────────────────────
 
 MODEL_WEIGHTS: Dict[str, float] = {
-    "anthropic/claude-sonnet-4.6":  0.30,
-    "openai/gpt-5.4":               0.25,
-    "qwen/qwen3.5-27b":             0.20,   # comparable to 122B per Qwen docs; ~40% cheaper
-    "deepseek/deepseek-v3.2":       0.15,
-    "mistralai/mistral-small-2603": 0.10,
+    "anthropic/claude-sonnet-4.6":  0.35,
+    "openai/gpt-5.4":               0.30,
+    "deepseek/deepseek-v3.2":       0.20,
+    "mistralai/mistral-small-2603": 0.15,
 }
 
 COMMITTEE_MODELS: List[str] = list(MODEL_WEIGHTS.keys())

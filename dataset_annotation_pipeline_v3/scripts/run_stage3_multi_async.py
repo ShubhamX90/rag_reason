@@ -12,9 +12,9 @@ that voted for the winning abstain value.
 
 All models are accessed via OpenRouter (OPENROUTER_API_KEY required).
 
-This script works identically for both the conflicts and refusals pipelines
-since Stage 3 only uses per_doc_notes, conflict_type, conflict_reason,
-and answerable_under_evidence — all of which are already resolved by Stage 2.
+Default mode uses the standard conflicts prompts.
+With --refusal-mode, refusal-specific prompts are used so the final
+expected_response is forced to refuse.
 
 Usage:
     # Conflicts
@@ -55,6 +55,8 @@ from src.cost_tracker import (
 
 SYSTEM_PROMPT_PATH = PROJECT_ROOT / "prompts" / "system_stage3.txt"
 USER_PROMPT_PATH   = PROJECT_ROOT / "prompts" / "user_stage3.txt"
+SYSTEM_REFUSAL_PATH = PROJECT_ROOT / "prompts" / "system_stage3_refusal.txt"
+USER_REFUSAL_PATH   = PROJECT_ROOT / "prompts" / "user_stage3_refusal.txt"
 STAGE3_MAX_TOKENS  = 6000
 
 
@@ -128,6 +130,7 @@ async def call_one_model(
     user_prompt: str,
     tracker: CostTracker,
     cache_enabled: bool,
+    is_refusal: bool,
 ) -> Dict[str, Any]:
     """One API call: one committee model for one record."""
     async with semaphore:
@@ -138,7 +141,7 @@ async def call_one_model(
                 max_tokens=STAGE3_MAX_TOKENS,
                 cost_tracker=tracker,
                 cache_enabled=cache_enabled,
-                cache_namespace="stage3_multi",
+                cache_namespace="stage3_multi_refusal" if is_refusal else "stage3_multi",
             )
             parsed, errors = parse_stage3(raw)
             if errors:
@@ -172,10 +175,11 @@ async def process_record(
     output_path: str,
     tracker: CostTracker,
     cache_enabled: bool,
+    is_refusal: bool,
 ) -> None:
     coros = [
         call_one_model(
-            clients[model], semaphore, system_prompt, user_prompt, tracker, cache_enabled
+            clients[model], semaphore, system_prompt, user_prompt, tracker, cache_enabled, is_refusal
         )
         for model in COMMITTEE_MODELS
     ]
@@ -201,11 +205,13 @@ async def process_record(
 # ─────────────────────────────────────────────
 
 async def run(args: argparse.Namespace) -> None:
+    default_system = SYSTEM_REFUSAL_PATH if args.refusal_mode else SYSTEM_PROMPT_PATH
+    default_user = USER_REFUSAL_PATH if args.refusal_mode else USER_PROMPT_PATH
     system_prompt = load_text(
-        Path(args.system_prompt) if args.system_prompt else SYSTEM_PROMPT_PATH
+        Path(args.system_prompt) if args.system_prompt else default_system
     )
     user_template = load_text(
-        Path(args.user_prompt) if args.user_prompt else USER_PROMPT_PATH
+        Path(args.user_prompt) if args.user_prompt else default_user
     )
 
     clients = {
@@ -250,6 +256,7 @@ async def run(args: argparse.Namespace) -> None:
             system_prompt, build_user_prompt(user_template, rec),
             rec, out_lock, args.output, tracker,
             args.use_cache,
+            args.refusal_mode,
         )
         for rec in records
     ]
@@ -290,11 +297,14 @@ def main() -> None:
         description=(
             "Multi-LLM Stage-3 response synthesis with weighted majority vote on abstain.\n"
             "All committee models are accessed via OpenRouter.\n"
-            "Works for both conflicts and refusals datasets."
+            "Default (no --refusal-mode): conflicts prompts.\n"
+            "With --refusal-mode: refusal-specific prompts force abstaining outputs."
         )
     )
     ap.add_argument("--input",         required=True)
     ap.add_argument("--output",        required=True)
+    ap.add_argument("--refusal-mode",  dest="refusal_mode", action="store_true", default=False,
+                    help="Use refusal-specific Stage-3 prompts for refusal-required samples")
     ap.add_argument("--temperature",   type=float, default=0.0)
     ap.add_argument("--concurrency",   type=int,   default=15,
                     help="Total concurrent API calls across ALL committee models (default: 15)")

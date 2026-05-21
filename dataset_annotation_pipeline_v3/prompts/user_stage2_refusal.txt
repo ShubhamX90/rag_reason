@@ -26,20 +26,19 @@ Your task has three parts:
      e) Do all non-irrelevant sources agree, with only superficial differences in phrasing or granularity?
         → "No conflict"
 
-2. WRITE conflict_reason (≤ 50 words)
+2. WRITE conflict_reason (≤ 35 words, exactly one sentence)
    • Reference specific document IDs (e.g., "d1 and d3 agree that…", "d2 contradicts d1 by stating…")
    • Explicitly name the mechanism: temporal, factual accuracy, contextual scope, methodological, or linguistic
    • State which documents cluster together and why the chosen label applies
-   • Do NOT exceed 50 words
+   • Do NOT exceed 35 words
 
 3. SET answerable_under_evidence
-   • true  → at least one verdict in per_doc_notes is "supports" or "partially supports"
-   • false → all verdicts are "irrelevant", or there is insufficient support to answer
+   • Because this is a refusal-required sample, set answerable_under_evidence to false.
 
 Before finalizing, verify:
   ✓ conflict_type is one of the five valid labels (exact spelling and capitalization)
   ✓ conflict_reason references real doc IDs from the per_doc_notes above
-  ✓ conflict_reason ≤ 50 words
+  ✓ conflict_reason ≤ 35 words
   ✓ conflict_reason explicitly names the causal mechanism
   ✓ answerable_under_evidence is consistent with the verdicts in per_doc_notes
 
@@ -47,5 +46,5 @@ Output ONLY this JSON object (no surrounding text, no markdown):
 {
   "conflict_type": "...",
   "conflict_reason": "...",
-  "answerable_under_evidence": true | false
+  "answerable_under_evidence": false
 }

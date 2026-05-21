@@ -489,6 +489,10 @@ def parse_monolithic(
 
     # ── 3. Extract label line (ConflictType — conflict_reason) ──
     conflict_type_label, conflict_reason = _parse_label_line(think_content, errors)
+    if conflict_type_label and conflict_type_label not in VALID_CONFLICT_TYPES:
+        errors.append(f"invalid ConflictType label line: {conflict_type_label!r}")
+        conflict_type_label = ""
+        conflict_reason = ""
 
     # ── 4. Derive answerable_under_evidence from per_doc_notes ──
     non_irr = [
@@ -537,19 +541,37 @@ def _parse_think_docs(think_content: str, errors: List[str]) -> List[Dict[str, A
             continue
         # Normalise field names (model may use slightly different keys)
         item = _normalise_per_doc_note(item, i)
+        verdict = item.get("verdict", "")
+        quality = item.get("source_quality", "")
+        if verdict not in STAGE1_VALID_VERDICTS:
+            errors.append(f"per_doc_notes[{i}] invalid verdict: {verdict!r}")
+        if quality not in STAGE1_VALID_QUALITY:
+            errors.append(f"per_doc_notes[{i}] invalid source_quality: {quality!r}")
+        if verdict == "irrelevant":
+            if item.get("key_fact") or item.get("quote"):
+                errors.append(
+                    f"per_doc_notes[{i}] irrelevant verdict must have empty key_fact and quote"
+                )
+        else:
+            if not item.get("key_fact"):
+                errors.append(f"per_doc_notes[{i}] missing key_fact for non-irrelevant verdict")
+            if not item.get("quote"):
+                errors.append(f"per_doc_notes[{i}] missing quote for non-irrelevant verdict")
         notes.append(item)
     return notes
 
 
 def _normalise_per_doc_note(item: Dict, idx: int) -> Dict:
     """Ensure standard field names for a per-doc note from monolithic output."""
-    # The monolithic prompt uses: doc_id, verdict, verdict_reason, key_fact, source_quality
+    # The monolithic prompt uses: doc_id, verdict, verdict_reason, key_fact, quote, source_quality
     # Map any alternative keys
     aliases = {
         "id":           "doc_id",
         "doc":          "doc_id",
         "reason":       "verdict_reason",
         "fact":         "key_fact",
+        "excerpt":      "quote",
+        "supporting_quote": "quote",
         "quality":      "source_quality",
     }
     for old, new in aliases.items():
@@ -561,6 +583,7 @@ def _normalise_per_doc_note(item: Dict, idx: int) -> Dict:
     item.setdefault("verdict",         "irrelevant")
     item.setdefault("verdict_reason",  "")
     item.setdefault("key_fact",        "")
+    item.setdefault("quote",           "")
     item.setdefault("source_quality",  "low")
     return item
 
@@ -573,21 +596,36 @@ def _parse_label_line(
     Extract the '<ConflictType> — <conflict_reason>' label line from think content.
     Returns (conflict_type_label, conflict_reason).
     """
-    # Look for an em-dash (—) or double-hyphen (--) separator on its own line
+    # First, prefer exact known conflict labels on their own line. This avoids
+    # accidentally grabbing JSON content such as `"quote": "... -- ..."` from
+    # the per-doc array.
+    label_prefixes = sorted(VALID_CONFLICT_TYPES, key=len, reverse=True)
+    dash_variants = ("\u2014", "--", "-")
+    for raw_line in think_content.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        for label in label_prefixes:
+            if not line.startswith(label):
+                continue
+            rest = line[len(label):].lstrip()
+            for dash in dash_variants:
+                if rest.startswith(dash):
+                    conflict_reason = rest[len(dash):].strip()
+                    if conflict_reason:
+                        return label, conflict_reason
+
+    # Fallback: tolerate slightly malformed labels, but still reject obvious
+    # JSON field lines by excluding double-quoted prefixes and braces.
     label_re = re.compile(
-        r"^([^\[\{\n]{3,80}?)\s*[\u2014]{1}\s*(.{3,300})$",
+        r"^([^\"\[\{\n][^\[\{\n]{2,80}?)\s*(?:\u2014|--|-)\s*(.{3,300})$",
         re.MULTILINE,
     )
-    # Also allow plain hyphen(s)
-    label_re2 = re.compile(
-        r"^([^\[\{\n]{3,80}?)\s*--?\s*(.{3,300})$",
-        re.MULTILINE,
-    )
-    for pattern in (label_re, label_re2):
-        m = pattern.search(think_content)
-        if m:
-            ct  = m.group(1).strip().strip("<>")
-            cr  = m.group(2).strip()
+    m = label_re.search(think_content)
+    if m:
+        ct = m.group(1).strip().strip("<>")
+        cr = m.group(2).strip()
+        if ct and cr:
             return ct, cr
 
     errors.append("could not extract ConflictType label line from think block")
