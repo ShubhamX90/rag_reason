@@ -10,9 +10,10 @@ Scope: all modules except `batch_processor.py` (out of scope per request).
 
 > **One-line summary:** the prompt now shows judges only the conflict-type-specific
 > rubric, the NLI judge is Claude Sonnet 4.6 (not Haiku), partial-recall credit
-> uses the *minority* side of the vote (not the majority), correct refusals get
-> full credit instead of zero, NLTK no longer splits "$1.8 billion" mid-number,
-> and judge priorities are YAML-overridable.
+> uses the *minority* side of the vote (not the majority), correct refusals are
+> gated out of Behavior/FG/STR averages (N1/N10 fixed), CATS GR component uses
+> dataset-level F1 instead of sample-averaged accuracy, NLTK no longer splits
+> "$1.8 billion" mid-number, and judge priorities are YAML-overridable.
 
 ---
 
@@ -604,18 +605,55 @@ that should largely vanish.
 
 While re-reading [detailed_results.json](outputs/untuned_generations/qwen/monolithic/e2e/detailed_results.json) sample-by-sample, I found bugs *not* in the original ISSUES.md. Each was either fixed or flagged.
 
-### N1 — Correct refusals were triple-penalized — **REVERTED (open — see ISSUES.md §N1)**
-
-> **Current state:** The carve-out has been removed. Correct refusals still
-> score `behavior=0.0`, `grounding=0.0`, `recall=0.0`. See ISSUES.md §N1.
+### N1 — Correct refusals were triple-penalized — **FIXED**
 
 **Observed at:** #0463 (Type 1, model "CANNOT ANSWER", gold not answerable).
 
-The carve-out (`correct_refusal_full_credit: bool = True` flag + early-return
-block in `_evaluate_single_sample`) was added then removed at the user's
-request. The `correct_refusal_full_credit` field no longer exists in
-`EnhancedConflictEvalConfig`. The problem documented in ISSUES.md §N1 remains
-unfixed.
+A correct refusal (`gold_answerable=False AND pred_answered=False`) is a
+structurally correct outcome — the model did exactly the right thing.
+Previously, `behavior=0.0`, `grounding=0.0`, `recall=0.0` were all included
+in the respective averages, dragging them down whenever unanswerable samples
+appeared in the dataset.
+
+**Fix in `rag_eval/evaluator.py` — `_evaluate_single_sample`:**
+
+```python
+correct_refusal = (not gold_answerable) and (not pred_answered)
+
+if correct_refusal:
+    # Skip committee — no answer exists to judge.
+    beh = {"adherent": None, "rationale": "N/A — correct refusal; excluded from behavior average",
+           "skipped": "correct_refusal", "committee_details": None}
+    fg_result = {"grounding_ratio": None, "supported_claims": 0, "total_claims": 0,
+                 "claim_details": [], "skipped": "correct_refusal"}
+    st_result = {"recall": 0.0, "skipped": "correct_refusal"}
+    beh_applicable = False
+    fg_applicable  = False
+    st_applicable  = False
+```
+
+**Fix in `_aggregate_results`:** each sub-metric has an independent
+`*_applicable` gate; `behavior_n`, `factual_grounding_n`, and
+`single_truth_recall_n` count only applicable samples:
+
+```python
+if res.get("behavior_applicable", True):
+    overall["behavior"].append(res["behavior_score"])
+    overall["behavior_n"] += 1
+if res.get("factual_grounding_applicable", True):
+    overall["factual_grounding"].append(res["factual_grounding_score"])
+    overall["factual_grounding_n"] += 1
+```
+
+**Impact (synthetic 5-sample example with 2 correct refusals):**
+
+| Metric | Before fix | After fix |
+| ------ | --------- | --------- |
+| Behavior | 0.200 | 0.333 |
+| Factual Grounding | 0.300 | 0.500 |
+| CATS | 0.450 | 0.533 |
+
+On a real dataset with 20 % unanswerable samples the effect is proportionally larger.
 
 ---
 
@@ -725,15 +763,54 @@ return now uses `claim_details: []` again, leaving `len(claim_details) != total_
 
 ---
 
-### N10 — Aggregator includes correct-refusal zeros in the metric mean — **REVERTED (open — see ISSUES.md §N10)**
+### N10 — Aggregator includes correct-refusal zeros in the metric mean — **FIXED**
 
-> **Current state:** Correct refusals contribute `behavior=0.0`,
-> `grounding=0.0`, `recall=0.0` to the aggregate means. See ISSUES.md §N10.
+This was downstream of N1 and is resolved by the same fix. The `_aggregate_results`
+loop now gates each sub-metric on its `*_applicable` flag. Correct-refusal samples
+contribute to `gr_accuracy` (their GR=1.0 is correct) but are excluded from
+`behavior`, `factual_grounding`, and `single_truth_recall` averages. The CATS
+score denominator shrinks to match only applicable sub-metrics.
 
-This was downstream of N1 — once the N1 carve-out was reverted, the aggregator
-no longer skips correct-refusal samples. The `_aggregate_results` loop includes
-these zeros in the mean, which depresses all three averaged metrics for any
-evaluation that includes unanswerable queries.
+See §N1 above for the full implementation detail.
+
+---
+
+### N11 — CATS GR component was sample-averaged accuracy, not F1 — **FIXED**
+
+**Problem:** The GR component fed into CATS was the mean of per-sample binary
+correct/incorrect flags — i.e., simple accuracy. Accuracy can be gamed by the
+class distribution: a model that refuses everything gets TN credit on every
+unanswerable sample, artificially inflating GR accuracy while FP (answering
+unanswerable) and FN (refusing answerable) trade off invisibly.
+
+**Fix in `rag_eval/evaluator.py` — `_aggregate_results`:**
+
+After `finalize()` averages sub-metrics and `compute_f1_gr` computes
+dataset-level precision/recall/F1 from TP/FP/FN/TN, the overall `cats_score`
+is recomputed with F1 in place of accuracy:
+
+```python
+if gr_dataset:
+    gr_f1 = gr_dataset["f1"]
+    overall["gr_f1"] = gr_f1          # stored for report / logging
+    cats_parts = [gr_f1]              # F1, not accuracy
+    if overall["behavior_n"] > 0:
+        cats_parts.append(overall["behavior"])
+    if overall["factual_grounding_n"] > 0:
+        cats_parts.append(overall["factual_grounding"])
+    if overall["single_truth_recall_n"] > 0:
+        cats_parts.append(overall["single_truth_recall"])
+    overall["cats_score"] = float(np.mean(cats_parts))
+```
+
+Per-type `cats_score` retains accuracy (per-type F1 would require separate
+TP/FP/FN tracking per bucket, which adds complexity with marginal per-type
+value — per-type rows are diagnostic, not headline numbers).
+
+**Report and logging:** the markdown report now shows both `GR Accuracy` (for
+transparency) and `GR F1 (used in CATS)`. The dataset-level GR block retains
+F1, Precision, Recall, Accuracy, and TP/FP/FN/TN. Terminal output shows
+`GR F1 (CATS input): X.XXX` alongside accuracy.
 
 ---
 
@@ -806,21 +883,21 @@ When you rerun the same `--input data/...` after these fixes, expect:
 Changes marked **[REVERTED]** were applied then undone at the user's request; the
 current file does NOT contain those changes.
 
-| File                          | Status  | Net changes in current code                                                     |
-|-------------------------------|---------|---------------------------------------------------------------------------------|
-| `rag_eval/judge_prompts.py`   | changed | Per-conflict rubric (§1); confidence requested (§4.1); recall prompt simpler form (N2 REVERTED) |
-| `rag_eval/config.py`          | changed | `DEFAULT_JUDGE_PRIORITIES`; `priority_overrides`; `get_sonnet_nli_judge`; `nli_judge` field; dead fields RESTORED (§3.2 REVERTED); no `correct_refusal_full_credit` (N1 REVERTED) |
+| File | Status | Net changes in current code |
+| --- | --- | --- |
+| `rag_eval/judge_prompts.py` | changed | Per-conflict rubric (§1); confidence requested (§4.1); recall prompt simpler form (N2 REVERTED) |
+| `rag_eval/config.py` | changed | `DEFAULT_JUDGE_PRIORITIES`; `priority_overrides`; `get_sonnet_nli_judge`; `nli_judge` field; dead fields RESTORED (§3.2 REVERTED) |
 | `rag_eval/judge_committee.py` | changed | `minority_confidence`; `<think>` stripping; choices guard; confidence floor; `all_failed`; NO semaphore (§3.3 REVERTED) |
-| `rag_eval/conflict_eval.py`   | changed | NLI uses dedicated `JudgeClient`; partial-credit uses `minority_confidence`; `claim_details=[]` on empty support (N9 REVERTED); gold via `str()` |
-| `rag_eval/data.py`            | changed | `model_output` never falls back to gold; verdict normalization |
-| `rag_eval/metrics.py`         | changed | Unified refusal regex; NLTK protection; meta-reference filter; `compute_f1_gr`; `gr_accuracy_from_flags` |
-| `rag_eval/evaluator.py`       | changed | `_safe_ctype`; NO refusal carve-out (N1/N10 REVERTED); NLI judge wiring; `setdefault` aggregator; deterministic order; per-type `n<5` warning |
-| `rag_eval/logging_config.py`  | changed | Idempotent handlers; `propagate=False` |
-| `rag_eval/__init__.py`        | changed | Exports `DEFAULT_JUDGE_PRIORITIES`, `get_sonnet_nli_judge`, `EnhancedTrustScoreConfig` (restored) |
-| `run_evaluation.py`           | changed | `_load_yaml_config`, `_apply_yaml_to_config`; metric-name updates |
-| `run_evaluation_batch.py`     | changed | `f1_gr` → `gr_accuracy` |
-| `configs/default.yaml`        | changed | Working YAML with `priority_overrides` example |
-| `.env.example`                | changed | `OPENROUTER_API_KEY` documented |
+| `rag_eval/conflict_eval.py` | changed | NLI uses dedicated `JudgeClient`; partial-credit uses `minority_confidence`; `claim_details=[]` on empty support (N9 REVERTED); gold via `str()` |
+| `rag_eval/data.py` | changed | `model_output` never falls back to gold; verdict normalization |
+| `rag_eval/metrics.py` | changed | Unified refusal regex; NLTK protection; meta-reference filter; `compute_f1_gr`; `gr_accuracy_from_flags` |
+| `rag_eval/evaluator.py` | changed | `_safe_ctype`; correct-refusal gating N1/N10; GR F1 in CATS N11; NLI wiring; `setdefault` aggregator; stable sort; `n<5` warning |
+| `rag_eval/logging_config.py` | changed | Idempotent handlers; `propagate=False` |
+| `rag_eval/__init__.py` | changed | Exports `DEFAULT_JUDGE_PRIORITIES`, `get_sonnet_nli_judge`, `EnhancedTrustScoreConfig` (restored) |
+| `run_evaluation.py` | changed | `_load_yaml_config`, `_apply_yaml_to_config`; GR F1 logging |
+| `run_evaluation_batch.py` | changed | `f1_gr` → `gr_accuracy`; GR F1 logging |
+| `configs/default.yaml` | changed | Working YAML with `priority_overrides` example |
+| `.env.example` | changed | `OPENROUTER_API_KEY` documented |
 
 ---
 
@@ -833,11 +910,9 @@ Issues from [ISSUES.md](ISSUES.md) that have no fix applied in the current codeb
 - **§3.2 — Dead config fields.** All fields restored; no evaluator reads them. Code smell only.
 - **§3.3 — max_concurrent_requests not enforced.** Semaphore removed; bare `asyncio.gather` is back. API fan-out is unbounded.
 - **§3.4 — Per-judge RPM rate limiting.** Fields restored but not enforced. HTTP 429s propagate as `adherent=False`.
-- **N1 — Correct refusals triple-penalized.** Carve-out block removed; correct refusals still score ~0.25 CATS.
 - **N2 — Recall judges count mentioned-not-asserted.** Prompt reverted; gold-string-present-but-not-asserted still scores recall=1.0.
 - **N3 — Dataset gold typos cause split verdicts.** Spelling-variation instruction removed.
 - **N9 — `claim_details=[]` when `total_claims>0`.** Consistency fix reverted; schema mismatch restored.
-- **N10 — Correct-refusal zeros dragged into aggregate means.** Downstream of N1; unresolved.
 
 ### Never fixed (open from the start)
 

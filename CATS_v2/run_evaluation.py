@@ -270,6 +270,8 @@ async def process_single_file(args, input_file: str, file_idx: int, total: int):
             if n_cr:
                 logger.info(f"  Correct refusals: {n_cr} (GR=1.0; excluded from sub-metric averages)")
             logger.info(f"  GR Accuracy:        {overall['gr_accuracy']:.3f}  (n={n})")
+            if "gr_f1" in overall:
+                logger.info(f"  GR F1 (CATS input): {overall['gr_f1']:.3f}")
             logger.info(f"  Behavior Adherence: {overall['behavior']:.3f}  (n={overall.get('behavior_n', n)})")
             logger.info(f"  Factual Grounding:  {overall['factual_grounding']:.3f}  (n={overall.get('factual_grounding_n', n)})")
             logger.info(f"  Single-Truth Recall:{overall['single_truth_recall']:.3f}  (n={overall.get('single_truth_recall_n', 0)})")

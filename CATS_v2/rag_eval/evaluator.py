@@ -351,6 +351,22 @@ class EnhancedEvaluator:
 
         gr_dataset = compute_f1_gr(pred_list, gold_list) if pred_list else {}
 
+        # Recompute overall CATS using dataset-level GR F1 instead of sample-averaged accuracy.
+        # F1 penalises both false positives (answering unanswerable) and false negatives (refusing
+        # answerable), while accuracy can be gamed by the class distribution.
+        # Per-type cats_score retains accuracy (no per-type F1 without separate tracking).
+        if gr_dataset:
+            gr_f1 = gr_dataset["f1"]
+            overall["gr_f1"] = gr_f1
+            cats_parts = [gr_f1]
+            if overall["behavior_n"] > 0:
+                cats_parts.append(overall["behavior"])
+            if overall["factual_grounding_n"] > 0:
+                cats_parts.append(overall["factual_grounding"])
+            if overall["single_truth_recall_n"] > 0:
+                cats_parts.append(overall["single_truth_recall"])
+            overall["cats_score"] = float(np.mean(cats_parts))
+
         return overall, per_type, gr_dataset
 
     def _write_markdown_report(self, path: str, res: Dict[str, Any]) -> None:
@@ -382,6 +398,8 @@ class EnhancedEvaluator:
                 )
             lines.append(f"**GR Accuracy**: {_safe_fmt(o['gr_accuracy']):.3f}"
                          f" (over {n_total} samples)\n\n")
+            if "gr_f1" in o:
+                lines.append(f"**GR F1** *(used in CATS)*: {_safe_fmt(o['gr_f1']):.3f}\n\n")
             lines.append(f"**Behavior Adherence**: {_safe_fmt(o['behavior']):.3f}"
                          f" (over {o.get('behavior_n', n_total)} applicable samples)\n\n")
             lines.append(f"**Factual Grounding**: {_safe_fmt(o['factual_grounding']):.3f}"
@@ -400,10 +418,10 @@ class EnhancedEvaluator:
 
             if "gr_dataset_metrics" in res and res["gr_dataset_metrics"]:
                 g = res["gr_dataset_metrics"]
-                lines.append("\n### Dataset-level GR F1\n\n")
+                lines.append("\n### Dataset-level GR Metrics\n\n")
+                lines.append(f"- **F1** *(CATS component)*: {g['f1']:.3f}\n")
                 lines.append(f"- **Precision**: {g['precision']:.3f}\n")
                 lines.append(f"- **Recall**: {g['recall']:.3f}\n")
-                lines.append(f"- **F1**: {g['f1']:.3f}\n")
                 lines.append(f"- **Accuracy**: {g['accuracy']:.3f}\n")
                 lines.append(f"- TP={g['tp']}, FP={g['fp']}, FN={g['fn']}, TN={g['tn']}\n\n")
 
