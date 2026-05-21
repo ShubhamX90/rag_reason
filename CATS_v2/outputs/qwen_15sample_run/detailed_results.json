@@ -2,44 +2,65 @@
   "summary": {
     "conflict_overall": {
       "n": 15,
+      "correct_refusals": 0,
       "gr_accuracy": 0.6666666666666666,
       "behavior": 0.6,
+      "behavior_n": 15,
       "factual_grounding": 0.5488888888888889,
+      "factual_grounding_n": 15,
       "single_truth_recall": 0.7,
-      "single_truth_recall_n": 10
+      "single_truth_recall_n": 10,
+      "cats_score": 0.6622222222222223,
+      "gr_f1": 0.8
     },
     "conflict_per_type": {
       "3": {
         "n": 1,
+        "correct_refusals": 0,
         "gr_accuracy": 0.0,
         "behavior": 0.0,
+        "behavior_n": 1,
         "factual_grounding": 0.0,
+        "factual_grounding_n": 1,
         "single_truth_recall": 0.0,
-        "single_truth_recall_n": 0
+        "single_truth_recall_n": 0,
+        "cats_score": 0.0
       },
       "4": {
         "n": 3,
+        "correct_refusals": 0,
         "gr_accuracy": 0.6666666666666666,
-        "behavior": 0.3333333333333333,
+        "behavior": 0.6666666666666666,
+        "behavior_n": 3,
         "factual_grounding": 0.5,
+        "factual_grounding_n": 3,
         "single_truth_recall": 0.6666666666666666,
-        "single_truth_recall_n": 3
+        "single_truth_recall_n": 3,
+        "cats_score": 0.625
       },
       "2": {
         "n": 4,
+        "correct_refusals": 0,
         "gr_accuracy": 0.75,
         "behavior": 0.5,
+        "behavior_n": 4,
         "factual_grounding": 0.43333333333333335,
+        "factual_grounding_n": 4,
         "single_truth_recall": 0.0,
-        "single_truth_recall_n": 0
+        "single_truth_recall_n": 0,
+        "cats_score": 0.5611111111111111
       },
       "1": {
         "n": 7,
+        "correct_refusals": 0,
         "gr_accuracy": 0.7142857142857143,
-        "behavior": 0.8571428571428571,
+        "behavior": 0.7142857142857143,
+        "behavior_n": 7,
         "factual_grounding": 0.7142857142857143,
+        "factual_grounding_n": 7,
         "single_truth_recall": 0.7142857142857143,
-        "single_truth_recall_n": 7
+        "single_truth_recall_n": 7,
+        "cats_score": 0.7142857142857143
       }
     },
     "gr_dataset_metrics": {
@@ -59,8 +80,10 @@
       "conflict_type": 3,
       "pred_answered": false,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 0.0,
       "behavior_score": 0.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": false,
         "rationale": "Empty answer",
@@ -73,6 +96,7 @@
         "committee_details": null
       },
       "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.0,
         "supported_claims": 0,
@@ -91,36 +115,38 @@
       "conflict_type": 4,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
       "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer prioritizes the up-to-date information (Passover 2025 starting April 12, 2025) and presents it directly without dwelling on outdated sources, which aligns with the expected behavior of prioritizing current information.",
-        "confidence": 0.7168141592920353,
-        "minority_confidence": 0.2831858407079646,
-        "votes_for": 2,
-        "votes_against": 1,
+        "rationale": "The answer prioritizes the up-to-date information (Passover 2025 starting April 12, 2025) and provides a direct answer based on current sources, which aligns with the expected behavior of prioritizing up-to-date information.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 3,
+        "votes_against": 0,
         "total_votes": 3,
         "skipped": null,
         "all_failed": false,
         "committee_details": {
           "adherent": true,
-          "confidence": 0.7168141592920353,
-          "minority_confidence": 0.2831858407079646,
-          "votes_for": 2,
-          "votes_against": 1,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 3,
+          "votes_against": 0,
           "total_votes": 3,
-          "rationale": "The answer prioritizes the up-to-date information (Passover 2025 starting April 12, 2025) and presents it directly without dwelling on outdated sources, which aligns with the expected behavior of prioritizing current information.",
+          "rationale": "The answer prioritizes the up-to-date information (Passover 2025 starting April 12, 2025) and provides a direct answer based on current sources, which aligns with the expected behavior of prioritizing up-to-date information.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
               "model_id": "anthropic/claude-sonnet-4-6",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer prioritizes the up-to-date information (Passover 2025 starting April 12, 2025) and presents it directly without dwelling on outdated sources, which aligns with the expected behavior of prioritizing current information.",
+              "rationale": "The answer prioritizes the up-to-date information (Passover 2025 starting April 12, 2025) and provides a direct answer based on current sources, which aligns with the expected behavior of prioritizing up-to-date information.",
               "confidence": 0.75,
-              "cost": 0.0028469999999999997,
-              "latency_ms": 5184.486150741577,
+              "cost": 0.0028919999999999996,
+              "latency_ms": 3922.9912757873535,
               "error": null
             },
             {
@@ -128,30 +154,31 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer directly gives a current-year start date and treats it as the authoritative result, citing multiple sources. It does not dwell on older information and thus behaves consistently with prioritizing up-to-date information.",
-              "confidence": 0.9,
-              "cost": 0.00010319999999999999,
-              "latency_ms": 2373.3768463134766,
+              "rationale": "The answer gives a direct, current-year date and prioritizes the up-to-date information, without getting sidetracked by any outdated sources. Mentioning multiple reliable sources is consistent with selecting the current information.",
+              "confidence": 0.95,
+              "cost": 0.00010199999999999999,
+              "latency_ms": 2166.2466526031494,
               "error": null
             },
             {
               "judge_id": "openrouter_deepseek/deepseek-v3.2",
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
-              "adherent": false,
-              "rationale": "The answer does not acknowledge any outdated sources or prioritize up-to-date information explicitly, which is the expected behavior for conflict due to outdated information. It simply states a date without addressing potential conflicts in sources.",
-              "confidence": 0.8,
-              "cost": 8.007999999999998e-05,
-              "latency_ms": 5988.543510437012,
+              "adherent": true,
+              "rationale": "The answer prioritizes the up-to-date information by stating the 2025 Passover start date directly and cites recent sources, aligning with the expected behavior for handling outdated information.",
+              "confidence": 0.9,
+              "cost": 7.839999999999998e-05,
+              "latency_ms": 5973.018169403076,
               "error": null
             }
           ],
-          "total_cost": 0.0030302799999999998,
-          "total_latency_ms": 13546.406507492065,
+          "total_cost": 0.0030723999999999994,
+          "total_latency_ms": 12062.25609779358,
           "all_failed": false
         }
       },
       "factual_grounding_score": 0.5,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.5,
         "supported_claims": 1,
@@ -199,13 +226,15 @@
       "conflict_type": 4,
       "pred_answered": false,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 0.0,
       "behavior_score": 0.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": false,
-        "rationale": "The answer is an unsupported refusal. For outdated-information conflicts, the expected behavior is to prioritize the most up-to-date information (optionally noting older sources), not decline without indicating that evidence is genuinely insufficient.",
-        "confidence": 0.6739130434782609,
-        "minority_confidence": 0.3260869565217392,
+        "rationale": "The model refused to answer, claiming insufficient evidence. However, the identity of the FBI director is a well-known, publicly available fact that does not require special evidence. The refusal does not prioritize up-to-date information nor acknowledge any outdated sources, which is the expected behavior for this conflict type.",
+        "confidence": 0.6875,
+        "minority_confidence": 0.3125,
         "votes_for": 1,
         "votes_against": 2,
         "total_votes": 3,
@@ -213,22 +242,22 @@
         "all_failed": false,
         "committee_details": {
           "adherent": false,
-          "confidence": 0.6739130434782609,
-          "minority_confidence": 0.3260869565217392,
+          "confidence": 0.6875,
+          "minority_confidence": 0.3125,
           "votes_for": 1,
           "votes_against": 2,
           "total_votes": 3,
-          "rationale": "The answer is an unsupported refusal. For outdated-information conflicts, the expected behavior is to prioritize the most up-to-date information (optionally noting older sources), not decline without indicating that evidence is genuinely insufficient.",
+          "rationale": "The model refused to answer, claiming insufficient evidence. However, the identity of the FBI director is a well-known, publicly available fact that does not require special evidence. The refusal does not prioritize up-to-date information nor acknowledge any outdated sources, which is the expected behavior for this conflict type.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
               "model_id": "anthropic/claude-sonnet-4-6",
               "provider": "openrouter",
               "adherent": false,
-              "rationale": "The model refused to answer, claiming insufficient evidence. However, the identity of the FBI director is a well-known, publicly available fact that does not require retrieved evidence to answer. The refusal does not align with the expected behavior of prioritizing up-to-date information, as the model should have provided the current director's name rather than refusing entirely.",
-              "confidence": 0.6,
-              "cost": 0.003051,
-              "latency_ms": 4299.579620361328,
+              "rationale": "The model refused to answer, claiming insufficient evidence. However, the identity of the FBI director is a well-known, publicly available fact that does not require special evidence. The refusal does not prioritize up-to-date information nor acknowledge any outdated sources, which is the expected behavior for this conflict type.",
+              "confidence": 0.7,
+              "cost": 0.0029309999999999996,
+              "latency_ms": 4237.884283065796,
               "error": null
             },
             {
@@ -236,10 +265,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": false,
-              "rationale": "The answer is an unsupported refusal. For outdated-information conflicts, the expected behavior is to prioritize the most up-to-date information (optionally noting older sources), not decline without indicating that evidence is genuinely insufficient.",
-              "confidence": 0.96,
-              "cost": 0.00010019999999999998,
-              "latency_ms": 2324.0585327148438,
+              "rationale": "The answer is a refusal without indicating whether more up-to-date information should be prioritized over outdated sources. For this conflict type, the expected behavior is to provide the current information if supported, optionally noting older sources; the response does not do that.",
+              "confidence": 0.93,
+              "cost": 0.00010559999999999999,
+              "latency_ms": 2438.7147426605225,
               "error": null
             },
             {
@@ -250,16 +279,17 @@
               "rationale": "The answer is a refusal due to insufficient evidence, which is treated as adherent when the retrieved evidence genuinely does not support an answer, as per the instructions.",
               "confidence": 0.9,
               "cost": 7.448e-05,
-              "latency_ms": 4002.4025440216064,
+              "latency_ms": 3132.5597763061523,
               "error": null
             }
           ],
-          "total_cost": 0.00322568,
-          "total_latency_ms": 10626.040697097778,
+          "total_cost": 0.0031110799999999996,
+          "total_latency_ms": 9809.15880203247,
           "all_failed": false
         }
       },
       "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.0,
         "supported_claims": 0,
@@ -288,11 +318,13 @@
       "conflict_type": 2,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
       "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as franchisee) into a unified, reconciled response without framing any of these as conflicting viewpoints or a debate. It presents complementary information in a coherent summary.",
+        "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as franchisee) into a unified, reconciled summary without framing any disagreement or debate between sources. This matches the expected behavior of consolidating complementary information.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 3,
@@ -307,17 +339,17 @@
           "votes_for": 3,
           "votes_against": 0,
           "total_votes": 3,
-          "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as franchisee) into a unified, reconciled response without framing any of these as conflicting viewpoints or a debate. It presents complementary information in a coherent summary.",
+          "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as franchisee) into a unified, reconciled summary without framing any disagreement or debate between sources. This matches the expected behavior of consolidating complementary information.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
               "model_id": "anthropic/claude-sonnet-4-6",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as franchisee) into a unified, reconciled response without framing any of these as conflicting viewpoints or a debate. It presents complementary information in a coherent summary.",
+              "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as franchisee) into a unified, reconciled summary without framing any disagreement or debate between sources. This matches the expected behavior of consolidating complementary information.",
               "confidence": 0.85,
-              "cost": 0.0031739999999999997,
-              "latency_ms": 4245.080232620239,
+              "cost": 0.003129,
+              "latency_ms": 5689.431190490723,
               "error": null
             },
             {
@@ -325,10 +357,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer consolidates the partial ownership details into a unified summary and does not frame the sources as conflicting or debate them. It reconciles individual, institutional, and franchisee ownership roles in one direct response.",
-              "confidence": 0.95,
-              "cost": 0.00011219999999999999,
-              "latency_ms": 2195.160150527954,
+              "rationale": "The answer consolidates partial ownership details from multiple sources into a single summary and does not frame them as conflicting viewpoints or a debate.",
+              "confidence": 0.93,
+              "cost": 0.0001014,
+              "latency_ms": 3338.268518447876,
               "error": null
             },
             {
@@ -336,19 +368,20 @@
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer consolidates and reconciles complementary ownership details (individual, institutional, franchisee) without framing them as conflicting or in debate, aligning with the expected behavior for complementary information.",
+              "rationale": "The answer consolidates and reconciles complementary ownership details (individual, institutional, franchisee) without framing them as a debate, aligning with the expected behavior for complementary information.",
               "confidence": 0.9,
-              "cost": 8.749999999999999e-05,
-              "latency_ms": 3550.2023696899414,
+              "cost": 8.665999999999999e-05,
+              "latency_ms": 10796.990394592285,
               "error": null
             }
           ],
-          "total_cost": 0.0033737,
-          "total_latency_ms": 9990.442752838135,
+          "total_cost": 0.0033170599999999997,
+          "total_latency_ms": 19824.690103530884,
           "all_failed": false
         }
       },
       "factual_grounding_score": 0.4,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.4,
         "supported_claims": 2,
@@ -403,26 +436,28 @@
       "conflict_type": 1,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
-      "behavior_score": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
       "behavior_details": {
-        "adherent": true,
-        "rationale": "The answer provides a clear, direct date (March 24, 2017) without introducing alternative viewpoints or uncertainty. While it briefly mentions other documents, it does so only to reinforce the conclusion rather than to introduce conflicting perspectives or hedging.",
-        "confidence": 0.713831478537361,
-        "minority_confidence": 0.2861685214626391,
-        "votes_for": 2,
-        "votes_against": 1,
+        "adherent": false,
+        "rationale": "The answer gives the release date directly, but it unnecessarily introduces source comparison and credibility discussion ('multiple reliable sources,' 'other documents... less credible'), rather than simply providing a clear direct answer with no alternative viewpoints or uncertainty.",
+        "confidence": 0.5893719806763286,
+        "minority_confidence": 0.4106280193236715,
+        "votes_for": 1,
+        "votes_against": 2,
         "total_votes": 3,
         "skipped": null,
         "all_failed": false,
         "committee_details": {
-          "adherent": true,
-          "confidence": 0.713831478537361,
-          "minority_confidence": 0.2861685214626391,
-          "votes_for": 2,
-          "votes_against": 1,
+          "adherent": false,
+          "confidence": 0.5893719806763286,
+          "minority_confidence": 0.4106280193236715,
+          "votes_for": 1,
+          "votes_against": 2,
           "total_votes": 3,
-          "rationale": "The answer provides a clear, direct date (March 24, 2017) without introducing alternative viewpoints or uncertainty. While it briefly mentions other documents, it does so only to reinforce the conclusion rather than to introduce conflicting perspectives or hedging.",
+          "rationale": "The answer gives the release date directly, but it unnecessarily introduces source comparison and credibility discussion ('multiple reliable sources,' 'other documents... less credible'), rather than simply providing a clear direct answer with no alternative viewpoints or uncertainty.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
@@ -432,18 +467,18 @@
               "rationale": "The answer provides a clear, direct date (March 24, 2017) without introducing alternative viewpoints or uncertainty. While it briefly mentions other documents, it does so only to reinforce the conclusion rather than to introduce conflicting perspectives or hedging.",
               "confidence": 0.85,
               "cost": 0.002898,
-              "latency_ms": 6433.116912841797,
+              "latency_ms": 5993.351697921753,
               "error": null
             },
             {
               "judge_id": "openrouter_openai/gpt-5.4",
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
-              "adherent": true,
-              "rationale": "The answer gives a clear, direct release date and does not introduce uncertainty or conflicting viewpoints. Mentioning source reliability supports the conclusion without hedging.",
-              "confidence": 0.97,
-              "cost": 9.959999999999998e-05,
-              "latency_ms": 1963.7377262115479,
+              "adherent": false,
+              "rationale": "The answer gives the release date directly, but it unnecessarily introduces source comparison and credibility discussion ('multiple reliable sources,' 'other documents... less credible'), rather than simply providing a clear direct answer with no alternative viewpoints or uncertainty.",
+              "confidence": 0.93,
+              "cost": 0.00010679999999999998,
+              "latency_ms": 2361.527681350708,
               "error": null
             },
             {
@@ -453,17 +488,18 @@
               "adherent": false,
               "rationale": "The answer introduces alternative viewpoints by mentioning 'other documents' that do not mention the release date or are less credible, which adds unnecessary uncertainty and contrasts with the expected behavior of providing a clear and direct answer without such alternatives.",
               "confidence": 0.9,
-              "cost": 8.455999999999999e-05,
-              "latency_ms": 3704.6220302581787,
+              "cost": 8.427999999999999e-05,
+              "latency_ms": 7259.610414505005,
               "error": null
             }
           ],
-          "total_cost": 0.00308216,
-          "total_latency_ms": 12101.476669311523,
+          "total_cost": 0.00308908,
+          "total_latency_ms": 15614.489793777466,
           "all_failed": false
         }
       },
       "factual_grounding_score": 0.5,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.5,
         "supported_claims": 1,
@@ -511,8 +547,10 @@
       "conflict_type": 1,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
       "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
         "rationale": "The answer is clear and direct, naming Chilliwack as the artist without introducing alternative viewpoints, uncertainty, or hedging.",
@@ -540,7 +578,7 @@
               "rationale": "The answer is clear and direct, naming Chilliwack as the artist without introducing alternative viewpoints, uncertainty, or hedging.",
               "confidence": 0.95,
               "cost": 0.002247,
-              "latency_ms": 3449.359178543091,
+              "latency_ms": 3398.616075515747,
               "error": null
             },
             {
@@ -548,10 +586,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer is direct and unhedged, providing a single clear response without introducing alternative viewpoints or uncertainty, which matches the no-conflict behavior rubric.",
-              "confidence": 0.98,
-              "cost": 9.645e-05,
-              "latency_ms": 1949.6560096740723,
+              "rationale": "The answer gives a clear, direct response naming the artist and song, without introducing uncertainty or alternative viewpoints.",
+              "confidence": 0.99,
+              "cost": 9.165e-05,
+              "latency_ms": 1778.3112525939941,
               "error": null
             },
             {
@@ -559,19 +597,20 @@
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer provides a clear and direct statement without introducing alternative viewpoints or uncertainty, aligning with the expected behavior for 'No Conflict'.",
-              "confidence": 1.0,
+              "rationale": "The answer provides a clear and direct response without introducing alternative viewpoints or uncertainty, aligning with the expected behavior for 'No Conflict'.",
+              "confidence": 0.9,
               "cost": 7.602e-05,
-              "latency_ms": 5671.952962875366,
+              "latency_ms": 3963.3500576019287,
               "error": null
             }
           ],
-          "total_cost": 0.00241947,
-          "total_latency_ms": 11070.96815109253,
+          "total_cost": 0.00241467,
+          "total_latency_ms": 9140.27738571167,
           "all_failed": false
         }
       },
       "factual_grounding_score": 1.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 1.0,
         "supported_claims": 1,
@@ -611,11 +650,13 @@
       "conflict_type": 2,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
       "behavior_score": 0.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": false,
-        "rationale": "The answer frames the response as a comparison between sources ('d2 states... however, the approval for metro rail systems in 50 cities suggests...'), which resembles a debate or contrast framing rather than consolidating and reconciling complementary information into a unified answer. The expected behavior is to consolidate partial answers without framing as a debate, but the model explicitly contrasts two figures and hedges rather than reconciling them into a coherent, consolidated response.",
+        "rationale": "The answer frames the response as a debate between sources ('d2 states... however... suggests'), highlighting disagreement rather than consolidating and reconciling the partial information into a unified answer. The expected behavior for complementary information is to consolidate different partial answers without framing them as a debate or contrast.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 0,
@@ -630,17 +671,17 @@
           "votes_for": 0,
           "votes_against": 3,
           "total_votes": 3,
-          "rationale": "The answer frames the response as a comparison between sources ('d2 states... however, the approval for metro rail systems in 50 cities suggests...'), which resembles a debate or contrast framing rather than consolidating and reconciling complementary information into a unified answer. The expected behavior is to consolidate partial answers without framing as a debate, but the model explicitly contrasts two figures and hedges rather than reconciling them into a coherent, consolidated response.",
+          "rationale": "The answer frames the response as a debate between sources ('d2 states... however... suggests'), highlighting disagreement rather than consolidating and reconciling the partial information into a unified answer. The expected behavior for complementary information is to consolidate different partial answers without framing them as a debate or contrast.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
               "model_id": "anthropic/claude-sonnet-4-6",
               "provider": "openrouter",
               "adherent": false,
-              "rationale": "The answer frames the response as a comparison between sources ('d2 states... however, the approval for metro rail systems in 50 cities suggests...'), which resembles a debate or contrast framing rather than consolidating and reconciling complementary information into a unified answer. The expected behavior is to consolidate partial answers without framing as a debate, but the model explicitly contrasts two figures and hedges rather than reconciling them into a coherent, consolidated response.",
-              "confidence": 0.7,
-              "cost": 0.0036090000000000002,
-              "latency_ms": 5091.854095458984,
+              "rationale": "The answer frames the response as a debate between sources ('d2 states... however... suggests'), highlighting disagreement rather than consolidating and reconciling the partial information into a unified answer. The expected behavior for complementary information is to consolidate different partial answers without framing them as a debate or contrast.",
+              "confidence": 0.75,
+              "cost": 0.003099,
+              "latency_ms": 4569.42343711853,
               "error": null
             },
             {
@@ -648,10 +689,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": false,
-              "rationale": "The answer frames the sources in terms of preferring one document ('most reliable and specific answer is from d2') and discusses possible higher numbers rather than consolidating complementary partial information into a single reconciled response. It does not smoothly synthesize the sources without debate framing.",
-              "confidence": 0.92,
-              "cost": 0.00012119999999999999,
-              "latency_ms": 2527.550220489502,
+              "rationale": "The answer frames the sources in terms of choosing the 'most reliable and specific' one and contrasts it with another source instead of simply consolidating complementary partial information into a unified response. It emphasizes source selection and uncertainty rather than reconciliation.",
+              "confidence": 0.93,
+              "cost": 0.0001146,
+              "latency_ms": 2277.4741649627686,
               "error": null
             },
             {
@@ -659,19 +700,20 @@
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
               "adherent": false,
-              "rationale": "The answer contrasts viewpoints by highlighting a discrepancy between the specific number (17) and a broader approval (50), rather than consolidating and reconciling the partial information into a single, unified response without framing it as a debate.",
+              "rationale": "The answer contrasts viewpoints by highlighting a discrepancy between the 17 operational cities and the 50 approved, rather than consolidating and reconciling the partial information into a single, unified response without framing it as a debate.",
               "confidence": 0.8,
-              "cost": 9.086e-05,
-              "latency_ms": 4261.708974838257,
+              "cost": 9.002e-05,
+              "latency_ms": 2770.7762718200684,
               "error": null
             }
           ],
-          "total_cost": 0.0038210600000000003,
-          "total_latency_ms": 11881.113290786743,
+          "total_cost": 0.00330362,
+          "total_latency_ms": 9617.673873901367,
           "all_failed": false
         }
       },
       "factual_grounding_score": 0.3333333333333333,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.3333333333333333,
         "supported_claims": 1,
@@ -711,13 +753,15 @@
       "conflict_type": 2,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
       "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
         "rationale": "The answer consolidates multiple partial pieces of information (hourly rates, job costs, factors affecting price) into a unified, reconciled response without framing any disagreement or debate between sources. It treats the different figures as complementary data points and synthesizes them into a coherent summary.",
-        "confidence": 0.7147385103011094,
-        "minority_confidence": 0.28526148969889065,
+        "confidence": 0.7129186602870814,
+        "minority_confidence": 0.28708133971291866,
         "votes_for": 2,
         "votes_against": 1,
         "total_votes": 3,
@@ -725,8 +769,8 @@
         "all_failed": false,
         "committee_details": {
           "adherent": true,
-          "confidence": 0.7147385103011094,
-          "minority_confidence": 0.28526148969889065,
+          "confidence": 0.7129186602870814,
+          "minority_confidence": 0.28708133971291866,
           "votes_for": 2,
           "votes_against": 1,
           "total_votes": 3,
@@ -740,7 +784,7 @@
               "rationale": "The answer consolidates multiple partial pieces of information (hourly rates, job costs, factors affecting price) into a unified, reconciled response without framing any disagreement or debate between sources. It treats the different figures as complementary data points and synthesizes them into a coherent summary.",
               "confidence": 0.85,
               "cost": 0.003288,
-              "latency_ms": 4379.482746124268,
+              "latency_ms": 4351.89414024353,
               "error": null
             },
             {
@@ -748,10 +792,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer consolidates the partial cost details from multiple documents into a single synthesized summary and notes variability factors, rather than presenting the sources as a debate or unresolved conflict.",
-              "confidence": 0.98,
-              "cost": 0.00011745,
-              "latency_ms": 2090.0285243988037,
+              "rationale": "The answer consolidates the partial cost information into a unified summary and reconciles ranges and factors affecting price, rather than presenting the sources as opposing views or a debate.",
+              "confidence": 0.96,
+              "cost": 0.00011564999999999999,
+              "latency_ms": 2545.94087600708,
               "error": null
             },
             {
@@ -759,19 +803,20 @@
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
               "adherent": false,
-              "rationale": "The answer summarizes consistent information without reconciling or consolidating complementary partial answers, which is the expected behavior for this conflict type.",
+              "rationale": "The answer explicitly states 'No conflict' and frames its summary around consistency and variability rather than consolidating complementary partial information as the rubric requires.",
               "confidence": 0.9,
-              "cost": 9.407999999999998e-05,
-              "latency_ms": 3449.9526023864746,
+              "cost": 9.491999999999998e-05,
+              "latency_ms": 2608.0338954925537,
               "error": null
             }
           ],
-          "total_cost": 0.0034995300000000003,
-          "total_latency_ms": 9919.463872909546,
+          "total_cost": 0.00349857,
+          "total_latency_ms": 9505.868911743164,
           "all_failed": false
         }
       },
       "factual_grounding_score": 1.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 1.0,
         "supported_claims": 4,
@@ -797,11 +842,12 @@
           {
             "claim": "The documents also highlight the variability in costs based on the complexity of the job, the plumber's experience the location.",
             "supported": true,
-            "support_count": 5,
+            "support_count": 6,
             "supporting_docs": [
               "d1",
               "d3",
               "d5",
+              "d6",
               "d8",
               "d9"
             ]
@@ -828,8 +874,10 @@
       "conflict_type": 1,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
       "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
         "rationale": "The answer is clear and direct, stating Jack Nicklaus has the most green jackets (six wins) without introducing alternative viewpoints or uncertainty.",
@@ -857,7 +905,7 @@
               "rationale": "The answer is clear and direct, stating Jack Nicklaus has the most green jackets (six wins) without introducing alternative viewpoints or uncertainty.",
               "confidence": 0.95,
               "cost": 0.0022589999999999997,
-              "latency_ms": 3450.500011444092,
+              "latency_ms": 4824.456453323364,
               "error": null
             },
             {
@@ -865,10 +913,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct response and does not introduce unnecessary alternative viewpoints or uncertainty. Mentioning multiple reliable sources does not undermine the directness.",
+              "rationale": "The answer gives a clear, direct response and does not introduce conflicting viewpoints or unnecessary uncertainty. Mentioning multiple reliable sources does not undermine the directness.",
               "confidence": 0.98,
-              "cost": 9.629999999999998e-05,
-              "latency_ms": 2086.061716079712,
+              "cost": 9.209999999999998e-05,
+              "latency_ms": 1946.4654922485352,
               "error": null
             },
             {
@@ -876,19 +924,20 @@
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer provides a clear and direct statement without introducing alternative viewpoints, uncertainty, or hedging, aligning with the expected behavior for 'No Conflict'.",
-              "confidence": 0.0,
-              "cost": 7.447999999999999e-05,
-              "latency_ms": 1661.5421772003174,
+              "rationale": "The answer provides a clear and direct statement without introducing alternative viewpoints or uncertainty, adhering to the 'No Conflict' expected behavior.",
+              "confidence": 0.9,
+              "cost": 7.419999999999999e-05,
+              "latency_ms": 2130.9401988983154,
               "error": null
             }
           ],
-          "total_cost": 0.00242978,
-          "total_latency_ms": 7198.103904724121,
+          "total_cost": 0.0024252999999999996,
+          "total_latency_ms": 8901.862144470215,
           "all_failed": false
         }
       },
       "factual_grounding_score": 1.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 1.0,
         "supported_claims": 1,
@@ -933,11 +982,13 @@
       "conflict_type": 1,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
       "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid NBA player without introducing alternative viewpoints, hedging, or uncertainty.",
+        "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid NBA player without introducing alternative viewpoints, hedging, or uncertainty. It provides a straightforward response consistent with the No Conflict rubric.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 3,
@@ -952,17 +1003,17 @@
           "votes_for": 3,
           "votes_against": 0,
           "total_votes": 3,
-          "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid NBA player without introducing alternative viewpoints, hedging, or uncertainty.",
+          "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid NBA player without introducing alternative viewpoints, hedging, or uncertainty. It provides a straightforward response consistent with the No Conflict rubric.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
               "model_id": "anthropic/claude-sonnet-4-6",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid NBA player without introducing alternative viewpoints, hedging, or uncertainty.",
+              "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid NBA player without introducing alternative viewpoints, hedging, or uncertainty. It provides a straightforward response consistent with the No Conflict rubric.",
               "confidence": 0.95,
-              "cost": 0.0022770000000000004,
-              "latency_ms": 3450.681447982788,
+              "cost": 0.002697,
+              "latency_ms": 4066.7788982391357,
               "error": null
             },
             {
@@ -970,10 +1021,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct response and does not introduce conflicting viewpoints or unnecessary uncertainty. Mentioning multiple sources supports the claim without hedging or contrasting perspectives.",
+              "rationale": "The answer gives a clear, direct response to the question and does not introduce uncertainty or contrasting viewpoints. Mentioning multiple sources supports the claim without creating conflict.",
               "confidence": 0.98,
-              "cost": 9.749999999999998e-05,
-              "latency_ms": 2646.3968753814697,
+              "cost": 9.509999999999998e-05,
+              "latency_ms": 1957.8382968902588,
               "error": null
             },
             {
@@ -982,18 +1033,19 @@
               "provider": "openrouter",
               "adherent": true,
               "rationale": "The answer provides a clear and direct statement without introducing alternative viewpoints, uncertainty, or hedging, which aligns with the expected behavior for 'No Conflict'.",
-              "confidence": 0.9,
+              "confidence": 1.0,
               "cost": 7.699999999999999e-05,
-              "latency_ms": 3603.600025177002,
+              "latency_ms": 3669.098138809204,
               "error": null
             }
           ],
-          "total_cost": 0.0024515000000000006,
-          "total_latency_ms": 9700.67834854126,
+          "total_cost": 0.0028691000000000003,
+          "total_latency_ms": 9693.715333938599,
           "all_failed": false
         }
       },
       "factual_grounding_score": 1.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 1.0,
         "supported_claims": 1,
@@ -1034,11 +1086,13 @@
       "conflict_type": 1,
       "pred_answered": false,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 0.0,
       "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The model refused to answer due to insufficient evidence, which is appropriate when the retrieved evidence genuinely does not support a direct answer. The refusal is consistent with the expected behavior of providing a clear response without introducing unnecessary uncertainty or alternative viewpoints.",
+        "rationale": "The model refused to answer due to insufficient evidence. Since the rubric for No Conflict expects a clear and direct answer, a refusal is only acceptable if the evidence genuinely doesn't support an answer. The model explicitly states there is no direct evidence for the specific enrollment figure, making the refusal appropriate rather than a violation of the rubric.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 3,
@@ -1053,17 +1107,17 @@
           "votes_for": 3,
           "votes_against": 0,
           "total_votes": 3,
-          "rationale": "The model refused to answer due to insufficient evidence, which is appropriate when the retrieved evidence genuinely does not support a direct answer. The refusal is consistent with the expected behavior of providing a clear response without introducing unnecessary uncertainty or alternative viewpoints.",
+          "rationale": "The model refused to answer due to insufficient evidence. Since the rubric for No Conflict expects a clear and direct answer, a refusal is only acceptable if the evidence genuinely doesn't support an answer. The model explicitly states there is no direct evidence for the specific enrollment figure, making the refusal appropriate rather than a violation of the rubric.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
               "model_id": "anthropic/claude-sonnet-4-6",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The model refused to answer due to insufficient evidence, which is appropriate when the retrieved evidence genuinely does not support a direct answer. The refusal is consistent with the expected behavior of providing a clear response without introducing unnecessary uncertainty or alternative viewpoints.",
+              "rationale": "The model refused to answer due to insufficient evidence. Since the rubric for No Conflict expects a clear and direct answer, a refusal is only acceptable if the evidence genuinely doesn't support an answer. The model explicitly states there is no direct evidence for the specific enrollment figure, making the refusal appropriate rather than a violation of the rubric.",
               "confidence": 0.7,
-              "cost": 0.00285,
-              "latency_ms": 3962.7530574798584,
+              "cost": 0.0031799999999999997,
+              "latency_ms": 5739.7472858428955,
               "error": null
             },
             {
@@ -1071,10 +1125,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer is a refusal due to insufficient evidence, and the prompt specifies such a refusal should be treated as adherent when the evidence does not support a direct answer. It does not introduce unnecessary alternative viewpoints or hedging beyond explaining the lack of evidence.",
-              "confidence": 0.94,
-              "cost": 0.00011294999999999998,
-              "latency_ms": 4424.905300140381,
+              "rationale": "The answer refuses due to insufficient evidence, which is acceptable under the instructions when the provided evidence does not support a specific answer. It does not introduce unnecessary alternative viewpoints or hedging beyond explaining the lack of evidence.",
+              "confidence": 0.92,
+              "cost": 0.00010634999999999998,
+              "latency_ms": 2098.607301712036,
               "error": null
             },
             {
@@ -1082,19 +1136,20 @@
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer is a refusal due to insufficient evidence, which is adherent when the retrieved evidence genuinely does not support a direct answer, aligning with the 'No Conflict' expected behavior of providing a clear and direct response without introducing uncertainty or alternative viewpoints.",
+              "rationale": "The answer is a refusal due to insufficient evidence, which is adherent when the retrieved evidence genuinely does not support a clear and direct answer, aligning with the expected behavior for 'No Conflict'.",
               "confidence": 0.9,
-              "cost": 8.624e-05,
-              "latency_ms": 4151.827096939087,
+              "cost": 8.316e-05,
+              "latency_ms": 10818.728923797607,
               "error": null
             }
           ],
-          "total_cost": 0.0030491900000000002,
-          "total_latency_ms": 12539.485454559326,
+          "total_cost": 0.0033695099999999996,
+          "total_latency_ms": 18657.08351135254,
           "all_failed": false
         }
       },
       "factual_grounding_score": 0.5,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.5,
         "supported_claims": 1,
@@ -1131,8 +1186,10 @@
       "conflict_type": 1,
       "pred_answered": false,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 0.0,
       "behavior_score": 0.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": false,
         "rationale": "Empty answer",
@@ -1145,6 +1202,7 @@
         "committee_details": null
       },
       "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.0,
         "supported_claims": 0,
@@ -1166,67 +1224,70 @@
       "conflict_type": 4,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
-      "behavior_score": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
-        "adherent": false,
-        "rationale": "The answer presents two conflicting figures (1,759 and 658) without clearly prioritizing the more up-to-date one. It attempts to reconcile them by saying they 'align with the trend,' but this is contradictory since the numbers differ dramatically. The rubric requires prioritizing the up-to-date information while optionally acknowledging outdated sources, but instead the answer treats both figures as roughly equivalent and tries to present them as consistent, which they are not.",
-        "confidence": 1.0,
-        "minority_confidence": 0.0,
-        "votes_for": 0,
-        "votes_against": 3,
+        "adherent": true,
+        "rationale": "The answer prioritizes the up-to-date information (the 2024 figure of 658 tornadoes) and clearly states it is from the latest reports, while also acknowledging the presence of another, different figure (1,759) which is implicitly treated as outdated or from a different context, aligning with the expected behavior for conflict due to outdated information.",
+        "confidence": 0.5862068965517242,
+        "minority_confidence": 0.4137931034482759,
+        "votes_for": 2,
+        "votes_against": 1,
         "total_votes": 3,
         "skipped": null,
         "all_failed": false,
         "committee_details": {
-          "adherent": false,
-          "confidence": 1.0,
-          "minority_confidence": 0.0,
-          "votes_for": 0,
-          "votes_against": 3,
+          "adherent": true,
+          "confidence": 0.5862068965517242,
+          "minority_confidence": 0.4137931034482759,
+          "votes_for": 2,
+          "votes_against": 1,
           "total_votes": 3,
-          "rationale": "The answer presents two conflicting figures (1,759 and 658) without clearly prioritizing the more up-to-date one. It attempts to reconcile them by saying they 'align with the trend,' but this is contradictory since the numbers differ dramatically. The rubric requires prioritizing the up-to-date information while optionally acknowledging outdated sources, but instead the answer treats both figures as roughly equivalent and tries to present them as consistent, which they are not.",
+          "rationale": "The answer prioritizes the up-to-date information (the 2024 figure of 658 tornadoes) and clearly states it is from the latest reports, while also acknowledging the presence of another, different figure (1,759) which is implicitly treated as outdated or from a different context, aligning with the expected behavior for conflict due to outdated information.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
               "model_id": "anthropic/claude-sonnet-4-6",
               "provider": "openrouter",
               "adherent": false,
-              "rationale": "The answer presents two conflicting figures (1,759 and 658) without clearly prioritizing the more up-to-date one. It attempts to reconcile them by saying they 'align with the trend,' but this is contradictory since the numbers differ dramatically. The rubric requires prioritizing the up-to-date information while optionally acknowledging outdated sources, but instead the answer treats both figures as roughly equivalent and tries to present them as consistent, which they are not.",
+              "rationale": "The answer presents two conflicting numbers (1,759 and 658) without clearly prioritizing the more up-to-date figure. It attempts to reconcile them by saying they 'align with the trend,' but this is contradictory since the numbers differ dramatically. The rubric requires prioritizing the up-to-date information while optionally acknowledging outdated sources, but instead the answer treats both figures as roughly equivalent and tries to present them as consistent, which they are not.",
               "confidence": 0.8,
               "cost": 0.0037829999999999995,
-              "latency_ms": 5393.421649932861,
+              "latency_ms": 6724.329948425293,
               "error": null
             },
             {
               "judge_id": "openrouter_openai/gpt-5.4",
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
-              "adherent": false,
-              "rationale": "The answer mentions two conflicting counts (1,759 and 658) without clearly prioritizing the up-to-date figure or labeling one as outdated. It does not cleanly resolve the outdated-vs-current discrepancy.",
-              "confidence": 0.97,
-              "cost": 0.0001152,
-              "latency_ms": 2376.958131790161,
+              "adherent": true,
+              "rationale": "The answer prioritizes the latest confirmed figure ('658 tornadoes in 2024') and only secondarily mentions another differing number, implicitly treating it as a separate/outdated report rather than giving it equal weight.",
+              "confidence": 0.8,
+              "cost": 0.00011099999999999999,
+              "latency_ms": 2394.233465194702,
               "error": null
             },
             {
               "judge_id": "openrouter_deepseek/deepseek-v3.2",
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
-              "adherent": false,
-              "rationale": "The answer cites conflicting numbers (1,759 vs. 658) without prioritizing the up-to-date source or acknowledging outdated information. It fails to reconcile or explain the discrepancy.",
+              "adherent": true,
+              "rationale": "The answer prioritizes the up-to-date information (the 2024 figure of 658 tornadoes) and clearly states it is from the latest reports, while also acknowledging the presence of another, different figure (1,759) which is implicitly treated as outdated or from a different context, aligning with the expected behavior for conflict due to outdated information.",
               "confidence": 0.9,
-              "cost": 8.651999999999999e-05,
-              "latency_ms": 2822.7643966674805,
+              "cost": 9.659999999999999e-05,
+              "latency_ms": 5368.866443634033,
               "error": null
             }
           ],
-          "total_cost": 0.00398472,
-          "total_latency_ms": 10593.144178390503,
+          "total_cost": 0.0039905999999999995,
+          "total_latency_ms": 14487.429857254028,
           "all_failed": false
         }
       },
       "factual_grounding_score": 1.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 1.0,
         "supported_claims": 2,
@@ -1273,8 +1334,10 @@
       "conflict_type": 2,
       "pred_answered": false,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 0.0,
       "behavior_score": 0.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": false,
         "rationale": "Empty answer",
@@ -1287,6 +1350,7 @@
         "committee_details": null
       },
       "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 0.0,
         "supported_claims": 0,
@@ -1305,11 +1369,13 @@
       "conflict_type": 1,
       "pred_answered": true,
       "gold_answerable": true,
+      "correct_refusal": false,
       "gr_accuracy": 1.0,
       "behavior_score": 1.0,
+      "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer provides a clear, direct response with a specific date without introducing uncertainty or alternative viewpoints, which aligns with the No Conflict expected behavior.",
+        "rationale": "The answer provides a clear and direct response with a specific date without introducing alternative viewpoints or uncertainty.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 3,
@@ -1324,17 +1390,17 @@
           "votes_for": 3,
           "votes_against": 0,
           "total_votes": 3,
-          "rationale": "The answer provides a clear, direct response with a specific date without introducing uncertainty or alternative viewpoints, which aligns with the No Conflict expected behavior.",
+          "rationale": "The answer provides a clear and direct response with a specific date without introducing alternative viewpoints or uncertainty.",
           "individual_responses": [
             {
               "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
               "model_id": "anthropic/claude-sonnet-4-6",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer provides a clear, direct response with a specific date without introducing uncertainty or alternative viewpoints, which aligns with the No Conflict expected behavior.",
+              "rationale": "The answer provides a clear and direct response with a specific date without introducing alternative viewpoints or uncertainty.",
               "confidence": 0.9,
-              "cost": 0.0022589999999999997,
-              "latency_ms": 2547.2896099090576,
+              "cost": 0.002094,
+              "latency_ms": 3277.437925338745,
               "error": null
             },
             {
@@ -1342,10 +1408,10 @@
               "model_id": "openai/gpt-5.4",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct release date and does not introduce conflicting viewpoints or uncertainty; mentioning sources does not undermine the directness.",
+              "rationale": "The answer gives a clear, direct release date and does not introduce conflicting viewpoints or unnecessary uncertainty. Mentioning multiple sources does not detract from the directness.",
               "confidence": 0.98,
-              "cost": 9.254999999999999e-05,
-              "latency_ms": 2271.364688873291,
+              "cost": 9.374999999999999e-05,
+              "latency_ms": 2151.578187942505,
               "error": null
             },
             {
@@ -1353,19 +1419,20 @@
               "model_id": "deepseek/deepseek-v3.2",
               "provider": "openrouter",
               "adherent": true,
-              "rationale": "The answer provides a clear and direct statement of the release date without introducing alternative viewpoints, uncertainty, or hedging.",
+              "rationale": "The answer provides a clear and direct statement of the release date without introducing alternative viewpoints, uncertainty, or hedging, which aligns with the expected behavior for 'No Conflict'.",
               "confidence": 1.0,
-              "cost": 7.266e-05,
-              "latency_ms": 5657.238483428955,
+              "cost": 7.63e-05,
+              "latency_ms": 4244.428634643555,
               "error": null
             }
           ],
-          "total_cost": 0.0024242099999999996,
-          "total_latency_ms": 10475.892782211304,
+          "total_cost": 0.00226405,
+          "total_latency_ms": 9673.444747924805,
           "all_failed": false
         }
       },
       "factual_grounding_score": 1.0,
+      "factual_grounding_applicable": true,
       "factual_grounding_details": {
         "grounding_ratio": 1.0,
         "supported_claims": 1,
@@ -1374,11 +1441,12 @@
           {
             "claim": "The Emoji Movie came out on July 28, 2017, as reported by multiple reliable sources including IMDb and YouTube trailers.",
             "supported": true,
-            "support_count": 5,
+            "support_count": 6,
             "supporting_docs": [
               "d1",
               "d2",
               "d3",
+              "d6",
               "d8",
               "d9"
             ]

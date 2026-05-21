@@ -6,26 +6,30 @@
 
 **Total Samples**: 15
 
-**GR Accuracy (per-sample)**: 0.667
+**GR Accuracy**: 0.667 (over 15 samples)
 
-**Behavior Adherence**: 0.600
+**GR F1** *(used in CATS)*: 0.800
 
-**Factual Grounding**: 0.549
+**Behavior Adherence**: 0.600 (over 15 applicable samples)
+
+**Factual Grounding**: 0.549 (over 15 applicable samples)
 
 **Single-Truth Recall**: 0.700 (over 10 applicable samples)
 
 --------------------------------------------------------------------------------
 
-### CATS Score: 0.629
+### CATS Score: 0.662
+
+*(average of 4 applicable sub-metrics)*
 
 --------------------------------------------------------------------------------
 
 
-### Dataset-level GR F1
+### Dataset-level GR Metrics
 
+- **F1** *(CATS component)*: 0.800
 - **Precision**: 1.000
 - **Recall**: 0.667
-- **F1**: 0.800
 - **Accuracy**: 0.667
 - TP=10, FP=0, FN=5, TN=0
 
@@ -36,36 +40,40 @@
 
 - **Samples**: 7
 - **GR Accuracy**: 0.714
-- **Behavior**: 0.857
-- **Grounding**: 0.714
+- **Behavior**: 0.714 (n=7)
+- **Grounding**: 0.714 (n=7)
 - **Recall**: 0.714 (n=7)
+- **CATS**: 0.714
 
 ### Type 2: Complementary Info
 
 - **Samples**: 4
   - ⚠️  n<5: numbers below are noisy
 - **GR Accuracy**: 0.750
-- **Behavior**: 0.500
-- **Grounding**: 0.433
+- **Behavior**: 0.500 (n=4)
+- **Grounding**: 0.433 (n=4)
 - **Recall**: 0.000 (n=0)
+- **CATS**: 0.561
 
 ### Type 3: Conflicting Opinions
 
 - **Samples**: 1
   - ⚠️  n<5: numbers below are noisy
 - **GR Accuracy**: 0.000
-- **Behavior**: 0.000
-- **Grounding**: 0.000
+- **Behavior**: 0.000 (n=1)
+- **Grounding**: 0.000 (n=1)
 - **Recall**: 0.000 (n=0)
+- **CATS**: 0.000
 
 ### Type 4: Outdated Info
 
 - **Samples**: 3
   - ⚠️  n<5: numbers below are noisy
 - **GR Accuracy**: 0.667
-- **Behavior**: 0.333
-- **Grounding**: 0.500
+- **Behavior**: 0.667 (n=3)
+- **Grounding**: 0.500 (n=3)
 - **Recall**: 0.667 (n=3)
+- **CATS**: 0.625
 
 
 ================================================================================
