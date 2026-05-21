@@ -200,20 +200,16 @@ async def evaluate_single_file(
         
         if "conflict_overall" in results:
             overall = results["conflict_overall"]
-            logger.info(f"Samples evaluated: {overall['n']}")
-            logger.info(f"GR Accuracy: {overall['gr_accuracy']:.3f}")
-            logger.info(f"Behavior Adherence: {overall['behavior']:.3f}")
-            logger.info(f"Factual Grounding: {overall['factual_grounding']:.3f}")
-            logger.info(f"Single-Truth Recall: {overall['single_truth_recall']:.3f}")
-
-            import numpy as np
-            cats_score = np.mean([
-                overall['gr_accuracy'],
-                overall['behavior'],
-                overall['factual_grounding'],
-                overall['single_truth_recall']
-            ])
-            logger.info(f"CATS Score: {cats_score:.3f}")
+            n = overall["n"]
+            n_cr = overall.get("correct_refusals", 0)
+            logger.info(f"Samples evaluated: {n}")
+            if n_cr:
+                logger.info(f"Correct refusals: {n_cr} (excluded from sub-metric averages)")
+            logger.info(f"GR Accuracy:        {overall['gr_accuracy']:.3f}  (n={n})")
+            logger.info(f"Behavior Adherence: {overall['behavior']:.3f}  (n={overall.get('behavior_n', n)})")
+            logger.info(f"Factual Grounding:  {overall['factual_grounding']:.3f}  (n={overall.get('factual_grounding_n', n)})")
+            logger.info(f"Single-Truth Recall:{overall['single_truth_recall']:.3f}  (n={overall.get('single_truth_recall_n', 0)})")
+            logger.info(f"CATS Score: {overall.get('cats_score', 0.0):.3f}")
         
         if "cost_summary" in results:
             cost = results["cost_summary"]

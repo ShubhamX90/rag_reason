@@ -167,47 +167,81 @@ class EnhancedEvaluator:
 
         answer = get_model_output(rec)
         pred_answered = answered_flags([answer])[0]
-        claims = extract_claims_by_sentence(answer, cfg.max_claims_per_answer)
 
-        # --- Metric 1: per-sample GR accuracy (binary).
+        # --- Metric 1: per-sample GR accuracy (binary, always computed).
         gr_acc = gr_accuracy_from_flags(pred_answered, gold_answerable)
 
-        # --- Metric 2: behavior adherence (committee).
-        beh = await committee_behavior_adherence(self.committee, query, answer, ctype)
-        beh_score = 1.0 if beh["adherent"] else 0.0
+        # Correct refusal: the model refused AND the question was genuinely unanswerable.
+        # Behavior, factual grounding, and STR are not meaningful here — the model did
+        # the right thing (GR=1.0), so we do not call the committee and exclude these
+        # samples from the three sub-metric averages and from the CATS denominator.
+        correct_refusal = (not gold_answerable) and (not pred_answered)
 
-        # --- Metric 3: factual grounding (dedicated NLI judge, default Sonnet 4.6).
-        fg_result = await enhanced_factual_grounding(
-            self.nli_judge,
-            claims,
-            support_docs,
-            require_cross_doc=cfg.require_cross_doc_verification,
-        )
-        fg_score = fg_result["grounding_ratio"]
-
-        # --- Metric 4: single-truth recall (committee).
-        gold_ans = get_gold_answer(rec)
-        if gold_ans and ctype in cfg.single_truth_types:
-            st_result = await enhanced_single_truth_recall(
-                self.committee, gold_ans, answer,
-                allow_paraphrases=cfg.allow_paraphrases,
-            )
-            st_score = st_result["recall"]
-            st_applicable = True
-        else:
-            st_result = {"recall": 0.0, "skipped": "no_gold_or_type_3"}
+        if correct_refusal:
+            beh_score = 0.0  # placeholder — not counted in average
+            beh = {
+                "adherent": None,
+                "rationale": "N/A — correct refusal; sample excluded from behavior average",
+                "skipped": "correct_refusal",
+                "committee_details": None,
+            }
+            fg_score = 0.0  # placeholder — not counted in average
+            fg_result = {
+                "grounding_ratio": None,
+                "supported_claims": 0,
+                "total_claims": 0,
+                "claim_details": [],
+                "skipped": "correct_refusal",
+            }
             st_score = 0.0
+            st_result = {"recall": 0.0, "skipped": "correct_refusal"}
             st_applicable = False
+            beh_applicable = False
+            fg_applicable = False
+        else:
+            claims = extract_claims_by_sentence(answer, cfg.max_claims_per_answer)
+
+            # --- Metric 2: behavior adherence (committee).
+            beh = await committee_behavior_adherence(self.committee, query, answer, ctype)
+            beh_score = 1.0 if beh["adherent"] else 0.0
+            beh_applicable = True
+
+            # --- Metric 3: factual grounding (dedicated NLI judge, default Sonnet 4.6).
+            fg_result = await enhanced_factual_grounding(
+                self.nli_judge,
+                claims,
+                support_docs,
+                require_cross_doc=cfg.require_cross_doc_verification,
+            )
+            fg_score = fg_result["grounding_ratio"]
+            fg_applicable = True
+
+            # --- Metric 4: single-truth recall (committee).
+            gold_ans = get_gold_answer(rec)
+            if gold_ans and ctype in cfg.single_truth_types:
+                st_result = await enhanced_single_truth_recall(
+                    self.committee, gold_ans, answer,
+                    allow_paraphrases=cfg.allow_paraphrases,
+                )
+                st_score = st_result["recall"]
+                st_applicable = True
+            else:
+                st_result = {"recall": 0.0, "skipped": "no_gold_or_type_3"}
+                st_score = 0.0
+                st_applicable = False
 
         return {
             "sample_id": sample_id,
             "conflict_type": ctype,
             "pred_answered": pred_answered,
             "gold_answerable": gold_answerable,
+            "correct_refusal": correct_refusal,
             "gr_accuracy": gr_acc,
             "behavior_score": beh_score,
+            "behavior_applicable": beh_applicable,
             "behavior_details": beh,
             "factual_grounding_score": fg_score,
+            "factual_grounding_applicable": fg_applicable,
             "factual_grounding_details": fg_result,
             "single_truth_recall_score": st_score,
             "single_truth_recall_details": st_result,
@@ -219,19 +253,29 @@ class EnhancedEvaluator:
 
         Returns (overall, per_type, gr_dataset_metrics).
 
-        per_type keys are stringified so a JSON round-trip is idempotent.
-        Conflict-type buckets are created on demand via setdefault, so an
-        unexpected ctype no longer crashes the aggregator.
+        Applicability rules:
+        - gr_accuracy       : all samples
+        - behavior          : excluded when correct_refusal=True
+        - factual_grounding : excluded when correct_refusal=True
+        - single_truth_recall: excluded when single_truth_applicable=False
+                               (Type 3 or no gold answer)
 
-        single_truth_recall is averaged ONLY over samples where it was
-        applicable (i.e., gold_answer present AND ctype in single_truth_types),
-        so Type 3's structural zeros no longer drag the CATS score.
+        correct_refusal (gold_answerable=False AND pred_answered=False) means the
+        model did the right thing — its GR=1.0 counts, but the other three metrics
+        are structurally uninformative and must not drag the averages down.
+
+        CATS score is the mean of whichever sub-metrics have at least one
+        applicable sample, so correct refusals do not inflate a denominator they
+        don't contribute to.
         """
         empty_bucket = {
             "n": 0,
+            "correct_refusals": 0,
             "gr_accuracy": [],
             "behavior": [],
+            "behavior_n": 0,
             "factual_grounding": [],
+            "factual_grounding_n": 0,
             "single_truth_recall": [],
             "single_truth_recall_n": 0,
         }
@@ -252,16 +296,29 @@ class EnhancedEvaluator:
             overall["n"] += 1
             bucket["n"] += 1
 
+            if res.get("correct_refusal", False):
+                overall["correct_refusals"] += 1
+                bucket["correct_refusals"] += 1
+
+            # GR accuracy: always included.
             overall["gr_accuracy"].append(res["gr_accuracy"])
             bucket["gr_accuracy"].append(res["gr_accuracy"])
 
-            overall["behavior"].append(res["behavior_score"])
-            bucket["behavior"].append(res["behavior_score"])
+            # Behavior: excluded for correct refusals.
+            if res.get("behavior_applicable", True):
+                overall["behavior"].append(res["behavior_score"])
+                bucket["behavior"].append(res["behavior_score"])
+                overall["behavior_n"] += 1
+                bucket["behavior_n"] += 1
 
-            overall["factual_grounding"].append(res["factual_grounding_score"])
-            bucket["factual_grounding"].append(res["factual_grounding_score"])
+            # Factual grounding: excluded for correct refusals.
+            if res.get("factual_grounding_applicable", True):
+                overall["factual_grounding"].append(res["factual_grounding_score"])
+                bucket["factual_grounding"].append(res["factual_grounding_score"])
+                overall["factual_grounding_n"] += 1
+                bucket["factual_grounding_n"] += 1
 
-            # Only include single_truth_recall in averages when it was applicable.
+            # Single-truth recall: excluded when not applicable (Type 3 / no gold / correct refusal).
             if res.get("single_truth_applicable", True):
                 overall["single_truth_recall"].append(res["single_truth_recall_score"])
                 bucket["single_truth_recall"].append(res["single_truth_recall_score"])
@@ -278,6 +335,15 @@ class EnhancedEvaluator:
             for k in ("gr_accuracy", "behavior", "factual_grounding", "single_truth_recall"):
                 vals = b[k]
                 b[k] = float(np.mean(vals)) if vals else 0.0
+            # CATS: mean of whichever sub-metrics had at least one applicable sample.
+            cats_parts = [b["gr_accuracy"]]  # GR always present
+            if b["behavior_n"] > 0:
+                cats_parts.append(b["behavior"])
+            if b["factual_grounding_n"] > 0:
+                cats_parts.append(b["factual_grounding"])
+            if b["single_truth_recall_n"] > 0:
+                cats_parts.append(b["single_truth_recall"])
+            b["cats_score"] = float(np.mean(cats_parts))
             return b
 
         overall = finalize(overall)
@@ -306,21 +372,30 @@ class EnhancedEvaluator:
 
         if "conflict_overall" in res:
             o = res["conflict_overall"]
-            lines.append(f"**Total Samples**: {o['n']}\n\n")
-            lines.append(f"**GR Accuracy (per-sample)**: {_safe_fmt(o['gr_accuracy']):.3f}\n\n")
-            lines.append(f"**Behavior Adherence**: {_safe_fmt(o['behavior']):.3f}\n\n")
-            lines.append(f"**Factual Grounding**: {_safe_fmt(o['factual_grounding']):.3f}\n\n")
+            n_total = o["n"]
+            n_correct_refusals = o.get("correct_refusals", 0)
+            lines.append(f"**Total Samples**: {n_total}\n\n")
+            if n_correct_refusals:
+                lines.append(
+                    f"**Correct Refusals**: {n_correct_refusals} "
+                    f"(GR=1.0 only; excluded from behavior/grounding/recall averages)\n\n"
+                )
+            lines.append(f"**GR Accuracy**: {_safe_fmt(o['gr_accuracy']):.3f}"
+                         f" (over {n_total} samples)\n\n")
+            lines.append(f"**Behavior Adherence**: {_safe_fmt(o['behavior']):.3f}"
+                         f" (over {o.get('behavior_n', n_total)} applicable samples)\n\n")
+            lines.append(f"**Factual Grounding**: {_safe_fmt(o['factual_grounding']):.3f}"
+                         f" (over {o.get('factual_grounding_n', n_total)} applicable samples)\n\n")
             lines.append(f"**Single-Truth Recall**: {_safe_fmt(o['single_truth_recall']):.3f}"
                          f" (over {o.get('single_truth_recall_n', 0)} applicable samples)\n\n")
 
-            cats_score = float(np.mean([
-                _safe_fmt(o['gr_accuracy']),
-                _safe_fmt(o['behavior']),
-                _safe_fmt(o['factual_grounding']),
-                _safe_fmt(o['single_truth_recall']),
-            ]))
+            cats_score = _safe_fmt(o.get("cats_score", 0.0))
             lines.append("-" * 80 + "\n\n")
             lines.append(f"### CATS Score: {cats_score:.3f}\n\n")
+            lines.append(
+                f"*(average of {len([x for x in [True, o.get('behavior_n',0)>0, o.get('factual_grounding_n',0)>0, o.get('single_truth_recall_n',0)>0] if x])} "
+                f"applicable sub-metrics)*\n\n"
+            )
             lines.append("-" * 80 + "\n\n")
 
             if "gr_dataset_metrics" in res and res["gr_dataset_metrics"]:
@@ -343,14 +418,17 @@ class EnhancedEvaluator:
 
             for t, b in sorted(res["conflict_per_type"].items()):
                 lines.append(f"### Type {t}: {conflict_types.get(str(t), 'Unknown')}\n\n")
-                lines.append(f"- **Samples**: {b['n']}\n")
+                lines.append(f"- **Samples**: {b['n']}"
+                             + (f" ({b['correct_refusals']} correct refusals excluded from sub-metrics)" if b.get('correct_refusals') else "")
+                             + "\n")
                 if b['n'] < 5:
                     lines.append(f"  - ⚠️  n<5: numbers below are noisy\n")
                 lines.append(f"- **GR Accuracy**: {_safe_fmt(b['gr_accuracy']):.3f}\n")
-                lines.append(f"- **Behavior**: {_safe_fmt(b['behavior']):.3f}\n")
-                lines.append(f"- **Grounding**: {_safe_fmt(b['factual_grounding']):.3f}\n")
+                lines.append(f"- **Behavior**: {_safe_fmt(b['behavior']):.3f} (n={b.get('behavior_n', b['n'])})\n")
+                lines.append(f"- **Grounding**: {_safe_fmt(b['factual_grounding']):.3f} (n={b.get('factual_grounding_n', b['n'])})\n")
                 lines.append(f"- **Recall**: {_safe_fmt(b['single_truth_recall']):.3f}"
-                             f" (n={b.get('single_truth_recall_n', 0)})\n\n")
+                             f" (n={b.get('single_truth_recall_n', 0)})\n")
+                lines.append(f"- **CATS**: {_safe_fmt(b.get('cats_score', 0.0)):.3f}\n\n")
 
         if "cost_summary" in res:
             lines.append("\n" + "=" * 80 + "\n\n")

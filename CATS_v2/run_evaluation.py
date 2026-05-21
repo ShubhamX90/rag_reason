@@ -263,13 +263,16 @@ async def process_single_file(args, input_file: str, file_idx: int, total: int):
         
         if "conflict_overall" in results:
             overall = results["conflict_overall"]
+            n = overall["n"]
+            n_cr = overall.get("correct_refusals", 0)
             logger.info("\nMetrics Summary:")
-            logger.info(f"  Samples evaluated: {overall['n']}")
-            logger.info(f"  GR Accuracy: {overall['gr_accuracy']:.3f}")
-            logger.info(f"  Behavior Adherence: {overall['behavior']:.3f}")
-            logger.info(f"  Factual Grounding: {overall['factual_grounding']:.3f}")
-            logger.info(f"  Single-Truth Recall: {overall['single_truth_recall']:.3f}"
-                        f" (n_applicable={overall.get('single_truth_recall_n', 0)})")
+            logger.info(f"  Samples evaluated: {n}")
+            if n_cr:
+                logger.info(f"  Correct refusals: {n_cr} (GR=1.0; excluded from sub-metric averages)")
+            logger.info(f"  GR Accuracy:        {overall['gr_accuracy']:.3f}  (n={n})")
+            logger.info(f"  Behavior Adherence: {overall['behavior']:.3f}  (n={overall.get('behavior_n', n)})")
+            logger.info(f"  Factual Grounding:  {overall['factual_grounding']:.3f}  (n={overall.get('factual_grounding_n', n)})")
+            logger.info(f"  Single-Truth Recall:{overall['single_truth_recall']:.3f}  (n={overall.get('single_truth_recall_n', 0)})")
 
             # Dataset-level F1 (proper precision/recall over TP/FP/FN)
             if "gr_dataset_metrics" in results and results["gr_dataset_metrics"]:
@@ -277,13 +280,7 @@ async def process_single_file(args, input_file: str, file_idx: int, total: int):
                 logger.info(f"  GR Dataset F1: {g['f1']:.3f} "
                             f"(P={g['precision']:.3f}, R={g['recall']:.3f})")
 
-            import numpy as np
-            cats_score = np.mean([
-                overall['gr_accuracy'],
-                overall['behavior'],
-                overall['factual_grounding'],
-                overall['single_truth_recall']
-            ])
+            cats_score = overall.get("cats_score", 0.0)
             logger.info(f"\nCATS Score: {cats_score:.3f}")
         
         if "cost_summary" in results:
