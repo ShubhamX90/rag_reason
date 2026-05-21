@@ -9,7 +9,7 @@ No Anthropic direct API key is required.
 Committee composition (3 judges):
   • Claude Sonnet 4.6   (anthropic/claude-sonnet-4-6) — priority 3, anchor judge
   • GPT-5.4             (openai/gpt-5.4)              — priority 2, low-cost
-  • DeepSeek V3.2       (deepseek/deepseek-v3-2)      — priority 2, low-cost reasoning
+  • DeepSeek V3.2       (deepseek/deepseek-v3.2)      — priority 2, low-cost reasoning
 
 NLI judge: Claude Sonnet 4.6 via OpenRouter (separate JudgeClient instance).
 
@@ -229,7 +229,7 @@ class EvaluationConfig:
 DEFAULT_JUDGE_PRIORITIES: Dict[str, int] = {
     "anthropic/claude-sonnet-4-6": 3,  # anchor judge — strongest rubric adherence
     "openai/gpt-5.4":              2,  # low-cost complement
-    "deepseek/deepseek-v3-2":      2,  # low-cost reasoning complement
+    "deepseek/deepseek-v3.2":      2,  # low-cost reasoning complement
 }
 
 
@@ -291,13 +291,13 @@ def get_deepseek_v32_judge(priority_overrides: Optional[Dict[str, int]] = None) 
     strips <think>...</think> before parsing.
     """
     return JudgeModelConfig(
-        model_id="deepseek/deepseek-v3-2",
+        model_id="deepseek/deepseek-v3.2",
         provider=APIProvider.OPENROUTER,
         temperature=0.0,
         max_tokens=3000,
         cost_per_1k_input=0.00014,
         cost_per_1k_output=0.00028,
-        priority=_resolve_priority("deepseek/deepseek-v3-2", priority_overrides),
+        priority=_resolve_priority("deepseek/deepseek-v3.2", priority_overrides),
         api_key_env="OPENROUTER_API_KEY",
         base_url=_OPENROUTER_BASE,
     )
@@ -339,6 +339,27 @@ def create_default_committee(
             get_sonnet_judge(priority_overrides),
             get_gpt54_judge(priority_overrides),
             get_deepseek_v32_judge(priority_overrides),
+        ],
+        voting_strategy="weighted_majority",
+        max_concurrent_requests=max_concurrent_requests,
+    )
+
+
+def create_conservative_committee(
+    priority_overrides: Optional[Dict[str, int]] = None,
+    max_concurrent_requests: int = 50,
+) -> JudgeCommitteeConfig:
+    """
+    Lower-cost 2-judge behavior committee — all via OpenRouter.
+
+    Keeps the Sonnet anchor and GPT complement, omitting DeepSeek's larger
+    generation budget. This preserves the CLI's historical "conservative"
+    option while matching the current OpenRouter-only judge stack.
+    """
+    return JudgeCommitteeConfig(
+        judges=[
+            get_sonnet_judge(priority_overrides),
+            get_gpt54_judge(priority_overrides),
         ],
         voting_strategy="weighted_majority",
         max_concurrent_requests=max_concurrent_requests,

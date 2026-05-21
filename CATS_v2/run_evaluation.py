@@ -30,7 +30,6 @@ from rag_eval import (
     logger,
     setup_file_logging,
     create_default_committee,
-    create_conservative_committee,
 )
 from rag_eval.config import EnhancedConflictEvalConfig
 
@@ -97,17 +96,11 @@ def _apply_yaml_to_config(yaml_data: dict, config: EvaluationConfig, args) -> Ev
         # Apply priority overrides — rebuild the committee with new priorities.
         overrides = committee_section.get("priority_overrides")
         if overrides:
-            from rag_eval.config import create_default_committee, create_conservative_committee
-            if args.committee == "conservative":
-                config.conflict.committee = create_conservative_committee(
-                    priority_overrides=overrides,
-                    max_concurrent_requests=config.conflict.committee.max_concurrent_requests,
-                )
-            else:
-                config.conflict.committee = create_default_committee(
-                    priority_overrides=overrides,
-                    max_concurrent_requests=config.conflict.committee.max_concurrent_requests,
-                )
+            from rag_eval.config import create_default_committee
+            config.conflict.committee = create_default_committee(
+                priority_overrides=overrides,
+                max_concurrent_requests=config.conflict.committee.max_concurrent_requests,
+            )
 
     return config
 
@@ -136,9 +129,9 @@ def parse_args():
     parser.add_argument(
         "--committee",
         type=str,
-        choices=["default", "conservative", "none"],
+        choices=["default", "none"],
         default="default",
-        help="Judge committee preset: default (Sonnet 4.6 + DeepSeek + Qwen + Mistral), conservative (no DeepSeek), none (single judge)"
+        help="Judge committee preset: default (Sonnet 4.6 + GPT-5.4 + DeepSeek V3.2, all via OpenRouter), none (skip committee)"
     )
     
     # Configuration
@@ -190,16 +183,11 @@ def setup_config(args, input_file: str, output_dir: str) -> EvaluationConfig:
     config.pipeline.batch_size = args.batch_size
     config.pipeline.verbose = args.verbose
     
-    # Validate API keys before setting up committee
-    anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+    # Validate API keys before setting up committee.
+    # Current CATS v2 judges are all routed through OpenRouter, including
+    # Sonnet and the dedicated NLI judge.
     openrouter_key = os.getenv("OPENROUTER_API_KEY")
-    
-    if not anthropic_key:
-        logger.error("ANTHROPIC_API_KEY not found in environment!")
-        logger.error("Please set it in your .env file or export it:")
-        logger.error("  export ANTHROPIC_API_KEY=sk-ant-your-key-here")
-        sys.exit(1)
-    
+
     if not openrouter_key and args.committee in ["default", "conservative"]:
         logger.error("OPENROUTER_API_KEY not found in environment!")
         logger.error("Please set it in your .env file or export it:")
@@ -210,11 +198,7 @@ def setup_config(args, input_file: str, output_dir: str) -> EvaluationConfig:
     if args.committee == "default":
         config.conflict.use_judge_committee = True
         config.conflict.committee = create_default_committee()
-        logger.info("Using default judge committee (Sonnet 4.6 + DeepSeek + Qwen + Mistral)")
-    elif args.committee == "conservative":
-        config.conflict.use_judge_committee = True
-        config.conflict.committee = create_conservative_committee()
-        logger.info("Using conservative judge committee (lower cost)")
+        logger.info("Using default judge committee (Sonnet 4.6 + GPT-5.4 + DeepSeek V3.2 via OpenRouter)")
     else:
         config.conflict.use_judge_committee = False
         logger.info("Using single judge mode")
