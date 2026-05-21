@@ -38,7 +38,6 @@ from rag_eval import (
     logger,
     setup_file_logging,
     create_default_committee,
-    create_conservative_committee,
 )
 
 
@@ -66,9 +65,9 @@ def parse_args():
     parser.add_argument(
         "--committee",
         type=str,
-        choices=["default", "conservative", "none"],
+        choices=["default", "none"],
         default="default",
-        help="Judge committee preset: default (Sonnet 4.6 + DeepSeek + Qwen + Mistral), conservative (no DeepSeek), none (single judge)"
+        help="Judge committee preset: default (Sonnet 4.6 + GPT-5.4 + DeepSeek V3.2, all via OpenRouter), none (skip committee)"
     )
     
     # Configuration
@@ -121,29 +120,18 @@ def setup_config_for_file(args, input_file: str, output_dir: str) -> EvaluationC
     config.pipeline.batch_size = args.batch_size
     config.pipeline.verbose = args.verbose
     
-    # Validate API keys before setting up committee
-    anthropic_key = os.getenv("ANTHROPIC_API_KEY")
+    # All judges run through OpenRouter — only one API key required.
     openrouter_key = os.getenv("OPENROUTER_API_KEY")
-    
-    if not anthropic_key:
-        logger.error("ANTHROPIC_API_KEY not found in environment!")
-        logger.error("Please set it in your .env file or export it:")
-        logger.error("  export ANTHROPIC_API_KEY=sk-ant-your-key-here")
-        sys.exit(1)
-    
-    if not openrouter_key and args.committee in ["default", "conservative"]:
+    if not openrouter_key and args.committee == "default":
         logger.error("OPENROUTER_API_KEY not found in environment!")
         logger.error("Please set it in your .env file or export it:")
         logger.error("  export OPENROUTER_API_KEY=your-key-here")
         sys.exit(1)
-    
+
     # Setup judge committee
     if args.committee == "default":
         config.conflict.use_judge_committee = True
         config.conflict.committee = create_default_committee()
-    elif args.committee == "conservative":
-        config.conflict.use_judge_committee = True
-        config.conflict.committee = create_conservative_committee()
     else:
         config.conflict.use_judge_committee = False
     

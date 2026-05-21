@@ -13,8 +13,9 @@ from .config import (
     JudgeCommitteeConfig,
     DEFAULT_JUDGE_PRIORITIES,
     create_default_committee,
-    create_conservative_committee,
     get_sonnet_judge,
+    get_gpt54_judge,
+    get_deepseek_v32_judge,
     get_sonnet_nli_judge,
 )
 from .evaluator import EnhancedEvaluator
@@ -35,7 +36,8 @@ __all__ = [
     "logger",
     "setup_file_logging",
     "create_default_committee",
-    "create_conservative_committee",
     "get_sonnet_judge",
+    "get_gpt54_judge",
+    "get_deepseek_v32_judge",
     "get_sonnet_nli_judge",
 ]
