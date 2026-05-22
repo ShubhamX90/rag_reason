@@ -180,16 +180,25 @@ async def enhanced_factual_grounding(
         contradicting_docs: List[str] = []
 
         for doc in support_docs:
-            # NLI-I fix: prefer the annotator-verified verbatim quote when
-            # available — it is a tighter, higher-signal premise than the full
-            # snippet. Fall back to snippet / text for docs without a quote.
-            passage = (
-                doc.get("quote")
-                or doc.get("snippet")
-                or doc.get("text")
-                or ""
-            )
-            if not passage.strip():
+            # NLI-I fix (v3.1): combine the annotator-verified verbatim quote
+            # with the full snippet when both are present.
+            #   • Quote alone is too narrow (~60 words) — generic model claims
+            #     often fail to strictly entail from such a tight span.
+            #   • Snippet alone misses the annotator's focus signal.
+            # Concatenating gives NLI both the focused span and the surrounding
+            # context. The quote is labelled so the judge can weight it.
+            quote = (doc.get("quote") or "").strip()
+            snippet = (doc.get("snippet") or doc.get("text") or "").strip()
+            if quote and snippet and quote not in snippet:
+                passage = f"Key evidence (annotator-verified): {quote}\n\nFull passage: {snippet}"
+            elif quote and snippet:
+                # Quote is a substring of snippet — snippet already contains it.
+                passage = snippet
+            elif quote:
+                passage = quote
+            else:
+                passage = snippet
+            if not passage:
                 continue
 
             prompt = nli_prompt(passage, claim)

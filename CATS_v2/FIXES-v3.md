@@ -1022,6 +1022,65 @@ Comparing
 - **Behavior didn't lose a denominator.** Behavior is still applicable for wrong refusals (a refusal can be judged on style/appropriateness even if it was the wrong call), so `n=15` survives — only the **score** of those samples changed.
 - **Recall denominator is unchanged at 10.** §N2B changes verdicts, not applicability.
 
+### Ablation: premise width (quote-only vs quote+snippet)
+
+To attribute the FG drop, the NLI premise construction was changed from
+"quote when present, else snippet" (the v3 `enhanced_factual_grounding`
+default) to "quote labelled + snippet concatenated when both present", and
+the 15-sample run was repeated.
+[outputs/qwen_15sample_run_quote_plus_snippet/eval_report.md](outputs/qwen_15sample_run_quote_plus_snippet/eval_report.md)
+
+| Metric | Original (snippet only) | quote-only | quote + snippet |
+| ------ | ----------------------- | ---------- | --------------- |
+| Factual Grounding (overall) | 0.549 (n=15) | 0.140 (n=10) | **0.195 (n=10)** |
+| FG — Type 1 | 0.714 | 0.200 | **0.300** |
+| FG — Type 2 | 0.433 | 0.133 | 0.150 |
+| FG — Type 4 | 0.500 | 0.000 | 0.000 |
+| CATS | 0.662 | 0.518 | 0.549 |
+
+**Findings:**
+
+1. **Premise width matters but is not the dominant driver.** Quote+snippet
+   recovers +0.055 overall and +0.100 on Type 1 vs quote-only, confirming
+   the original hypothesis that a ≤60-word quote was too narrow for many
+   model claims. But normalising to the same 10-sample denominator, the
+   pre-revision FG was ~0.82 on these samples; quote+snippet only reaches
+   0.20. The premise change accounts for ~10–15 % of the drop.
+2. **Type 4 stays at 0.000.** Outdated samples carry an intrinsic
+   contradiction between support docs (older vs newer claim). §N12.A's
+   contradiction-block fires regardless of premise width, so widening the
+   premise does nothing here.
+3. **Type 1 is where premise width *does* help** — clean No-Conflict
+   samples have no contradictions, so the only thing keeping a claim
+   below the entail threshold is whether the premise text covers it.
+4. **Behavior also moved (0.533 → 0.600 overall, Type 4: 0.000 → 0.333)
+   between the two runs**, despite the behavior judge being unaffected by
+   NLI premise construction. This is committee judge nondeterminism at
+   `temperature=0` (OpenRouter still has provider-side variance) — useful
+   reminder that single 15-sample runs are noisy on per-type rows.
+
+**Decision (locked in for v3):** keep `quote + snippet` as the default
+premise — strictly more information at the same per-call API cost, and
+helps the no-contradiction case without harming the others. Code in
+`enhanced_factual_grounding` now builds the premise as:
+
+```python
+if quote and snippet and quote not in snippet:
+    passage = f"Key evidence (annotator-verified): {quote}\n\nFull passage: {snippet}"
+elif quote and snippet:
+    passage = snippet            # quote is a substring of snippet
+elif quote:
+    passage = quote
+else:
+    passage = snippet
+```
+
+**Next ablation candidate (not run yet):** sweep `MIN_ENTAIL_CONFIDENCE`
+from 0.5 → 0.0 on the same 15-sample set to bound how much of the
+remaining drop is the §N12.B confidence floor vs §N12.A contradiction
+block. The contradiction block is logically defensible (a contradicted
+claim is not grounded), so the floor is the more debatable knob.
+
 ### What this run does *not* tell us
 
 - **n is small (15).** Per-type rows with n<5 (Types 2, 3, 4) are noisy by construction (the `⚠️ n<5` warning, §6.1 fix). The single-sample Type 3 row shouldn't be over-interpreted in either direction.
