@@ -657,109 +657,104 @@ On a real dataset with 20 % unanswerable samples the effect is proportionally la
 
 ---
 
-### N2 — Recall judges count gold strings *mentioned* but not *asserted* — **REVERTED (open — see ISSUES.md §N2)**
-
-> **Current state:** `single_truth_recall_prompt` does not distinguish assertion
-> from mention. Prompts asking the judge whether the gold "appears in" the answer
-> still fire. See ISSUES.md §N2.
+### N2 — Recall judges count gold strings *mentioned* but not *asserted* — **PARTIALLY MITIGATED (open)**
 
 **Observed at:** #0085 (Type 4, gold="at least 1,759", model committed to "658" but quoted "1,759" from a doc).
 
-The rewrite adding explicit examples and the assertion-vs-mention distinction
-has been reverted. The simpler prompt asks only if the gold is "contained or
-expressed" in the model answer — not whether the model is *committing* to it.
+**Current state — two separate sub-issues:**
 
----
+**Sub-issue A (partial-credit inversion): FIXED via §2.1.**
+The `minority_confidence` gate (`PARTIAL_MIN_CONFIDENCE = 0.30`) ensures partial credit fires only when the "yes, gold present" side had ≥ 30 % weighted support. A unanimous "NO" now yields `minority_confidence = 0.0` → no partial credit. This eliminates the worst case (confident majority against + partial credit still awarded).
 
-### N3 — Dataset has misspelled gold answers, recall awards partial credit — **REVERTED (open — see ISSUES.md §N3)**
+**Sub-issue B (assertion vs. mention in prompt): STILL OPEN.**
+`single_truth_recall_prompt` currently reads:
 
-> **Current state:** The spelling-variation instruction has been removed from the
-> recall prompt. The dataset typos remain. See ISSUES.md §N3.
-
-**Observed at:** #0042 (gold="Chiliwack" — 1 'l'; correct "Chilliwack" — 2 'l's).
-
-The prompt instruction `"Misspellings or formatting differences are acceptable"` was
-added then removed. Recall on typo-ed gold answers will remain split-vote
-dependent on judge tolerance.
-
----
-
-### N4 — `votes_for: 2, votes_against: 2` ties — **DOCUMENTED (by design, no code change)**
-
-**Observed at:** #0066, #0204, #0321 (2-2 ties under simple count).
-
-With `priority=2,3,1,1` for Haiku/DeepSeek/Qwen/Mistral, weighted totals on a
-2-2 split depend entirely on which judges land where. The qwen run shows
-DeepSeek (priority 3) regularly tipping outcomes when other judges split 2-1.
-
-**v3 stance:** This is the *intended* behavior of weighted voting. Documented
-in the FIXES doc; flagged for calibration. If DeepSeek tipping outcomes feels
-too strong, users can now lower its priority via YAML (§3.1):
-
-```yaml
-priority_overrides:
-  deepseek/deepseek-r1: 2   # match Haiku
+```text
+Consider paraphrases and equivalent wording as matching.
 ```
 
----
-
-### N5 — `gold_answer` typos in dataset — **DOCUMENTED**
-
-Examples: "Stephan Curry" (#0061), "Chiliwack" (#0042). Recall judges
-sometimes accept these (Stephen vs Stephan) but sometimes don't (Chiliwack vs
-Chilliwack split 2-2). The prompt now instructs the judge to accept
-misspellings, but data cleanup is a separate task.
+It does not tell the judge to distinguish *asserting* the gold answer from merely *citing or quoting* it. A model that says "document d2 claims 1,759 but I believe 658" will likely be judged as "1,759 is present" → recall=1.0, even though the model committed to the wrong answer. The prompt-level fix (explicit instruction + examples) was reverted and remains outstanding.
 
 ---
 
-### N6 — Type-4 outdated-info samples lose to outdated model answers — **STILL OPEN**
+### N3 — Dataset has misspelled gold answers, recall gives split verdicts — **STILL OPEN**
 
-**Observed at:** #0113 (gold="2023", model="2020", behavior=1.0, grounding=1.0, recall=0.5).
+**Observed at:** #0042 (gold="Chiliwack" — one 'l'; correct spelling "Chilliwack" — two 'l's).
 
-The model gave a confidently-wrong outdated answer; behavior and grounding
-gave it full credit; only recall caught the error and only at half credit.
+**Current state:** The prompt currently says *"Consider paraphrases and equivalent wording as matching"* but does not mention spelling variants or typos. Judges vary in tolerance: some accept "Chiliwack" ≈ "Chilliwack", others do not. The explicit instruction *"Misspellings or formatting differences are acceptable"* was added then reverted.
 
-**v3 stance:** Without passing document dates to the behavior prompt
-(§6.7-open), this isn't fully fixable. With §1 fixed, the Type-4 rubric
-("Prioritise the up-to-date information") is at least now visible to the
-judges. The right long-term fix is to inject `retrieved_docs[i].date` into
-the behavior prompt for Type 4.
+Result: gold-answer typos produce nondeterministic recall depending on which judge is called and how they weigh spelling proximity. Data cleanup is the primary long-term fix; the code mitigation (prompt instruction) remains unapplied.
+
+---
+
+### N4 — Tie-break weights not surfaced in output — **PARTIALLY ADDRESSED**
+
+**Observed at:** #0066, #0204, #0321.
+
+**Current state:** `votes_for` and `votes_against` (integer counts) ARE now stored on `CommitteeDecision` and serialized via `to_dict()`. Callers can see how many judges voted each way.
+
+What is still NOT stored: `weighted_for` and `weighted_against` (the actual float totals from `_weighted_majority_vote`). These are computed locally and discarded. When you see `votes_for=1, votes_against=2` but the outcome is `adherent=True`, you cannot tell from the output that the single "for" judge had priority=3 while the two "against" had priority=1 each (weighted_for=3.0 > weighted_against=2.0). The tie-break is correct but opaque.
+
+**Note:** The new default committee is 3 judges (Sonnet priority=3, GPT priority=2, DeepSeek priority=2). A 2-1 vote can still be overturned by a single high-priority judge if weighted voting is active. The old 4-judge 2-2 tie pattern is less likely with 3 judges (ties require exactly 1.5 vs 1.5 in weighted, which requires perfectly balanced priorities).
+
+---
+
+### N5 — `gold_answer` typos in the dataset — **STILL OPEN (data task)**
+
+Examples: "Stephan Curry" (#0061 — correct: "Stephen"), "Chiliwack" (#0042 — correct: "Chilliwack"). These are upstream data quality issues. Code mitigation (spelling-variation instruction in the recall prompt, see N3) was reverted. Primary fix is dataset cleanup; no code change planned.
+
+---
+
+### N6 — Type 4 behavior judge never sees document dates — **STILL OPEN**
+
+**Observed at:** #0113 (gold="2023", model="2020"; behavior=1.0, grounding=1.0, recall=0.5).
+
+The model gave a confidently wrong outdated answer. Behavior and grounding awarded full credit (the answer was grounded in an older document and followed the rubric it could see). Only recall caught the error.
+
+**Current state:** The Type 4 rubric ("Prioritise the up-to-date information") is now correctly shown to behavior judges (§1 fix). But the judge has no way to know *which document is newer* — document dates are not passed into the prompt. Without date metadata, "prioritise up-to-date" is judged by wording alone.
+
+**Fix required:** Inject `retrieved_docs[i].date` alongside each document passage in the behavior prompt for Type 4 (and arguably Type 5). This touches the prompt contract and input shape — out of scope for v3.
 
 ---
 
 ### N7 — DeepSeek dominates tail latency — **PARTIALLY MITIGATED**
 
-DeepSeek calls in the qwen run regularly took 25-45 seconds; the rest of the
-committee finished under 5 seconds. Two changes help:
-1. `max_tokens=3000` for DeepSeek (§4.2) — fewer truncations, no need to retry.
-2. `<think>` stripping (§4.2) — partial responses still produce valid JSON.
+DeepSeek V3.2 (new committee) and previously DeepSeek R1 regularly take 15–45 seconds per call while Sonnet and GPT finish under 5 seconds. Mitigations in place:
 
-A `--no-deepseek` flag (using `--committee conservative`) is still available
-for users who want to trade reasoning depth for throughput.
+1. `max_tokens=3000` for DeepSeek (§4.2) — reduces truncation-driven retries.
+2. `<think>` stripping (§4.2) — partial responses still yield valid JSON.
 
----
-
-### N8 — Mistral cost reported as $0.00 even on paid fallback — **DOCUMENTED**
-
-Mistral Nemo is configured with `cost_per_1k_input=0.0` because OpenRouter
-historically offered it free. OpenRouter sometimes silently fails over to a
-paid tier under rate limits; in those cases the reported run cost is slightly
-under-counted. Out of scope for v3 (would need OpenRouter to surface actual
-billing in the response, which it sometimes does and sometimes doesn't).
+Still open: no per-judge timeout (`asyncio.wait_for`) and no semaphore (§3.3 REVERTED). A slow DeepSeek call blocks the entire sample's result even after the other two judges finish.
 
 ---
 
-### N9 — `factual_grounding=1.0` on `total_claims=2, claim_details=[]` — **REVERTED (open — see ISSUES.md §N9)**
+### N8 — Mistral cost reported as $0.00 even on paid fallback — **MOOT FOR DEFAULT COMMITTEE**
 
-> **Current state:** When `support_docs` is empty, the function returns
-> `claim_details: []` with `total_claims=N`. The schema inconsistency remains.
-> See ISSUES.md §N9.
+**Current state:** The default committee is now **Sonnet 4.6 + GPT-5.4 + DeepSeek V3.2** — Mistral Nemo is no longer a default judge. N8 does not apply to out-of-the-box runs.
 
-**Observed at:** #0471 (Type 5).
+If a user builds a custom committee that includes Mistral Nemo, its configured `cost_per_1k_input=0.0 / cost_per_1k_output=0.0` still under-reports cost when OpenRouter silently falls back to a paid tier. No code change is planned; the issue is noted here for custom-committee users.
 
-The fix (populating `claim_details` with one `{supported: False}` entry per
-extracted claim when support_docs is empty) was applied then reverted. The
-return now uses `claim_details: []` again, leaving `len(claim_details) != total_claims`.
+---
+
+### N9 — `claim_details=[]` when `total_claims > 0` and `support_docs=[]` — **STILL OPEN**
+
+**Observed at:** #0471 (Type 5). Title corrected: `grounding_ratio` is **0.0** (not 1.0 as previously labelled) in this path, but the schema inconsistency remains.
+
+**Current state in `rag_eval/conflict_eval.py`:**
+
+```python
+if not support_docs:
+    return {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": len(claims),   # e.g. 2
+        "claim_details": [],           # empty — inconsistent with total_claims=2
+    }
+```
+
+`len(claim_details) != total_claims` violates the implicit contract. Any downstream code that iterates `claim_details` expecting `total_claims` entries gets misaligned output.
+
+**Fix (option A, preferred):** Populate `claim_details` with `{claim, supported=False, support_count=0, supporting_docs=[]}` for each claim even when `support_docs=[]`, so `len(claim_details) == total_claims` always holds. Remains unapplied.
 
 ---
 
@@ -818,7 +813,7 @@ F1, Precision, Recall, Accuracy, and TP/FP/FN/TN. Terminal output shows
 
 All edits compile-pass:
 
-```
+```bash
 $ python3 -m py_compile rag_eval/config.py rag_eval/judge_prompts.py rag_eval/judge_committee.py \
     rag_eval/conflict_eval.py rag_eval/data.py rag_eval/metrics.py rag_eval/evaluator.py \
     rag_eval/logging_config.py rag_eval/__init__.py run_evaluation.py run_evaluation_batch.py
@@ -827,7 +822,7 @@ ALL_OK
 
 End-to-end behavioral tests (8 assertions, all green):
 
-```
+```text
 rubric isolation: OK                # §1 fix verified
 refusal detection: OK               # §5.8/§5.9 fix verified — [False, True, False, False, False]
 claim extraction: OK                # §5.6 fix verified
@@ -843,7 +838,7 @@ model_output safety: OK             # §5.3 fix verified — never falls back to
 
 NLTK preprocessing tests (4 real qwen-run sentence patterns, all green):
 
-```
+```text
 #0185 Titanic:    ['TITANIC MADE OVER $1.8 BILLION AT THE BOX OFFICE, WITH A PROFIT OF $1.4 BILLION.']
 #0027 Schnatter:  ['Schnatter is the largest individual shareholder with 17.83%, while ...']
 #0126 domains:    ['The evidence indicates that there is no inherent SEO advantage to using a.COM domain over a.NET domain.', ...]
@@ -853,7 +848,7 @@ NLTK preprocessing tests (4 real qwen-run sentence patterns, all green):
 
 Meta-reference filter (eliminates 2 dataset patterns, preserves real claims):
 
-```
+```text
 'Scientists confirm that the Earth orbits the Sun.'                              → kept ✓
 'Multiple studies indicate a strong correlation between exercise and longevity.' → kept ✓
 'all explicitly state this fact.'                                                → dropped ✓
@@ -903,23 +898,30 @@ current file does NOT contain those changes.
 
 ## What's still open
 
-Issues from [ISSUES.md](ISSUES.md) that have no fix applied in the current codebase:
+### Reverted (code change was applied then undone)
 
-### Reverted in this session (code change was applied then undone)
-
-- **§3.2 — Dead config fields.** All fields restored; no evaluator reads them. Code smell only.
-- **§3.3 — max_concurrent_requests not enforced.** Semaphore removed; bare `asyncio.gather` is back. API fan-out is unbounded.
+- **§3.2 — Dead config fields.** All fields restored; no evaluator reads them.
+- **§3.3 — max_concurrent_requests not enforced.** Bare `asyncio.gather` is back; API fan-out is unbounded.
 - **§3.4 — Per-judge RPM rate limiting.** Fields restored but not enforced. HTTP 429s propagate as `adherent=False`.
-- **N2 — Recall judges count mentioned-not-asserted.** Prompt reverted; gold-string-present-but-not-asserted still scores recall=1.0.
-- **N3 — Dataset gold typos cause split verdicts.** Spelling-variation instruction removed.
-- **N9 — `claim_details=[]` when `total_claims>0`.** Consistency fix reverted; schema mismatch restored.
+- **N2B — Assertion-vs-mention in recall prompt.** Prompt-level fix reverted; minority_confidence gate (N2A) is in place.
+- **N3 — Spelling-variation instruction.** Removed from recall prompt; gold typos still cause nondeterministic verdicts.
+- **N9 — `claim_details=[]` when `total_claims>0`.** Schema consistency fix reverted.
+
+### Partially mitigated (code change in place but incomplete)
+
+- **N2A — Partial-credit inversion.** `minority_confidence` gate fixed. Assertion-vs-mention distinction (N2B) remains open.
+- **N4 — Tie-break weights not in output.** `votes_for/votes_against` now surfaced; `weighted_for/weighted_against` floats are not stored.
+- **N7 — DeepSeek tail latency.** `max_tokens=3000` + `<think>` stripping in place; no per-judge timeout.
 
 ### Never fixed (open from the start)
 
-- **§6.7 / N6 — Type 4 behavior judge doesn't see document dates.** Requires a prompt-contract change. Without dates, the judge infers "outdatedness" from answer wording, not from document metadata.
-- **N4 — 2-2 tie resolution not surfaced in output.** `weighted_for` and `weighted_against` not emitted; callers can't see why a tie was broken without re-implementing the voting math.
-- **N5 — Gold answer typos in the dataset.** Data cleanup task; code can partially mitigate but not fully fix.
-- **N7 — DeepSeek tail latency.** `max_tokens=3000` (§4.2) mitigates truncation; full latency control requires per-judge timeouts or `asyncio.wait`.
-- **N8 — Mistral cost under-reported.** OpenRouter's free-tier fallback to paid isn't reflected in configured pricing.
+- **§6.7 / N6 — Type 4 judge doesn't see document dates.** Requires prompt-contract change.
+- **N5 — Gold answer typos in dataset.** Data cleanup task; no code mitigation applied.
+- **N8 — Mistral cost under-reported.** Moot for default committee (no Mistral); still applies to custom committees.
+
+### New logical errors (found during code audit, not in original ISSUES.md)
+
+- **NLI fence parse** — `_parse_nli_response` in `judge_committee.py` uses `rfind("}")` which can fail with "Extra data" if the model appends JSON-like content after the main object. Observed as `Failed to parse NLI response: Extra data` warnings in live runs. Fix: strip markdown fences and use the first balanced-brace span rather than rfind.
+- **FP case FG semantics** — When a model answers an unanswerable question (`pred_answered=True, gold_answerable=False`), FG runs on the fabricated answer. If the fabricated answer happens to be supported by documents, FG=1.0 even though the model was wrong to answer. By design (GR already penalises the FP), but worth documenting.
 
 Everything else from ISSUES.md §§1–6 (excluding §3.2/§3.3/§3.4) is fixed and the fix remains in place.
