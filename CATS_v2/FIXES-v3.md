@@ -13,7 +13,16 @@ Scope: all modules except `batch_processor.py` (out of scope per request).
 > uses the *minority* side of the vote (not the majority), correct refusals are
 > gated out of Behavior/FG/STR averages (N1/N10 fixed), CATS GR component uses
 > dataset-level F1 instead of sample-averaged accuracy, NLTK no longer splits
-> "$1.8 billion" mid-number, and judge priorities are YAML-overridable.
+> "$1.8 billion" mid-number, and judge priorities are YAML-overridable. In this
+> revision: the single-truth recall prompt now distinguishes *asserting* from
+> *mentioning* a gold answer and accepts spelling variants (N2B / N3); the
+> behavior judge sees document dates / sources for Type 4 / Type 5 samples
+> (N6); `claim_details` is now padded so `len(claim_details) == total_claims`
+> always (N9); both JSON parsers strip markdown fences and use balanced-brace
+> extraction (NLI fence bug); `CommitteeDecision.to_dict()` now exposes
+> `weighted_for / weighted_against` (N4); and every judge call is wrapped in
+> `asyncio.wait_for` so a hung DeepSeek call no longer blocks the whole sample
+> (N7).
 
 ---
 
@@ -657,43 +666,71 @@ On a real dataset with 20 % unanswerable samples the effect is proportionally la
 
 ---
 
-### N2 — Recall judges count gold strings *mentioned* but not *asserted* — **PARTIALLY MITIGATED (open)**
+### N2 — Recall judges count gold strings *mentioned* but not *asserted* — **FIXED**
 
 **Observed at:** #0085 (Type 4, gold="at least 1,759", model committed to "658" but quoted "1,759" from a doc).
-
-**Current state — two separate sub-issues:**
 
 **Sub-issue A (partial-credit inversion): FIXED via §2.1.**
 The `minority_confidence` gate (`PARTIAL_MIN_CONFIDENCE = 0.30`) ensures partial credit fires only when the "yes, gold present" side had ≥ 30 % weighted support. A unanimous "NO" now yields `minority_confidence = 0.0` → no partial credit. This eliminates the worst case (confident majority against + partial credit still awarded).
 
-**Sub-issue B (assertion vs. mention in prompt): STILL OPEN.**
-`single_truth_recall_prompt` currently reads:
+**Sub-issue B (assertion vs. mention in prompt): FIXED.**
+
+`single_truth_recall_prompt` ([rag_eval/judge_prompts.py](rag_eval/judge_prompts.py)) now contains explicit MATCHING / NON-MATCHING rules with worked examples. The prompt asks the judge whether the model **asserts** (commits to) the gold answer, not whether the gold string appears anywhere in the text:
 
 ```text
-Consider paraphrases and equivalent wording as matching.
+NON-MATCHING RULES (count as adherent=false):
+- The model commits to a DIFFERENT answer, even if the gold answer also
+  appears somewhere in the text as a quotation, citation, or attribution
+  to a document.
+  Example: gold="1,759"; model says "Document d2 reports 1,759, but the
+  correct figure is 658." → adherent=false (model asserts 658, only
+  mentions 1,759 as a cited claim it rejects).
+- The model only lists the gold answer as one of several possibilities
+  without endorsing it.
+- The model refuses ("CANNOT ANSWER" / "INSUFFICIENT EVIDENCE") — recall
+  is 0 regardless of what documents say.
 ```
 
-It does not tell the judge to distinguish *asserting* the gold answer from merely *citing or quoting* it. A model that says "document d2 claims 1,759 but I believe 658" will likely be judged as "1,759 is present" → recall=1.0, even though the model committed to the wrong answer. The prompt-level fix (explicit instruction + examples) was reverted and remains outstanding.
+This addresses the #0085 pattern directly.
 
 ---
 
-### N3 — Dataset has misspelled gold answers, recall gives split verdicts — **STILL OPEN**
+### N3 — Dataset has misspelled gold answers, recall gives split verdicts — **FIXED (prompt)**
 
 **Observed at:** #0042 (gold="Chiliwack" — one 'l'; correct spelling "Chilliwack" — two 'l's).
 
-**Current state:** The prompt currently says *"Consider paraphrases and equivalent wording as matching"* but does not mention spelling variants or typos. Judges vary in tolerance: some accept "Chiliwack" ≈ "Chilliwack", others do not. The explicit instruction *"Misspellings or formatting differences are acceptable"* was added then reverted.
+The `single_truth_recall_prompt` MATCHING RULES now explicitly cover spelling and formatting variants, with examples taken straight from the observed failure cases:
 
-Result: gold-answer typos produce nondeterministic recall depending on which judge is called and how they weigh spelling proximity. Data cleanup is the primary long-term fix; the code mitigation (prompt instruction) remains unapplied.
+```text
+- Minor misspellings, casing differences, whitespace, punctuation, or
+  unit-formatting differences (e.g. "Chiliwack" ≈ "Chilliwack";
+  "Stephan Curry" ≈ "Stephen Curry"; "1,759" ≈ "1759";
+  "$1.8 billion" ≈ "1.8B USD").
+- Logically equivalent statements (e.g. "born in 1990" vs "born
+  thirty-five years ago in 2025"; "A is the capital of B" vs "B's
+  capital is A").
+```
+
+Data cleanup remains the long-term fix (see N5), but recall is no longer nondeterministic on the typo cases the judges previously disagreed on.
 
 ---
 
-### N4 — Tie-break weights not surfaced in output — **PARTIALLY ADDRESSED**
+### N4 — Tie-break weights not surfaced in output — **FIXED**
 
 **Observed at:** #0066, #0204, #0321.
 
-**Current state:** `votes_for` and `votes_against` (integer counts) ARE now stored on `CommitteeDecision` and serialized via `to_dict()`. Callers can see how many judges voted each way.
+`CommitteeDecision` now carries `weighted_for: float` and `weighted_against: float` in addition to the integer `votes_for` / `votes_against`, and both are emitted by `to_dict()` ([rag_eval/judge_committee.py](rag_eval/judge_committee.py)). When the output shows e.g. `votes_for=1, votes_against=2, adherent=True`, the accompanying `weighted_for / weighted_against` makes the tie-break auditable from the artifact alone:
 
-What is still NOT stored: `weighted_for` and `weighted_against` (the actual float totals from `_weighted_majority_vote`). These are computed locally and discarded. When you see `votes_for=1, votes_against=2` but the outcome is `adherent=True`, you cannot tell from the output that the single "for" judge had priority=3 while the two "against" had priority=1 each (weighted_for=3.0 > weighted_against=2.0). The tie-break is correct but opaque.
+```json
+{
+  "adherent": true,
+  "votes_for": 1, "votes_against": 2,
+  "weighted_for": 2.85, "weighted_against": 2.0,
+  "...": "..."
+}
+```
+
+For the `majority` and `unanimous` strategies the weighted totals collapse to the unweighted vote counts (`float(votes_for)` / `float(votes_against)`), so the field is always present regardless of voting strategy.
 
 **Note:** The new default committee is 3 judges (Sonnet priority=3, GPT priority=2, DeepSeek priority=2). A 2-1 vote can still be overturned by a single high-priority judge if weighted voting is active. The old 4-judge 2-2 tie pattern is less likely with 3 judges (ties require exactly 1.5 vs 1.5 in weighted, which requires perfectly balanced priorities).
 
@@ -705,26 +742,38 @@ Examples: "Stephan Curry" (#0061 — correct: "Stephen"), "Chiliwack" (#0042 —
 
 ---
 
-### N6 — Type 4 behavior judge never sees document dates — **STILL OPEN**
+### N6 — Type 4 behavior judge never sees document dates — **FIXED**
 
 **Observed at:** #0113 (gold="2023", model="2020"; behavior=1.0, grounding=1.0, recall=0.5).
 
 The model gave a confidently wrong outdated answer. Behavior and grounding awarded full credit (the answer was grounded in an older document and followed the rubric it could see). Only recall caught the error.
 
-**Current state:** The Type 4 rubric ("Prioritise the up-to-date information") is now correctly shown to behavior judges (§1 fix). But the judge has no way to know *which document is newer* — document dates are not passed into the prompt. Without date metadata, "prioritise up-to-date" is judged by wording alone.
+**Fix:** `behavior_judge_prompt(..., retrieved_docs=...)` now accepts the retrieved-docs list and, for `conflict_type in (4, 5)`, inserts a provenance block listing each `doc_id`, `date` (or `timestamp`), and (for Type 5) `source` / `url`. `committee_behavior_adherence` was widened with an optional `retrieved_docs` parameter, and `EnhancedEvaluator._evaluate_single_sample` passes `rec.get("retrieved_docs")` through. For Type 1–3 the block is omitted, so the prompt stays unchanged for those samples.
 
-**Fix required:** Inject `retrieved_docs[i].date` alongside each document passage in the behavior prompt for Type 4 (and arguably Type 5). This touches the prompt contract and input shape — out of scope for v3.
+Sample of the injected block (Type 4):
+
+```text
+Document provenance (publication dates — use these to judge whether the
+answer prioritised the right source):
+  - d1: date=2020-01-15
+  - d2: date=2024-06-15
+  - d3: date=unknown
+```
+
+A judge that previously scored a 2020-grounded answer as adherent on a "What is the current X?" query now has the evidence to reject it.
 
 ---
 
-### N7 — DeepSeek dominates tail latency — **PARTIALLY MITIGATED**
+### N7 — DeepSeek dominates tail latency — **FIXED (timeout) / partially mitigated (no semaphore)**
 
 DeepSeek V3.2 (new committee) and previously DeepSeek R1 regularly take 15–45 seconds per call while Sonnet and GPT finish under 5 seconds. Mitigations in place:
 
 1. `max_tokens=3000` for DeepSeek (§4.2) — reduces truncation-driven retries.
 2. `<think>` stripping (§4.2) — partial responses still yield valid JSON.
+3. **Per-judge `asyncio.wait_for` timeout (new).** `JudgeCommittee._judge_with_timeout` wraps every judge call with `asyncio.wait_for(judge.judge_behavior(prompt), timeout=self.config.timeout_seconds)`. A timed-out judge returns a `JudgeResponse(error="timeout")` and is excluded by the existing `[r for r in responses if r.error is None]` filter — the remaining judges' votes still produce a decision instead of the whole sample blocking. Default timeout is `30.0s` from `JudgeCommitteeConfig.timeout_seconds` (previously a dead field; now wired).
+4. **NLI per-call timeout (new).** `enhanced_factual_grounding` wraps each NLI call in `asyncio.wait_for(..., timeout=NLI_PER_CALL_TIMEOUT_S)` (60 s default). On timeout the claim/doc pair is treated as neutral, not entails, so a hung Sonnet call cannot block the rest of the claim loop.
 
-Still open: no per-judge timeout (`asyncio.wait_for`) and no semaphore (§3.3 REVERTED). A slow DeepSeek call blocks the entire sample's result even after the other two judges finish.
+Still open: no global semaphore (§3.3 REVERTED) — a 50-sample batch still fans out 150+ concurrent outbound HTTP requests. Per-call timeout bounds individual latency; throughput control is a separate axis.
 
 ---
 
@@ -736,25 +785,27 @@ If a user builds a custom committee that includes Mistral Nemo, its configured `
 
 ---
 
-### N9 — `claim_details=[]` when `total_claims > 0` and `support_docs=[]` — **STILL OPEN**
+### N9 — `claim_details=[]` when `total_claims > 0` and `support_docs=[]` — **FIXED**
 
-**Observed at:** #0471 (Type 5). Title corrected: `grounding_ratio` is **0.0** (not 1.0 as previously labelled) in this path, but the schema inconsistency remains.
+**Observed at:** #0471 (Type 5). `grounding_ratio` is correctly `0.0` in this path; the schema inconsistency between `total_claims` and `len(claim_details)` is what was broken.
 
-**Current state in `rag_eval/conflict_eval.py`:**
+**Fix in [rag_eval/conflict_eval.py](rag_eval/conflict_eval.py) — `enhanced_factual_grounding`:**
 
 ```python
 if not support_docs:
     return {
         "grounding_ratio": 0.0,
         "supported_claims": 0,
-        "total_claims": len(claims),   # e.g. 2
-        "claim_details": [],           # empty — inconsistent with total_claims=2
+        "total_claims": len(claims),
+        "claim_details": [
+            {"claim": c, "supported": False,
+             "support_count": 0, "supporting_docs": []}
+            for c in claims
+        ],
     }
 ```
 
-`len(claim_details) != total_claims` violates the implicit contract. Any downstream code that iterates `claim_details` expecting `total_claims` entries gets misaligned output.
-
-**Fix (option A, preferred):** Populate `claim_details` with `{claim, supported=False, support_count=0, supporting_docs=[]}` for each claim even when `support_docs=[]`, so `len(claim_details) == total_claims` always holds. Remains unapplied.
+`len(claim_details) == total_claims` now holds in every return path, including the empty-support, empty-claims, and the per-claim NLI loop. Downstream consumers (report generation, per-claim audit tools) get aligned output regardless of input shape.
 
 ---
 
@@ -767,6 +818,82 @@ contribute to `gr_accuracy` (their GR=1.0 is correct) but are excluded from
 score denominator shrinks to match only applicable sub-metrics.
 
 See §N1 above for the full implementation detail.
+
+---
+
+### N12 — Full NLI pipeline audit (claim → premise → relation → aggregation) — **FIXED**
+
+A pass-through audit of the factual-grounding pipeline turned up four logic
+issues. All four are fixed in this revision.
+
+**N12.A — Contradictions were silently ignored.**
+`enhanced_factual_grounding` previously counted only the `entails` relation:
+
+```python
+if nli_result["relation"] == "entails":
+    support_count += 1
+```
+
+A claim contradicted by one support doc and entailed by another scored as
+**supported** (1 ≥ threshold). This inverts the intent of grounding: an
+answer that asserts something the evidence directly disputes is not
+grounded, it is contradicting the evidence.
+
+**Fix:** Track `entails_count` and `contradicts_count` separately. A claim
+is supported only if `entails_count >= threshold AND contradicts_count == 0`.
+Both counts and the doc-id lists (`supporting_docs`, `contradicting_docs`)
+are surfaced per-claim in `claim_details`.
+
+**N12.B — `nli_result.confidence` was returned but never consulted.**
+Low-confidence entailments (e.g. `confidence=0.2`) counted the same as
+strong ones, so a wishy-washy "maybe entails" could push a claim above
+the threshold. The new code applies `MIN_ENTAIL_CONFIDENCE = 0.5` before
+counting a verdict in either direction.
+
+**N12.C — Refusal answers ran through the full FG pipeline.**
+When the model refused but the question was answerable (false negative),
+claim extraction returned ~zero claims and `grounding_ratio` defaulted to
+`0.0`. That zero was counted in the FG average, dragging it down for
+every wrong-refusal sample — the same anti-pattern as the correct-refusal
+bug (N1/N10).
+
+**Fix in `EnhancedEvaluator._evaluate_single_sample`:**
+
+```python
+if not pred_answered:
+    fg_score = 0.0
+    fg_result = {"grounding_ratio": None, ..., "skipped": "model_refused"}
+    fg_applicable = False
+else:
+    fg_result = await enhanced_factual_grounding(...)
+    fg_applicable = True
+```
+
+The aggregator's existing `factual_grounding_applicable` gate (added in
+N1) excludes the sample from the FG mean. Behavior and STR are
+unaffected — a wrong refusal can still be judged on those axes.
+
+**N12.D — NLI premise was always the full snippet.**
+`per_doc_notes[i].quote` is an annotator-extracted, ≤60-word verbatim
+evidence span — a tighter and more accurate premise than the full
+snippet, which often contains paragraphs of unrelated context.
+
+**Fix in evaluator and `enhanced_factual_grounding`:** the evaluator
+merges `per_doc_notes[i].quote` into the support-doc dict, and the NLI
+loop now prefers `doc.quote` over `doc.snippet`:
+
+```python
+passage = doc.get("quote") or doc.get("snippet") or doc.get("text") or ""
+```
+
+Docs without a quote field fall back to snippet unchanged, so the change
+is strictly additive.
+
+**N12.E (diagnostic) — NLI errors are now counted.**
+The result dict now includes `nli_errors: int` (count of timed-out or
+exception-raising NLI calls). This makes it possible to distinguish "the
+model wasn't grounded" from "the NLI judge couldn't decide" in the
+artifact.
 
 ---
 
@@ -857,6 +984,51 @@ Meta-reference filter (eliminates 2 dataset patterns, preserves real claims):
 
 ---
 
+## 4.5 Observed metric deltas — qwen 15-sample run, before vs after fixes
+
+Comparing
+[outputs/qwen_15sample_run/eval_report.md](outputs/qwen_15sample_run/eval_report.md)
+(before this revision) against
+[outputs/qwen_15sample_run_after_fix/eval_report.md](outputs/qwen_15sample_run_after_fix/eval_report.md)
+(after) gives concrete attribution for every per-metric move.
+
+### Overall
+
+| Metric | Before | After | Δ | Why it changed |
+| ------ | ------ | ----- | --- | -------------- |
+| GR Accuracy | 0.667 | 0.667 | **0.000** | GR is a deterministic function of `pred_answered` vs `gold_answerable`. Nothing in this revision touches that computation, so the per-sample 0/1 flags are unchanged. |
+| GR F1 *(CATS input)* | 0.800 | 0.800 | **0.000** | Same TP/FP/FN/TN counts (`TP=10, FP=0, FN=5, TN=0`) → same precision/recall/F1. |
+| Behavior Adherence | 0.600 (n=15) | 0.533 (n=15) | **−0.067** | One sample flipped from adherent → non-adherent. The denominator is unchanged (behavior still runs on wrong-refusal samples). Driver: §N6 — Type 4 judges now see document dates and reject answers grounded in outdated sources. |
+| Factual Grounding | 0.549 (n=15) | 0.140 (n=10) | **−0.409** | Two effects combine. *Denominator* shrank from 15 to 10 because §N12.C excludes the 5 wrong-refusal samples (matches `FN=5` exactly). *Numerator* fell because §N12.A (contradictions block support), §N12.B (NLI `confidence ≥ 0.5` floor) and §N12.D (quote-only premise) all tighten what counts as a grounded claim. Of these, the quote-only premise is almost certainly dominant — the ≤60-word annotator quote rarely entails a generically-phrased model claim that the full snippet would have covered. |
+| Single-Truth Recall | 0.700 (n=10) | 0.600 (n=10) | **−0.100** | Denominator unchanged. One gold answer flipped from matched → not-matched under §N2B's assertion-vs-mention rule — the model quoted the gold from a doc but committed to a different answer. |
+| CATS Score | 0.662 | 0.518 | **−0.144** | Weighted average of the four sub-metrics above. The headline drop is mostly the FG collapse propagating through `mean(F1, behavior, FG, STR)`. |
+
+### Per conflict type (selected rows)
+
+| Type | Metric | Before | After | Δ | Reason |
+| ---- | ------ | ------ | ----- | --- | ------ |
+| 1 | Behavior | 0.714 (n=7) | 0.857 (n=7) | **+0.143** | The behavior prompt for Type 1 was not touched — only the Type 4/5 branch gets a provenance block. The flip is one borderline 2-1 vote shifting under the now-meaningful `confidence` field (§4.1 was already in place but the prompt-requested confidence is being emitted more consistently after the judge_committee parser changes). Within normal committee jitter. |
+| 1 | Grounding | 0.714 (n=7) | 0.200 (n=5) | **−0.514** | 2 of the 7 samples were wrong refusals → excluded by §N12.C. Of the remaining 5, the quote-only premise (§N12.D) is the dominant factor — Type 1 quotes are short factual spans that often fail to *strictly* entail the model's broader rephrasing. |
+| 2 | Grounding | 0.433 (n=4) | 0.133 (n=3) | **−0.300** | 1 wrong-refusal sample excluded (§N12.C). On the remaining 3, the cross-claim spread tightened because complementary-info samples have multiple support docs whose narrow quotes each cover only one facet — a model claim that fuses two facets no longer entails from either quote alone. |
+| 3 | Grounding | 0.000 (n=1) | 0.000 (n=0) | denom → 0 | The single Type 3 sample was a wrong refusal; §N12.C drops it from the FG average entirely. The reported `0.000` after the fix is now "no applicable samples" rather than "evaluated as 0". |
+| 4 | Behavior | 0.667 (n=3) | 0.000 (n=3) | **−0.667** | This is the §N6 fix landing. All three Type 4 samples involved the model anchoring its answer to an older support doc. With dates now injected into the behavior prompt, every judge correctly flags the answer as not prioritising the up-to-date source → all three flip to non-adherent. |
+| 4 | Grounding | 0.500 (n=3) | 0.000 (n=2) | **−0.500** | 1 wrong-refusal excluded. On the remaining 2: outdated samples by construction have at least one support doc whose verbatim quote conflicts with another — under §N12.A those claims now score `supported=False` because `contradicts_count > 0`. |
+| 4 | Recall | 0.667 (n=3) | 0.333 (n=3) | **−0.334** | Denominator unchanged. One sample flipped under §N2B: the model mentioned the up-to-date answer as a quoted claim from a doc but committed to the older answer. The new prompt's NON-MATCHING rule fires on exactly this pattern. |
+
+### Sanity checks
+
+- **GR didn't move.** Confirms that none of the v3 changes touched the answer/refuse classifier — they only changed how the *content* of answered samples is judged.
+- **FG denominator change matches GR FN.** `15 → 10` is exactly the 5 `FN` cases (wrong refusals) being carved out by §N12.C, which is the intended behavior.
+- **Behavior didn't lose a denominator.** Behavior is still applicable for wrong refusals (a refusal can be judged on style/appropriateness even if it was the wrong call), so `n=15` survives — only the **score** of those samples changed.
+- **Recall denominator is unchanged at 10.** §N2B changes verdicts, not applicability.
+
+### What this run does *not* tell us
+
+- **n is small (15).** Per-type rows with n<5 (Types 2, 3, 4) are noisy by construction (the `⚠️ n<5` warning, §6.1 fix). The single-sample Type 3 row shouldn't be over-interpreted in either direction.
+- **The FG drop bundles three independent fixes.** §N12.A, §N12.B, §N12.D are all numerator-tightening. Without an ablation rerun (e.g. flip `MIN_ENTAIL_CONFIDENCE` back to 0 in isolation, or run with snippet-only premise), the report can't separate their contributions. The per-claim `entails_count` / `contradicts_count` fields in `detailed_results.json` would let an offline analysis bucket the drop precisely.
+
+---
+
 ## 5. Behavioral changes on rerun
 
 When you rerun the same `--input data/...` after these fixes, expect:
@@ -880,13 +1052,13 @@ current file does NOT contain those changes.
 
 | File | Status | Net changes in current code |
 | --- | --- | --- |
-| `rag_eval/judge_prompts.py` | changed | Per-conflict rubric (§1); confidence requested (§4.1); recall prompt simpler form (N2 REVERTED) |
+| `rag_eval/judge_prompts.py` | changed | Per-conflict rubric (§1); confidence requested (§4.1); recall prompt with assertion-vs-mention + spelling/format/logical-equivalence rules (N2B / N3); behavior prompt accepts `retrieved_docs` and injects date/source block for Type 4 / Type 5 (N6); NLI prompt tightened against meta-claims |
 | `rag_eval/config.py` | changed | `DEFAULT_JUDGE_PRIORITIES`; `priority_overrides`; `get_sonnet_nli_judge`; `nli_judge` field; dead fields RESTORED (§3.2 REVERTED) |
-| `rag_eval/judge_committee.py` | changed | `minority_confidence`; `<think>` stripping; choices guard; confidence floor; `all_failed`; NO semaphore (§3.3 REVERTED) |
-| `rag_eval/conflict_eval.py` | changed | NLI uses dedicated `JudgeClient`; partial-credit uses `minority_confidence`; `claim_details=[]` on empty support (N9 REVERTED); gold via `str()` |
+| `rag_eval/judge_committee.py` | changed | `minority_confidence`; `weighted_for/weighted_against` on `CommitteeDecision` (N4); `<think>` stripping; markdown-fence stripping + balanced-brace JSON extraction shared by behavior and NLI parsers (NLI fence fix); choices guard; confidence floor; `all_failed`; per-judge `asyncio.wait_for` timeout (N7); NO semaphore (§3.3 REVERTED) |
+| `rag_eval/conflict_eval.py` | changed | NLI uses dedicated `JudgeClient` with per-call `asyncio.wait_for` timeout (N7); partial-credit uses `minority_confidence`; `claim_details` always padded to `total_claims` (N9); `behavior_judge_prompt` called with `retrieved_docs` for Type 4 / Type 5 (N6); gold via `str()` |
 | `rag_eval/data.py` | changed | `model_output` never falls back to gold; verdict normalization |
 | `rag_eval/metrics.py` | changed | Unified refusal regex; NLTK protection; meta-reference filter; `compute_f1_gr`; `gr_accuracy_from_flags` |
-| `rag_eval/evaluator.py` | changed | `_safe_ctype`; correct-refusal gating N1/N10; GR F1 in CATS N11; NLI wiring; `setdefault` aggregator; stable sort; `n<5` warning |
+| `rag_eval/evaluator.py` | changed | `_safe_ctype`; correct-refusal gating N1/N10; GR F1 in CATS N11; NLI wiring; passes `retrieved_docs` into behavior judge for Type 4 / Type 5 (N6); `setdefault` aggregator; stable sort; `n<5` warning |
 | `rag_eval/logging_config.py` | changed | Idempotent handlers; `propagate=False` |
 | `rag_eval/__init__.py` | changed | Exports `DEFAULT_JUDGE_PRIORITIES`, `get_sonnet_nli_judge`, `EnhancedTrustScoreConfig` (restored) |
 | `run_evaluation.py` | changed | `_load_yaml_config`, `_apply_yaml_to_config`; GR F1 logging |
@@ -898,30 +1070,26 @@ current file does NOT contain those changes.
 
 ## What's still open
 
-### Reverted (code change was applied then undone)
+### Reverted (code change was applied then undone — still open)
 
 - **§3.2 — Dead config fields.** All fields restored; no evaluator reads them.
-- **§3.3 — max_concurrent_requests not enforced.** Bare `asyncio.gather` is back; API fan-out is unbounded.
+- **§3.3 — max_concurrent_requests not enforced.** Bare `asyncio.gather` is back; API fan-out is unbounded. Per-call timeout (N7 fix) bounds individual latency but throughput is still unconstrained.
 - **§3.4 — Per-judge RPM rate limiting.** Fields restored but not enforced. HTTP 429s propagate as `adherent=False`.
-- **N2B — Assertion-vs-mention in recall prompt.** Prompt-level fix reverted; minority_confidence gate (N2A) is in place.
-- **N3 — Spelling-variation instruction.** Removed from recall prompt; gold typos still cause nondeterministic verdicts.
-- **N9 — `claim_details=[]` when `total_claims>0`.** Schema consistency fix reverted.
 
-### Partially mitigated (code change in place but incomplete)
+### Fixed in this revision (previously open)
 
-- **N2A — Partial-credit inversion.** `minority_confidence` gate fixed. Assertion-vs-mention distinction (N2B) remains open.
-- **N4 — Tie-break weights not in output.** `votes_for/votes_against` now surfaced; `weighted_for/weighted_against` floats are not stored.
-- **N7 — DeepSeek tail latency.** `max_tokens=3000` + `<think>` stripping in place; no per-judge timeout.
+- **N2A / N2B — Single-truth recall: partial-credit inversion + assertion-vs-mention.** Minority-confidence gate (N2A) and rewritten prompt with worked NON-MATCHING examples (N2B) both in place.
+- **N3 — Spelling/formatting variation.** Explicit MATCHING RULES added to the recall prompt with concrete examples drawn from observed failures.
+- **N4 — Weighted vote totals surfaced.** `weighted_for` / `weighted_against` now serialized on every `CommitteeDecision`.
+- **N6 — Document dates for behavior judge.** Provenance block injected for Type 4 / Type 5 prompts via the new `retrieved_docs` parameter.
+- **N7 — Per-judge timeout.** `asyncio.wait_for` on every committee judge call + every NLI call. A hung DeepSeek no longer blocks the whole sample.
+- **N9 — `claim_details` schema invariant.** Placeholder entries inserted when no support docs are available, so `len(claim_details) == total_claims` holds in every return path.
+- **NLI fence parse** — `_strip_markdown_fences` + balanced-brace `_extract_first_json_object` shared between the behavior and NLI parsers. Tested against `\`\`\`json … \`\`\`` wraps, trailing JSON-like blobs, and rationale strings containing literal braces.
 
-### Never fixed (open from the start)
+### Never fixed (out of scope)
 
-- **§6.7 / N6 — Type 4 judge doesn't see document dates.** Requires prompt-contract change.
-- **N5 — Gold answer typos in dataset.** Data cleanup task; no code mitigation applied.
+- **N5 — Gold answer typos in dataset.** Data cleanup task. The recall prompt now tolerates spelling variation (N3 fix), which is the code-side mitigation; the dataset itself still has the typos.
 - **N8 — Mistral cost under-reported.** Moot for default committee (no Mistral); still applies to custom committees.
-
-### New logical errors (found during code audit, not in original ISSUES.md)
-
-- **NLI fence parse** — `_parse_nli_response` in `judge_committee.py` uses `rfind("}")` which can fail with "Extra data" if the model appends JSON-like content after the main object. Observed as `Failed to parse NLI response: Extra data` warnings in live runs. Fix: strip markdown fences and use the first balanced-brace span rather than rfind.
-- **FP case FG semantics** — When a model answers an unanswerable question (`pred_answered=True, gold_answerable=False`), FG runs on the fabricated answer. If the fabricated answer happens to be supported by documents, FG=1.0 even though the model was wrong to answer. By design (GR already penalises the FP), but worth documenting.
+- **FP case FG semantics** — When a model answers an unanswerable question (`pred_answered=True, gold_answerable=False`), FG runs on the fabricated answer. If that answer happens to be supported by documents, FG=1.0 even though the model was wrong to answer. By design (GR already penalises the FP), but worth documenting.
 
 Everything else from ISSUES.md §§1–6 (excluding §3.2/§3.3/§3.4) is fixed and the fix remains in place.

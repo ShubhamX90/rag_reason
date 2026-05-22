@@ -51,9 +51,15 @@ async def committee_behavior_adherence(
     query: str,
     answer: str,
     conflict_type: int,
+    retrieved_docs: Optional[List[Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     """
     Evaluate behavior adherence using multi-judge committee.
+
+    `retrieved_docs` is optional. When provided for conflict types 4
+    (Outdated) and 5 (Misinformation), document dates / sources are surfaced
+    to the behavior judges so "prioritise the up-to-date / reliable source"
+    can be evaluated against evidence rather than wording alone (N6 fix).
 
     Returns a dict including a `skipped` flag distinguishing "empty answer
     skipped" from "committee ran and voted non-adherent". The downstream
@@ -73,7 +79,7 @@ async def committee_behavior_adherence(
             "committee_details": None,
         }
 
-    prompt = behavior_judge_prompt(query, answer, conflict_type)
+    prompt = behavior_judge_prompt(query, answer, conflict_type, retrieved_docs=retrieved_docs)
 
     try:
         decision: CommitteeDecision = await committee.judge_behavior(prompt)
@@ -107,6 +113,10 @@ async def committee_behavior_adherence(
 # --------------------
 # Enhanced Factual Grounding (dedicated NLI judge)
 # --------------------
+NLI_PER_CALL_TIMEOUT_S = 60.0  # N7 fix: cap a single NLI call so a hung Sonnet
+                                # request can't block sample completion.
+
+
 async def enhanced_factual_grounding(
     nli_judge: JudgeClient,
     claims: List[str],
@@ -127,40 +137,97 @@ async def enhanced_factual_grounding(
             "supported_claims": 0,
             "total_claims": 0,
             "claim_details": [],
+            "nli_errors": 0,
         }
 
     if not support_docs:
+        # N9 fix: keep the schema invariant len(claim_details) == total_claims.
+        # Previously this branch returned claim_details=[] while total_claims=len(claims),
+        # which broke downstream code that iterated claim_details expecting one entry
+        # per claim.
         return {
             "grounding_ratio": 0.0,
             "supported_claims": 0,
             "total_claims": len(claims),
-            "claim_details": [],
+            "claim_details": [
+                {
+                    "claim": c,
+                    "supported": False,
+                    "entails_count": 0,
+                    "contradicts_count": 0,
+                    "support_count": 0,           # alias kept for backward compatibility
+                    "supporting_docs": [],
+                    "contradicting_docs": [],
+                }
+                for c in claims
+            ],
+            "nli_errors": 0,
         }
 
     claim_details = []
     supported_count = 0
+    total_errors = 0
+
+    # NLI confidence floor: a "entails" verdict with confidence below this is
+    # treated as neutral. Prevents wishy-washy entailments from passing the
+    # threshold on a single doc.
+    MIN_ENTAIL_CONFIDENCE = 0.5
 
     for claim in claims:
-        support_count = 0
+        entails_count = 0
+        contradicts_count = 0
         supporting_docs: List[str] = []
+        contradicting_docs: List[str] = []
 
         for doc in support_docs:
-            passage = doc.get("snippet") or doc.get("text") or ""
+            # NLI-I fix: prefer the annotator-verified verbatim quote when
+            # available — it is a tighter, higher-signal premise than the full
+            # snippet. Fall back to snippet / text for docs without a quote.
+            passage = (
+                doc.get("quote")
+                or doc.get("snippet")
+                or doc.get("text")
+                or ""
+            )
             if not passage.strip():
                 continue
 
             prompt = nli_prompt(passage, claim)
             try:
-                nli_result = await nli_judge.judge_nli(prompt)
-                if nli_result["relation"] == "entails":
-                    support_count += 1
-                    supporting_docs.append(doc.get("doc_id", "unknown"))
+                nli_result = await asyncio.wait_for(
+                    nli_judge.judge_nli(prompt),
+                    timeout=NLI_PER_CALL_TIMEOUT_S,
+                )
+            except asyncio.TimeoutError:
+                logger.warning(
+                    f"NLI judge timeout for claim '{claim[:50]}...' on doc "
+                    f"{doc.get('doc_id', '?')}; treating as neutral."
+                )
+                total_errors += 1
+                continue
             except Exception as e:
                 logger.warning(f"NLI error for claim '{claim[:50]}...': {e}")
+                total_errors += 1
                 continue
 
+            relation = nli_result.get("relation", "neutral")
+            conf = float(nli_result.get("confidence", 0.0) or 0.0)
+
+            if relation == "entails" and conf >= MIN_ENTAIL_CONFIDENCE:
+                entails_count += 1
+                supporting_docs.append(doc.get("doc_id", "unknown"))
+            elif relation == "contradicts" and conf >= MIN_ENTAIL_CONFIDENCE:
+                # NLI-A fix: a confident contradiction by a support doc is a
+                # strong negative signal — track it and use it to gate
+                # `supported`.
+                contradicts_count += 1
+                contradicting_docs.append(doc.get("doc_id", "unknown"))
+
         threshold = 2 if require_cross_doc else 1
-        is_supported = support_count >= threshold
+        # NLI-A fix: a claim contradicted by any support doc is NOT grounded,
+        # even if another doc entails it. The model is asserting something
+        # that the evidence directly disputes.
+        is_supported = (entails_count >= threshold) and (contradicts_count == 0)
 
         if is_supported:
             supported_count += 1
@@ -168,8 +235,11 @@ async def enhanced_factual_grounding(
         claim_details.append({
             "claim": claim,
             "supported": is_supported,
-            "support_count": support_count,
+            "entails_count": entails_count,
+            "contradicts_count": contradicts_count,
+            "support_count": entails_count,        # backward-compat alias
             "supporting_docs": supporting_docs,
+            "contradicting_docs": contradicting_docs,
         })
 
     grounding_ratio = supported_count / len(claims)
@@ -179,6 +249,7 @@ async def enhanced_factual_grounding(
         "supported_claims": supported_count,
         "total_claims": len(claims),
         "claim_details": claim_details,
+        "nli_errors": total_errors,
     }
 
 

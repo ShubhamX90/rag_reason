@@ -19,6 +19,8 @@ Authors: Gorang Mehrishi, Samyek Jain
 Institution: Birla Institute of Technology and Science, Pilani
 """
 
+from typing import Any, Dict, List, Optional
+
 # ---------------------------------------------------------------------
 # Behavior adherence rubric (aligned to taxonomy)
 # ---------------------------------------------------------------------
@@ -35,7 +37,12 @@ BEHAVIOR_RUBRIC = {
 # Behavior adherence prompt
 # ---------------------------------------------------------------------
 
-def behavior_judge_prompt(query: str, answer: str, conflict_type: int) -> str:
+def behavior_judge_prompt(
+    query: str,
+    answer: str,
+    conflict_type: int,
+    retrieved_docs: Optional[List[Dict[str, Any]]] = None,
+) -> str:
     """
     Build prompt for behavior adherence judgment.
 
@@ -48,8 +55,36 @@ def behavior_judge_prompt(query: str, answer: str, conflict_type: int) -> str:
     when the retrieved documents do not actually support a confident answer,
     regardless of conflict type — refusal is always an acceptable behavior
     when the evidence is genuinely insufficient.
+
+    For Type 4 (Outdated Information) and Type 5 (Misinformation), the judge
+    needs document dates / source provenance to assess whether the model
+    prioritised the newer / more reliable source. If `retrieved_docs` is
+    provided and contains a `date` or `source` field, a compact provenance
+    table is inserted into the prompt for those conflict types.
     """
     rubric = BEHAVIOR_RUBRIC.get(conflict_type, BEHAVIOR_RUBRIC[1])
+
+    # N6 fix: surface document dates/sources to behavior judges for Type 4 / Type 5,
+    # so "prioritise the up-to-date information" can be judged on evidence rather
+    # than wording alone.
+    provenance_block = ""
+    if retrieved_docs and conflict_type in (4, 5):
+        rows = []
+        for d in retrieved_docs:
+            doc_id = d.get("doc_id", "?")
+            date = (d.get("date") or d.get("timestamp") or "unknown").strip() or "unknown"
+            source = (d.get("source") or d.get("url") or "").strip()
+            src_tag = f"  source={source}" if source else ""
+            rows.append(f"  - {doc_id}: date={date}{src_tag}")
+        if rows:
+            label = "publication dates" if conflict_type == 4 else "publication dates / sources"
+            provenance_block = (
+                f"\nDocument provenance ({label} — use these to judge whether the "
+                f"answer prioritised the right source):\n"
+                + "\n".join(rows)
+                + "\n"
+            )
+
     return f"""
 You are evaluating ONLY the **behavior** of a model answer, not its factual correctness.
 
@@ -69,7 +104,7 @@ Decide whether the model's answer **follows the expected behavior** for THIS spe
 Conflict Type: {conflict_type}
 Expected Behavior for this conflict type:
 {rubric}
-
+{provenance_block}
 Instructions:
 - Judge the answer ONLY against the rubric shown above. Do not invoke rubrics for other conflict types.
 - If the answer is a refusal ("CANNOT ANSWER" / "INSUFFICIENT EVIDENCE") AND the retrieved evidence genuinely does not support an answer, treat the refusal as adherent.
@@ -119,8 +154,12 @@ Rules:
 - **Do not add knowledge**, outside interpretation, or world facts.
 - **Do not guess** beyond what the premise literally says.
 - Focus ONLY on whether the hypothesis is justified by the premise.
+- Meta-statements about the answer itself ("the documents agree", "this is therefore considered real")
+  are NOT entailed by a premise unless the premise itself states that meta-fact verbatim.
+- A premise that merely mentions a topic without making the specific claim in the hypothesis is "neutral",
+  not "entails".
 
-Return ONLY a JSON object:
+Return ONLY a JSON object (no markdown fences, no extra text):
 {{
   "relation": "entails" | "contradicts" | "neutral",
   "confidence": 0.0 to 1.0
@@ -137,19 +176,48 @@ Hypothesis (claim from model answer):
 def single_truth_recall_prompt(gold_answer: str, model_answer: str) -> str:
     """
     Prompt for LLM-as-a-judge to decide if the gold factual answer is
-    present in (or semantically equivalent to) the model's answer.
+    *asserted* by the model's answer (not merely mentioned or attributed
+    to a document).
+
+    Key distinctions enforced by this prompt (v3 fix for N2B + N3):
+      • Assertion vs mention — quoting / citing the gold answer from a
+        retrieved document while the model itself commits to a different
+        answer does NOT count as recall.
+      • Spelling / formatting variation — minor misspellings, casing,
+        whitespace, punctuation, or unit-formatting differences are
+        acceptable matches.
+      • Logical equivalence — semantically equivalent statements
+        (paraphrases, equivalent dates, "X is Y" vs "Y is X" for
+        symmetric relations) count as matching, mirroring the paper's
+        single-truth recall judge.
     """
     return f"""
-You are checking whether a model answer contains or expresses a given factual answer.
+You are checking whether a model answer correctly **asserts** a given factual answer.
 
-The gold answer is the correct answer to a question. The model's answer should contain this answer
-(possibly paraphrased, abbreviated, or expressed differently).
+The gold answer is the correct answer to a question. Your job is to decide whether the model's answer
+**commits to** (asserts) this gold answer as the model's own conclusion.
 
-Consider paraphrases and equivalent wording as matching.
+MATCHING RULES (count as adherent=true):
+- Paraphrases, abbreviations, and equivalent wording that convey the same fact.
+- **Logically equivalent statements** (e.g. "born in 1990" vs "born thirty-five years ago in 2025";
+  "A is the capital of B" vs "B's capital is A").
+- Minor misspellings, casing differences, whitespace, punctuation, or unit-formatting differences
+  (e.g. "Chiliwack" ≈ "Chilliwack"; "Stephan Curry" ≈ "Stephen Curry"; "1,759" ≈ "1759";
+  "$1.8 billion" ≈ "1.8B USD").
+
+NON-MATCHING RULES (count as adherent=false):
+- The model commits to a DIFFERENT answer, even if the gold answer also appears somewhere in the text
+  as a **quotation, citation, or attribution** to a document.
+  Example: gold="1,759"; model says "Document d2 reports 1,759, but the correct figure is 658." →
+  adherent=false (model asserts 658, only mentions 1,759 as a cited claim it rejects).
+- The model only lists the gold answer as one of several possibilities without endorsing it.
+- The model refuses ("CANNOT ANSWER" / "INSUFFICIENT EVIDENCE") — recall is 0 regardless of
+  what documents say.
+- The model asserts something logically incompatible with the gold answer.
 
 Return ONLY a JSON object with fields:
-  "adherent": true or false (whether the model's answer contains or expresses the gold answer),
-  "rationale": short string explanation,
+  "adherent": true or false (whether the model's answer ASSERTS the gold answer as its own conclusion),
+  "rationale": short string explanation (briefly note whether the gold was asserted or merely mentioned),
   "confidence": 0.0 to 1.0 (your certainty in the adherent decision)
 
 Gold factual answer:

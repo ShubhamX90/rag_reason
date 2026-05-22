@@ -1,0 +1,1563 @@
+{
+  "summary": {
+    "conflict_overall": {
+      "n": 15,
+      "correct_refusals": 0,
+      "gr_accuracy": 0.6666666666666666,
+      "behavior": 0.5333333333333333,
+      "behavior_n": 15,
+      "factual_grounding": 0.13999999999999999,
+      "factual_grounding_n": 10,
+      "single_truth_recall": 0.6,
+      "single_truth_recall_n": 10,
+      "cats_score": 0.5183333333333333,
+      "gr_f1": 0.8
+    },
+    "conflict_per_type": {
+      "3": {
+        "n": 1,
+        "correct_refusals": 0,
+        "gr_accuracy": 0.0,
+        "behavior": 0.0,
+        "behavior_n": 1,
+        "factual_grounding": 0.0,
+        "factual_grounding_n": 0,
+        "single_truth_recall": 0.0,
+        "single_truth_recall_n": 0,
+        "cats_score": 0.0
+      },
+      "4": {
+        "n": 3,
+        "correct_refusals": 0,
+        "gr_accuracy": 0.6666666666666666,
+        "behavior": 0.0,
+        "behavior_n": 3,
+        "factual_grounding": 0.0,
+        "factual_grounding_n": 2,
+        "single_truth_recall": 0.3333333333333333,
+        "single_truth_recall_n": 3,
+        "cats_score": 0.25
+      },
+      "2": {
+        "n": 4,
+        "correct_refusals": 0,
+        "gr_accuracy": 0.75,
+        "behavior": 0.5,
+        "behavior_n": 4,
+        "factual_grounding": 0.13333333333333333,
+        "factual_grounding_n": 3,
+        "single_truth_recall": 0.0,
+        "single_truth_recall_n": 0,
+        "cats_score": 0.4611111111111111
+      },
+      "1": {
+        "n": 7,
+        "correct_refusals": 0,
+        "gr_accuracy": 0.7142857142857143,
+        "behavior": 0.8571428571428571,
+        "behavior_n": 7,
+        "factual_grounding": 0.2,
+        "factual_grounding_n": 5,
+        "single_truth_recall": 0.7142857142857143,
+        "single_truth_recall_n": 7,
+        "cats_score": 0.6214285714285714
+      }
+    },
+    "gr_dataset_metrics": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 5,
+      "tn": 0,
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1": 0.8,
+      "accuracy": 0.6666666666666666
+    }
+  },
+  "per_sample": [
+    {
+      "sample_id": "#0002",
+      "conflict_type": 3,
+      "pred_answered": false,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "Empty answer",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 0,
+        "total_votes": 0,
+        "skipped": "empty_answer",
+        "committee_details": null
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": false,
+      "factual_grounding_details": {
+        "grounding_ratio": null,
+        "supported_claims": 0,
+        "total_claims": 0,
+        "claim_details": [],
+        "skipped": "model_refused"
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0013",
+      "conflict_type": 4,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer gives a direct date, but it cites both a newer source (d1, 2025) and an older source (d2, 2024) as equal final support rather than clearly prioritizing the most up-to-date information. For outdated-information conflicts, it should foreground the newer source and only optionally note older ones.",
+        "confidence": 0.5933014354066986,
+        "minority_confidence": 0.40669856459330145,
+        "votes_for": 1,
+        "votes_against": 2,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 0.5933014354066986,
+          "minority_confidence": 0.40669856459330145,
+          "votes_for": 1,
+          "votes_against": 2,
+          "total_votes": 3,
+          "weighted_for": 2.55,
+          "weighted_against": 3.7199999999999998,
+          "rationale": "The answer gives a direct date, but it cites both a newer source (d1, 2025) and an older source (d2, 2024) as equal final support rather than clearly prioritizing the most up-to-date information. For outdated-information conflicts, it should foreground the newer source and only optionally note older ones.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer prioritizes the most up-to-date sources (d1 from 2025-01-01 and d2 from 2024-05-01) and provides the 2025 Passover date, which aligns with the rubric of prioritizing up-to-date information.",
+              "confidence": 0.85,
+              "cost": 0.0043950000000000005,
+              "latency_ms": 4665.2672290802,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer gives a direct date, but it cites both a newer source (d1, 2025) and an older source (d2, 2024) as equal final support rather than clearly prioritizing the most up-to-date information. For outdated-information conflicts, it should foreground the newer source and only optionally note older ones.",
+              "confidence": 0.96,
+              "cost": 0.00018645,
+              "latency_ms": 3033.7326526641846,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer does not prioritize up-to-date information by referencing [d2] (published 2024-05-01) alongside [d1], and fails to acknowledge that some sources may be outdated. Expected behavior was to prioritize the most recent source (d1 or d8) and optionally note outdated ones.",
+              "confidence": 0.9,
+              "cost": 0.00014797999999999998,
+              "latency_ms": 3062.4215602874756,
+              "error": null
+            }
+          ],
+          "total_cost": 0.004729430000000001,
+          "total_latency_ms": 10761.42144203186,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Passover 2025 starts on April 12, 2025, as reported by multiple reliable sources.",
+            "supported": false,
+            "entails_count": 4,
+            "contradicts_count": 4,
+            "support_count": 4,
+            "supporting_docs": [
+              "d1",
+              "d2",
+              "d7",
+              "d8"
+            ],
+            "contradicting_docs": [
+              "d3",
+              "d4",
+              "d5",
+              "d6"
+            ]
+          },
+          {
+            "claim": "Therefore, the final answer is and .",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 0,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": []
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "begins at sundown on Saturday, April 12.",
+            "confidence": 0.6734006734006733,
+            "votes_for": 2,
+            "votes_against": 1
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0022",
+      "conflict_type": 4,
+      "pred_answered": false,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The retrieved documents include multiple 2025 sources (d3, d4, d5, d6, d8, d9) that clearly identify the current FBI director. The model's refusal to answer is unjustified given the available evidence, and it fails to prioritize the up-to-date information as required by the rubric.",
+        "confidence": 0.9958592132505177,
+        "minority_confidence": 0.004140786749482403,
+        "votes_for": 1,
+        "votes_against": 2,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 0.9958592132505177,
+          "minority_confidence": 0.004140786749482403,
+          "votes_for": 1,
+          "votes_against": 2,
+          "total_votes": 3,
+          "weighted_for": 0.02,
+          "weighted_against": 4.81,
+          "rationale": "The retrieved documents include multiple 2025 sources (d3, d4, d5, d6, d8, d9) that clearly identify the current FBI director. The model's refusal to answer is unjustified given the available evidence, and it fails to prioritize the up-to-date information as required by the rubric.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The retrieved documents include multiple 2025 sources (d3, d4, d5, d6, d8, d9) that clearly identify the current FBI director. The model's refusal to answer is unjustified given the available evidence, and it fails to prioritize the up-to-date information as required by the rubric.",
+              "confidence": 0.95,
+              "cost": 0.005637,
+              "latency_ms": 6969.512224197388,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The evidence includes clear, recent sources from 2025 identifying the FBI director, so a refusal does not prioritize the up-to-date information. For outdated-information conflict, the expected behavior is to use the newest source(s), not decline to answer when sufficient current evidence exists.",
+              "confidence": 0.98,
+              "cost": 0.00015329999999999999,
+              "latency_ms": 3077.2194862365723,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer is a refusal ('CANNOT ANSWER, INSUFFICIENT EVIDENCE'), and the retrieved evidence genuinely does not support an answer, as the documents provided are outdated or irrelevant to the current director, making the refusal adherent to the expected behavior for this conflict type.",
+              "confidence": 0.0,
+              "cost": 0.00012515999999999997,
+              "latency_ms": 13113.367557525635,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00591546,
+          "total_latency_ms": 23160.099267959595,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": false,
+      "factual_grounding_details": {
+        "grounding_ratio": null,
+        "supported_claims": 0,
+        "total_claims": 0,
+        "claim_details": [],
+        "skipped": "model_refused"
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0027",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as largest franchisee) into a unified, reconciled summary without framing any viewpoints as conflicting or debating them against each other.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 3,
+        "votes_against": 0,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 3,
+          "votes_against": 0,
+          "total_votes": 3,
+          "weighted_for": 6.27,
+          "weighted_against": 0.0,
+          "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as largest franchisee) into a unified, reconciled summary without framing any viewpoints as conflicting or debating them against each other.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer consolidates multiple partial pieces of information (institutional shareholders, Schnatter's individual stake, Bajco Group as largest franchisee) into a unified, reconciled summary without framing any viewpoints as conflicting or debating them against each other.",
+              "confidence": 0.85,
+              "cost": 0.0030540000000000003,
+              "latency_ms": 4593.784332275391,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer consolidates multiple complementary ownership details into a single summary and does not present the sources as conflicting or debate them. It reconciles the partial information by describing shared ownership across categories.",
+              "confidence": 0.96,
+              "cost": 0.00010979999999999999,
+              "latency_ms": 2674.0612983703613,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer consolidates and reconciles complementary information about ownership (individual, institutional, franchisee) without framing it as a debate, aligning with the expected behavior for Complementary Information.",
+              "confidence": 0.9,
+              "cost": 8.722e-05,
+              "latency_ms": 15366.201400756836,
+              "error": null
+            }
+          ],
+          "total_cost": 0.0032510200000000003,
+          "total_latency_ms": 22634.047031402588,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.4,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.4,
+        "supported_claims": 2,
+        "total_claims": 5,
+        "claim_details": [
+          {
+            "claim": "No conflict \u2014 The evidence indicates that John H. Schnatter is the largest individual shareholder with 17.83%, while major institutional shareholders also hold significant portions.",
+            "supported": false,
+            "entails_count": 1,
+            "contradicts_count": 1,
+            "support_count": 1,
+            "supporting_docs": [
+              "d5"
+            ],
+            "contradicting_docs": [
+              "d9"
+            ]
+          },
+          {
+            "claim": "Bajco Group is the largest privately held franchisee.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 0,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": []
+          },
+          {
+            "claim": "Schnatter has significantly reduced his ownership.",
+            "supported": true,
+            "entails_count": 2,
+            "contradicts_count": 0,
+            "support_count": 2,
+            "supporting_docs": [
+              "d1",
+              "d9"
+            ],
+            "contradicting_docs": []
+          },
+          {
+            "claim": "Papa John's ownership is shared among major institutional shareholders, a significant individual shareholder a large privately held franchisee.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 0,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": []
+          },
+          {
+            "claim": "Schnatter, the founder, still holds a substantial share but has reduced it substantially.",
+            "supported": true,
+            "entails_count": 1,
+            "contradicts_count": 0,
+            "support_count": 1,
+            "supporting_docs": [
+              "d9"
+            ],
+            "contradicting_docs": []
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0030",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer provides a clear, direct date (March 24, 2017) without introducing alternative viewpoints or uncertainty. While it briefly mentions other documents, it does so only to reinforce the conclusion rather than to introduce conflicting perspectives or hedging.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 3,
+        "votes_against": 0,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 3,
+          "votes_against": 0,
+          "total_votes": 3,
+          "weighted_for": 6.49,
+          "weighted_against": 0.0,
+          "rationale": "The answer provides a clear, direct date (March 24, 2017) without introducing alternative viewpoints or uncertainty. While it briefly mentions other documents, it does so only to reinforce the conclusion rather than to introduce conflicting perspectives or hedging.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer provides a clear, direct date (March 24, 2017) without introducing alternative viewpoints or uncertainty. While it briefly mentions other documents, it does so only to reinforce the conclusion rather than to introduce conflicting perspectives or hedging.",
+              "confidence": 0.85,
+              "cost": 0.002898,
+              "latency_ms": 4531.870603561401,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer gives a clear, direct release date and does not introduce uncertainty or alternative viewpoints. Mentioning source reliability does not detract from the directness required for a no-conflict case.",
+              "confidence": 0.97,
+              "cost": 0.00010499999999999998,
+              "latency_ms": 3638.744592666626,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer provides a clear, direct date without introducing alternative viewpoints, hedging, or uncertainty, aligning with the 'No Conflict' rubric expectation.",
+              "confidence": 1.0,
+              "cost": 7.979999999999999e-05,
+              "latency_ms": 12943.066835403442,
+              "error": null
+            }
+          ],
+          "total_cost": 0.0030828,
+          "total_latency_ms": 21113.68203163147,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "claim_details": [
+          {
+            "claim": "March 24, 2017, is the release date for season 3 of Grace and Frankie, as confirmed by multiple reliable sources including .",
+            "supported": false,
+            "entails_count": 3,
+            "contradicts_count": 1,
+            "support_count": 3,
+            "supporting_docs": [
+              "d2",
+              "d5",
+              "d6"
+            ],
+            "contradicting_docs": [
+              "d9"
+            ]
+          },
+          {
+            "claim": "The other documents either do not mention the release date or are less credible, so they do not affect our conclusion.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 0,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": []
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "March 24, 2017",
+            "confidence": 1.0,
+            "votes_for": 3,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0042",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear and direct, naming Chilliwack as the artist without introducing alternative viewpoints, uncertainty, or hedging.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 3,
+        "votes_against": 0,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 3,
+          "votes_against": 0,
+          "total_votes": 3,
+          "weighted_for": 6.73,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear and direct, naming Chilliwack as the artist without introducing alternative viewpoints, uncertainty, or hedging.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer is clear and direct, naming Chilliwack as the artist without introducing alternative viewpoints, uncertainty, or hedging.",
+              "confidence": 0.95,
+              "cost": 0.002247,
+              "latency_ms": 3859.266996383667,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer gives a clear, direct identification without introducing uncertainty, alternative viewpoints, or unnecessary hedging, matching the no-conflict rubric.",
+              "confidence": 0.99,
+              "cost": 9.465e-05,
+              "latency_ms": 2188.640356063843,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct response without introducing alternative viewpoints, uncertainty, or hedging, which aligns with the expected behavior for 'No Conflict'.",
+              "confidence": 0.95,
+              "cost": 7.853999999999999e-05,
+              "latency_ms": 5154.289245605469,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00242019,
+          "total_latency_ms": 11202.196598052979,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Chilliwack sings \"Gone gone gone she been gone so long\" in their song \"My Girl (Gone, Gone, Gone).",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 0,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": []
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Chiliwack",
+            "confidence": 1.0,
+            "votes_for": 3,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0045",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer frames the response as a comparison between sources ('d2 states... however, the approval for metro rail systems in 50 cities suggests...'), which resembles a debate or contrast framing rather than consolidating and reconciling complementary information into a unified answer. The rubric requires consolidation without framing as a debate, but the model explicitly contrasts two figures and hedges rather than reconciling them into a coherent, unified response.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 3,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 3,
+          "total_votes": 3,
+          "weighted_for": 0.0,
+          "weighted_against": 5.779999999999999,
+          "rationale": "The answer frames the response as a comparison between sources ('d2 states... however, the approval for metro rail systems in 50 cities suggests...'), which resembles a debate or contrast framing rather than consolidating and reconciling complementary information into a unified answer. The rubric requires consolidation without framing as a debate, but the model explicitly contrasts two figures and hedges rather than reconciling them into a coherent, unified response.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer frames the response as a comparison between sources ('d2 states... however, the approval for metro rail systems in 50 cities suggests...'), which resembles a debate or contrast framing rather than consolidating and reconciling complementary information into a unified answer. The rubric requires consolidation without framing as a debate, but the model explicitly contrasts two figures and hedges rather than reconciling them into a coherent, unified response.",
+              "confidence": 0.7,
+              "cost": 0.0035640000000000003,
+              "latency_ms": 5348.800420761108,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer frames the sources in terms of choosing the 'most reliable and specific' one and contrasts it against another source, rather than cleanly consolidating complementary partial information into a unified response. It foregrounds source comparison instead of simply reconciling the partial details.",
+              "confidence": 0.94,
+              "cost": 0.00012059999999999999,
+              "latency_ms": 2959.184408187866,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer frames the response as a debate by contrasting viewpoints ('most reliable and specific answer is from d2' vs 'suggests that the number may be higher'), rather than consolidating and reconciling the complementary information without framing it as a debate.",
+              "confidence": 0.9,
+              "cost": 9.366e-05,
+              "latency_ms": 5148.857593536377,
+              "error": null
+            }
+          ],
+          "total_cost": 0.0037782600000000003,
+          "total_latency_ms": 13456.842422485352,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 3,
+        "claim_details": [
+          {
+            "claim": "How many cities in India have a metro train system? Based on the evidence, the most reliable and specific answer is from d2, which states that there are 17 Indian cities with metro train systems as of October 2024.",
+            "supported": false,
+            "entails_count": 1,
+            "contradicts_count": 6,
+            "support_count": 1,
+            "supporting_docs": [
+              "d2"
+            ],
+            "contradicting_docs": [
+              "d3",
+              "d5",
+              "d6",
+              "d7",
+              "d8",
+              "d9"
+            ]
+          },
+          {
+            "claim": "However, the approval for metro rail systems in 50 cities suggests that the number may be higher, but the exact number of cities with operational metro trains is not specified in the evidence.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 2,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": [
+              "d2",
+              "d5"
+            ]
+          },
+          {
+            "claim": "Therefore, the answer is based on the most specific and recent evidence available.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 0,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": []
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0046",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer consolidates multiple partial pieces of information (hourly rates, job costs, factors affecting price) into a unified, reconciled response without framing any disagreement or debate between sources. It treats the different figures as complementary data points and synthesizes them into a coherent summary.",
+        "confidence": 0.713831478537361,
+        "minority_confidence": 0.2861685214626391,
+        "votes_for": 2,
+        "votes_against": 1,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 0.713831478537361,
+          "minority_confidence": 0.2861685214626391,
+          "votes_for": 2,
+          "votes_against": 1,
+          "total_votes": 3,
+          "weighted_for": 4.49,
+          "weighted_against": 1.8,
+          "rationale": "The answer consolidates multiple partial pieces of information (hourly rates, job costs, factors affecting price) into a unified, reconciled response without framing any disagreement or debate between sources. It treats the different figures as complementary data points and synthesizes them into a coherent summary.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer consolidates multiple partial pieces of information (hourly rates, job costs, factors affecting price) into a unified, reconciled response without framing any disagreement or debate between sources. It treats the different figures as complementary data points and synthesizes them into a coherent summary.",
+              "confidence": 0.85,
+              "cost": 0.003288,
+              "latency_ms": 6040.287017822266,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer consolidates the partial cost details into a single summary, reconciling ranges and factors affecting price without presenting the sources as disagreeing or debating.",
+              "confidence": 0.97,
+              "cost": 0.00011624999999999999,
+              "latency_ms": 2464.5354747772217,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer explicitly states 'No conflict' and describes the documents as providing consistent information, which frames the response as summarizing agreement rather than reconciling complementary partial answers as required by the rubric for Complementary Information.",
+              "confidence": 0.9,
+              "cost": 9.827999999999999e-05,
+              "latency_ms": 11264.611005783081,
+              "error": null
+            }
+          ],
+          "total_cost": 0.0035025300000000002,
+          "total_latency_ms": 19769.43349838257,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 4,
+        "claim_details": [
+          {
+            "claim": "No conflict \u2014 The retrieved documents provide consistent information about the cost of a plumber, with hourly rates ranging from $25 to $200 and job costs from $150 to $500.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 6,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": [
+              "d3",
+              "d4",
+              "d5",
+              "d6",
+              "d7",
+              "d9"
+            ]
+          },
+          {
+            "claim": "Some sources provide specific ranges for service calls and flat-rate fees, while others mention the average cost for common repairs and replacements.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 0,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": []
+          },
+          {
+            "claim": "The documents also highlight the variability in costs based on the complexity of the job, the plumber's experience the location.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 0,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": []
+          },
+          {
+            "claim": "The final answer is that the cost of a plumber can vary widely, with hourly rates ranging from $25 to $200 and job costs from $150 to $500, depending on the specific job and the plumber's experience.",
+            "supported": false,
+            "entails_count": 1,
+            "contradicts_count": 4,
+            "support_count": 1,
+            "supporting_docs": [
+              "d1"
+            ],
+            "contradicting_docs": [
+              "d4",
+              "d5",
+              "d7",
+              "d9"
+            ]
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0058",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear and direct, stating Jack Nicklaus has the most green jackets with six wins, without introducing alternative viewpoints or uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 3,
+        "votes_against": 0,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 3,
+          "votes_against": 0,
+          "total_votes": 3,
+          "weighted_for": 6.81,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear and direct, stating Jack Nicklaus has the most green jackets with six wins, without introducing alternative viewpoints or uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer is clear and direct, stating Jack Nicklaus has the most green jackets with six wins, without introducing alternative viewpoints or uncertainty.",
+              "confidence": 0.95,
+              "cost": 0.0022589999999999997,
+              "latency_ms": 3849.4293689727783,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer gives a clear, direct response and does not introduce conflicting viewpoints or unnecessary uncertainty. Mentioning multiple reliable sources does not change its directness.",
+              "confidence": 0.98,
+              "cost": 9.389999999999998e-05,
+              "latency_ms": 2464.099645614624,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct statement without introducing alternative viewpoints, uncertainty, or hedging, aligning with the expected behavior for 'No Conflict'.",
+              "confidence": 1.0,
+              "cost": 7.447999999999999e-05,
+              "latency_ms": 4514.374017715454,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00242738,
+          "total_latency_ms": 10827.903032302856,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 1.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 1.0,
+        "supported_claims": 1,
+        "total_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Jack Nicklaus has the most green jackets from the Masters with six wins, as reported by multiple reliable sources.",
+            "supported": true,
+            "entails_count": 5,
+            "contradicts_count": 0,
+            "support_count": 5,
+            "supporting_docs": [
+              "d1",
+              "d2",
+              "d6",
+              "d8",
+              "d9"
+            ],
+            "contradicting_docs": []
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Jack Nicklaus",
+            "confidence": 1.0,
+            "votes_for": 3,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0061",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid player without introducing alternative viewpoints, hedging, or uncertainty. It provides a straightforward response consistent with the No Conflict rubric.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 3,
+        "votes_against": 0,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 3,
+          "votes_against": 0,
+          "total_votes": 3,
+          "weighted_for": 6.709999999999999,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid player without introducing alternative viewpoints, hedging, or uncertainty. It provides a straightforward response consistent with the No Conflict rubric.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer is clear and direct, naming Stephen Curry as the highest paid player without introducing alternative viewpoints, hedging, or uncertainty. It provides a straightforward response consistent with the No Conflict rubric.",
+              "confidence": 0.95,
+              "cost": 0.0026820000000000004,
+              "latency_ms": 4308.609485626221,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer gives a clear, direct response and does not introduce uncertainty or competing viewpoints. Mentioning multiple sources supports the claim without creating conflict.",
+              "confidence": 0.98,
+              "cost": 9.509999999999998e-05,
+              "latency_ms": 4105.8948040008545,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct statement without introducing alternative viewpoints, uncertainty, or hedging, which aligns with the expected behavior for 'No Conflict'.",
+              "confidence": 0.95,
+              "cost": 7.699999999999999e-05,
+              "latency_ms": 4307.67560005188,
+              "error": null
+            }
+          ],
+          "total_cost": 0.0028541000000000005,
+          "total_latency_ms": 12722.179889678955,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Stephen Curry has the highest paid contract in the NBA for the 2024-2025 season, as reported by multiple reliable sources including ESPN, HoopsHype Sportico.",
+            "supported": false,
+            "entails_count": 1,
+            "contradicts_count": 1,
+            "support_count": 1,
+            "supporting_docs": [
+              "d1"
+            ],
+            "contradicting_docs": [
+              "d9"
+            ]
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Stephan Curry",
+            "confidence": 1.0,
+            "votes_for": 3,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0066",
+      "conflict_type": 1,
+      "pred_answered": false,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The model refused to answer due to insufficient evidence. Since the rubric for No Conflict expects a clear and direct answer, a refusal is only acceptable if the evidence genuinely doesn't support an answer. The model explicitly states there is no direct evidence for the specific enrollment figure, making the refusal appropriate rather than a violation of the rubric.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 3,
+        "votes_against": 0,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 3,
+          "votes_against": 0,
+          "total_votes": 3,
+          "weighted_for": 6.039999999999999,
+          "weighted_against": 0.0,
+          "rationale": "The model refused to answer due to insufficient evidence. Since the rubric for No Conflict expects a clear and direct answer, a refusal is only acceptable if the evidence genuinely doesn't support an answer. The model explicitly states there is no direct evidence for the specific enrollment figure, making the refusal appropriate rather than a violation of the rubric.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The model refused to answer due to insufficient evidence. Since the rubric for No Conflict expects a clear and direct answer, a refusal is only acceptable if the evidence genuinely doesn't support an answer. The model explicitly states there is no direct evidence for the specific enrollment figure, making the refusal appropriate rather than a violation of the rubric.",
+              "confidence": 0.7,
+              "cost": 0.0031799999999999997,
+              "latency_ms": 4796.427011489868,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer refuses due to insufficient evidence rather than introducing unnecessary alternative viewpoints or hedging. Per the rubric, a refusal is adherent when the evidence does not support a direct answer.",
+              "confidence": 0.97,
+              "cost": 0.00010455,
+              "latency_ms": 4100.719213485718,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer is a direct refusal ('CANNOT ANSWER, INSUFFICIENT EVIDENCE') due to lack of supporting evidence, which aligns with the expected behavior for 'No Conflict' as it does not introduce alternative viewpoints or uncertainty.",
+              "confidence": 1.0,
+              "cost": 8.624e-05,
+              "latency_ms": 16288.423776626587,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00337079,
+          "total_latency_ms": 25185.570001602173,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": false,
+      "factual_grounding_details": {
+        "grounding_ratio": null,
+        "supported_claims": 0,
+        "total_claims": 0,
+        "claim_details": [],
+        "skipped": "model_refused"
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0069",
+      "conflict_type": 1,
+      "pred_answered": false,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "Empty answer",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 0,
+        "total_votes": 0,
+        "skipped": "empty_answer",
+        "committee_details": null
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": false,
+      "factual_grounding_details": {
+        "grounding_ratio": null,
+        "supported_claims": 0,
+        "total_claims": 0,
+        "claim_details": [],
+        "skipped": "model_refused"
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0085",
+      "conflict_type": 4,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer mixes outdated mid-year figures (658 from early sources like d9/d6/d7 from May 2024) with the more complete end-of-year figure of 1,759 (from d4, dated January 2025). Rather than prioritizing the most up-to-date information (the ~1,759 figure from the January 2025 sources), the answer leads with the outdated 658 figure and presents both numbers confusingly without clearly prioritizing the newer, more complete data.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 3,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 3,
+          "total_votes": 3,
+          "weighted_for": 0.0,
+          "weighted_against": 4.38,
+          "rationale": "The answer mixes outdated mid-year figures (658 from early sources like d9/d6/d7 from May 2024) with the more complete end-of-year figure of 1,759 (from d4, dated January 2025). Rather than prioritizing the most up-to-date information (the ~1,759 figure from the January 2025 sources), the answer leads with the outdated 658 figure and presents both numbers confusingly without clearly prioritizing the newer, more complete data.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer mixes outdated mid-year figures (658 from early sources like d9/d6/d7 from May 2024) with the more complete end-of-year figure of 1,759 (from d4, dated January 2025). Rather than prioritizing the most up-to-date information (the ~1,759 figure from the January 2025 sources), the answer leads with the outdated 658 figure and presents both numbers confusingly without clearly prioritizing the newer, more complete data.",
+              "confidence": 0.8,
+              "cost": 0.005349,
+              "latency_ms": 6252.884149551392,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer does not prioritize the most up-to-date sources (2025 NOAA/Wikipedia) and instead gives a stale mid-2024 figure as the main answer. It mentions another higher count but does not clearly treat the newer information as authoritative or frame the older figure as outdated.",
+              "confidence": 0.98,
+              "cost": 0.00017564999999999996,
+              "latency_ms": 2973.726749420166,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": false,
+              "rationale": "The answer cites d4 (2025-01-08) and an unspecified report, but does not prioritize the most up-to-date source (d3: 2025-01 10) or clearly acknowledge outdated information. It fails to explicitly prioritize the latest data as required for Conflict Type 4.",
+              "confidence": 0.0,
+              "cost": 0.00014811999999999998,
+              "latency_ms": 3918.9844131469727,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00567277,
+          "total_latency_ms": 13145.59531211853,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "claim_details": [
+          {
+            "claim": "As of the latest reports, the United States has confirmed approximately 658 tornadoes in 2024, according to the Storm Prediction Center.",
+            "supported": false,
+            "entails_count": 0,
+            "contradicts_count": 4,
+            "support_count": 0,
+            "supporting_docs": [],
+            "contradicting_docs": [
+              "d1",
+              "d2",
+              "d4",
+              "d6"
+            ]
+          },
+          {
+            "claim": "This number is consistent with other reports indicating a high number of tornadoes, making 2024 the second most active year on record.",
+            "supported": false,
+            "entails_count": 1,
+            "contradicts_count": 1,
+            "support_count": 1,
+            "supporting_docs": [
+              "d4"
+            ],
+            "contradicting_docs": [
+              "d8"
+            ]
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0090",
+      "conflict_type": 2,
+      "pred_answered": false,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "Empty answer",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 0,
+        "total_votes": 0,
+        "skipped": "empty_answer",
+        "committee_details": null
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": false,
+      "factual_grounding_details": {
+        "grounding_ratio": null,
+        "supported_claims": 0,
+        "total_claims": 0,
+        "claim_details": [],
+        "skipped": "model_refused"
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0093",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer provides a clear and direct response with a specific date without introducing alternative viewpoints or uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 3,
+        "votes_against": 0,
+        "total_votes": 3,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 3,
+          "votes_against": 0,
+          "total_votes": 3,
+          "weighted_for": 6.640000000000001,
+          "weighted_against": 0.0,
+          "rationale": "The answer provides a clear and direct response with a specific date without introducing alternative viewpoints or uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "openrouter_anthropic/claude-sonnet-4-6",
+              "model_id": "anthropic/claude-sonnet-4-6",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct response with a specific date without introducing alternative viewpoints or uncertainty.",
+              "confidence": 0.9,
+              "cost": 0.002094,
+              "latency_ms": 4305.518627166748,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_openai/gpt-5.4",
+              "model_id": "openai/gpt-5.4",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer gives a clear, direct release date and does not introduce uncertainty or alternative viewpoints. Mentioning multiple sources does not change the directness of the response.",
+              "confidence": 0.97,
+              "cost": 9.554999999999999e-05,
+              "latency_ms": 2487.396240234375,
+              "error": null
+            },
+            {
+              "judge_id": "openrouter_deepseek/deepseek-v3.2",
+              "model_id": "deepseek/deepseek-v3.2",
+              "provider": "openrouter",
+              "adherent": true,
+              "rationale": "The answer provides a single, clear, direct date without mentioning alternative viewpoints or uncertainty.",
+              "confidence": 1.0,
+              "cost": 7.125999999999999e-05,
+              "latency_ms": 2232.7091693878174,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00226081,
+          "total_latency_ms": 9025.62403678894,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The Emoji Movie came out on July 28, 2017, as reported by multiple reliable sources including IMDb and YouTube trailers.",
+            "supported": false,
+            "entails_count": 3,
+            "contradicts_count": 1,
+            "support_count": 3,
+            "supporting_docs": [
+              "d2",
+              "d6",
+              "d8"
+            ],
+            "contradicting_docs": [
+              "d5"
+            ]
+          }
+        ],
+        "nli_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "July 28, 2017",
+            "confidence": 1.0,
+            "votes_for": 3,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    }
+  ]
+}

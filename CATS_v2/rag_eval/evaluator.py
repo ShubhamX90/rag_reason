@@ -162,7 +162,22 @@ class EnhancedEvaluator:
         doc_index = doc_index_from_record(rec)
 
         support_ids = support_doc_ids_from_notes(notes, accept_partial=True)
-        support_docs = [doc_index[i] for i in support_ids if i in doc_index]
+        # NLI-I fix: merge the annotator-verified verbatim `quote` from
+        # per_doc_notes into each support doc so enhanced_factual_grounding
+        # can use it as a tighter NLI premise. Falls back to snippet when no
+        # quote is present.
+        notes_by_id: Dict[str, Dict[str, Any]] = {
+            n.get("doc_id"): n for n in notes if n.get("doc_id")
+        }
+        support_docs: List[Dict[str, Any]] = []
+        for did in support_ids:
+            if did not in doc_index:
+                continue
+            merged = dict(doc_index[did])  # copy to avoid mutating the input record
+            quote = (notes_by_id.get(did, {}) or {}).get("quote")
+            if quote and str(quote).strip():
+                merged["quote"] = str(quote).strip()
+            support_docs.append(merged)
         gold_answerable = gold_answerable_from_notes(notes, accept_partial=True)
 
         answer = get_model_output(rec)
@@ -202,19 +217,44 @@ class EnhancedEvaluator:
             claims = extract_claims_by_sentence(answer, cfg.max_claims_per_answer)
 
             # --- Metric 2: behavior adherence (committee).
-            beh = await committee_behavior_adherence(self.committee, query, answer, ctype)
+            # Pass retrieved_docs so Type 4 / Type 5 judges can see publication
+            # dates / sources when judging "prioritise the up-to-date / reliable
+            # source" behavior (N6 fix). For other types the docs are ignored.
+            retrieved_docs = rec.get("retrieved_docs") or []
+            beh = await committee_behavior_adherence(
+                self.committee, query, answer, ctype,
+                retrieved_docs=retrieved_docs,
+            )
             beh_score = 1.0 if beh["adherent"] else 0.0
             beh_applicable = True
 
             # --- Metric 3: factual grounding (dedicated NLI judge, default Sonnet 4.6).
-            fg_result = await enhanced_factual_grounding(
-                self.nli_judge,
-                claims,
-                support_docs,
-                require_cross_doc=cfg.require_cross_doc_verification,
-            )
-            fg_score = fg_result["grounding_ratio"]
-            fg_applicable = True
+            # NLI-G fix: FG measures how well the model grounded its CLAIMS in
+            # the evidence. If the model refused (pred_answered=False) there
+            # are no claims to ground — FG is not applicable, regardless of
+            # whether the refusal was correct or wrong. (Correct refusal is
+            # already handled by the outer branch.) Previously FG ran on the
+            # refusal text, produced grounding_ratio=0.0, and dragged down
+            # the average for every wrong-refusal sample.
+            if not pred_answered:
+                fg_score = 0.0
+                fg_result = {
+                    "grounding_ratio": None,
+                    "supported_claims": 0,
+                    "total_claims": 0,
+                    "claim_details": [],
+                    "skipped": "model_refused",
+                }
+                fg_applicable = False
+            else:
+                fg_result = await enhanced_factual_grounding(
+                    self.nli_judge,
+                    claims,
+                    support_docs,
+                    require_cross_doc=cfg.require_cross_doc_verification,
+                )
+                fg_score = fg_result["grounding_ratio"]
+                fg_applicable = True
 
             # --- Metric 4: single-truth recall (committee).
             gold_ans = get_gold_answer(rec)

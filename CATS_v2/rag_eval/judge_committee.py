@@ -21,6 +21,7 @@ import asyncio
 import os
 import json
 import logging
+import re
 import time
 from typing import Dict, Any, List, Optional, Tuple
 from dataclasses import dataclass
@@ -78,6 +79,12 @@ class CommitteeDecision:
     individual_responses: List[JudgeResponse]
     total_cost: float
     total_latency_ms: float
+    # N4 fix: actual weighted vote totals (priority × confidence). Surfaced so
+    # a 1-vote-against-2 decision that flips to adherent=True because the one
+    # supporting judge had higher priority/confidence is auditable from the
+    # output alone, not only by re-computing the math.
+    weighted_for: float = 0.0
+    weighted_against: float = 0.0
     all_failed: bool = False
 
     def to_dict(self) -> Dict[str, Any]:
@@ -88,6 +95,8 @@ class CommitteeDecision:
             "votes_for": self.votes_for,
             "votes_against": self.votes_against,
             "total_votes": self.total_votes,
+            "weighted_for": self.weighted_for,
+            "weighted_against": self.weighted_against,
             "rationale": self.rationale,
             "individual_responses": [r.to_dict() for r in self.individual_responses],
             "total_cost": self.total_cost,
@@ -267,15 +276,46 @@ class JudgeClient:
 
         return content, input_tokens, output_tokens
 
+    @staticmethod
+    def _strip_markdown_fences(text: str) -> str:
+        """Remove ```json / ``` fences so they don't trip the brace-scan parser."""
+        if "```" not in text:
+            return text
+        # Drop any opening fence with optional language tag, plus closing fences.
+        return re.sub(r"```(?:json|JSON)?\s*", "", text).replace("```", "").strip()
+
+    @staticmethod
+    def _extract_first_json_object(text: str) -> str:
+        """Return the substring covering the first balanced {...} object.
+
+        Falls back to the find/rfind window if balanced-brace scanning fails.
+        Prevents 'Extra data' parse errors when the model appends extra text
+        or a second JSON-like blob after the main response.
+        """
+        depth = 0
+        start_idx = -1
+        for i, ch in enumerate(text):
+            if ch == "{":
+                if depth == 0:
+                    start_idx = i
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0 and start_idx != -1:
+                    return text[start_idx : i + 1]
+        # Fallback: legacy behavior.
+        s = text.find("{")
+        e = text.rfind("}") + 1
+        if s == -1 or e == 0:
+            raise ValueError("No JSON object found")
+        return text[s:e]
+
     def _parse_judge_response(self, text: str) -> Dict[str, Any]:
         """Parse a behavior-judge JSON response. Records parse failures explicitly."""
         try:
-            start = text.find("{")
-            end = text.rfind("}") + 1
-            if start == -1 or end == 0:
-                raise ValueError("No JSON found in response")
-
-            obj = json.loads(text[start:end])
+            cleaned = self._strip_markdown_fences(text)
+            json_blob = self._extract_first_json_object(cleaned)
+            obj = json.loads(json_blob)
 
             raw_conf = obj.get("confidence", 0.5)
             try:
@@ -299,15 +339,16 @@ class JudgeClient:
             }
 
     def _parse_nli_response(self, text: str) -> Tuple[str, float]:
-        """Parse an NLI JSON response. Returns (relation, confidence)."""
+        """Parse an NLI JSON response. Returns (relation, confidence).
+
+        Robust against markdown fences and trailing JSON-like content that
+        previously caused 'Extra data' errors and silent fallback to neutral.
+        """
         valid = {"entails", "contradicts", "neutral"}
         try:
-            start = text.find("{")
-            end = text.rfind("}") + 1
-            if start == -1 or end == 0:
-                raise ValueError("No JSON found in NLI response")
-
-            obj = json.loads(text[start:end])
+            cleaned = self._strip_markdown_fences(text)
+            json_blob = self._extract_first_json_object(cleaned)
+            obj = json.loads(json_blob)
             relation = str(obj.get("relation", "neutral")).strip().lower()
             if relation not in valid:
                 relation = "neutral"
@@ -345,9 +386,39 @@ class JudgeCommittee:
         for judge in config.judges:
             logger.info(f"  - {judge.model_id} ({judge.provider.value}) [priority={judge.priority}]")
 
+    async def _judge_with_timeout(self, judge: "JudgeClient", prompt: str) -> JudgeResponse:
+        """Wrap a single judge call in asyncio.wait_for so a slow judge
+        (typically DeepSeek with a long <think> trace) cannot block the entire
+        sample. Timeout comes from JudgeCommitteeConfig.timeout_seconds.
+        Returns a JudgeResponse with error='timeout' on timeout — the
+        downstream voter treats it the same as any other failed judge.
+        """
+        timeout = float(getattr(self.config, "timeout_seconds", 0) or 0)
+        try:
+            if timeout > 0:
+                return await asyncio.wait_for(judge.judge_behavior(prompt), timeout=timeout)
+            return await judge.judge_behavior(prompt)
+        except asyncio.TimeoutError:
+            logger.warning(
+                f"Judge {judge.config.model_id} timed out after {timeout:.1f}s; "
+                "excluding from this vote."
+            )
+            return JudgeResponse(
+                judge_id=f"{judge.config.provider.value}_{judge.config.model_id}",
+                model_id=judge.config.model_id,
+                provider=judge.config.provider.value,
+                adherent=False,
+                rationale="Judge timeout",
+                confidence=0.0,
+                cost=0.0,
+                latency_ms=timeout * 1000,
+                error="timeout",
+            )
+
     async def judge_behavior(self, prompt: str) -> CommitteeDecision:
-        """Get behavior judgment from the committee. All judges run in parallel."""
-        tasks = [judge.judge_behavior(prompt) for judge in self.judges]
+        """Get behavior judgment from the committee. All judges run in parallel,
+        each capped by JudgeCommitteeConfig.timeout_seconds (N7 fix)."""
+        tasks = [self._judge_with_timeout(judge, prompt) for judge in self.judges]
         responses = await asyncio.gather(*tasks)
 
         valid_responses = [r for r in responses if r.error is None]
@@ -386,6 +457,8 @@ class JudgeCommittee:
             votes_for=votes_for,
             votes_against=votes_against,
             total_votes=len(responses),
+            weighted_for=float(votes_for),
+            weighted_against=float(votes_against),
             rationale=rationale,
             individual_responses=responses,
             total_cost=sum(r.cost for r in responses),
@@ -436,6 +509,8 @@ class JudgeCommittee:
             votes_for=votes_for,
             votes_against=votes_against,
             total_votes=len(responses),
+            weighted_for=float(weighted_for),
+            weighted_against=float(weighted_against),
             rationale=rationale,
             individual_responses=responses,
             total_cost=sum(r.cost for r in responses),
@@ -458,6 +533,8 @@ class JudgeCommittee:
             votes_for=votes_for,
             votes_against=votes_against,
             total_votes=len(responses),
+            weighted_for=float(votes_for),
+            weighted_against=float(votes_against),
             rationale=rationale,
             individual_responses=responses,
             total_cost=sum(r.cost for r in responses),
