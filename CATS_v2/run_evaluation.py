@@ -294,16 +294,22 @@ async def process_single_file(args, input_file: str, file_idx: int, total: int):
             logger.info(f"Decisions Made: {cost['decisions_made']}")
             logger.info(f"Average Cost per Decision: ${cost['avg_cost_per_decision']:.6f}")
             
-            # Per-model costs
+            # Per-model costs (committee judges + NLI judge)
             if "per_judge_costs" in cost:
                 logger.info(f"\nPer-Model Costs:")
                 for model_id, model_cost in cost["per_judge_costs"].items():
-                    # Shorten model names for display
                     display_name = model_id.split('/')[-1] if '/' in model_id else model_id
-                    logger.info(f"  {display_name}:")
+                    logger.info(f"  {display_name} (committee):")
                     logger.info(f"    Total: ${model_cost['total_cost']:.4f}")
                     logger.info(f"    Requests: {model_cost['requests']}")
                     logger.info(f"    Avg/Request: ${model_cost['avg_cost']:.6f}")
+            if "nli_judge_cost" in cost:
+                n = cost["nli_judge_cost"]
+                display_name = n["model_id"].split("/")[-1] if "/" in n["model_id"] else n["model_id"]
+                logger.info(f"  {display_name} (NLI judge):")
+                logger.info(f"    Total: ${n['total_cost']:.4f}")
+                logger.info(f"    Requests: {n['requests']}")
+                logger.info(f"    Avg/Request: ${n['avg_cost']:.6f}")
         
         logger.info(f"\nOutput Files:")
         logger.info(f"  Report: {config.report_md}")

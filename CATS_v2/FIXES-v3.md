@@ -12,17 +12,18 @@ Scope: all modules except `batch_processor.py` (out of scope per request).
 > rubric, the NLI judge is Claude Sonnet 4.6 (not Haiku), partial-recall credit
 > uses the *minority* side of the vote (not the majority), correct refusals are
 > gated out of Behavior/FG/STR averages (N1/N10 fixed), CATS GR component uses
-> dataset-level F1 instead of sample-averaged accuracy, NLTK no longer splits
-> "$1.8 billion" mid-number, and judge priorities are YAML-overridable. In this
-> revision: the single-truth recall prompt now distinguishes *asserting* from
-> *mentioning* a gold answer and accepts spelling variants (N2B / N3); the
-> behavior judge sees document dates / sources for Type 4 / Type 5 samples
-> (N6); `claim_details` is now padded so `len(claim_details) == total_claims`
-> always (N9); both JSON parsers strip markdown fences and use balanced-brace
-> extraction (NLI fence bug); `CommitteeDecision.to_dict()` now exposes
-> `weighted_for / weighted_against` (N4); and every judge call is wrapped in
-> `asyncio.wait_for` so a hung DeepSeek call no longer blocks the whole sample
-> (N7).
+> dataset-level F1 instead of sample-averaged accuracy (overall AND per-type, N13),
+> NLTK no longer splits "$1.8 billion" mid-number, and judge priorities are
+> YAML-overridable. In this revision: the single-truth recall prompt now
+> distinguishes *asserting* from *mentioning* a gold answer and accepts spelling
+> variants (N2B / N3); the behavior judge sees document dates / sources for Type 4 /
+> Type 5 samples (N6); `claim_details` is now padded so
+> `len(claim_details) == total_claims` always (N9); both JSON parsers strip markdown
+> fences and use balanced-brace extraction (NLI fence bug);
+> `CommitteeDecision.to_dict()` now exposes `weighted_for / weighted_against` (N4);
+> every judge call is wrapped in `asyncio.wait_for` so a hung DeepSeek call no
+> longer blocks the whole sample (N7); NLI prompt now correctly handles the
+> two-section "Key evidence / Full passage" structured premise format (NLI-II).
 
 ---
 
@@ -894,6 +895,90 @@ The result dict now includes `nli_errors: int` (count of timed-out or
 exception-raising NLI calls). This makes it possible to distinguish "the
 model wasn't grounded" from "the NLI judge couldn't decide" in the
 artifact.
+
+---
+
+### N13 — Per-type CATS used GR accuracy while overall CATS used GR F1 — **FIXED**
+
+**Problem:** `_aggregate_results` used two inconsistent GR components:
+- **Overall CATS** — recomputed post-`finalize()` with `gr_dataset["f1"]` (dataset-level F1 from TP/FP/FN/TN). Correct.
+- **Per-type CATS** — `finalize()` built `cats_parts = [b["gr_accuracy"]]` (mean of per-sample 0/1 flags). Inconsistent.
+
+A Type 4 bucket with 3 samples, all TP (model answered answerable questions), gets:
+- accuracy = 3/3 = **1.000**
+- F1: precision=1.0, recall=1.0 → **F1=1.000** (agrees here by coincidence)
+
+But a bucket where the model systematically refuses an answerable type:
+- accuracy counts TN correctly but not separately from TP; F1 penalises FN heavily.
+The inconsistency means per-type CATS and overall CATS were measuring structurally different things.
+
+**Fix in [`rag_eval/evaluator.py`](rag_eval/evaluator.py):**
+
+Two additions:
+
+1. `empty_bucket` now carries `pred_answered_list: []` and `gold_answerable_list: []`.
+   The accumulation loop fills them per-bucket alongside the global `pred_list`/`gold_list`.
+
+2. `finalize()` pops those lists, calls `compute_f1_gr(pt_pred, pt_gold)`, stores the result
+   as `b["gr_f1"]`, and uses it in `cats_parts` instead of accuracy:
+
+```python
+pt_pred = b.pop("pred_answered_list", [])
+pt_gold = b.pop("gold_answerable_list", [])
+if pt_pred:
+    pt_gr = compute_f1_gr(pt_pred, pt_gold)
+    b["gr_f1"] = pt_gr["f1"]
+    gr_cats_component = pt_gr["f1"]
+else:
+    gr_cats_component = b["gr_accuracy"]
+cats_parts = [gr_cats_component]
+...
+```
+
+The markdown report now shows `GR F1 (used in CATS)` per-type row alongside `GR Accuracy`
+(retained for transparency).
+
+**Note:** With n<5 per type, per-type F1 is still noisy (the ⚠️ warning already flags
+this). The fix ensures semantic consistency — both levels use F1 — not that the
+per-type number is stable. Overall CATS is unchanged (the post-finalize block still
+overrides overall cats_score with the dataset-level F1 as before).
+
+---
+
+### NLI-II — NLI prompt didn't explain the two-section structured premise format — **FIXED**
+
+**Problem:** `enhanced_factual_grounding` (N12.D fix) constructs the NLI premise as:
+
+```
+Key evidence (annotator-verified): <quote>
+
+Full passage: <snippet>
+```
+
+when both a quote and a distinct snippet are present. The `nli_prompt` had no instructions
+about this format. A judge that hadn't seen this structure before could:
+
+- Treat the section labels ("Key evidence", "Full passage") as evidence text.
+- Evaluate entailment only against the first section and ignore the full passage.
+- Penalise the premise for having formatting boilerplate that "contradicts" nothing.
+
+**Fix in [`rag_eval/judge_prompts.py`](rag_eval/judge_prompts.py) — `nli_prompt`:**
+
+A new bullet was added to the Rules block:
+
+```text
+- **Structured premise format:** the premise may begin with a labelled section
+  "Key evidence (annotator-verified):" followed by a short verbatim quote, then
+  "Full passage:" followed by the broader surrounding context. When both sections
+  are present, use the content of BOTH sections to evaluate entailment — the key
+  evidence is the most focused span, the full passage supplies surrounding context.
+  The section labels themselves ("Key evidence", "Full passage") are formatting
+  artefacts, not evidence.
+```
+
+This closes the gap between N12.D's premise construction and what the NLI judge
+is instructed to do. The fix is additive — when only a snippet is present (no
+two-section format), the rule is vacuous and the prompt behaves exactly as before.
 
 ---
 

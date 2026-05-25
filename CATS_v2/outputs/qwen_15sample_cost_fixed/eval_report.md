@@ -10,7 +10,7 @@
 
 **GR F1** *(used in CATS)*: 0.800
 
-**Behavior Adherence**: 0.600 (over 15 applicable samples)
+**Behavior Adherence**: 0.467 (over 15 applicable samples)
 
 **Factual Grounding**: 0.295 (over 10 applicable samples)
 
@@ -18,7 +18,7 @@
 
 --------------------------------------------------------------------------------
 
-### CATS Score: 0.574
+### CATS Score: 0.540
 
 *(average of 4 applicable sub-metrics)*
 
@@ -41,10 +41,10 @@
 - **Samples**: 7
 - **GR Accuracy**: 0.714
 - **GR F1** *(used in CATS)*: 0.833
-- **Behavior**: 0.857 (n=7)
+- **Behavior**: 0.714 (n=7)
 - **Grounding**: 0.500 (n=5)
 - **Recall**: 0.714 (n=7)
-- **CATS**: 0.726
+- **CATS**: 0.690
 
 ### Type 2: Complementary Info
 
@@ -74,10 +74,47 @@
   - ⚠️  n<5: numbers below are noisy
 - **GR Accuracy**: 0.667
 - **GR F1** *(used in CATS)*: 0.800
-- **Behavior**: 0.333 (n=3)
+- **Behavior**: 0.000 (n=3)
 - **Grounding**: 0.000 (n=2)
 - **Recall**: 0.333 (n=3)
-- **CATS**: 0.367
+- **CATS**: 0.283
+
+
+================================================================================
+
+## Cost Summary
+
+**Total Cost**: $0.5842
+
+**Decisions Made**: 21
+
+**Average Cost per Decision**: $0.027820
+
+
+### Per-Model Cost Breakdown
+
+#### anthropic/claude-sonnet-4-6
+
+- **Total Cost**: $0.0617
+- **Total Requests**: 21
+- **Average Cost per Request**: $0.002937
+
+#### openai/gpt-5.4
+
+- **Total Cost**: $0.0024
+- **Total Requests**: 21
+- **Average Cost per Request**: $0.000116
+
+#### deepseek/deepseek-v3.2
+
+- **Total Cost**: $0.0020
+- **Total Requests**: 21
+- **Average Cost per Request**: $0.000094
+
+#### NLI Judge: anthropic/claude-sonnet-4-6
+
+- **Total Cost**: $0.5181
+- **Total Requests**: 183
 
 
 ================================================================================

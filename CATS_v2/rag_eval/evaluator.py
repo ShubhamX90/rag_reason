@@ -25,7 +25,7 @@ from .config import EvaluationConfig, get_sonnet_nli_judge
 from .data import (
     doc_index_from_record,
     support_doc_ids_from_notes,
-    gold_answerable_from_notes,
+    gold_answerable_from_record,
     get_model_output,
     get_gold_answer,
 )
@@ -97,23 +97,30 @@ class EnhancedEvaluator:
         else:
             logger.warning("Conflict evaluation skipped (committee not available)")
 
+        if self.committee:
+            cost_summary = self.committee.get_cost_summary()
+            # Add NLI judge cost — it is tracked on a separate JudgeClient, not the committee.
+            cost_summary["nli_judge_cost"] = {
+                "model_id": self.nli_judge.config.model_id,
+                "total_cost": self.nli_judge.total_cost,
+                "requests": self.nli_judge.request_count,
+                "avg_cost": (self.nli_judge.total_cost / self.nli_judge.request_count
+                             if self.nli_judge.request_count else 0.0),
+            }
+            cost_summary["total_cost_usd"] = cost_summary["total_cost_usd"] + self.nli_judge.total_cost
+            # Recompute avg after adding NLI so it reflects the true grand total.
+            cost_summary["avg_cost_per_decision"] = (
+                cost_summary["total_cost_usd"] / max(1, cost_summary["decisions_made"])
+            )
+            self.results["cost_summary"] = cost_summary
+            logger.info(f"Total cost: ${cost_summary['total_cost_usd']:.4f}")
+
+        # Write output files after cost_summary is populated so both files include cost data.
         if cfg.report_md:
             self._write_markdown_report(cfg.report_md, self.results)
 
         if cfg.detailed_results_json:
             self._write_detailed_results(cfg.detailed_results_json)
-
-        if self.committee:
-            cost_summary = self.committee.get_cost_summary()
-            # Add NLI judge cost separately since it isn't part of the committee.
-            cost_summary["nli_judge_cost"] = {
-                "model_id": self.nli_judge.config.model_id,
-                "total_cost": self.nli_judge.total_cost,
-                "requests": self.nli_judge.request_count,
-            }
-            cost_summary["total_cost_usd"] = cost_summary["total_cost_usd"] + self.nli_judge.total_cost
-            self.results["cost_summary"] = cost_summary
-            logger.info(f"Total cost: ${cost_summary['total_cost_usd']:.4f}")
 
         return self.results
 
@@ -178,7 +185,7 @@ class EnhancedEvaluator:
             if quote and str(quote).strip():
                 merged["quote"] = str(quote).strip()
             support_docs.append(merged)
-        gold_answerable = gold_answerable_from_notes(notes, accept_partial=True)
+        gold_answerable = gold_answerable_from_record(rec, accept_partial=True)
 
         answer = get_model_output(rec)
         pred_answered = answered_flags([answer])[0]
@@ -318,6 +325,9 @@ class EnhancedEvaluator:
             "factual_grounding_n": 0,
             "single_truth_recall": [],
             "single_truth_recall_n": 0,
+            # Per-bucket pred/gold lists for per-type GR F1 (N13 fix).
+            "pred_answered_list": [],
+            "gold_answerable_list": [],
         }
 
         overall = {k: ([] if isinstance(v, list) else 0) for k, v in empty_bucket.items()}
@@ -368,6 +378,9 @@ class EnhancedEvaluator:
             if "pred_answered" in res and "gold_answerable" in res:
                 pred_list.append(bool(res["pred_answered"]))
                 gold_list.append(bool(res["gold_answerable"]))
+                # Also track per-bucket for per-type F1 (N13 fix).
+                bucket["pred_answered_list"].append(bool(res["pred_answered"]))
+                bucket["gold_answerable_list"].append(bool(res["gold_answerable"]))
 
         def finalize(b: Dict[str, Any]) -> Dict[str, Any]:
             if b["n"] == 0:
@@ -375,8 +388,18 @@ class EnhancedEvaluator:
             for k in ("gr_accuracy", "behavior", "factual_grounding", "single_truth_recall"):
                 vals = b[k]
                 b[k] = float(np.mean(vals)) if vals else 0.0
+            # N13 fix: compute per-bucket GR F1 so per-type CATS is semantically
+            # consistent with overall CATS (which uses dataset-level F1, not accuracy).
+            pt_pred = b.pop("pred_answered_list", [])
+            pt_gold = b.pop("gold_answerable_list", [])
+            if pt_pred:
+                pt_gr = compute_f1_gr(pt_pred, pt_gold)
+                b["gr_f1"] = pt_gr["f1"]
+                gr_cats_component = pt_gr["f1"]
+            else:
+                gr_cats_component = b["gr_accuracy"]
             # CATS: mean of whichever sub-metrics had at least one applicable sample.
-            cats_parts = [b["gr_accuracy"]]  # GR always present
+            cats_parts = [gr_cats_component]
             if b["behavior_n"] > 0:
                 cats_parts.append(b["behavior"])
             if b["factual_grounding_n"] > 0:
@@ -482,6 +505,8 @@ class EnhancedEvaluator:
                 if b['n'] < 5:
                     lines.append(f"  - ⚠️  n<5: numbers below are noisy\n")
                 lines.append(f"- **GR Accuracy**: {_safe_fmt(b['gr_accuracy']):.3f}\n")
+                if "gr_f1" in b:
+                    lines.append(f"- **GR F1** *(used in CATS)*: {_safe_fmt(b['gr_f1']):.3f}\n")
                 lines.append(f"- **Behavior**: {_safe_fmt(b['behavior']):.3f} (n={b.get('behavior_n', b['n'])})\n")
                 lines.append(f"- **Grounding**: {_safe_fmt(b['factual_grounding']):.3f} (n={b.get('factual_grounding_n', b['n'])})\n")
                 lines.append(f"- **Recall**: {_safe_fmt(b['single_truth_recall']):.3f}"

@@ -109,6 +109,28 @@ def gold_answerable_from_notes(per_doc_notes: List[Dict[str, Any]], accept_parti
     return len(support_doc_ids_from_notes(per_doc_notes, accept_partial)) > 0
 
 
+def gold_answerable_from_record(record: Dict[str, Any], accept_partial: bool = True) -> bool:
+    """
+    Authoritative gold_answerable for a record.
+
+    Prefers the explicit `answerable_under_evidence` field when present — this
+    is the annotator's direct verdict and overrides notes-derived inference.
+    Falls back to `gold_answerable_from_notes` for records without that field
+    (backwards-compatible with the old dataset schema).
+
+    Why this matters: val-split records have `partially supports` verdicts even
+    on unanswerable samples (evidence is partial but insufficient). With
+    `accept_partial=True`, `gold_answerable_from_notes` returns True for those
+    samples, misclassifying correct refusals as wrong-refusals and scoring
+    GR=0 instead of GR=1.
+    """
+    aue = record.get("answerable_under_evidence")
+    if aue is not None:
+        return bool(aue)
+    notes = record.get("per_doc_notes") or []
+    return gold_answerable_from_notes(notes, accept_partial=accept_partial)
+
+
 class MissingModelOutputError(KeyError):
     """Raised when a record has no usable model_output."""
     pass

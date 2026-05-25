@@ -158,6 +158,13 @@ Rules:
   are NOT entailed by a premise unless the premise itself states that meta-fact verbatim.
 - A premise that merely mentions a topic without making the specific claim in the hypothesis is "neutral",
   not "entails".
+- **Structured premise format:** the premise may begin with a labelled section
+  "Key evidence (annotator-verified):" followed by a short verbatim quote, then
+  "Full passage:" followed by the broader surrounding context. When both sections
+  are present, use the content of BOTH sections to evaluate entailment — the key
+  evidence is the most focused span, the full passage supplies surrounding context.
+  The section labels themselves ("Key evidence", "Full passage") are formatting
+  artefacts, not evidence.
 
 Return ONLY a JSON object (no markdown fences, no extra text):
 {{
