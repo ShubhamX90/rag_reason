@@ -121,6 +121,72 @@ def _strip_citations_inplace(text: str) -> str:
     return text
 
 
+# --------------------
+# Attribution stripping (Fix 4)
+# --------------------
+# Many gold answers wrap verifiable facts inside source-attribution phrases:
+#   "According to Wikipedia, X"             → X
+#   "Source A and Source B both confirm X"  → X
+#   "As of early 2025, X"                   → X
+#   "X, confirmed across multiple sources"  → X
+# Stripping the attribution exposes the atomic verifiable fact so NLI can
+# evaluate it against individual docs without being confused by meta-language.
+
+# Leading attribution patterns:
+#   (a) "According to / As reported/stated/noted/confirmed by [Source],"
+#   (b) "[Sources...] both/also confirm/show/report/state/note (that)"
+#       — requires "both" or "also" to avoid stripping normal sentences
+#         like "The study shows that X"
+#   (c) "As of [temporal qualifier],"
+_ATTR_PREFIX_RE = re.compile(
+    r"^(?:"
+    # (a) Standard attribution opener
+    r"(?:According|As\s+(?:reported|stated|noted|confirmed))\s+(?:to|by)\s+[^,]{4,80}?,\s*"
+    # (b) Named-source attribution: "[Sources] both/also VERB (that)"
+    r"|[A-Z][^.]{8,120}?\s+(?:both|also)\s+(?:confirm|confirms|show|shows|report|reports|state|states|note|notes|indicate|indicates)\s+(?:that\s+)?"
+    # (c) Quantity-source attribution: "Multiple/Several/Both/All sources VERB (that)"
+    r"|(?:Multiple|Several|Both|All|Many)\s+sources?\s+(?:confirm|confirms|show|shows|report|reports|indicate|indicates|agree|corroborate|concur)\s+(?:that\s+)?"
+    # (d) Temporal qualifier
+    r"|[Aa]s\s+of\s+[^,]{4,60},\s*"
+    r")",
+    re.DOTALL,
+)
+
+# Trailing confirmation suffix:
+#   "X, confirmed across multiple sources"  → X
+#   "X, unanimously established by all studies"  → X
+_TRAILING_META_RE = re.compile(
+    r",\s*(?:unanimously|widely|consistently|independently)?\s*"
+    r"(?:confirmed|verified|established|documented|supported|agreed)"
+    r"(?:\s+(?:across|by|among|in)\s+[^.]*)?\.?$",
+    re.IGNORECASE,
+)
+
+
+def _strip_attribution(claim: str) -> str:
+    """
+    Strip source-attribution wrapper from a claim, returning the core verifiable fact.
+
+    Only strips when the residual is >= 4 words so we don't create empty fragments.
+    Capitalises the first letter of the residual when the original was capitalised.
+    """
+    s = claim
+
+    # Strip leading attribution prefix
+    m = _ATTR_PREFIX_RE.match(s)
+    if m and m.end() < len(s) - 1:
+        residual = s[m.end():].strip(" ,")
+        if len(residual.split()) >= 4:
+            s = (residual[0].upper() + residual[1:]) if residual else residual
+
+    # Strip trailing meta-confirmation suffix
+    s_stripped = _TRAILING_META_RE.sub("", s).strip(" .")
+    if len(s_stripped.split()) >= 4:
+        s = s_stripped
+
+    return s
+
+
 def extract_claims_by_sentence(answer_text: str, max_claims: int = 12) -> List[str]:
     """
     Split answer into candidate claims (sentences) suitable for NLI.
@@ -198,6 +264,13 @@ def extract_claims_by_sentence(answer_text: str, max_claims: int = 12) -> List[s
         # Heuristic: if the sentence has no content word of >=5 chars,
         # it's almost certainly a meta-citation fragment, not a claim.
         if not any(len(w.strip(".,;:!?")) >= 5 for w in words):
+            continue
+
+        # Fix 4: Strip source-attribution wrappers ("According to X, ...",
+        # "A and B both confirm ...", "As of DATE, ...") so NLI evaluates
+        # the core verifiable fact rather than the meta-attribution sentence.
+        stripped = _strip_attribution(stripped)
+        if not stripped or len(stripped.split()) < 4:
             continue
 
         out.append(stripped)

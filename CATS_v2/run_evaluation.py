@@ -81,7 +81,8 @@ def _apply_yaml_to_config(yaml_data: dict, config: EvaluationConfig, args) -> Ev
     # Conflict-eval section
     ce = yaml_data.get("conflict_eval") or {}
     for k in ("correct_refusal_full_credit", "require_cross_doc_verification",
-              "max_claims_per_answer", "allow_paraphrases", "aggregate_by_conflict_type"):
+              "max_claims_per_answer", "allow_paraphrases", "aggregate_by_conflict_type",
+              "min_entail_confidence", "majority_support_rule"):
         if k in ce:
             setattr(config.conflict, k, ce[k])
 

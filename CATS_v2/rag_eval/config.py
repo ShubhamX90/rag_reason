@@ -158,6 +158,9 @@ class EnhancedConflictEvalConfig:
 
     # Enhanced factual grounding
     require_cross_doc_verification: bool = False
+    min_entail_confidence: float = 0.5  # NLI confidence floor; verdicts below this are treated as neutral
+    majority_support_rule: bool = False  # if True: claim passes when entails_count > contradicts_count (majority wins)
+                                         # if False (default): any contradiction blocks the claim
 
     # Enhanced single-truth recall
     allow_paraphrases: bool = True

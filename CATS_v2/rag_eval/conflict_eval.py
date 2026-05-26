@@ -16,10 +16,55 @@ Authors: Enhanced by Claude AI
 """
 
 import asyncio
+import re
 from typing import Dict, Any, List, Optional
 from .judge_prompts import behavior_judge_prompt, single_truth_recall_prompt, nli_prompt
 from .judge_committee import JudgeCommittee, JudgeClient, CommitteeDecision
 from .logging_config import logger
+
+
+# ---------------------------------------------------------------------------
+# Meta-claim detection (Fix 3)
+# ---------------------------------------------------------------------------
+# Claims that reference the aggregate of docs ("confirmed across all sources",
+# "unanimously confirmed", etc.) cannot be verified per-doc because no single
+# doc states "all sources agree on X". Excluding them from the FG denominator
+# avoids unfairly penalising the model for making true aggregate statements.
+
+_META_CLAIM_RE = re.compile(
+    r"(?:"
+    # Trailing meta phrases — claim says sources agree, not a verifiable world fact
+    r"confirmed\s+across\s+(?:all\s+available|all|multiple)\s+sources?"
+    r"|unanimously\s+(?:confirmed|agreed|supported|established|corroborated)"
+    r"|consistent(?:ly)?\s+(?:across|between|among)\s+(?:all\s+)?sources?"
+    r")",
+    re.IGNORECASE,
+)
+
+# Source-reference fragments: "An older high-credibility source from November 2023 (Olympics.com)"
+# — no actual claim about the world, just a source label.
+_SOURCE_FRAG_RE = re.compile(
+    r"^[Aa]n?\s+(?:[\w-]+\s+){0,4}"
+    r"(?:source|study|report|document|article|paper|page|survey|analysis)\s+from\s+",
+    re.IGNORECASE,
+)
+
+# Anaphoric meta-references: "These individual confirmations are consistent with..."
+# — the subject is other citations, not a real-world entity.
+_ANAPHORIC_META_RE = re.compile(
+    r"^(?:These|This|Those|The)\s+(?:individual\s+)?"
+    r"(?:confirmations?|sources?|documents?|findings?|results?|references?)\s+",
+    re.IGNORECASE,
+)
+
+
+def _is_meta_claim(claim: str) -> bool:
+    """Return True if claim is a meta-attribution statement not verifiable against individual docs."""
+    return bool(
+        _META_CLAIM_RE.search(claim)
+        or _SOURCE_FRAG_RE.match(claim)
+        or _ANAPHORIC_META_RE.match(claim)
+    )
 
 
 def _iter_gold_answers(gold_answers: Any) -> List[str]:
@@ -122,6 +167,9 @@ async def enhanced_factual_grounding(
     claims: List[str],
     support_docs: List[Dict[str, Any]],
     require_cross_doc: bool = False,
+    min_entail_confidence: float = 0.5,
+    majority_support_rule: bool = False,
+    conflict_type: int = 0,
 ) -> Dict[str, Any]:
     """
     Factual grounding via NLI entailment, computed by a single dedicated
@@ -130,32 +178,40 @@ async def enhanced_factual_grounding(
     For each claim, we ask the NLI judge whether each support_doc entails it.
     A claim is "supported" if at least one doc entails it (or two, when
     require_cross_doc=True).
+
+    Meta-attribution claims (e.g. "unanimously confirmed across all sources")
+    are excluded from the FG denominator — they cannot be verified per-doc.
+
+    conflict_type=3 (Conflicting Opinions) uses a relaxed rule: contradictions
+    from opposing docs are expected and do not block a claim that has at least
+    one entailment.
     """
     if not claims:
         return {
             "grounding_ratio": 0.0,
             "supported_claims": 0,
             "total_claims": 0,
+            "evaluable_claims": 0,
+            "meta_excluded_claims": 0,
             "claim_details": [],
             "nli_errors": 0,
         }
 
     if not support_docs:
         # N9 fix: keep the schema invariant len(claim_details) == total_claims.
-        # Previously this branch returned claim_details=[] while total_claims=len(claims),
-        # which broke downstream code that iterated claim_details expecting one entry
-        # per claim.
         return {
             "grounding_ratio": 0.0,
             "supported_claims": 0,
             "total_claims": len(claims),
+            "evaluable_claims": len(claims),
+            "meta_excluded_claims": 0,
             "claim_details": [
                 {
                     "claim": c,
                     "supported": False,
                     "entails_count": 0,
                     "contradicts_count": 0,
-                    "support_count": 0,           # alias kept for backward compatibility
+                    "support_count": 0,
                     "supporting_docs": [],
                     "contradicting_docs": [],
                 }
@@ -166,14 +222,30 @@ async def enhanced_factual_grounding(
 
     claim_details = []
     supported_count = 0
+    meta_excluded_count = 0
     total_errors = 0
 
-    # NLI confidence floor: a "entails" verdict with confidence below this is
-    # treated as neutral. Prevents wishy-washy entailments from passing the
-    # threshold on a single doc.
-    MIN_ENTAIL_CONFIDENCE = 0.5
+    # NLI confidence floor — passed in from config (default 0.5, sweep via YAML).
+    MIN_ENTAIL_CONFIDENCE = min_entail_confidence
 
     for claim in claims:
+        # Fix 3: Skip meta-attribution claims that reference the aggregate of
+        # docs. They cannot be entailed by any single doc and unfairly penalise
+        # the model for accurate aggregate statements.
+        if _is_meta_claim(claim):
+            meta_excluded_count += 1
+            claim_details.append({
+                "claim": claim,
+                "supported": False,
+                "entails_count": 0,
+                "contradicts_count": 0,
+                "support_count": 0,
+                "supporting_docs": [],
+                "contradicting_docs": [],
+                "evaluation_method": "meta_excluded",
+            })
+            continue
+
         entails_count = 0
         contradicts_count = 0
         supporting_docs: List[str] = []
@@ -233,10 +305,20 @@ async def enhanced_factual_grounding(
                 contradicting_docs.append(doc.get("doc_id", "unknown"))
 
         threshold = 2 if require_cross_doc else 1
-        # NLI-A fix: a claim contradicted by any support doc is NOT grounded,
-        # even if another doc entails it. The model is asserting something
-        # that the evidence directly disputes.
-        is_supported = (entails_count >= threshold) and (contradicts_count == 0)
+        if conflict_type == 3:
+            # Fix FG-CT3: For conflicting-opinions queries, docs on the opposing
+            # side will always contradict claims about the other side — that is
+            # expected, not evidence of hallucination. Only require that at least
+            # one doc entails the claim; ignore contradictions entirely.
+            is_supported = entails_count >= threshold
+        elif majority_support_rule:
+            # Majority rule + tie-breaking: claim passes when entails >= contradicts
+            # (ties go to the claim — on gold data a tie means genuine ambiguity,
+            # not hallucination). Previously used strict e > c which lost tie cases.
+            is_supported = (entails_count >= threshold) and (entails_count >= contradicts_count)
+        else:
+            # Strict rule (default): any contradiction blocks the claim.
+            is_supported = (entails_count >= threshold) and (contradicts_count == 0)
 
         if is_supported:
             supported_count += 1
@@ -251,12 +333,15 @@ async def enhanced_factual_grounding(
             "contradicting_docs": contradicting_docs,
         })
 
-    grounding_ratio = supported_count / len(claims)
+    evaluable_claims = len(claims) - meta_excluded_count
+    grounding_ratio = supported_count / evaluable_claims if evaluable_claims > 0 else 0.0
 
     return {
         "grounding_ratio": grounding_ratio,
         "supported_claims": supported_count,
         "total_claims": len(claims),
+        "evaluable_claims": evaluable_claims,
+        "meta_excluded_claims": meta_excluded_count,
         "claim_details": claim_details,
         "nli_errors": total_errors,
     }

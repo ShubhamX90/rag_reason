@@ -259,6 +259,9 @@ class EnhancedEvaluator:
                     claims,
                     support_docs,
                     require_cross_doc=cfg.require_cross_doc_verification,
+                    min_entail_confidence=cfg.min_entail_confidence,
+                    majority_support_rule=cfg.majority_support_rule,
+                    conflict_type=ctype,
                 )
                 fg_score = fg_result["grounding_ratio"]
                 fg_applicable = True
