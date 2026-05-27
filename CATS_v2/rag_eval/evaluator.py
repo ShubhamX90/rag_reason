@@ -262,6 +262,7 @@ class EnhancedEvaluator:
                     min_entail_confidence=cfg.min_entail_confidence,
                     majority_support_rule=cfg.majority_support_rule,
                     conflict_type=ctype,
+                    neutral_as_support=cfg.neutral_as_support,
                 )
                 fg_score = fg_result["grounding_ratio"]
                 fg_applicable = True

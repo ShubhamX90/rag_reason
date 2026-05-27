@@ -170,6 +170,7 @@ async def enhanced_factual_grounding(
     min_entail_confidence: float = 0.5,
     majority_support_rule: bool = False,
     conflict_type: int = 0,
+    neutral_as_support: bool = False,
 ) -> Dict[str, Any]:
     """
     Factual grounding via NLI entailment, computed by a single dedicated
@@ -319,6 +320,14 @@ async def enhanced_factual_grounding(
         else:
             # Strict rule (default): any contradiction blocks the claim.
             is_supported = (entails_count >= threshold) and (contradicts_count == 0)
+
+        # R1: All-neutral = supported.
+        # If every doc returned neutral (e=0, c=0), the retrieved snippets simply
+        # don't contain the evidence — this is a retrieval gap, not hallucination.
+        # On a gold dataset the claim is presumed correct; penalising it for a
+        # retrieval miss produces artificially low FG scores.
+        if neutral_as_support and not is_supported and entails_count == 0 and contradicts_count == 0:
+            is_supported = True
 
         if is_supported:
             supported_count += 1

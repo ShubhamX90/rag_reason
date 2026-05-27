@@ -161,6 +161,8 @@ class EnhancedConflictEvalConfig:
     min_entail_confidence: float = 0.5  # NLI confidence floor; verdicts below this are treated as neutral
     majority_support_rule: bool = False  # if True: claim passes when entails_count > contradicts_count (majority wins)
                                          # if False (default): any contradiction blocks the claim
+    neutral_as_support: bool = False     # R1: if True, claims where ALL docs are neutral (e=0, c=0) are treated
+                                         # as supported — retrieval gap, not hallucination
 
     # Enhanced single-truth recall
     allow_paraphrases: bool = True
