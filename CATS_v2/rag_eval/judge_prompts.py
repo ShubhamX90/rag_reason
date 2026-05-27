@@ -231,5 +231,106 @@ Gold factual answer:
 {gold_answer}
 
 Model answer:
-{model_answer}
-""".strip()
+{model_answer}"""
+
+
+# ---------------------------------------------------------------------
+# FG committee prompt (v2 grounding approach)
+# ---------------------------------------------------------------------
+
+def fg_committee_prompt(
+    query: str,
+    claim_text: str,
+    eligible_docs: List[Dict[str, Any]],
+    model_answer: str = "",
+) -> str:
+    """Prompt for the judge committee to identify which pre-annotated supporting
+    documents contain evidence for a specific claim extracted from the model's answer.
+
+    The committee is given full context:
+      - The query
+      - The model's complete Final Answer (think-trace stripped) — for context
+      - The specific claim extracted from the Final Answer to evaluate
+      - Retrieved documents pre-filtered to 'supports' / 'partially supports' verdicts,
+        each shown with its gold annotation (verdict, key_fact, quote, snippet).
+        These verdicts are **ground truth** — the committee does NOT need to re-verify
+        whether a doc is relevant; it only needs to check whether the specific claim
+        is stated or clearly inferable from that doc's content.
+
+    eligible_docs: list of dicts with keys doc_id, verdict, key_fact, quote, snippet.
+    Only "supports" and "partially supports" docs are passed here — "irrelevant" docs
+    are filtered out before calling this function.
+
+    model_answer: the model's Final Answer (think-trace stripped). Shown to the
+    committee for context so the claim can be understood in the full answer's frame.
+    """
+    docs_block_lines = []
+    for d in eligible_docs:
+        doc_id = d.get("doc_id", "?")
+        verdict = d.get("verdict", "unknown")
+        key_fact = (d.get("key_fact") or "").strip()
+        quote = (d.get("quote") or "").strip()
+        snippet = (d.get("snippet") or "").strip()
+
+        if quote and snippet and quote not in snippet:
+            passage = f"Key evidence (annotator-verified): {quote}\nFull passage: {snippet}"
+        elif quote and snippet:
+            passage = snippet
+        elif quote:
+            passage = quote
+        else:
+            passage = snippet
+
+        docs_block_lines.append(
+            f"--- Document {doc_id} [gold verdict: {verdict}] ---\n"
+            f"Gold key fact: {key_fact}\n"
+            f"Passage: {passage[:600]}"
+        )
+
+    docs_block = "\n\n".join(docs_block_lines) if docs_block_lines else "(no eligible documents)"
+    valid_ids_str = ", ".join(d.get("doc_id", "?") for d in eligible_docs)
+
+    model_answer_block = ""
+    if model_answer:
+        # Truncate long answers — the committee needs context, not the full 2000-token trace.
+        truncated = model_answer[:1200]
+        if len(model_answer) > 1200:
+            truncated += "\n[... truncated for brevity ...]"
+        model_answer_block = (
+            f"MODEL'S FINAL ANSWER (the complete output from which the claim was extracted):\n"
+            f"{truncated}\n\n"
+        )
+
+    return (
+        "You are a fact-checking judge. Your task is to determine whether a specific claim "
+        "from a model's answer is directly supported by any of the retrieved documents.\n\n"
+        "IMPORTANT GROUND RULES:\n"
+        "- The document verdicts ('supports', 'partially supports') are GROUND TRUTH annotations "
+        "made by human experts. You do NOT need to re-verify whether these docs are relevant to "
+        "the query — they already are. Your job is ONLY to check whether the SPECIFIC CLAIM "
+        "is stated or clearly inferable from each doc's text.\n"
+        "- Do NOT use outside knowledge. Only what the document text says.\n"
+        "- No concept of 'contradicts' — ignore any conflict between docs. Only look for support.\n\n"
+        f"QUERY: {query}\n\n"
+        f"{model_answer_block}"
+        f'SPECIFIC CLAIM TO EVALUATE: "{claim_text}"\n\n'
+        "RETRIEVED DOCUMENTS (pre-annotated supporting docs — check which ones contain "
+        "evidence for the SPECIFIC CLAIM above):\n"
+        f"{docs_block}\n\n"
+        "YOUR TASKS:\n"
+        "1. For each document above, determine if its content (gold key fact + passage) "
+        "directly confirms the specific claim. A document supports the claim if the claim's "
+        "assertion is directly stated or clearly inferable from that document's text.\n"
+        "   - A 'supports' OR 'partially supports' verdict doc can support the claim.\n"
+        "   - Even if only one 'partially supports' doc confirms the claim, the claim is supported.\n\n"
+        "2. If NO single document alone supports the claim, check whether the COMBINATION "
+        "of any two documents together supports it (cross-document evidence — one doc provides "
+        "part A, another provides part B, and together they establish the claim).\n\n"
+        f"Valid document IDs you may reference: {valid_ids_str}\n\n"
+        "Return ONLY a JSON object (no markdown, no explanation outside the JSON):\n"
+        "{\n"
+        '  "supporting_docs": ["d2", "d3"],   // doc_ids that individually support the claim — empty [] if none\n'
+        '  "cross_doc_support": false,        // true ONLY when no single doc supports but 2 combined docs do\n'
+        '  "cross_doc_combo": []              // the 2 doc_ids that combine to support (only when cross_doc_support is true)\n'
+        "}"
+    )

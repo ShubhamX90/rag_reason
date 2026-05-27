@@ -1237,3 +1237,244 @@ current file does NOT contain those changes.
 - **FP case FG semantics** — When a model answers an unanswerable question (`pred_answered=True, gold_answerable=False`), FG runs on the fabricated answer. If that answer happens to be supported by documents, FG=1.0 even though the model was wrong to answer. By design (GR already penalises the FP), but worth documenting.
 
 Everything else from ISSUES.md §§1–6 (excluding §3.2/§3.3/§3.4) is fixed and the fix remains in place.
+
+---
+
+## FG-v2 — Committee-based Factual Grounding using gold annotations
+
+### Motivation
+
+The original NLI-based FG had a structural ceiling:
+
+| Failure mode | Root cause |
+|---|---|
+| e=0, c=0 (all-neutral) | Retrieval gap — snippet doesn't cover the claim; not a hallucination, but scored 0 |
+| e=0, c>0 (contradicted) | Synthesis claims ("prevailing consensus…") no single doc can confirm |
+| Confidence floor sensitivity | e.g. confidence=0.29 vs 0.30 flips the verdict |
+
+Even after R1–R4 relaxations (Tier 2), FG topped out at ~0.84 because ~15 claims were structurally unverifiable per-doc. The per-doc NLI architecture was the limiting factor, not model quality.
+
+### New approach
+
+**Gold per-doc annotations are ground truth.** The dataset has `per_doc_notes[].verdict` ∈ {`supports`, `partially supports`, `irrelevant`} annotated by a 5-model committee. These are treated as 100% confident.
+
+**Pipeline per claim:**
+
+1. **Claim extraction with citations preserved** — `extract_claims_with_citations()` splits the model's final answer (think trace stripped) into sentence-level claims and records which `[dN]` citations each sentence carries.
+
+2. **Judge committee identifies supporting docs** — the 3-judge committee (Sonnet 4.6 + GPT-5.4 + DeepSeek V3.2) is given:
+   - The query (context)
+   - The specific claim text
+   - Only the "supports" / "partially supports" docs (irrelevant docs excluded), each with its verdict label, gold `key_fact`, verbatim `quote`, and `snippet`
+   
+   The committee answers: *which of these docs directly confirms this specific claim?* Majority vote (doc included if >50% of judges name it).
+
+3. **Cross-doc support** — if no single doc supports the claim, the committee checks whether combining any two docs establishes it. Majority vote on `cross_doc_support`; combo doc IDs taken as union across agreeing judges.
+
+4. **Citation check** — the model must have cited at least one of the judge-identified supporting docs in that sentence. If the intersection of `cited_docs ∩ supporting_docs` is empty, the claim does not count as grounded — it may be a correct fact that the model failed to ground in evidence.
+
+5. **Scoring** — 1.0 per supported+cited claim, 0.0 otherwise. `FG = supported / N`.
+
+### What changed in each file
+
+| File | Change |
+|---|---|
+| `rag_eval/metrics.py` | Added `strip_think_trace()` (removes `<think>…</think>` before claim extraction) and `extract_claims_with_citations()` (returns `[{text, cited_docs}]` instead of stripped strings) |
+| `rag_eval/judge_prompts.py` | Added `fg_committee_prompt(query, claim, eligible_docs)` — structured prompt that shows only pre-annotated supporting docs with their labels/key_facts/passages and asks the committee to identify per-claim support + cross-doc combos |
+| `rag_eval/judge_committee.py` | Added `JudgeClient.judge_fg()` + `_parse_fg_response()` (parses `{supporting_docs, cross_doc_support, cross_doc_combo}` JSON) and `JudgeCommittee.judge_fg()` (majority aggregation across judges) |
+| `rag_eval/conflict_eval.py` | Added `committee_factual_grounding_v2()` — the new FG function; the old `enhanced_factual_grounding` is retained but no longer called by the evaluator |
+| `rag_eval/evaluator.py` | Replaced `enhanced_factual_grounding` call with `committee_factual_grounding_v2`; replaced `extract_claims_by_sentence` with `extract_claims_with_citations`; added `strip_think_trace` on model output; builds `docs_with_notes` (merged snippet + verdict/key_fact/quote per doc) instead of the old `support_docs` list |
+
+### Key design decisions
+
+- **No confidence score** — gold labels are taken as 100% accurate; judge is only doing semantic matching (does this claim map to what this doc says?), not re-verifying the verdict.
+- **Citation gating** — prevents the model from getting credit for a claim it stated correctly but failed to ground in evidence. Without this, a model that hallucinated facts that happen to match some docs would score well.
+- **Committee for semantic matching** — 3-judge majority reduces single-model noise on borderline claims where e.g. the claim is a paraphrase of the doc's key_fact.
+- **Eligible docs only** — passing "irrelevant" docs to the judge would waste tokens and introduce noise; the filter happens before the prompt is built.
+- **Cross-doc at FG level** — the NLI approach couldn't handle "claim needs doc A + doc B together"; the committee prompt explicitly asks about 2-doc combinations, which closes the structural gap for complementary-info (CT2) samples.
+
+---
+
+## FG-v3 — Always-compute FG + Full model answer context in committee prompt
+
+### FG-v3 Motivation
+
+Two gaps remained after FG-v2:
+
+1. **FG was gated on `pred_answered=True`** — when a model refused (wrong refusal or val dataset
+   evaluation), FG was skipped and marked `fg_applicable=False` (the N12.C fix). For validation
+   datasets where `model_output` IS the expected answer (no refusals), this was never triggered,
+   but the gate was conceptually incorrect: FG should always measure what the model grounded,
+   even if the model refused (grounding ratio = 0.0 in that case, which is correct).
+
+2. **The committee prompt showed only the specific claim** — the committee lacked the full model
+   answer context when evaluating whether a claim was supported. A claim like "the merger was
+   completed in 2023" is ambiguous without knowing whether the model was answering about deal
+   completion dates or regulatory approval dates. Showing the full Final Answer lets judges
+   interpret the claim in context.
+
+### FG-v3 Changes
+
+**What stays the same:**
+
+- Gold per-doc verdicts ('supports' / 'partially supports' / 'irrelevant') remain 100% ground truth.
+  The committee does semantic matching only — it does not re-verify doc relevance.
+- No concept of contradicts — the committee only looks for support.
+- No confidence scores on verdicts — a 'partially supports' labelled doc is as authoritative as
+  a 'supports' labelled doc; both can support a claim.
+- Scoring: +1.0 per supported+cited claim (simplified uniform scoring for both verdict types),
+  0.0 otherwise. `FG = supported_count / N` (0–1 ratio; ×100 for percentage).
+- Citation check: model must have cited at least one judge-identified supporting doc.
+- Cross-doc: if no single doc but two docs combined support the claim AND model cited one → +1.0.
+- Only the model's **Final Answer** is used (think-trace is stripped via `strip_think_trace`).
+
+**What changed:**
+
+#### FG always computes (`rag_eval/evaluator.py`)
+
+The `if not pred_answered: fg_applicable = False` gate (the N12.C fix) is removed.
+FG now runs in every non-correct-refusal case:
+
+```python
+# FG always computes when model output is present (FG-v3 change).
+fg_result = await committee_factual_grounding_v2(
+    self.committee, claims_with_citations, docs_with_notes,
+    query=query, model_answer=answer,
+)
+fg_score = fg_result["grounding_ratio"]
+fg_applicable = True
+```
+
+- A refusal text produces 0 extracted claims → `grounding_ratio = 0.0`, `total_claims = 0`.
+- `fg_applicable = True` means this 0.0 COUNTS in the FG average (correct: the model grounded nothing).
+- Correct refusals (`gold_answerable=False AND pred_answered=False`) are still gated out
+  by the outer `correct_refusal` branch — they remain `fg_applicable = False`.
+
+**Impact:** Wrong-refusal samples (FN in GR metrics) now contribute FG=0.0 to the average
+instead of being excluded. This makes the FG average more conservative on models that refuse
+answerable questions — a fairer reflection of grounding quality.
+
+#### Full model answer passed to committee (`rag_eval/judge_prompts.py`, `rag_eval/conflict_eval.py`)
+
+`fg_committee_prompt` gains a `model_answer: str = ""` parameter.
+When provided, the prompt shows the model's complete Final Answer above the specific claim:
+
+```text
+MODEL'S FINAL ANSWER (the complete output from which the claim was extracted):
+<truncated to 1200 chars>
+
+SPECIFIC CLAIM TO EVALUATE: "<claim>"
+```
+
+The committee is also told explicitly:
+
+- Gold verdicts are **ground truth** — no re-verification needed.
+- No concept of contradicts — only look for support.
+- Both 'supports' and 'partially supports' docs can support a claim.
+
+`committee_factual_grounding_v2` gains the matching `model_answer: str = ""` parameter
+and forwards it to `fg_committee_prompt`.
+
+### FG-v3 File-by-file changes
+
+| File | Change |
+| --- | --- |
+| `rag_eval/judge_prompts.py` | `fg_committee_prompt` gains `model_answer` param; prompt now shows model's Final Answer for context; explicit ground-truth / no-contradicts instructions added |
+| `rag_eval/conflict_eval.py` | `committee_factual_grounding_v2` gains `model_answer` param; docstring updated to reflect FG-v3 design; passes `model_answer` to prompt |
+| `rag_eval/evaluator.py` | Removed `if not pred_answered: fg_applicable = False` gate; FG always runs in non-correct-refusal branch; passes `model_answer=answer` to `committee_factual_grounding_v2` |
+
+### What is NOT changed in FG-v3
+
+- **Scoring formula** — still 1.0 per supported+cited claim, 0.0 otherwise (`FG = result / N`).
+- **Citation check** — still required (`cited_docs ∩ supporting_docs` must be non-empty).
+- **Cross-doc logic** — unchanged.
+- **Verdict filter** — still only 'supports' / 'partially supports' docs are eligible.
+- **Think-trace stripping** — still applied via `strip_think_trace` before claim extraction.
+- **Correct refusal gate** — still excluded from FG (unchanged from N1 fix).
+
+---
+
+## Val-dataset pipeline adapter — `expected_response.answer` + `conflict_type` string
+
+### Problem
+
+The gold validation split (`data/splits/92p5_7p5/stagewise_multi/val/stage3_final.jsonl`)
+uses a slightly different schema from the pipeline's expected format:
+
+| Val field | Pipeline expects | Gap |
+| --- | --- | --- |
+| `expected_response.answer` | `model_output` (string) | Pipeline returned `""` → all samples treated as refusals |
+| `conflict_type` (string, e.g. `"Complementary information"`) | `conflict_category_id` (int 1-5) | Pipeline defaulted everything to type 1 |
+| `answerable_under_evidence` (bool) | same | ✓ already handled by `gold_answerable_from_record` |
+| `per_doc_notes` with verdict/key_fact/quote | same | ✓ already correct |
+| `think` (stage-1 annotator reasoning) | not used | ✓ ignored (not model output) |
+
+### Fix — `rag_eval/data.py` — `get_model_output` fallback chain
+
+```python
+# 1. model_output (standard schema) — highest priority, unchanged
+if "model_output" in record:
+    ...
+
+# 2. expected_response.answer (val/gold dataset) — NEW fallback
+er = record.get("expected_response")
+if isinstance(er, dict) and "answer" in er:
+    return str(er.get("answer") or "")
+
+# 3. Empty string (treat as refusal) — unchanged
+```
+
+The `think` field is NOT included — it is the stage-1 annotator reasoning used to
+derive `per_doc_notes`, not a model thinking trace. `strip_think_trace` is still
+called on the result but has no effect (no `</think>` tag in the expected answer text).
+
+`abstain=True` records have `expected_response.answer = "CANNOT ANSWER, INSUFFICIENT
+EVIDENCE"` — `answered_flags` correctly detects these as refusals, `gold_answerable_from_record`
+returns `False` (via `answerable_under_evidence`), so `correct_refusal = True` and all
+three sub-metrics are correctly gated out (N1 fix).
+
+### Fix — `rag_eval/evaluator.py` — `conflict_type` string mapping
+
+A new lookup table and an updated `_safe_ctype` signature handle the string→int mapping:
+
+```python
+_CONFLICT_TYPE_STR_MAP = {
+    "no conflict": 1,
+    "complementary information": 2,
+    "conflicting opinions and research outcomes": 3,
+    "conflicting opinions or research outcomes": 3,   # typo variant
+    "conflict due to outdated information": 4,
+    "conflict due to misinformation": 5,
+}
+
+def _safe_ctype(raw, conflict_type_string=None):
+    if raw is None:
+        if conflict_type_string:
+            return _CONFLICT_TYPE_STR_MAP.get(str(conflict_type_string).strip().lower(), 1)
+        return 1
+    return int(raw)
+```
+
+Call site updated: `_safe_ctype(rec.get("conflict_category_id"), rec.get("conflict_type"))`.
+
+### Fix — `configs/val_tier2.yaml` — cleaned for FG-v3
+
+Old NLI-based options removed (`min_entail_confidence`, `neutral_as_support`,
+`ignore_contradictions_types`, `partial_credit_fg`, `majority_support_rule` — all
+applied to the old `enhanced_factual_grounding`). `max_claims_per_answer` raised
+to 8 (gold answers are longer than typical model outputs).
+
+### Verification on the 49-record val split
+
+| Conflict type | n | correct_refusals |
+| --- | --- | --- |
+| 1 — No Conflict | 19 | 8 |
+| 2 — Complementary Info | 15 | 7 |
+| 3 — Conflicting Opinions | 10 | 0 |
+| 4 — Outdated Info | 5 | 0 |
+| **Total** | **49** | **15** |
+
+All 49 records resolve without an unmapped conflict type.
+All 15 correct-refusal records have `answerable_under_evidence=False` and
+`expected_response.answer="CANNOT ANSWER, INSUFFICIENT EVIDENCE"` (36 chars).
+The 34 answerable records have model outputs ranging from 439 to 1625 chars.

@@ -280,6 +280,84 @@ def extract_claims_by_sentence(answer_text: str, max_claims: int = 12) -> List[s
     return out
 
 
+def strip_think_trace(text: str) -> str:
+    """Remove <think>...</think> reasoning trace so FG only scores the final answer."""
+    if text and "</think>" in text:
+        return text.split("</think>", 1)[1].strip()
+    return text or ""
+
+
+# _CITE_EXTRACT: capture bare doc-id inside [dN] brackets for per-sentence citation extraction
+_CITE_EXTRACT = re.compile(r"\[d(\d+)\]", re.IGNORECASE)
+
+
+def extract_claims_with_citations(answer_text: str, max_claims: int = 12) -> List[Dict]:
+    """Split answer into claims, preserving the inline citations found in each sentence.
+
+    Returns a list of dicts: {"text": <clean claim>, "cited_docs": [<doc_id>, ...]}.
+    Applies the same sentence-splitting and filtering logic as
+    extract_claims_by_sentence, but captures [dN] citations before stripping them.
+    """
+    if not answer_text:
+        return []
+
+    text = answer_text
+
+    # Same pre-tokenization protection as extract_claims_by_sentence
+    text = re.sub(r"\b([A-Z])\.(?=\s+[A-Z])", r"\1<DOT>", text)
+    text = re.sub(r"(\d)\.(\d)", r"\1<DOT>\2", text)
+    text = re.sub(r"\b([a-zA-Z])\.([A-Za-z]{2,4})\b", r"\1<DOT>\2", text)
+    _ABBREV = (
+        "Inc", "Ltd", "Co", "Corp", "Mr", "Mrs", "Ms", "Dr", "Prof", "St", "Sr", "Jr",
+        "vs", "etc", "e\\.g", "i\\.e", "Fig", "Vol", "No", "Ave", "Blvd", "Mt",
+    )
+    for ab in _ABBREV:
+        text = re.sub(rf"\b({ab})\.", rf"\1<DOT>", text)
+
+    try:
+        sents = sent_tokenize(text)
+    except Exception:
+        sents = [s + "." for s in text.split(".") if s.strip()]
+
+    out: List[Dict] = []
+    for s in sents:
+        s = s.replace("<DOT>", ".").strip()
+        if not s:
+            continue
+
+        # Extract citations BEFORE stripping them
+        cited_docs = [f"d{m}" for m in _CITE_EXTRACT.findall(s)]
+        # Deduplicate while preserving order
+        seen_cites: set = set()
+        unique_cites: List[str] = []
+        for d in cited_docs:
+            if d not in seen_cites:
+                unique_cites.append(d)
+                seen_cites.add(d)
+
+        stripped = _strip_citations_inplace(s)
+        if not stripped:
+            continue
+        if _CITATION_ONLY.match(stripped):
+            continue
+        if _META_REFERENCE.match(stripped):
+            continue
+        words = stripped.split()
+        if len(words) < 4:
+            continue
+        if not any(len(w.strip(".,;:!?")) >= 5 for w in words):
+            continue
+        stripped = _strip_attribution(stripped)
+        if not stripped or len(stripped.split()) < 4:
+            continue
+
+        out.append({"text": stripped, "cited_docs": unique_cites})
+        if len(out) >= max_claims:
+            break
+
+    return out
+
+
 # --------------------
 # Citations
 # --------------------

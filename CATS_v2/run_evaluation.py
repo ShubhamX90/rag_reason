@@ -82,9 +82,14 @@ def _apply_yaml_to_config(yaml_data: dict, config: EvaluationConfig, args) -> Ev
     ce = yaml_data.get("conflict_eval") or {}
     for k in ("correct_refusal_full_credit", "require_cross_doc_verification",
               "max_claims_per_answer", "allow_paraphrases", "aggregate_by_conflict_type",
-              "min_entail_confidence", "majority_support_rule", "neutral_as_support"):
+              "min_entail_confidence", "majority_support_rule", "neutral_as_support",
+              "partial_credit_fg"):
         if k in ce:
             setattr(config.conflict, k, ce[k])
+
+    # ignore_contradictions_types is a list in YAML but a tuple in the dataclass.
+    if "ignore_contradictions_types" in ce:
+        setattr(config.conflict, "ignore_contradictions_types", tuple(ce["ignore_contradictions_types"]))
 
     # Committee section: voting strategy + priority overrides
     committee_section = ce.get("committee") or {}

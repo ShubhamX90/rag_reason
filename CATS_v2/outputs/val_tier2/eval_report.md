@@ -14,13 +14,13 @@
 
 **Behavior Adherence**: 1.000 (over 34 applicable samples)
 
-**Factual Grounding**: 0.772 (over 34 applicable samples)
+**Factual Grounding**: 0.872 (over 34 applicable samples)
 
 **Single-Truth Recall**: 0.941 (over 17 applicable samples)
 
 --------------------------------------------------------------------------------
 
-### CATS Score: 0.928
+### CATS Score: 0.953
 
 *(average of 4 applicable sub-metrics)*
 
@@ -44,9 +44,9 @@
 - **GR Accuracy**: 1.000
 - **GR F1** *(used in CATS)*: 1.000
 - **Behavior**: 1.000 (n=12)
-- **Grounding**: 0.819 (n=12)
+- **Grounding**: 0.889 (n=12)
 - **Recall**: 0.917 (n=12)
-- **CATS**: 0.934
+- **CATS**: 0.951
 
 ### Type 2: Complementary Info
 
@@ -54,9 +54,9 @@
 - **GR Accuracy**: 1.000
 - **GR F1** *(used in CATS)*: 1.000
 - **Behavior**: 1.000 (n=8)
-- **Grounding**: 0.771 (n=8)
+- **Grounding**: 0.969 (n=8)
 - **Recall**: 0.000 (n=0)
-- **CATS**: 0.924
+- **CATS**: 0.990
 
 ### Type 3: Conflicting Opinions
 
@@ -64,9 +64,9 @@
 - **GR Accuracy**: 1.000
 - **GR F1** *(used in CATS)*: 1.000
 - **Behavior**: 1.000 (n=9)
-- **Grounding**: 0.831 (n=9)
+- **Grounding**: 0.776 (n=9)
 - **Recall**: 0.000 (n=0)
-- **CATS**: 0.944
+- **CATS**: 0.925
 
 ### Type 4: Outdated Info
 
@@ -74,46 +74,46 @@
 - **GR Accuracy**: 1.000
 - **GR F1** *(used in CATS)*: 1.000
 - **Behavior**: 1.000 (n=5)
-- **Grounding**: 0.550 (n=5)
+- **Grounding**: 0.850 (n=5)
 - **Recall**: 1.000 (n=5)
-- **CATS**: 0.887
+- **CATS**: 0.963
 
 
 ================================================================================
 
 ## Cost Summary
 
-**Total Cost**: $3.4203
+**Total Cost**: $1.5055
 
-**Decisions Made**: 51
+**Decisions Made**: 172
 
-**Average Cost per Decision**: $0.067066
+**Average Cost per Decision**: $0.008753
 
 
 ### Per-Model Cost Breakdown
 
 #### anthropic/claude-sonnet-4-6
 
-- **Total Cost**: $0.1734
-- **Total Requests**: 51
-- **Average Cost per Request**: $0.003400
+- **Total Cost**: $1.4162
+- **Total Requests**: 172
+- **Average Cost per Request**: $0.008234
 
 #### openai/gpt-5.4
 
-- **Total Cost**: $0.0064
-- **Total Requests**: 51
-- **Average Cost per Request**: $0.000126
+- **Total Cost**: $0.0464
+- **Total Requests**: 172
+- **Average Cost per Request**: $0.000270
 
 #### deepseek/deepseek-v3.2
 
-- **Total Cost**: $0.0053
-- **Total Requests**: 51
-- **Average Cost per Request**: $0.000104
+- **Total Cost**: $0.0429
+- **Total Requests**: 172
+- **Average Cost per Request**: $0.000249
 
 #### NLI Judge: anthropic/claude-sonnet-4-6
 
-- **Total Cost**: $3.2353
-- **Total Requests**: 1035
+- **Total Cost**: $0.0000
+- **Total Requests**: 0
 
 
 ================================================================================

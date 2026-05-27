@@ -365,6 +365,47 @@ class JudgeClient:
             logger.warning(f"Failed to parse NLI response: {e}. Text: {text[:120]}")
             return "neutral", 0.0
 
+    def _parse_fg_response(self, text: str, valid_doc_ids: set) -> Dict[str, Any]:
+        """Parse the FG committee JSON response. Returns supporting_docs, cross_doc_support, cross_doc_combo."""
+        try:
+            cleaned = self._strip_markdown_fences(text)
+            json_blob = self._extract_first_json_object(cleaned)
+            obj = json.loads(json_blob)
+
+            raw_docs = obj.get("supporting_docs") or []
+            supporting = [d for d in raw_docs if isinstance(d, str) and d in valid_doc_ids]
+
+            cross_doc = bool(obj.get("cross_doc_support", False))
+            raw_combo = obj.get("cross_doc_combo") or []
+            combo = [d for d in raw_combo if isinstance(d, str) and d in valid_doc_ids]
+
+            return {"supporting_docs": supporting, "cross_doc_support": cross_doc, "cross_doc_combo": combo}
+        except Exception as e:
+            logger.warning(f"Failed to parse FG response for {self.config.model_id}: {e}")
+            return {"supporting_docs": [], "cross_doc_support": False, "cross_doc_combo": []}
+
+    async def judge_fg(self, prompt: str, valid_doc_ids: set) -> Dict[str, Any]:
+        """Send a factual-grounding judgment request. Returns parsed supporting_docs + cross_doc info."""
+        start_time = time.time()
+        try:
+            if self.config.provider == APIProvider.ANTHROPIC:
+                response_text, input_tokens, output_tokens = await self._call_anthropic(prompt)
+            elif self.config.provider == APIProvider.OPENROUTER:
+                response_text, input_tokens, output_tokens = await self._call_openrouter(prompt)
+            else:
+                raise ValueError(f"Unsupported provider: {self.config.provider}")
+
+            parsed = self._parse_fg_response(response_text, valid_doc_ids)
+            cost = (input_tokens * self.config.cost_per_1k_input / 1000
+                    + output_tokens * self.config.cost_per_1k_output / 1000)
+            self.total_cost += cost
+            self.request_count += 1
+            return {**parsed, "cost": cost, "latency_ms": (time.time() - start_time) * 1000, "error": None}
+        except Exception as e:
+            logger.error(f"FG judge {self.config.model_id} error: {e}")
+            return {"supporting_docs": [], "cross_doc_support": False, "cross_doc_combo": [],
+                    "cost": 0.0, "latency_ms": (time.time() - start_time) * 1000, "error": str(e)}
+
     async def close(self):
         if hasattr(self, "http_client"):
             await self.http_client.aclose()
@@ -556,6 +597,54 @@ class JudgeCommittee:
             total_latency_ms=sum(r.latency_ms for r in responses),
             all_failed=True,
         )
+
+    async def judge_fg(self, prompt: str, valid_doc_ids: set) -> Dict[str, Any]:
+        """Run FG judgment across all judges in parallel and aggregate by majority vote.
+
+        A doc is in supporting_docs if the majority of judges include it.
+        cross_doc_support is True if the majority of judges say so.
+        """
+        tasks = [j.judge_fg(prompt, valid_doc_ids) for j in self.judges]
+        responses = await asyncio.gather(*tasks)
+
+        valid = [r for r in responses if r.get("error") is None]
+        if not valid:
+            return {"supporting_docs": [], "cross_doc_support": False, "cross_doc_combo": [],
+                    "total_cost": sum(r.get("cost", 0.0) for r in responses)}
+
+        majority = len(valid) / 2.0
+
+        # Per-doc majority: include a doc if more than half of valid judges named it
+        from collections import Counter
+        doc_counts: Counter = Counter()
+        for r in valid:
+            for d in r.get("supporting_docs", []):
+                doc_counts[d] += 1
+        supporting_docs = [d for d, cnt in doc_counts.items() if cnt > majority]
+
+        # Cross-doc majority
+        cross_votes = sum(1 for r in valid if r.get("cross_doc_support", False))
+        cross_doc_support = cross_votes > majority
+
+        cross_combo: set = set()
+        if cross_doc_support:
+            for r in valid:
+                if r.get("cross_doc_support", False):
+                    cross_combo.update(r.get("cross_doc_combo", []))
+
+        self.total_cost += sum(r.get("cost", 0.0) for r in responses)
+        self.decision_count += 1
+
+        return {
+            "supporting_docs": supporting_docs,
+            "cross_doc_support": cross_doc_support,
+            "cross_doc_combo": list(cross_combo),
+            "total_cost": sum(r.get("cost", 0.0) for r in responses),
+            "judge_responses": [
+                {"model_id": j.config.model_id, **r}
+                for j, r in zip(self.judges, responses)
+            ],
+        }
 
     def get_cost_summary(self) -> Dict[str, Any]:
         return {

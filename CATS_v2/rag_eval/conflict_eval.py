@@ -18,7 +18,7 @@ Authors: Enhanced by Claude AI
 import asyncio
 import re
 from typing import Dict, Any, List, Optional
-from .judge_prompts import behavior_judge_prompt, single_truth_recall_prompt, nli_prompt
+from .judge_prompts import behavior_judge_prompt, single_truth_recall_prompt, nli_prompt, fg_committee_prompt
 from .judge_committee import JudgeCommittee, JudgeClient, CommitteeDecision
 from .logging_config import logger
 
@@ -171,6 +171,8 @@ async def enhanced_factual_grounding(
     majority_support_rule: bool = False,
     conflict_type: int = 0,
     neutral_as_support: bool = False,
+    ignore_contradictions_types: tuple = (),
+    partial_credit_fg: bool = False,
 ) -> Dict[str, Any]:
     """
     Factual grounding via NLI entailment, computed by a single dedicated
@@ -222,9 +224,12 @@ async def enhanced_factual_grounding(
         }
 
     claim_details = []
-    supported_count = 0
+    supported_count: float = 0.0
     meta_excluded_count = 0
     total_errors = 0
+
+    # R3: CT3 always ignores contradictions; caller can extend this to CT2/CT4.
+    _ignore_contradictions = conflict_type == 3 or conflict_type in ignore_contradictions_types
 
     # NLI confidence floor — passed in from config (default 0.5, sweep via YAML).
     MIN_ENTAIL_CONFIDENCE = min_entail_confidence
@@ -306,11 +311,10 @@ async def enhanced_factual_grounding(
                 contradicting_docs.append(doc.get("doc_id", "unknown"))
 
         threshold = 2 if require_cross_doc else 1
-        if conflict_type == 3:
-            # Fix FG-CT3: For conflicting-opinions queries, docs on the opposing
-            # side will always contradict claims about the other side — that is
-            # expected, not evidence of hallucination. Only require that at least
-            # one doc entails the claim; ignore contradictions entirely.
+        if _ignore_contradictions:
+            # R3 / CT3-logic: contradictions are expected for this conflict type
+            # (opposing docs in CT3, off-topic docs in CT2, stale docs in CT4).
+            # Only require at least one doc to entail the claim.
             is_supported = entails_count >= threshold
         elif majority_support_rule:
             # Majority rule + tie-breaking: claim passes when entails >= contradicts
@@ -329,12 +333,23 @@ async def enhanced_factual_grounding(
         if neutral_as_support and not is_supported and entails_count == 0 and contradicts_count == 0:
             is_supported = True
 
+        # R4: Partial credit for claims that have some entailment but don't fully pass.
+        # A claim with e=1, c=3 (net negative) gets 0.5 * (1/4) = 0.125 credit.
+        # A claim with e=2, c=2 (tie, blocked by strict rule) gets 0.5 * (2/4) = 0.25 credit.
+        # Rationale: binary 0/1 is too coarse — partial support is better than zero support.
+        partial = 0.0
+        if partial_credit_fg and not is_supported and entails_count > 0:
+            partial = 0.5 * entails_count / (entails_count + contradicts_count)
+
         if is_supported:
-            supported_count += 1
+            supported_count += 1.0
+        else:
+            supported_count += partial
 
         claim_details.append({
             "claim": claim,
             "supported": is_supported,
+            "partial_credit": partial,
             "entails_count": entails_count,
             "contradicts_count": contradicts_count,
             "support_count": entails_count,        # backward-compat alias
@@ -431,4 +446,153 @@ async def enhanced_single_truth_recall(
         "partial_matches": len(partial_matches),
         "match_details": matches,
         "partial_details": partial_matches,
+    }
+
+
+# --------------------
+# Committee-based Factual Grounding v2
+# --------------------
+
+_POSITIVE_VERDICTS_FG = frozenset({"supports", "support", "partially supports", "partial support", "partially_supports"})
+
+
+async def committee_factual_grounding_v2(
+    committee: JudgeCommittee,
+    claims_with_citations: List[Dict],
+    docs_with_notes: List[Dict],
+    query: str = "",
+    model_answer: str = "",
+) -> Dict[str, Any]:
+    """
+    FG v2 / FG-v3: committee-based grounding using gold per-doc annotations as ground truth.
+
+    Always called whenever model output is present (FG-v3 change: no longer gated on
+    pred_answered; even a refusal reaches here and produces grounding_ratio=0.0 from
+    0 extracted claims).
+
+    For each claim (extracted from model's Final Answer with its inline citations):
+      1. Judge committee checks which pre-annotated "supports"/"partially supports"
+         docs actually contain evidence for that specific claim.
+         The committee is given the full model Final Answer for context, so it can
+         interpret the claim correctly.
+      2. Citation check: the model must have cited at least one of those supporting
+         docs — if not, the claim does not count as grounded.
+      3. Cross-doc: if no single doc supports the claim but two docs combined do,
+         that counts (model must still have cited at least one of the combo docs).
+
+    Scoring (simplified — FG-v3):
+      - Supported + cited (via single doc or cross-doc combo): +1.0
+      - Not supported, or supported but not cited: +0.0
+      - No concept of contradicts; no confidence weighting on doc verdicts.
+      - Gold verdicts ('supports' / 'partially supports') are treated as 100% ground
+        truth — the committee only does semantic matching (does this claim appear in
+        this doc's content?), not re-verification of doc relevance.
+
+    FG = supported_count / N  (0.0–1.0; multiply by 100 for a percentage).
+
+    docs_with_notes: list of dicts with keys doc_id, snippet, verdict, key_fact, quote.
+    model_answer: the model's Final Answer (think-trace stripped) — passed to the
+    committee prompt for context so claims can be interpreted in the full answer frame.
+    """
+    if not claims_with_citations:
+        return {
+            "grounding_ratio": 0.0,
+            "supported_claims": 0,
+            "total_claims": 0,
+            "evaluable_claims": 0,
+            "claim_details": [],
+            "fg_errors": 0,
+        }
+
+    # Filter to eligible (non-irrelevant) docs only — "irrelevant" docs cannot support claims.
+    eligible_docs = [
+        d for d in docs_with_notes
+        if (d.get("verdict") or "").strip().lower() in _POSITIVE_VERDICTS_FG
+    ]
+    valid_doc_ids = {d["doc_id"] for d in eligible_docs if d.get("doc_id")}
+
+    if not eligible_docs:
+        return {
+            "grounding_ratio": 0.0,
+            "supported_claims": 0,
+            "total_claims": len(claims_with_citations),
+            "evaluable_claims": len(claims_with_citations),
+            "claim_details": [
+                {"claim": c["text"], "cited_docs": c.get("cited_docs", []),
+                 "supported": False, "reason": "no_eligible_docs"}
+                for c in claims_with_citations
+            ],
+            "fg_errors": 0,
+        }
+
+    supported_count = 0
+    claim_details = []
+    total_errors = 0
+
+    for claim_item in claims_with_citations:
+        claim_text = claim_item.get("text", "")
+        cited_docs = set(claim_item.get("cited_docs", []))
+
+        prompt = fg_committee_prompt(query, claim_text, eligible_docs, model_answer=model_answer)
+
+        try:
+            result = await committee.judge_fg(prompt, valid_doc_ids)
+
+            supporting = set(result.get("supporting_docs", []))
+            cross_support = result.get("cross_doc_support", False)
+            cross_combo = set(result.get("cross_doc_combo", []))
+
+            # Determine if the model cited at least one of the judge-identified supporting docs
+            if supporting and (cited_docs & supporting):
+                is_supported = True
+                support_reason = "single_doc_cited"
+            elif cross_support and cross_combo and (cited_docs & cross_combo):
+                is_supported = True
+                support_reason = "cross_doc_cited"
+            else:
+                is_supported = False
+                if not supporting and not cross_support:
+                    support_reason = "no_supporting_doc_found"
+                elif supporting and not (cited_docs & supporting):
+                    support_reason = "supporting_doc_not_cited"
+                elif cross_support and cross_combo and not (cited_docs & cross_combo):
+                    support_reason = "cross_doc_not_cited"
+                else:
+                    support_reason = "not_supported"
+
+            if is_supported:
+                supported_count += 1
+
+            claim_details.append({
+                "claim": claim_text,
+                "cited_docs": list(cited_docs),
+                "supporting_docs_found": list(supporting),
+                "cross_doc_support": cross_support,
+                "cross_doc_combo": list(cross_combo),
+                "citation_check_passed": is_supported,
+                "supported": is_supported,
+                "reason": support_reason,
+            })
+
+        except Exception as e:
+            logger.warning(f"FG v2 committee error for claim '{claim_text[:50]}': {e}")
+            total_errors += 1
+            claim_details.append({
+                "claim": claim_text,
+                "cited_docs": list(cited_docs),
+                "supported": False,
+                "reason": "committee_error",
+                "error": str(e),
+            })
+
+    N = len(claims_with_citations)
+    grounding_ratio = supported_count / N if N > 0 else 0.0
+
+    return {
+        "grounding_ratio": grounding_ratio,
+        "supported_claims": supported_count,
+        "total_claims": N,
+        "evaluable_claims": N,
+        "claim_details": claim_details,
+        "fg_errors": total_errors,
     }

@@ -23,21 +23,20 @@ import numpy as np
 
 from .config import EvaluationConfig, get_sonnet_nli_judge
 from .data import (
-    doc_index_from_record,
-    support_doc_ids_from_notes,
     gold_answerable_from_record,
     get_model_output,
     get_gold_answer,
 )
 from .metrics import (
     answered_flags,
-    extract_claims_by_sentence,
+    extract_claims_with_citations,
+    strip_think_trace,
     gr_accuracy_from_flags,
     compute_f1_gr,
 )
 from .conflict_eval import (
     committee_behavior_adherence,
-    enhanced_factual_grounding,
+    committee_factual_grounding_v2,
     enhanced_single_truth_recall,
 )
 from .judge_committee import JudgeCommittee, JudgeClient
@@ -46,17 +45,43 @@ from .logging_config import logger
 
 VALID_CONFLICT_TYPES = (1, 2, 3, 4, 5)
 
+# Val/gold dataset support: conflict_type is stored as a human-readable string.
+# Map to the numeric conflict_category_id used throughout the pipeline.
+# Two spelling variants for type 3 are included ("and" vs "or").
+_CONFLICT_TYPE_STR_MAP = {
+    "no conflict": 1,
+    "complementary information": 2,
+    "conflicting opinions and research outcomes": 3,
+    "conflicting opinions or research outcomes": 3,   # typo variant in some batches
+    "conflict due to outdated information": 4,
+    "conflict due to outdated information (temporal conflict)": 4,
+    "conflict due to misinformation": 5,
+}
 
-def _safe_ctype(raw: Any) -> int:
+
+def _safe_ctype(raw: Any, conflict_type_string: Any = None) -> int:
     """
     Coerce conflict_category_id to an int in 1..5.
-    Returns the int if it's in range; otherwise returns it as-is so the
-    aggregator can record an "unknown" bucket without crashing.
+    Returns the int as-is (even if out of range) so the aggregator can record
+    an "unknown" bucket without crashing.
+
+    Fallback chain:
+      1. `conflict_category_id` numeric field (standard schema).
+      2. `conflict_type` string field (val/gold dataset schema) — mapped via
+         _CONFLICT_TYPE_STR_MAP.  Case-insensitive; strips whitespace.
+      3. Default 1 (No Conflict) when neither is present / parseable.
 
     The old code was `int(rec.get("conflict_category_id") or 1)`, which
-    silently mapped 0 -> 1 because `0 or 1 == 1`.
+    silently mapped 0 -> 1 because `0 or 1 == 1` (§5.1 fix, preserved).
     """
     if raw is None:
+        # Try the human-readable conflict_type string (val dataset)
+        if conflict_type_string:
+            key = str(conflict_type_string).strip().lower()
+            mapped = _CONFLICT_TYPE_STR_MAP.get(key)
+            if mapped is not None:
+                return mapped
+            logger.warning(f"Unknown conflict_type string {conflict_type_string!r}; defaulting to 1")
         return 1  # default for missing field
     try:
         return int(raw)
@@ -164,31 +189,29 @@ class EnhancedEvaluator:
 
         sample_id = rec.get("id", f"sample_{idx:06d}")
         query = rec.get("query", "")
-        ctype = _safe_ctype(rec.get("conflict_category_id"))
+        ctype = _safe_ctype(rec.get("conflict_category_id"), rec.get("conflict_type"))
         notes = rec.get("per_doc_notes") or []
-        doc_index = doc_index_from_record(rec)
+        gold_answerable = gold_answerable_from_record(rec, accept_partial=True)
 
-        support_ids = support_doc_ids_from_notes(notes, accept_partial=True)
-        # NLI-I fix: merge the annotator-verified verbatim `quote` from
-        # per_doc_notes into each support doc so enhanced_factual_grounding
-        # can use it as a tighter NLI premise. Falls back to snippet when no
-        # quote is present.
+        answer = strip_think_trace(get_model_output(rec))
+        pred_answered = answered_flags([answer])[0]
+
+        # Build merged doc list: snippet from retrieved_docs + verdict/key_fact/quote
+        # from per_doc_notes. Used by committee_factual_grounding_v2.
         notes_by_id: Dict[str, Dict[str, Any]] = {
             n.get("doc_id"): n for n in notes if n.get("doc_id")
         }
-        support_docs: List[Dict[str, Any]] = []
-        for did in support_ids:
-            if did not in doc_index:
-                continue
-            merged = dict(doc_index[did])  # copy to avoid mutating the input record
-            quote = (notes_by_id.get(did, {}) or {}).get("quote")
-            if quote and str(quote).strip():
-                merged["quote"] = str(quote).strip()
-            support_docs.append(merged)
-        gold_answerable = gold_answerable_from_record(rec, accept_partial=True)
-
-        answer = get_model_output(rec)
-        pred_answered = answered_flags([answer])[0]
+        docs_with_notes: List[Dict[str, Any]] = []
+        for doc in rec.get("retrieved_docs", []) or []:
+            did = doc.get("doc_id", "")
+            note = notes_by_id.get(did) or {}
+            docs_with_notes.append({
+                "doc_id": did,
+                "snippet": (doc.get("snippet") or "").strip(),
+                "verdict": (note.get("verdict") or "").strip(),
+                "key_fact": (note.get("key_fact") or "").strip(),
+                "quote": (note.get("quote") or "").strip(),
+            })
 
         # --- Metric 1: per-sample GR accuracy (binary, always computed).
         gr_acc = gr_accuracy_from_flags(pred_answered, gold_answerable)
@@ -221,7 +244,7 @@ class EnhancedEvaluator:
             beh_applicable = False
             fg_applicable = False
         else:
-            claims = extract_claims_by_sentence(answer, cfg.max_claims_per_answer)
+            claims_with_citations = extract_claims_with_citations(answer, cfg.max_claims_per_answer)
 
             # --- Metric 2: behavior adherence (committee).
             # Pass retrieved_docs so Type 4 / Type 5 judges can see publication
@@ -235,37 +258,25 @@ class EnhancedEvaluator:
             beh_score = 1.0 if beh["adherent"] else 0.0
             beh_applicable = True
 
-            # --- Metric 3: factual grounding (dedicated NLI judge, default Sonnet 4.6).
-            # NLI-G fix: FG measures how well the model grounded its CLAIMS in
-            # the evidence. If the model refused (pred_answered=False) there
-            # are no claims to ground — FG is not applicable, regardless of
-            # whether the refusal was correct or wrong. (Correct refusal is
-            # already handled by the outer branch.) Previously FG ran on the
-            # refusal text, produced grounding_ratio=0.0, and dragged down
-            # the average for every wrong-refusal sample.
-            if not pred_answered:
-                fg_score = 0.0
-                fg_result = {
-                    "grounding_ratio": None,
-                    "supported_claims": 0,
-                    "total_claims": 0,
-                    "claim_details": [],
-                    "skipped": "model_refused",
-                }
-                fg_applicable = False
-            else:
-                fg_result = await enhanced_factual_grounding(
-                    self.nli_judge,
-                    claims,
-                    support_docs,
-                    require_cross_doc=cfg.require_cross_doc_verification,
-                    min_entail_confidence=cfg.min_entail_confidence,
-                    majority_support_rule=cfg.majority_support_rule,
-                    conflict_type=ctype,
-                    neutral_as_support=cfg.neutral_as_support,
-                )
-                fg_score = fg_result["grounding_ratio"]
-                fg_applicable = True
+            # --- Metric 3: factual grounding (committee, v2 / FG-v3).
+            # FG-v3 change: FG always computes whenever model output is present.
+            # A refusal produces 0 extracted claims → grounding_ratio = 0.0,
+            # and fg_applicable = True so it is counted in the average.
+            # Correct refusals are already handled by the outer branch (fg_applicable = False).
+            #
+            # The committee is given the model's Final Answer (think-trace stripped)
+            # for context, along with the specific claim and eligible docs (gold-annotated
+            # 'supports'/'partially supports' docs as ground truth). No contradicts,
+            # no confidence weighting on doc verdicts.
+            fg_result = await committee_factual_grounding_v2(
+                self.committee,
+                claims_with_citations,
+                docs_with_notes,
+                query=query,
+                model_answer=answer,
+            )
+            fg_score = fg_result["grounding_ratio"]
+            fg_applicable = True
 
             # --- Metric 4: single-truth recall (committee).
             gold_ans = get_gold_answer(rec)

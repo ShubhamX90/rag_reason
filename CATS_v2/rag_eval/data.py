@@ -140,10 +140,23 @@ def get_model_output(record: Dict[str, Any], strict: bool = False) -> str:
     """
     Extract the model's answer text.
 
+    Priority order:
+      1. `model_output` — the explicit model output field (standard schema).
+      2. `expected_response.answer` — val/gold dataset support.
+         For gold evaluation datasets (e.g. stage3_final.jsonl) the pipeline
+         stores the expected model answer in `expected_response.answer`.
+         The companion `think` field is the stage-1 annotator reasoning, NOT
+         the model's thinking trace, so it is intentionally ignored here.
+         `expected_response.answer` may contain "CANNOT ANSWER, INSUFFICIENT
+         EVIDENCE" for unanswerable samples — this is handled correctly by
+         `answered_flags` / `strip_think_trace` downstream.
+
     `final_grounded_answer.answer` is the GOLD annotation, not the model's
-    output — silently falling back to it would score the gold against itself.
-    By default, return "" when model_output is missing (so the sample is
-    treated as a refusal). Pass strict=True to raise instead.
+    output — silently falling back to it would score the gold against itself,
+    so it is never used here (§5.3 fix, preserved).
+
+    By default, return "" when no usable output field is found (so the sample
+    is treated as a refusal). Pass strict=True to raise instead.
     """
     if "model_output" in record:
         val = record["model_output"]
@@ -151,13 +164,19 @@ def get_model_output(record: Dict[str, Any], strict: bool = False) -> str:
             val = ""
         return str(val)
 
+    # Val/gold dataset fallback: expected_response is a dict with an 'answer' key.
+    er = record.get("expected_response")
+    if isinstance(er, dict) and "answer" in er:
+        val = er.get("answer") or ""
+        return str(val)
+
     if strict:
         raise MissingModelOutputError(
-            f"Record {record.get('id', '<no id>')} has no model_output field. "
-            "Refusing to fall back to final_grounded_answer.answer (that is the gold annotation)."
+            f"Record {record.get('id', '<no id>')} has no model_output or "
+            "expected_response.answer field."
         )
 
-    # Lenient mode: treat as refusal but DO NOT use the gold field.
+    # Lenient mode: treat as refusal but DO NOT use any gold annotation field.
     return ""
 
 

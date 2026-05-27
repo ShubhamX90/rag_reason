@@ -163,6 +163,12 @@ class EnhancedConflictEvalConfig:
                                          # if False (default): any contradiction blocks the claim
     neutral_as_support: bool = False     # R1: if True, claims where ALL docs are neutral (e=0, c=0) are treated
                                          # as supported — retrieval gap, not hallucination
+    ignore_contradictions_types: tuple = ()  # R3: conflict types that ignore contradictions (CT3 is always included).
+                                             # Add 2 and/or 4 here: CT2 docs cover different aspects (off-topic
+                                             # contradictions meaningless); CT4 outdated docs should contradict
+                                             # current-state claims by design.
+    partial_credit_fg: bool = False      # R4: award 0.5 * (e/(e+c)) partial credit when e>0 but claim doesn't
+                                         # fully pass — finer-grained than binary 0/1 per claim
 
     # Enhanced single-truth recall
     allow_paraphrases: bool = True
