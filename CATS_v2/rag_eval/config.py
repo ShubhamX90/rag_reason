@@ -238,9 +238,10 @@ class EvaluationConfig:
 # Modular judge priorities — tune the committee without editing factory code
 # --------------------
 DEFAULT_JUDGE_PRIORITIES: Dict[str, int] = {
-    "anthropic/claude-sonnet-4-6": 3,  # anchor judge — strongest rubric adherence
-    "openai/gpt-5.4":              2,  # low-cost complement
-    "deepseek/deepseek-v3.2":      2,  # low-cost reasoning complement
+    "anthropic/claude-sonnet-4-6":      3,  # anchor judge — strongest rubric adherence
+    "anthropic/claude-haiku-4-5":       3,  # haiku anchor — fast + cheap alternative
+    "openai/gpt-5.4":                   2,  # low-cost complement
+    "deepseek/deepseek-v3.2":           2,  # low-cost reasoning complement
 }
 
 
@@ -274,8 +275,23 @@ def get_sonnet_judge(priority_overrides: Optional[Dict[str, int]] = None) -> Jud
     )
 
 
-# Backward-compatibility alias.
-get_haiku_judge = get_sonnet_judge
+def get_haiku_judge(priority_overrides: Optional[Dict[str, int]] = None) -> JudgeModelConfig:
+    """Claude Haiku 4.5 via OpenRouter — fast, low-cost anchor judge.
+
+    ~10x cheaper than Sonnet on input tokens; suitable when throughput and cost
+    matter more than peak reasoning quality.
+    """
+    return JudgeModelConfig(
+        model_id="anthropic/claude-haiku-4-5",
+        provider=APIProvider.OPENROUTER,
+        temperature=0.0,
+        max_tokens=800,
+        cost_per_1k_input=0.0008,
+        cost_per_1k_output=0.004,
+        priority=_resolve_priority("anthropic/claude-haiku-4-5", priority_overrides),
+        api_key_env="OPENROUTER_API_KEY",
+        base_url=_OPENROUTER_BASE,
+    )
 
 
 def get_gpt54_judge(priority_overrides: Optional[Dict[str, int]] = None) -> JudgeModelConfig:
@@ -341,13 +357,13 @@ def create_default_committee(
     3-judge behavior committee — all via OpenRouter, single API key.
 
     Composition:
-      • Claude Sonnet 4.6  (priority 3) — anchor judge
+      • Claude Haiku 4.5   (priority 3) — anchor judge (fast, low-cost)
       • GPT-5.4            (priority 2) — low-cost complement
       • DeepSeek V3.2      (priority 2) — low-cost reasoning complement
     """
     return JudgeCommitteeConfig(
         judges=[
-            get_sonnet_judge(priority_overrides),
+            get_haiku_judge(priority_overrides),
             get_gpt54_judge(priority_overrides),
             get_deepseek_v32_judge(priority_overrides),
         ],
@@ -363,13 +379,12 @@ def create_conservative_committee(
     """
     Lower-cost 2-judge behavior committee — all via OpenRouter.
 
-    Keeps the Sonnet anchor and GPT complement, omitting DeepSeek's larger
-    generation budget. This preserves the CLI's historical "conservative"
-    option while matching the current OpenRouter-only judge stack.
+    Keeps the Haiku anchor and GPT complement, omitting DeepSeek's larger
+    generation budget.
     """
     return JudgeCommitteeConfig(
         judges=[
-            get_sonnet_judge(priority_overrides),
+            get_haiku_judge(priority_overrides),
             get_gpt54_judge(priority_overrides),
         ],
         voting_strategy="weighted_majority",

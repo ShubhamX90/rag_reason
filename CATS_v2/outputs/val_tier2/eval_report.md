@@ -14,13 +14,13 @@
 
 **Behavior Adherence**: 1.000 (over 34 applicable samples)
 
-**Factual Grounding**: 0.872 (over 34 applicable samples)
+**Factual Grounding**: 0.865 (over 34 applicable samples)
 
 **Single-Truth Recall**: 0.941 (over 17 applicable samples)
 
 --------------------------------------------------------------------------------
 
-### CATS Score: 0.953
+### CATS Score: 0.951
 
 *(average of 4 applicable sub-metrics)*
 
@@ -44,9 +44,9 @@
 - **GR Accuracy**: 1.000
 - **GR F1** *(used in CATS)*: 1.000
 - **Behavior**: 1.000 (n=12)
-- **Grounding**: 0.889 (n=12)
+- **Grounding**: 0.868 (n=12)
 - **Recall**: 0.917 (n=12)
-- **CATS**: 0.951
+- **CATS**: 0.946
 
 ### Type 2: Complementary Info
 
@@ -83,20 +83,20 @@
 
 ## Cost Summary
 
-**Total Cost**: $1.5055
+**Total Cost**: $0.3941
 
 **Decisions Made**: 172
 
-**Average Cost per Decision**: $0.008753
+**Average Cost per Decision**: $0.002291
 
 
 ### Per-Model Cost Breakdown
 
-#### anthropic/claude-sonnet-4-6
+#### anthropic/claude-haiku-4-5
 
-- **Total Cost**: $1.4162
+- **Total Cost**: $0.3049
 - **Total Requests**: 172
-- **Average Cost per Request**: $0.008234
+- **Average Cost per Request**: $0.001773
 
 #### openai/gpt-5.4
 
