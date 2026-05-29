@@ -4,13 +4,13 @@
       "n": 49,
       "correct_refusals": 15,
       "gr_accuracy": 1.0,
-      "behavior": 1.0,
+      "behavior": 0.9117647058823529,
       "behavior_n": 34,
-      "factual_grounding": 0.901470588235294,
+      "factual_grounding": 0.8818627450980392,
       "factual_grounding_n": 34,
       "single_truth_recall": 0.9411764705882353,
       "single_truth_recall_n": 17,
-      "cats_score": 0.9606617647058824,
+      "cats_score": 0.9337009803921568,
       "gr_f1": 1.0
     },
     "conflict_per_type": {
@@ -18,14 +18,14 @@
         "n": 19,
         "correct_refusals": 7,
         "gr_accuracy": 1.0,
-        "behavior": 1.0,
+        "behavior": 0.8333333333333334,
         "behavior_n": 12,
-        "factual_grounding": 0.9444444444444443,
+        "factual_grounding": 0.8888888888888888,
         "factual_grounding_n": 12,
         "single_truth_recall": 0.9166666666666666,
         "single_truth_recall_n": 12,
         "gr_f1": 1.0,
-        "cats_score": 0.9652777777777777
+        "cats_score": 0.9097222222222222
       },
       "3": {
         "n": 10,
@@ -57,14 +57,14 @@
         "n": 15,
         "correct_refusals": 7,
         "gr_accuracy": 1.0,
-        "behavior": 1.0,
+        "behavior": 0.875,
         "behavior_n": 8,
         "factual_grounding": 0.96875,
         "factual_grounding_n": 8,
         "single_truth_recall": 0.0,
         "single_truth_recall_n": 0,
         "gr_f1": 1.0,
-        "cats_score": 0.9895833333333334
+        "cats_score": 0.9479166666666666
       }
     },
     "gr_dataset_metrics": {
@@ -85,6 +85,21 @@
         "codex-cli/default": {
           "total_cost": 0.0,
           "requests": 172,
+          "avg_cost": 0.0
+        },
+        "deepseek/deepseek-v3.2": {
+          "total_cost": 0.0,
+          "requests": 0,
+          "avg_cost": 0.0
+        },
+        "qwen/qwen3-235b-a22b:free": {
+          "total_cost": 0.0,
+          "requests": 0,
+          "avg_cost": 0.0
+        },
+        "meta-llama/llama-3.3-70b-instruct:free": {
+          "total_cost": 0.0,
+          "requests": 0,
           "avg_cost": 0.0
         }
       },
@@ -108,7 +123,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear, direct winner and supporting details without presenting alternative viewpoints, disagreement, or unnecessary uncertainty.",
+        "rationale": "The answer gives a clear, direct response and adds straightforward supporting details without introducing uncertainty, disagreement, or alternative viewpoints.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -123,24 +138,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct winner and supporting details without presenting alternative viewpoints, disagreement, or unnecessary uncertainty.",
+          "rationale": "The answer gives a clear, direct response and adds straightforward supporting details without introducing uncertainty, disagreement, or alternative viewpoints.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct winner and supporting details without presenting alternative viewpoints, disagreement, or unnecessary uncertainty.",
-              "confidence": 0.95,
+              "rationale": "The answer gives a clear, direct response and adds straightforward supporting details without introducing uncertainty, disagreement, or alternative viewpoints.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 9362.223863601685,
+              "latency_ms": 13021.303176879883,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 9362.223863601685,
+          "total_latency_ms": 13021.303176879883,
           "all_failed": false
         }
       },
@@ -158,9 +173,9 @@
               "d3"
             ],
             "supporting_docs_found": [
+              "d2",
               "d7",
               "d3",
-              "d2",
               "d9",
               "d1"
             ],
@@ -173,11 +188,10 @@
           {
             "claim": "Carter beat out runner-up Will Moseley and fellow finalist Jack Blocker during the season finale, with host Ryan Seacrest making the announcement",
             "cited_docs": [
-              "d2",
-              "d9"
+              "d9",
+              "d2"
             ],
             "supporting_docs_found": [
-              "d3",
               "d9"
             ],
             "cross_doc_support": false,
@@ -189,9 +203,9 @@
           {
             "claim": "She made history as the first woman to win the competition in four seasons was also the first 'platinum ticket' recipient to win the series",
             "cited_docs": [
-              "d1",
               "d3",
-              "d2"
+              "d2",
+              "d1"
             ],
             "supporting_docs_found": [
               "d2"
@@ -233,7 +247,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer explicitly frames the evidence as divided, contrasts positive findings for educational programming with null or negative findings for toddlers/DVDs, and neutrally summarizes conditions such as age, program quality, and adult co-viewing.",
+        "rationale": "The answer explicitly states that research is divided, presents multiple contrasting viewpoints (benefits, no effect, and harms), and neutrally reconciles them by noting that effects appear conditional rather than asserting a one-sided conclusion.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -248,24 +262,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.92,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer explicitly frames the evidence as divided, contrasts positive findings for educational programming with null or negative findings for toddlers/DVDs, and neutrally summarizes conditions such as age, program quality, and adult co-viewing.",
+          "rationale": "The answer explicitly states that research is divided, presents multiple contrasting viewpoints (benefits, no effect, and harms), and neutrally reconciles them by noting that effects appear conditional rather than asserting a one-sided conclusion.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer explicitly frames the evidence as divided, contrasts positive findings for educational programming with null or negative findings for toddlers/DVDs, and neutrally summarizes conditions such as age, program quality, and adult co-viewing.",
-              "confidence": 0.96,
+              "rationale": "The answer explicitly states that research is divided, presents multiple contrasting viewpoints (benefits, no effect, and harms), and neutrally reconciles them by noting that effects appear conditional rather than asserting a one-sided conclusion.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 71633.65125656128,
+              "latency_ms": 60294.91925239563,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 71633.65125656128,
+          "total_latency_ms": 60294.91925239563,
           "all_failed": false
         }
       },
@@ -281,7 +295,6 @@
             "claim": "Research on whether children learn language skills from television is genuinely divided",
             "cited_docs": [],
             "supporting_docs_found": [
-              "d1",
               "d6",
               "d7"
             ],
@@ -294,20 +307,14 @@
           {
             "claim": "High-credibility sources suggest that well-designed educational programs like Sesame Street can improve cognitive, literacy social outcomes for children aged 3 to 5 a meta-analysis in JAMA Pediatrics found that educational programs may benefit child language skills, particularly those that label objects and speak directly to children ; however, the same analysis cautioned that screen time can displace learning opportunities and hinder caregiver-child interactions critical for language development",
             "cited_docs": [
-              "d7",
-              "d2"
+              "d2",
+              "d7"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d10",
               "d4",
-              "d3",
               "d2",
-              "d1",
-              "d5",
-              "d6",
-              "d12"
+              "d7",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -318,15 +325,13 @@
           {
             "claim": "In contrast, a study of 275 families found that TV viewing had no effect on language development\u2014neither positive nor negative\u2014while back-and-forth conversation contributed most to children's language scores research from the AAP found that preschoolers playing with blocks independently developed better language skills than peers watching Baby Einstein videos, with real-time social interaction consistently outperforming digital media",
             "cited_docs": [
-              "d10",
-              "d12"
+              "d12",
+              "d10"
             ],
             "supporting_docs_found": [
-              "d7",
+              "d12",
               "d10",
-              "d11",
-              "d1",
-              "d12"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -337,12 +342,12 @@
           {
             "claim": "Studies on educational DVDs also found no language benefit for toddlers, with earlier viewing associated with smaller vocabularies a University of California study found that 12\u201318 month olds who watched vocabulary-teaching DVDs learned no more words than those who did not",
             "cited_docs": [
-              "d11",
-              "d9"
+              "d9",
+              "d11"
             ],
             "supporting_docs_found": [
-              "d11",
-              "d9"
+              "d9",
+              "d11"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -353,23 +358,21 @@
           {
             "claim": "Overall, the evidence suggests that any language benefits from television are conditional\u2014dependent on program quality, child age especially the presence of an engaged adult co-viewer \u2014and that controversy across studies remains unresolved",
             "cited_docs": [
-              "d1",
               "d6",
+              "d2",
               "d7",
-              "d2"
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d10",
-              "d4",
-              "d3",
+              "d6",
               "d2",
+              "d7",
+              "d3",
+              "d4",
               "d11",
               "d9",
-              "d1",
-              "d6",
-              "d12"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -394,51 +397,51 @@
       "gold_answerable": true,
       "correct_refusal": false,
       "gr_accuracy": 1.0,
-      "behavior_score": 1.0,
+      "behavior_score": 0.0,
       "behavior_applicable": true,
       "behavior_details": {
-        "adherent": true,
-        "rationale": "The answer gives a clear, direct identification of the song and performer without hedging, presenting sources as confirming rather than conflicting.",
+        "adherent": false,
+        "rationale": "The answer does give a direct identification, but it unnecessarily emphasizes multiple sources and supporting confirmation ('confirmed across multiple sources'), which introduces source-handling behavior not expected for a no-conflict case.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
-        "votes_for": 1,
-        "votes_against": 0,
+        "votes_for": 0,
+        "votes_against": 1,
         "total_votes": 1,
         "skipped": null,
         "all_failed": false,
         "committee_details": {
-          "adherent": true,
+          "adherent": false,
           "confidence": 1.0,
           "minority_confidence": 0.0,
-          "votes_for": 1,
-          "votes_against": 0,
+          "votes_for": 0,
+          "votes_against": 1,
           "total_votes": 1,
-          "weighted_for": 1.96,
-          "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct identification of the song and performer without hedging, presenting sources as confirming rather than conflicting.",
+          "weighted_for": 0.0,
+          "weighted_against": 3.72,
+          "rationale": "The answer does give a direct identification, but it unnecessarily emphasizes multiple sources and supporting confirmation ('confirmed across multiple sources'), which introduces source-handling behavior not expected for a no-conflict case.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
-              "adherent": true,
-              "rationale": "The answer gives a clear, direct identification of the song and performer without hedging, presenting sources as confirming rather than conflicting.",
-              "confidence": 0.98,
+              "adherent": false,
+              "rationale": "The answer does give a direct identification, but it unnecessarily emphasizes multiple sources and supporting confirmation ('confirmed across multiple sources'), which introduces source-handling behavior not expected for a no-conflict case.",
+              "confidence": 0.93,
               "cost": 0.0,
-              "latency_ms": 25146.233320236206,
+              "latency_ms": 32886.85703277588,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 25146.233320236206,
+          "total_latency_ms": 32886.85703277588,
           "all_failed": false
         }
       },
-      "factual_grounding_score": 1.0,
+      "factual_grounding_score": 0.6666666666666666,
       "factual_grounding_applicable": true,
       "factual_grounding_details": {
-        "grounding_ratio": 1.0,
-        "supported_claims": 3,
+        "grounding_ratio": 0.6666666666666666,
+        "supported_claims": 2,
         "total_claims": 3,
         "evaluable_claims": 3,
         "claim_details": [
@@ -449,15 +452,15 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d10",
-              "d4",
-              "d3",
+              "d6",
               "d2",
+              "d10",
+              "d3",
+              "d4",
               "d9",
-              "d1",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -482,20 +485,16 @@
           {
             "claim": "Released in 1981, the track became one of Chilliwack's most recognized hits",
             "cited_docs": [
-              "d1",
               "d6",
-              "d9"
+              "d9",
+              "d1"
             ],
-            "supporting_docs_found": [
-              "d1",
-              "d8",
-              "d6"
-            ],
+            "supporting_docs_found": [],
             "cross_doc_support": false,
             "cross_doc_combo": [],
-            "citation_check_passed": true,
-            "supported": true,
-            "reason": "single_doc_cited"
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "no_supporting_doc_found"
           }
         ],
         "fg_errors": 0
@@ -528,7 +527,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear, direct date and supporting context without presenting competing viewpoints or hedging. It treats the sources as aligned and states a definitive answer.",
+        "rationale": "The answer gives a clear, direct date and explanation without hedging or presenting competing viewpoints; mentioning source agreement reinforces certainty rather than introducing conflict.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -543,24 +542,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.88,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct date and supporting context without presenting competing viewpoints or hedging. It treats the sources as aligned and states a definitive answer.",
+          "rationale": "The answer gives a clear, direct date and explanation without hedging or presenting competing viewpoints; mentioning source agreement reinforces certainty rather than introducing conflict.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct date and supporting context without presenting competing viewpoints or hedging. It treats the sources as aligned and states a definitive answer.",
-              "confidence": 0.95,
+              "rationale": "The answer gives a clear, direct date and explanation without hedging or presenting competing viewpoints; mentioning source agreement reinforces certainty rather than introducing conflict.",
+              "confidence": 0.97,
               "cost": 0.0,
-              "latency_ms": 65225.00467300415,
+              "latency_ms": 64618.57604980469,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 65225.00467300415,
+          "total_latency_ms": 64618.57604980469,
           "all_failed": false
         }
       },
@@ -578,15 +577,15 @@
               "d9"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
-              "d3",
+              "d6",
               "d2",
+              "d7",
+              "d3",
+              "d4",
               "d9",
-              "d1",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -601,12 +600,11 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d4",
               "d2",
+              "d4",
               "d9",
-              "d1",
               "d5",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -617,12 +615,12 @@
           {
             "claim": "The initiative was spearheaded by Shriram Bhikaji Velankar, additional secretary in the Union Ministry of Communications and a senior member of the Posts and Telegraphs Board",
             "cited_docs": [
-              "d1",
-              "d6"
+              "d6",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d6"
+              "d6",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -633,21 +631,21 @@
           {
             "claim": "This date is unanimously confirmed across all available sources, establishing August 15, 1972 as the definitive introduction date of the PIN code system in India",
             "cited_docs": [
-              "d7",
-              "d8",
-              "d3",
-              "d2"
-            ],
-            "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
               "d3",
               "d2",
+              "d7",
+              "d8"
+            ],
+            "supporting_docs_found": [
+              "d6",
+              "d2",
+              "d7",
+              "d3",
+              "d4",
               "d9",
-              "d1",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -686,7 +684,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear, direct identification of Dina Boluarte and does not introduce competing viewpoints, disagreement, or unnecessary uncertainty.",
+        "rationale": "The answer is clear and direct, names a single person, and does not introduce unnecessary alternative viewpoints or uncertainty. It stays assertive and straightforward, which matches the no-conflict rubric.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -701,24 +699,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct identification of Dina Boluarte and does not introduce competing viewpoints, disagreement, or unnecessary uncertainty.",
+          "rationale": "The answer is clear and direct, names a single person, and does not introduce unnecessary alternative viewpoints or uncertainty. It stays assertive and straightforward, which matches the no-conflict rubric.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct identification of Dina Boluarte and does not introduce competing viewpoints, disagreement, or unnecessary uncertainty.",
-              "confidence": 0.95,
+              "rationale": "The answer is clear and direct, names a single person, and does not introduce unnecessary alternative viewpoints or uncertainty. It stays assertive and straightforward, which matches the no-conflict rubric.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 63161.20958328247,
+              "latency_ms": 49543.18022727966,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 63161.20958328247,
+          "total_latency_ms": 49543.18022727966,
           "all_failed": false
         }
       },
@@ -733,21 +731,21 @@
           {
             "claim": "Dina Boluarte is the most recent woman to become President of Peru, having been sworn in on December 7, 2022, making her the first female president in Peru's 201-year history",
             "cited_docs": [
-              "d5",
+              "d9",
               "d2",
-              "d9"
+              "d5"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
+              "d2",
               "d7",
               "d10",
-              "d4",
               "d3",
-              "d2",
+              "d4",
               "d9",
-              "d1",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -758,18 +756,18 @@
           {
             "claim": "She assumed the presidency after her predecessor, Pedro Castillo, was impeached by Congress following his attempt to dissolve the legislative body",
             "cited_docs": [
-              "d7",
               "d6",
-              "d3"
+              "d3",
+              "d7"
             ],
             "supporting_docs_found": [
+              "d6",
               "d7",
               "d10",
-              "d4",
               "d3",
+              "d4",
               "d9",
-              "d5",
-              "d6"
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -780,12 +778,12 @@
           {
             "claim": "Boluarte continues to serve as the 64th and current president of Peru, with her term extending through July 2026",
             "cited_docs": [
-              "d8",
-              "d2"
+              "d2",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d2"
+              "d2",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -824,7 +822,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer prioritizes the newer 2025 sources for the current ranking and explicitly notes that the older 2023 Djokovic source has been superseded.",
+        "rationale": "The answer clearly prioritizes the newer 2025 sources for the current ranking and only mentions the 2023 source as outdated, explicitly noting it has been superseded.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -839,24 +837,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.96,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer prioritizes the newer 2025 sources for the current ranking and explicitly notes that the older 2023 Djokovic source has been superseded.",
+          "rationale": "The answer clearly prioritizes the newer 2025 sources for the current ranking and only mentions the 2023 source as outdated, explicitly noting it has been superseded.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer prioritizes the newer 2025 sources for the current ranking and explicitly notes that the older 2023 Djokovic source has been superseded.",
+              "rationale": "The answer clearly prioritizes the newer 2025 sources for the current ranking and only mentions the 2023 source as outdated, explicitly noting it has been superseded.",
               "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 36425.559759140015,
+              "latency_ms": 18013.055324554443,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 36425.559759140015,
+          "total_latency_ms": 18013.055324554443,
           "all_failed": false
         }
       },
@@ -871,15 +869,15 @@
           {
             "claim": "Jannik Sinner (ITA) holds the ATP #1 ranking in men's singles tennis, with Wikipedia's current rankings page listing him at the top with 10,330 points , a finding corroborated by multiple 2025 sources including Eurosport , Tennis24 Tennis",
             "cited_docs": [
-              "d8",
+              "d9",
               "d4",
-              "d9"
+              "d8"
             ],
             "supporting_docs_found": [
-              "d5",
-              "d8",
               "d9",
-              "d4"
+              "d4",
+              "d8",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -905,11 +903,11 @@
               "d7"
             ],
             "supporting_docs_found": [
-              "d8",
               "d7",
               "d4",
               "d9",
-              "d5"
+              "d5",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -920,15 +918,14 @@
           {
             "claim": "The context of current standings, though their snippets do not explicitly name the top-ranked player",
             "cited_docs": [
-              "d1",
               "d3",
-              "d2"
+              "d2",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d6",
               "d3",
-              "d2"
+              "d2",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -967,7 +964,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer consolidates complementary details from multiple sources into one timeline: organization in 1599, formal incorporation in 1600, purpose/evolution, and dissolution. It reconciles the partial information without presenting it as a debate or conflict.",
+        "rationale": "The answer consolidates complementary details from multiple sources into a single timeline, reconciling the 1599 organization date with the 1600 formal incorporation and adding related context without presenting the sources as conflicting viewpoints or a debate.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -982,24 +979,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.88,
           "weighted_against": 0.0,
-          "rationale": "The answer consolidates complementary details from multiple sources into one timeline: organization in 1599, formal incorporation in 1600, purpose/evolution, and dissolution. It reconciles the partial information without presenting it as a debate or conflict.",
+          "rationale": "The answer consolidates complementary details from multiple sources into a single timeline, reconciling the 1599 organization date with the 1600 formal incorporation and adding related context without presenting the sources as conflicting viewpoints or a debate.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer consolidates complementary details from multiple sources into one timeline: organization in 1599, formal incorporation in 1600, purpose/evolution, and dissolution. It reconciles the partial information without presenting it as a debate or conflict.",
-              "confidence": 0.95,
+              "rationale": "The answer consolidates complementary details from multiple sources into a single timeline, reconciling the 1599 organization date with the 1600 formal incorporation and adding related context without presenting the sources as conflicting viewpoints or a debate.",
+              "confidence": 0.97,
               "cost": 0.0,
-              "latency_ms": 51765.528202056885,
+              "latency_ms": 9069.693326950073,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 51765.528202056885,
+          "total_latency_ms": 9069.693326950073,
           "all_failed": false
         }
       },
@@ -1014,19 +1011,16 @@
           {
             "claim": "The East India Company (EIC) was incorporated by royal charter on December 31, 1600, during the reign of Queen Elizabeth I, who granted a group of London merchants exclusive trading rights with the East Indies",
             "cited_docs": [
-              "d1",
               "d6",
-              "d2"
+              "d2",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
+              "d2",
               "d7",
               "d3",
-              "d2",
-              "d9",
-              "d1",
-              "d5",
-              "d6"
+              "d9"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1037,18 +1031,16 @@
           {
             "claim": "It was formed in 1600 to trade in Asian textiles, spices, porcelain tea, evolving from a small commercial enterprise into a powerful political and military organization",
             "cited_docs": [
-              "d8",
               "d7",
-              "d2"
+              "d2",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
+              "d2",
               "d7",
               "d3",
-              "d2",
-              "d9",
-              "d1",
-              "d6"
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1059,17 +1051,13 @@
           {
             "claim": "One source notes the company was organized as early as 1599 before receiving its formal charter in 1600 it continued to operate until it was formally dissolved by Act of Parliament in 1874",
             "cited_docs": [
-              "d4",
-              "d9"
+              "d9",
+              "d4"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d4",
-              "d3",
-              "d2",
               "d9",
-              "d1",
-              "d6"
+              "d4",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1098,7 +1086,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer neutrally distinguishes the dominant medical consensus from nuanced or partially differing views, noting historical belief, theoretical mechanisms, stress ulcers, and indirect contributing pathways rather than presenting a one-sided claim.",
+        "rationale": "The answer explicitly contrasts the main consensus view with the nuanced alternative points, noting that stress alone is not considered a direct cause while also summarizing exceptions and contributing-factor arguments in a neutral way.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -1113,24 +1101,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.86,
+          "weighted_for": 3.68,
           "weighted_against": 0.0,
-          "rationale": "The answer neutrally distinguishes the dominant medical consensus from nuanced or partially differing views, noting historical belief, theoretical mechanisms, stress ulcers, and indirect contributing pathways rather than presenting a one-sided claim.",
+          "rationale": "The answer explicitly contrasts the main consensus view with the nuanced alternative points, noting that stress alone is not considered a direct cause while also summarizing exceptions and contributing-factor arguments in a neutral way.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer neutrally distinguishes the dominant medical consensus from nuanced or partially differing views, noting historical belief, theoretical mechanisms, stress ulcers, and indirect contributing pathways rather than presenting a one-sided claim.",
-              "confidence": 0.93,
+              "rationale": "The answer explicitly contrasts the main consensus view with the nuanced alternative points, noting that stress alone is not considered a direct cause while also summarizing exceptions and contributing-factor arguments in a neutral way.",
+              "confidence": 0.92,
               "cost": 0.0,
-              "latency_ms": 38574.82624053955,
+              "latency_ms": 41215.234994888306,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 38574.82624053955,
+          "total_latency_ms": 41215.234994888306,
           "all_failed": false
         }
       },
@@ -1148,12 +1136,11 @@
               "d5"
             ],
             "supporting_docs_found": [
+              "d6",
               "d7",
-              "d4",
               "d3",
-              "d1",
               "d5",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1167,11 +1154,7 @@
               "d7"
             ],
             "supporting_docs_found": [
-              "d4",
-              "d3",
-              "d1",
-              "d5",
-              "d6"
+              "d3"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1185,13 +1168,12 @@
               "d6"
             ],
             "supporting_docs_found": [
+              "d6",
               "d7",
-              "d4",
               "d3",
-              "d2",
-              "d1",
+              "d4",
               "d5",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1231,16 +1213,14 @@
           {
             "claim": "g., in ICU patients) can trigger a distinct type called a 'stress ulcer,' and psychological stress may act as a contributing backdrop by increasing NSAID use, alcohol tobacco consumption, though it is not considered a direct cause on its own",
             "cited_docs": [
-              "d1",
-              "d2"
+              "d2",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d3",
+              "d6",
+              "d4",
               "d2",
-              "d1",
-              "d5",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1269,7 +1249,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear direct count and does not introduce disagreement or alternative viewpoints; source references and examples support the single answer rather than creating uncertainty.",
+        "rationale": "The answer gives a direct count and stays focused on a single clear conclusion. It does not introduce unnecessary uncertainty or alternative viewpoints beyond brief supporting detail.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -1284,24 +1264,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear direct count and does not introduce disagreement or alternative viewpoints; source references and examples support the single answer rather than creating uncertainty.",
+          "rationale": "The answer gives a direct count and stays focused on a single clear conclusion. It does not introduce unnecessary uncertainty or alternative viewpoints beyond brief supporting detail.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear direct count and does not introduce disagreement or alternative viewpoints; source references and examples support the single answer rather than creating uncertainty.",
-              "confidence": 0.95,
+              "rationale": "The answer gives a direct count and stays focused on a single clear conclusion. It does not introduce unnecessary uncertainty or alternative viewpoints beyond brief supporting detail.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 15899.685859680176,
+              "latency_ms": 70879.72331047058,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 15899.685859680176,
+          "total_latency_ms": 70879.72331047058,
           "all_failed": false
         }
       },
@@ -1335,11 +1315,11 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d4",
-              "d3",
               "d2",
-              "d9"
+              "d3",
+              "d4",
+              "d9",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1350,17 +1330,18 @@
           {
             "claim": "These individual confirmations are consistent with the broader affiliation count provided by the department's own records",
             "cited_docs": [
-              "d5",
-              "d9"
-            ],
-            "supporting_docs_found": [
+              "d9",
               "d5"
             ],
-            "cross_doc_support": false,
-            "cross_doc_combo": [],
+            "supporting_docs_found": [],
+            "cross_doc_support": true,
+            "cross_doc_combo": [
+              "d3",
+              "d5"
+            ],
             "citation_check_passed": true,
             "supported": true,
-            "reason": "single_doc_cited"
+            "reason": "cross_doc_cited"
           }
         ],
         "fg_errors": 0
@@ -1386,7 +1367,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer consolidates partial information into a unified response: it gives the general rule, adds gemstone-specific exceptions, explains market context, and reconciles differences without presenting the sources as opposing sides in a debate.",
+        "rationale": "The answer integrates multiple partial sources into a unified explanation, distinguishing general rules from gemstone-specific exceptions and reconciling them without presenting the information as a debate.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -1401,24 +1382,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.88,
           "weighted_against": 0.0,
-          "rationale": "The answer consolidates partial information into a unified response: it gives the general rule, adds gemstone-specific exceptions, explains market context, and reconciles differences without presenting the sources as opposing sides in a debate.",
+          "rationale": "The answer integrates multiple partial sources into a unified explanation, distinguishing general rules from gemstone-specific exceptions and reconciling them without presenting the information as a debate.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer consolidates partial information into a unified response: it gives the general rule, adds gemstone-specific exceptions, explains market context, and reconciles differences without presenting the sources as opposing sides in a debate.",
-              "confidence": 0.95,
+              "rationale": "The answer integrates multiple partial sources into a unified explanation, distinguishing general rules from gemstone-specific exceptions and reconciling them without presenting the information as a debate.",
+              "confidence": 0.97,
               "cost": 0.0,
-              "latency_ms": 9327.969551086426,
+              "latency_ms": 53753.748416900635,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 9327.969551086426,
+          "total_latency_ms": 53753.748416900635,
           "all_failed": false
         }
       },
@@ -1434,19 +1415,18 @@
             "claim": "Whether heated gemstones are less valuable depends on the specific gemstone variety: as a general principle, untreated gemstones are considered the most valuable the more treatments a stone has undergone, the lower its retail value , with unheated sapphires and rubies commanding significantly higher prices than their heated counterparts \u2014 for example, an unheated 1-carat ruby may start at $5,000 or more, while a heat-only ruby of similar quality might sell for $2,000 or more unheated sapphires are rarer and more valuable than heated ones",
             "cited_docs": [
               "d6",
-              "d2",
-              "d4"
+              "d4",
+              "d2"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
-              "d3",
+              "d6",
               "d2",
-              "d9",
-              "d1",
+              "d7",
+              "d3",
+              "d4",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1461,13 +1441,12 @@
               "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
-              "d3",
+              "d6",
               "d2",
+              "d7",
+              "d3",
               "d5",
-              "d6"
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1479,18 +1458,14 @@
             "claim": "A considerable portion of all sapphires and rubies on the market are heat-treated to improve color and clarity heat treatment is widely regarded as an acceptable and common practice , meaning buyers should verify treatment status through reputable laboratory reports when purchasing high-value stones",
             "cited_docs": [
               "d6",
-              "d11",
+              "d9",
               "d3",
-              "d9"
+              "d11"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d9",
               "d7",
-              "d10",
-              "d4",
-              "d11",
-              "d2",
-              "d9"
+              "d11"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1519,7 +1494,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer explicitly presents the issue as a debate, neutrally contrasts rationalist/empiricist and cognitive science viewpoints, and notes lack of consensus rather than taking a one-sided stance.",
+        "rationale": "The answer explicitly presents opposing viewpoints on innate knowledge, contrasts rationalist and empiricist positions, adds a nuanced intermediate perspective from cognitive science, and ends with a neutral statement that the issue remains contested.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -1534,24 +1509,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer explicitly presents the issue as a debate, neutrally contrasts rationalist/empiricist and cognitive science viewpoints, and notes lack of consensus rather than taking a one-sided stance.",
+          "rationale": "The answer explicitly presents opposing viewpoints on innate knowledge, contrasts rationalist and empiricist positions, adds a nuanced intermediate perspective from cognitive science, and ends with a neutral statement that the issue remains contested.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer explicitly presents the issue as a debate, neutrally contrasts rationalist/empiricist and cognitive science viewpoints, and notes lack of consensus rather than taking a one-sided stance.",
-              "confidence": 0.95,
+              "rationale": "The answer explicitly presents opposing viewpoints on innate knowledge, contrasts rationalist and empiricist positions, adds a nuanced intermediate perspective from cognitive science, and ends with a neutral statement that the issue remains contested.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 25056.472063064575,
+              "latency_ms": 66867.66362190247,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 25056.472063064575,
+          "total_latency_ms": 66867.66362190247,
           "all_failed": false
         }
       },
@@ -1567,9 +1542,7 @@
             "claim": "Whether humans possess innate knowledge is one of philosophy's most enduring debates, with sharply opposing camps",
             "cited_docs": [],
             "supporting_docs_found": [
-              "d5",
-              "d6",
-              "d2"
+              "d6"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1583,9 +1556,9 @@
               "d1"
             ],
             "supporting_docs_found": [
-              "d1",
+              "d2",
               "d5",
-              "d2"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1612,16 +1585,16 @@
           {
             "claim": "On the empiricist side, John Locke famously rejected innate knowledge entirely, arguing that the mind is a tabula rasa at birth and that all knowledge\u2014including mathematical truths\u2014is derived solely from sensory experience , with Locke further contending that it is logically contradictory to claim something is innately known yet remains unknown until reason is applied",
             "cited_docs": [
-              "d7",
-              "d8",
               "d6",
-              "d9"
+              "d9",
+              "d7",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d8",
               "d6",
-              "d9"
+              "d9",
+              "d7",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1664,7 +1637,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer consolidates multiple partial figures into a single overall response, notes timing/methodology differences for minor discrepancies, and adds regional details without framing the sources as a debate.",
+        "rationale": "The answer combines overlapping employee counts into a single synthesized response, reconciles small numeric differences by attributing them to timing/methodology, and adds regional breakdowns without presenting the sources as conflicting sides in a debate.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -1679,24 +1652,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.88,
           "weighted_against": 0.0,
-          "rationale": "The answer consolidates multiple partial figures into a single overall response, notes timing/methodology differences for minor discrepancies, and adds regional details without framing the sources as a debate.",
+          "rationale": "The answer combines overlapping employee counts into a single synthesized response, reconciles small numeric differences by attributing them to timing/methodology, and adds regional breakdowns without presenting the sources as conflicting sides in a debate.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer consolidates multiple partial figures into a single overall response, notes timing/methodology differences for minor discrepancies, and adds regional details without framing the sources as a debate.",
-              "confidence": 0.95,
+              "rationale": "The answer combines overlapping employee counts into a single synthesized response, reconciles small numeric differences by attributing them to timing/methodology, and adds regional breakdowns without presenting the sources as conflicting sides in a debate.",
+              "confidence": 0.97,
               "cost": 0.0,
-              "latency_ms": 58408.732652664185,
+              "latency_ms": 38380.6414604187,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 58408.732652664185,
+          "total_latency_ms": 38380.6414604187,
           "all_failed": false
         }
       },
@@ -1711,15 +1684,14 @@
           {
             "claim": "Mercedes-Benz Group AG employed approximately 166,000 people globally, according to the company's official figures , with a more precise count of 166,056 employees recorded as of December 31, 2023 , a figure also corroborated by Forbes at 166,000",
             "cited_docs": [
-              "d5",
               "d3",
-              "d2"
+              "d2",
+              "d5"
             ],
             "supporting_docs_found": [
-              "d5",
-              "d8",
               "d3",
-              "d2"
+              "d2",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1744,12 +1716,11 @@
           {
             "claim": "At the regional level, Mercedes-Benz USA alone accounts for approximately 12,000 employees , while MBUSA's dealership network employs more than 1,400 staff",
             "cited_docs": [
-              "d7",
-              "d9"
+              "d9",
+              "d7"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d9"
+              "d7"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1778,7 +1749,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer consolidates complementary information across jurisdictions and sources into a unified summary, reconciling country/state variation, U.S. state rules, historical standards, and recent reforms without presenting it as a debate.",
+        "rationale": "The answer integrates partial information from multiple sources into a single synthesized response, combining global variation, U.S. state variation, historical context, and a state example without presenting them as conflicting viewpoints or a debate.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -1793,24 +1764,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.84,
           "weighted_against": 0.0,
-          "rationale": "The answer consolidates complementary information across jurisdictions and sources into a unified summary, reconciling country/state variation, U.S. state rules, historical standards, and recent reforms without presenting it as a debate.",
+          "rationale": "The answer integrates partial information from multiple sources into a single synthesized response, combining global variation, U.S. state variation, historical context, and a state example without presenting them as conflicting viewpoints or a debate.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer consolidates complementary information across jurisdictions and sources into a unified summary, reconciling country/state variation, U.S. state rules, historical standards, and recent reforms without presenting it as a debate.",
-              "confidence": 0.95,
+              "rationale": "The answer integrates partial information from multiple sources into a single synthesized response, combining global variation, U.S. state variation, historical context, and a state example without presenting them as conflicting viewpoints or a debate.",
+              "confidence": 0.96,
               "cost": 0.0,
-              "latency_ms": 39889.74595069885,
+              "latency_ms": 19999.84121322632,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 39889.74595069885,
+          "total_latency_ms": 19999.84121322632,
           "all_failed": false
         }
       },
@@ -1825,17 +1796,16 @@
           {
             "claim": "There is no single universal legal age for marriage; it varies significantly by country and, within the United States, by state",
             "cited_docs": [
-              "d1",
-              "d9"
+              "d9",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
               "d7",
               "d2",
               "d9",
-              "d1",
               "d5",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1846,19 +1816,15 @@
           {
             "claim": "the minimum marriage age is set by each state and has historically ranged from 16 to 18 years (with or without parental/judicial consent) as of recent data, child marriage remains legal in 37 states, with 20 states imposing no minimum age at all when a parental or judicial waiver is obtained",
             "cited_docs": [
-              "d1",
-              "d6"
+              "d6",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
+              "d6",
               "d3",
-              "d2",
-              "d9",
-              "d1",
-              "d5",
-              "d6"
+              "d4",
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1881,18 +1847,14 @@
           {
             "claim": "while still permitting 16- and 17-year-olds to wed with parental or judicial approval ; a growing number of states\u2014including Massachusetts, which raised its minimum to 18 with no exceptions in 2022\u2014have moved to set a firm minimum of 18",
             "cited_docs": [
+              "d9",
               "d5",
-              "d8",
-              "d9"
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d4",
-              "d3",
-              "d9",
-              "d1",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1921,7 +1883,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer explicitly presents disagreement among sources, contrasts pro-business-plan views with sources saying formal plans are not always required, and neutrally summarizes the debate without taking an overly one-sided stance.",
+        "rationale": "The answer explicitly presents the disagreement among sources, contrasts the 'every startup needs one' view with the 'not always required' view, and ends with a neutral synthesis rather than taking a one-sided stance.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -1936,24 +1898,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.92,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer explicitly presents disagreement among sources, contrasts pro-business-plan views with sources saying formal plans are not always required, and neutrally summarizes the debate without taking an overly one-sided stance.",
+          "rationale": "The answer explicitly presents the disagreement among sources, contrasts the 'every startup needs one' view with the 'not always required' view, and ends with a neutral synthesis rather than taking a one-sided stance.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer explicitly presents disagreement among sources, contrasts pro-business-plan views with sources saying formal plans are not always required, and neutrally summarizes the debate without taking an overly one-sided stance.",
-              "confidence": 0.96,
+              "rationale": "The answer explicitly presents the disagreement among sources, contrasts the 'every startup needs one' view with the 'not always required' view, and ends with a neutral synthesis rather than taking a one-sided stance.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 65467.551708221436,
+              "latency_ms": 54708.815574645996,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 65467.551708221436,
+          "total_latency_ms": 54708.815574645996,
           "all_failed": false
         }
       },
@@ -1969,8 +1931,13 @@
             "claim": "Opinions differ on whether every startup needs a business plan",
             "cited_docs": [],
             "supporting_docs_found": [
+              "d6",
+              "d10",
+              "d4",
               "d11",
-              "d10"
+              "d9",
+              "d5",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -1986,9 +1953,9 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d5",
+              "d4",
               "d8",
-              "d4"
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2000,15 +1967,13 @@
             "claim": "On the other hand, several sources contend that a formal business plan is not strictly required for all startups: one notes that startups are 'generally not required' to have one, though it helps investors and lenders understand the business , another argues that a business plan 'isn't needed for every business' and is only essential when raising outside funding from investors a third suggests that only some startups need a long business plan while all need a pitch deck",
             "cited_docs": [
               "d6",
-              "d10",
-              "d9"
+              "d9",
+              "d10"
             ],
             "supporting_docs_found": [
-              "d10",
-              "d11",
-              "d3",
+              "d6",
               "d9",
-              "d6"
+              "d10"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2019,18 +1984,17 @@
           {
             "claim": "The lean startup methodology, described in Harvard Business Review, offers an alternative approach where startups search for a business model through iterative testing and customer feedback rather than writing a traditional plan upfront , suggesting that the necessity of a formal business plan depends heavily on the startup's funding needs, industry strategic approach",
             "cited_docs": [
-              "d11",
               "d3",
-              "d4"
+              "d4",
+              "d11"
             ],
             "supporting_docs_found": [
+              "d6",
               "d10",
-              "d4",
               "d3",
               "d11",
               "d9",
-              "d1",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2055,43 +2019,43 @@
       "gold_answerable": true,
       "correct_refusal": false,
       "gr_accuracy": 1.0,
-      "behavior_score": 1.0,
+      "behavior_score": 0.0,
       "behavior_applicable": true,
       "behavior_details": {
-        "adherent": true,
-        "rationale": "The answer consolidates complementary details from multiple sources into a coherent response, gives the likely main launch date, and reconciles ambiguity by distinguishing other entities named Channel 5 without framing it as a debate.",
+        "adherent": false,
+        "rationale": "The answer does not simply consolidate complementary evidence into one direct response. It adds contrasting information about unrelated U.S. stations and explicitly distinguishes them from the British Channel 5, which shifts into disambiguation/contrast rather than straightforward reconciliation of partial answers.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
-        "votes_for": 1,
-        "votes_against": 0,
+        "votes_for": 0,
+        "votes_against": 1,
         "total_votes": 1,
         "skipped": null,
         "all_failed": false,
         "committee_details": {
-          "adherent": true,
+          "adherent": false,
           "confidence": 1.0,
           "minority_confidence": 0.0,
-          "votes_for": 1,
-          "votes_against": 0,
+          "votes_for": 0,
+          "votes_against": 1,
           "total_votes": 1,
-          "weighted_for": 1.9,
-          "weighted_against": 0.0,
-          "rationale": "The answer consolidates complementary details from multiple sources into a coherent response, gives the likely main launch date, and reconciles ambiguity by distinguishing other entities named Channel 5 without framing it as a debate.",
+          "weighted_for": 0.0,
+          "weighted_against": 3.56,
+          "rationale": "The answer does not simply consolidate complementary evidence into one direct response. It adds contrasting information about unrelated U.S. stations and explicitly distinguishes them from the British Channel 5, which shifts into disambiguation/contrast rather than straightforward reconciliation of partial answers.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
-              "adherent": true,
-              "rationale": "The answer consolidates complementary details from multiple sources into a coherent response, gives the likely main launch date, and reconciles ambiguity by distinguishing other entities named Channel 5 without framing it as a debate.",
-              "confidence": 0.95,
+              "adherent": false,
+              "rationale": "The answer does not simply consolidate complementary evidence into one direct response. It adds contrasting information about unrelated U.S. stations and explicitly distinguishes them from the British Channel 5, which shifts into disambiguation/contrast rather than straightforward reconciliation of partial answers.",
+              "confidence": 0.89,
               "cost": 0.0,
-              "latency_ms": 45905.31897544861,
+              "latency_ms": 33271.34990692139,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 45905.31897544861,
+          "total_latency_ms": 33271.34990692139,
           "all_failed": false
         }
       },
@@ -2109,14 +2073,13 @@
               "d2"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
+              "d2",
               "d7",
               "d10",
               "d4",
-              "d2",
               "d9",
-              "d1",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2131,11 +2094,10 @@
               "d9"
             ],
             "supporting_docs_found": [
-              "d10",
-              "d4",
-              "d2",
               "d9",
-              "d1"
+              "d2",
+              "d1",
+              "d10"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2146,13 +2108,12 @@
           {
             "claim": "Around 65% of the UK population could receive the channel on launch night it later expanded to satellite coverage on 23 April 1997 to reach the remaining third of the country",
             "cited_docs": [
-              "d1",
-              "d2"
+              "d2",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d6",
-              "d2"
+              "d2",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2163,12 +2124,12 @@
           {
             "claim": "It is worth noting that a different 'Channel 5' \u2014 WEWS in Ohio, USA \u2014 went on air much earlier, on 17 December 1947 , while another US NewsChannel 5 celebrated its 70th anniversary in August 2024 , but these are entirely separate stations from the British Channel 5",
             "cited_docs": [
-              "d5",
-              "d3"
+              "d3",
+              "d5"
             ],
             "supporting_docs_found": [
-              "d5",
-              "d3"
+              "d3",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2197,7 +2158,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer explicitly frames the claim as contested, contrasts sources that support comparability with sources that reject the equivalence, and presents a neutral middle-ground view about inactivity and activity offsets.",
+        "rationale": "The answer explicitly presents the claim as contested, contrasts sources that support the comparison with sources that reject it, and ends with a neutral, nuanced synthesis rather than taking one side.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -2212,24 +2173,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.94,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer explicitly frames the claim as contested, contrasts sources that support comparability with sources that reject the equivalence, and presents a neutral middle-ground view about inactivity and activity offsets.",
+          "rationale": "The answer explicitly presents the claim as contested, contrasts sources that support the comparison with sources that reject it, and ends with a neutral, nuanced synthesis rather than taking one side.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer explicitly frames the claim as contested, contrasts sources that support comparability with sources that reject the equivalence, and presents a neutral middle-ground view about inactivity and activity offsets.",
-              "confidence": 0.97,
+              "rationale": "The answer explicitly presents the claim as contested, contrasts sources that support the comparison with sources that reject it, and ends with a neutral, nuanced synthesis rather than taking one side.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 30134.18221473694,
+              "latency_ms": 24567.848920822144,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 30134.18221473694,
+          "total_latency_ms": 24567.848920822144,
           "all_failed": false
         }
       },
@@ -2245,16 +2206,11 @@
             "claim": "The phrase 'sitting is the new smoking' is a popular but contested claim",
             "cited_docs": [],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d10",
-              "d4",
-              "d3",
               "d2",
+              "d10",
               "d11",
-              "d9",
-              "d1",
-              "d5"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2265,17 +2221,17 @@
           {
             "claim": "Some medical experts and sources argue that prolonged sitting creates health risks comparable to smoking \u2014 including increased risks of heart disease, diabetes, obesity even cancer \u2014 and that these risks persist even in people who exercise regularly",
             "cited_docs": [
-              "d5",
               "d6",
+              "d4",
               "d7",
-              "d4"
+              "d5"
             ],
             "supporting_docs_found": [
+              "d6",
               "d7",
-              "d4",
               "d3",
-              "d5",
-              "d6"
+              "d4",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2286,15 +2242,15 @@
           {
             "claim": "However, a peer-reviewed evaluation published in the American Journal of Public Health and other research-backed sources directly refute this equivalence, noting that smoking increases the risk of dying from any cause by approximately 180%, compared to only about 25% for excessive sitting that media enthusiasm for the comparison has far outpaced the scientific evidence",
             "cited_docs": [
-              "d1",
+              "d9",
               "d10",
-              "d9"
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d11",
+              "d9",
               "d10",
-              "d9"
+              "d11",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2305,12 +2261,12 @@
           {
             "claim": "A more nuanced view holds that sitting itself is not the enemy, but rather prolonged physical inactivity is the real hazard \u2014 and that 60\u201375 minutes of moderate daily activity can largely offset the effects of sitting for 8 hours a day",
             "cited_docs": [
-              "d8",
-              "d11"
+              "d11",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d11"
+              "d11",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2339,7 +2295,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear, direct yes and supports it without introducing disagreement, alternative viewpoints, or unnecessary uncertainty.",
+        "rationale": "The answer gives a clear, direct yes and straightforward support, without introducing competing viewpoints, hedging, or unnecessary uncertainty.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -2354,24 +2310,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.94,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct yes and supports it without introducing disagreement, alternative viewpoints, or unnecessary uncertainty.",
+          "rationale": "The answer gives a clear, direct yes and straightforward support, without introducing competing viewpoints, hedging, or unnecessary uncertainty.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct yes and supports it without introducing disagreement, alternative viewpoints, or unnecessary uncertainty.",
-              "confidence": 0.97,
+              "rationale": "The answer gives a clear, direct yes and straightforward support, without introducing competing viewpoints, hedging, or unnecessary uncertainty.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 45792.22226142883,
+              "latency_ms": 42208.436489105225,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 45792.22226142883,
+          "total_latency_ms": 42208.436489105225,
           "all_failed": false
         }
       },
@@ -2387,12 +2343,12 @@
             "claim": "Yes, smoking can increase a person's risk of developing Rheumatoid Arthritis (RA)",
             "cited_docs": [],
             "supporting_docs_found": [
-              "d4",
-              "d3",
+              "d6",
               "d2",
-              "d1",
+              "d3",
+              "d4",
               "d5",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2403,17 +2359,17 @@
           {
             "claim": "Multiple studies confirm that cigarette smoking is a significant risk factor for RA continuing to smoke can also make the disease more severe",
             "cited_docs": [
-              "d1",
-              "d3",
-              "d2"
-            ],
-            "supporting_docs_found": [
-              "d4",
               "d3",
               "d2",
-              "d1",
+              "d1"
+            ],
+            "supporting_docs_found": [
+              "d6",
+              "d2",
+              "d3",
+              "d4",
               "d5",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2424,13 +2380,13 @@
           {
             "claim": "Research further shows that smoking plays a major role in RA pathogenesis through mechanisms such as oxidative stress, inflammation epigenetic changes it interacts with genetic factors (such as HLA-DRB1 alleles) to substantially elevate the risk of antibody-positive RA",
             "cited_docs": [
-              "d5",
               "d6",
-              "d4"
+              "d4",
+              "d5"
             ],
             "supporting_docs_found": [
-              "d5",
-              "d6"
+              "d6",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2469,7 +2425,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer consolidates partial evidence into a unified conclusion: driving is generally faster in many U.S. contexts, while transit can be competitive or faster where dedicated lanes or BRT exist. It reconciles the sources without framing them as a debate.",
+        "rationale": "The answer integrates multiple sources into a single synthesized conclusion, combining general U.S. patterns with exceptions where transit can be faster. It reconciles partial evidence rather than treating the sources as a debate.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -2484,24 +2440,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.8,
           "weighted_against": 0.0,
-          "rationale": "The answer consolidates partial evidence into a unified conclusion: driving is generally faster in many U.S. contexts, while transit can be competitive or faster where dedicated lanes or BRT exist. It reconciles the sources without framing them as a debate.",
+          "rationale": "The answer integrates multiple sources into a single synthesized conclusion, combining general U.S. patterns with exceptions where transit can be faster. It reconciles partial evidence rather than treating the sources as a debate.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer consolidates partial evidence into a unified conclusion: driving is generally faster in many U.S. contexts, while transit can be competitive or faster where dedicated lanes or BRT exist. It reconciles the sources without framing them as a debate.",
+              "rationale": "The answer integrates multiple sources into a single synthesized conclusion, combining general U.S. patterns with exceptions where transit can be faster. It reconciles partial evidence rather than treating the sources as a debate.",
               "confidence": 0.95,
               "cost": 0.0,
-              "latency_ms": 69689.37158584595,
+              "latency_ms": 60421.19812965393,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 69689.37158584595,
+          "total_latency_ms": 60421.19812965393,
           "all_failed": false
         }
       },
@@ -2516,15 +2472,15 @@
           {
             "claim": "cities, driving is significantly faster than public transportation: research published in Nature confirms that 'car-based travel is often faster than public transit' census data show that transit commuters average nearly twice the travel time of solo drivers \u2014 roughly 45\u201347 minutes by bus or subway versus about 25 minutes by car nationally",
             "cited_docs": [
-              "d1",
+              "d2",
               "d7",
-              "d2"
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
               "d3",
               "d2",
-              "d7"
+              "d7",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2538,8 +2494,8 @@
               "d5"
             ],
             "supporting_docs_found": [
-              "d5",
-              "d4"
+              "d4",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2553,12 +2509,12 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d4",
-              "d3",
               "d2",
-              "d1",
-              "d5"
+              "d7",
+              "d3",
+              "d4",
+              "d5",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2569,14 +2525,14 @@
           {
             "claim": "However, the picture is not universal: where cities invest in dedicated bus lanes or bus rapid transit systems, public transport can become competitive or even faster than driving \u2014 Mexico City's Metrob\u00fas reduced travel times by 40 percent and can outpace cars in the high-traffic city center dedicated transit lanes in other cities offer similar advantages",
             "cited_docs": [
-              "d8",
               "d6",
-              "d9"
+              "d9",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
               "d6",
-              "d9"
+              "d9",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2605,7 +2561,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer explicitly presents multiple viewpoints: evidence that dogs understand aspects of language, then contrasts it with researchers/trainers who argue the evidence is limited or that dogs rely more on cues like tone and body language. It neutrally summarizes the debate rather than taking an overly one-sided stance.",
+        "rationale": "The answer explicitly presents both sides of the debate: evidence that dogs understand words/language and counterviews that they may mainly distinguish sounds or rely on tone/body language. It contrasts the viewpoints with a neutral 'however, not all researchers agree' framing rather than ignoring disagreement.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -2620,24 +2576,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.84,
           "weighted_against": 0.0,
-          "rationale": "The answer explicitly presents multiple viewpoints: evidence that dogs understand aspects of language, then contrasts it with researchers/trainers who argue the evidence is limited or that dogs rely more on cues like tone and body language. It neutrally summarizes the debate rather than taking an overly one-sided stance.",
+          "rationale": "The answer explicitly presents both sides of the debate: evidence that dogs understand words/language and counterviews that they may mainly distinguish sounds or rely on tone/body language. It contrasts the viewpoints with a neutral 'however, not all researchers agree' framing rather than ignoring disagreement.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer explicitly presents multiple viewpoints: evidence that dogs understand aspects of language, then contrasts it with researchers/trainers who argue the evidence is limited or that dogs rely more on cues like tone and body language. It neutrally summarizes the debate rather than taking an overly one-sided stance.",
-              "confidence": 0.95,
+              "rationale": "The answer explicitly presents both sides of the debate: evidence that dogs understand words/language and counterviews that they may mainly distinguish sounds or rely on tone/body language. It contrasts the viewpoints with a neutral 'however, not all researchers agree' framing rather than ignoring disagreement.",
+              "confidence": 0.96,
               "cost": 0.0,
-              "latency_ms": 62952.76069641113,
+              "latency_ms": 18279.10351753235,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 62952.76069641113,
+          "total_latency_ms": 18279.10351753235,
           "all_failed": false
         }
       },
@@ -2652,14 +2608,15 @@
           {
             "claim": "Research suggests that dogs do understand human language to a meaningful extent: brain-imaging studies show that dogs process word meaning with the left hemisphere and intonation with the right hemisphere, mirroring human neural mechanisms their brains can detect speech and distinguish between languages without explicit training",
             "cited_docs": [
-              "d8",
               "d3",
-              "d2"
+              "d2",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
               "d3",
-              "d2"
+              "d2",
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2675,9 +2632,9 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d7",
               "d6",
-              "d4"
+              "d4",
+              "d7"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2688,13 +2645,14 @@
           {
             "claim": "However, not all researchers agree: one Emory University study noted there is limited scientific evidence that dogs truly know what words mean (as opposed to simply distinguishing familiar from unfamiliar sounds) some dog training perspectives argue that dogs are overwhelmed by human speech and rely more heavily on body language and tone than on linguistic content itself",
             "cited_docs": [
+              "d9",
               "d5",
-              "d1",
-              "d9"
+              "d1"
             ],
             "supporting_docs_found": [
+              "d9",
               "d5",
-              "d9"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2723,7 +2681,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer prioritizes the most recent 2024 sources and explicitly treats the 2023 winner as superseded outdated information.",
+        "rationale": "The answer prioritizes the newest available information by naming the 2024 winner as the most recent, supports it with the latest sources, and only secondarily notes the older 2023 winner as superseded.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -2738,24 +2696,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.96,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer prioritizes the most recent 2024 sources and explicitly treats the 2023 winner as superseded outdated information.",
+          "rationale": "The answer prioritizes the newest available information by naming the 2024 winner as the most recent, supports it with the latest sources, and only secondarily notes the older 2023 winner as superseded.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer prioritizes the most recent 2024 sources and explicitly treats the 2023 winner as superseded outdated information.",
+              "rationale": "The answer prioritizes the newest available information by naming the 2024 winner as the most recent, supports it with the latest sources, and only secondarily notes the older 2023 winner as superseded.",
               "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 68860.18776893616,
+              "latency_ms": 56028.074741363525,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 68860.18776893616,
+          "total_latency_ms": 56028.074741363525,
           "all_failed": false
         }
       },
@@ -2770,12 +2728,12 @@
           {
             "claim": "The most recent Spiel des Jahres winner is **Sky Team**, which won the 2024 award",
             "cited_docs": [
-              "d5",
-              "d3"
+              "d3",
+              "d5"
             ],
             "supporting_docs_found": [
-              "d5",
-              "d3"
+              "d3",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2786,14 +2744,14 @@
           {
             "claim": "The official Spiel des Jahres website confirms a 2024 award winners page exists multiple sources report that Sky Team \u2014 a cooperative two-player game about landing an airliner \u2014 was announced as the winner on July 21, 2024",
             "cited_docs": [
-              "d5",
               "d3",
-              "d4"
+              "d4",
+              "d5"
             ],
             "supporting_docs_found": [
-              "d5",
               "d3",
-              "d4"
+              "d4",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2804,16 +2762,16 @@
           {
             "claim": "This supersedes the 2023 winner, Dorfromantik: The Board Game , which had previously held the title",
             "cited_docs": [
-              "d1",
-              "d8",
               "d6",
-              "d7"
+              "d7",
+              "d8",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d8",
               "d6",
-              "d7"
+              "d7",
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2852,7 +2810,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear, direct response and adds supporting detail without presenting disagreement or unnecessary uncertainty.",
+        "rationale": "The answer gives a clear, direct response ('Yes') and maintains a single consistent position without introducing uncertainty or competing viewpoints.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -2867,24 +2825,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.88,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct response and adds supporting detail without presenting disagreement or unnecessary uncertainty.",
+          "rationale": "The answer gives a clear, direct response ('Yes') and maintains a single consistent position without introducing uncertainty or competing viewpoints.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct response and adds supporting detail without presenting disagreement or unnecessary uncertainty.",
-              "confidence": 0.95,
+              "rationale": "The answer gives a clear, direct response ('Yes') and maintains a single consistent position without introducing uncertainty or competing viewpoints.",
+              "confidence": 0.97,
               "cost": 0.0,
-              "latency_ms": 56696.34747505188,
+              "latency_ms": 28980.860710144043,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 56696.34747505188,
+          "total_latency_ms": 28980.860710144043,
           "all_failed": false
         }
       },
@@ -2899,18 +2857,17 @@
           {
             "claim": "Yes \u2014 in fact, not just most but all octopuses are venomous",
             "cited_docs": [
-              "d1",
+              "d7",
               "d8",
-              "d7"
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
               "d7",
-              "d4",
               "d3",
-              "d2",
-              "d1",
-              "d6"
+              "d4",
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2921,18 +2878,18 @@
           {
             "claim": "Wikipedia notes that \"all octopuses are venomous, but only the blue-ringed octopuses are known to be deadly to humans\" , a finding corroborated by a peer-reviewed case study showing that even common octopuses (Octopus vulgaris) possess neurotoxins in glands connected to their beak",
             "cited_docs": [
-              "d1",
-              "d2"
+              "d2",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
-              "d3",
+              "d6",
               "d2",
-              "d1",
+              "d7",
+              "d3",
+              "d4",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2943,18 +2900,18 @@
           {
             "claim": "While all species carry venom \u2014 primarily used for hunting and self-defense \u2014 most octopus venom is not harmful to humans , with only the blue-ringed octopus and the Mototi octopus carrying the lethal tetrodotoxin (TTX)",
             "cited_docs": [
-              "d8",
               "d6",
-              "d4"
+              "d4",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
-              "d3",
+              "d6",
               "d2",
-              "d1",
-              "d6"
+              "d7",
+              "d3",
+              "d4",
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -2993,7 +2950,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer explicitly presents a dominant scientific view and a minority perspective, attributes both to sources, and neutrally contrasts the disagreement while noting shared agreement about land-based ice.",
+        "rationale": "The answer explicitly presents the disagreement between sources, distinguishes the dominant view from a minority perspective, and summarizes both viewpoints in a neutral, comparative way.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -3008,24 +2965,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.92,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer explicitly presents a dominant scientific view and a minority perspective, attributes both to sources, and neutrally contrasts the disagreement while noting shared agreement about land-based ice.",
+          "rationale": "The answer explicitly presents the disagreement between sources, distinguishes the dominant view from a minority perspective, and summarizes both viewpoints in a neutral, comparative way.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer explicitly presents a dominant scientific view and a minority perspective, attributes both to sources, and neutrally contrasts the disagreement while noting shared agreement about land-based ice.",
-              "confidence": 0.96,
+              "rationale": "The answer explicitly presents the disagreement between sources, distinguishes the dominant view from a minority perspective, and summarizes both viewpoints in a neutral, comparative way.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 19055.43088912964,
+              "latency_ms": 10665.6973361969,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 19055.43088912964,
+          "total_latency_ms": 10665.6973361969,
           "all_failed": false
         }
       },
@@ -3040,21 +2997,21 @@
           {
             "claim": "The dominant scientific view",
             "cited_docs": [
-              "d1",
-              "d13",
-              "d10",
-              "d14"
-            ],
-            "supporting_docs_found": [
               "d14",
               "d10",
-              "d4",
               "d13",
+              "d1"
+            ],
+            "supporting_docs_found": [
+              "d13",
+              "d10",
+              "d14",
               "d3",
+              "d4",
               "d11",
               "d9",
-              "d1",
               "d5",
+              "d1",
               "d12"
             ],
             "cross_doc_support": false,
@@ -3083,17 +3040,17 @@
             "claim": "Across both perspectives, there is broad agreement that land-based ice \u2014 such as the Greenland and Antarctic ice sheets and mountain glaciers \u2014 is the primary driver of sea level rise, with Greenland alone currently contributing about 20% of global sea-level rise running at 4mm per year",
             "cited_docs": [
               "d14",
-              "d8",
-              "d10"
+              "d10",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d14",
-              "d4",
               "d13",
+              "d14",
               "d3",
+              "d4",
               "d11",
               "d9",
+              "d8",
               "d1",
               "d12"
             ],
@@ -3124,7 +3081,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear, direct response and presents the sources as consistent, without introducing disagreement, alternatives, or unnecessary uncertainty.",
+        "rationale": "The answer gives a clear, direct response and does not introduce competing viewpoints or unnecessary uncertainty. It straightforwardly states the winner and adds supporting detail without hedging.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -3139,24 +3096,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct response and presents the sources as consistent, without introducing disagreement, alternatives, or unnecessary uncertainty.",
+          "rationale": "The answer gives a clear, direct response and does not introduce competing viewpoints or unnecessary uncertainty. It straightforwardly states the winner and adds supporting detail without hedging.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct response and presents the sources as consistent, without introducing disagreement, alternatives, or unnecessary uncertainty.",
-              "confidence": 0.95,
+              "rationale": "The answer gives a clear, direct response and does not introduce competing viewpoints or unnecessary uncertainty. It straightforwardly states the winner and adds supporting detail without hedging.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 33301.344871520996,
+              "latency_ms": 26293.06650161743,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 33301.344871520996,
+          "total_latency_ms": 26293.06650161743,
           "all_failed": false
         }
       },
@@ -3171,15 +3128,15 @@
           {
             "claim": "The 2024 Nobel Prize in Literature was awarded to South Korean author Han Kang, recognized \"for her intense poetic prose that confronts historical traumas and exposes the fragility of human life\"",
             "cited_docs": [
-              "d5",
-              "d2"
+              "d2",
+              "d5"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
+              "d6",
               "d2",
+              "d7",
               "d5",
-              "d6"
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3190,16 +3147,15 @@
           {
             "claim": "This was confirmed by the official Nobel Prize website, Wikipedia's dedicated 2024 Nobel Prize in Literature article The Guardian, all consistently identifying Han Kang as the laureate",
             "cited_docs": [
-              "d8",
               "d6",
-              "d3"
+              "d3",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
+              "d6",
               "d2",
-              "d5",
-              "d6"
+              "d8",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3210,15 +3166,15 @@
           {
             "claim": "Han Kang, born in 1970, is the first South Korean author to receive the Nobel Prize in Literature the announcement was made on October 10, 2024",
             "cited_docs": [
-              "d8",
-              "d7"
+              "d7",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
+              "d6",
               "d2",
+              "d7",
               "d5",
-              "d6"
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3257,7 +3213,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer prioritizes the more recent appointment and explicitly acknowledges older sources naming Amy Coney Barrett as outdated and superseded by Ketanji Brown Jackson's 2022 confirmation.",
+        "rationale": "The answer prioritizes the most recent appointment and explicitly notes that older sources naming Amy Coney Barrett are outdated and superseded, which matches the rubric for handling outdated information.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -3272,24 +3228,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.84,
           "weighted_against": 0.0,
-          "rationale": "The answer prioritizes the more recent appointment and explicitly acknowledges older sources naming Amy Coney Barrett as outdated and superseded by Ketanji Brown Jackson's 2022 confirmation.",
+          "rationale": "The answer prioritizes the most recent appointment and explicitly notes that older sources naming Amy Coney Barrett are outdated and superseded, which matches the rubric for handling outdated information.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer prioritizes the more recent appointment and explicitly acknowledges older sources naming Amy Coney Barrett as outdated and superseded by Ketanji Brown Jackson's 2022 confirmation.",
-              "confidence": 0.95,
+              "rationale": "The answer prioritizes the most recent appointment and explicitly notes that older sources naming Amy Coney Barrett are outdated and superseded, which matches the rubric for handling outdated information.",
+              "confidence": 0.96,
               "cost": 0.0,
-              "latency_ms": 47339.17260169983,
+              "latency_ms": 46238.75856399536,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 47339.17260169983,
+          "total_latency_ms": 46238.75856399536,
           "all_failed": false
         }
       },
@@ -3305,10 +3261,9 @@
             "claim": "The last person appointed to the U",
             "cited_docs": [],
             "supporting_docs_found": [
-              "d1",
-              "d5",
               "d3",
-              "d4"
+              "d4",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3319,14 +3274,14 @@
           {
             "claim": "S. Supreme Court is Ketanji Brown Jackson, who was nominated by President Joe Biden on February 25, 2022 confirmed by the Senate on April 7, 2022, as the 116th Associate Justice",
             "cited_docs": [
-              "d5",
-              "d3"
+              "d3",
+              "d5"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d5",
               "d3",
-              "d4"
+              "d4",
+              "d5",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3340,9 +3295,9 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d1",
+              "d4",
               "d5",
-              "d4"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3357,12 +3312,11 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d4",
+              "d6",
               "d3",
-              "d1",
+              "d4",
               "d5",
-              "d6"
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3401,7 +3355,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer consolidates multiple partial counts by distinguishing major authored books from catalog/title listings and reconciles the differences as editions, co-authored works, and compilations without framing it as a debate.",
+        "rationale": "The answer synthesizes multiple source outputs into a single reconciled response, explaining why counts differ across catalogs and distinguishing major books from edition-based listings, without treating the sources as a debate.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -3416,24 +3370,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.84,
           "weighted_against": 0.0,
-          "rationale": "The answer consolidates multiple partial counts by distinguishing major authored books from catalog/title listings and reconciles the differences as editions, co-authored works, and compilations without framing it as a debate.",
+          "rationale": "The answer synthesizes multiple source outputs into a single reconciled response, explaining why counts differ across catalogs and distinguishing major books from edition-based listings, without treating the sources as a debate.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer consolidates multiple partial counts by distinguishing major authored books from catalog/title listings and reconciles the differences as editions, co-authored works, and compilations without framing it as a debate.",
-              "confidence": 0.95,
+              "rationale": "The answer synthesizes multiple source outputs into a single reconciled response, explaining why counts differ across catalogs and distinguishing major books from edition-based listings, without treating the sources as a debate.",
+              "confidence": 0.96,
               "cost": 0.0,
-              "latency_ms": 18416.807174682617,
+              "latency_ms": 9530.438899993896,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 18416.807174682617,
+          "total_latency_ms": 9530.438899993896,
           "all_failed": false
         }
       },
@@ -3448,15 +3402,15 @@
           {
             "claim": "Shoshana Zuboff is widely described as the author of three major books: *In the Age of the Smart Machine: The Future of Work and Power* (1988), *The Support Economy: Why Corporations Are Failing Individuals and the Next Episode of Capitalism* (co-authored with James Maxmin) *The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power*",
             "cited_docs": [
-              "d1",
-              "d7",
+              "d9",
               "d2",
-              "d9"
+              "d7",
+              "d1"
             ],
             "supporting_docs_found": [
+              "d2",
               "d7",
               "d3",
-              "d2",
               "d9",
               "d1"
             ],
@@ -3474,9 +3428,9 @@
               "d4"
             ],
             "supporting_docs_found": [
-              "d5",
+              "d4",
               "d8",
-              "d4"
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3521,7 +3475,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear direct 'No' and explains the single uncontested account without hedging, uncertainty, or presenting alternative viewpoints as competing.",
+        "rationale": "The answer is clear, direct, and unambiguous, giving a straightforward 'No' without unnecessary hedging or presenting competing viewpoints.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -3536,24 +3490,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.96,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear direct 'No' and explains the single uncontested account without hedging, uncertainty, or presenting alternative viewpoints as competing.",
+          "rationale": "The answer is clear, direct, and unambiguous, giving a straightforward 'No' without unnecessary hedging or presenting competing viewpoints.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear direct 'No' and explains the single uncontested account without hedging, uncertainty, or presenting alternative viewpoints as competing.",
+              "rationale": "The answer is clear, direct, and unambiguous, giving a straightforward 'No' without unnecessary hedging or presenting competing viewpoints.",
               "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 32210.426568984985,
+              "latency_ms": 32106.31823539734,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 32210.426568984985,
+          "total_latency_ms": 32106.31823539734,
           "all_failed": false
         }
       },
@@ -3569,10 +3523,10 @@
             "claim": "No, Spider-Man did not originally have organic web shooters",
             "cited_docs": [],
             "supporting_docs_found": [
-              "d1",
-              "d5",
+              "d4",
               "d2",
-              "d4"
+              "d5",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3587,10 +3541,10 @@
               "d2"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d5",
+              "d4",
               "d2",
-              "d4"
+              "d5",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3601,15 +3555,14 @@
           {
             "claim": "Organic web shooters were introduced later in the comic series after Peter dealt with the problem of running out of ammo the concept was most prominently brought to mainstream audiences through Sam Raimi's 2002 film adaptation, which was considered a significant departure from the source material by comic fans",
             "cited_docs": [
-              "d1",
+              "d4",
               "d5",
-              "d4"
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
+              "d4",
               "d5",
-              "d2",
-              "d4"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3648,7 +3601,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear, direct response identifying the signers as 56 delegates and provides supporting details without introducing competing viewpoints or unnecessary uncertainty.",
+        "rationale": "The answer is clear, direct, and assertive, stating who signed the Declaration without introducing uncertainty or unnecessary competing viewpoints.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -3663,49 +3616,47 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.88,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct response identifying the signers as 56 delegates and provides supporting details without introducing competing viewpoints or unnecessary uncertainty.",
+          "rationale": "The answer is clear, direct, and assertive, stating who signed the Declaration without introducing uncertainty or unnecessary competing viewpoints.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct response identifying the signers as 56 delegates and provides supporting details without introducing competing viewpoints or unnecessary uncertainty.",
-              "confidence": 0.95,
+              "rationale": "The answer is clear, direct, and assertive, stating who signed the Declaration without introducing uncertainty or unnecessary competing viewpoints.",
+              "confidence": 0.97,
               "cost": 0.0,
-              "latency_ms": 52260.308504104614,
+              "latency_ms": 48519.5198059082,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 52260.308504104614,
+          "total_latency_ms": 48519.5198059082,
           "all_failed": false
         }
       },
-      "factual_grounding_score": 1.0,
+      "factual_grounding_score": 0.6666666666666666,
       "factual_grounding_applicable": true,
       "factual_grounding_details": {
-        "grounding_ratio": 1.0,
-        "supported_claims": 3,
+        "grounding_ratio": 0.6666666666666666,
+        "supported_claims": 2,
         "total_claims": 3,
         "evaluable_claims": 3,
         "claim_details": [
           {
             "claim": "The Declaration of Independence was signed by 56 delegates to the Second Continental Congress , with John Hancock, President of the Congress, being the first and most famous signer, affixing his bold signature on August 2, 1776",
             "cited_docs": [
-              "d7",
+              "d9",
               "d2",
-              "d9"
+              "d7"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d4",
-              "d2",
               "d9",
-              "d1",
-              "d6"
+              "d2",
+              "d7",
+              "d4"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3716,17 +3667,15 @@
           {
             "claim": "Notable signers included Thomas Jefferson, John Adams, Benjamin Franklin, Benjamin Harrison V Edward Rutledge (the youngest signer at age 26), among the full roster of 56 delegates",
             "cited_docs": [
-              "d1",
-              "d4"
+              "d4",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d4",
               "d2",
+              "d4",
               "d9",
-              "d1",
               "d5",
-              "d6"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3741,17 +3690,14 @@
               "d7"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d3",
               "d2",
-              "d9"
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
-            "citation_check_passed": true,
-            "supported": true,
-            "reason": "single_doc_cited"
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
           }
         ],
         "fg_errors": 0
@@ -3784,7 +3730,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer prioritizes the more recent/current population estimate while using the older 8-billion milestone as context, which matches the expected behavior of favoring up-to-date information and optionally acknowledging older sources.",
+        "rationale": "The answer prioritizes the more current estimate ('approximately 8.2 billion as of January 2025') while also noting the older 8 billion milestone from 2022 as background, which matches the rubric for handling outdated information.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -3799,24 +3745,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.64,
+          "weighted_for": 3.72,
           "weighted_against": 0.0,
-          "rationale": "The answer prioritizes the more recent/current population estimate while using the older 8-billion milestone as context, which matches the expected behavior of favoring up-to-date information and optionally acknowledging older sources.",
+          "rationale": "The answer prioritizes the more current estimate ('approximately 8.2 billion as of January 2025') while also noting the older 8 billion milestone from 2022 as background, which matches the rubric for handling outdated information.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer prioritizes the more recent/current population estimate while using the older 8-billion milestone as context, which matches the expected behavior of favoring up-to-date information and optionally acknowledging older sources.",
-              "confidence": 0.82,
+              "rationale": "The answer prioritizes the more current estimate ('approximately 8.2 billion as of January 2025') while also noting the older 8 billion milestone from 2022 as background, which matches the rubric for handling outdated information.",
+              "confidence": 0.93,
               "cost": 0.0,
-              "latency_ms": 16532.762050628662,
+              "latency_ms": 63596.14419937134,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 16532.762050628662,
+          "total_latency_ms": 63596.14419937134,
           "all_failed": false
         }
       },
@@ -3831,19 +3777,19 @@
           {
             "claim": "The world population currently stands at over 8 billion people, with multiple authoritative sources confirming this milestone was reached on November 15, 2022",
             "cited_docs": [
-              "d8",
               "d3",
-              "d4"
+              "d4",
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
-              "d3",
+              "d6",
               "d2",
+              "d7",
+              "d3",
+              "d4",
               "d9",
-              "d1",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3854,35 +3800,36 @@
           {
             "claim": "The United Nations and U",
             "cited_docs": [],
-            "supporting_docs_found": [],
-            "cross_doc_support": true,
-            "cross_doc_combo": [
+            "supporting_docs_found": [
+              "d3",
+              "d4",
               "d8",
-              "d3"
+              "d5"
             ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
             "citation_check_passed": false,
             "supported": false,
-            "reason": "cross_doc_not_cited"
+            "reason": "supporting_doc_not_cited"
           },
           {
             "claim": "S. Census Bureau both place the figure at 8 billion as of that date , a finding corroborated by the UN Population Fund , INED , Our World in Data the Population Reference Bureau",
             "cited_docs": [
-              "d8",
+              "d6",
               "d7",
-              "d3",
               "d2",
+              "d3",
               "d9",
-              "d6"
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
-              "d3",
+              "d6",
               "d2",
+              "d7",
+              "d3",
+              "d4",
               "d9",
-              "d5",
-              "d6"
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -3935,7 +3882,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer gives a clear, direct response that the USA is ranked #1 and treats the sources as consistent, without hedging or introducing disagreement.",
+        "rationale": "The answer gives a clear, direct conclusion that the USA is ranked #1 and does not hedge or present competing viewpoints. It adds supporting source confirmation and brief background, but still behaves as a straightforward no-conflict answer.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -3950,24 +3897,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.68,
           "weighted_against": 0.0,
-          "rationale": "The answer gives a clear, direct response that the USA is ranked #1 and treats the sources as consistent, without hedging or introducing disagreement.",
+          "rationale": "The answer gives a clear, direct conclusion that the USA is ranked #1 and does not hedge or present competing viewpoints. It adds supporting source confirmation and brief background, but still behaves as a straightforward no-conflict answer.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer gives a clear, direct response that the USA is ranked #1 and treats the sources as consistent, without hedging or introducing disagreement.",
-              "confidence": 0.95,
+              "rationale": "The answer gives a clear, direct conclusion that the USA is ranked #1 and does not hedge or present competing viewpoints. It adds supporting source confirmation and brief background, but still behaves as a straightforward no-conflict answer.",
+              "confidence": 0.92,
               "cost": 0.0,
-              "latency_ms": 39591.86792373657,
+              "latency_ms": 45915.430307388306,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 39591.86792373657,
+          "total_latency_ms": 45915.430307388306,
           "all_failed": false
         }
       },
@@ -3982,14 +3929,14 @@
           {
             "claim": "The United States (USA) is currently ranked #1 in the FIBA Men's World Ranking, as confirmed by the official FIBA website and a November 2024 FIBA ranking update",
             "cited_docs": [
-              "d1",
-              "d4"
+              "d4",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d5",
               "d9",
-              "d4"
+              "d4",
+              "d5",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4004,11 +3951,10 @@
               "d9"
             ],
             "supporting_docs_found": [
-              "d4",
               "d3",
               "d9",
-              "d1",
-              "d5"
+              "d4",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4019,15 +3965,14 @@
           {
             "claim": "This ranking is consistent across multiple sources, with ESPN reporting that USA overtook Spain for the #1 position following the 2023 World Cup the most recent FIBA update confirming the USA's continued dominance at the top",
             "cited_docs": [
-              "d4",
-              "d9"
+              "d9",
+              "d4"
             ],
             "supporting_docs_found": [
-              "d4",
-              "d3",
               "d9",
-              "d1",
-              "d5"
+              "d4",
+              "d5",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4066,7 +4011,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer prioritizes the more recent 2024-10-15 sources identifying Caesars Superdome for Super Bowl LIX, while explicitly acknowledging older Las Vegas/Super Bowl LVIII information as outdated and pertaining to the prior year.",
+        "rationale": "The answer prioritizes the newer 2025 sources for the current year's Super Bowl venue and explicitly frames the Las Vegas references as outdated prior-year information, which matches the rubric.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -4081,24 +4026,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer prioritizes the more recent 2024-10-15 sources identifying Caesars Superdome for Super Bowl LIX, while explicitly acknowledging older Las Vegas/Super Bowl LVIII information as outdated and pertaining to the prior year.",
+          "rationale": "The answer prioritizes the newer 2025 sources for the current year's Super Bowl venue and explicitly frames the Las Vegas references as outdated prior-year information, which matches the rubric.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer prioritizes the more recent 2024-10-15 sources identifying Caesars Superdome for Super Bowl LIX, while explicitly acknowledging older Las Vegas/Super Bowl LVIII information as outdated and pertaining to the prior year.",
-              "confidence": 0.95,
+              "rationale": "The answer prioritizes the newer 2025 sources for the current year's Super Bowl venue and explicitly frames the Las Vegas references as outdated prior-year information, which matches the rubric.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 10604.795217514038,
+              "latency_ms": 67481.27627372742,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 10604.795217514038,
+          "total_latency_ms": 67481.27627372742,
           "all_failed": false
         }
       },
@@ -4113,16 +4058,15 @@
           {
             "claim": "This year's Super Bowl (Super Bowl LIX) is hosted at the Caesars Superdome in New Orleans, Louisiana, scheduled for February 9, 2025",
             "cited_docs": [
+              "d3",
               "d7",
-              "d8",
-              "d3"
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
+              "d6",
               "d3",
-              "d1",
-              "d6"
+              "d10",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4133,16 +4077,15 @@
           {
             "claim": "New Orleans was moved to host the 2025 game after originally being slated for 2024, with the Caesars Superdome \u2014 home of the New Orleans Saints \u2014 serving as the venue",
             "cited_docs": [
-              "d1",
-              "d3"
+              "d3",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
               "d7",
-              "d10",
               "d3",
-              "d1",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4153,19 +4096,19 @@
           {
             "claim": "It is worth noting that older documents reference Allegiant Stadium in Las Vegas as the host of Super Bowl LVIII on February 11, 2024 , but that information is outdated and refers to the previous year's game, which has since been superseded by the 2025 event at Caesars Superdome",
             "cited_docs": [
-              "d5",
               "d8",
+              "d4",
               "d7",
-              "d4"
+              "d5"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
               "d7",
-              "d4",
               "d3",
-              "d1",
+              "d4",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4204,7 +4147,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer explicitly reflects disagreement among sources, contrasts supportive nutrition bodies with Belgium's opposing view, and neutrally summarizes the conditional consensus and caveats.",
+        "rationale": "The answer explicitly presents the disagreement between sources, contrasts the supportive and opposing viewpoints, and summarizes the overall debate in a neutral, conditional way rather than presenting a single unqualified conclusion.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -4219,24 +4162,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer explicitly reflects disagreement among sources, contrasts supportive nutrition bodies with Belgium's opposing view, and neutrally summarizes the conditional consensus and caveats.",
+          "rationale": "The answer explicitly presents the disagreement between sources, contrasts the supportive and opposing viewpoints, and summarizes the overall debate in a neutral, conditional way rather than presenting a single unqualified conclusion.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer explicitly reflects disagreement among sources, contrasts supportive nutrition bodies with Belgium's opposing view, and neutrally summarizes the conditional consensus and caveats.",
-              "confidence": 0.95,
+              "rationale": "The answer explicitly presents the disagreement between sources, contrasts the supportive and opposing viewpoints, and summarizes the overall debate in a neutral, conditional way rather than presenting a single unqualified conclusion.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 59073.5285282135,
+              "latency_ms": 53636.01994514465,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 59073.5285282135,
+          "total_latency_ms": 53636.01994514465,
           "all_failed": false
         }
       },
@@ -4254,8 +4197,8 @@
             "supporting_docs_found": [],
             "cross_doc_support": true,
             "cross_doc_combo": [
-              "d1",
-              "d2"
+              "d2",
+              "d1"
             ],
             "citation_check_passed": false,
             "supported": false,
@@ -4267,11 +4210,10 @@
               "d2"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d4",
+              "d6",
               "d2",
-              "d5",
-              "d6"
+              "d7",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4286,8 +4228,8 @@
               "d7"
             ],
             "supporting_docs_found": [
-              "d5",
-              "d2"
+              "d2",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4312,20 +4254,19 @@
           {
             "claim": "The prevailing conditional consensus among most sources is that a well-planned vegan diet can be safe and even beneficial during pregnancy\u2014potentially reducing risks of preeclampsia and gestational diabetes\u2014but requires careful monitoring, supplementation ideally guidance from a registered dietitian ; the vegan keto diet, a more restrictive variant, is generally considered unsuitable for pregnant women",
             "cited_docs": [
+              "d6",
+              "d2",
               "d7",
               "d3",
-              "d2",
-              "d5",
-              "d6"
+              "d5"
             ],
             "supporting_docs_found": [
-              "d7",
-              "d4",
-              "d3",
+              "d6",
               "d2",
-              "d1",
-              "d5",
-              "d6"
+              "d7",
+              "d3",
+              "d4",
+              "d5"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4350,43 +4291,43 @@
       "gold_answerable": true,
       "correct_refusal": false,
       "gr_accuracy": 1.0,
-      "behavior_score": 1.0,
+      "behavior_score": 0.0,
       "behavior_applicable": true,
       "behavior_details": {
-        "adherent": true,
-        "rationale": "The answer gives a clear direct yes and explains the legal definition without presenting conflicting viewpoints or undue uncertainty. The brief everyday-speech note is contextual rather than hedging.",
+        "adherent": false,
+        "rationale": "The answer begins directly, but it introduces an alternative perspective about non-French sparkling wines being informally called 'champagne' in everyday speech, which violates the rubric for a no-conflict case requiring a clear, direct answer without alternative viewpoints or uncertainty.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
-        "votes_for": 1,
-        "votes_against": 0,
+        "votes_for": 0,
+        "votes_against": 1,
         "total_votes": 1,
         "skipped": null,
         "all_failed": false,
         "committee_details": {
-          "adherent": true,
+          "adherent": false,
           "confidence": 1.0,
           "minority_confidence": 0.0,
-          "votes_for": 1,
-          "votes_against": 0,
+          "votes_for": 0,
+          "votes_against": 1,
           "total_votes": 1,
-          "weighted_for": 1.9,
-          "weighted_against": 0.0,
-          "rationale": "The answer gives a clear direct yes and explains the legal definition without presenting conflicting viewpoints or undue uncertainty. The brief everyday-speech note is contextual rather than hedging.",
+          "weighted_for": 0.0,
+          "weighted_against": 3.8,
+          "rationale": "The answer begins directly, but it introduces an alternative perspective about non-French sparkling wines being informally called 'champagne' in everyday speech, which violates the rubric for a no-conflict case requiring a clear, direct answer without alternative viewpoints or uncertainty.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
-              "adherent": true,
-              "rationale": "The answer gives a clear direct yes and explains the legal definition without presenting conflicting viewpoints or undue uncertainty. The brief everyday-speech note is contextual rather than hedging.",
+              "adherent": false,
+              "rationale": "The answer begins directly, but it introduces an alternative perspective about non-French sparkling wines being informally called 'champagne' in everyday speech, which violates the rubric for a no-conflict case requiring a clear, direct answer without alternative viewpoints or uncertainty.",
               "confidence": 0.95,
               "cost": 0.0,
-              "latency_ms": 25551.321983337402,
+              "latency_ms": 25685.423135757446,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 25551.321983337402,
+          "total_latency_ms": 25685.423135757446,
           "all_failed": false
         }
       },
@@ -4401,18 +4342,18 @@
           {
             "claim": "Yes, Champagne comes solely from the Champagne region of France \u2014 by legal definition, only sparkling wine produced in that designated region may be called Champagne",
             "cited_docs": [
-              "d1",
-              "d5"
+              "d5",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d4",
-              "d3",
               "d2",
+              "d7",
+              "d3",
+              "d4",
               "d9",
-              "d1",
-              "d5"
+              "d5",
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4423,15 +4364,14 @@
           {
             "claim": "The name is legally protected in the European Union and over 70 other countries under frameworks dating back to an 1891 treaty and reaffirmed after World War I, meaning any sparkling wine from outside the region must be labeled differently",
             "cited_docs": [
-              "d1",
-              "d8"
+              "d8",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d8",
-              "d7",
-              "d10",
-              "d3",
               "d2",
+              "d7",
+              "d3",
+              "d8",
               "d1"
             ],
             "cross_doc_support": false,
@@ -4447,16 +4387,16 @@
               "d10"
             ],
             "supporting_docs_found": [
-              "d8",
+              "d6",
+              "d2",
               "d7",
               "d10",
-              "d4",
               "d3",
-              "d2",
+              "d4",
               "d9",
-              "d1",
               "d5",
-              "d6"
+              "d8",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4495,7 +4435,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer explicitly presents multiple viewpoints/milestones, notes there is no single agreed date, and neutrally contrasts formal declaration, strict temple enforcement, later-date claims, and partial enforcement.",
+        "rationale": "The answer explicitly presents multiple competing milestones (1851 formal declaration, 1919 or 1921 stricter temple-worthiness enforcement, and partial earlier enforcement), contrasts them clearly, and neutrally explains that there is no single agreed date.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -4510,24 +4450,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.94,
+          "weighted_for": 3.92,
           "weighted_against": 0.0,
-          "rationale": "The answer explicitly presents multiple viewpoints/milestones, notes there is no single agreed date, and neutrally contrasts formal declaration, strict temple enforcement, later-date claims, and partial enforcement.",
+          "rationale": "The answer explicitly presents multiple competing milestones (1851 formal declaration, 1919 or 1921 stricter temple-worthiness enforcement, and partial earlier enforcement), contrasts them clearly, and neutrally explains that there is no single agreed date.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer explicitly presents multiple viewpoints/milestones, notes there is no single agreed date, and neutrally contrasts formal declaration, strict temple enforcement, later-date claims, and partial enforcement.",
-              "confidence": 0.97,
+              "rationale": "The answer explicitly presents multiple competing milestones (1851 formal declaration, 1919 or 1921 stricter temple-worthiness enforcement, and partial earlier enforcement), contrasts them clearly, and neutrally explains that there is no single agreed date.",
+              "confidence": 0.98,
               "cost": 0.0,
-              "latency_ms": 32816.56241416931,
+              "latency_ms": 40169.533014297485,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 32816.56241416931,
+          "total_latency_ms": 40169.533014297485,
           "all_failed": false
         }
       },
@@ -4543,10 +4483,9 @@
             "claim": "There is no single universally agreed-upon date for when the Word of Wisdom became mandatory, as different milestones mark different stages of enforcement",
             "cited_docs": [],
             "supporting_docs_found": [
-              "d7",
-              "d8",
               "d6",
-              "d4"
+              "d4",
+              "d7"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4557,14 +4496,15 @@
           {
             "claim": "On September 9, 1851, President Brigham Young moved at general conference that the Word of Wisdom be considered a binding divine commandment for all Church members, a motion accepted unanimously \u2014 making 1851 the earliest formal declaration of mandatory status",
             "cited_docs": [
-              "d5",
+              "d7",
               "d1",
-              "d7"
+              "d5"
             ],
             "supporting_docs_found": [
-              "d1",
+              "d6",
               "d5",
-              "d7"
+              "d7",
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4575,14 +4515,14 @@
           {
             "claim": "However, the Church History Library (an official LDS source) and other sources indicate that strict enforcement as a temple recommend requirement came decades later, in 1919, when the First Presidency under President Heber J. Grant issued a letter on October 8, 1919 making it a condition of temple worthiness \u2014 a shift corroborated by the BYU scholarly analysis , which notes that Grant's administration was when strict observance became a criterion of orthodoxy",
             "cited_docs": [
-              "d8",
+              "d9",
               "d4",
-              "d9"
+              "d8"
             ],
             "supporting_docs_found": [
-              "d8",
               "d9",
-              "d4"
+              "d4",
+              "d8"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4593,8 +4533,8 @@
           {
             "claim": "Some sources place the temple recommend requirement slightly later, in 1921 , while a Reddit discussion notes partial enforcement as early as 1915 for certain men seeking priesthood ordination ; the current LDS Church confirms compliance is now necessary for membership and participation in church functions",
             "cited_docs": [
-              "d3",
               "d6",
+              "d3",
               "d2"
             ],
             "supporting_docs_found": [
@@ -4629,7 +4569,7 @@
       "behavior_applicable": true,
       "behavior_details": {
         "adherent": true,
-        "rationale": "The answer consolidates partial details into a single coherent explanation, combining definition, regional context, alternate terminology, history, uses, examples, and SUV contrast without framing the sources as disagreeing or debating.",
+        "rationale": "The answer combines partial details from multiple sources into one unified explanation of AUV, adding meaning, regional context, history, purpose, and examples without presenting the sources as conflicting or debating them.",
         "confidence": 1.0,
         "minority_confidence": 0.0,
         "votes_for": 1,
@@ -4644,24 +4584,24 @@
           "votes_for": 1,
           "votes_against": 0,
           "total_votes": 1,
-          "weighted_for": 1.9,
+          "weighted_for": 3.88,
           "weighted_against": 0.0,
-          "rationale": "The answer consolidates partial details into a single coherent explanation, combining definition, regional context, alternate terminology, history, uses, examples, and SUV contrast without framing the sources as disagreeing or debating.",
+          "rationale": "The answer combines partial details from multiple sources into one unified explanation of AUV, adding meaning, regional context, history, purpose, and examples without presenting the sources as conflicting or debating them.",
           "individual_responses": [
             {
               "judge_id": "codex_cli_codex-cli/default",
               "model_id": "codex-cli/default",
               "provider": "codex_cli",
               "adherent": true,
-              "rationale": "The answer consolidates partial details into a single coherent explanation, combining definition, regional context, alternate terminology, history, uses, examples, and SUV contrast without framing the sources as disagreeing or debating.",
-              "confidence": 0.95,
+              "rationale": "The answer combines partial details from multiple sources into one unified explanation of AUV, adding meaning, regional context, history, purpose, and examples without presenting the sources as conflicting or debating them.",
+              "confidence": 0.97,
               "cost": 0.0,
-              "latency_ms": 22693.572998046875,
+              "latency_ms": 19674.755811691284,
               "error": null
             }
           ],
           "total_cost": 0.0,
-          "total_latency_ms": 22693.572998046875,
+          "total_latency_ms": 19674.755811691284,
           "all_failed": false
         }
       },
@@ -4676,13 +4616,12 @@
           {
             "claim": "In the context of cars, AUV stands for **Asian Utility Vehicle** \u2014 a term coined for multi-passenger vehicles predominantly sold in Asian markets, particularly in the Philippines",
             "cited_docs": [
-              "d1",
-              "d5"
+              "d5",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
               "d5",
-              "d2"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4693,13 +4632,11 @@
           {
             "claim": "These vehicles, also sometimes called Basic Utility Vehicles (BUVs), were first seen on roads in the late 1960s and early 1970s were designed to seat 8\u201310 people, haul goods serve commercial purposes",
             "cited_docs": [
-              "d1",
-              "d5"
+              "d5",
+              "d1"
             ],
             "supporting_docs_found": [
-              "d1",
-              "d5",
-              "d2"
+              "d1"
             ],
             "cross_doc_support": false,
             "cross_doc_combo": [],
@@ -4713,7 +4650,6 @@
               "d2"
             ],
             "supporting_docs_found": [
-              "d1",
               "d2"
             ],
             "cross_doc_support": false,

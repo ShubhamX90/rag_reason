@@ -458,26 +458,83 @@ def get_codex_cli_judge(
 
 def create_cli_committee(
     use_codex: bool = True,
+    use_claude: bool = True,
     cli_model: str = "sonnet",
+    codex_model: Optional[str] = None,
     max_concurrent_requests: int = 4,
 ) -> JudgeCommitteeConfig:
     """CLI-based behavior committee — no OpenRouter API key required.
 
-    Default (use_codex=True): 2-judge committee (claude CLI priority=3 + codex CLI priority=2).
-    With use_codex=False: single claude CLI judge.
+    Default: 2-judge committee (claude CLI priority=3 + codex CLI priority=2).
+    use_claude=False, use_codex=True: codex-only single judge.
+    use_claude=True, use_codex=False: claude-only single judge.
 
     max_concurrent_requests is enforced via semaphore in JudgeClient._call_claude_cli /
     _call_codex_cli, unlike the OpenRouter committee where it was stored but not enforced.
     """
-    judges = [get_claude_cli_judge(model_alias=cli_model, priority=3)]
+    judges: List[JudgeModelConfig] = []
+    if use_claude:
+        judges.append(get_claude_cli_judge(model_alias=cli_model, priority=3))
     if use_codex:
-        judges.append(get_codex_cli_judge(priority=2))
+        judges.append(get_codex_cli_judge(model_alias=codex_model, priority=2))
+    if not judges:
+        raise ValueError("create_cli_committee: at least one of use_claude / use_codex must be True")
 
     return JudgeCommitteeConfig(
         judges=judges,
         voting_strategy="weighted_majority",
         max_concurrent_requests=max_concurrent_requests,
         timeout_seconds=150.0,
+    )
+
+
+def create_mixed_committee(
+    codex_model: Optional[str] = "gpt-5.4",
+    codex_priority: int = 4,
+    openrouter_judges: Optional[List[Tuple[str, int]]] = None,
+    max_concurrent_requests: int = 4,
+) -> JudgeCommitteeConfig:
+    """Mixed committee: codex CLI gpt-5.4 anchor + OpenRouter free reasoning judges.
+
+    Default composition (gpt-5.4 = 40% weight):
+      - codex-cli gpt-5.4              priority 4   (anchor)
+      - deepseek/deepseek-v3.2         priority 2   (paid, ~$0.10/run; v3.2 specifically)
+      - qwen/qwen3-235b-a22b:free      priority 2   (Qwen MoE; explicitly NOT qwen3-32b or qwen2.5-*)
+      - meta-llama/llama-3.3-70b:free  priority 2   (70B, explicitly NOT llama 8B)
+
+    Override via openrouter_judges=[("model_id", priority), ...].
+    Requires OPENROUTER_API_KEY for the OpenRouter judges (works with $0 balance for :free models;
+    paid DeepSeek V3.2 needs ~$0.10 credit per 49-sample run).
+    """
+    judges: List[JudgeModelConfig] = [
+        get_codex_cli_judge(model_alias=codex_model, priority=codex_priority),
+    ]
+
+    if openrouter_judges is None:
+        openrouter_judges = [
+            ("deepseek/deepseek-v3.2", 2),
+            ("qwen/qwen3-235b-a22b:free", 2),
+            ("meta-llama/llama-3.3-70b-instruct:free", 2),
+        ]
+
+    for model_id, priority in openrouter_judges:
+        judges.append(JudgeModelConfig(
+            model_id=model_id,
+            provider=APIProvider.OPENROUTER,
+            temperature=0.0,
+            max_tokens=2500,   # reasoning models need headroom for <think> traces + JSON
+            cost_per_1k_input=0.0,   # :free tier; non-:free DeepSeek v3.2 would be ~$0.00014
+            cost_per_1k_output=0.0,
+            priority=priority,
+            api_key_env="OPENROUTER_API_KEY",
+            base_url=_OPENROUTER_BASE,
+        ))
+
+    return JudgeCommitteeConfig(
+        judges=judges,
+        voting_strategy="weighted_majority",
+        max_concurrent_requests=max_concurrent_requests,
+        timeout_seconds=180.0,   # free-tier OpenRouter can be slow
     )
 
 

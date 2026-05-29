@@ -12,15 +12,15 @@
 
 **GR F1** *(used in CATS)*: 1.000
 
-**Behavior Adherence**: 1.000 (over 34 applicable samples)
+**Behavior Adherence**: 0.971 (over 34 applicable samples)
 
-**Factual Grounding**: 0.901 (over 34 applicable samples)
+**Factual Grounding**: 0.877 (over 34 applicable samples)
 
-**Single-Truth Recall**: 0.941 (over 17 applicable samples)
+**Single-Truth Recall**: 0.882 (over 17 applicable samples)
 
 --------------------------------------------------------------------------------
 
-### CATS Score: 0.961
+### CATS Score: 0.932
 
 *(average of 4 applicable sub-metrics)*
 
@@ -43,10 +43,10 @@
 - **Samples**: 19 (7 correct refusals excluded from sub-metrics)
 - **GR Accuracy**: 1.000
 - **GR F1** *(used in CATS)*: 1.000
-- **Behavior**: 1.000 (n=12)
-- **Grounding**: 0.944 (n=12)
+- **Behavior**: 0.917 (n=12)
+- **Grounding**: 0.917 (n=12)
 - **Recall**: 0.917 (n=12)
-- **CATS**: 0.965
+- **CATS**: 0.937
 
 ### Type 2: Complementary Info
 
@@ -64,9 +64,9 @@
 - **GR Accuracy**: 1.000
 - **GR F1** *(used in CATS)*: 1.000
 - **Behavior**: 1.000 (n=9)
-- **Grounding**: 0.813 (n=9)
+- **Grounding**: 0.757 (n=9)
 - **Recall**: 0.000 (n=0)
-- **CATS**: 0.938
+- **CATS**: 0.919
 
 ### Type 4: Outdated Info
 
@@ -75,8 +75,8 @@
 - **GR F1** *(used in CATS)*: 1.000
 - **Behavior**: 1.000 (n=5)
 - **Grounding**: 0.850 (n=5)
-- **Recall**: 1.000 (n=5)
-- **CATS**: 0.963
+- **Recall**: 0.800 (n=5)
+- **CATS**: 0.913
 
 
 ================================================================================

@@ -12,15 +12,15 @@
 
 **GR F1** *(used in CATS)*: 1.000
 
-**Behavior Adherence**: 1.000 (over 34 applicable samples)
+**Behavior Adherence**: 0.941 (over 34 applicable samples)
 
-**Factual Grounding**: 0.901 (over 34 applicable samples)
+**Factual Grounding**: 0.882 (over 34 applicable samples)
 
-**Single-Truth Recall**: 0.941 (over 17 applicable samples)
+**Single-Truth Recall**: 0.882 (over 17 applicable samples)
 
 --------------------------------------------------------------------------------
 
-### CATS Score: 0.961
+### CATS Score: 0.926
 
 *(average of 4 applicable sub-metrics)*
 
@@ -43,10 +43,10 @@
 - **Samples**: 19 (7 correct refusals excluded from sub-metrics)
 - **GR Accuracy**: 1.000
 - **GR F1** *(used in CATS)*: 1.000
-- **Behavior**: 1.000 (n=12)
-- **Grounding**: 0.944 (n=12)
+- **Behavior**: 0.833 (n=12)
+- **Grounding**: 0.889 (n=12)
 - **Recall**: 0.917 (n=12)
-- **CATS**: 0.965
+- **CATS**: 0.910
 
 ### Type 2: Complementary Info
 
@@ -75,8 +75,8 @@
 - **GR F1** *(used in CATS)*: 1.000
 - **Behavior**: 1.000 (n=5)
 - **Grounding**: 0.850 (n=5)
-- **Recall**: 1.000 (n=5)
-- **CATS**: 0.963
+- **Recall**: 0.800 (n=5)
+- **CATS**: 0.913
 
 
 ================================================================================
@@ -96,6 +96,24 @@
 
 - **Total Cost**: $0.0000
 - **Total Requests**: 172
+- **Average Cost per Request**: $0.000000
+
+#### deepseek/deepseek-v3.2
+
+- **Total Cost**: $0.0000
+- **Total Requests**: 0
+- **Average Cost per Request**: $0.000000
+
+#### qwen/qwen3-235b-a22b-2507
+
+- **Total Cost**: $0.0000
+- **Total Requests**: 0
+- **Average Cost per Request**: $0.000000
+
+#### meta-llama/llama-3.3-70b-instruct:free
+
+- **Total Cost**: $0.0000
+- **Total Requests**: 0
 - **Average Cost per Request**: $0.000000
 
 #### NLI Judge: claude-cli/sonnet-nli

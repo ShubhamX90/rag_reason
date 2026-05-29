@@ -11,9 +11,9 @@
 #     --committee cli \
 #     --output-dir outputs/val_tier2_cli
 
-outputs_dir: "outputs/val_tier2_cli"
-report_md: "outputs/val_tier2_cli/eval_report.md"
-detailed_results_json: "outputs/val_tier2_cli/detailed_results.json"
+outputs_dir: "outputs/val_stage3_codex_gpt54"
+report_md: "outputs/val_stage3_codex_gpt54/eval_report.md"
+detailed_results_json: "outputs/val_stage3_codex_gpt54/detailed_results.json"
 
 pipeline:
   batch_size: 10    # CLI subprocesses are slower than HTTP; keep concurrency manageable
@@ -29,7 +29,9 @@ conflict_eval:
 
   committee:
     type: "cli"           # triggers create_cli_committee in _apply_yaml_to_config
-    use_codex: true       # include codex exec as second judge alongside claude
-    cli_model: "haiku"    # --model flag passed to claude CLI (haiku is faster + lower quota burn than sonnet)
+    use_claude: false     # disable claude CLI judge (saves Claude Max quota)
+    use_codex: true       # codex-only single judge: a doc passes FG if codex alone supports it
+    cli_model: "haiku"    # only used if use_claude is true
+    codex_model: "gpt-5.4"   # codex CLI -m flag; omit for codex default (gpt-5.5)
     voting_strategy: "weighted_majority"
     max_concurrent_requests: 4   # max simultaneous CLI subprocesses

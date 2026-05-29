@@ -31,7 +31,12 @@ from rag_eval import (
     setup_file_logging,
     create_default_committee,
 )
-from rag_eval.config import EnhancedConflictEvalConfig, create_cli_committee, get_claude_cli_judge
+from rag_eval.config import (
+    EnhancedConflictEvalConfig,
+    create_cli_committee,
+    create_mixed_committee,
+    get_claude_cli_judge,
+)
 
 
 def _load_yaml_config(path: str) -> dict:
@@ -98,12 +103,16 @@ def _apply_yaml_to_config(yaml_data: dict, config: EvaluationConfig, args) -> Ev
     if committee_type == "cli":
         # Rebuild as CLI committee regardless of --committee arg.
         use_codex = bool(committee_section.get("use_codex", True))
+        use_claude = bool(committee_section.get("use_claude", True))
         cli_model = str(committee_section.get("cli_model", "sonnet"))
+        codex_model = committee_section.get("codex_model")  # None → codex CLI default
         max_conc = int(committee_section.get("max_concurrent_requests", 4))
         config.conflict.use_judge_committee = True
         config.conflict.committee = create_cli_committee(
             use_codex=use_codex,
+            use_claude=use_claude,
             cli_model=cli_model,
+            codex_model=codex_model,
             max_concurrent_requests=max_conc,
         )
         config.conflict.nli_judge = get_claude_cli_judge(
@@ -111,7 +120,31 @@ def _apply_yaml_to_config(yaml_data: dict, config: EvaluationConfig, args) -> Ev
             model_id="claude-cli/sonnet-nli",
             priority=1,
         )
-        logger.info(f"YAML override: CLI committee (use_codex={use_codex}, model={cli_model})")
+        logger.info(f"YAML override: CLI committee (use_claude={use_claude}, use_codex={use_codex}, model={cli_model})")
+    elif committee_type == "mixed":
+        codex_model = committee_section.get("codex_model", "gpt-5.4")
+        codex_priority = int(committee_section.get("codex_priority", 4))
+        max_conc = int(committee_section.get("max_concurrent_requests", 4))
+
+        # openrouter_judges: list of {model_id, priority} dicts; None → factory default
+        raw_or_judges = committee_section.get("openrouter_judges")
+        or_judges = None
+        if raw_or_judges:
+            or_judges = [(j["model_id"], int(j.get("priority", 2))) for j in raw_or_judges]
+
+        config.conflict.use_judge_committee = True
+        config.conflict.committee = create_mixed_committee(
+            codex_model=codex_model,
+            codex_priority=codex_priority,
+            openrouter_judges=or_judges,
+            max_concurrent_requests=max_conc,
+        )
+        config.conflict.nli_judge = get_claude_cli_judge(
+            model_alias="sonnet",
+            model_id="claude-cli/sonnet-nli",
+            priority=1,
+        )
+        logger.info(f"YAML override: MIXED committee (codex gpt-{codex_model} priority={codex_priority} + {len(config.conflict.committee.judges)-1} OpenRouter judges)")
     elif config.conflict.committee is not None:
         if "voting_strategy" in committee_section:
             config.conflict.committee.voting_strategy = committee_section["voting_strategy"]
