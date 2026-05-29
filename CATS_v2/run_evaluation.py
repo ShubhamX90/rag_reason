@@ -31,7 +31,7 @@ from rag_eval import (
     setup_file_logging,
     create_default_committee,
 )
-from rag_eval.config import EnhancedConflictEvalConfig
+from rag_eval.config import EnhancedConflictEvalConfig, create_cli_committee, get_claude_cli_judge
 
 
 def _load_yaml_config(path: str) -> dict:
@@ -91,15 +91,34 @@ def _apply_yaml_to_config(yaml_data: dict, config: EvaluationConfig, args) -> Ev
     if "ignore_contradictions_types" in ce:
         setattr(config.conflict, "ignore_contradictions_types", tuple(ce["ignore_contradictions_types"]))
 
-    # Committee section: voting strategy + priority overrides
+    # Committee section: voting strategy + priority overrides + CLI type
     committee_section = ce.get("committee") or {}
-    if config.conflict.committee is not None:
+
+    committee_type = committee_section.get("type")
+    if committee_type == "cli":
+        # Rebuild as CLI committee regardless of --committee arg.
+        use_codex = bool(committee_section.get("use_codex", True))
+        cli_model = str(committee_section.get("cli_model", "sonnet"))
+        max_conc = int(committee_section.get("max_concurrent_requests", 4))
+        config.conflict.use_judge_committee = True
+        config.conflict.committee = create_cli_committee(
+            use_codex=use_codex,
+            cli_model=cli_model,
+            max_concurrent_requests=max_conc,
+        )
+        config.conflict.nli_judge = get_claude_cli_judge(
+            model_alias=cli_model,
+            model_id="claude-cli/sonnet-nli",
+            priority=1,
+        )
+        logger.info(f"YAML override: CLI committee (use_codex={use_codex}, model={cli_model})")
+    elif config.conflict.committee is not None:
         if "voting_strategy" in committee_section:
             config.conflict.committee.voting_strategy = committee_section["voting_strategy"]
         if "max_concurrent_requests" in committee_section:
             config.conflict.committee.max_concurrent_requests = int(committee_section["max_concurrent_requests"])
 
-        # Apply priority overrides — rebuild the committee with new priorities.
+        # Apply priority overrides — rebuild the OpenRouter committee with new priorities.
         overrides = committee_section.get("priority_overrides")
         if overrides:
             from rag_eval.config import create_default_committee
@@ -135,9 +154,9 @@ def parse_args():
     parser.add_argument(
         "--committee",
         type=str,
-        choices=["default", "none"],
+        choices=["default", "cli", "none"],
         default="default",
-        help="Judge committee preset: default (Sonnet 4.6 + GPT-5.4 + DeepSeek V3.2, all via OpenRouter), none (skip committee)"
+        help="Judge committee preset: default (OpenRouter API), cli (claude+codex CLI, no API key), none (skip committee)"
     )
     
     # Configuration
@@ -189,22 +208,27 @@ def setup_config(args, input_file: str, output_dir: str) -> EvaluationConfig:
     config.pipeline.batch_size = args.batch_size
     config.pipeline.verbose = args.verbose
     
-    # Validate API keys before setting up committee.
-    # Current CATS v2 judges are all routed through OpenRouter, including
-    # Sonnet and the dedicated NLI judge.
-    openrouter_key = os.getenv("OPENROUTER_API_KEY")
-
-    if not openrouter_key and args.committee in ["default", "conservative"]:
-        logger.error("OPENROUTER_API_KEY not found in environment!")
-        logger.error("Please set it in your .env file or export it:")
-        logger.error("  export OPENROUTER_API_KEY=your-key-here")
-        sys.exit(1)
-    
     # Setup judge committee
     if args.committee == "default":
+        openrouter_key = os.getenv("OPENROUTER_API_KEY")
+        if not openrouter_key:
+            logger.error("OPENROUTER_API_KEY not found in environment!")
+            logger.error("Please set it in your .env file or export it:")
+            logger.error("  export OPENROUTER_API_KEY=your-key-here")
+            logger.error("Or use CLI judges with: --committee cli")
+            sys.exit(1)
         config.conflict.use_judge_committee = True
         config.conflict.committee = create_default_committee()
-        logger.info("Using default judge committee (Sonnet 4.6 + GPT-5.4 + DeepSeek V3.2 via OpenRouter)")
+        logger.info("Using default judge committee (Haiku + GPT-5.4 + DeepSeek V3.2 via OpenRouter)")
+    elif args.committee == "cli":
+        config.conflict.use_judge_committee = True
+        config.conflict.committee = create_cli_committee(use_codex=True)
+        config.conflict.nli_judge = get_claude_cli_judge(
+            model_alias="sonnet",
+            model_id="claude-cli/sonnet-nli",
+            priority=1,
+        )
+        logger.info("Using CLI judge committee (claude --print + codex exec, no API key required)")
     else:
         config.conflict.use_judge_committee = False
         logger.info("Using single judge mode")

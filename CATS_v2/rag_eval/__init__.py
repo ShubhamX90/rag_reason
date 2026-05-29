@@ -13,10 +13,13 @@ from .config import (
     JudgeCommitteeConfig,
     DEFAULT_JUDGE_PRIORITIES,
     create_default_committee,
+    create_cli_committee,
     get_sonnet_judge,
     get_gpt54_judge,
     get_deepseek_v32_judge,
     get_sonnet_nli_judge,
+    get_claude_cli_judge,
+    get_codex_cli_judge,
 )
 from .evaluator import EnhancedEvaluator
 from .data import load_dataset, read_jsonl, write_jsonl
@@ -36,8 +39,11 @@ __all__ = [
     "logger",
     "setup_file_logging",
     "create_default_committee",
+    "create_cli_committee",
     "get_sonnet_judge",
     "get_gpt54_judge",
     "get_deepseek_v32_judge",
     "get_sonnet_nli_judge",
+    "get_claude_cli_judge",
+    "get_codex_cli_judge",
 ]

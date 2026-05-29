@@ -1,0 +1,35 @@
+# CATS v2.0 — Val Split Evaluation Config (CLI-based judges)
+#
+# Uses claude --print (Claude Code Max) and npx @openai/codex exec (Codex Pro)
+# instead of OpenRouter. No OPENROUTER_API_KEY required.
+#
+# Run with:
+#   cd CATS_v2
+#   python run_evaluation.py \
+#     --input data/splits/85_7p5_7p5/monolithic_multi/val/monolithic_final.jsonl \
+#     --config configs/val_tier2_cli.yaml \
+#     --committee cli \
+#     --output-dir outputs/val_tier2_cli
+
+outputs_dir: "outputs/val_tier2_cli"
+report_md: "outputs/val_tier2_cli/eval_report.md"
+detailed_results_json: "outputs/val_tier2_cli/detailed_results.json"
+
+pipeline:
+  batch_size: 10    # CLI subprocesses are slower than HTTP; keep concurrency manageable
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "cli"           # triggers create_cli_committee in _apply_yaml_to_config
+    use_codex: true       # include codex exec as second judge alongside claude
+    cli_model: "haiku"    # --model flag passed to claude CLI (haiku is faster + lower quota burn than sonnet)
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 4   # max simultaneous CLI subprocesses

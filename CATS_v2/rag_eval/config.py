@@ -29,6 +29,8 @@ class APIProvider(str, Enum):
     ANTHROPIC = "anthropic"
     OPENROUTER = "openrouter"
     OPENAI = "openai"  # kept for backward compatibility
+    CLAUDE_CLI = "claude_cli"   # claude --print subprocess (Claude Code Max subscription)
+    CODEX_CLI = "codex_cli"     # npx @openai/codex exec subprocess (Codex Pro subscription)
 
 
 # --------------------
@@ -67,6 +69,8 @@ class JudgeModelConfig:
 
     api_key_env: Optional[str] = None
     base_url: Optional[str] = None
+    cli_model: Optional[str] = None  # --model flag for CLI providers (e.g. "haiku", "sonnet")
+    cli_timeout: int = 120            # subprocess timeout in seconds
 
 
 # --------------------
@@ -242,6 +246,9 @@ DEFAULT_JUDGE_PRIORITIES: Dict[str, int] = {
     "anthropic/claude-haiku-4-5":       3,  # haiku anchor — fast + cheap alternative
     "openai/gpt-5.4":                   2,  # low-cost complement
     "deepseek/deepseek-v3.2":           2,  # low-cost reasoning complement
+    "claude-cli/sonnet":                3,  # claude CLI (Max subscription)
+    "claude-cli/haiku":                 2,  # claude CLI haiku (Max subscription)
+    "codex-cli/default":                2,  # codex CLI (Pro subscription)
 }
 
 
@@ -389,6 +396,88 @@ def create_conservative_committee(
         ],
         voting_strategy="weighted_majority",
         max_concurrent_requests=max_concurrent_requests,
+    )
+
+
+# --------------------
+# CLI-based Judge Configurations — no API key required
+# --------------------
+def get_claude_cli_judge(
+    model_alias: str = "sonnet",
+    model_id: str = "claude-cli/sonnet",
+    priority: int = 3,
+    cli_timeout: int = 120,
+) -> JudgeModelConfig:
+    """Claude via `claude --print` subprocess.
+
+    Uses Claude Code Max subscription auth — no ANTHROPIC_API_KEY needed.
+    model_alias is passed as --model to the claude CLI (e.g. "haiku", "sonnet").
+    Token counts are always 0; cost is $0.00.
+    """
+    return JudgeModelConfig(
+        model_id=model_id,
+        provider=APIProvider.CLAUDE_CLI,
+        temperature=0.0,
+        max_tokens=800,
+        cost_per_1k_input=0.0,
+        cost_per_1k_output=0.0,
+        priority=priority,
+        api_key_env=None,
+        base_url=None,
+        cli_model=model_alias,
+        cli_timeout=cli_timeout,
+    )
+
+
+def get_codex_cli_judge(
+    model_alias: Optional[str] = None,
+    model_id: str = "codex-cli/default",
+    priority: int = 2,
+    cli_timeout: int = 120,
+) -> JudgeModelConfig:
+    """OpenAI Codex via `npx @openai/codex exec -` subprocess.
+
+    Uses Codex Pro subscription auth — no OPENAI_API_KEY needed when logged in.
+    model_alias is passed as -m to the codex CLI.
+    Token counts are always 0; cost is $0.00.
+    """
+    return JudgeModelConfig(
+        model_id=model_id,
+        provider=APIProvider.CODEX_CLI,
+        temperature=0.0,
+        max_tokens=800,
+        cost_per_1k_input=0.0,
+        cost_per_1k_output=0.0,
+        priority=priority,
+        api_key_env=None,
+        base_url=None,
+        cli_model=model_alias,
+        cli_timeout=cli_timeout,
+    )
+
+
+def create_cli_committee(
+    use_codex: bool = True,
+    cli_model: str = "sonnet",
+    max_concurrent_requests: int = 4,
+) -> JudgeCommitteeConfig:
+    """CLI-based behavior committee — no OpenRouter API key required.
+
+    Default (use_codex=True): 2-judge committee (claude CLI priority=3 + codex CLI priority=2).
+    With use_codex=False: single claude CLI judge.
+
+    max_concurrent_requests is enforced via semaphore in JudgeClient._call_claude_cli /
+    _call_codex_cli, unlike the OpenRouter committee where it was stored but not enforced.
+    """
+    judges = [get_claude_cli_judge(model_alias=cli_model, priority=3)]
+    if use_codex:
+        judges.append(get_codex_cli_judge(priority=2))
+
+    return JudgeCommitteeConfig(
+        judges=judges,
+        voting_strategy="weighted_majority",
+        max_concurrent_requests=max_concurrent_requests,
+        timeout_seconds=150.0,
     )
 
 

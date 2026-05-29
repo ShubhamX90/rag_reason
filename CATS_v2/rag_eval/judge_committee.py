@@ -22,13 +22,20 @@ import os
 import json
 import logging
 import re
+import subprocess
 import time
+from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, Any, List, Optional, Tuple
 from dataclasses import dataclass
 import anthropic
 import httpx
 
 from .config import JudgeCommitteeConfig, JudgeModelConfig, APIProvider
+
+# Shared executor for blocking CLI subprocess calls.
+# max_workers=8 gives headroom above the per-judge semaphore cap (4)
+# so threads are never the bottleneck when multiple samples are in-flight.
+_CLI_EXECUTOR = ThreadPoolExecutor(max_workers=8, thread_name_prefix="cats_cli_judge")
 
 logger = logging.getLogger(__name__)
 
@@ -115,16 +122,15 @@ class JudgeClient:
         self.config = config
 
         api_key_var = config.api_key_env or ""
-        self.api_key = os.getenv(api_key_var)
-
-        if not self.api_key:
-            logger.warning(
-                f"API key not found for {config.model_id}. Looking for env var: {api_key_var}"
-            )
+        self.api_key = os.getenv(api_key_var) if api_key_var else None
 
         if config.provider == APIProvider.ANTHROPIC:
+            if not self.api_key:
+                logger.warning(f"API key not found for {config.model_id}. Looking for env var: {api_key_var}")
             self.client = anthropic.AsyncAnthropic(api_key=self.api_key)
         elif config.provider == APIProvider.OPENROUTER:
+            if not self.api_key:
+                logger.warning(f"API key not found for {config.model_id}. Looking for env var: {api_key_var}")
             self.base_url = config.base_url or "https://openrouter.ai/api/v1"
             self.http_client = httpx.AsyncClient(
                 base_url=self.base_url,
@@ -135,9 +141,20 @@ class JudgeClient:
                 },
                 timeout=60.0,
             )
+        elif config.provider in (APIProvider.CLAUDE_CLI, APIProvider.CODEX_CLI):
+            # No network client needed — subprocess calls handle auth via local login.
+            # Semaphore is lazily created inside the running event loop (see _get_cli_semaphore).
+            self._cli_semaphore: Optional[asyncio.Semaphore] = None
+            logger.info(f"CLI judge initialized: {config.model_id} (provider={config.provider.value})")
 
         self.total_cost = 0.0
         self.request_count = 0
+
+    def _get_cli_semaphore(self) -> asyncio.Semaphore:
+        """Lazy-init semaphore. Must be called from within a running event loop."""
+        if self._cli_semaphore is None:
+            self._cli_semaphore = asyncio.Semaphore(4)
+        return self._cli_semaphore
 
     async def judge_behavior(self, prompt: str) -> JudgeResponse:
         """Send a behavior judgment request and return a structured response."""
@@ -148,6 +165,10 @@ class JudgeClient:
                 response_text, input_tokens, output_tokens = await self._call_anthropic(prompt)
             elif self.config.provider == APIProvider.OPENROUTER:
                 response_text, input_tokens, output_tokens = await self._call_openrouter(prompt)
+            elif self.config.provider == APIProvider.CLAUDE_CLI:
+                response_text, input_tokens, output_tokens = await self._call_claude_cli(prompt)
+            elif self.config.provider == APIProvider.CODEX_CLI:
+                response_text, input_tokens, output_tokens = await self._call_codex_cli(prompt)
             else:
                 raise ValueError(f"Unsupported provider: {self.config.provider}")
 
@@ -198,6 +219,10 @@ class JudgeClient:
                 response_text, input_tokens, output_tokens = await self._call_anthropic(prompt)
             elif self.config.provider == APIProvider.OPENROUTER:
                 response_text, input_tokens, output_tokens = await self._call_openrouter(prompt)
+            elif self.config.provider == APIProvider.CLAUDE_CLI:
+                response_text, input_tokens, output_tokens = await self._call_claude_cli(prompt)
+            elif self.config.provider == APIProvider.CODEX_CLI:
+                response_text, input_tokens, output_tokens = await self._call_codex_cli(prompt)
             else:
                 raise ValueError(f"Unsupported provider: {self.config.provider}")
 
@@ -275,6 +300,114 @@ class JudgeClient:
         output_tokens = usage.get("completion_tokens") or (len(content) // 4)
 
         return content, input_tokens, output_tokens
+
+    async def _call_claude_cli(self, prompt: str) -> Tuple[str, int, int]:
+        """Call `claude --print` subprocess. Uses Claude Code Max subscription — no API key needed.
+
+        Runs in _CLI_EXECUTOR so the asyncio event loop is never blocked.
+        A per-judge semaphore (capacity 4) prevents spawning too many subprocesses simultaneously.
+        Returns (response_text, 0, 0) — token counts unavailable from CLI; cost stays $0.00.
+        """
+        cmd = ["claude", "--print"]
+        cli_model = getattr(self.config, "cli_model", None)
+        if cli_model:
+            cmd += ["--model", cli_model]
+        timeout = int(getattr(self.config, "cli_timeout", 120))
+
+        loop = asyncio.get_running_loop()
+        sem = self._get_cli_semaphore()
+
+        async with sem:
+            def _run() -> Tuple[str, int]:
+                proc = subprocess.run(
+                    cmd,
+                    input=prompt,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                )
+                return proc.stdout.strip(), proc.returncode
+
+            try:
+                stdout, returncode = await loop.run_in_executor(_CLI_EXECUTOR, _run)
+            except subprocess.TimeoutExpired:
+                raise RuntimeError(f"claude CLI timed out after {timeout}s")
+
+        if returncode != 0:
+            raise RuntimeError(f"claude CLI exited with code {returncode}")
+        if not stdout:
+            raise RuntimeError("claude CLI returned empty output")
+
+        if "</think>" in stdout:
+            stdout = stdout.split("</think>", 1)[1].strip()
+
+        return stdout, 0, 0
+
+    async def _call_codex_cli(self, prompt: str) -> Tuple[str, int, int]:
+        """Call `npx @openai/codex exec -` subprocess. Uses Codex Pro subscription — no API key needed.
+
+        Prompt is piped via stdin ('-') to avoid shell arg-length limits.
+        Returns (response_text, 0, 0) — token counts unavailable from CLI; cost stays $0.00.
+        """
+        cmd = ["npx", "@openai/codex", "exec"]
+        cli_model = getattr(self.config, "cli_model", None)
+        if cli_model:
+            cmd += ["-m", cli_model]
+        cmd.append("-")  # read prompt from stdin
+        timeout = int(getattr(self.config, "cli_timeout", 120))
+
+        loop = asyncio.get_running_loop()
+        sem = self._get_cli_semaphore()
+
+        async with sem:
+            def _run() -> Tuple[str, int]:
+                proc = subprocess.run(
+                    cmd,
+                    input=prompt,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                )
+                return proc.stdout.strip(), proc.returncode
+
+            try:
+                stdout, returncode = await loop.run_in_executor(_CLI_EXECUTOR, _run)
+            except subprocess.TimeoutExpired:
+                raise RuntimeError(f"codex CLI timed out after {timeout}s")
+            except FileNotFoundError:
+                raise RuntimeError("codex CLI not found — run: npm install -g @openai/codex")
+
+        if returncode != 0 and not stdout:
+            raise RuntimeError(f"codex CLI exited with code {returncode}")
+        if not stdout:
+            raise RuntimeError("codex CLI returned empty stdout")
+
+        # codex exec output formats:
+        #   - Non-TTY (subprocess): stdout = raw model response only; headers + 'codex'/'tokens used'
+        #     markers go to stderr. Use stdout as-is.
+        #   - TTY/combined: stdout includes headers, a 'codex' marker line, the response,
+        #     then a 'tokens used' marker. Extract between markers.
+        lines = stdout.splitlines()
+        codex_idx = None
+        for i in range(len(lines) - 1, -1, -1):
+            if lines[i].strip() == "codex":
+                codex_idx = i
+                break
+
+        if codex_idx is not None:
+            response_lines = []
+            for line in lines[codex_idx + 1:]:
+                if line.strip() == "tokens used":
+                    break
+                response_lines.append(line)
+            stdout = "\n".join(response_lines).strip()
+            if not stdout:
+                raise RuntimeError("codex CLI returned empty response after marker")
+
+        if "</think>" in stdout:
+            stdout = stdout.split("</think>", 1)[1].strip()
+
+        return stdout, 0, 0
 
     @staticmethod
     def _strip_markdown_fences(text: str) -> str:
@@ -392,6 +525,10 @@ class JudgeClient:
                 response_text, input_tokens, output_tokens = await self._call_anthropic(prompt)
             elif self.config.provider == APIProvider.OPENROUTER:
                 response_text, input_tokens, output_tokens = await self._call_openrouter(prompt)
+            elif self.config.provider == APIProvider.CLAUDE_CLI:
+                response_text, input_tokens, output_tokens = await self._call_claude_cli(prompt)
+            elif self.config.provider == APIProvider.CODEX_CLI:
+                response_text, input_tokens, output_tokens = await self._call_codex_cli(prompt)
             else:
                 raise ValueError(f"Unsupported provider: {self.config.provider}")
 
