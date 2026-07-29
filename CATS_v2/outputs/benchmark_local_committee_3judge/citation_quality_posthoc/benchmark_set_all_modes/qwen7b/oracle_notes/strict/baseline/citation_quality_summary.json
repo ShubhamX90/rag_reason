@@ -1,0 +1,1701 @@
+{
+  "variant": "benchmark_set_all_modes/qwen7b/oracle_notes/strict/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/oracle_notes/strict/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/oracle_notes/strict/baseline/final/detailed_results.json",
+    "source_final_sha256": "93d7dd9f6199eee7e20ed02cfa85e1dd3dc99a898c9986d3902b0fba5871caf8",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen7b/oracle_notes/strict/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen7b/oracle_notes/strict/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 941,
+    "claims_with_citations": 592,
+    "claims_with_committee_support_set": 740,
+    "claims_with_any_approved_citation": 561,
+    "claims_with_any_gold_positive_citation": 591,
+    "committee_alignment_precision_macro": 0.8325008043758044,
+    "committee_alignment_precision_micro": 0.7846153846153846,
+    "gold_positive_citation_precision_macro": 0.995777027027027,
+    "gold_positive_citation_precision_micro": 0.9959866220735786,
+    "soft_extra_citation_rate_micro": 0.21137123745819397,
+    "hard_negative_citation_rate_micro": 0.004013377926421404,
+    "committee_support_citation_recall_macro": 0.7581081081081081,
+    "committee_support_citation_recall_micro": 0.7581081081081081,
+    "claims_with_any_soft_extra_rate": 0.3091216216216216,
+    "claims_with_any_hard_negative_rate": 0.008445945945945946,
+    "strict_committee_alignment_claim_rate": 0.4314558979808714,
+    "strict_gold_clean_claim_rate": 0.5929861849096706,
+    "strict_grounded_committee_clean_rate_all_claims": 0.4314558979808714,
+    "strict_grounded_gold_clean_rate_all_claims": 0.5929861849096706,
+    "total_cited_docs": 1495,
+    "total_approved_cited_docs": 1173,
+    "total_gold_positive_cited_docs": 1489,
+    "total_soft_extra_cited_docs": 316,
+    "total_hard_negative_cited_docs": 6
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "trust_align_146",
+      "claim_index": 0,
+      "claim": "However, none of the documents offer a comprehensive explanation of how an air conditioner cools the air. discusses swamp coolers and mentions the condenser noise in air conditioners, defines ductless air conditioners, talks about air conditioner installation, lists types of air conditioners and their efficiency mentions the compressor and condenser as key components. d2 d3 d4 d5",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses air conditioner installation locations but does not explain the cooling mechanism.",
+          "quote": "Installing Air Conditioner Units How to Install an Air Conditioner The location for installing air conditioner units depend if you want to cool a single room or the whole house.",
+          "verdict_reason": "Snippet addresses the same entity (air conditioners) and goal (cooling) but discusses installation rather than the requested mechanism, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "An air conditioner is described as a complex device simplified into three sections: compressor, condenser, and an implied third section.",
+          "quote": "A complex device which has been simplified into 3 sections: compressor, condenser,",
+          "verdict_reason": "The snippet identifies key components (compressor, condenser) relevant to cooling but is incomplete, cutting off before explaining the mechanism or the third section.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Ductless air conditioners are a type of air conditioner that uses an outdoor unit.",
+          "quote": "Ductless air conditioners are air conditioners that use an outdoor",
+          "verdict_reason": "Snippet addresses the query topic by defining a specific AC type but cuts off before explaining the cooling mechanism, providing only partial evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document explains that swamp coolers cool air by evaporating moisture from wet pads, but only mentions noise regarding air conditioner condensers.",
+          "quote": "1 Swamp coolers: A system for cooling the air in a home by passing warmer outdoor air over wet pads. This causes the moisture on the pads to evaporate, cooling the air.",
+          "verdict_reason": "The snippet discusses cooling systems but primarily defines swamp coolers, offering no direct explanation of the air conditioner cooling mechanism beyond a mention of condenser noise.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists six types of air conditioners and notes that central air conditioners can cool homes efficiently.",
+          "quote": "There are six different types of air conditioners; Central Air Conditioning Air Conditioners, Ductless Air Conditioners, Split System Air Conditioners, Hybrid Air Conditioners, Portable Air Conditioners, and Window Air Conditioners. Most people go for Central Air Conditioning Air Conditioners as they can cool homes efficiently.",
+          "verdict_reason": "The snippet addresses the same entity (air conditioners) and mentions cooling efficiency but fails to explain the mechanism of how they cool air, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_157",
+      "claim_index": 1,
+      "claim": "Each document offers a different perspective, making it challenging to form a unified answer",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Da Vinci is considered a genius due to his myriad interests and observations of the natural world, anatomy, and cosmos.",
+          "quote": "Leonardo Da Vinci: Facing Genius ... evidence a mind whose interests were myriad and diverse. His observation of the natural world, anatomy and the cosmos reveal a man",
+          "verdict_reason": "Snippet directly attributes genius to Da Vinci's diverse interests and observations but includes contradictory views and cuts off before fully explaining the appreciation of his talents.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Some specialists hypothesize that the apostle Tadeu in da Vinci's work is actually a self-portrait of the artist.",
+          "quote": "Other art specialists assert that the image of the apostle who is facing Jesus, that is, Tadeu, is actually the self-portrait of da Vinci.",
+          "verdict_reason": "The snippet discusses specific theories about da Vinci's genius and hidden meanings in his art, but offers speculative hypotheses rather than a definitive explanation of why he is considered a genius.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The text acknowledges Da Vinci as a genius but attributes renewed public awareness of this status to Dan Brown's book rather than explaining the specific reasons for his genius.",
+          "quote": "History nuts and art lovers know that Leonardo Da Vinci is a genius. But this brilliance is lost among the multitudes of ordinary people",
+          "verdict_reason": "The snippet confirms Da Vinci is a genius but fails to explain why, instead discussing public perception and an exhibition, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The exhibit aims to uncover the mysteries behind Da Vinci's brilliant mind through replicas from his codices and paintings.",
+          "quote": "Uncovering Da VinciΓÇÖs Genius at the Mind Museum... is peeling off more of the mysteries surrounding the wonders behind Da VinciΓÇÖs brilliant mind",
+          "verdict_reason": "The snippet addresses the query topic by mentioning an exhibit exploring Da Vinci's genius but fails to explain the specific reasons why he is considered one.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Leonardo Da Vinci is widely considered a genius, evidenced by his functional inventions and musical instruments like the Great Continuous Organ.",
+          "quote": "This celebrates Italian Renaissance painter and inventor Leonardo Da Vinci, who is widely considered to be a genius. You see examples of that genius in the functional inventions on display.",
+          "verdict_reason": "The snippet confirms Da Vinci is considered a genius and cites inventions as examples, but does not fully explain the underlying reasons for this status.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_173",
+      "claim_index": 2,
+      "claim": "While the documents collectively provide a good starting point, they do not offer a comprehensive breakdown of all differences between good and bad sugars",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Sugars are categorized as naturally occurring (like fructose in fruit) or added during processing.",
+          "quote": "there are two different types of sugars found in food: sugar that's present naturally, like fructose, the sugar in fruit... and added sugar, which is any sugar or sweetener that's added to food or drinks",
+          "verdict_reason": "Snippet defines the key distinction between natural and added sugars relevant to the query but cuts off before explaining the health implications or differences.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Simple sugars in whole foods like fruits are unlikely to negatively affect health, whereas added sugars in candy and soda can cause health issues if overconsumed.",
+          "quote": "When you eat fresh veggies, fruit and unsweetened dairy products, you're taking in simple sugars in their natural form. In this case, as long as you don't overdo it, it's unlikely that the simple sugars will have a significant negative effect on your health.",
+          "verdict_reason": "The snippet distinguishes between natural sugars in fruit and added sugars in candy/soda, directly addressing the query's core comparison, though it lacks a comprehensive breakdown of all differences.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Fruit sugar provides antioxidants, vitamins, minerals, fiber, and enzymes, whereas candy and soda lack nutritional value and cause strong insulin responses.",
+          "quote": "Good: Sugar from fruit (fructose) has benefits when eaten as a whole fruit... because it contains antioxidants, vitamins, minerals, and fiber. ... Cereal is inflammatory and contains no enzymes to help with digestion.",
+          "verdict_reason": "Snippet directly contrasts fruit sugars with processed sugars regarding nutrients and health effects, but lacks comprehensive detail on all 'bad' sugars mentioned in the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document distinguishes fruit sugar from candy sugar by stating that candy is not a whole food and asserts that fruit sugar is beneficial.",
+          "quote": "sugars in fruits and the sugar in candy simply because candy is not a whole food. ... Why fruit sugar is good (not bad) for you",
+          "verdict_reason": "Snippet addresses the specific comparison between fruit and candy sugars but offers limited reasoning (whole food status) without detailed nutritional differences.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "High-fructose corn syrup (HFCS), found in candy and sodas, is a significant dietary source of fructose created from corn starch.",
+          "quote": "The most significant sources of fructose in the diet include: HFCS, which is present in candy, baked goods, and sodas, and other processed foods",
+          "verdict_reason": "Snippet identifies fructose sources in 'bad' sugars (candy, soda) but fails to explain the physiological difference or address 'good' sugars like fruit directly.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9275911a2961",
+      "claim_index": 1,
+      "claim": "However, the conflicting nature of the evidence prevents a definitive answer",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Antacids containing calcium can cause kidney stones if taken in excessive amounts due to calcium buildup in the kidneys.",
+          "quote": "Additionally, it's possible that antacids containing calcium can cause kidney stones if you take too much. This is because calcium can build up in the kidneys.",
+          "verdict_reason": "The snippet directly addresses the query by confirming a link between calcium-based antacids and kidney stones at high doses, though it notes this is not a concern at normal doses.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The study found that PPI use was associated with a 12% higher risk of developing kidney stones.",
+          "quote": "The results of the study showed the use of PPIs were associated with a 12% higher risk of developing a kidney stone",
+          "verdict_reason": "Snippet provides specific evidence linking PPIs (a type of antacid) to kidney stones, directly addressing the query's entity and claim, though it does not cover all antacid types or provide a final conclusion.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A case report links large amounts of magnesium-containing antacid ingestion to the formation of magnesium-ammonium-phosphate kidney stones.",
+          "quote": "A case of acute renal failure apparently caused by ingestion of large amounts of a magnesium-containing antacid is reported... demonstrated the presence of multiple renal stones that were found to be composed of magnesium-ammonium-phosphate crystals.",
+          "verdict_reason": "The snippet provides direct evidence of antacids causing kidney stones in a specific case, but as a single case report, it does not definitively resolve the general causal question for all antacids.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Antacids containing calcium can cause kidney stones in some cases.",
+          "quote": "In some cases, antacids that contain calcium can cause kidney stones . Calcium kidney stones are the most common type of kidney stone.",
+          "verdict_reason": "The snippet directly answers the query by stating that calcium-containing antacids can cause kidney stones, providing specific evidence for the causal link.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_a41257e9d6f6",
+      "claim_index": 1,
+      "claim": "This information is corroborated by , which explicitly states the cause of death. and provide additional context about his death but do not specify the cause, while confirms his role as the inventor of the perceptron but lacks the specific cause of death",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Frank Rosenblatt died in a boating accident two years after the publication of Minsky and Papert's book.",
+          "quote": "Sadly, two years after the book was published, Rosenblatt died in a boating accident.",
+          "verdict_reason": "The snippet explicitly states the cause of death (boating accident) for Rosenblatt, the inventor of the Perceptron, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Frank Rosenblatt as the inventor of the perceptron but does not state how he died.",
+          "quote": "The giant computer simulator was the brainchild of Frank Rosenblatt, a scientist at Cornell University.",
+          "verdict_reason": "The snippet confirms the identity of the perceptron's inventor (Frank Rosenblatt) but lacks any information regarding his death or cause of death, making it incomplete evidence for the specific query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet confirms Frank Rosenblatt died in 1971 but does not state the cause of his death.",
+          "quote": "When Rosenblatt died in 1971",
+          "verdict_reason": "The document addresses the specific entity (Rosenblatt) and confirms his death year, but fails to provide the cause of death requested by the query, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document references an article stating that Dr. Frank Rosenblatt died at the age of 43.",
+          "quote": "3. Dr. Frank Rosenblatt Dies at 43; Taught Neurobiology at Cornell",
+          "verdict_reason": "The snippet confirms the death of the Perceptron's inventor via a reference title but does not specify the cause of death, making it incomplete evidence for the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f3b3face1b6b",
+      "claim_index": 1,
+      "claim": "While d2 provides the most direct and comprehensive list, the exact full list of items is not fully provided by any single document",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "McDonald's Monopoly game pieces are typically printed on the packaging of specific menu items like Big Macs or large fries.",
+          "quote": "Game pieces are usually printed on the packaging of certain items, such as a Big Mac or large fries.",
+          "verdict_reason": "The snippet directly answers the query by stating that game pieces are found on the packaging of certain items, providing specific examples.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Some eligible items come with a physical game piece, while others earn a digital game piece in the app.",
+          "quote": "Some elig. items have physical Game Piece; some earn a digital Game Piece in App.",
+          "verdict_reason": "The snippet confirms game pieces come with eligible items but does not list the specific food items requested by the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A user reports that a kiosk indicates game pieces are on most breakfast sandwiches.",
+          "quote": "On the kiosk it shows game pieces are on most breakfast sandwiches.",
+          "verdict_reason": "The snippet addresses the query by stating game pieces are on breakfast sandwiches, but it is anecdotal, unverified, and notes a discrepancy, making it partial evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "More than 30 popular McDonald's menu items are eligible to receive a game piece, though the specific list is cut off in the snippet.",
+          "quote": "More than 30 of the chain's most popular items are eligible to receive a game piece. Some will be digital-only, but don't worry, plenty of physical game pieces will be offered as well",
+          "verdict_reason": "The snippet confirms game pieces come on over 30 menu items but cuts off before listing the specific items requested by the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_bac0f4d62f96",
+      "claim_index": 2,
+      "claim": "However, the topic remains under active debate the exact nature of meteorite origins is still being studied",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Most scientists believe few, if any, large meteorites originate from comets, though comets contribute micrometeorites.",
+          "quote": "Comets are another potential source of primitive material, but most scientists think that few, if any, large meteorites come from comets.",
+          "verdict_reason": "The snippet directly addresses the query by stating the scientific consensus that comets rarely produce large meteorites, providing relevant but nuanced evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Cometary meteoroids make up 0% of fresh meteorites because they are too fragile to survive atmospheric entry.",
+          "quote": "It goes on to claim that cometary meteoroids make up about 95% of observed meteors, 38% of observed fireballs, and 0% of fresh meteorites.",
+          "verdict_reason": "The snippet directly addresses the query by stating cometary meteoroids constitute 0% of fresh meteorites due to fragility, providing specific evidence against the claim while acknowledging the topic is under debate.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "A cometary origin is ruled out for stony meteorite classes with gas-rich members, including carbonaceous chondrites.",
+          "quote": "It appears that a cometary origin can be ruled out for all stony meteorite clases that have gas-rich members. This includes carbonaceous chondrites.",
+          "verdict_reason": "The snippet directly addresses the query by ruling out cometary origins for specific meteorite types, providing conflict-bearing evidence that partially resolves the general question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_2877cf4bd00f",
+      "claim_index": 1,
+      "claim": "This information is corroborated by multiple reliable sources, including , which provide additional context but do not contradict the age information",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Donald Trump as the 45th and 47th president of the United States but does not state his age.",
+          "quote": "Donald Trump 45th and 47th president of the United States Also known as: Donald John Trump",
+          "verdict_reason": "The snippet confirms the entity and role relevant to the query but lacks the specific age data requested, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document provides family details and a 2020 status update for Donald Trump but does not state his age or birth date.",
+          "quote": "As of August 2020, Trump had five children and ten grandchildren.( Trump married his first wife, Ivana, a former model and Olympic skier from Czechoslovakia, in 1977.",
+          "verdict_reason": "The snippet concerns the correct entity but lacks the specific age or birth date requested, offering only partial biographical context.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states President Trump's chronological age is 80 based on a recent medical evaluation.",
+          "quote": "President Trump has the cardiac age of a 65-year-old. That's 14 years younger than his biological age.",
+          "verdict_reason": "Snippet confirms Trump's chronological age is 80 by stating his cardiac age (65) is 14 years younger, directly addressing the query but requiring simple arithmetic.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a91ae87c969d",
+      "claim_index": 1,
+      "claim": "This is confirmed by multiple reliable sources, including high-quality official reports",
+      "cited_docs": [
+        "d5",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The song \"Does He Love You\" was made famous by Reba McEntire and Linda Davis.",
+          "quote": "\"Does He Love You,\" made famous by Reba McEntire and Linda Davis, has had a storied life.",
+          "verdict_reason": "The snippet explicitly identifies Linda Davis as the singer who performed the duet with Reba McEntire, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Linda Davis sang the duet \"Does He Love You\" with Reba McEntire.",
+          "quote": "\"Does He Love You\" Reba McEntire with Linda Davis Written by Sandy Knox and Billy Stritch",
+          "verdict_reason": "The snippet explicitly identifies Linda Davis as the artist who performed the duet \"Does He Love You\" with Reba McEntire, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Reba McEntire sang the duet \"Does He Love You\" with Linda Davis.",
+          "quote": "Reba McEntire stole the show with an unforgettable duet with fellow singer Linda Davis... The pair sang \"Does He Love You,\"",
+          "verdict_reason": "The snippet explicitly identifies Linda Davis as the singer who performed the duet \"Does He Love You\" with Reba McEntire.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_d8b24beb2f90",
+      "claim_index": 1,
+      "claim": "This statement reflects the relationship between assets, liabilities shareholders' equity, which are the core components of the accounting equation. provide additional context and related information, confirming the importance of the balance sheet in the accounting system",
+      "cited_docs": [
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The accounting equation reflects the format of the statement of financial position, where total assets balance with total equity and liabilities.",
+          "quote": "It reflects the format of the statement of financial position (ie assets are presented first and the total assets figure balances with the total amount of equity and liabilities)",
+          "verdict_reason": "The snippet links the accounting equation to the statement of financial position but does not explicitly state it involves all aspects or mention other financial statements, making it incomplete.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The accounting cycle ensures every transaction adheres to the Double-Entry System where Assets equal Liabilities plus Equity.",
+          "quote": "This phase captures the data, ensuring every event adheres to the Double-Entry System (Assets = Liabilities + Equity).",
+          "verdict_reason": "The snippet links the accounting equation to the transaction recording phase but does not explicitly state which specific financial statement involves all aspects of the equation.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The accounting equation connects every transaction, ledger, and financial statement into one logical system.",
+          "quote": "It connects every transaction, ledger, and financial statement into one logical system.",
+          "verdict_reason": "Snippet states the equation connects all financial statements but does not identify which specific statement involves all aspects of the equation.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f2031e426cee",
+      "claim_index": 1,
+      "claim": "This information is more recent and directly answers the query compared to the other documents which either provide outdated or incomplete information",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Shri Kaushik Vekariya as the Hon'ble Minister Of State and provides a historical list of law ministers ending in 1990.",
+          "quote": "Shri Kaushik Vekariya Hon'ble Minister Of State Sr.No. Name Duration 1 Shri Hitendra K. Desai 01/05/60 to 07/03/62",
+          "verdict_reason": "The snippet identifies a current Minister of State but fails to explicitly name the present 'Law Minister' or provide a complete current list, offering only historical data up to 1990.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies Arjun Ram Meghwal as the Minister of the Ministry of Law and Justice.",
+          "quote": "Ministry of Law and Justice    Minister   Arjun Ram Meghwal  ---   Attorney-General   R. Venkataramani",
+          "verdict_reason": "The snippet names a minister for the queried entity but lacks temporal markers to confirm if this is the 'present' minister, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Shri Kiren Rijiju as the correct answer for the present Law Minister of India.",
+          "quote": "The correct answer is Shri Kiren Rijiju",
+          "verdict_reason": "Snippet directly addresses the query by naming a Law Minister, but the 'Last updated Jan 14, 2026' date and exam context suggest it may be outdated or specific to a past exam cycle, making it conflict-bearing rather than definitively current.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_d59edcfab87f",
+      "claim_index": 1,
+      "claim": "This is confirmed by multiple reliable sources including Britannica Editors , the official city website a detailed history article",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Charlotte and its resident county are named for Charlotte of Mecklenburg-Strelitz, a German princess and queen consort.",
+          "quote": "Origin: Nicknamed the Queen City, Charlotte and its resident county are named for Charlotte of Mecklenburg-Strelitz, a German princess and the queen consort of",
+          "verdict_reason": "The snippet directly answers the query by identifying the namesake as Charlotte of Mecklenburg-Strelitz. The source is the official city website.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Charlotte, North Carolina, was named to honor Charlotte Sophia of Mecklenburg-Strelitz, who became queen consort upon marrying King George III in 1761.",
+          "quote": "Incorporated in 1768, the city of Charlotte in North Carolina was named to honor Charlotte Sophia of Mecklenburg-Strelitz, who became queen consort when she married King George III of Great Britain in 1761.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating the city was named after Charlotte Sophia of Mecklenburg-Strelitz, the wife of King George III.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Settlers in North Carolina named the settlement Charlotte in 1768 after Queen Charlotte.",
+          "quote": "In 1768, settlers in what is now North Carolina named their growing interior settlement after her, and Mecklenburg County honored her birthplace.",
+          "verdict_reason": "The snippet explicitly states the city was named after Queen Charlotte in 1768, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_045",
+      "claim_index": 1,
+      "claim": "Additional context about the character's actions is provided in , which collectively support the answer",
+      "cited_docs": [
+        "d5",
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses Jennifer Pickett's role as a mother in Ferris Bueller's Day Off but does not mention Stifler's mom or American Pie.",
+          "quote": "Pickett, however, is best known to audiences for her lighter turn as Katie Bueller, Ferris Bueller's loving and unsuspecting mother, in the 1986 American comedy movie",
+          "verdict_reason": "The snippet discusses an actress playing a 'mom' role in a different movie, providing tangential but incomplete evidence regarding the specific query about Stifler's mom.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Stifler's mom receiving sexual gratification from Noah Levenstein but does not name the actress who plays her.",
+          "quote": "In a mid-credits scene, Noah Levenstein receives sexual gratification from Stifler's mom at a movie theater.",
+          "verdict_reason": "The snippet discusses the character 'Stifler's mom' and her actions, confirming relevance to the entity, but fails to provide the specific actress's name requested by the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Stifler's Mom appearing in a Mercedes-Benz coupe but does not name the actress who plays her.",
+          "quote": "a Mercedes-Benz coupe with darkened windows turns up, Finch approaches and it turns out Stifler's Mom has come after all.",
+          "verdict_reason": "The snippet confirms the character's presence in the film but fails to identify the actress, providing incomplete evidence for the specific query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_159",
+      "claim_index": 1,
+      "claim": "This information is confirmed by the snippets from , which provide additional context but do not contradict the primary location identified",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Preparation for the invasion of Normandy involved gathering photographic information on locations in France, Belgium, and the Netherlands.",
+          "quote": "In preparation for Operation Overlord, the invasion of Normandy, the unit concentrated on providing photographic information on airfields, cities, factories and seaports in France, Belgium and the Netherlands.",
+          "verdict_reason": "The snippet confirms the invasion is associated with France but lists multiple countries for preparation activities, failing to definitively isolate the specific invasion location.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Gold Beach was the codename for the center invasion beach during the Allied invasion of Normandy on June 6, 1944.",
+          "quote": "Gold Beach was the Allied codename for the centre invasion beach during the Allied invasion of Normandy on 6 June 1944.",
+          "verdict_reason": "The snippet identifies Gold Beach as one specific location of the invasion but does not list all beaches or fully answer where the entire invasion took place.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "American divisions landed at Utah Beach and Omaha Beach during the invasion.",
+          "quote": "Three American divisions were landed by sea at the western end of the beaches... On Utah Beach, the assault troops made good progress, but Omaha Beach came nearest of all of the five landing areas to disaster.",
+          "verdict_reason": "Snippet names specific beaches (Utah, Omaha) where the invasion occurred but does not provide the complete list of all five landing sites or the broader region.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0035",
+      "claim_index": 1,
+      "claim": "This information is confirmed by multiple recent and high-quality sources",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Sanae Takaichi is the incumbent Prime Minister of Japan as of 21 October 2025.",
+          "quote": "incumbent = Sanae Takaichi | acting = | incumbentsince = 21 October 2025",
+          "verdict_reason": "The document directly identifies the current Prime Minister with a recent timestamp (May 2026), confirming Sanae Takaichi holds the position as of October 2025.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Sanae Takaichi is the incumbent Prime Minister of Japan and the first female prime minister, having assumed office on 21 October 2025.",
+          "quote": "The incumbent and first female prime minister is Sanae Takaichi, who assumed the office on 21 October 2025.",
+          "verdict_reason": "The snippet directly identifies the latest Prime Minister of Japan as Sanae Takaichi with her assumption date, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Sanae Takaichi is the incumbent Prime Minister of Japan as of 21 October 2025.",
+          "quote": "incumbent = Sanae Takaichi | acting = | incumbentsince = 21 October 2025",
+          "verdict_reason": "Snippet directly identifies the current Prime Minister with recent incumbency date (October 2025), matching the query for the latest PM. Document timestamp (April 2026) confirms this is current information.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0065",
+      "claim_index": 1,
+      "claim": "This is confirmed by multiple reliable sources",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Facebook is a social networking service owned by Meta Platforms, which is the company formerly known as Facebook, Inc.",
+          "quote": "Social networking service owned by Meta Platforms hatnote This article is about the social media service. For its owner, formerly known as Facebook, Inc. see Meta Platforms.",
+          "verdict_reason": "Snippet directly answers the query by stating Facebook's parent company is currently called Meta Platforms, formerly Facebook, Inc. Wikipedia source with recent timestamp (2026) confirms current naming.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Facebook's parent company is currently called Meta Platforms, Inc., which rebranded from Facebook, Inc. in 2021.",
+          "quote": "Meta Platforms, Inc. (doing business as Meta) is an American multinational technology company headquartered in Menlo Park, California. Meta owns and operates several prominent social media platforms and communication services, including Facebook, Instagram, WhatsApp, Messenger, and Threads.",
+          "verdict_reason": "The snippet directly answers the query by identifying Meta Platforms, Inc. as Facebook's current parent company and confirms it operates Facebook as one of its platforms.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Facebook's parent company is currently called Meta Platforms.",
+          "quote": "Social networking service owned by Meta Platforms About the social media service its owner, formerly known as Facebook, Inc.",
+          "verdict_reason": "Snippet directly states Facebook is owned by Meta Platforms and identifies Meta as the former Facebook, Inc., directly answering the query about the current parent company name.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_56fd6bf22253",
+      "claim_index": 2,
+      "claim": "Studies like the one in d2 and d4 confirm that adenoids rarely regrow enough to cause significant symptoms, especially when the surgery involves thorough removal of the tissue",
+      "cited_docs": [
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Adenoids can rarely grow back after surgery, particularly if the procedure is performed at a very young age or if small tissue portions remain.",
+          "quote": "Can Adenoids Come Back After Surgery? It's rare—but possible. Adenoids can regrow if surgery is done at a very young age or if small portions are left behind.",
+          "verdict_reason": "The snippet directly answers the query by confirming regrowth is rare but possible under specific conditions, providing a decisive resolution.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "It is possible but reasonably rare for adenoids to grow back after removal, with regrowth being more common in very young children.",
+          "quote": "Can the adenoids grow back? It is possible for adenoids to grow back, although that is reasonably rare. Regrowth seems to be more common when the adenoids are taken out in a child at a very early age.",
+          "verdict_reason": "The snippet directly answers the query by confirming regrowth is possible but rare, and identifies age as a risk factor.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_962d8f5d5574",
+      "claim_index": 1,
+      "claim": "While d1 introduces some uncertainty by noting that swimming ability is unknown for most species, the overwhelming support from high-quality sources indicates that the claim is valid",
+      "cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "A 2024 study found that all 525 snake species with available information or tested directly appear to be able to swim.",
+          "quote": "The results show that, 1) all snakes for which information is available (525 species) appear to be able to swim, 2) this is a trait shared by many land vertebrates that undulate laterally.",
+          "verdict_reason": "The snippet directly answers the query by stating that all snakes with available data or tested in the study appear to be able to swim.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Professor John Maerz states that all snakes are capable of swimming.",
+          "quote": "John Maerz, Professor of Vertebrate Ecology at the University of Georgia, told Reuters that all snakes can swim",
+          "verdict_reason": "The snippet directly answers the query with an expert statement confirming that all snakes can swim, providing decisive evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_7dce5d575302",
+      "claim_index": 0,
+      "claim": "Kaka was the last player to win the Ballon d'Or before the Messi–Ronaldo dominance, as explicitly stated in and . provides a table listing Kaka as the 2007 winner, immediately preceding the 2008 start of the Messi-Ronaldo dominance shown in subsequent rows. also confirms this by stating that Kaka won the Ballon d'Or the year before Cristiano Ronaldo secured his first award in 2008, making him the last winner before their dominance",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Kaka won the Ballon d'Or in 2007, the year before Cristiano Ronaldo and Lionel Messi began their dominance of the award.",
+          "quote": "| 2007 | Kaka | Cristiano Ronaldo | Lionel Messi |\n| 2008 | Cristiano Ronaldo | Lionel Messi | Fernando Torres |",
+          "verdict_reason": "The table explicitly lists Kaka as the 2007 winner, immediately preceding the 2008 start of the Messi-Ronaldo dominance shown in subsequent rows.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Kaka won the Ballon d'Or the year before Cristiano Ronaldo secured his first award in 2008, making him the last winner before their dominance.",
+          "quote": "Kaka was crowned the best player in the world the year before Ronaldo secured his first Ballon d'Or, which sparked the beginning of the dominant era shared with Messi.",
+          "verdict_reason": "The snippet explicitly identifies Kaka as the winner immediately preceding the Messi-Ronaldo era starting in 2008, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0124",
+      "claim_index": 1,
+      "claim": "Although suggests this information might be superseded, the more recent timestamp in indicates that this is the current and accurate information",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Frank-Walter Steinmeier is the incumbent President of Germany, serving since 19 March 2017.",
+          "quote": "incumbent = Frank-Walter Steinmeier incumbentsince = 19 March 2017",
+          "verdict_reason": "The document directly identifies the current President of Germany as Frank-Walter Steinmeier with his incumbency date. The timestamp (2026-04-28) confirms this is recent information.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Frank-Walter Steinmeier is the incumbent Federal President of Germany, serving since 19 March 2017.",
+          "quote": "incumbent = Frank-Walter Steinmeier incumbentsince = 19 March 2017",
+          "verdict_reason": "Document identifies Steinmeier as incumbent president with start date, but timestamp (Sept 2023) and URL label ('older revision') suggest this may be superseded. Provides relevant but potentially outdated information about the same entity.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 1,
+      "claim": "Stanford University is not located in Chestnut Hill, Massachusetts",
+      "cited_docs": [
+        "d8"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d8": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "Stanford University (Stanford; officially Leland Stanford Junior University, colloquially the Farm) is a private research university in Stanford, California, adjacent to Palo Alto and between San Jose and San Francisco.",
+          "verdict_reason": "The query asks which university is in Chestnut Hill, Massachusetts. The snippet confirms Stanford is in California, not Massachusetts, providing no evidence for the queried location.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0028",
+      "claim_index": 1,
+      "claim": "This information is confirmed by the newer Wikipedia revision, which provides the current and accurate details about the Prime Minister's tenure. provides earlier information but is superseded by the newer data. and are irrelevant as they do not address the query about the latest Prime Minister",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.3333333333333333,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet defines the role and constitutional powers of the Prime Minister of India but does not identify who the current or latest Prime Minister is. It provides no name or temporal information answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Narendra Modi has been the Prime Minister of India since 26 May 2014.",
+          "quote": "incumbent = Narendra Modi | acting = | incumbentsince = 26 May 2014",
+          "verdict_reason": "Document identifies Narendra Modi as PM with tenure start date, but is an older Wikipedia revision (timestamp 2026-02-16). For a 'latest' query, this may be superseded by newer information.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses the Deputy Prime Minister of India, not the Prime Minister. It provides no information about who the current or latest Prime Minister is.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_004",
+      "claim_index": 0,
+      "claim": "The St. Louis Cardinals train in Florida, specifically at Pirate City, though this is not explicitly confirmed. The evidence collectively points to Florida as their spring training location, but the exact confirmation for the Cardinals is lacking",
+      "cited_docs": [
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses spring training for multiple other MLB teams but contains no mention of the St. Louis Cardinals or their training location.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses spring training in Florida and mentions renovations to Pirate City, but does not explicitly state that the St. Louis Cardinals train there.",
+          "quote": "Florida. Only the Detroit Tigers in Lakeland (65 years), and the Philadelphia Phillies in Clearwater (64 years) have been in their Spring training locations longer.",
+          "verdict_reason": "Snippet discusses Florida spring training context and Pirate City (Cardinals' facility) but fails to explicitly name the St. Louis Cardinals or confirm their location.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The St. Louis Browns, not the Cardinals, trained in St. Petersburg starting in 1914.",
+          "quote": "drew in the city's first spring training tenant, the St. Louis Browns, in 1914. The club trained at Coffee Pot Park",
+          "verdict_reason": "Snippet discusses a St. Louis team's spring training history but refers to the Browns, not the Cardinals, providing related but incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_b3ad3248b7d4",
+      "claim_index": 1,
+      "claim": "This information is confirmed by and , which provide additional context and dates. offers an earlier start date but lacks the end date, while is irrelevant",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is merely a video title and platform name; it contains no dates or factual evidence regarding the start or end of the Inca Empire.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Inca Empire began its rapid expansion around 1463 under Pachacuti, and the empire effectively ended with the capture of Atahualpa in 1532.",
+          "quote": "1463 — Pachacuti places his son, Túpac Inca Yupanqui... in charge of the Inca army. The Inca Empire... is born... 1532 — Francisco Pizarro... capture Atahualpa in Cajamarca",
+          "verdict_reason": "Snippet provides specific dates for the empire's birth (1463) and the pivotal 1532 capture of its leader, but lacks a definitive end date for the empire's total dissolution.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Inca Empire started in 1438 when Pachacuti expanded the Tawantinsuyo.",
+          "quote": "The Inca Empire started at 1438, when Pachacuti expanded The Tawantinsuyo Fast.",
+          "verdict_reason": "Snippet provides a start date (1438) but omits the end date requested by the query, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Inca Empire was ruled until the Spanish conquest in 1532.",
+          "quote": "of the Spanish conquest in 1532, ruled an empire that extended along the Pacific coast and Andean highlands",
+          "verdict_reason": "Snippet provides the end date (1532) but lacks the start date, making it incomplete for the full query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0061",
+      "claim_index": 0,
+      "claim": "Claudia Sheinbaum is the current President of Mexico, having taken office on 1 October 2024, as directly stated in . is irrelevant as it discusses the historical context of the vice presidency office rather than the current president",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Claudia Sheinbaum is the incumbent President of Mexico, having assumed office on 1 October 2024.",
+          "quote": "incumbent = Claudia Sheinbaum acting = incumbentsince = 1 October 2024",
+          "verdict_reason": "The snippet directly identifies Claudia Sheinbaum as the current incumbent President of Mexico with her start date, directly answering the query about the current president.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses the historical creation and abolition of Mexico's vice presidency office, not the current President of Mexico. It provides no information about who currently holds the presidency.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Claudia Sheinbaum Pardo has been serving as the 66th president of Mexico since 2024.",
+          "quote": "Claudia Sheinbaum Pardo (born 24 June 1962) is a Mexican politician, energy and climate change scientist, and academic who has been serving as the 66th president of Mexico since 2024.",
+          "verdict_reason": "The snippet directly identifies Claudia Sheinbaum as the current President of Mexico, serving since 2024. This directly answers the query about who currently holds the office.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Claudia Sheinbaum is the incumbent President of Mexico, having taken office on 1 October 2024.",
+          "quote": "incumbent = Claudia Sheinbaum acting = incumbentsince = 1 October 2024",
+          "verdict_reason": "The snippet directly identifies the current President of Mexico as Claudia Sheinbaum with an incumbency start date of 1 October 2024, which matches the query for the current president.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

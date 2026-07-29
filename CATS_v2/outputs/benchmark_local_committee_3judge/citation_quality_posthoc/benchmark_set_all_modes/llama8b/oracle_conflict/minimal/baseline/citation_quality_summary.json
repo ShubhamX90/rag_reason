@@ -1,0 +1,1454 @@
+{
+  "variant": "benchmark_set_all_modes/llama8b/oracle_conflict/minimal/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/oracle_conflict/minimal/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/oracle_conflict/minimal/baseline/final/detailed_results.json",
+    "source_final_sha256": "c9ba2af80f8c805918c40b6426ac31507bdf3dd285c4956b2abe0f34ed4d1db1",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/llama8b/oracle_conflict/minimal/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/llama8b/oracle_conflict/minimal/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1012,
+    "claims_with_citations": 201,
+    "claims_with_committee_support_set": 865,
+    "claims_with_any_approved_citation": 159,
+    "claims_with_any_gold_positive_citation": 195,
+    "committee_alignment_precision_macro": 0.7487562189054726,
+    "committee_alignment_precision_micro": 0.7411003236245954,
+    "gold_positive_citation_precision_macro": 0.9626865671641791,
+    "gold_positive_citation_precision_micro": 0.970873786407767,
+    "soft_extra_citation_rate_micro": 0.2297734627831715,
+    "hard_negative_citation_rate_micro": 0.02912621359223301,
+    "committee_support_citation_recall_macro": 0.1838150289017341,
+    "committee_support_citation_recall_micro": 0.1838150289017341,
+    "claims_with_any_soft_extra_rate": 0.263681592039801,
+    "claims_with_any_hard_negative_rate": 0.04477611940298507,
+    "strict_committee_alignment_claim_rate": 0.1383399209486166,
+    "strict_gold_clean_claim_rate": 0.1551383399209486,
+    "strict_grounded_committee_clean_rate_all_claims": 0.1383399209486166,
+    "strict_grounded_gold_clean_rate_all_claims": 0.1551383399209486,
+    "total_cited_docs": 309,
+    "total_approved_cited_docs": 229,
+    "total_gold_positive_cited_docs": 300,
+    "total_soft_extra_cited_docs": 71,
+    "total_hard_negative_cited_docs": 9
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "wikirevision_0042",
+      "claim_index": 1,
+      "claim": "However, mentions that the information is as of 2025, which is the same year mentioned in",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Lee Jae Myung is the incumbent President of South Korea as of June 4, 2025.",
+          "quote": "incumbent = Lee Jae Myung | acting = | incumbentsince = 4 June 2025",
+          "verdict_reason": "The document directly identifies the current president and provides the incumbency date. The timestamp (2026-05-10) confirms this is recent information.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet describes the role and constitutional requirements of the South Korean presidency but does not identify the current president.",
+          "quote": "The president of the Republic of Korea serves as the chief executive of the government of the Republic of Korea and the commander-in-chief of the Republic of Korea Armed Forces.",
+          "verdict_reason": "The document is about South Korean presidents but provides only institutional background and historical constitutional changes, not the current president's identity. It is clearly on-topic but incomplete.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Lee Jae Myung is the incumbent President of South Korea as of June 4, 2025.",
+          "quote": "incumbent = Lee Jae Myung | acting = | incumbentsince = 4 June 2025",
+          "verdict_reason": "Snippet directly identifies the current incumbent president and provides the date he assumed office. Document timestamp (2026-01-22) is recent and confirms this information remains current.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0042",
+      "claim_index": 2,
+      "claim": "Since does not provide a more up-to-date information, the information in is likely to be accurate",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Lee Jae Myung is the incumbent President of South Korea as of June 4, 2025.",
+          "quote": "incumbent = Lee Jae Myung | acting = | incumbentsince = 4 June 2025",
+          "verdict_reason": "The document directly identifies the current president and provides the incumbency date. The timestamp (2026-05-10) confirms this is recent information.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet describes the role and constitutional requirements of the South Korean presidency but does not identify the current president.",
+          "quote": "The president of the Republic of Korea serves as the chief executive of the government of the Republic of Korea and the commander-in-chief of the Republic of Korea Armed Forces.",
+          "verdict_reason": "The document is about South Korean presidents but provides only institutional background and historical constitutional changes, not the current president's identity. It is clearly on-topic but incomplete.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Lee Jae Myung is the incumbent President of South Korea as of June 4, 2025.",
+          "quote": "incumbent = Lee Jae Myung | acting = | incumbentsince = 4 June 2025",
+          "verdict_reason": "Snippet directly identifies the current incumbent president and provides the date he assumed office. Document timestamp (2026-01-22) is recent and confirms this information remains current.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_14a587def215",
+      "claim_index": 1,
+      "claim": "However, also mentions that the Hurricanes made the Stanley Cup Final in 2026, which is consistent with the information in",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the Hurricanes made the playoffs in 2009, 2019, 2023, and 2025 while reaching the Eastern Conference Finals.",
+          "quote": "This encompassed the East Final in 2009, 2019, 2023, and 2025.",
+          "verdict_reason": "Snippet lists specific recent playoff years (2023, 2025) but focuses on a specific 2026 narrative, making it relevant but potentially incomplete or conflicting regarding the absolute 'last' time depending on current date.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Carolina Hurricanes last made the playoffs in 2026, which is currently ongoing.",
+          "quote": "When was the last time the Hurricanes were in the playoffs? The Carolina Hurricanes last made the playoffs in 2026, which is currently ongoing.",
+          "verdict_reason": "The snippet directly answers the query by stating the last playoff appearance was in 2026, providing a definitive response to the user's question.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0002",
+      "claim_index": 2,
+      "claim": "is from 2026, while is from an unknown date, but it is likely older than d2",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet says Twitter was the name of X between 2006 and 2023.",
+          "quote": "Short description|Name of X between 2006–2023",
+          "verdict_reason": "It is directly about Twitter’s naming history and implies a newer name for the same entity, but the snippet does not explicitly state what Twitter is now called.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Twitter is now known as X, an American microblogging and social networking service.",
+          "quote": "X, formerly known as Twitter, is an American microblogging and social networking service, headquartered in Bastrop, Texas.",
+          "verdict_reason": "The snippet directly answers the query by stating that the platform is 'X, formerly known as Twitter', clearly establishing X as the current name.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0025",
+      "claim_index": 1,
+      "claim": "However, the timestamp of is from May 2023 is from January 2026, which is more recent",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Droupadi Murmu is the President of India.",
+          "quote": "image = President Droupadi Murmu official portrait higher version.jpg",
+          "verdict_reason": "Document is a current Wikipedia article (timestamp 2026-05-16) about the President of India with an official portrait of Droupadi Murmu, directly identifying her as the current president.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Droupadi Murmu is the President of India as of 2025.",
+          "quote": "image = Droupadi Murmu POI official portrait.jpg | imagecaption = Official Portrait, 2025",
+          "verdict_reason": "Snippet identifies Droupadi Murmu as current President with 2025 official portrait, directly answering the query for the latest President of India.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0032",
+      "claim_index": 1,
+      "claim": "However, is newer than 's timestamp is 2026-05-10T13:30:20Z, which is more recent than 's timestamp 2025-10-21T09:26:09Z",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Emmanuel Macron is the incumbent President of France, having held office since 14 May 2017.",
+          "quote": "incumbent = Emmanuel Macron | incumbentsince = 14 May 2017",
+          "verdict_reason": "The document directly identifies the current President of France as Emmanuel Macron with his incumbency date. Wikipedia is a high-quality source for factual reference information.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Emmanuel Macron is the incumbent President of France, serving since 14 May 2017.",
+          "quote": "incumbent = Emmanuel Macron | incumbentsince = 14 May 2017",
+          "verdict_reason": "Snippet directly identifies Emmanuel Macron as the current (incumbent) President of France with his start date. Wikipedia source with recent timestamp (2025-10-21) confirms current status.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0041",
+      "claim_index": 1,
+      "claim": "However, has a timestamp of 2025-02-25T15:59:05Z, which is more recent than 's timestamp of 2026-05-16T12:49:34Z",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Javier Milei is the incumbent President of Argentina, having assumed office on 10 December 2023.",
+          "quote": "incumbent = Javier Milei | acting = | incumbentsince = 10 December 2023",
+          "verdict_reason": "The document directly identifies the current President of Argentina with name and inauguration date. Wikipedia is a high-quality source for factual biographical information.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Javier Milei is the incumbent President of Argentina as of 10 December 2023.",
+          "quote": "incumbent = Javier Milei | acting = | incumbentsince = 10 December 2023",
+          "verdict_reason": "Document directly identifies the current President of Argentina with incumbent status and assumption date. Wikipedia source with recent timestamp (Feb 2025) confirms Milei remains in office.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0064",
+      "claim_index": 1,
+      "claim": "However, is newer and has a more recent timestamp (2026-05-21T22:21:13Z) than (2024-06-17T15:13:14Z)",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Recep Tayyip Erdoğan is the current President of Turkey, serving since 28 August 2014.",
+          "quote": "incumbent = Recep Tayyip Erdoğan incumbentsince = 28 August 2014",
+          "verdict_reason": "The document directly identifies the current President of Turkey as Recep Tayyip Erdoğan with his incumbency date. Wikipedia is a high-quality source for factual reference information.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Recep Tayyip Erdoğan has been the President of Turkey since 28 August 2014.",
+          "quote": "incumbent = Recep Tayyip Erdoğan incumbentsince = 28 August 2014",
+          "verdict_reason": "Document identifies Erdoğan as incumbent president with start date, but is an older Wikipedia revision (June 2024) that may be superseded by more current information about the present president.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0086",
+      "claim_index": 1,
+      "claim": "However, is newer and has a timestamp of 2026-05-05T19:02:03Z, which is more recent than 's timestamp of 2024-05-03T06:57:33Z",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Shehbaz Sharif is the current Prime Minister of Pakistan as of 4 March 2024.",
+          "quote": "incumbent = Shehbaz Sharif incumbentsince = 4 March 2024",
+          "verdict_reason": "The document directly identifies the current Prime Minister and provides the incumbent's name and start date from an authoritative Wikipedia source.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Shehbaz Sharif is the incumbent Prime Minister of Pakistan as of 4 March 2024.",
+          "quote": "incumbent = Shehbaz Sharif incumbentsince = 4 March 2024",
+          "verdict_reason": "The document directly identifies the current Prime Minister and provides the incumbency date. The timestamp (May 2024) is recent enough to reflect current status.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0111",
+      "claim_index": 2,
+      "claim": "The other documents do not mention the parent company's current name",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Facebook's parent company is currently called Meta Platforms.",
+          "quote": "Messenger is an American proprietary instant messaging service developed by Meta Platforms, the company that operates Facebook.",
+          "verdict_reason": "The snippet directly states that Meta Platforms is the company that operates Facebook, clearly answering the query about Facebook's current parent company name.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Facebook's parent company is currently called Meta Platforms.",
+          "quote": "Social networking service owned by Meta Platforms About the social media service its owner, formerly known as Facebook, Inc.",
+          "verdict_reason": "Snippet explicitly states Facebook's owner is Meta Platforms, formerly Facebook, Inc. Directly answers the query about current parent company name.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0124",
+      "claim_index": 1,
+      "claim": "However, is newer than both documents are from 2023 and 2026, respectively",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Frank-Walter Steinmeier is the incumbent President of Germany, serving since 19 March 2017.",
+          "quote": "incumbent = Frank-Walter Steinmeier incumbentsince = 19 March 2017",
+          "verdict_reason": "The document directly identifies the current President of Germany as Frank-Walter Steinmeier with his incumbency date. The timestamp (2026-04-28) confirms this is recent information.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Frank-Walter Steinmeier is the incumbent Federal President of Germany, serving since 19 March 2017.",
+          "quote": "incumbent = Frank-Walter Steinmeier incumbentsince = 19 March 2017",
+          "verdict_reason": "Document identifies Steinmeier as incumbent president with start date, but timestamp (Sept 2023) and URL label ('older revision') suggest this may be superseded. Provides relevant but potentially outdated information about the same entity.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0134",
+      "claim_index": 1,
+      "claim": "However, is newer than it also mentions Anthony Albanese as the current Prime Minister",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Anthony Albanese is the current Prime Minister of Australia, having held office since 23 May 2022.",
+          "quote": "incumbent = Anthony Albanese incumbentsince = 23 May 2022",
+          "verdict_reason": "The document directly identifies the current Prime Minister and provides the incumbent name and date of assumption of office, fully answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Anthony Albanese is listed as the incumbent Prime Minister of Australia since 23 May 2022.",
+          "quote": "incumbent = Anthony Albanese incumbentsince = 23 May 2022",
+          "verdict_reason": "Document is from an older Wikipedia revision (timestamp 2025-02-07) and explicitly labeled as such. While it names Anthony Albanese as incumbent PM, the 'old revision' designation suggests this may be superseded by newer information. Conflict-bearing but potentially outdated evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1d741779a31e",
+      "claim_index": 3,
+      "claim": "Additionally, a large cohort study found an association between high artificial sweetener intake and increased risk of all-cause mortality, cardiovascular disease cancer",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Recent studies indicate artificial sweeteners may worsen glycemic control by altering gut microbiota and affecting insulin secretion.",
+          "quote": "However, recent studies have shown that artificial sweeteners affect glucose absorption in the intestinal tract as well as insulin and incretin secretion in humans and animals.",
+          "verdict_reason": "The snippet directly addresses safety for diabetics but presents conflicting evidence (worsened control vs. previous beliefs) rather than a definitive yes/no answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1e9c6cd8e30b",
+      "claim_index": 0,
+      "claim": "However, it's worth noting that some documents suggest that sustainable palm oil production is possible that there are organizations working to improve sustainability and environmental friendliness in the industry",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production causes deforestation, habitat loss for wildlife, increased greenhouse gas emissions, and human rights violations.",
+          "quote": "Unfortunately, this has led to palm oil deforestation as forests and peatlands have been destroyed in order to keep up with the increased demands. This has had devastating consequences, causing habitat loss for wildlife and increasing greenhouse gas emissions.",
+          "verdict_reason": "The snippet directly confirms environmental harms including deforestation, habitat loss, and emissions, decisively answering the query about negative environmental impacts.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_7e63fcff2dea",
+      "claim_index": 1,
+      "claim": "However, mentions that two Russian tortoises were the first living beings to circle the Moon in September 1968 on the Zond 5 mission",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Laika was the first animal to orbit the Earth, not to land on the moon.",
+          "quote": "Sputnik 2 utilized an animal habitat and carried the dog Laika, the first animal to orbit the Earth.",
+          "verdict_reason": "The snippet addresses the query's topic (first animal in space) but clarifies the achievement was orbiting Earth, not landing on the moon, providing relevant but corrective evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_7e63fcff2dea",
+      "claim_index": 2,
+      "claim": "also mentions that in 1972, five mice orbited the Moon a record 75 times aboard command module America as part of the Apollo 17 mission, but it does not mention them landing on the moon",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Two tortoises were the first living beings to circle the Moon in 1968, but the text does not state any animal landed on the Moon.",
+          "quote": "Two tortoises and several varieties of plants were the first living beings to circle the Moon in September 1968 on the Zond 5 mission.",
+          "verdict_reason": "The snippet addresses animals in lunar proximity (circling) but does not confirm any animal landed on the Moon, leaving the specific query unanswered while providing related conflict-bearing evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_8f302f0bfe82",
+      "claim_index": 0,
+      "claim": "According to , the winner of the Nebula award for Best Novel in 2024 is \"Someone You Can Build a Nest In\" by John Wiswell",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists John Wiswell's 'Someone You Can Build a Nest In' as the 2024 winner, but the 2025 section only shows nominees without a declared winner.",
+          "quote": "2025\n When We Were Real, by Daryl Gregory (Saga) . Nominated for Best Novel in 2025\n The Buffalo Hunter Hunter, by Stephen Graham Jones (Saga; Titan UK) . Nominated for Best Novel in 2025",
+          "verdict_reason": "The snippet addresses the query entity but fails to name a 2025 winner, listing only nominees. It provides the 2024 winner, making it relevant but incomplete for the 'latest' award.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a3c882e062c2",
+      "claim_index": 1,
+      "claim": "According to , the tower of Jesus was completed in 2026, but the construction of the last towers, the Glory Façade, is still ongoing",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The construction board refuses to give an exact finish date, though rumors suggest completion in the early 2030s.",
+          "quote": "So they refuse to give an exact date. However, rumors are that the last towers should be done by the early 2030's.",
+          "verdict_reason": "The snippet addresses the query directly but states no exact date is given, offering only rumored timelines, thus partially resolving the question.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_d0532ee6a455",
+      "claim_index": 1,
+      "claim": "This is stated in , which mentions that \"about 75% of the country can be described as having a desert climate with less than 200 mm. of rain annually.\"",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "About 75% of Jordan has a desert climate, though the text does not explicitly state it is the country on the border that is mostly desert.",
+          "quote": "However, about 75% of the country can be described as having a desert climate with less than 200 mm. of rain annually.",
+          "verdict_reason": "The snippet provides relevant evidence that Jordan is mostly desert (75%), addressing the query's core constraint, but lacks explicit confirmation of the specific 'border' context requested.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f2031e426cee",
+      "claim_index": 1,
+      "claim": "However, mentions Kiren Rijiju as the Minister of Parliamentary Affairs, which is a related position",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies Arjun Ram Meghwal as the Minister of the Ministry of Law and Justice.",
+          "quote": "Ministry of Law and Justice    Minister   Arjun Ram Meghwal  ---   Attorney-General   R. Venkataramani",
+          "verdict_reason": "The snippet names a minister for the queried entity but lacks temporal markers to confirm if this is the 'present' minister, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "trust_align_130",
+      "claim_index": 1,
+      "claim": "The most recent information available is from 2010 , which mentions Hector John as the Leader of the Opposition in Dominica, not Uganda",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet exclusively discusses the political leadership of Dominica. It provides no evidence regarding the leader of the opposition in Uganda, making it off-topic for the specific entity queried.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0074",
+      "claim_index": 3,
+      "claim": "does not mention the current vice president",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the Office of the Vice President's structure and location but does not identify who the current Vice President is. It provides no name or identifying information.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0104",
+      "claim_index": 3,
+      "claim": "does not mention the official name of the city",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses Rapid Metro Gurgaon's operations and history but does not address the query about Gurgaon's official name or any renaming.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0124",
+      "claim_index": 2,
+      "claim": "is unrelated to the current President of Germany",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet explains the role and titles of state-level heads of government in Germany, not the national President. It does not address who currently holds the office of President of Germany.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0142",
+      "claim_index": 3,
+      "claim": "does not mention the current vice president",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the Office of the Vice President's structure and location but does not identify who the current or latest Vice President is. It provides no information about the person holding the office.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0165",
+      "claim_index": 2,
+      "claim": "is about the vice president, not the president",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the role and powers of the Vice President generally, not the identity of the current President. It provides no information about who currently holds the presidency.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0073",
+      "claim_index": 0,
+      "claim": "Based on the retrieved documents, El Nuevo Cojo Ilustrado is not owned by Time Inc. El Nuevo Cojo is mentioned in as a Parisian newspaper, but no information is available about its ownership",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d10",
+        "d3",
+        "d4",
+        "d8"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "El Nuevo Cojo Ilustrado is an American online Spanish language magazine published from Los Angeles, California.",
+          "quote": "El Nuevo Cojo Ilustrado is an American online Spanish language magazine published from Los Angeles, California.",
+          "verdict_reason": "Snippet confirms El Nuevo Cojo is a special interest publication but does not address ownership by Time Inc, which is the decisive query element.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "two articles that appeared in both the online and print editions of the New York newspaper \"El Nuevo Cojo Ilustrado\" in 2004.",
+          "verdict_reason": "It mentions El Nuevo Cojo Ilustrado but gives no ownership information and does not mention Golf Magazine or Time Inc., so it does not meaningfully answer the comparison.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_078",
+      "claim_index": 0,
+      "claim": "There are also research vessels and ships named \"The Princess Royal\" and a cruise ship named \"Royal Princess\"",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the human title 'Princess Royal'. The snippet discusses a cruise ship named 'Royal Princess', which is a different entity and provides no evidence regarding the royal title holder.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The research vessel named \"The Princess Royal\" is owned and operated by Newcastle University.",
+          "quote": "RV The Princess Royal RV \"The Princess Royal\" is a research vessel owned and operated by Newcastle University",
+          "verdict_reason": "Snippet addresses the string 'Princess Royal' as a vessel name, not the royal title, providing partial but non-decisive evidence for the query about title holders.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0057",
+      "claim_index": 0,
+      "claim": "Based on the retrieved documents, the owner of Google is Alphabet Inc. This is stated in , which is a more recent and reliable source than , which appears to be a Wikipedia revision from 2026 that contains a mix of English and Odia text",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Alphabet Inc. is a public company traded on Nasdaq under ticker symbols GOOGL and GOOG, with key leadership including CEO Sundar Pichai.",
+          "quote": "type = Public company Public traded_as = ubl * nowrap Nasdaq : NasdaqSymbol GOOGL ( Class A share Class A ) * nowrap Nasdaq: NasdaqSymbol GOOG ( Class C share Class C ) * Sundar Pichai ( Chief executive officer CEO )",
+          "verdict_reason": "Document describes Alphabet Inc. as a public company with multiple shareholders, not a single owner. Query asks 'who owns Google' but snippet shows public ownership structure without identifying individual/entity ownership.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet is corrupted/garbled with non-English text and metadata fragments. No coherent information about Google ownership is extractable.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

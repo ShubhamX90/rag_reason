@@ -1,0 +1,4886 @@
+{
+  "summary": {
+    "conflict_overall": {
+      "n": 49,
+      "correct_refusals": 1,
+      "gr_accuracy": 0.673469387755102,
+      "behavior": 0.5,
+      "behavior_n": 48,
+      "factual_grounding": 0.020833333333333332,
+      "factual_grounding_n": 48,
+      "single_truth_recall": 0.6470588235294118,
+      "single_truth_recall_n": 17,
+      "cats_score": 0.49197303921568625,
+      "gr_f1": 0.7999999999999999
+    },
+    "conflict_per_type": {
+      "1": {
+        "n": 19,
+        "correct_refusals": 0,
+        "gr_accuracy": 0.5789473684210527,
+        "behavior": 0.6842105263157895,
+        "behavior_n": 19,
+        "factual_grounding": 0.05263157894736842,
+        "factual_grounding_n": 19,
+        "single_truth_recall": 0.8333333333333334,
+        "single_truth_recall_n": 12,
+        "gr_f1": 0.7333333333333334,
+        "cats_score": 0.5758771929824561
+      },
+      "3": {
+        "n": 10,
+        "correct_refusals": 0,
+        "gr_accuracy": 0.8,
+        "behavior": 0.1,
+        "behavior_n": 10,
+        "factual_grounding": 0.0,
+        "factual_grounding_n": 10,
+        "single_truth_recall": 0.0,
+        "single_truth_recall_n": 0,
+        "gr_f1": 0.8888888888888888,
+        "cats_score": 0.3296296296296296
+      },
+      "4": {
+        "n": 5,
+        "correct_refusals": 0,
+        "gr_accuracy": 1.0,
+        "behavior": 0.4,
+        "behavior_n": 5,
+        "factual_grounding": 0.0,
+        "factual_grounding_n": 5,
+        "single_truth_recall": 0.2,
+        "single_truth_recall_n": 5,
+        "gr_f1": 1.0,
+        "cats_score": 0.39999999999999997
+      },
+      "2": {
+        "n": 15,
+        "correct_refusals": 1,
+        "gr_accuracy": 0.6,
+        "behavior": 0.5714285714285714,
+        "behavior_n": 14,
+        "factual_grounding": 0.0,
+        "factual_grounding_n": 14,
+        "single_truth_recall": 0.0,
+        "single_truth_recall_n": 0,
+        "gr_f1": 0.7272727272727273,
+        "cats_score": 0.4329004329004329
+      }
+    },
+    "gr_dataset_metrics": {
+      "tp": 32,
+      "fp": 14,
+      "fn": 2,
+      "tn": 1,
+      "precision": 0.6956521739130435,
+      "recall": 0.9411764705882353,
+      "f1": 0.7999999999999999,
+      "accuracy": 0.673469387755102
+    },
+    "cost_summary": {
+      "total_cost_usd": 0.05053748,
+      "decisions_made": 131,
+      "avg_cost_per_decision": 0.0003857822900763359,
+      "per_judge_costs": {
+        "codex-cli/default": {
+          "provider": "codex_cli",
+          "metered": false,
+          "total_cost": 0.0,
+          "requests": 131,
+          "avg_cost": 0.0
+        },
+        "deepseek-v4-flash": {
+          "provider": "deepseek",
+          "metered": true,
+          "total_cost": 0.05053748,
+          "requests": 131,
+          "avg_cost": 0.0003857822900763359
+        }
+      }
+    }
+  },
+  "per_sample": [
+    {
+      "sample_id": "#0015",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer gives a single, direct response and does not introduce uncertainty, disagreement, or alternative viewpoints.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer gives a single, direct response and does not introduce uncertainty, disagreement, or alternative viewpoints.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer gives a single, direct response and does not introduce uncertainty, disagreement, or alternative viewpoints.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 10521.457195281982,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a clear, direct statement about the winner without introducing alternative viewpoints or uncertainty.",
+              "confidence": 1.0,
+              "cost": 0.0001078,
+              "latency_ms": 2147.465944290161,
+              "error": null
+            }
+          ],
+          "total_cost": 0.0001078,
+          "total_latency_ms": 12668.923139572144,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Abi Carter won American Idol this year ()",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d9",
+              "d7",
+              "d2",
+              "d3",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Abi Carter",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0031",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer gives a single synthesized conclusion without explicitly reflecting any debate or contrasting viewpoints among sources. It does not neutrally summarize differing opinions or research outcomes.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.84,
+          "rationale": "The answer gives a single synthesized conclusion without explicitly reflecting any debate or contrasting viewpoints among sources. It does not neutrally summarize differing opinions or research outcomes.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer gives a single synthesized conclusion without explicitly reflecting any debate or contrasting viewpoints among sources. It does not neutrally summarize differing opinions or research outcomes.",
+              "confidence": 0.98,
+              "cost": 0.0,
+              "latency_ms": 5285.385847091675,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer does not explicitly reflect a debate or neutrally summarize different viewpoints; instead, it presents a single, nuanced conclusion without acknowledging conflicting opinions or research outcomes.",
+              "confidence": 0.95,
+              "cost": 0.00013972000000000002,
+              "latency_ms": 2883.5949897766113,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00013972000000000002,
+          "total_latency_ms": 8168.980836868286,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Children can learn language skills from television, but the effectiveness of this learning depends on the quality of the educational programs, the presence of social interactions the appropriateness of the content",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "Co-viewing and parent-child conversations are particularly important for promoting language acquisition",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d7",
+              "d2",
+              "d6",
+              "d12",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0042",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear and direct, giving a single straightforward response without unnecessary uncertainty or alternative viewpoints.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.84,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear and direct, giving a single straightforward response without unnecessary uncertainty or alternative viewpoints.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear and direct, giving a single straightforward response without unnecessary uncertainty or alternative viewpoints.",
+              "confidence": 0.98,
+              "cost": 0.0,
+              "latency_ms": 12593.116044998169,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer directly states which artist sings the song without introducing alternative viewpoints or uncertainty, adhering to the expected behavior for no conflict.",
+              "confidence": 0.95,
+              "cost": 0.00012166000000000002,
+              "latency_ms": 2673.321008682251,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00012166000000000002,
+          "total_latency_ms": 15266.43705368042,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Chilliwack sings \"Gone Gone Gone\" []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d10",
+              "d8",
+              "d9",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Chiliwack",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0102",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear, direct, and unhedged, giving a single date without introducing alternative viewpoints or uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear, direct, and unhedged, giving a single date without introducing alternative viewpoints or uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear, direct, and unhedged, giving a single date without introducing alternative viewpoints or uncertainty.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 6505.048036575317,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a direct, clear statement about the introduction date without any uncertainty, alternative viewpoints, or hedging, which matches the expected behavior for No Conflict.",
+              "confidence": 1.0,
+              "cost": 0.00012012000000000001,
+              "latency_ms": 2277.7698040008545,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00012012000000000001,
+          "total_latency_ms": 8782.817840576172,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The PIN code system was introduced in India on August 15, 1972 []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d9",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "August 15, 1972",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0103",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear, direct, and unhedged, giving a single response without introducing alternative viewpoints or unnecessary uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear, direct, and unhedged, giving a single response without introducing alternative viewpoints or unnecessary uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear, direct, and unhedged, giving a single response without introducing alternative viewpoints or unnecessary uncertainty.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 5173.099756240845,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct answer, naming Dina Boluarte and the date, without introducing alternative viewpoints or uncertainty, which matches the expected behavior for No Conflict.",
+              "confidence": 1.0,
+              "cost": 9.59e-05,
+              "latency_ms": 1686.8093013763428,
+              "error": null
+            }
+          ],
+          "total_cost": 9.59e-05,
+          "total_latency_ms": 6859.9090576171875,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Dina Boluarte became the most recent woman to become president of Peru on December 7, 2022 []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d9",
+              "d7",
+              "d2",
+              "d4",
+              "d10",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Dina Boluarte",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0104",
+      "conflict_type": 4,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer treats the disagreement as unresolved instead of prioritizing the most recent sources. For an outdated-information conflict, it should favor the newest documents and optionally note older conflicting ones, not refuse based on older-source conflict.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.84,
+          "rationale": "The answer treats the disagreement as unresolved instead of prioritizing the most recent sources. For an outdated-information conflict, it should favor the newest documents and optionally note older conflicting ones, not refuse based on older-source conflict.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer treats the disagreement as unresolved instead of prioritizing the most recent sources. For an outdated-information conflict, it should favor the newest documents and optionally note older conflicting ones, not refuse based on older-source conflict.",
+              "confidence": 0.98,
+              "cost": 0.0,
+              "latency_ms": 6597.017288208008,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer states it cannot determine the current top-ranked player due to conflicting information, but it fails to prioritize the most up-to-date sources (e.g., d2, d6, d8, d9 from January 2025) as required by the rubric. Instead, it cites outdated sources and does not provide an answer based on newer information.",
+              "confidence": 0.95,
+              "cost": 0.00019978000000000002,
+              "latency_ms": 4012.6430988311768,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00019978000000000002,
+          "total_latency_ms": 10609.660387039185,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The current ATP top-ranked men's singles tennis player cannot be definitively determined based on the provided documents, as they contain conflicting information. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d6",
+              "d3",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0127",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer gives a single consolidated response supported by multiple sources and does not present the information as conflicting viewpoints or a debate.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.72,
+          "weighted_against": 0.0,
+          "rationale": "The answer gives a single consolidated response supported by multiple sources and does not present the information as conflicting viewpoints or a debate.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer gives a single consolidated response supported by multiple sources and does not present the information as conflicting viewpoints or a debate.",
+              "confidence": 0.94,
+              "cost": 0.0,
+              "latency_ms": 6923.188924789429,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a single, consolidated founding date from multiple documents without presenting debate or disagreement.",
+              "confidence": 0.95,
+              "cost": 0.0001631,
+              "latency_ms": 3821.4571475982666,
+              "error": null
+            }
+          ],
+          "total_cost": 0.0001631,
+          "total_latency_ms": 10744.646072387695,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The East India Company was founded on December 31, 1600 []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d6",
+              "d3"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0133",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer gives a single reconciled conclusion without explicitly presenting the differing viewpoints or debate among sources, so it does not neutrally summarize conflicting opinions/research outcomes.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.71,
+          "rationale": "The answer gives a single reconciled conclusion without explicitly presenting the differing viewpoints or debate among sources, so it does not neutrally summarize conflicting opinions/research outcomes.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer gives a single reconciled conclusion without explicitly presenting the differing viewpoints or debate among sources, so it does not neutrally summarize conflicting opinions/research outcomes.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 10913.906812667847,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer presents a single viewpoint without explicitly reflecting any debate or neutrally summarizing different viewpoints as required for conflicting opinions or research outcomes.",
+              "confidence": 0.9,
+              "cost": 0.00014728,
+              "latency_ms": 3309.112787246704,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00014728,
+          "total_latency_ms": 14223.01959991455,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Stress can contribute to the development of stomach ulcers, but it does not cause them on its own. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d6",
+              "d4",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0139",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer is hedged with 'At least one' instead of giving a clear, direct count, which violates the no-conflict expectation to answer plainly without unnecessary uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.74,
+          "rationale": "The answer is hedged with 'At least one' instead of giving a clear, direct count, which violates the no-conflict expectation to answer plainly without unnecessary uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer is hedged with 'At least one' instead of giving a clear, direct count, which violates the no-conflict expectation to answer plainly without unnecessary uncertainty.",
+              "confidence": 0.98,
+              "cost": 0.0,
+              "latency_ms": 11458.799123764038,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer uses 'at least one' which introduces uncertainty rather than providing a clear and direct number as required for no conflict.",
+              "confidence": 0.9,
+              "cost": 0.00017192000000000002,
+              "latency_ms": 4064.180850982666,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00017192000000000002,
+          "total_latency_ms": 15522.979974746704,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "At least one person from Princeton University has won the Fields Medal. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d9",
+              "d2",
+              "d4",
+              "d3",
+              "d5"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.5,
+      "single_truth_recall_details": {
+        "recall": 0.5,
+        "exact_matches": 0,
+        "partial_matches": 1,
+        "match_details": [],
+        "partial_details": [
+          {
+            "gold_answer": "1",
+            "minority_confidence": 0.40485829959514175,
+            "votes_for": 1,
+            "votes_against": 1
+          }
+        ]
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0159",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer gives a single consolidated conclusion and does not frame the sources as conflicting or debate-like. It directly synthesizes the partial evidence into one response.",
+        "confidence": 0.602510460251046,
+        "minority_confidence": 0.397489539748954,
+        "votes_for": 1,
+        "votes_against": 1,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 0.602510460251046,
+          "minority_confidence": 0.397489539748954,
+          "votes_for": 1,
+          "votes_against": 1,
+          "total_votes": 2,
+          "weighted_for": 2.88,
+          "weighted_against": 1.9,
+          "rationale": "The answer gives a single consolidated conclusion and does not frame the sources as conflicting or debate-like. It directly synthesizes the partial evidence into one response.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer gives a single consolidated conclusion and does not frame the sources as conflicting or debate-like. It directly synthesizes the partial evidence into one response.",
+              "confidence": 0.96,
+              "cost": 0.0,
+              "latency_ms": 5521.341800689697,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer simply asserts a single viewpoint ('Yes, heated gemstones can be less valuable') without consolidating or reconciling any partial answers from the documents. It does not demonstrate the expected behavior of integrating complementary information.",
+              "confidence": 0.95,
+              "cost": 0.00014056000000000002,
+              "latency_ms": 3060.9381198883057,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00014056000000000002,
+          "total_latency_ms": 8582.279920578003,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Are heated gemstones less valuable?",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "Yes, heated gemstones can be less valuable than natural gemstones of the same quality in terms of color and clarity. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0175",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer explicitly notes that some sources support innate knowledge while others oppose it, and it remains neutral by concluding the evidence is inconclusive rather than taking a side.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.79,
+          "weighted_against": 0.0,
+          "rationale": "The answer explicitly notes that some sources support innate knowledge while others oppose it, and it remains neutral by concluding the evidence is inconclusive rather than taking a side.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer explicitly notes that some sources support innate knowledge while others oppose it, and it remains neutral by concluding the evidence is inconclusive rather than taking a side.",
+              "confidence": 0.93,
+              "cost": 0.0,
+              "latency_ms": 7685.634136199951,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer explicitly acknowledges the debate between sources supporting and opposing innate knowledge, and neutrally summarizes the different viewpoints without taking a side.",
+              "confidence": 1.0,
+              "cost": 0.00014518000000000002,
+              "latency_ms": 2583.936929702759,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00014518000000000002,
+          "total_latency_ms": 10269.57106590271,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Some documents support the existence of innate knowledge, while others argue against it",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d9",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "Based on the evidence presented in these documents, it is not possible to definitively answer the question of whether humans have innate knowledge or not. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0187",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer consolidates the retrieved information into one concise, unified response and does not frame the sources as conflicting or debate-like.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.8100000000000005,
+          "weighted_against": 0.0,
+          "rationale": "The answer consolidates the retrieved information into one concise, unified response and does not frame the sources as conflicting or debate-like.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer consolidates the retrieved information into one concise, unified response and does not frame the sources as conflicting or debate-like.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 5841.18914604187,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer consolidates multiple documents into a single employee count without framing as a debate or highlighting disagreement.",
+              "confidence": 0.95,
+              "cost": 0.00010682000000000001,
+              "latency_ms": 2050.0781536102295,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00010682000000000001,
+          "total_latency_ms": 7891.2672996521,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Mercedes-Benz Group had around 166,000 employees in 2023 []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d3",
+              "d5",
+              "d8"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0190",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not consolidate the partial information into a unified response; instead it emphasizes inconsistency and withholds a definitive answer, framing the evidence as unclear rather than reconciling complementary details.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.75,
+          "rationale": "The answer does not consolidate the partial information into a unified response; instead it emphasizes inconsistency and withholds a definitive answer, framing the evidence as unclear rather than reconciling complementary details.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not consolidate the partial information into a unified response; instead it emphasizes inconsistency and withholds a definitive answer, framing the evidence as unclear rather than reconciling complementary details.",
+              "confidence": 0.95,
+              "cost": 0.0,
+              "latency_ms": 7571.521043777466,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer highlights inconsistency and lack of clarity among documents, and refuses to provide a definitive answer, rather than consolidating and reconciling the complementary information as required by the rubric. It frames the response as a debate about conflicting evidence instead of synthesizing the partial answers.",
+              "confidence": 0.95,
+              "cost": 0.00016464000000000002,
+              "latency_ms": 3423.597812652588,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00016464000000000002,
+          "total_latency_ms": 10995.118856430054,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 3,
+        "evaluable_claims": 3,
+        "claim_details": [
+          {
+            "claim": "The documents suggest that as of June 1, 2020, the minimum marriageable age in all states, including Massachusetts, is 18 without exceptions",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d5",
+              "d9"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "However, the documents do not all specify the current legal age for marriage in Massachusetts there is some inconsistency and lack of clarity about the matter",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d9",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "Therefore, a definitive answer about the current legal age for marriage in Massachusetts cannot be provided based on the available evidence. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d3"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0201",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer presents a single definitive stance and does not explicitly acknowledge or neutrally summarize differing viewpoints or debate among sources about whether every startup needs a business plan.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.71,
+          "rationale": "The answer presents a single definitive stance and does not explicitly acknowledge or neutrally summarize differing viewpoints or debate among sources about whether every startup needs a business plan.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer presents a single definitive stance and does not explicitly acknowledge or neutrally summarize differing viewpoints or debate among sources about whether every startup needs a business plan.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 6679.487943649292,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer does not explicitly reflect a debate or neutrally summarize different viewpoints; instead, it gives a definitive statement that every startup needs a business plan, with a minor caveat about pitch decks, which fails to capture conflicting opinions from sources.",
+              "confidence": 0.9,
+              "cost": 0.00014280000000000003,
+              "latency_ms": 3206.2740325927734,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00014280000000000003,
+          "total_latency_ms": 9885.761976242065,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Every startup needs a business plan, as it provides guidance, attracts investors serves as a roadmap for success",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d7",
+              "d4",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "However, a pitch deck may be more effective for fundraising. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d10"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0203",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer directly consolidates the retrieved support into one concise response and does not frame the sources as conflicting or debate-like. For complementary information, this behavior is appropriate.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.66,
+          "weighted_against": 0.0,
+          "rationale": "The answer directly consolidates the retrieved support into one concise response and does not frame the sources as conflicting or debate-like. For complementary information, this behavior is appropriate.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer directly consolidates the retrieved support into one concise response and does not frame the sources as conflicting or debate-like. For complementary information, this behavior is appropriate.",
+              "confidence": 0.92,
+              "cost": 0.0,
+              "latency_ms": 11410.084009170532,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a single consolidated date (March 30, 1997) and cites multiple sources, without framing the response as a debate or presenting conflict, consistent with the expected behavior for complementary information.",
+              "confidence": 0.95,
+              "cost": 0.00018774000000000002,
+              "latency_ms": 5052.206754684448,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00018774000000000002,
+          "total_latency_ms": 16462.29076385498,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Channel 5 started on March 30, 1997. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d9",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d10",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0206",
+      "conflict_type": 3,
+      "pred_answered": false,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not reflect or neutrally summarize any debate or differing viewpoints; it gives a blanket refusal instead of contrasting opinions or research outcomes as required for this conflict type.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 3.96,
+          "rationale": "The answer does not reflect or neutrally summarize any debate or differing viewpoints; it gives a blanket refusal instead of contrasting opinions or research outcomes as required for this conflict type.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not reflect or neutrally summarize any debate or differing viewpoints; it gives a blanket refusal instead of contrasting opinions or research outcomes as required for this conflict type.",
+              "confidence": 0.92,
+              "cost": 0.0,
+              "latency_ms": 10327.195167541504,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer is a refusal ('CANNOT ANSWER, INSUFFICIENT EVIDENCE') rather than explicitly reflecting the debate between sources and neutrally summarizing different viewpoints as required by the rubric.",
+              "confidence": 0.6,
+              "cost": 0.00026726,
+              "latency_ms": 6911.91291809082,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00026726,
+          "total_latency_ms": 17239.108085632324,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d11",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0229",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear and direct, stating a single conclusion without introducing alternative viewpoints, disagreement, or unnecessary uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.9399999999999995,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear and direct, stating a single conclusion without introducing alternative viewpoints, disagreement, or unnecessary uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear and direct, stating a single conclusion without introducing alternative viewpoints, disagreement, or unnecessary uncertainty.",
+              "confidence": 0.98,
+              "cost": 0.0,
+              "latency_ms": 11254.017114639282,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct statement that smoking can cause Rheumatoid Arthritis, citing multiple sources that agree, without introducing alternative viewpoints or uncertainty.",
+              "confidence": 1.0,
+              "cost": 0.00011536000000000001,
+              "latency_ms": 2514.8098468780518,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00011536000000000001,
+          "total_latency_ms": 13768.826961517334,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Smoking can cause Rheumatoid Arthritis, as multiple sources agree that smoking increases a person's risk of developing Rheumatoid Arthritis and can make the disease worse. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Yes, smoking increase a person's risk of Rheumatoid Arthritis",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0263",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer presents a simplified conclusion with a contrasting caveat rather than consolidating complementary partial information into a unified synthesis. It does not reconcile the sources smoothly and instead frames the response as a general claim plus an exception.",
+        "confidence": 0.6052631578947368,
+        "minority_confidence": 0.3947368421052631,
+        "votes_for": 1,
+        "votes_against": 1,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 0.6052631578947368,
+          "minority_confidence": 0.3947368421052631,
+          "votes_for": 1,
+          "votes_against": 1,
+          "total_votes": 2,
+          "weighted_for": 1.8,
+          "weighted_against": 2.7600000000000002,
+          "rationale": "The answer presents a simplified conclusion with a contrasting caveat rather than consolidating complementary partial information into a unified synthesis. It does not reconcile the sources smoothly and instead frames the response as a general claim plus an exception.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer presents a simplified conclusion with a contrasting caveat rather than consolidating complementary partial information into a unified synthesis. It does not reconcile the sources smoothly and instead frames the response as a general claim plus an exception.",
+              "confidence": 0.92,
+              "cost": 0.0,
+              "latency_ms": 8934.784173965454,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer consolidates two partial perspectives: it states that driving is generally faster, but then adds that ridesharing can make public transportation faster. It presents these as complementary pieces without framing them as a debate, aligning with the expected behavior for Complementary Information.",
+              "confidence": 0.9,
+              "cost": 0.00016142,
+              "latency_ms": 3589.923143386841,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00016142,
+          "total_latency_ms": 12524.707317352295,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "In cities, driving is generally faster than public transportation",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d3",
+              "d7",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "However, ridesharing can potentially make public transportation faster than driving. []",
+            "cited_docs": [],
+            "supporting_docs_found": [],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "no_supporting_doc_found"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0300",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer gives a single, definite summary and does not acknowledge or neutrally present differing viewpoints or research debate, which is required for conflicting opinions or outcomes.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.8100000000000005,
+          "rationale": "The answer gives a single, definite summary and does not acknowledge or neutrally present differing viewpoints or research debate, which is required for conflicting opinions or outcomes.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer gives a single, definite summary and does not acknowledge or neutrally present differing viewpoints or research debate, which is required for conflicting opinions or outcomes.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 8882.349967956543,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer states a single viewpoint without reflecting any debate or conflicting research outcomes, failing to neutrally summarize different perspectives as required.",
+              "confidence": 0.95,
+              "cost": 0.00011214000000000002,
+              "latency_ms": 2237.518787384033,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00011214000000000002,
+          "total_latency_ms": 11119.868755340576,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Dogs can understand certain words and associate them with specific actions or objects they can distinguish between human words they've previously heard and words they haven't",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0301",
+      "conflict_type": 4,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not prioritize the newest available information. It gives a 2023 winner while citing older 2023 sources alongside newer 2024 sources, without indicating that newer documents may supersede outdated ones.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.279999999999999,
+          "rationale": "The answer does not prioritize the newest available information. It gives a 2023 winner while citing older 2023 sources alongside newer 2024 sources, without indicating that newer documents may supersede outdated ones.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not prioritize the newest available information. It gives a 2023 winner while citing older 2023 sources alongside newer 2024 sources, without indicating that newer documents may supersede outdated ones.",
+              "confidence": 0.96,
+              "cost": 0.0,
+              "latency_ms": 8210.923194885254,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer states that Dorfromantik won in 2023, but it cites a source from 2024 (d5) without acknowledging that more recent information (d3 from 2024-07-22) might contain a newer winner. It does not prioritize the most up-to-date information nor acknowledge the presence of outdated sources, violating the expected behavior for Conflict Type 4.",
+              "confidence": 0.7,
+              "cost": 0.00035392,
+              "latency_ms": 10938.031673431396,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00035392,
+          "total_latency_ms": 19148.95486831665,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Dorfromantik: The Board Game won the Spiel des Jahres award most recently in 2023 []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0320",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear and direct, gives a straightforward conclusion, and does not introduce unnecessary uncertainty or alternative viewpoints.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear and direct, gives a straightforward conclusion, and does not introduce unnecessary uncertainty or alternative viewpoints.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear and direct, gives a straightforward conclusion, and does not introduce unnecessary uncertainty or alternative viewpoints.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 12267.64702796936,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer directly states that most octopuses are venomous, providing a clear and definitive response without introducing alternative viewpoints or uncertainty, aligning with the expected behavior for no conflict.",
+              "confidence": 1.0,
+              "cost": 0.00011578,
+              "latency_ms": 2189.393997192383,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00011578,
+          "total_latency_ms": 14457.041025161743,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Most octopuses are venomous, but only the blue-ringed octopus is known to be deadly to humans. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d7",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Yes",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0322",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer gives a single blended conclusion and does not explicitly describe any debate, disagreement, or contrasting viewpoints among sources. It fails to neutrally summarize differing opinions or research outcomes.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.84,
+          "rationale": "The answer gives a single blended conclusion and does not explicitly describe any debate, disagreement, or contrasting viewpoints among sources. It fails to neutrally summarize differing opinions or research outcomes.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer gives a single blended conclusion and does not explicitly describe any debate, disagreement, or contrasting viewpoints among sources. It fails to neutrally summarize differing opinions or research outcomes.",
+              "confidence": 0.98,
+              "cost": 0.0,
+              "latency_ms": 6314.516067504883,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer does not reflect any debate or conflict between sources; instead it presents a unified conclusion without acknowledging differing viewpoints.",
+              "confidence": 0.95,
+              "cost": 0.00013986,
+              "latency_ms": 2812.0219707489014,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00013986,
+          "total_latency_ms": 9126.538038253784,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Both melting land ice and sea ice contribute to sea level rise, but the primary contributor may vary depending on the specific location and circumstances. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d6",
+              "d8"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0324",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear, direct, and unhedged, giving a single winner without introducing alternative viewpoints or unnecessary uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear, direct, and unhedged, giving a single winner without introducing alternative viewpoints or unnecessary uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear, direct, and unhedged, giving a single winner without introducing alternative viewpoints or unnecessary uncertainty.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 13912.286043167114,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer directly states the winner without introducing alternative viewpoints or uncertainty, matching the expected behavior for No Conflict.",
+              "confidence": 1.0,
+              "cost": 9.730000000000001e-05,
+              "latency_ms": 1745.9368705749512,
+              "error": null
+            }
+          ],
+          "total_cost": 9.730000000000001e-05,
+          "total_latency_ms": 15658.222913742065,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Han Kang won the Nobel Prize in Literature 2024 []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d7",
+              "d2",
+              "d6",
+              "d5"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Han Kang",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0333",
+      "conflict_type": 4,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not prioritize a single up-to-date source or conclusion; instead it emphasizes inconsistency and hedges, rather than clearly favoring the most current information while optionally noting outdated sources.",
+        "confidence": 0.6355353075170842,
+        "minority_confidence": 0.3644646924829157,
+        "votes_for": 1,
+        "votes_against": 1,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 0.6355353075170842,
+          "minority_confidence": 0.3644646924829157,
+          "votes_for": 1,
+          "votes_against": 1,
+          "total_votes": 2,
+          "weighted_for": 1.6,
+          "weighted_against": 2.79,
+          "rationale": "The answer does not prioritize a single up-to-date source or conclusion; instead it emphasizes inconsistency and hedges, rather than clearly favoring the most current information while optionally noting outdated sources.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not prioritize a single up-to-date source or conclusion; instead it emphasizes inconsistency and hedges, rather than clearly favoring the most current information while optionally noting outdated sources.",
+              "confidence": 0.93,
+              "cost": 0.0,
+              "latency_ms": 7740.976095199585,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer acknowledges the inconsistency in the documents and tentatively suggests Ketanji Brown Jackson while noting the lack of consistent information. Since all dates are unknown, the model cannot prioritize a specific source, but it does not ignore the potential for outdated information.",
+              "confidence": 0.8,
+              "cost": 0.00015554000000000002,
+              "latency_ms": 3502.5672912597656,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00015554000000000002,
+          "total_latency_ms": 11243.54338645935,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The documents suggest that Ketanji Brown Jackson was the last person appointed to the Supreme Court, but they do not provide consistent information about the last person appointed. [d3, d5]",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d3",
+              "d5",
+              "d4",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0334",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not consolidate or reconcile partial information from the cited documents; it simply refuses with a generic uncertainty statement instead of synthesizing complementary evidence into a direct response.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 3.9499999999999997,
+          "rationale": "The answer does not consolidate or reconcile partial information from the cited documents; it simply refuses with a generic uncertainty statement instead of synthesizing complementary evidence into a direct response.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not consolidate or reconcile partial information from the cited documents; it simply refuses with a generic uncertainty statement instead of synthesizing complementary evidence into a direct response.",
+              "confidence": 0.85,
+              "cost": 0.0,
+              "latency_ms": 7849.252939224243,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer refuses to provide an exact number, claiming it cannot be determined, instead of consolidating and reconciling the partial answers from the documents as expected for complementary information.",
+              "confidence": 0.7,
+              "cost": 0.00026236,
+              "latency_ms": 6999.293327331543,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00026236,
+          "total_latency_ms": 14848.546266555786,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The exact number of books Shoshana Zuboff has published cannot be determined with the provided documents. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d6"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0343",
+      "conflict_type": 1,
+      "pred_answered": false,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer refuses instead of giving a clear, direct response. For a no-conflict case, it should answer straightforwardly without introducing unnecessary uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.71,
+          "rationale": "The answer refuses instead of giving a clear, direct response. For a no-conflict case, it should answer straightforwardly without introducing unnecessary uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer refuses instead of giving a clear, direct response. For a no-conflict case, it should answer straightforwardly without introducing unnecessary uncertainty.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 11920.870065689087,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer refuses to provide a direct answer and instead introduces uncertainty by claiming insufficient evidence, violating the expected behavior for No Conflict, which requires a clear and direct answer.",
+              "confidence": 0.9,
+              "cost": 0.00022106000000000003,
+              "latency_ms": 6182.12366104126,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00022106000000000003,
+          "total_latency_ms": 18102.993726730347,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+            "cited_docs": [],
+            "supporting_docs_found": [],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "no_supporting_doc_found"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0373",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is direct and does not introduce uncertainty, disagreement, or alternative viewpoints. It states a single clear response and even notes source agreement rather than contrasting perspectives.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.8100000000000005,
+          "weighted_against": 0.0,
+          "rationale": "The answer is direct and does not introduce uncertainty, disagreement, or alternative viewpoints. It states a single clear response and even notes source agreement rather than contrasting perspectives.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is direct and does not introduce uncertainty, disagreement, or alternative viewpoints. It states a single clear response and even notes source agreement rather than contrasting perspectives.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 14273.014068603516,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct list of signatories without introducing alternative viewpoints or uncertainty, adhering to the 'No Conflict' expected behavior.",
+              "confidence": 0.95,
+              "cost": 0.00012026000000000002,
+              "latency_ms": 2487.107753753662,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00012026000000000002,
+          "total_latency_ms": 16760.121822357178,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The 56 signatories of the Declaration of Independence are (in alphabetical order):\n[] (Note that all provide the same list of signatories.)",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d9",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.5,
+      "single_truth_recall_details": {
+        "recall": 0.5,
+        "exact_matches": 0,
+        "partial_matches": 1,
+        "match_details": [],
+        "partial_details": [
+          {
+            "gold_answer": "56 delegates to the Continental Congress",
+            "minority_confidence": 0.4025423728813559,
+            "votes_for": 1,
+            "votes_against": 1
+          }
+        ]
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0381",
+      "conflict_type": 4,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer directly gives a current population figure and presents it as up-to-date ('as of 2025'), which matches the expected behavior of prioritizing newer information; acknowledging older sources was optional.",
+        "confidence": 0.5550351288056207,
+        "minority_confidence": 0.44496487119437944,
+        "votes_for": 1,
+        "votes_against": 1,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 0.5550351288056207,
+          "minority_confidence": 0.44496487119437944,
+          "votes_for": 1,
+          "votes_against": 1,
+          "total_votes": 2,
+          "weighted_for": 2.37,
+          "weighted_against": 1.9,
+          "rationale": "The answer directly gives a current population figure and presents it as up-to-date ('as of 2025'), which matches the expected behavior of prioritizing newer information; acknowledging older sources was optional.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer directly gives a current population figure and presents it as up-to-date ('as of 2025'), which matches the expected behavior of prioritizing newer information; acknowledging older sources was optional.",
+              "confidence": 0.79,
+              "cost": 0.0,
+              "latency_ms": 7431.563854217529,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer cites d1 (date unknown) as the source for a 'current' population figure, without prioritizing known up-to-date sources like d6 (2023-07-03) or d8 (2023-11-09), and fails to acknowledge any potential outdated information.",
+              "confidence": 0.95,
+              "cost": 0.00020720000000000005,
+              "latency_ms": 4587.218284606934,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00020720000000000005,
+          "total_latency_ms": 12018.782138824463,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The current world population is 8,198,260,420 as of 2025",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d8",
+              "d9",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "8 billion",
+            "confidence": 0.5850622406639003,
+            "votes_for": 1,
+            "votes_against": 1
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0392",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear and direct, gives a single ranking result, and does not introduce uncertainty or alternative viewpoints.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear and direct, gives a single ranking result, and does not introduce uncertainty or alternative viewpoints.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear and direct, gives a single ranking result, and does not introduce uncertainty or alternative viewpoints.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 5390.21110534668,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct statement that the USA is at the top rank, without introducing any alternative viewpoints or uncertainty.",
+              "confidence": 1.0,
+              "cost": 9.716e-05,
+              "latency_ms": 1781.4860343933105,
+              "error": null
+            }
+          ],
+          "total_cost": 9.716e-05,
+          "total_latency_ms": 7171.69713973999,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The USA is currently at the top rank at the FIBA Men's World Ranking. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d4",
+              "d5",
+              "d1",
+              "d9"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "USA",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0394",
+      "conflict_type": 4,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer gives a single direct conclusion and appears to rely mainly on the most recent dated sources (2024-10-15), rather than foregrounding older information. It does not dwell on outdated material, which is consistent with prioritizing newer sources.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.0,
+          "weighted_against": 0.0,
+          "rationale": "The answer gives a single direct conclusion and appears to rely mainly on the most recent dated sources (2024-10-15), rather than foregrounding older information. It does not dwell on outdated material, which is consistent with prioritizing newer sources.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer gives a single direct conclusion and appears to rely mainly on the most recent dated sources (2024-10-15), rather than foregrounding older information. It does not dwell on outdated material, which is consistent with prioritizing newer sources.",
+              "confidence": 0.8,
+              "cost": 0.0,
+              "latency_ms": 11632.872819900513,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer cites multiple sources, including the most recent ones (2024-10-15), and states a specific future Super Bowl location, which indicates it prioritizes the up-to-date information. The optional acknowledgment of outdated sources is omitted, which is permitted by the rubric.",
+              "confidence": 0.8,
+              "cost": 0.00062706,
+              "latency_ms": 19226.101875305176,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00062706,
+          "total_latency_ms": 30858.97469520569,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Super Bowl LXI (2027) will be held at SoFi Stadium. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d3",
+              "d8"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "exact_matches": 0,
+        "partial_matches": 0,
+        "match_details": [],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0399",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer gives a single bottom-line recommendation with a caveat, but it does not explicitly reflect any debate or neutrally summarize differing viewpoints among sources.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.8100000000000005,
+          "rationale": "The answer gives a single bottom-line recommendation with a caveat, but it does not explicitly reflect any debate or neutrally summarize differing viewpoints among sources.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer gives a single bottom-line recommendation with a caveat, but it does not explicitly reflect any debate or neutrally summarize differing viewpoints among sources.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 5762.284994125366,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer does not reflect any debate or different viewpoints; it presents a single unified conclusion without acknowledging conflicting opinions or research outcomes, as required by the rubric.",
+              "confidence": 0.95,
+              "cost": 0.00020286000000000002,
+              "latency_ms": 5266.734838485718,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00020286000000000002,
+          "total_latency_ms": 11029.019832611084,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "A well-planned vegan diet can be safe and beneficial during pregnancy, but it requires careful planning and monitoring to ensure nutritional needs are met. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d5"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0408",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear, direct, and unequivocal, without introducing alternative viewpoints, hedging, or unnecessary uncertainty.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear, direct, and unequivocal, without introducing alternative viewpoints, hedging, or unnecessary uncertainty.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear, direct, and unequivocal, without introducing alternative viewpoints, hedging, or unnecessary uncertainty.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 5217.887878417969,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct statement that champagne comes solely from the Champagne region of France, without introducing alternative viewpoints or uncertainty.",
+              "confidence": 1.0,
+              "cost": 0.00011018,
+              "latency_ms": 2347.5098609924316,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00011018,
+          "total_latency_ms": 7565.3977394104,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Champagne comes solely from the Champagne region of France. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d10",
+              "d8",
+              "d9",
+              "d7",
+              "d2",
+              "d4",
+              "d6",
+              "d3",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 1.0,
+      "single_truth_recall_details": {
+        "recall": 1.0,
+        "exact_matches": 1,
+        "partial_matches": 0,
+        "match_details": [
+          {
+            "gold_answer": "Yes",
+            "confidence": 1.0,
+            "votes_for": 2,
+            "votes_against": 0
+          }
+        ],
+        "partial_details": []
+      },
+      "single_truth_applicable": true
+    },
+    {
+      "sample_id": "#0416",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not explicitly present or contrast differing source viewpoints. It gives a single conclusion and notes uncertainty, rather than neutrally summarizing the debate or disagreement between sources.",
+        "confidence": 0.602510460251046,
+        "minority_confidence": 0.397489539748954,
+        "votes_for": 1,
+        "votes_against": 1,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 0.602510460251046,
+          "minority_confidence": 0.397489539748954,
+          "votes_for": 1,
+          "votes_against": 1,
+          "total_votes": 2,
+          "weighted_for": 1.9,
+          "weighted_against": 2.88,
+          "rationale": "The answer does not explicitly present or contrast differing source viewpoints. It gives a single conclusion and notes uncertainty, rather than neutrally summarizing the debate or disagreement between sources.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not explicitly present or contrast differing source viewpoints. It gives a single conclusion and notes uncertainty, rather than neutrally summarizing the debate or disagreement between sources.",
+              "confidence": 0.96,
+              "cost": 0.0,
+              "latency_ms": 6986.873149871826,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer explicitly reflects the debate by stating a specific date (1851) from one source and acknowledging uncertainty about temple recommend requirements from another, neutrally summarizing the conflicting viewpoints.",
+              "confidence": 0.95,
+              "cost": 0.00012082000000000003,
+              "latency_ms": 2752.730131149292,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00012082000000000003,
+          "total_latency_ms": 9739.603281021118,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The Word of Wisdom became a commandment for Church members in 1851, but it is unclear when it became a requirement for temple recommends. [d1, d7]",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d6",
+              "d7",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0427",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": true,
+      "correct_refusal": false,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not consolidate complementary partial information from the sources; it simply states that the term is unclear and cites documents, without reconciling or summarizing the different pieces into a unified explanation.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.68,
+          "rationale": "The answer does not consolidate complementary partial information from the sources; it simply states that the term is unclear and cites documents, without reconciling or summarizing the different pieces into a unified explanation.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not consolidate complementary partial information from the sources; it simply states that the term is unclear and cites documents, without reconciling or summarizing the different pieces into a unified explanation.",
+              "confidence": 0.96,
+              "cost": 0.0,
+              "latency_ms": 5554.50701713562,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer does not consolidate or reconcile partial answers; instead it states the term is not widely defined, which contradicts the expected behavior of combining complementary information without debate.",
+              "confidence": 0.9,
+              "cost": 0.00017962000000000002,
+              "latency_ms": 4206.259965896606,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00017962000000000002,
+          "total_latency_ms": 9760.766983032227,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "In the context of cars, the meaning of AUV is not clear, as the term \"Asian Utility Vehicle\" is not widely defined or accepted. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0470",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer introduces hedging and uncertainty ('can be effective,' 'may depend') instead of giving a clear, direct answer, which violates the expected no-conflict behavior.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.9399999999999995,
+          "rationale": "The answer introduces hedging and uncertainty ('can be effective,' 'may depend') instead of giving a clear, direct answer, which violates the expected no-conflict behavior.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer introduces hedging and uncertainty ('can be effective,' 'may depend') instead of giving a clear, direct answer, which violates the expected no-conflict behavior.",
+              "confidence": 0.98,
+              "cost": 0.0,
+              "latency_ms": 7187.809944152832,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer includes hedging phrases ('can be', 'may depend') and introduces uncertainty about effectiveness, which violates the expected behavior of providing a clear and direct answer without alternative viewpoints or uncertainty for a no-conflict scenario.",
+              "confidence": 1.0,
+              "cost": 0.00011984,
+              "latency_ms": 2551.8698692321777,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00011984,
+          "total_latency_ms": 9739.67981338501,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Club soda can be effective for removing stains, as supported by personal anecdotes and a study conducted by the Dry-cleaning & Laundry Institute (DLI)",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d4",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "However, the effectiveness may depend on the type of stain and the method used. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d4"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0499",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer is hedged and introduces unnecessary uncertainty ('can become', 'documents do not specify the type') instead of giving a clear, direct response as required for a no-conflict case.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.3100000000000005,
+          "rationale": "The answer is hedged and introduces unnecessary uncertainty ('can become', 'documents do not specify the type') instead of giving a clear, direct response as required for a no-conflict case.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer is hedged and introduces unnecessary uncertainty ('can become', 'documents do not specify the type') instead of giving a clear, direct response as required for a no-conflict case.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 6810.584783554077,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer introduces uncertainty with the caveat 'although the documents do not specify the type of bath towel that exhibits this behavior' and fails to directly explain the mechanism behind the increased absorbency, deviating from the expected behavior of providing a clear and direct answer without alternative viewpoints or uncertainty.",
+              "confidence": 0.7,
+              "cost": 0.00028434,
+              "latency_ms": 7848.896026611328,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00028434,
+          "total_latency_ms": 14659.480810165405,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Bath towels can become more absorbent with each wash, although the documents do not specify the type of bath towel that exhibits this behavior. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d3"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0509",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer gives a single consolidated response from multiple cited sources and does not frame the information as conflicting or debate-like.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.32,
+          "weighted_against": 0.0,
+          "rationale": "The answer gives a single consolidated response from multiple cited sources and does not frame the information as conflicting or debate-like.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer gives a single consolidated response from multiple cited sources and does not frame the information as conflicting or debate-like.",
+              "confidence": 0.84,
+              "cost": 0.0,
+              "latency_ms": 8853.026151657104,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer consolidates information from multiple documents (d1, d2, d5) into a single, coherent statement without framing as a debate, which matches the expected behavior for complementary information.",
+              "confidence": 0.9,
+              "cost": 0.00028364000000000004,
+              "latency_ms": 7823.085069656372,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00028364000000000004,
+          "total_latency_ms": 16676.111221313477,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "America's Got Talent season 11 premiered on May 31, 2016. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d4",
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0517",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not consolidate complementary partial explanations; it gives a narrow, single-thread explanation and even shifts to a gold-specific detail rather than reconciling the different pieces into a unified response.",
+        "confidence": 0.6052631578947368,
+        "minority_confidence": 0.3947368421052631,
+        "votes_for": 1,
+        "votes_against": 1,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 0.6052631578947368,
+          "minority_confidence": 0.3947368421052631,
+          "votes_for": 1,
+          "votes_against": 1,
+          "total_votes": 2,
+          "weighted_for": 1.8,
+          "weighted_against": 2.7600000000000002,
+          "rationale": "The answer does not consolidate complementary partial explanations; it gives a narrow, single-thread explanation and even shifts to a gold-specific detail rather than reconciling the different pieces into a unified response.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not consolidate complementary partial explanations; it gives a narrow, single-thread explanation and even shifts to a gold-specific detail rather than reconciling the different pieces into a unified response.",
+              "confidence": 0.92,
+              "cost": 0.0,
+              "latency_ms": 19133.559942245483,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer consolidates information from multiple documents (d1, d4, d5) into a single, coherent explanation of why reflective surfaces appear silver, without framing the response as a debate or indicating conflict.",
+              "confidence": 0.9,
+              "cost": 0.00018816000000000001,
+              "latency_ms": 5197.73006439209,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00018816000000000001,
+          "total_latency_ms": 24331.290006637573,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Our brains register reflective surfaces such as metal as silver in color because of the selective reflection of light by the metal, with gold having low reflectivity at short wavelengths and preferentially reflecting yellow and red. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d5",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0531",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear, direct, and assertive, presenting a straightforward comparison without introducing uncertainty or competing viewpoints.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.84,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear, direct, and assertive, presenting a straightforward comparison without introducing uncertainty or competing viewpoints.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear, direct, and assertive, presenting a straightforward comparison without introducing uncertainty or competing viewpoints.",
+              "confidence": 0.98,
+              "cost": 0.0,
+              "latency_ms": 5496.185064315796,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct comparison of socialism and communism without introducing alternative viewpoints or uncertainty, matching the expected behavior for a no-conflict scenario.",
+              "confidence": 0.95,
+              "cost": 0.00010682000000000001,
+              "latency_ms": 1757.8620910644531,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00010682000000000001,
+          "total_latency_ms": 7254.047155380249,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 4,
+        "evaluable_claims": 4,
+        "claim_details": [
+          {
+            "claim": "Socialism and Communism share some similarities, such as a focus on collective ownership and a concern for the welfare of the community",
+            "cited_docs": [],
+            "supporting_docs_found": [],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "no_supporting_doc_found"
+          },
+          {
+            "claim": "However, there are significant differences between the two ideologies",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d4"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "Communism, as proposed by Marx, is the final stage of societal evolution, where all property is owned in common the state has withered away",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d4"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "Socialism, on the other hand, is a transitional stage between capitalism and communism, where the means of production are owned and controlled by the workers, but the state still exists to manage the economy and ensure fair distribution of resources. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d4"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0542",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear, direct, and unhedged, and it does not introduce alternative viewpoints or uncertainty, which matches the no-conflict behavior rubric.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear, direct, and unhedged, and it does not introduce alternative viewpoints or uncertainty, which matches the no-conflict behavior rubric.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear, direct, and unhedged, and it does not introduce alternative viewpoints or uncertainty, which matches the no-conflict behavior rubric.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 9116.354942321777,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer directly attributes 'I Got Rhythm' to George Gershwin without introducing alternative viewpoints or uncertainty, matching the expected behavior for no conflict.",
+              "confidence": 1.0,
+              "cost": 0.00011326000000000001,
+              "latency_ms": 2477.9160022735596,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00011326000000000001,
+          "total_latency_ms": 11594.270944595337,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "George Gershwin wrote the jazz classic \"I Got Rhythm\"",
+            "cited_docs": [
+              "d2"
+            ],
+            "supported": false,
+            "reason": "no_eligible_docs"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0561",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer gives an inconclusive refusal instead of consolidating the partial evidence into a single reconciled response. For complementary information, it should synthesize the documents rather than avoid answering.",
+        "confidence": 0.6252927400468384,
+        "minority_confidence": 0.3747072599531617,
+        "votes_for": 1,
+        "votes_against": 1,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 0.6252927400468384,
+          "minority_confidence": 0.3747072599531617,
+          "votes_for": 1,
+          "votes_against": 1,
+          "total_votes": 2,
+          "weighted_for": 1.6,
+          "weighted_against": 2.67,
+          "rationale": "The answer gives an inconclusive refusal instead of consolidating the partial evidence into a single reconciled response. For complementary information, it should synthesize the documents rather than avoid answering.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer gives an inconclusive refusal instead of consolidating the partial evidence into a single reconciled response. For complementary information, it should synthesize the documents rather than avoid answering.",
+              "confidence": 0.89,
+              "cost": 0.0,
+              "latency_ms": 8615.448713302612,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer directly states that the evidence is inconclusive, effectively providing a refusal. Per instructions, if the evidence genuinely does not support an answer, such a refusal is treated as adherent for this conflict type.",
+              "confidence": 0.8,
+              "cost": 0.00028238000000000004,
+              "latency_ms": 7185.408115386963,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00028238000000000004,
+          "total_latency_ms": 15800.856828689575,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "The evidence is inconclusive as to whether Jamie Oliver is a member of a television series cast. []",
+            "cited_docs": [],
+            "supporting_docs_found": [],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "no_supporting_doc_found"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0588",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer gives a single consolidated explanation and lightly integrates supporting context from multiple documents, rather than presenting them as conflicting viewpoints or a debate.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.609999999999999,
+          "weighted_against": 0.0,
+          "rationale": "The answer gives a single consolidated explanation and lightly integrates supporting context from multiple documents, rather than presenting them as conflicting viewpoints or a debate.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer gives a single consolidated explanation and lightly integrates supporting context from multiple documents, rather than presenting them as conflicting viewpoints or a debate.",
+              "confidence": 0.87,
+              "cost": 0.0,
+              "latency_ms": 12309.073209762573,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer consolidates information from multiple documents (d1, d3, d4) to provide a single coherent explanation for why night vision is green, without framing it as a debate or highlighting disagreement.",
+              "confidence": 1.0,
+              "cost": 0.00015414,
+              "latency_ms": 2970.003843307495,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00015414,
+          "total_latency_ms": 15279.077053070068,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Night vision is green because of the technology used in night vision devices, which amplifies a specific range of light that is more visible to the human eye in low light conditions",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d3",
+              "d4"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "This is supported by documents , which provide additional context about the sensitivity of the human eye to different colors and the use of LED flashlights to preserve night vision. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d4"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0592",
+      "conflict_type": 2,
+      "pred_answered": false,
+      "gold_answerable": false,
+      "correct_refusal": true,
+      "gr_accuracy": 1.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": false,
+      "behavior_details": {
+        "adherent": null,
+        "rationale": "N/A \u2014 correct refusal; sample excluded from behavior average",
+        "skipped": "correct_refusal",
+        "committee_details": null
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": false,
+      "factual_grounding_details": {
+        "grounding_ratio": null,
+        "supported_claims": 0,
+        "total_claims": 0,
+        "claim_details": [],
+        "skipped": "correct_refusal"
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "correct_refusal"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0603",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer gives a single consolidated response and cites multiple sources without framing them as conflicting or debating viewpoints, which matches the expected complementary-information behavior.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.85,
+          "weighted_against": 0.0,
+          "rationale": "The answer gives a single consolidated response and cites multiple sources without framing them as conflicting or debating viewpoints, which matches the expected complementary-information behavior.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer gives a single consolidated response and cites multiple sources without framing them as conflicting or debating viewpoints, which matches the expected complementary-information behavior.",
+              "confidence": 0.95,
+              "cost": 0.0,
+              "latency_ms": 5994.808912277222,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer consolidates information from multiple documents into a single, direct claim (4 championships) without framing as a debate, matching the expected complementary behavior.",
+              "confidence": 1.0,
+              "cost": 0.00011718000000000001,
+              "latency_ms": 2409.166097640991,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00011718000000000001,
+          "total_latency_ms": 8403.975009918213,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "UCLA has won 4 NCAA basketball championships []",
+            "cited_docs": [],
+            "supporting_docs_found": [],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "no_supporting_doc_found"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0609",
+      "conflict_type": 2,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer gives a single consolidated explanation across sources, combining probability-based pricing with real-time adjustment for bet distribution, and does not frame the sources as conflicting or debated.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.72,
+          "weighted_against": 0.0,
+          "rationale": "The answer gives a single consolidated explanation across sources, combining probability-based pricing with real-time adjustment for bet distribution, and does not frame the sources as conflicting or debated.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer gives a single consolidated explanation across sources, combining probability-based pricing with real-time adjustment for bet distribution, and does not frame the sources as conflicting or debated.",
+              "confidence": 0.94,
+              "cost": 0.0,
+              "latency_ms": 11582.839965820312,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer consolidates multiple partial answers into a coherent explanation of how bookmakers calculate in-play odds, focusing on probability and balanced book without presenting any debate or disagreement.",
+              "confidence": 0.95,
+              "cost": 0.00019292000000000002,
+              "latency_ms": 4499.393939971924,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00019292000000000002,
+          "total_latency_ms": 16082.233905792236,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 4,
+        "evaluable_claims": 4,
+        "claim_details": [
+          {
+            "claim": "Bookmakers calculate odds in play by using probability and trying to achieve a balanced book",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d3",
+              "d4",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "They offer odds based on how likely they believe an event is to happen they adjust the odds as more bets are placed to try to achieve a balanced book",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d3",
+              "d4",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "This means that they will offer different odds for the same event depending on the distribution of bets among different outcomes",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d4"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "The specific calculation of odds may vary between bookmakers, but the general approach is to use probability and try to achieve a balanced book. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d2",
+              "d3",
+              "d4",
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0638",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer does not give a clear, direct response and instead introduces unnecessary uncertainty ('Further research is needed') despite the no-conflict rubric calling for a straightforward answer.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.97,
+          "rationale": "The answer does not give a clear, direct response and instead introduces unnecessary uncertainty ('Further research is needed') despite the no-conflict rubric calling for a straightforward answer.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer does not give a clear, direct response and instead introduces unnecessary uncertainty ('Further research is needed') despite the no-conflict rubric calling for a straightforward answer.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 6137.331962585449,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer introduces uncertainty ('Further research is needed') and does not provide a clear, direct answer to the query, violating the expected behavior for No Conflict.",
+              "confidence": 1.0,
+              "cost": 0.00014098000000000002,
+              "latency_ms": 3246.356964111328,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00014098000000000002,
+          "total_latency_ms": 9383.688926696777,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Dorothy does not live in the Emerald City in the Wizard of Oz",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d5"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "Further research is needed to determine where she lives. []",
+            "cited_docs": [],
+            "supporting_docs_found": [],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "no_supporting_doc_found"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0644",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer is hedged and nonresponsive, saying the titles are not mentioned instead of giving a clear, direct answer as expected for a no-conflict case.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.59,
+          "rationale": "The answer is hedged and nonresponsive, saying the titles are not mentioned instead of giving a clear, direct answer as expected for a no-conflict case.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer is hedged and nonresponsive, saying the titles are not mentioned instead of giving a clear, direct answer as expected for a no-conflict case.",
+              "confidence": 0.93,
+              "cost": 0.0,
+              "latency_ms": 7868.515253067017,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer introduces uncertainty by stating that specific titles are not mentioned, failing to provide a clear and direct answer as required for No Conflict. It hedges instead of giving a straightforward response.",
+              "confidence": 0.9,
+              "cost": 0.00015344000000000002,
+              "latency_ms": 2960.221767425537,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00015344000000000002,
+          "total_latency_ms": 10828.737020492554,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 1.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 1.0,
+        "supported_claims": 1,
+        "total_claims": 1,
+        "evaluable_claims": 1,
+        "claim_details": [
+          {
+            "claim": "Based on the provided documents, Mordecai Richler wrote books, but the specific titles are not mentioned",
+            "cited_docs": [
+              "d3"
+            ],
+            "supporting_docs_found": [
+              "d3"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": true,
+            "supported": true,
+            "reason": "single_doc_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0650",
+      "conflict_type": 1,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 1.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": true,
+        "rationale": "The answer is clear, direct, and explanatory, without introducing uncertainty, disagreement, or alternative viewpoints.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 2,
+        "votes_against": 0,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": true,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 2,
+          "votes_against": 0,
+          "total_votes": 2,
+          "weighted_for": 4.97,
+          "weighted_against": 0.0,
+          "rationale": "The answer is clear, direct, and explanatory, without introducing uncertainty, disagreement, or alternative viewpoints.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": true,
+              "rationale": "The answer is clear, direct, and explanatory, without introducing uncertainty, disagreement, or alternative viewpoints.",
+              "confidence": 0.99,
+              "cost": 0.0,
+              "latency_ms": 11083.515882492065,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": true,
+              "rationale": "The answer provides a clear and direct explanation of how salt softens water through ion exchange, without introducing alternative viewpoints or uncertainty, which matches the expected behavior for No Conflict.",
+              "confidence": 1.0,
+              "cost": 0.00010164000000000001,
+              "latency_ms": 1700.9773254394531,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00010164000000000001,
+          "total_latency_ms": 12784.493207931519,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 3,
+        "evaluable_claims": 3,
+        "claim_details": [
+          {
+            "claim": "Salt softens water by replacing the minerals in hard water with sodium ions",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "This process is known as ion exchange",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "When hard water passes through a resin bed containing sodium ions, the calcium and magnesium ions in the hard water are exchanged for sodium ions, resulting in soft water. []",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d1"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    },
+    {
+      "sample_id": "#0654",
+      "conflict_type": 3,
+      "pred_answered": true,
+      "gold_answerable": false,
+      "correct_refusal": false,
+      "gr_accuracy": 0.0,
+      "behavior_score": 0.0,
+      "behavior_applicable": true,
+      "behavior_details": {
+        "adherent": false,
+        "rationale": "The answer presents a single definition from one source and does not acknowledge, contrast, or neutrally summarize any differing viewpoints or debate between sources, which is required for conflicting opinions or research outcomes.",
+        "confidence": 1.0,
+        "minority_confidence": 0.0,
+        "votes_for": 0,
+        "votes_against": 2,
+        "total_votes": 2,
+        "skipped": null,
+        "all_failed": false,
+        "committee_details": {
+          "adherent": false,
+          "confidence": 1.0,
+          "minority_confidence": 0.0,
+          "votes_for": 0,
+          "votes_against": 2,
+          "total_votes": 2,
+          "weighted_for": 0.0,
+          "weighted_against": 4.8100000000000005,
+          "rationale": "The answer presents a single definition from one source and does not acknowledge, contrast, or neutrally summarize any differing viewpoints or debate between sources, which is required for conflicting opinions or research outcomes.",
+          "individual_responses": [
+            {
+              "judge_id": "codex_cli_codex-cli/default",
+              "model_id": "codex-cli/default",
+              "provider": "codex_cli",
+              "adherent": false,
+              "rationale": "The answer presents a single definition from one source and does not acknowledge, contrast, or neutrally summarize any differing viewpoints or debate between sources, which is required for conflicting opinions or research outcomes.",
+              "confidence": 0.97,
+              "cost": 0.0,
+              "latency_ms": 12875.28395652771,
+              "error": null
+            },
+            {
+              "judge_id": "deepseek_deepseek-v4-flash",
+              "model_id": "deepseek-v4-flash",
+              "provider": "deepseek",
+              "adherent": false,
+              "rationale": "The answer only cites one document and mentions no conflicting viewpoints, debate, or alternative opinions. It does not reflect the expected behavior of explicitly reflecting and neutrally summarizing different viewpoints.",
+              "confidence": 0.95,
+              "cost": 0.00013342000000000003,
+              "latency_ms": 2496.5529441833496,
+              "error": null
+            }
+          ],
+          "total_cost": 0.00013342000000000003,
+          "total_latency_ms": 15371.83690071106,
+          "all_failed": false
+        }
+      },
+      "factual_grounding_score": 0.0,
+      "factual_grounding_applicable": true,
+      "factual_grounding_details": {
+        "grounding_ratio": 0.0,
+        "supported_claims": 0,
+        "total_claims": 2,
+        "evaluable_claims": 2,
+        "claim_details": [
+          {
+            "claim": "Gravity is a natural phenomenon by which all material bodies attract each other, as defined in document d5",
+            "cited_docs": [],
+            "supporting_docs_found": [
+              "d5"
+            ],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "supporting_doc_not_cited"
+          },
+          {
+            "claim": "However, the documents do not provide a simple, easy-to-understand definition of gravity",
+            "cited_docs": [
+              "d5"
+            ],
+            "supporting_docs_found": [],
+            "cross_doc_support": false,
+            "cross_doc_combo": [],
+            "citation_check_passed": false,
+            "supported": false,
+            "reason": "no_supporting_doc_found"
+          }
+        ],
+        "fg_errors": 0
+      },
+      "single_truth_recall_score": 0.0,
+      "single_truth_recall_details": {
+        "recall": 0.0,
+        "skipped": "no_gold_or_type_3"
+      },
+      "single_truth_applicable": false
+    }
+  ]
+}

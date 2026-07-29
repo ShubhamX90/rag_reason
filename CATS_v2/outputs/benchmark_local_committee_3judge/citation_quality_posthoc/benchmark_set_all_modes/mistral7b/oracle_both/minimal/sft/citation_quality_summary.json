@@ -1,0 +1,1383 @@
+{
+  "variant": "benchmark_set_all_modes/mistral7b/oracle_both/minimal/sft",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "benchmark_sft_qd_collect27_20260706_r1",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_qd_collect27_20260706_r1/mistral7b/oracle_both/minimal/sft/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_qd_collect27_20260706_r1/mistral7b/oracle_both/minimal/sft/final/detailed_results.json",
+    "source_final_sha256": "0a74ce331bd2897f19b84efcfa50f2ae2430ae4c846092858bb6d046c349360d",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/mistral7b/oracle_both/minimal/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/mistral7b/oracle_both/minimal/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1025,
+    "claims_with_citations": 975,
+    "claims_with_committee_support_set": 933,
+    "claims_with_any_approved_citation": 867,
+    "claims_with_any_gold_positive_citation": 974,
+    "committee_alignment_precision_macro": 0.7751111111111111,
+    "committee_alignment_precision_micro": 0.7406103286384976,
+    "gold_positive_citation_precision_macro": 0.9982905982905983,
+    "gold_positive_citation_precision_micro": 0.9982394366197183,
+    "soft_extra_citation_rate_micro": 0.2576291079812207,
+    "hard_negative_citation_rate_micro": 0.0017605633802816902,
+    "committee_support_citation_recall_macro": 0.9292604501607717,
+    "committee_support_citation_recall_micro": 0.9292604501607717,
+    "claims_with_any_soft_extra_rate": 0.3425641025641026,
+    "claims_with_any_hard_negative_rate": 0.003076923076923077,
+    "strict_committee_alignment_claim_rate": 0.6234146341463415,
+    "strict_gold_clean_claim_rate": 0.8439024390243902,
+    "strict_grounded_committee_clean_rate_all_claims": 0.6234146341463415,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8439024390243902,
+    "total_cited_docs": 1704,
+    "total_approved_cited_docs": 1262,
+    "total_gold_positive_cited_docs": 1701,
+    "total_soft_extra_cited_docs": 439,
+    "total_hard_negative_cited_docs": 3
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "freshqa_7bc7bb2dde20",
+      "claim_index": 2,
+      "claim": "This result, superseding earlier reports that listed *CODA* (2022) or *Sinners* (2024) as the most recent winners, as those ceremonies have since been surpassed by the 2026 event",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The movie One Battle After Another won Best Picture at the 98th Academy Awards.",
+          "quote": "The latest: One Battle After Another wins Best Picture at the 98th Academy Awards!",
+          "verdict_reason": "The snippet explicitly identifies the latest Best Picture winner as 'One Battle After Another' at the 98th Academy Awards, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet lists past Best Picture winners like CODA (2022) and mentions 2026 nominees but does not identify the latest winner.",
+          "quote": "Only three best picture winners were directed by women: Kathryn Bigelow's \"The Hurt Locker\" (2010), Chloé Zhao's \"Nomadland\" (2021) and Sian Heder's \"CODA\" (2022).",
+          "verdict_reason": "The document discusses the same entity (Best Picture winners) and provides historical data up to 2022, but fails to name the specific latest winner requested, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The movie 'One Battle After Another' won Best Picture at the 98th Academy Awards.",
+          "quote": "'One Battle After Another' wins best picture at 98th Academy Awards... Paul Thomas Anderson's \"One Battle After Another\" was crowned best picture at the 98th Academy Awards",
+          "verdict_reason": "The snippet directly answers the query by identifying the winner of the latest (98th) Academy Award for Best Picture.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Paul Thomas Anderson's One Battle After Another won Best Picture at the 98th Academy Awards in 2025.",
+          "quote": "Recent winners include Paul Thomas Anderson's One Battle After Another (2o25)... ONE BATTLE AFTER ANOTHER, 2026... won Best Picture... at the 98th Acadey Awards.",
+          "verdict_reason": "The snippet explicitly identifies 'One Battle After Another' as the winner of the 98th Academy Awards (2025), directly answering the query about the latest winner.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4317242e485c",
+      "claim_index": 1,
+      "claim": "On the other hand, prominent scientists and advocacy groups contend that the practice normalizes animal cruelty, diverts funding from more effective conservation strategies that the evidence on its overall conservation impact is both mixed and largely promotional , with some experts arguing that blanket bans could actually reduce animal suffering and that the IUCN itself calls for trophy hunting to be replaced by more sustainable alternatives",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Conservationist Amy Dickman argues that trophy hunting revenue makes lions and their habitat more likely to be conserved compared to areas without such income.",
+          "quote": "If lions and other species generate revenue through trophy hunting, she argues, they and their habitat are more likely to be conserved.",
+          "verdict_reason": "The snippet provides expert testimony supporting the benefit of trophy hunting for conservation but presents it as one side of an ongoing debate without a definitive final conclusion.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues that a trophy-hunting ban would not be good for wildlife on balance at this time.",
+          "quote": "But will a trophy-hunting ban at this time be good for wildlife? On balance, right now, I believe the answer is no.",
+          "verdict_reason": "Snippet directly addresses the query with a specific stance supporting hunting's current role, though it acknowledges flaws and presents opposing views, making it conflict-bearing evidence rather than a definitive sole answer.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "An IUCN report claims trophy hunting has indisputable positive impacts on conservation and is the most effective way to save wildlife populations.",
+          "quote": "showcasing trophy hunting's indisputable positive impacts on conservation and animal welfare... The report cites in-depth research confirming what most hunters already know: Trophy hunting is the most effective way to save wildlife populations",
+          "verdict_reason": "The snippet directly addresses the query by citing an IUCN report supporting trophy hunting, but it represents a single perspective in a contested debate rather than a definitive consensus.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_b198a514fff8",
+      "claim_index": 2,
+      "claim": "This is consistently confirmed across multiple sources, with New Mexico entering the Union on the same date as Arizona, forming the 47th and 48th contiguous states",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "New Mexico was admitted to the Union as the 47th state on January 6, 1912.",
+          "quote": "Eventually on January 6, 1912, New Mexico became the 47th state admitted to the Union when President William Taft signed the New Mexico statehood bill.",
+          "verdict_reason": "The snippet explicitly states that New Mexico became the 47th state admitted to the Union, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "New Mexico achieved statehood on January 6, 1912.",
+          "quote": "New Mexico achieved statehood on January 6, 1912. At that time, the state had a population of about 330,000 people.",
+          "verdict_reason": "The snippet explicitly states the date New Mexico achieved statehood, directly addressing the query about its admission to the union.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "New Mexico was admitted to the Union as the 47th state on January 6, 1912.",
+          "quote": "President William Howard Taft signed the legislation soon after, admitting New Mexico as the 47th state on January 6, 1912",
+          "verdict_reason": "The snippet explicitly states that New Mexico was admitted as the 47th state, directly answering the query about its admission order.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_d44802dc3c96",
+      "claim_index": 2,
+      "claim": "This is confirmed by multiple authoritative sources, including the official Social Security Administration website and the St. Louis Federal Reserve Economic Data (FRED)",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The first Social Security numbers were issued in November 1936 by post office typing centers.",
+          "quote": "In November 1936, the first SSNs were issued by these typing centers and thousands of people were given their 9-digit number.",
+          "verdict_reason": "The snippet explicitly states the month and year the first SSNs were issued, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Social Security numbers were first issued by the Social Security Administration in November 1936.",
+          "quote": "Social Security numbers were first issued by the Social Security Administration in November 1936 as part of the New Deal Social Security program.",
+          "verdict_reason": "The snippet explicitly states the month and year the US started issuing Social Security numbers, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Social security numbers were first issued in late November 1936.",
+          "quote": "Social security numbers were first issued in late. November 1936 to workers in industry and com- merce covered by the Social Security Act.",
+          "verdict_reason": "The snippet directly answers the query by stating the specific time (late November 1936) when SSNs were first issued.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0172",
+      "claim_index": 1,
+      "claim": "The 2026 French Open was the most recent Grand Slam tournament, held at the Stade Roland Garros in Paris from 24 May to 7 June 2026 Alcaraz's victory there marked his second French Open title and fifth major. Multiple sources confirm his 2026 championship, superseding older records that identified him as the 2025 or 2023 winner, making him the latest French Open champion",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the men's singles champion at the French Open.",
+          "quote": "Men Current = Carlos Alcaraz (singles)",
+          "verdict_reason": "Document explicitly identifies Carlos Alcaraz as the current men's singles champion. Timestamp (2026-04-16) is recent and aligns with latest tournament data.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz won the 2025 French Open men's singles title by defeating Jannik Sinner in the final.",
+          "quote": "Carlos Alcaraz defended his title in men's singles by defeating world No. 1 Jannik Sinner in the final, which lasted five hours and twenty nine minutes",
+          "verdict_reason": "The snippet directly identifies Carlos Alcaraz as the 2025 French Open men's singles champion, the latest edition of the tournament, fully answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the current men's singles champion at the French Open.",
+          "quote": "Men Current = Carlos Alcaraz (singles)",
+          "verdict_reason": "Document explicitly identifies Carlos Alcaraz as the current men's singles champion. Timestamp (2026-05-20) and infobox structure confirm this is the latest information about the French Open.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_04e1627e9fc5",
+      "claim_index": 1,
+      "claim": "However, researchers consistently note that nematodes can respond to fertilizers in ways that are not necessarily associated with increased fertility, such as changes in trophic structure or disease transmission the specific mechanisms vary considerably depending on nematode group and fertilizer type",
+      "cited_docs": [
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Soil nematodes directly influence nutrient cycling by feeding on microorganisms and releasing nutrients available to plants.",
+          "quote": "Soil nematodes are key indicators of soil health and directly influence nutrient cycling. ... Both groups, by feeding on microorganisms, release nutrients available to plants.",
+          "verdict_reason": "The snippet confirms nematodes release nutrients, supporting fertility, but notes inorganic fertilizers can negatively affect them, making the evidence nuanced rather than a simple yes.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Beneficial nematodes contribute to soil health and natural productivity, whereas plant-parasitic nematodes damage roots and prevent nutrient access.",
+          "quote": "Understanding the role of beneficial nematodes in soil health is a key step toward optimizing crop production... Conserving the beneficial nematodes and controlling the plant-parasitic ones can make a significant impact on your crops.",
+          "verdict_reason": "The snippet distinguishes between beneficial and parasitic nematodes, implying beneficial ones support soil health, but does not explicitly state they increase fertility, making it partial evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0875b5f3262a",
+      "claim_index": 1,
+      "claim": "The poem itself explores intense human emotion and experience, including references to sex and drugs, which were cited by some critics as grounds for obscenity",
+      "cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The text references the premise that Allen Ginsberg's poem Howl was deemed not obscene.",
+          "quote": "What were the negative effects of Allen Ginsberg's \"Howl\" being deemed not obscene",
+          "verdict_reason": "The snippet addresses the query by presupposing the poem was found not obscene, providing conflict-bearing evidence regarding the obscenity status without a direct ruling.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document notes that Allen Ginsberg's poem \"Howl\" was banned for obscenity and involved in a landmark court case protecting First Amendment rights.",
+          "quote": "Tags: aclu Allen Ginsberg Banned for obscenity City Lights Eric Drooker first amendment Howl obscenity case poetry Shigeyoshi Murao",
+          "verdict_reason": "The snippet confirms the poem was banned for obscenity and discusses the trial's legacy, providing direct but incomplete evidence regarding the specific question of whether the work is obscene.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0c3c7b487766",
+      "claim_index": 2,
+      "claim": "However, iodine deficiency is a distinct and separate concern adequate intake is considered essential for thyroid hormone synthesis, meaning the appropriate balance is key",
+      "cited_docs": [
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Excess iodine intake does not enhance hormone production and may increase the risk of thyroid dysfunction.",
+          "quote": "Once adequate intake is achieved, additional iodine does not enhance hormone production and may increase dysfunction risk.",
+          "verdict_reason": "The snippet directly addresses the query by stating excess iodine may increase dysfunction risk, providing conflict-bearing evidence without fully resolving all nuances of causation.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Excess iodine intake can disrupt thyroid homeostasis and cause thyroid dysfunction including hypothyroidism, hyperthyroidism, and autoimmune thyroiditis.",
+          "quote": "excess can also cause thyroid dysfunction, including hypothyroidism, hyperthyroidism, and thyroid autoimmunity.",
+          "verdict_reason": "The snippet directly confirms that excess iodine causes thyroid problems, explicitly listing hypothyroidism, hyperthyroidism, and autoimmunity as outcomes.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1d741779a31e",
+      "claim_index": 2,
+      "claim": "Overall, the evidence is mixed and the potential risks are debated, with the most consistent finding being that artificial sweeteners help reduce sugar intake without causing hyperglycemia, rather than definitively resolving whether they are harmful",
+      "cited_docs": [
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The FDA deems synthetic sweeteners safe for consumption within acceptable daily intake limits, and they are considered beneficial for managing Type 2 Diabetes.",
+          "quote": "synthetic sweeteners are deemed safe for consumption by the U.S. Food and Drug Administration (FDA) when used within the acceptable daily intake (ADI).",
+          "verdict_reason": "Snippet confirms FDA safety status and potential benefits for diabetes management but notes the topic remains contentious, offering partial rather than definitive resolution.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Artificial sweeteners do not affect blood sugar levels and are safe for people with diabetes to consume.",
+          "quote": "Can People With Diabetes Have Artificial Sweeteners? Yes, they can. Artificial sweeteners are just as sweet ... but they have no calories and don't affect your blood sugar (glucose).",
+          "verdict_reason": "The snippet directly answers the query by confirming safety and explaining that artificial sweeteners do not impact blood glucose levels in diabetics.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1e9c6cd8e30b",
+      "claim_index": 3,
+      "claim": "However, it is worth noting that certified sustainable palm oil (via RSPO standards) can mitigate some of these harms palm oil does have some benefits—such as lowering greenhouse gas emissions compared to other vegetable oils—meaning boycott is not necessarily the only solution",
+      "cited_docs": [
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production causes deforestation, habitat loss for wildlife, increased greenhouse gas emissions, and human rights violations.",
+          "quote": "Unfortunately, this has led to palm oil deforestation as forests and peatlands have been destroyed in order to keep up with the increased demands. This has had devastating consequences, causing habitat loss for wildlife and increasing greenhouse gas emissions.",
+          "verdict_reason": "The snippet directly confirms environmental harms including deforestation, habitat loss, and emissions, decisively answering the query about negative environmental impacts.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Palm oil's environmental harm stems from its production methods rather than the oil itself.",
+          "quote": "Palm oil is bad for the environment not necessarily because of the palm oil itself, but rather, it is bad because of how it is made.",
+          "verdict_reason": "The snippet directly addresses the query by confirming palm oil is bad for the environment but limits the scope to production methods, offering incomplete evidence on the full environmental impact.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_6988dd820a61",
+      "claim_index": 1,
+      "claim": "These conflicting findings reflect methodological differences in how researchers interpret the same phenomena, as probabilistic links to full moons do not necessarily constitute definitive causation",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A study suggests high tidal stress during new and full moons may increase the probability that an earthquake grows larger, though not every such moon brings an earthquake.",
+          "quote": "This makes it more likely that major earthquakes will strike at these times, according to a new study.",
+          "verdict_reason": "The snippet directly addresses the query with scientific findings supporting a link between moon phases and earthquake likelihood, but qualifies the claim as probabilistic rather than absolute.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Geologic strain from tides during full and new moons could increase the magnitude of tremors.",
+          "quote": "Geologic strain of tides during full and new moons could increase magnitude of tremors.",
+          "verdict_reason": "The snippet directly addresses the query by linking full moons to earthquake triggers, but uses cautious language ('could increase') and lacks a definitive yes/no conclusion.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_7998e59d9b97",
+      "claim_index": 1,
+      "claim": "However, some sources argue that organic farming has other sustainability advantages — such as lower fossil fuel use and less nitrogen pollution — that make it comparable to or even superior to conventional farming for certain metrics , while others note that organic farming's lower yield potential can be offset if food waste is reduced",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming practices cannot compete with the crop yields of conventional systems.",
+          "quote": "Organic farming practices have more future value, contributing far less emissions during production processes, but yet cannot compete with the crop yields of conventional systems.",
+          "verdict_reason": "The snippet directly addresses the query by stating organic yields are lower than conventional, supporting the efficiency claim, though it also notes sustainability benefits.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming aims to maximize beneficial microbes to help plants achieve maximum productivity, but the text states the answer regarding efficiency is not clear-cut.",
+          "quote": "Farmers make choices designed to maximize beneficial microbes such as bacteria, fungi, nematodes, and more in their growing space to help plants achieve maximum productivity",
+          "verdict_reason": "The snippet addresses the query topic but explicitly states the answer is 'not clear-cut' and focuses on principles rather than providing a direct efficiency comparison.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9ceca2645833",
+      "claim_index": 1,
+      "claim": "Others argue that affirmative action can have discriminatory effects: it may disproportionately benefit minority students over non-minority ones in the employment context, the Supreme Court has treated voluntarily adopted programs with greater severity than those adopted after findings of discrimination",
+      "cited_docs": [
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies a position arguing that affirmative action discriminates against whites, which relates to the concept of reverse discrimination.",
+          "quote": "Proponents of this never-needed argument tend to say that any consideration of race is unconstitutional and/or that affirmative action discriminates against whites (and, sometimes, Asians).",
+          "verdict_reason": "The snippet discusses the query's core concept by describing a viewpoint that affirmative action discriminates against whites, but it presents this as one of several positions rather than a definitive answer.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses affirmative action programs in the context of claims regarding reverse discrimination under the Rehnquist Court.",
+          "quote": "Under the Rehnquist Court, affirmative action programs have been increasingly vulnerable to claims of reverse discrimination.",
+          "verdict_reason": "The snippet directly addresses the query's core concepts (affirmative action and reverse discrimination) but discusses legal vulnerability rather than definitively answering if it constitutes such discrimination.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9ceca2645833",
+      "claim_index": 2,
+      "claim": "Still others argue that affirmative action is inherently discriminatory because it gives preferential treatment to certain groups over others, even if the intent is to correct historical injustices",
+      "cited_docs": [
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document references a critical review of Supreme Court doctrine regarding discrimination through antidiscrimination law.",
+          "quote": "Discrimination Through Antidiscrimination Law: A Critical Review of. Supreme Court Doctrine, 62 MINN. L. REV. 1049, 1054 (1978).",
+          "verdict_reason": "The snippet cites a law review article directly addressing the relationship between antidiscrimination law and discrimination, which is central to the query about reverse discrimination, though it lacks specific conclusions.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The text raises questions about whether affirmative action compensates for racism or hides its effects, directly engaging with the query's theme of reverse discrimination.",
+          "quote": "How does affirmative action actually solve discrimination? Does it merely compensate for racism, and thus hide its effects?",
+          "verdict_reason": "The snippet addresses the same entity and claim by questioning the nature of affirmative action, serving as conflict-bearing evidence despite lacking a definitive answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a2f06d54b240",
+      "claim_index": 1,
+      "claim": "Contrary to a common misconception, stalactites do not require dry conditions to grow — they can form underwater as long as there is sufficient calcium carbonate-rich water flowing over a suitable surface",
+      "cited_docs": [
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document describes stalactite formation via dripping water and mineral deposition but does not mention underwater formation.",
+          "quote": "Most soda straws, however, eventually conduct water along their external surface, as well, and there deposit radially oriented calcite crystals perpendicular to their outer surface.",
+          "verdict_reason": "The snippet addresses stalactite formation mechanisms but lacks information on underwater contexts, making it incomplete evidence for the specific query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Stalactites found underwater initially formed in open caves rather than forming underwater.",
+          "quote": "These structures are sometimes found under water even! But don't be confused, they didn't form underwater. They initially formed in an open cave and then",
+          "verdict_reason": "The snippet directly addresses the query by stating stalactites do not form underwater, providing conflict-bearing evidence that partially resolves the question despite being an incomplete sentence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a507c5b61631",
+      "claim_index": 2,
+      "claim": "However, some researchers also acknowledge that methane release from organic-rich permafrost or peatlands could have been involved, suggesting a more complex sequence of feedbacks",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Volcanic activity from the North Atlantic Igneous Province is listed as a top candidate for the source of carbon that caused the PETM.",
+          "quote": "Top candidates include volcanic activity (at this time, rifting of northern continents created the North Atlantic Igneous Province, which would have produced lots of Carbon-rich gases)",
+          "verdict_reason": "The snippet identifies volcanic activity as a 'top candidate' cause but presents it as one of several possibilities alongside methane release, thus providing relevant but non-definitive evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Pulsed volcanism likely provided the trigger for the PETM, though a subsequent carbon reservoir release was also involved.",
+          "quote": "signifying pulsed volcanism from the North Atlantic Igneous Province likely provided the trigger and subsequently sustained elevated CO2. However, the PETM onset coincides with a mercury low, suggesting at least one other carbon reservoir released significant greenhouse gases",
+          "verdict_reason": "The snippet directly addresses the query by identifying volcanism as a likely trigger but qualifies this by suggesting additional carbon reservoirs were involved, making the evidence relevant but not a simple affirmative.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_c3e66630928c",
+      "claim_index": 1,
+      "claim": "If you do choose to use coffee grounds as a deterrent, it is recommended to test their effectiveness first, as results can vary depending on concentration and slug appetite",
+      "cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Dry coffee grounds act only as an unreliable deterrent because their caffeine concentration is too low to stop hungry slugs.",
+          "quote": "As for pure coffee grounds, it is only a deterrent and does not work quite reliably, because the concentration of caffeine in coffee grounds is not sufficiently high.",
+          "verdict_reason": "The snippet directly addresses the query but limits effectiveness, stating grounds are unreliable deterrents compared to higher caffeine concentrations.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document is a YouTube video testing whether coffee deters slugs and snails as a barrier.",
+          "quote": "Does Coffee Deter Slugs and Snails? Can it Protect Your vegetables Ep 2/9 *Slug barrier tests*",
+          "verdict_reason": "The snippet directly addresses the query by indicating a test of coffee as a slug barrier, but lacks the specific results or conclusion needed to fully support the claim.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_dc6f972e8447",
+      "claim_index": 2,
+      "claim": "However, experts note that investors can protect themselves by focusing on transparent liquidity, verified project fundamentals reliable exchanges regulators are increasingly cracking down on manipulative practices",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Several factors make market manipulation both easier and more profitable in cryptocurrency markets.",
+          "quote": "Several factors make manipulation both easier and more profitable in cryptocurrency markets",
+          "verdict_reason": "The snippet explicitly states that factors exist making manipulation easier in crypto, directly answering the query about ease of manipulation.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Cryptocurrency markets are susceptible to manipulation tactics like sell walls and pump-and-dump schemes, as evidenced by the FBI's Operation Token Mirrors which uncovered a $25 million scheme.",
+          "quote": "The operation revealed a $25 million pump and dump scheme where traders manipulated the token's trading volume and price to lure in unsuspecting investors.",
+          "verdict_reason": "The snippet provides concrete evidence of crypto manipulation (sell walls, pump-and-dump), directly addressing the query, but focuses on specific tactics and cases rather than a general assessment of ease.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f777a43ba278",
+      "claim_index": 1,
+      "claim": "Some low-credibility sources suggest yerba mate may have anti-cancer properties that could protect against some cancers, though this evidence is limited and does not contradict the carcinogenic findings from epidemiological studies ; the overall picture remains complex and incomplete",
+      "cited_docs": [
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Studies indicate that drinking large amounts of hot yerba mate over prolonged periods may increase the risk of esophageal, larynx, and oral cavity cancers.",
+          "quote": "some studies have indicated that people who drink large amounts of hot yerba mate over prolonged periods may be at increased risk of some types of cancer, such as cancer of the esophagus, larynx and oral cavity.",
+          "verdict_reason": "The snippet provides direct evidence linking hot yerba mate consumption to cancer risk, addressing the query with specific conditions rather than a definitive yes/no for all cases.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking yerba mate is linked to higher esophageal cancer levels only when consumed at very high temperatures, not due to the drink itself.",
+          "quote": "Drinking yerba mate has also been linked with higher levels of esophageal cancer. This association only exists because many people drink yerba mate at very high temperatures, though. It has nothing to do with drinking yerba mate itself.",
+          "verdict_reason": "The snippet directly addresses the cancer query by distinguishing between temperature-related risk and the substance itself, providing nuanced but incomplete resolution regarding other cancer types.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_0293a11bd364",
+      "claim_index": 2,
+      "claim": "This ranking is corroborated by multiple sources reporting the same sequence of languages by global reach",
+      "cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists English and Mandarin Chinese as the top two languages by total speakers but cuts off before listing the third.",
+          "quote": "Top Languages by Total Speakers (L1 + L2)\n|  |  |  |\n --- \n| Rank | Language | Total Speakers (millions) |\n| 1 | English | ~1,450 |\n| 2 | Mandarin Chinese",
+          "verdict_reason": "The snippet addresses the query entity but is truncated, providing only ranks 1 and 2 while omitting the third largest language.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "English is ranked third with 380 million native speakers, but the data excludes total speakers including second-language users.",
+          "quote": "3. English — 380 Million Native Speakers If you're reading this article, you may be one of the 380 million-odd native English speakers, or one of the billion people who speak it as a second language.",
+          "verdict_reason": "Snippet addresses language rankings but provides data for native speakers only, not total speakers requested by the query.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "wikirevision_0141",
+      "claim_index": 1,
+      "claim": "The 2026 Wimbledon Championships are scheduled to take place from 29 June to 12 July 2026, at which point the current champion will be crowned",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the 2026 Wimbledon Championships (a future event), not the latest/current men's singles champion. It provides no information about any champion.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 2,
+      "claim": "Boston College's main campus is located in the Chestnut Hill Reservation, a historic district coextensive with the Chestnut Hill Reservoir between Beacon Street and Commonwealth Avenue in Boston",
+      "cited_docs": [
+        "d4",
+        "d9"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d9"
+      ],
+      "approved_cited_docs": [
+        "d9"
+      ],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d9"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a historic district in Newton's portion of Chestnut Hill but provides no information about Boston College, Stanford University, or which university is located there.",
+          "source_quality": "low"
+        },
+        "d9": {
+          "verdict": "partially supports",
+          "key_fact": "Boston College Main Campus is located in the Chestnut Hill area of Boston, Massachusetts.",
+          "quote": "The reservoir is located between Beacon Street and Commonwealth Avenue in Boston, just east of the Boston College Main Campus Historic District",
+          "verdict_reason": "Snippet confirms Boston College is in Chestnut Hill, Boston, but does not directly answer which university (Boston College or Stanford) is located there, nor does it address Stanford.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_cf331ed7d09f",
+      "claim_index": 2,
+      "claim": "Earlier sources, including , reference older release versions (Sierra, Monterey, Tahoe 25) as the latest, but these have since been superseded by the 2025 Tahoe 26 release",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d8",
+        "d2",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.8333333333333334,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The document lists macOS Tahoe 26.5.1 as the most recent version of the Mac operating system.",
+          "quote": "These are the latest versions of each Mac operating system, starting with the most recent. ... macOS Tahoe 26.5.1 macOS Sequoia 15.7.7",
+          "verdict_reason": "The snippet explicitly lists macOS versions starting with the most recent, identifying macOS Tahoe 26.5.1 as the latest release name.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies macOS 14 Sonoma as a supported version released in 2023 but does not explicitly confirm it as the absolute latest release name.",
+          "quote": "The oldest macOS still supported is macOS 14 Sonoma, released in 2023. A new macOS is usually released every year and supported for three years.",
+          "verdict_reason": "The snippet discusses the same entity (latest macOS) and provides a recent version (Sonoma), but lacks a definitive statement confirming it as the current latest release, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d8": {},
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document introduces a section for the current macOS version as of 2025 but cuts off before providing the specific release name.",
+          "quote": "macOS Latest Version Overview\nStaying updated with the macOS latest version overview ensures optimal performance and access to new features.\nCurrent macOS Version (As of 2025):\n✅",
+          "verdict_reason": "The snippet addresses the query topic directly but is incomplete, cutting off before stating the actual release name, thus providing conflict-bearing but unresolved evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "As of 2026, the most recent release of macOS is macOS 26 Tahoe.",
+          "quote": "As of 2026( the most recent release of macOS is macOS 26 Tahoe, the 22nd major version of macOS.",
+          "verdict_reason": "The snippet explicitly identifies the latest macOS release name as 'macOS 26 Tahoe' as of 2026, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "macOS 12 Monterey is identified as the highest officially supported version for a specific Mac model.",
+          "quote": "macOS 12 Monterey is the highest officially supported version you can use on this Mac.",
+          "verdict_reason": "Snippet addresses the query topic by naming a macOS version but limits it to a specific device context, failing to answer the general 'latest version' question.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

@@ -6,11 +6,14 @@ Multi-LLM Judge Committee with Voting System
 Implements a committee of LLM judges that vote on evaluation decisions.
 
 Features:
-  • Parallel async judge execution
-  • Weighted majority voting
-  • Confidence scoring
-  • Cost tracking and optimization
-  • Fallback mechanisms
+  • Parallel async judge execution (all judges run concurrently via asyncio.gather)
+  • Weighted majority voting (weight = priority × confidence)
+  • Per-judge cost tracking
+  • Loud failure modes (no silent fallback to adherent=False)
+
+Note: max_concurrent_requests is enforced around outbound judge calls. This is
+especially important for locally hosted model servers, where uncontrolled
+fan-out can overload a single GPU-backed endpoint.
 
 Authors: Enhanced by Claude AI
 """
@@ -19,13 +22,30 @@ import asyncio
 import os
 import json
 import logging
+import re
+import hashlib
+import subprocess
+import time
+from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 from typing import Dict, Any, List, Optional, Tuple
 from dataclasses import dataclass
-from collections import Counter
 import anthropic
 import httpx
 
 from .config import JudgeCommitteeConfig, JudgeModelConfig, APIProvider
+
+# Shared executor for blocking CLI subprocess calls.
+# max_workers=8 gives headroom above the per-judge semaphore cap (4)
+# so threads are never the bottleneck when multiple samples are in-flight.
+_CLI_EXECUTOR = ThreadPoolExecutor(max_workers=8, thread_name_prefix="cats_cli_judge")
+
+_VLLM_CONTEXT_OVERFLOW_RE = re.compile(
+    r"maximum context length is\s+(?P<max_ctx>\d+)\s+tokens.*?"
+    r"requested\s+(?P<requested>\d+)\s+output tokens.*?"
+    r"contains(?:\s+at\s+least)?\s+(?P<input_tokens>\d+)\s+input tokens",
+    re.IGNORECASE | re.DOTALL,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +65,7 @@ class JudgeResponse:
     cost: float = 0.0
     latency_ms: float = 0.0
     error: Optional[str] = None
-    
+
     def to_dict(self) -> Dict[str, Any]:
         return {
             "judge_id": self.judge_id,
@@ -56,7 +76,7 @@ class JudgeResponse:
             "confidence": self.confidence,
             "cost": self.cost,
             "latency_ms": self.latency_ms,
-            "error": self.error
+            "error": self.error,
         }
 
 
@@ -67,7 +87,8 @@ class JudgeResponse:
 class CommitteeDecision:
     """Aggregated decision from the judge committee."""
     adherent: bool
-    confidence: float
+    confidence: float          # majority-side confidence in [0, 1]
+    minority_confidence: float # minority-side confidence in [0, 1] — useful for partial-credit logic
     votes_for: int
     votes_against: int
     total_votes: int
@@ -75,18 +96,29 @@ class CommitteeDecision:
     individual_responses: List[JudgeResponse]
     total_cost: float
     total_latency_ms: float
-    
+    # N4 fix: actual weighted vote totals (priority × confidence). Surfaced so
+    # a 1-vote-against-2 decision that flips to adherent=True because the one
+    # supporting judge had higher priority/confidence is auditable from the
+    # output alone, not only by re-computing the math.
+    weighted_for: float = 0.0
+    weighted_against: float = 0.0
+    all_failed: bool = False
+
     def to_dict(self) -> Dict[str, Any]:
         return {
             "adherent": self.adherent,
             "confidence": self.confidence,
+            "minority_confidence": self.minority_confidence,
             "votes_for": self.votes_for,
             "votes_against": self.votes_against,
             "total_votes": self.total_votes,
+            "weighted_for": self.weighted_for,
+            "weighted_against": self.weighted_against,
             "rationale": self.rationale,
             "individual_responses": [r.to_dict() for r in self.individual_responses],
             "total_cost": self.total_cost,
-            "total_latency_ms": self.total_latency_ms
+            "total_latency_ms": self.total_latency_ms,
+            "all_failed": self.all_failed,
         }
 
 
@@ -95,81 +127,99 @@ class CommitteeDecision:
 # --------------------
 class JudgeClient:
     """Client for a single judge model."""
-    
+
     def __init__(self, config: JudgeModelConfig):
         self.config = config
-        
-        # Load API key from environment
+
         api_key_var = config.api_key_env or ""
-        self.api_key = os.getenv(api_key_var)
-        
-        # Validate API key
-        if not self.api_key:
-            logger.warning(f"API key not found for {config.model_id}. Looking for env var: {api_key_var}")
-            logger.warning(f"Please set {api_key_var} in your .env file")
-        
-        # Initialize API clients
+        self.api_key = os.getenv(api_key_var) if api_key_var else None
+
         if config.provider == APIProvider.ANTHROPIC:
+            if not self.api_key:
+                logger.warning(f"API key not found for {config.model_id}. Looking for env var: {api_key_var}")
             self.client = anthropic.AsyncAnthropic(api_key=self.api_key)
-        elif config.provider == APIProvider.OPENROUTER:
-            # OpenRouter uses OpenAI-compatible API
-            self.base_url = config.base_url or "https://openrouter.ai/api/v1"
+        elif config.provider in (APIProvider.OPENROUTER, APIProvider.DEEPSEEK, APIProvider.LOCAL_OPENAI):
+            if config.provider != APIProvider.LOCAL_OPENAI and not self.api_key:
+                logger.warning(f"API key not found for {config.model_id}. Looking for env var: {api_key_var}")
+            if config.provider == APIProvider.OPENROUTER:
+                default_base = "https://openrouter.ai/api/v1"
+            elif config.provider == APIProvider.DEEPSEEK:
+                default_base = "https://api.deepseek.com"
+            else:
+                default_base = "http://127.0.0.1:8000/v1"
+            self.base_url = config.base_url or default_base
+            headers = {}
+            if self.api_key:
+                headers["Authorization"] = f"Bearer {self.api_key}"
+            if config.provider == APIProvider.OPENROUTER:
+                headers.update({
+                    "HTTP-Referer": "https://github.com/CATS-eval",
+                    "X-Title": "CATS Eval Pipeline",
+                })
             self.http_client = httpx.AsyncClient(
                 base_url=self.base_url,
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "HTTP-Referer": "https://github.com/CATS-eval",
-                    "X-Title": "CATS Eval Pipeline"
-                },
-                timeout=30.0
+                headers=headers,
+                timeout=float(getattr(config, "request_timeout", 60.0) or 60.0),
             )
-        
+        elif config.provider == APIProvider.CODEX_CLI:
+            # No network client needed — subprocess calls handle auth via local login.
+            # Semaphore is lazily created inside the running event loop (see _get_cli_semaphore).
+            self._cli_semaphore: Optional[asyncio.Semaphore] = None
+            logger.info(f"CLI judge initialized: {config.model_id} (provider={config.provider.value})")
+
         self.total_cost = 0.0
         self.request_count = 0
-    
+
+    def _get_cli_semaphore(self) -> asyncio.Semaphore:
+        """Lazy-init semaphore. Must be called from within a running event loop."""
+        if self._cli_semaphore is None:
+            self._cli_semaphore = asyncio.Semaphore(4)
+        return self._cli_semaphore
+
     async def judge_behavior(self, prompt: str) -> JudgeResponse:
-        """
-        Send a behavior judgment request to this judge.
-        Returns structured JudgeResponse with voting decision.
-        """
-        import time
+        """Send a behavior judgment request and return a structured response."""
         start_time = time.time()
-        
+
         try:
             if self.config.provider == APIProvider.ANTHROPIC:
                 response_text, input_tokens, output_tokens = await self._call_anthropic(prompt)
             elif self.config.provider == APIProvider.OPENROUTER:
                 response_text, input_tokens, output_tokens = await self._call_openrouter(prompt)
+            elif self.config.provider == APIProvider.DEEPSEEK:
+                response_text, input_tokens, output_tokens = await self._call_deepseek(prompt)
+            elif self.config.provider == APIProvider.LOCAL_OPENAI:
+                response_text, input_tokens, output_tokens = await self._call_local_openai(prompt)
+            elif self.config.provider == APIProvider.CODEX_CLI:
+                response_text, input_tokens, output_tokens = await self._call_codex_cli(prompt)
             else:
                 raise ValueError(f"Unsupported provider: {self.config.provider}")
-            
-            # Parse JSON response
+
             parsed = self._parse_judge_response(response_text)
-            
-            # Calculate cost using actual token counts
-            cost = (input_tokens * self.config.cost_per_1k_input / 1000 + 
-                   output_tokens * self.config.cost_per_1k_output / 1000)
-            
+
+            cost = (input_tokens * self.config.cost_per_1k_input / 1000
+                    + output_tokens * self.config.cost_per_1k_output / 1000)
+
             self.total_cost += cost
             self.request_count += 1
-            
+
             latency_ms = (time.time() - start_time) * 1000
-            
+
             return JudgeResponse(
                 judge_id=f"{self.config.provider.value}_{self.config.model_id}",
                 model_id=self.config.model_id,
                 provider=self.config.provider.value,
                 adherent=parsed["adherent"],
                 rationale=parsed["rationale"],
-                confidence=parsed.get("confidence", 1.0),
+                confidence=parsed["confidence"],
                 cost=cost,
-                latency_ms=latency_ms
+                latency_ms=latency_ms,
+                error=parsed.get("parse_error"),  # surfaces parse failures so weighting can ignore them
             )
-            
+
         except Exception as e:
             logger.error(f"Judge {self.config.model_id} error: {e}")
             latency_ms = (time.time() - start_time) * 1000
-            
+
             return JudgeResponse(
                 judge_id=f"{self.config.provider.value}_{self.config.model_id}",
                 model_id=self.config.model_id,
@@ -179,181 +229,526 @@ class JudgeClient:
                 confidence=0.0,
                 cost=0.0,
                 latency_ms=latency_ms,
-                error=str(e)
+                error=str(e),
             )
-    
+
     async def judge_nli(self, prompt: str) -> Dict[str, Any]:
-        """
-        Send an NLI judgment request to this judge.
-        Returns dict with relation and cost info.
-        """
-        import time
+        """Send an NLI judgment request. Returns dict with relation, confidence, cost."""
         start_time = time.time()
-        
+
         try:
             if self.config.provider == APIProvider.ANTHROPIC:
                 response_text, input_tokens, output_tokens = await self._call_anthropic(prompt)
             elif self.config.provider == APIProvider.OPENROUTER:
                 response_text, input_tokens, output_tokens = await self._call_openrouter(prompt)
+            elif self.config.provider == APIProvider.DEEPSEEK:
+                response_text, input_tokens, output_tokens = await self._call_deepseek(prompt)
+            elif self.config.provider == APIProvider.LOCAL_OPENAI:
+                response_text, input_tokens, output_tokens = await self._call_local_openai(prompt)
+            elif self.config.provider == APIProvider.CODEX_CLI:
+                response_text, input_tokens, output_tokens = await self._call_codex_cli(prompt)
             else:
                 raise ValueError(f"Unsupported provider: {self.config.provider}")
-            
-            # Parse NLI response - expects {"relation": "entails"|"contradicts"|"neutral"}
-            import json as json_lib
-            try:
-                # Find JSON in response
-                start_idx = response_text.find("{")
-                end_idx = response_text.rfind("}") + 1
-                if start_idx == -1 or end_idx == 0:
-                    raise ValueError("No JSON found in NLI response")
-                
-                json_str = response_text[start_idx:end_idx]
-                parsed = json_lib.loads(json_str)
-                relation = parsed.get("relation", "neutral").lower()
-            except Exception as e:
-                logger.warning(f"Failed to parse NLI response, defaulting to neutral: {e}")
-                relation = "neutral"
-            
-            # Calculate cost
-            cost = (input_tokens * self.config.cost_per_1k_input / 1000 + 
-                   output_tokens * self.config.cost_per_1k_output / 1000)
-            
+
+            relation, nli_confidence = self._parse_nli_response(response_text)
+
+            cost = (input_tokens * self.config.cost_per_1k_input / 1000
+                    + output_tokens * self.config.cost_per_1k_output / 1000)
+
             self.total_cost += cost
             self.request_count += 1
-            
+
             latency_ms = (time.time() - start_time) * 1000
-            
+
             return {
                 "relation": relation,
+                "confidence": nli_confidence,
                 "cost": cost,
                 "latency_ms": latency_ms,
-                "error": None
+                "error": None,
             }
-            
+
         except Exception as e:
             logger.error(f"NLI judge {self.config.model_id} error: {e}")
             latency_ms = (time.time() - start_time) * 1000
-            
             return {
                 "relation": "neutral",
+                "confidence": 0.0,
                 "cost": 0.0,
                 "latency_ms": latency_ms,
-                "error": str(e)
+                "error": str(e),
             }
-    
+
     async def _call_anthropic(self, prompt: str) -> Tuple[str, int, int]:
-        """Call Anthropic API and return response text + token counts."""
+        """Call Anthropic API. Returns (response_text, input_tokens, output_tokens)."""
         message = await self.client.messages.create(
             model=self.config.model_id,
             max_tokens=self.config.max_tokens,
             temperature=self.config.temperature,
-            messages=[{
-                "role": "user",
-                "content": prompt
-            }]
+            messages=[{"role": "user", "content": prompt}],
         )
-        # Get actual token counts from usage
-        input_tokens = message.usage.input_tokens
-        output_tokens = message.usage.output_tokens
-        return message.content[0].text, input_tokens, output_tokens
-    
+        return message.content[0].text, message.usage.input_tokens, message.usage.output_tokens
+
     async def _call_openrouter(self, prompt: str) -> Tuple[str, int, int]:
-        """Call OpenRouter API (OpenAI-compatible) and return response + token counts."""
+        """Call OpenRouter API. Guards against empty/error responses."""
+        payload = {
+            "model": self.config.model_id,
+            "messages": [
+                {"role": "system", "content": "You are an evaluation judge. Respond ONLY with JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": self.config.temperature,
+            "max_tokens": self.config.max_tokens,
+        }
+
+        response = await self.http_client.post("/chat/completions", json=payload)
+        response.raise_for_status()
+        data = response.json()
+
+        choices = data.get("choices") or []
+        if not choices:
+            err = data.get("error", "no choices in response")
+            raise RuntimeError(f"OpenRouter returned no choices: {err}")
+
+        msg = choices[0].get("message") or {}
+        content = msg.get("content") or ""
+
+        # DeepSeek R1 wraps reasoning in <think>...</think> before the JSON.
+        # Strip the trailing JSON if a think block is present.
+        if "</think>" in content:
+            content = content.split("</think>", 1)[1].strip()
+
+        usage = data.get("usage", {}) or {}
+        input_tokens = usage.get("prompt_tokens") or (len(prompt) // 4)
+        output_tokens = usage.get("completion_tokens") or (len(content) // 4)
+
+        return content, input_tokens, output_tokens
+
+    async def _call_deepseek(self, prompt: str) -> Tuple[str, int, int]:
+        """Call DeepSeek's OpenAI-compatible API."""
         response = await self.http_client.post(
             "/chat/completions",
             json={
                 "model": self.config.model_id,
                 "messages": [
-                    {
-                        "role": "system",
-                        "content": "You are an evaluation judge. Respond ONLY with JSON."
-                    },
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
+                    {"role": "system", "content": "You are an evaluation judge. Respond ONLY with JSON."},
+                    {"role": "user", "content": prompt},
                 ],
                 "temperature": self.config.temperature,
-                "max_tokens": self.config.max_tokens
-            }
+                "max_tokens": self.config.max_tokens,
+                # Encourage stable caching/isolation on the DeepSeek side.
+                "user_id": "cats_eval",
+            },
         )
         response.raise_for_status()
         data = response.json()
-        
-        # Extract token counts from usage (if available)
-        usage = data.get("usage", {})
-        input_tokens = usage.get("prompt_tokens", len(prompt) // 4)  # fallback to estimate
-        output_tokens = usage.get("completion_tokens", len(data["choices"][0]["message"]["content"]) // 4)
-        
-        return data["choices"][0]["message"]["content"], input_tokens, output_tokens
-    
-    def _parse_judge_response(self, text: str) -> Dict[str, Any]:
-        """Parse judge response JSON."""
+
+        choices = data.get("choices") or []
+        if not choices:
+            err = data.get("error", "no choices in response")
+            raise RuntimeError(f"DeepSeek returned no choices: {err}")
+
+        msg = choices[0].get("message") or {}
+        content = msg.get("content") or ""
+
+        if "</think>" in content:
+            content = content.split("</think>", 1)[1].strip()
+
+        usage = data.get("usage", {}) or {}
+        input_tokens = usage.get("prompt_tokens") or (len(prompt) // 4)
+        output_tokens = usage.get("completion_tokens") or (len(content) // 4)
+
+        return content, input_tokens, output_tokens
+
+    async def _call_local_openai(self, prompt: str) -> Tuple[str, int, int]:
+        """Call a local OpenAI-compatible chat-completions endpoint.
+
+        Expected server shape:
+          base_url=http://host:port/v1
+          POST /chat/completions
+
+        Works with vLLM/SGLang/LMDeploy-style endpoints. Token usage is read
+        when provided; otherwise we use the same rough character heuristic as
+        the remote API paths. Cost stays zero because local judges are unmetered.
+        """
+        payload = {
+            "model": self.config.model_id,
+            "messages": [
+                {"role": "system", "content": "You are an evaluation judge. Respond ONLY with JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": self.config.temperature,
+            "max_tokens": self.config.max_tokens,
+            "response_format": {"type": "json_object"},
+        }
+        payload.update(getattr(self.config, "extra_body", None) or {})
+        payload = self._fit_local_openai_max_tokens(payload)
+
+        response = await self.http_client.post("/chat/completions", json=payload)
+        if response.status_code == 400:
+            retry_payload = self._maybe_adjust_local_openai_max_tokens(payload, response.text)
+            if retry_payload is not None:
+                logger.warning(
+                    "Retrying %s with reduced max_tokens=%s after local context-window overflow",
+                    self.config.model_id,
+                    retry_payload["max_tokens"],
+                )
+                response = await self.http_client.post("/chat/completions", json=retry_payload)
+        response.raise_for_status()
+        data = response.json()
+
+        choices = data.get("choices") or []
+        if not choices:
+            err = data.get("error", "no choices in response")
+            raise RuntimeError(f"Local OpenAI-compatible endpoint returned no choices: {err}")
+
+        msg = choices[0].get("message") or {}
+        content = msg.get("content") or ""
+
+        if "</think>" in content:
+            content = content.split("</think>", 1)[1].strip()
+
+        usage = data.get("usage", {}) or {}
+        input_tokens = usage.get("prompt_tokens") or (len(prompt) // 4)
+        output_tokens = usage.get("completion_tokens") or (len(content) // 4)
+
+        return content, input_tokens, output_tokens
+
+    def _fit_local_openai_max_tokens(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """Cap local completion budget so prompt + completion stays within the model context window.
+
+        This is a cheap pre-flight estimate that prevents obviously impossible
+        requests from reaching the vLLM server and creating noisy 400s.
+        """
+        max_ctx = int(getattr(self.config, "max_context_tokens", 4096) or 4096)
+        margin = int(getattr(self.config, "context_safety_margin", 64) or 64)
+        current = int(payload.get("max_tokens", self.config.max_tokens) or self.config.max_tokens)
+
+        prompt_chars = 0
+        for msg in payload.get("messages", []) or []:
+            prompt_chars += len(str(msg.get("content", "")))
+
+        # Rough chat-format/tokenization overhead. We keep this intentionally conservative.
+        estimated_prompt_tokens = (prompt_chars // 4) + 48 * max(1, len(payload.get("messages", []) or []))
+        safe_max = max_ctx - estimated_prompt_tokens - margin
+        if safe_max >= current:
+            return payload
+
+        retry_payload = dict(payload)
+        retry_payload["max_tokens"] = max(64, min(current, safe_max))
+        return retry_payload
+
+    def _maybe_adjust_local_openai_max_tokens(
+        self,
+        payload: Dict[str, Any],
+        response_text: str,
+    ) -> Optional[Dict[str, Any]]:
+        """Return a retry payload with a safer max_tokens when vLLM reports a context overflow.
+
+        This only activates for local OpenAI-compatible servers and only for the specific
+        context-window validation error emitted by vLLM. It preserves the original prompt
+        and response-format settings, reducing only the completion budget.
+        """
+        match = _VLLM_CONTEXT_OVERFLOW_RE.search(response_text or "")
+        if not match:
+            return None
+
         try:
-            # Find JSON in response
-            start = text.find("{")
-            end = text.rfind("}") + 1
-            if start == -1 or end == 0:
-                raise ValueError("No JSON found in response")
-            
-            json_str = text[start:end]
-            obj = json.loads(json_str)
-            
+            max_ctx = int(match.group("max_ctx"))
+            input_tokens = int(match.group("input_tokens"))
+            requested = int(match.group("requested"))
+        except (TypeError, ValueError):
+            return None
+
+        current = int(payload.get("max_tokens", requested) or requested)
+        if current <= 64:
+            return None
+
+        # Leave a small safety buffer because the server-side token count can vary
+        # slightly from the number surfaced in the validation error.
+        margin = int(getattr(self.config, "context_safety_margin", 64) or 64)
+        safe_max = max_ctx - input_tokens - margin
+        safe_max = max(64, min(current - 1, safe_max))
+        if safe_max >= current:
+            return None
+
+        retry_payload = dict(payload)
+        retry_payload["max_tokens"] = safe_max
+        return retry_payload
+
+    async def _call_codex_cli(self, prompt: str) -> Tuple[str, int, int]:
+        """Call `npx @openai/codex exec --skip-git-repo-check -` subprocess.
+
+        Uses Codex Pro subscription — no API key needed.
+
+        Prompt is piped via stdin ('-') to avoid shell arg-length limits.
+        Returns (response_text, 0, 0) — token counts unavailable from CLI; cost stays $0.00.
+        """
+        cmd = ["npx", "@openai/codex", "exec"]
+        cli_model = getattr(self.config, "cli_model", None)
+        if cli_model:
+            cmd += ["-m", cli_model]
+        cmd.append("--skip-git-repo-check")
+        cmd.append("-")  # read prompt from stdin
+        timeout = int(getattr(self.config, "cli_timeout", 120))
+
+        loop = asyncio.get_running_loop()
+        sem = self._get_cli_semaphore()
+
+        async with sem:
+            def _run() -> Tuple[str, int]:
+                proc = subprocess.run(
+                    cmd,
+                    input=prompt,
+                    capture_output=True,
+                    text=True,
+                    timeout=timeout,
+                )
+                return proc.stdout.strip(), proc.returncode
+
+            try:
+                stdout, returncode = await loop.run_in_executor(_CLI_EXECUTOR, _run)
+            except subprocess.TimeoutExpired:
+                raise RuntimeError(f"codex CLI timed out after {timeout}s")
+            except FileNotFoundError:
+                raise RuntimeError("codex CLI not found — run: npm install -g @openai/codex")
+
+        if returncode != 0 and not stdout:
+            raise RuntimeError(f"codex CLI exited with code {returncode}")
+        if not stdout:
+            raise RuntimeError("codex CLI returned empty stdout")
+
+        # codex exec output formats:
+        #   - Non-TTY (subprocess): stdout = raw model response only; headers + 'codex'/'tokens used'
+        #     markers go to stderr. Use stdout as-is.
+        #   - TTY/combined: stdout includes headers, a 'codex' marker line, the response,
+        #     then a 'tokens used' marker. Extract between markers.
+        lines = stdout.splitlines()
+        codex_idx = None
+        for i in range(len(lines) - 1, -1, -1):
+            if lines[i].strip() == "codex":
+                codex_idx = i
+                break
+
+        if codex_idx is not None:
+            response_lines = []
+            for line in lines[codex_idx + 1:]:
+                if line.strip() == "tokens used":
+                    break
+                response_lines.append(line)
+            stdout = "\n".join(response_lines).strip()
+            if not stdout:
+                raise RuntimeError("codex CLI returned empty response after marker")
+
+        if "</think>" in stdout:
+            stdout = stdout.split("</think>", 1)[1].strip()
+
+        return stdout, 0, 0
+
+    @staticmethod
+    def _strip_markdown_fences(text: str) -> str:
+        """Remove ```json / ``` fences so they don't trip the brace-scan parser."""
+        if "```" not in text:
+            return text
+        # Drop any opening fence with optional language tag, plus closing fences.
+        return re.sub(r"```(?:json|JSON)?\s*", "", text).replace("```", "").strip()
+
+    @staticmethod
+    def _extract_first_json_object(text: str) -> str:
+        """Return the substring covering the first balanced {...} object.
+
+        Falls back to the find/rfind window if balanced-brace scanning fails.
+        Prevents 'Extra data' parse errors when the model appends extra text
+        or a second JSON-like blob after the main response.
+        """
+        depth = 0
+        start_idx = -1
+        for i, ch in enumerate(text):
+            if ch == "{":
+                if depth == 0:
+                    start_idx = i
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0 and start_idx != -1:
+                    return text[start_idx : i + 1]
+        # Fallback: legacy behavior.
+        s = text.find("{")
+        e = text.rfind("}") + 1
+        if s == -1 or e == 0:
+            raise ValueError("No JSON object found")
+        return text[s:e]
+
+    def _parse_judge_response(self, text: str) -> Dict[str, Any]:
+        """Parse a behavior-judge JSON response. Records parse failures explicitly."""
+        try:
+            cleaned = self._strip_markdown_fences(text)
+            json_blob = self._extract_first_json_object(cleaned)
+            obj = json.loads(json_blob)
+
+            raw_conf = obj.get("confidence", 0.5)
+            try:
+                conf = float(raw_conf)
+            except (TypeError, ValueError):
+                conf = 0.5
+            conf = max(0.0, min(1.0, conf))
+
             return {
                 "adherent": bool(obj.get("adherent", False)),
                 "rationale": str(obj.get("rationale", "")),
-                "confidence": float(obj.get("confidence", 1.0))
+                "confidence": conf,
             }
         except Exception as e:
-            logger.warning(f"Failed to parse judge response: {e}")
+            logger.warning(f"Failed to parse judge response for {self.config.model_id}: {e}")
             return {
                 "adherent": False,
                 "rationale": "Parse error",
-                "confidence": 0.0
+                "confidence": 0.0,
+                "parse_error": str(e),
             }
-    
-    def _parse_nli_response(self, text: str) -> str:
-        """Parse NLI response to extract the relation field."""
+
+    def _parse_nli_response(self, text: str) -> Tuple[str, float]:
+        """Parse an NLI JSON response. Returns (relation, confidence).
+
+        Robust against markdown fences and trailing JSON-like content that
+        previously caused 'Extra data' errors and silent fallback to neutral.
+        """
+        valid = {"entails", "contradicts", "neutral"}
         try:
-            # Find JSON in response
-            start = text.find("{")
-            end = text.rfind("}") + 1
-            if start == -1 or end == 0:
-                raise ValueError("No JSON found in response")
-            
-            json_str = text[start:end]
-            obj = json.loads(json_str)
-            
-            # Get relation field
-            relation = obj.get("relation", "").lower()
-            
-            # Validate relation value
-            if relation in ["entails", "contradicts", "neutral"]:
-                return relation
-            else:
-                # Fallback: check if any of these words appear in the text
-                text_lower = text.lower()
-                if "entails" in text_lower and "contradicts" not in text_lower:
-                    return "entails"
-                elif "contradicts" in text_lower:
-                    return "contradicts"
-                else:
-                    return "neutral"
-                    
+            cleaned = self._strip_markdown_fences(text)
+            json_blob = self._extract_first_json_object(cleaned)
+            obj = json.loads(json_blob)
+            relation = str(obj.get("relation", "neutral")).strip().lower()
+            if relation not in valid:
+                relation = "neutral"
+
+            raw_conf = obj.get("confidence", 0.5)
+            try:
+                conf = float(raw_conf)
+            except (TypeError, ValueError):
+                conf = 0.5
+            conf = max(0.0, min(1.0, conf))
+            return relation, conf
+
         except Exception as e:
-            logger.warning(f"Failed to parse NLI response: {e}. Text: {text[:100]}")
-            # Fallback: simple text search
-            text_lower = text.lower()
-            if "entails" in text_lower and "contradicts" not in text_lower:
-                return "entails"
-            elif "contradicts" in text_lower:
-                return "contradicts"
+            logger.warning(f"Failed to parse NLI response: {e}. Text: {text[:120]}")
+            return "neutral", 0.0
+
+    def _parse_fg_response(self, text: str, valid_doc_ids: set) -> Dict[str, Any]:
+        """Parse the FG committee JSON response. Returns supporting_docs, cross_doc_support, cross_doc_combo."""
+        try:
+            cleaned = self._strip_markdown_fences(text)
+            json_blob = self._extract_first_json_object(cleaned)
+            obj = json.loads(json_blob)
+
+            raw_docs = obj.get("supporting_docs") or []
+            supporting = [d for d in raw_docs if isinstance(d, str) and d in valid_doc_ids]
+
+            cross_doc = bool(obj.get("cross_doc_support", False))
+            raw_combo = obj.get("cross_doc_combo") or []
+            combo = [d for d in raw_combo if isinstance(d, str) and d in valid_doc_ids]
+
+            return {"supporting_docs": supporting, "cross_doc_support": cross_doc, "cross_doc_combo": combo}
+        except Exception as e:
+            fallback = self._recover_fg_response(text, valid_doc_ids)
+            if fallback is not None:
+                logger.warning(
+                    f"Recovered non-strict FG response for {self.config.model_id} after parse error: {e}"
+                )
+                return fallback
+            logger.warning(f"Failed to parse FG response for {self.config.model_id}: {e}")
+            return {"supporting_docs": [], "cross_doc_support": False, "cross_doc_combo": []}
+
+    @staticmethod
+    def _parse_boolish(value: str) -> bool:
+        v = (value or "").strip().lower()
+        return v in {"true", "yes", "y", "1"}
+
+    def _recover_fg_response(self, text: str, valid_doc_ids: set) -> Optional[Dict[str, Any]]:
+        """Best-effort recovery for mildly malformed FG outputs.
+
+        DeepSeek occasionally returns key-value text like:
+          supporting_docs: [d1, d2]
+          cross_doc_support: false
+          cross_doc_combo: []
+        without a strict JSON object wrapper. This fallback only activates for FG
+        and only extracts the three expected fields.
+        """
+        cleaned = self._strip_markdown_fences(text or "")
+        if not cleaned.strip():
+            return None
+
+        doc_pattern = r"d\d+"
+
+        def _extract_list_for_key(key: str) -> Optional[List[str]]:
+            patterns = [
+                rf'{key}"?\s*[:=]\s*\[([^\]]*)\]',
+                rf'{key}"?\s*[:=]\s*([^\n\r]+)',
+            ]
+            for pat in patterns:
+                m = re.search(pat, cleaned, flags=re.IGNORECASE)
+                if not m:
+                    continue
+                candidates = re.findall(doc_pattern, m.group(1), flags=re.IGNORECASE)
+                vals = []
+                seen = set()
+                for d in candidates:
+                    d = d.lower()
+                    if d in valid_doc_ids and d not in seen:
+                        vals.append(d)
+                        seen.add(d)
+                return vals
+            return None
+
+        supporting = _extract_list_for_key("supporting_docs")
+        combo = _extract_list_for_key("cross_doc_combo")
+
+        cross_doc = False
+        m_bool = re.search(r'cross_doc_support"?\s*[:=]\s*(true|false|yes|no|0|1)', cleaned, flags=re.IGNORECASE)
+        if m_bool:
+            cross_doc = self._parse_boolish(m_bool.group(1))
+        elif combo:
+            cross_doc = True
+
+        if supporting is None and combo is None and not m_bool:
+            return None
+
+        return {
+            "supporting_docs": supporting or [],
+            "cross_doc_support": bool(cross_doc),
+            "cross_doc_combo": combo or [],
+        }
+
+    async def judge_fg(self, prompt: str, valid_doc_ids: set) -> Dict[str, Any]:
+        """Send a factual-grounding judgment request. Returns parsed supporting_docs + cross_doc info."""
+        start_time = time.time()
+        try:
+            if self.config.provider == APIProvider.ANTHROPIC:
+                response_text, input_tokens, output_tokens = await self._call_anthropic(prompt)
+            elif self.config.provider == APIProvider.OPENROUTER:
+                response_text, input_tokens, output_tokens = await self._call_openrouter(prompt)
+            elif self.config.provider == APIProvider.DEEPSEEK:
+                response_text, input_tokens, output_tokens = await self._call_deepseek(prompt)
+            elif self.config.provider == APIProvider.LOCAL_OPENAI:
+                response_text, input_tokens, output_tokens = await self._call_local_openai(prompt)
+            elif self.config.provider == APIProvider.CODEX_CLI:
+                response_text, input_tokens, output_tokens = await self._call_codex_cli(prompt)
             else:
-                return "neutral"
-    
+                raise ValueError(f"Unsupported provider: {self.config.provider}")
+
+            parsed = self._parse_fg_response(response_text, valid_doc_ids)
+            cost = (input_tokens * self.config.cost_per_1k_input / 1000
+                    + output_tokens * self.config.cost_per_1k_output / 1000)
+            self.total_cost += cost
+            self.request_count += 1
+            return {**parsed, "cost": cost, "latency_ms": (time.time() - start_time) * 1000, "error": None}
+        except Exception as e:
+            logger.error(f"FG judge {self.config.model_id} error: {e}")
+            return {"supporting_docs": [], "cross_doc_support": False, "cross_doc_combo": [],
+                    "cost": 0.0, "latency_ms": (time.time() - start_time) * 1000, "error": str(e)}
+
     async def close(self):
-        """Close async clients."""
-        if hasattr(self, 'http_client'):
+        if hasattr(self, "http_client"):
             await self.http_client.aclose()
 
 
@@ -361,193 +756,415 @@ class JudgeClient:
 # Judge Committee
 # --------------------
 class JudgeCommittee:
-    """
-    Multi-LLM judge committee with voting mechanism.
-    Coordinates multiple judges and aggregates their decisions.
-    """
-    
+    """Multi-LLM judge committee with parallel async voting."""
+
     def __init__(self, config: JudgeCommitteeConfig):
         self.config = config
         self.judges = [JudgeClient(j) for j in config.judges]
         self.total_cost = 0.0
         self.decision_count = 0
-        
+        self._request_semaphore: Optional[asyncio.Semaphore] = None
+        self.cache_mode = (getattr(config, "cache_mode", "off") or "off").lower()
+        if self.cache_mode not in {"off", "read_write", "read_only", "write_only"}:
+            logger.warning(f"Unknown committee cache_mode={self.cache_mode!r}; disabling response cache")
+            self.cache_mode = "off"
+        cache_dir = getattr(config, "response_cache_dir", None)
+        self.response_cache_dir = Path(cache_dir) if cache_dir and self.cache_mode != "off" else None
+
         logger.info(f"Initialized committee with {len(self.judges)} judges:")
         for judge in config.judges:
             logger.info(f"  - {judge.model_id} ({judge.provider.value}) [priority={judge.priority}]")
-    
+        if self.response_cache_dir:
+            logger.info(f"Committee response cache enabled: {self.response_cache_dir} ({self.cache_mode})")
+
+    def _get_request_semaphore(self) -> asyncio.Semaphore:
+        if self._request_semaphore is None:
+            limit = max(1, int(getattr(self.config, "max_concurrent_requests", 1) or 1))
+            self._request_semaphore = asyncio.Semaphore(limit)
+        return self._request_semaphore
+
+    def _cache_path(self, mode: str, judge: "JudgeClient", prompt: str) -> Optional[Path]:
+        if not self.response_cache_dir:
+            return None
+        model_key = re.sub(r"[^A-Za-z0-9_.-]+", "_", judge.config.model_id).strip("_") or "model"
+        prompt_hash = hashlib.sha256(prompt.encode("utf-8")).hexdigest()
+        return self.response_cache_dir / mode / model_key / f"{prompt_hash}.json"
+
+    def _read_cached_behavior(self, judge: "JudgeClient", prompt: str) -> Optional[JudgeResponse]:
+        if self.cache_mode not in {"read_write", "read_only"}:
+            return None
+        path = self._cache_path("behavior", judge, prompt)
+        if not path or not path.exists():
+            return None
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                payload = json.load(f)
+            response = payload.get("response") or {}
+            response["latency_ms"] = 0.0
+            response["cost"] = 0.0
+            response["rationale"] = f"[cached] {response.get('rationale', '')}".strip()
+            return JudgeResponse(**response)
+        except Exception as e:
+            logger.warning(f"Failed to read cached judge response {path}: {e}")
+            return None
+
+    def _read_cached_fg(self, judge: "JudgeClient", prompt: str) -> Optional[Dict[str, Any]]:
+        if self.cache_mode not in {"read_write", "read_only"}:
+            return None
+        path = self._cache_path("fg", judge, prompt)
+        if not path or not path.exists():
+            return None
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                payload = json.load(f)
+            response = payload.get("response") or {}
+            response["latency_ms"] = 0.0
+            response["cost"] = 0.0
+            response["cached"] = True
+            return response
+        except Exception as e:
+            logger.warning(f"Failed to read cached FG judge response {path}: {e}")
+            return None
+
+    def _write_cached_response(
+        self,
+        mode: str,
+        judge: "JudgeClient",
+        prompt: str,
+        response: Any,
+    ) -> None:
+        if self.cache_mode not in {"read_write", "write_only"}:
+            return
+        path = self._cache_path(mode, judge, prompt)
+        if not path:
+            return
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            response_payload = response.to_dict() if isinstance(response, JudgeResponse) else response
+            payload = {
+                "mode": mode,
+                "model_id": judge.config.model_id,
+                "provider": judge.config.provider.value,
+                "prompt_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+                "cached_at_unix": time.time(),
+                "response": response_payload,
+            }
+            tmp_path = path.with_suffix(".json.tmp")
+            with open(tmp_path, "w", encoding="utf-8") as f:
+                json.dump(payload, f, ensure_ascii=False, indent=2)
+            os.replace(tmp_path, path)
+        except Exception as e:
+            logger.warning(f"Failed to write cached judge response {path}: {e}")
+
+    async def _judge_with_timeout(self, judge: "JudgeClient", prompt: str) -> JudgeResponse:
+        """Wrap a single judge call in asyncio.wait_for so a slow judge
+        (typically DeepSeek with a long <think> trace) cannot block the entire
+        sample. Timeout comes from JudgeCommitteeConfig.timeout_seconds.
+        Returns a JudgeResponse with error='timeout' on timeout — the
+        downstream voter treats it the same as any other failed judge.
+        """
+        cached = self._read_cached_behavior(judge, prompt)
+        if cached is not None:
+            return cached
+        if self.cache_mode == "read_only" and self.response_cache_dir:
+            return JudgeResponse(
+                judge_id=f"{judge.config.provider.value}_{judge.config.model_id}",
+                model_id=judge.config.model_id,
+                provider=judge.config.provider.value,
+                adherent=False,
+                rationale="Cache miss",
+                confidence=0.0,
+                cost=0.0,
+                latency_ms=0.0,
+                error="cache_miss",
+            )
+
+        timeout = float(getattr(self.config, "timeout_seconds", 0) or 0)
+        try:
+            async with self._get_request_semaphore():
+                if timeout > 0:
+                    response = await asyncio.wait_for(judge.judge_behavior(prompt), timeout=timeout)
+                else:
+                    response = await judge.judge_behavior(prompt)
+            if response.error is None:
+                self._write_cached_response("behavior", judge, prompt, response)
+            return response
+        except asyncio.TimeoutError:
+            logger.warning(
+                f"Judge {judge.config.model_id} timed out after {timeout:.1f}s; "
+                "excluding from this vote."
+            )
+            return JudgeResponse(
+                judge_id=f"{judge.config.provider.value}_{judge.config.model_id}",
+                model_id=judge.config.model_id,
+                provider=judge.config.provider.value,
+                adherent=False,
+                rationale="Judge timeout",
+                confidence=0.0,
+                cost=0.0,
+                latency_ms=timeout * 1000,
+                error="timeout",
+            )
+
+    async def _judge_fg_with_timeout(self, judge: "JudgeClient", prompt: str, valid_doc_ids: set) -> Dict[str, Any]:
+        cached = self._read_cached_fg(judge, prompt)
+        if cached is not None:
+            return cached
+        if self.cache_mode == "read_only" and self.response_cache_dir:
+            return {"supporting_docs": [], "cross_doc_support": False, "cross_doc_combo": [],
+                    "cost": 0.0, "latency_ms": 0.0, "error": "cache_miss"}
+
+        timeout = float(getattr(self.config, "timeout_seconds", 0) or 0)
+        try:
+            async with self._get_request_semaphore():
+                if timeout > 0:
+                    response = await asyncio.wait_for(judge.judge_fg(prompt, valid_doc_ids), timeout=timeout)
+                else:
+                    response = await judge.judge_fg(prompt, valid_doc_ids)
+            if response.get("error") is None:
+                self._write_cached_response("fg", judge, prompt, response)
+            return response
+        except asyncio.TimeoutError:
+            logger.warning(
+                f"FG judge {judge.config.model_id} timed out after {timeout:.1f}s; "
+                "excluding from this FG vote."
+            )
+            return {"supporting_docs": [], "cross_doc_support": False, "cross_doc_combo": [],
+                    "cost": 0.0, "latency_ms": timeout * 1000, "error": "timeout"}
+
     async def judge_behavior(self, prompt: str) -> CommitteeDecision:
-        """
-        Get behavior judgment from the committee.
-        All judges vote in parallel, then results are aggregated.
-        """
-        # Execute all judges in parallel
-        tasks = [judge.judge_behavior(prompt) for judge in self.judges]
+        """Get behavior judgment from the committee. All judges run in parallel,
+        each capped by JudgeCommitteeConfig.timeout_seconds (N7 fix)."""
+        tasks = [self._judge_with_timeout(judge, prompt) for judge in self.judges]
         responses = await asyncio.gather(*tasks)
-        
-        # Filter out failed responses
+
         valid_responses = [r for r in responses if r.error is None]
-        
+
         if not valid_responses:
             logger.error("All judges failed!")
             return self._create_fallback_decision(responses)
-        
-        # Aggregate votes
+
         decision = self._aggregate_votes(valid_responses)
-        
-        # Track costs
         self.total_cost += decision.total_cost
         self.decision_count += 1
-        
         return decision
-    
+
     def _aggregate_votes(self, responses: List[JudgeResponse]) -> CommitteeDecision:
-        """
-        Aggregate judge responses using configured voting strategy.
-        """
-        if self.config.voting_strategy == "majority":
+        strategy = self.config.voting_strategy
+        if strategy == "majority":
             return self._majority_vote(responses)
-        elif self.config.voting_strategy == "weighted_majority":
-            return self._weighted_majority_vote(responses)
-        elif self.config.voting_strategy == "unanimous":
+        elif strategy == "unanimous":
             return self._unanimous_vote(responses)
-        else:
-            return self._weighted_majority_vote(responses)
-    
+        # default
+        return self._weighted_majority_vote(responses)
+
     def _majority_vote(self, responses: List[JudgeResponse]) -> CommitteeDecision:
-        """Simple majority voting (each judge gets 1 vote)."""
         votes_for = sum(1 for r in responses if r.adherent)
         votes_against = len(responses) - votes_for
         adherent = votes_for > votes_against
-        confidence = votes_for / len(responses)
-        
-        # Select rationale from majority side
+        confidence = max(votes_for, votes_against) / len(responses)
+        minority_confidence = min(votes_for, votes_against) / len(responses)
+
         majority_responses = [r for r in responses if r.adherent == adherent]
         rationale = majority_responses[0].rationale if majority_responses else ""
-        
-        total_cost = sum(r.cost for r in responses)
-        total_latency = sum(r.latency_ms for r in responses)
-        
+
         return CommitteeDecision(
             adherent=adherent,
             confidence=confidence,
+            minority_confidence=minority_confidence,
             votes_for=votes_for,
             votes_against=votes_against,
             total_votes=len(responses),
+            weighted_for=float(votes_for),
+            weighted_against=float(votes_against),
             rationale=rationale,
             individual_responses=responses,
-            total_cost=total_cost,
-            total_latency_ms=total_latency
+            total_cost=sum(r.cost for r in responses),
+            total_latency_ms=sum(r.latency_ms for r in responses),
         )
-    
+
     def _weighted_majority_vote(self, responses: List[JudgeResponse]) -> CommitteeDecision:
-        """Weighted voting based on judge priority and confidence."""
-        # Get priorities from config
-        priority_map = {
-            j.model_id: j.priority 
-            for j in self.config.judges
-        }
-        
-        weighted_votes_for = 0.0
-        weighted_votes_against = 0.0
+        priority_map = {j.model_id: j.priority for j in self.config.judges}
+
+        weighted_for = 0.0
+        weighted_against = 0.0
         total_weight = 0.0
-        
+
         for r in responses:
             priority = priority_map.get(r.model_id, 1)
-            weight = priority * r.confidence
+            weight = priority * max(r.confidence, 0.01)  # floor to avoid 0-weight when judge emits confidence=0
             total_weight += weight
-            
             if r.adherent:
-                weighted_votes_for += weight
+                weighted_for += weight
             else:
-                weighted_votes_against += weight
-        
-        adherent = weighted_votes_for > weighted_votes_against
-        confidence = max(weighted_votes_for, weighted_votes_against) / total_weight if total_weight > 0 else 0.0
-        
-        # Select rationale from highest-priority judge on winning side
+                weighted_against += weight
+
+        adherent = weighted_for > weighted_against
+        if total_weight > 0:
+            confidence = max(weighted_for, weighted_against) / total_weight
+            minority_confidence = min(weighted_for, weighted_against) / total_weight
+        else:
+            confidence = 0.0
+            minority_confidence = 0.0
+
         winning_responses = [r for r in responses if r.adherent == adherent]
         if winning_responses:
-            best_response = max(
+            best = max(
                 winning_responses,
-                key=lambda r: priority_map.get(r.model_id, 1) * r.confidence
+                key=lambda r: priority_map.get(r.model_id, 1) * r.confidence,
             )
-            rationale = best_response.rationale
+            rationale = best.rationale
         else:
             rationale = ""
-        
+
         votes_for = sum(1 for r in responses if r.adherent)
         votes_against = len(responses) - votes_for
-        total_cost = sum(r.cost for r in responses)
-        total_latency = sum(r.latency_ms for r in responses)
-        
+
         return CommitteeDecision(
             adherent=adherent,
             confidence=confidence,
+            minority_confidence=minority_confidence,
             votes_for=votes_for,
             votes_against=votes_against,
             total_votes=len(responses),
+            weighted_for=float(weighted_for),
+            weighted_against=float(weighted_against),
             rationale=rationale,
             individual_responses=responses,
-            total_cost=total_cost,
-            total_latency_ms=total_latency
+            total_cost=sum(r.cost for r in responses),
+            total_latency_ms=sum(r.latency_ms for r in responses),
         )
-    
+
     def _unanimous_vote(self, responses: List[JudgeResponse]) -> CommitteeDecision:
-        """All judges must agree."""
-        all_adherent = all(r.adherent for r in responses)
         votes_for = sum(1 for r in responses if r.adherent)
         votes_against = len(responses) - votes_for
-        
-        confidence = 1.0 if all_adherent else 0.0
+        all_adherent = votes_for == len(responses)
+        # Use majority-side fraction so confidence still has meaning when not unanimous
+        confidence = max(votes_for, votes_against) / len(responses) if responses else 0.0
+        minority_confidence = min(votes_for, votes_against) / len(responses) if responses else 0.0
         rationale = responses[0].rationale if responses else ""
-        
-        total_cost = sum(r.cost for r in responses)
-        total_latency = sum(r.latency_ms for r in responses)
-        
+
         return CommitteeDecision(
             adherent=all_adherent,
             confidence=confidence,
+            minority_confidence=minority_confidence,
             votes_for=votes_for,
             votes_against=votes_against,
             total_votes=len(responses),
+            weighted_for=float(votes_for),
+            weighted_against=float(votes_against),
             rationale=rationale,
             individual_responses=responses,
-            total_cost=total_cost,
-            total_latency_ms=total_latency
+            total_cost=sum(r.cost for r in responses),
+            total_latency_ms=sum(r.latency_ms for r in responses),
         )
-    
+
     def _create_fallback_decision(self, responses: List[JudgeResponse]) -> CommitteeDecision:
-        """Create a fallback decision when all judges fail."""
+        """Used only when EVERY judge errored — marks all_failed so callers can skip."""
         return CommitteeDecision(
             adherent=False,
             confidence=0.0,
+            minority_confidence=0.0,
             votes_for=0,
             votes_against=len(responses),
             total_votes=len(responses),
             rationale="All judges failed",
             individual_responses=responses,
             total_cost=0.0,
-            total_latency_ms=sum(r.latency_ms for r in responses)
+            total_latency_ms=sum(r.latency_ms for r in responses),
+            all_failed=True,
         )
-    
+
+    async def judge_fg(self, prompt: str, valid_doc_ids: set) -> Dict[str, Any]:
+        """Run FG judgment across all judges in parallel and aggregate by weighted majority.
+
+        Uses judge priority as the FG vote weight. This keeps FG aligned with the
+        rest of the committee design while avoiding broader changes to the FG
+        prompt/response schema, which currently does not expose per-doc confidence.
+
+        A doc is in supporting_docs if the summed priority of judges naming it is
+        greater than half of the total valid priority mass.
+
+        To keep FG genuinely committee-based, positive support also requires
+        corroboration from at least two valid judges whenever more than one
+        judge is available. This prevents the highest-priority judge from
+        unilaterally green-lighting a claim/doc on its own while still allowing
+        single-judge fallback when the other committee members fail or time out.
+        """
+        tasks = [self._judge_fg_with_timeout(j, prompt, valid_doc_ids) for j in self.judges]
+        responses = await asyncio.gather(*tasks)
+
+        valid = [(judge, resp) for judge, resp in zip(self.judges, responses) if resp.get("error") is None]
+        if not valid:
+            return {"supporting_docs": [], "cross_doc_support": False, "cross_doc_combo": [],
+                    "total_cost": sum(r.get("cost", 0.0) for r in responses)}
+
+        total_priority = sum(max(1, int(judge.config.priority)) for judge, _ in valid)
+        threshold = total_priority / 2.0
+        min_positive_judges = 2 if len(valid) > 1 else 1
+
+        # Per-doc weighted majority: include a doc if more than half of the valid
+        # priority mass names it, with corroboration from at least two valid
+        # judges when a multi-judge committee is available.
+        from collections import defaultdict
+        doc_weights: Dict[str, float] = defaultdict(float)
+        doc_vote_counts: Dict[str, int] = defaultdict(int)
+        for judge, resp in valid:
+            priority = max(1, int(judge.config.priority))
+            for d in resp.get("supporting_docs", []):
+                doc_weights[d] += priority
+                doc_vote_counts[d] += 1
+        supporting_docs = [
+            d for d, weight in doc_weights.items()
+            if weight > threshold and doc_vote_counts.get(d, 0) >= min_positive_judges
+        ]
+
+        # Cross-doc weighted majority
+        cross_weight = sum(
+            max(1, int(judge.config.priority))
+            for judge, resp in valid
+            if resp.get("cross_doc_support", False)
+        )
+        cross_votes = sum(1 for _, resp in valid if resp.get("cross_doc_support", False))
+        cross_doc_support = cross_weight > threshold and cross_votes >= min_positive_judges
+
+        cross_combo: set = set()
+        if cross_doc_support:
+            for _, resp in valid:
+                if resp.get("cross_doc_support", False):
+                    cross_combo.update(resp.get("cross_doc_combo", []))
+
+        self.total_cost += sum(r.get("cost", 0.0) for r in responses)
+        self.decision_count += 1
+
+        return {
+            "supporting_docs": supporting_docs,
+            "cross_doc_support": cross_doc_support,
+            "cross_doc_combo": list(cross_combo),
+            "total_cost": sum(r.get("cost", 0.0) for r in responses),
+            "judge_responses": [
+                {"model_id": j.config.model_id, **r}
+                for j, r in zip(self.judges, responses)
+            ],
+        }
+
     def get_cost_summary(self) -> Dict[str, Any]:
-        """Get cost summary for the committee."""
         return {
             "total_cost_usd": self.total_cost,
             "decisions_made": self.decision_count,
             "avg_cost_per_decision": self.total_cost / max(1, self.decision_count),
             "per_judge_costs": {
                 judge.config.model_id: {
+                    "provider": judge.config.provider.value,
+                    "metered": judge.config.provider not in (APIProvider.CODEX_CLI, APIProvider.LOCAL_OPENAI),
                     "total_cost": judge.total_cost,
                     "requests": judge.request_count,
-                    "avg_cost": judge.total_cost / max(1, judge.request_count)
+                    "avg_cost": judge.total_cost / max(1, judge.request_count),
                 }
                 for judge in self.judges
-            }
+            },
         }
-    
+
     async def close(self):
-        """Close all judge clients."""
         for judge in self.judges:
             await judge.close()

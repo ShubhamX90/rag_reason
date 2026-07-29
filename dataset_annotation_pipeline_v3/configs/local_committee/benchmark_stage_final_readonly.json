@@ -1,0 +1,49 @@
+{
+  "provider": "local_openai",
+  "response_cache_dir": "data/.llm_cache/local_committee_benchmark",
+  "cache_mode": "read_only",
+  "max_concurrent_requests": 8,
+  "judges": [
+    {
+      "model_id": "local/qwen3.5-397b-a17b",
+      "base_url": "http://127.0.0.1:8001/v1",
+      "base_url_env": "LOCAL_QWEN_BASE_URL",
+      "priority": 4,
+      "request_timeout": 30,
+      "extra_body": {
+        "response_format": {"type": "json_object"},
+        "chat_template_kwargs": {"enable_thinking": false}
+      }
+    },
+    {
+      "model_id": "local/deepseek-r1-distill-32b",
+      "base_url": "http://127.0.0.1:8002/v1",
+      "base_url_env": "LOCAL_DEEPSEEK_BASE_URL",
+      "priority": 2,
+      "request_timeout": 30,
+      "extra_body": {
+        "response_format": {"type": "json_object"}
+      }
+    },
+    {
+      "model_id": "local/gemma-4-31b",
+      "base_url": "http://127.0.0.1:8003/v1",
+      "base_url_env": "LOCAL_GEMMA_BASE_URL",
+      "priority": 1,
+      "request_timeout": 30,
+      "extra_body": {
+        "response_format": {"type": "json_object"}
+      }
+    },
+    {
+      "model_id": "local/mistral-small-4",
+      "base_url": "http://127.0.0.1:8004/v1",
+      "base_url_env": "LOCAL_MISTRAL_BASE_URL",
+      "priority": 1,
+      "request_timeout": 30,
+      "extra_body": {
+        "response_format": {"type": "json_object"}
+      }
+    }
+  ]
+}

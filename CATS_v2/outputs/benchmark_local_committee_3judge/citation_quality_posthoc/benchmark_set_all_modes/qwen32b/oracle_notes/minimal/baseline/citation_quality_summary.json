@@ -1,0 +1,1420 @@
+{
+  "variant": "benchmark_set_all_modes/qwen32b/oracle_notes/minimal/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_notes/minimal/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_notes/minimal/baseline/final/detailed_results.json",
+    "source_final_sha256": "42b15eb63630568a9e2487ef1c2d4b0d45d0250540b06c4e655acb02b6051597",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen32b/oracle_notes/minimal/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen32b/oracle_notes/minimal/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1284,
+    "claims_with_citations": 230,
+    "claims_with_committee_support_set": 1121,
+    "claims_with_any_approved_citation": 212,
+    "claims_with_any_gold_positive_citation": 228,
+    "committee_alignment_precision_macro": 0.874927536231884,
+    "committee_alignment_precision_micro": 0.8221024258760108,
+    "gold_positive_citation_precision_macro": 0.986231884057971,
+    "gold_positive_citation_precision_micro": 0.9865229110512129,
+    "soft_extra_citation_rate_micro": 0.16442048517520216,
+    "hard_negative_citation_rate_micro": 0.013477088948787063,
+    "committee_support_citation_recall_macro": 0.18911685994647637,
+    "committee_support_citation_recall_micro": 0.18911685994647637,
+    "claims_with_any_soft_extra_rate": 0.16956521739130434,
+    "claims_with_any_hard_negative_rate": 0.017391304347826087,
+    "strict_committee_alignment_claim_rate": 0.14641744548286603,
+    "strict_gold_clean_claim_rate": 0.16433021806853582,
+    "strict_grounded_committee_clean_rate_all_claims": 0.14641744548286603,
+    "strict_grounded_gold_clean_rate_all_claims": 0.16433021806853582,
+    "total_cited_docs": 371,
+    "total_approved_cited_docs": 305,
+    "total_gold_positive_cited_docs": 366,
+    "total_soft_extra_cited_docs": 61,
+    "total_hard_negative_cited_docs": 5
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_e2e2361dc28b",
+      "claim_index": 0,
+      "claim": "While documents provide context and related information, they do not directly address the query as comprehensively as",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The text asserts that the justification needed to know a proposition can be based on evidence one has for a false proposition.",
+          "quote": "The justification one needs to know that P is true is a justification one can have for a false proposition.",
+          "verdict_reason": "The snippet directly addresses the query by stating one can have justification for a false proposition, though it presents this as a premise in a Gettier case rather than a final normative conclusion.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "A 1976 article titled \"Can a justified Belief Be False?\" directly addresses the query topic.",
+          "quote": "(1976). Can a justified Belief Be False? Canadian Journal of Philosophy: Vol. 6, No. 3, pp. 561-568.",
+          "verdict_reason": "The snippet identifies a scholarly article with a title matching the query, providing conflict-bearing evidence, but lacks the actual argument or conclusion.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Gettier's objection to analyzing knowledge as justified true belief relies on the assumption that a justified belief can be false.",
+          "quote": "Gettier's objection draws on two assumptions: first, that a justified belief can be false; second, that a premise can justify a conclusion even though the premise is false.",
+          "verdict_reason": "The snippet explicitly states the assumption that a justified belief can be false as central to Gettier's argument, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The text discusses conditions under which beliefs are justified, such as inference from other justified beliefs or perceptual experience, without explicitly addressing false beliefs.",
+          "quote": "Frances's belief that it is cloudy outside owes its justification to her inference from her other two beliefs, both of which are justified",
+          "verdict_reason": "The snippet addresses the nature of belief justification, which is central to the query, but does not explicitly confirm or deny whether a false belief can be justified.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The text argues that no truth can be justified and that knowledge consists of conjectures that have not yet been refuted.",
+          "quote": "The problem with this is that there is no method of showing any piece of knowledge is true. ... all we have are guesses about reality.",
+          "verdict_reason": "The snippet directly addresses the relationship between justification, truth, and belief, arguing justification of truth is impossible, which bears on the query but presents a specific philosophical stance rather than a definitive answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_b6c75b99a2f4",
+      "claim_index": 0,
+      "claim": "While documents provide additional context on the visible spectrum and its range, they do not explicitly state the longest wavelengths without referencing the key fact established by",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states that radio waves have the longest wavelengths in the electromagnetic spectrum, not the visible spectrum.",
+          "quote": "Radio: Radio waves have the longest wavelengths in the electromagnetic spectrum. These waves can range from less than one centimeter to greater than 100 meters",
+          "verdict_reason": "The document addresses wavelength rankings in the electromagnetic spectrum but identifies radio waves, not visible light colors, as having the longest wavelengths, providing conflicting but relevant context.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The visible spectrum for humans ranges from 700 nm (red) to 400 nm (violet), making 700 nm the longest wavelength.",
+          "quote": "Humans see a visible spectrum ranging from 700 nm (red) to 400 nm (violet).",
+          "verdict_reason": "The snippet explicitly states the range of the visible spectrum and identifies 700 nm (red) as the upper limit, directly answering the query about the longest wavelengths.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The visible spectrum ranges from about 380 to 750 nanometers, with violet light at the shortest wavelengths (380–450 nm).",
+          "quote": "A typical human eye will respond to wavelengths from about 380 to about 750 nanometers.",
+          "verdict_reason": "Snippet defines the visible spectrum range and lists shorter wavelengths (violet) but cuts off before explicitly stating the longest wavelengths (red).",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Red is identified as the range of colors having the longest wavelengths (670 nm) in the visible spectrum.",
+          "quote": "RED · any of a range of colours having the longest",
+          "verdict_reason": "The snippet directly answers the query by identifying 'RED' as the color with the longest wavelengths in the visible spectrum.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The visible spectrum ranges from 400 nm to 700 nm, with red having the longest wavelengths within this range.",
+          "quote": "What you call light is the narrow range of wavelengths that can be detected by our eye: 400 nm to 700 nm",
+          "verdict_reason": "Snippet defines the visible spectrum range (400-700 nm) but does not explicitly state which end corresponds to the longest wavelengths, requiring external knowledge to fully answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_3d4ebfa8b6dd",
+      "claim_index": 0,
+      "claim": "References:\n- (https://www.statmuse.com/nba/ask/most-rings-as-coach-and-player-in-nba)\n- (https://discountsportsrings.com/who-holds-the-record-for-most-nba-championship-rings)\n- (https://www.basketball-reference.com/leaders/most_championships.html)",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Phil Jackson holds the record for most NBA championships as a coach with eleven rings, while Bill Russell holds the record as a player.",
+          "quote": "While Bill Russell holds the record for the most rings as a player, Phil Jackson holds the title for most championships as a coach, with eleven rings.",
+          "verdict_reason": "The snippet directly answers the query by identifying the record holders for both categories (coach and player) and providing the specific ring counts to determine the overall winner.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Phil Jackson holds the record for most NBA championships won as a coach with 11 titles.",
+          "quote": "Phil Jackson has won the most championships by a coach, with 11 championships.",
+          "verdict_reason": "Snippet answers the coach portion of the query but omits the player comparison needed to determine the overall leader between coaches and players.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Bill Russell holds the record for most NBA championships won by a player with 11 rings.",
+          "quote": "| 1 | Bill Russell\\ | BOS | 1957 | 1969 | 11 |",
+          "verdict_reason": "Snippet identifies the top player (Bill Russell, 11 rings) but lacks data on coaches to fully answer the comparative query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_587e89bbcbe1",
+      "claim_index": 0,
+      "claim": "Sources:\n- (https://gametimehero.com/blog/how-many-cards-are-in-an-uno-deck)\n- (https://www.unovariations.com/official-uno-rules)\n- (https://www.rd.com/article/uno-rules)",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "A standard Uno deck contains 108 cards, while themed decks contain 112 cards.",
+          "quote": "A standard deck of Uno cards consists of 108 cards: Themed Uno decks have an additional 4 unique Wild cards, bringing the total cards in the deck to 112 cards.",
+          "verdict_reason": "The snippet directly answers the query by specifying the exact card counts for both standard (108) and themed (112) Uno decks.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "A standard, modern UNO deck contains 108 cards in total.",
+          "quote": "A standard, modern UNO deck contains 108 cards in total. This number has remained consistent for decades, with only minor changes depending on themed editions or special rulesets.",
+          "verdict_reason": "The snippet directly answers the query by stating the exact count of cards in a standard UNO deck.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "In 2018, Uno added two new action cards, increasing the deck size from 108 to 112 cards.",
+          "quote": "In 2018, Uno added two new action cards, taking the deck from 108 to 112 cards per deck",
+          "verdict_reason": "The snippet directly answers the query by stating the current number of cards in a standard Uno deck is 112.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_39dcd7b38c39",
+      "claim_index": 1,
+      "claim": "are considered high-quality sources, further validating the information",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Maya Angelou is the first Black woman to appear on a U.S. quarter as part of the American Women Quarters Program.",
+          "quote": "Maya Angelou first Black woman to appear on U.S. quarter as Mint rolls out coins",
+          "verdict_reason": "The snippet explicitly identifies Maya Angelou as the first Black woman to appear on a U.S. quarter, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Maya Angelou is the first Black woman to appear on a U.S. quarter.",
+          "quote": "Angelou is the first Black woman to appear on the quarter.",
+          "verdict_reason": "The snippet explicitly states that Maya Angelou is the first Black woman to appear on the quarter, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_7dce5d575302",
+      "claim_index": 2,
+      "claim": "explicitly states that Kaka was crowned the best player in the world the year before Ronaldo's first Ballon d'Or, while provides a table listing Kaka as the 2007 winner",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Kaka won the Ballon d'Or in 2007, the year before Cristiano Ronaldo and Lionel Messi began their dominance of the award.",
+          "quote": "| 2007 | Kaka | Cristiano Ronaldo | Lionel Messi |\n| 2008 | Cristiano Ronaldo | Lionel Messi | Fernando Torres |",
+          "verdict_reason": "The table explicitly lists Kaka as the 2007 winner, immediately preceding the 2008 start of the Messi-Ronaldo dominance shown in subsequent rows.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Kaka won the Ballon d'Or the year before Cristiano Ronaldo secured his first award in 2008, making him the last winner before their dominance.",
+          "quote": "Kaka was crowned the best player in the world the year before Ronaldo secured his first Ballon d'Or, which sparked the beginning of the dominant era shared with Messi.",
+          "verdict_reason": "The snippet explicitly identifies Kaka as the winner immediately preceding the Messi-Ronaldo era starting in 2008, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_c2975d69d57c",
+      "claim_index": 0,
+      "claim": "- lists Seth MacFarlane as one of the actors playing multiple characters, including Carter Pewterschmidt.\n- mentions that Seth MacFarlane reprises his role as Carter Pewterschmidt, Lois's father, alongside Alex Borstein as Barbara Pewterschmidt",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Seth MacFarlane and Alex Borstein reprise their roles as Lois's parents, Carter and Barbara Pewterschmidt.",
+          "quote": "Series creator and executive producer Seth MacFarlane and main cast member and former series writer Alex Borstein reprise their roles of Carter and Barbara Pewterschmidt, Lois's parents.",
+          "verdict_reason": "The snippet explicitly identifies Seth MacFarlane as the voice actor for Carter, Lois's dad, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Seth MacFarlane is credited with playing the character Carter Pewterschmidt.",
+          "quote": "Actor 20 Credits Seth MacFarlane Peter Griffin, Stewie Griffin, Brian Griffin, Glenn Quagmire, Tom Tucker, Dr. Elmer Hartman, Carter Pewterschmidt",
+          "verdict_reason": "The snippet explicitly lists Seth MacFarlane as the actor playing Carter Pewterschmidt, who is Lois's dad in Family Guy.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_016",
+      "claim_index": 1,
+      "claim": "This information comes from",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The song \"Best Day of My Life\" by American Authors was sung by Criss and Overstreet.",
+          "quote": "\"Best Day of My Life\" by the American Authors, sung by Criss and Overstreet",
+          "verdict_reason": "Snippet confirms the song title and performers but does not explicitly state it is the theme for 'the best day of my life' singer query context.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The song is the only single by American Authors to break the Top 40 in the United States.",
+          "quote": "To date this remains to be the only single by the American Authors to break the Top 40 in the United States.",
+          "verdict_reason": "Snippet identifies the artist (American Authors) and a key song attribute but omits the song title needed to fully answer the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0025",
+      "claim_index": 1,
+      "claim": "specifically mentions an official portrait from 2025, while confirms this information with a more recent timestamp in 2026",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Droupadi Murmu is the President of India.",
+          "quote": "image = President Droupadi Murmu official portrait higher version.jpg",
+          "verdict_reason": "Document is a current Wikipedia article (timestamp 2026-05-16) about the President of India with an official portrait of Droupadi Murmu, directly identifying her as the current president.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Droupadi Murmu is the President of India as of 2025.",
+          "quote": "image = Droupadi Murmu POI official portrait.jpg | imagecaption = Official Portrait, 2025",
+          "verdict_reason": "Snippet identifies Droupadi Murmu as current President with 2025 official portrait, directly answering the query for the latest President of India.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_0436c0b3a9d7",
+      "claim_index": 2,
+      "claim": "However, since the query specifies \"last year,\" is the most relevant and clear source for the answer",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Aryna Sabalenka and Amanda Anisimova were the finalists in the US Open women's singles, with Sabalenka winning the match.",
+          "quote": "Aryna Sabalenka repeats as US Open's women's champion with a straight sets, 6-3, 7-6 (3) victory over American Amanda Anisimova.",
+          "verdict_reason": "The snippet explicitly names both finalists (Sabalenka and Anisimova) and confirms the match outcome, directly answering the query about who the finalists were.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_bc0542b3c97d",
+      "claim_index": 1,
+      "claim": "According to , the commissioning ceremony took place on that date, with the raising of the White Ensign symbolizing the ship's entry into the Royal Navy's fleet",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "HMS Queen Elizabeth was commissioned on December 7, 2017.",
+          "quote": "According to an article published on the UK Ministry of Defence website, the HMS Queen Elizabeth was commissioned on December 7, 2017.",
+          "verdict_reason": "The snippet explicitly states the commissioning date, directly answering when the ship came into service.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_bc0542b3c97d",
+      "claim_index": 2,
+      "claim": "further confirms that HMS Queen Elizabeth was commissioned in 2017 and formally declared operational in 2020",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "HMS Queen Elizabeth was commissioned in 2017 and formally declared operational in 2020.",
+          "quote": "HMS Queen Elizabeth was commissioned in 2017 as the lead ship of the class. She conducted her first sea trials in 2017 and was formally declared operational in 2020.",
+          "verdict_reason": "The snippet directly answers the query by providing the specific commissioning year (2017) and operational declaration year (2020) for HMS Queen Elizabeth.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_114",
+      "claim_index": 0,
+      "claim": "The retrieved documents partially support the query but do not fully address the origin of the saying \"all quiet on the western front.\" indicates that the novel \"All Quiet on the Western Front\" (\"Im Westen nichts Neues\") was written by Erich Maria Remarque in 1927",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The novel All Quiet on the Western Front was written in 1927.",
+          "quote": "\"All Quiet on the Western Front\" (\"Im Westen nichts Neues\") was written in 1927, but",
+          "verdict_reason": "Snippet confirms the author and writing year of the novel containing the saying, but does not explain the specific origin or first usage of the phrase itself.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_150",
+      "claim_index": 1,
+      "claim": "Documents do not contain relevant information about the Eagles' bass player",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.3333333333333333,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet identifies the bass player for Queensrÿche, not the Eagles. It provides no evidence regarding the queried entity.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses Norm Fisher and his work with Bryan Adams but contains no mention of the band 'the Eagles' or any connection to them.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Brian O'Connor is the bass guitarist for the rock band Eagles of Death Metal.",
+          "quote": "Brian Scott O'Connor ... is best known for his role as bass guitarist for rock band Eagles of Death Metal.",
+          "verdict_reason": "Snippet identifies a bassist for 'Eagles of Death Metal', a distinct entity from the queried band 'the Eagles', providing related but non-decisive evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_159",
+      "claim_index": 2,
+      "claim": "The invasion occurred on June 6, 1944 )",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The invasion of Normandy took place in Normandy on June 6, 1944, as part of Operation Overlord.",
+          "quote": "American airborne landings in Normandy were the first American combat operations during Operation Overlord, the invasion of Normandy by the Western Allies on June 6, 1944",
+          "verdict_reason": "The snippet explicitly identifies the location of the invasion of Normandy as Normandy and provides the date, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_188",
+      "claim_index": 0,
+      "claim": "Citation",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Peter Trueb computed approximately 22 trillion digits of pi in 2016, ranking second behind the PiHex project's least significant digit calculation.",
+          "quote": "second place is held by Peter Trueb who computed some 22+ trillion digits in 2016 and third place by \"houkouonchi\" who derived the 13.3 trillionth digit",
+          "verdict_reason": "Snippet addresses the query by listing specific record-holders for pi calculations, but the 1994 timestamp and mention of a 2016 record indicate the data is outdated and incomplete for a 'most digits' query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_6f777dda5314",
+      "claim_index": 0,
+      "claim": "While documents provide additional context, they do not contradict the fact that Todd Monken is the current coach",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document indicates the Browns are conducting head coach interviews as of January 26, 2026, rather than naming a current head coach.",
+          "quote": "The Browns are currently conducting second-round interviews. Interview details are based on current reports and will be updated as more information becomes available. Last updated: January 26, 2026 at 6:20 PM",
+          "verdict_reason": "The snippet addresses the query entity but indicates the position is vacant and under interview, providing conflict-bearing evidence about the lack of a current coach rather than a name.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Cleveland Browns announced the hiring of Todd Monken as their next head coach.",
+          "quote": "The Cleveland Browns have hired former Baltimore Ravens offensive coordinator Todd Monken to be their next head coach, the team announced",
+          "verdict_reason": "Snippet addresses the query entity and claim directly but lacks temporal confirmation of 'current' status, representing potentially superseded evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document is the official Cleveland Browns coaches roster page but the snippet only shows navigation links without listing the current coach.",
+          "quote": "Rosters\n+ Player Roster\n+ Coaches Roster\n+ Front Office\n+ Depth Chart",
+          "verdict_reason": "The snippet is from the official team site's coach roster page but only displays menu links, failing to name the current coach while remaining topically relevant.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_956e1f6e518e",
+      "claim_index": 2,
+      "claim": "No astronauts have returned to the moon since then",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The last time humans traveled to the moon was in 1972 during the Apollo 17 mission.",
+          "quote": "Schmitt, 90, left his bootprints on the lunar surface in 1972, as part of Apollo 17 — the final mission in the program, which was the last time humans traveled to the moon.",
+          "verdict_reason": "The snippet explicitly states that Apollo 17 in 1972 was the last time humans traveled to the moon, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The last U.S. astronaut landed on the moon on December 19, 1972, during the Apollo 17 mission.",
+          "quote": "When was the last time an American was on the moon? The last U.S. astronaut to land on the moon was on Dec. 19, 1972, during NASA's Apollo 17 mission.",
+          "verdict_reason": "The snippet directly answers the query by providing the specific date of the last human moon landing (Dec. 19, 1972).",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The last human to walk on the moon was Eugene Cernan on December 14, 1972, and no astronauts have returned since.",
+          "quote": "Cernan became the last human to walk on the moon on Dec. 14, 1972. ... None have been back since",
+          "verdict_reason": "The snippet explicitly identifies the date of the last moon landing (Dec 14, 1972) and confirms no subsequent visits, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_08757808c000",
+      "claim_index": 2,
+      "claim": "Documents provide more detailed information from higher quality sources, confirming that blood pressure can rise significantly during weight lifting, sometimes up to 200/100 mmHg, especially during heavy lifts or when using techniques like the Valsalva maneuver",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Weight lifting causes temporary blood pressure spikes up to 200/100 mmHg during heavy lifts, though long-term effects are generally positive.",
+          "quote": "During a lift, blood pressure can spike temporarily, especially when you're lifting heavy or bracing (holding your breath during part of the lift). Blood pressure can reach 200/100 mmHg or higher",
+          "verdict_reason": "Snippet directly addresses the query by confirming temporary BP spikes during lifting (supporting the claim) while noting long-term benefits (nuance), making it conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Weight lifting causes increases in blood pressure, with the greatest rise occurring at the joint angle corresponding to the weakest point in the strength curve.",
+          "quote": "In weight lifting, the greatest increase in blood pressure occurred at the joint angle corresponding to the weakest point in the strength curve",
+          "verdict_reason": "The snippet provides direct scientific evidence that weight lifting increases blood pressure, addressing the query. It is marked partially supports as it details specific mechanics rather than a simple yes/no conclusion.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Blood pressure increases during the actual act of weight lifting, though the document investigates if training plans can ultimately help hypertension.",
+          "quote": "It seems counter-intuitive that lifting weights could improve blood pressure, because blood pressure goes up during the actual weight lifting.",
+          "verdict_reason": "The snippet directly addresses the query by confirming blood pressure rises during lifting, but focuses on long-term benefits rather than solely confirming causation of chronic high blood pressure.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Weight lifting causes a temporary rise in blood pressure during the activity, though long-term training may lower it.",
+          "quote": "Blood pressure typically rises temporarily during strength training. Over time, regular strength training may help lower blood pressure.",
+          "verdict_reason": "The snippet directly addresses the query by confirming temporary blood pressure spikes during lifting while noting long-term benefits, providing nuanced but incomplete resolution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_1a764b8b6cf5",
+      "claim_index": 1,
+      "claim": "This name is used to signify their status as models of righteous rule in Sunni Islam",
+      "cited_docs": [
+        "d3",
+        "d2",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The formal name for the combined reigns of the four Rightly Guided Caliphs is the Rashidun Caliphate.",
+          "quote": "The Rashidun Caliphate The formal name for the combined reigns of",
+          "verdict_reason": "Snippet identifies 'Rashidun Caliphate' as the formal name for the combined reigns but cuts off before explicitly stating 'the rule was called'.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The reign of the first four caliphs is called the Rashidun Caliphate.",
+          "quote": "The reign of these caliphs, called the Rashidun Caliphate (632–661), is considered in Sunni Islam to have been 'rightly guided'",
+          "verdict_reason": "The snippet explicitly states that the reign of the rightly-guided caliphs is called the Rashidun Caliphate, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The rule of the first four caliphs is called the Rashidun Caliphate, which means Rightly Guided.",
+          "quote": "The term Rashidun, or \"Rightly Guided\", is derived from a famous Sunni hadith where Muhammad foretold that the caliphate of prophecy after him would last for 30 years",
+          "verdict_reason": "The snippet explicitly identifies the term 'Rashidun' as 'Rightly Guided' and associates it with the caliphate lasting 30 years, directly answering the query about the name of their rule.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The caliphs who followed the Prophet's footsteps are called 'The Rightly-Guided Caliphs' (Al-Khulafa-ur-Rashidun).",
+          "quote": "Those Caliphs who truly followed in the Prophet's foot steps are called 'The Rightly-Guided Caliphs' (Al-Khulafa-ur Rashidun in Arabic).",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating the name given to the rule of the first four caliphs.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "wikirevision_0109",
+      "claim_index": 2,
+      "claim": "does not provide any relevant information regarding the current Prime Minister",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses historical rankings of past Canadian prime ministers based on academic surveys, not the current Prime Minister. It provides no information about who currently holds the office.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0153",
+      "claim_index": 2,
+      "claim": "is irrelevant to the query as it discusses state-level heads of government rather than the federal presidency",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet explains the role and titles of state-level heads of government in Germany, not the President of Germany. It does not address the federal presidency or identify any current president.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_150",
+      "claim_index": 1,
+      "claim": "Documents do not contain relevant information about the Eagles' bass player",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.3333333333333333,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet identifies the bass player for Queensrÿche, not the Eagles. It provides no evidence regarding the queried entity.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses Norm Fisher and his work with Bryan Adams but contains no mention of the band 'the Eagles' or any connection to them.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Brian O'Connor is the bass guitarist for the rock band Eagles of Death Metal.",
+          "quote": "Brian Scott O'Connor ... is best known for his role as bass guitarist for rock band Eagles of Death Metal.",
+          "verdict_reason": "Snippet identifies a bassist for 'Eagles of Death Metal', a distinct entity from the queried band 'the Eagles', providing related but non-decisive evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0025",
+      "claim_index": 2,
+      "claim": "do not provide specific information regarding the current president, focusing instead on historical context and the role of the Vice President, respectively",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the role and election process of the Vice President of India, not the President. It does not identify or name any current or latest President of India.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "There have been 15 presidents of India since the post was established in 1950.",
+          "quote": "There have been 15 presidents of India since the post was established when India was declared a republic with the adoption of the Indian constitution in 1950.",
+          "verdict_reason": "Snippet provides historical context about Indian presidents but does not identify the current/latest president by name. It is about the same entity but incomplete for answering 'who is the latest president.'",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

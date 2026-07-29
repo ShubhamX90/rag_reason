@@ -1,0 +1,1394 @@
+{
+  "variant": "benchmark_set_all_modes/qwen7b/oracle_both/runtime/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/oracle_both/runtime/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/oracle_both/runtime/baseline/final/detailed_results.json",
+    "source_final_sha256": "e10263e6323b7fa549d7f4f334bd3ca8bb514d2857c45388b6cd5dfc3da5a4ae",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen7b/oracle_both/runtime/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen7b/oracle_both/runtime/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1028,
+    "claims_with_citations": 126,
+    "claims_with_committee_support_set": 784,
+    "claims_with_any_approved_citation": 122,
+    "claims_with_any_gold_positive_citation": 126,
+    "committee_alignment_precision_macro": 0.9141534391534392,
+    "committee_alignment_precision_micro": 0.9045801526717557,
+    "gold_positive_citation_precision_macro": 0.9973544973544973,
+    "gold_positive_citation_precision_micro": 0.9961832061068703,
+    "soft_extra_citation_rate_micro": 0.0916030534351145,
+    "hard_negative_citation_rate_micro": 0.003816793893129771,
+    "committee_support_citation_recall_macro": 0.1556122448979592,
+    "committee_support_citation_recall_micro": 0.1556122448979592,
+    "claims_with_any_soft_extra_rate": 0.16666666666666666,
+    "claims_with_any_hard_negative_rate": 0.007936507936507936,
+    "strict_committee_alignment_claim_rate": 0.10116731517509728,
+    "strict_gold_clean_claim_rate": 0.11770428015564202,
+    "strict_grounded_committee_clean_rate_all_claims": 0.10116731517509728,
+    "strict_grounded_gold_clean_rate_all_claims": 0.11770428015564202,
+    "total_cited_docs": 262,
+    "total_approved_cited_docs": 237,
+    "total_gold_positive_cited_docs": 261,
+    "total_soft_extra_cited_docs": 24,
+    "total_hard_negative_cited_docs": 1
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "trust_align_068",
+      "claim_index": 4,
+      "claim": "Therefore, switching to door 2 gives you a higher chance of winning the car",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The probability that the car is behind the initially chosen door #1 remains 1/3 after the host reveals a goat behind door #3.",
+          "quote": "The likelihood that the car is behind door #1 remains 1/3 as a result. In addition, in fact, when the game show host opens up door #3, he reveals two things: 1 ΓÇô that the likelihood that the car is behind door #3 is 0",
+          "verdict_reason": "The snippet addresses the specific Monty Hall scenario and confirms the static probability of the initial choice, providing key evidence for switching, though it cuts off before explicitly stating the final probability of door #2.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document describes a Bayesian calculation for the Monty Hall problem where the host reveals a goat behind Door 2 after the contestant picks Door 1.",
+          "quote": "Using Bayes to update odds host of the game show ΓÇ£LetΓÇÖs Make a Deal,ΓÇ¥ hides a car behind one of three doors and a goat behind each of the other two. The contestant picks Door No. 1, but before opening it, Mr. Hall opens Door No. 2 to reveal a goat.",
+          "verdict_reason": "The snippet addresses the same entity and logic (Monty Hall problem) but describes a scenario where Door 2 is opened, whereas the query specifies Door 3 is opened. It is relevant conflict-bearing evidence but does not directly answer the specific variable change requested.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_070",
+      "claim_index": 0,
+      "claim": "Big Brother is a character present in the work Nineteen Eighty-Four",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies Big Brother as a supreme figure in Nineteen Eighty-Four but cuts off before fully describing the character.",
+          "quote": "\"Big Brother\" is a supreme",
+          "verdict_reason": "The snippet addresses the query by naming a character (Big Brother) but is incomplete due to truncation, providing only partial evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_086",
+      "claim_index": 5,
+      "claim": "Lastly, state taxes can also significantly impact the cost of gasoline",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Gas prices vary between stations because those in convenient locations or directly off highways tend to be more expensive than those slightly further away.",
+          "quote": "Shop around, because gas stations in traditionally convenient locations tend to have higher prices... Stations located directly off the highway will have more expensive prices",
+          "verdict_reason": "The snippet addresses the query by explaining location-based price differences but is incomplete as the text cuts off before fully detailing other factors like state taxes.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0137",
+      "claim_index": 1,
+      "claim": "However, the information in is from a 2010 Wikipedia revision, which might be outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Calcutta redirects to Kolkata, indicating the official name change.",
+          "quote": "#REDIRECT Kolkata R from historic name",
+          "verdict_reason": "The redirect confirms Kolkata is the current official name, but the snippet is from a 2010 Wikipedia revision and lacks explicit confirmation of current status.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_0bd7153f19ad",
+      "claim_index": 0,
+      "claim": "The Allies went eastward across North Africa and entered Europe via Italy after the North African campaign. all confirm this movement",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "After the North African campaign, the Allies moved eastward across North Africa and entered Europe via Italy.",
+          "quote": "This opened a crucial front of war, allowing the Allies to make their way eastward across North Africa and, ultimately, into Europe via Italy.",
+          "verdict_reason": "The snippet explicitly states the Allies' movement after the North Africa victory was eastward across the region and into Europe via Italy, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Following the North African campaign, Allied forces proceeded to invade Sicily.",
+          "quote": "Following the campaign, North Africa was liberated, securing the Mediterranean for Allied shipping and setting the stage for subsequent military operations, including the invasion of Sicily.",
+          "verdict_reason": "The snippet explicitly states that the North African campaign set the stage for the invasion of Sicily, directly answering where the Allies went next.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "After the battle for North Africa ended, the Allies fought an attritional campaign in Italy from 1943 to 1945.",
+          "quote": "The battle for Italy From 1943 to 1945, the Allies fought an attritional campaign in Italy against a resolute and skilful enemy.",
+          "verdict_reason": "The snippet explicitly states that following the North African campaign, the Allies engaged in a campaign in Italy, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "After victories in Algeria and Morocco, Allied forces advanced into Tunisia for a major collision with Axis troops.",
+          "quote": "The minor victories in Algeria and Morocco would be followed by a much grander victory in Tunisia.",
+          "verdict_reason": "The snippet explicitly states that Allied operations in North Africa (Algeria/Morocco) were followed by a campaign in Tunisia, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_213701765f94",
+      "claim_index": 0,
+      "claim": "The plane landed on the Hudson River on January 15, 2009",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "A small plane made an emergency landing on the Hudson River in Orange County on Monday night around 8 p.m.",
+          "quote": "The Federal Aviation Administration said the plane landed at around 8 p.m. near the Newburgh-Beacon Bridge after experiencing engine issues.",
+          "verdict_reason": "The snippet directly answers the query by providing a specific date (Monday night) and time (around 8 p.m.) for a plane landing on the Hudson River.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "US Airways Flight 1549 made an emergency landing in the Hudson River on January 15, 2009.",
+          "quote": "US Airways flight 1549, flight of a passenger airliner that made an emergency landing in the Hudson River on January 15, 2009",
+          "verdict_reason": "The snippet explicitly states the date (January 15, 2009) and event of the plane landing on the Hudson River, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "News reports from January 2009 confirm that US Airways Flight 1549 crash-landed in the Hudson River.",
+          "quote": "US Airways Plane Crash-Lands in New York City's Hudson River, Everyone Survives. _Fox News_. Associated Press. January 16, 2009.",
+          "verdict_reason": "The snippet confirms the event occurred in January 2009 but lists citation dates rather than explicitly stating the specific landing date in a direct sentence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The airplane ditched in the Hudson River at approximately 1531.",
+          "quote": "The airplane ditched in the Hudson River about 1531. The cabin and flight deck crew initiated evacuation of the airplane.",
+          "verdict_reason": "The snippet explicitly states the time the plane landed (ditched) in the Hudson River, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_747727772a30",
+      "claim_index": 1,
+      "claim": "Genetic factors, hive conditions the intensity of the rain all play a role in determining whether bees will venture out. CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Bees do fly in the rain, though this behavior depends on genetics, hive needs, and rain intensity.",
+          "quote": "Yes, bees do fly in the rain, but I feel a lot depends on the current situation within the hive and it is also very dependent on genetics.",
+          "verdict_reason": "The snippet directly addresses the query by confirming bees fly in rain but adds conditional variables, making it relevant but not a simple unconditional confirmation.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Bees generally avoid flying in rain due to wet wings reducing lift, but will fly in light rain or emergencies.",
+          "quote": "In general, bees prefer to stay dry and will only fly in the rain if they absolutely must... But they also seem able to distinguish a brief shower from a full-blown storm and continue to forage in light rain.",
+          "verdict_reason": "The snippet directly addresses the query by explaining why bees usually don't fly in rain but explicitly notes exceptions for light rain and emergencies, providing a nuanced rather than absolute answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_31ad09b9cd22",
+      "claim_index": 0,
+      "claim": "Samara Joy won the latest Grammy Award for Best Jazz Performance in 2025",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Chick Corea, Christian McBride, and Brian Blade won the 2026 Grammy Award for Best Jazz Performance for \"Windows - Live\".",
+          "quote": "Chick Corea, Christian McBride & Brian Blade won the 2026 Grammy Award for Best Jazz Performance with \"Windows - Live\"",
+          "verdict_reason": "The snippet directly answers the query by identifying the winners of the latest (2026) Grammy Award for Best Jazz Performance.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Samara Joy won the 2025 Grammy Award for Best Jazz Performance for the song \"Twinkle Twinkle Little Me\".",
+          "quote": "Samara Joy won Best Jazz Vocal Album for A Joyful Holiday and Best Jazz Performance for \"Twinkle Twinkle Little Me\" featuring Sullivan Fortner.",
+          "verdict_reason": "The snippet explicitly identifies Samara Joy as the winner of the Best Jazz Performance category at the 67th Grammy Awards in February 2025, directly answering the query about the latest winner.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0186",
+      "claim_index": 0,
+      "claim": "The song \"Apocalypic\" is sung by Lizzy Hale from the group Halestorm",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Apocalyptic is a song by Halestorm, the American hard rock band that Lizzy Hale is a member of.",
+          "quote": "\"Apocalyptic\" is a song by the American hard rock band Halestorm.",
+          "verdict_reason": "The snippet directly identifies the song and the band. Lizzy Hale is the lead vocalist of Halestorm, so this directly answers which group performs the song.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Lizzy Hale is the lead vocalist and guitarist of Halestorm, an American hard rock band.",
+          "quote": "Halestorm is an American hard rock band from Red Lion, Pennsylvania, consisting of lead vocalist and guitarist Lzzy Hale",
+          "verdict_reason": "Document confirms Lizzy Hale is from Halestorm but does not mention the song 'Apocalyptic' or verify it as her work.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_c2975d69d57c",
+      "claim_index": 0,
+      "claim": "Seth MacFarlane plays Lois's dad, Carter Pewterschmidt, on Family Guy",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Seth MacFarlane and Alex Borstein reprise their roles as Lois's parents, Carter and Barbara Pewterschmidt.",
+          "quote": "Series creator and executive producer Seth MacFarlane and main cast member and former series writer Alex Borstein reprise their roles of Carter and Barbara Pewterschmidt, Lois's parents.",
+          "verdict_reason": "The snippet explicitly identifies Seth MacFarlane as the voice actor for Carter, Lois's dad, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Seth MacFarlane is credited with playing the character Carter Pewterschmidt.",
+          "quote": "Actor 20 Credits Seth MacFarlane Peter Griffin, Stewie Griffin, Brian Griffin, Glenn Quagmire, Tom Tucker, Dr. Elmer Hartman, Carter Pewterschmidt",
+          "verdict_reason": "The snippet explicitly lists Seth MacFarlane as the actor playing Carter Pewterschmidt, who is Lois's dad in Family Guy.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_064",
+      "claim_index": 1,
+      "claim": "This is why our eyes do not reflect light in the dark like animal eyes do",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Humans do not possess the tapetum lucidum, an iridescent membrane that reflects light back to the retina in some animals.",
+          "quote": "the tapetum lucidum is not found in all animals and is not something humans possess. It is an iridescent membrane which reflects light",
+          "verdict_reason": "The snippet directly addresses the query by explaining that humans lack the tapetum lucidum, the specific structure causing eye reflection in animals, though it focuses primarily on cats.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The tapetum lucidum acts as a mirror in canine eyes, reflecting light to allow better vision in the dark than humans possess.",
+          "quote": "The tapetum acts as a mirror within the eye, reflecting back the light that enters it, and giving the retina another opportunity to register the light.",
+          "verdict_reason": "Snippet explains the mechanism (tapetum lucidum) causing animal eye reflection, implying humans lack it, but does not explicitly state why human eyes do not reflect.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_132",
+      "claim_index": 3,
+      "claim": "Third highlight that productivity benefits require understanding how to use days off efficiently and avoid work during downtime, indicating that the quality of work and the ability to manage time effectively play crucial roles",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Tests of shorter work weeks aim to determine if time spent at work is proportional to employee efficiency, suggesting productivity may not scale linearly with hours.",
+          "quote": "These tests are intended to see whether the time spent at work is proportional with the employee efficiency. What actually matters is how productive you are at work.",
+          "verdict_reason": "The snippet addresses the query's core premise by questioning the proportionality of work time and efficiency, though it lacks specific data explaining why productivity remains high.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Productivity benefits require understanding how to use days off and avoiding work during downtime, though science on shorter weeks is incomplete.",
+          "quote": "For productivity benefits to show themselves, people need to understand how to make the most of their days off as well as their work days.",
+          "verdict_reason": "Snippet addresses the query's core topic by offering partial explanations (efficient meetings, proper downtime) but explicitly states much is left to learn.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0099",
+      "claim_index": 0,
+      "claim": "The latest Cricket World Cup champion is India, as confirmed by the most recent and reliable sources",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "India won the 2023 Cricket World Cup, making them the latest Cricket World Cup champion as of the document timestamp.",
+          "quote": "last = ubl 2023 Cricket World Cup 2023 India next = ubl 2027 Cricket World Cup 2027 South Africa Zimbabwe Namibia participants = 14 champions = cr AUS (6th title)",
+          "verdict_reason": "Document explicitly identifies 2023 Cricket World Cup won by India as the most recent tournament. Timestamp (May 2026) confirms this is current information. Wikipedia source is high-quality.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Australia won the 2023 Cricket World Cup by beating India in the final.",
+          "quote": "Australia beat India in the final by six wickets, winning their sixth Cricket World Cup title.",
+          "verdict_reason": "The snippet directly states the winner of the 2023 Cricket World Cup, which answers who the latest champion is.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_da5762edf2c2",
+      "claim_index": 0,
+      "claim": "The first episode of Saved by the Bell aired on August 20, 1989",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The release date for the show in the United States is August 20, 1989.",
+          "quote": "Release date · August 20, 1989 (United States)",
+          "verdict_reason": "The snippet explicitly provides the US release date of August 20, 1989, which directly answers the query about when the first episode aired.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The premiere date for Saved by the Bell is listed as July 11, 1987.",
+          "quote": "Saved by the Bell\nPremiere Date\nJuly 11, 1987",
+          "verdict_reason": "The snippet explicitly states the premiere date for the show, directly answering the query about when the first episode aired.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The series Saved by the Bell premiered on August 20, 1989.",
+          "quote": "The series premiered on August 20, 1989, and ended on May 22, 1993, with 86 episodes produced spanning four seasons.",
+          "verdict_reason": "The snippet explicitly states the premiere date of the series as August 20, 1989, directly answering the query about when the first episode aired.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_8efa53ba7c60",
+      "claim_index": 1,
+      "claim": "Therefore, while T-Rex is part of the family tree that led to birds, birds did not evolve directly from T-Rex",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Modern birds descended from theropods, a group of two-legged dinosaurs that includes Tyrannosaurus rex.",
+          "quote": "Modern birds descended from a group of two-legged dinosaurs known as theropods, whose members include the towering Tyrannosaurus rex",
+          "verdict_reason": "The snippet confirms birds descended from theropods including T-Rex, but describes T-Rex as a group member rather than a direct linear ancestor, making the evidence relevant but not a complete resolution of the specific lineage question.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Scientists believe modern birds evolved from Theropods, the dinosaur family that includes Tyrannosaurus Rex.",
+          "quote": "Scientists believe that modern birds evolved from a specific kind of dinosaur called Theropods. This is the family that includes Tyrannosaurus Rex and Velociraptors.",
+          "verdict_reason": "The snippet explicitly states birds evolved from Theropods, identifying T-Rex as a member of that family, directly supporting the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Birds descended from a common ancestor that was not in the T. rex lineage.",
+          "quote": "All birds, having descended from a common ancestor that was not in T. rex's lineage, share the same evolutionary distance from T. rex.",
+          "verdict_reason": "The snippet directly addresses the query by stating birds are not in T. rex's lineage, providing conflict-bearing evidence that partially resolves the claim.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Birds belong to the theropod group of dinosaurs that included T. rex.",
+          "quote": "Birds belong to the theropod group of dinosaurs that included T. rex.",
+          "verdict_reason": "The snippet explicitly states birds belong to the theropod group including T. rex, directly confirming the ancestral relationship queried.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_5eb89aae15f3",
+      "claim_index": 0,
+      "claim": "The second highest-grossing Kannada movie of all time is citations, which all confirm that Kantara has surpassed KGF: Chapter 1 to become the second-highest-grossing Kannada film",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The movie Kantara has surpassed KGF to become the second biggest Kannada film.",
+          "quote": "'Kantara' beats 'KGF' to become second biggest Kannada film",
+          "verdict_reason": "The snippet directly answers the query by identifying 'Kantara' as the second highest-grossing (biggest) Kannada movie.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Kantara has surpassed KGF: Chapter 1 to become the second-highest-grossing Kannada film of all time.",
+          "quote": "Rishab Shetty's Kantara has surpassed Yash's KGF: Chapter 1 to climb to the second spot in the list of highest-grossing Kannada films of all time.",
+          "verdict_reason": "The snippet explicitly states that Kantara is now the second highest-grossing Kannada film, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Kantara: A Legend - Chapter 1 is the second highest-grossing Kannada film with a worldwide gross of Rs 851.89 crore.",
+          "quote": "| Kantara: A Legend - Chapter 1 | Rs 851.89 crore |",
+          "verdict_reason": "The snippet provides a ranked list of highest-grossing Kannada films, explicitly identifying Kantara Chapter 1 as the second entry after KGF Chapter 2, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The document lists KGF as the second highest-grossing Kannada movie with a closing collection of 250.00 Cr.",
+          "quote": "| 2 | KGF  KGF Cast: Yash, Prashanth Neel, Vijay Kiragandur | 80.00 | 21.80 | 250.00 |",
+          "verdict_reason": "The snippet provides a ranked table explicitly listing 'KGF' at position 2 with box office figures, directly answering the query about the second highest-grossing movie.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_ff2cb00f4c03",
+      "claim_index": 0,
+      "claim": "The correct number of episodes in Game of Thrones season 7 is : seven episodes",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "HBO confirmed that the seventh season of Game of Thrones would consist of seven episodes.",
+          "quote": "HBO confirmed on July 18, 2016, that the seventh season would consist of seven episodes, and would premiere later than usual in mid-2017",
+          "verdict_reason": "The snippet explicitly states the confirmed number of episodes for season 7, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Game of Thrones Season 7 consists of seven episodes.",
+          "quote": "Instead of 10 episodes, HBO would only be airing seven in 2017.",
+          "verdict_reason": "The snippet explicitly states that Season 7 will have seven episodes, directly answering the user's query about the episode count.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The document states that Game of Thrones season 7 contains 7 episodes.",
+          "quote": "there are only 7 episodes in season 7",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating the episode count for season 7 is 7.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Season seven of Game of Thrones consisted of seven episodes.",
+          "quote": "Season seven of Game of Thrones was the show's shortest season, clocking in at only seven episodes",
+          "verdict_reason": "The snippet explicitly states the episode count for season seven, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_3521e5dc831c",
+      "claim_index": 0,
+      "claim": "The winner of the bronze medal in shooting for India at the 2012 Olympics was Gagan Narang in the 10m air rifle event",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Gagan Narang won the bronze medal in the 10 m air rifle shooting event for India at the 2012 Olympics.",
+          "quote": "Gagan Narang | 10 m air rifle | 598 | 3 Q | 701.1 | 3rd place, bronze medalist(s)",
+          "verdict_reason": "The snippet explicitly lists Gagan Narang as the 3rd place finisher and bronze medalist in the 10 m air rifle event for India at the 2012 Olympics.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Gagan Narang won the bronze medal for India in the Men's 10m Air Rifle at the 2012 London Olympics.",
+          "quote": "Watch India's Gagan Narang win a bronze medal in the Men's 10m Air Rifle at the 2012 London Olympics.",
+          "verdict_reason": "The snippet explicitly identifies Gagan Narang as the Indian shooter who won a bronze medal at the 2012 Olympics, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Gagan Narang won the bronze medal in the 10m air rifle event for India at the 2012 London Olympics.",
+          "quote": "Gagan Narang won the country its first medal in the London Olympics 2012. Narang bagged a bronze medal in the 10m air rifle event.",
+          "verdict_reason": "The snippet explicitly identifies Gagan Narang as the Indian shooter who won a bronze medal in the 10m air rifle event at the 2012 Olympics, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Gagan Narang won the bronze medal in the 10m air rifle event at the 2012 London Olympics for India.",
+          "quote": "Narang won the bronze medal in the 10m air rifle event at the 2012 London Olympics with a total score of 701.1 becoming India's first medal winner at the 2012 games.",
+          "verdict_reason": "The snippet explicitly states that Gagan Narang won the bronze medal for India in shooting at the 2012 London Olympics, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0170",
+      "claim_index": 0,
+      "claim": "The current French Open men's singles champion is Carlos Alcaraz. all confirm this, while does not explicitly state his current status but mentions him as the defending champion",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the current French Open men's singles champion.",
+          "quote": "Men Current = Carlos Alcaraz (singles)",
+          "verdict_reason": "The document explicitly identifies Carlos Alcaraz as the current men's singles champion at the French Open, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the current men's singles champion of the French Open.",
+          "quote": "Men Current = Carlos Alcaraz (singles)",
+          "verdict_reason": "Snippet explicitly identifies Carlos Alcaraz as the current men's singles champion. Document timestamp is 2026-02-01, making this current information.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the 2025 French Open men's singles champion, having defended his title by defeating Jannik Sinner in the final.",
+          "quote": "Carlos Alcaraz defended his title in men's singles by defeating world No. 1 Jannik Sinner in the final, which lasted five hours and twenty nine minutes",
+          "verdict_reason": "The snippet directly identifies Carlos Alcaraz as the current French Open men's singles champion with specific details about his victory.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Carlos Alcaraz was the two-time defending men's singles champion at the 2026 French Open but withdrew due to a wrist injury.",
+          "quote": "Two-time defending men's singles champion Carlos Alcaraz will not defend his title, as he withdrew before the start of the tournament due to a wrist injury.",
+          "verdict_reason": "Document addresses the 2026 French Open men's singles but does not name the actual current champion, only the defending champion who withdrew. The query asks for the current champion, which this document does not provide.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_114b9082bc42",
+      "claim_index": 0,
+      "claim": "Elvis Presley died on August 16, 1977",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.8,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley was discovered unconscious on August 16 and efforts to revive him failed, indicating his death occurred on that date.",
+          "quote": "On the afternoon of August 16, Presley was discovered unconscious in a bathroom of Graceland. Efforts by paramedics at the mansion failed to revive him, as did further attempts by doctors at Baptist Memorial Hospital.",
+          "verdict_reason": "The snippet explicitly states Presley was found unconscious on August 16 and could not be revived, directly answering the query about his death date.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "Assuming he didn't fake his death, he died August 16, 1977.",
+          "verdict_reason": "The snippet directly states the specific date of death requested in the query, providing a decisive answer despite the conditional phrasing.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977, in Memphis, Tennessee.",
+          "quote": "Died\n+ August 16\n, \n1977\n+ Memphis, Tennessee, USA\n(cardiac arrhythmia)",
+          "verdict_reason": "The snippet explicitly states the date of death (August 16, 1977) in the personal details section, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "The world went into mourning on August 16, 1977, when the King of Rock 'n' Roll died at the age of 42.",
+          "verdict_reason": "The snippet explicitly states the date of Elvis Presley's death as August 16, 1977, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "IN LOVING MEMORY OF Elvis Aaron Presley ... January 8, 1935 – August 16, 1977",
+          "verdict_reason": "The snippet explicitly states the death date of Elvis Presley as August 16, 1977, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "The actor who plays CO Rick Hopper on Orange is the New Black is Hunter Emery",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

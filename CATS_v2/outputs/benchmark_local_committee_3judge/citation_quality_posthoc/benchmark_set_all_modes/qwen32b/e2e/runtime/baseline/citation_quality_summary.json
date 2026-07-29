@@ -1,0 +1,1620 @@
+{
+  "variant": "benchmark_set_all_modes/qwen32b/e2e/runtime/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/e2e/runtime/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/e2e/runtime/baseline/final/detailed_results.json",
+    "source_final_sha256": "20658fb0d4d37020d8e709539876fd3b1af9aa448cbdc3f4d5eadcd5b3738e7b",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen32b/e2e/runtime/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen32b/e2e/runtime/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1349,
+    "claims_with_citations": 1151,
+    "claims_with_committee_support_set": 1280,
+    "claims_with_any_approved_citation": 1081,
+    "claims_with_any_gold_positive_citation": 1150,
+    "committee_alignment_precision_macro": 0.8062119895742832,
+    "committee_alignment_precision_micro": 0.7605579232855483,
+    "gold_positive_citation_precision_macro": 0.9979727772951057,
+    "gold_positive_citation_precision_micro": 0.9984502130956994,
+    "soft_extra_citation_rate_micro": 0.2378922898101511,
+    "hard_negative_citation_rate_micro": 0.0015497869043006587,
+    "committee_support_citation_recall_macro": 0.84453125,
+    "committee_support_citation_recall_micro": 0.84453125,
+    "claims_with_any_soft_extra_rate": 0.3353605560382276,
+    "claims_with_any_hard_negative_rate": 0.0034752389226759338,
+    "strict_committee_alignment_claim_rate": 0.56412157153447,
+    "strict_gold_clean_claim_rate": 0.799110452186805,
+    "strict_grounded_committee_clean_rate_all_claims": 0.56412157153447,
+    "strict_grounded_gold_clean_rate_all_claims": 0.799110452186805,
+    "total_cited_docs": 2581,
+    "total_approved_cited_docs": 1963,
+    "total_gold_positive_cited_docs": 2577,
+    "total_soft_extra_cited_docs": 614,
+    "total_hard_negative_cited_docs": 4
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_24fa0020a521",
+      "claim_index": 4,
+      "claim": "Consultation with a pediatrician is advised before starting any supplement regimen",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Most children do not need a daily multivitamin if they have a well-rounded diet, though supplements may help those with dietary restrictions.",
+          "quote": "For most children, a well-rounded diet provides all the vitamins and minerals they need. However, picky eating, food allergies, or dietary restrictions can sometimes make it challenging to meet these nutritional requirements.",
+          "verdict_reason": "The snippet addresses the query by stating most children don't need multivitamins but hints at exceptions; however, the text cuts off before fully detailing when they are beneficial.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The AAP states children do not need multivitamins if they eat a well-balanced diet, though specific groups like picky eaters or those with restrictive diets may benefit.",
+          "quote": "The short answer from the AAP: not if they eat a well-balanced diet. But \"well-balanced\" is doing a lot of heavy lifting in that sentence.",
+          "verdict_reason": "Snippet directly addresses the query with AAP guidelines but provides conditional nuance rather than a simple yes/no, making it conflict-bearing evidence that partially supports the answer.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The American Academy of Pediatrics does not recommend daily multivitamins for children who eat a well-balanced diet.",
+          "quote": "However, the American Academy of Pediatrics (AAP) does not recommend a daily multivitamin for children eating a well-balanced diet.",
+          "verdict_reason": "The snippet directly addresses the query with a specific guideline against routine use for healthy eaters, though it notes exceptions for specific deficiencies, making it partial rather than absolute support.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The AAP does not recommend a daily multivitamin for most children but advises specific vitamin D and iron supplements at certain life stages.",
+          "quote": "The AAP doesn't recommend a daily multivitamin for most children. But it does recommend vitamin D and iron supplements at certain points in a child's life.",
+          "verdict_reason": "The snippet directly addresses the query by stating the AAP's stance against routine multivitamins while noting exceptions for specific nutrients, providing partial but not absolute resolution.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Most healthy children do not require multivitamins if they grow typically and eat diverse foods.",
+          "quote": "Most healthy children don't need multivitamins if they are growing at the typical rate and eating a variety of foods.",
+          "verdict_reason": "Snippet addresses the query directly but only covers healthy children, leaving the question unanswered for children with specific health needs or deficiencies.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_8bedefe7ac1a",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Birds use a syrinx to produce different sounds, and different situations call for different volumes, but the text does not confirm if calls are unique to each individual.",
+          "quote": "While humans can make sounds with help from their vocal cords, birds use a part called the syrinx (SEE-RINKS). As air moves through the syrinx, it helps produce the different sounds.",
+          "verdict_reason": "The snippet discusses bird sound production and variation by situation but lacks specific evidence on whether calls are unique to individuals, making it relevant but incomplete.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The study analyzes factors like body mass and beak size that influence bird vocalization frequency at the species level, but does not address individual uniqueness.",
+          "quote": "Ecological and evolutionary traits like body mass and beak size influence the vocalization frequency of bird species, such as the white-rumped shama",
+          "verdict_reason": "The snippet discusses factors influencing bird sounds at the species level, which is relevant to the query about individual uniqueness but does not directly answer whether calls are unique to individuals.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Bird calls, unlike songs, can be understood and elicit responses from unrelated species, such as alarm calls.",
+          "quote": "Most species have a variety of calls they use to communicate with each other, but other species can take information from them. Specifically, these types of calls are alarm calls warning of predators or other dangers.",
+          "verdict_reason": "The snippet addresses bird calls and their function across species, providing relevant evidence that calls are not unique to individuals but shared/understood, though it doesn't explicitly state 'uniqueness' per individual.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Bird species produce a wide variety of distinct vocalization categories, with calls differing from songs in function and complexity.",
+          "quote": "most species make a wide variety of different sounds. This is especially true among the Passeriformes... Most of these have impressive playlists of sounds.",
+          "verdict_reason": "Snippet confirms birds have many distinct vocalizations but discusses species-level variety rather than individual uniqueness, providing partial but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Some young birds learn calls from adults and may sing poorly if isolated, while others like ducks are born with innate vocalization skills.",
+          "quote": "Your suggestion is correct that many young birds, especially songbirds, need to learn their songs and calls from the adults. Tests have shown that when some baby birds are raised in soundproof chambers, they aren't able to sing as well as birds that are exposed to the proper calls.",
+          "verdict_reason": "The snippet addresses bird call learning mechanisms (innate vs. learned) relevant to individuality but does not explicitly confirm if calls are unique to each individual bird.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_8cf8ebb94554",
+      "claim_index": 2,
+      "claim": "It is important to consult with a healthcare provider to determine the appropriate use and type of knee brace for individual needs",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "There are no studies proving that wearing a knee brace prevents injuries, though some users feel safer.",
+          "quote": "There haven't been studies that can prove for sure that wearing a brace was the reason someone avoided an injury. And you can't prevent some kinds of injuries, even with a brace.",
+          "verdict_reason": "The snippet directly addresses injury prevention but states there is no proof braces prevent injuries, offering conflicting evidence rather than a definitive support or rejection.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Prophylactic knee braces are designed to shield the kneecap from damage caused by direct impact in contact sports.",
+          "quote": "Prophylactic brace: This is a protective knee pad that shields the kneecap from damage due to direct impact. It's used by athletes who play contact sports, such as football.",
+          "verdict_reason": "The snippet describes a specific brace type for preventing impact damage, partially addressing injury prevention, but lacks broad evidence on overall effectiveness for all knee injuries.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "There is no conclusive evidence supporting the effectiveness of knee braces for preventing injuries, and they are not recommended for regular use.",
+          "quote": "However, no conclusive evidence supports their effectiveness, and they are not recommended for regular use.",
+          "verdict_reason": "The snippet directly addresses the query by stating there is no conclusive evidence for prevention, providing conflict-bearing scientific evidence rather than a definitive support or irrelevant text.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Prophylactic knee braces are designed to prevent injuries during contact sports and have proven effective for football players.",
+          "quote": "Prophylactic braces. These are designed to prevent injury to the knees during contact sports. ... Knee braces have proven to be a wise preventative measure in this particular sport.",
+          "verdict_reason": "The snippet directly addresses injury prevention for specific sports (football) but lacks broad evidence for all knee injuries, making it partially supportive.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Studies suggest prophylactic braces can help relieve MCL strain and protect against reinjury, though other studies indicate no clinical benefits for some knee supports.",
+          "quote": "There are studies that suggest prophylactic braces can help relieve MCL strain and knee stiffness as well as protect against reinjury after a previous MCL injury.",
+          "verdict_reason": "The snippet addresses the query by presenting conflicting evidence: it notes studies showing benefits for specific brace types (prophylactic) while acknowledging other studies find no clinical benefits.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_dd426f7706e8",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Traditional folklore states werewolves can transform at any time, while the full moon trigger is a modern cinematic invention.",
+          "quote": "No, werewolves do not exclusively transform during a full moon, according to traditional folklore. While modern media often portrays the full moon as the trigger for werewolf transformations, this concept is largely a product of cinematic storytelling",
+          "verdict_reason": "The snippet directly addresses the query by refuting the full moon necessity based on folklore and attributing it to modern media, providing conflict-bearing evidence that partially resolves the claim.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document title suggests an explanation of how a full moon creates a werewolf monster.",
+          "quote": "YouTube Werewolves Explained - how a full moon creates a monster!",
+          "verdict_reason": "The snippet directly addresses the query's claim about full moons creating werewolves but only provides a title without definitive evidence or resolution.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Werewolves created via a bite can only transform during a full moon.",
+          "quote": "Those turned via a bite only turn during a full moon.",
+          "verdict_reason": "The snippet addresses the query by stating bitten werewolves transform on full moons, but it is limited to a specific subset (bitten vs. born) and reflects fictional headcanon rather than a definitive universal rule.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Folklore from southern France and some Greek legends indicate a belief that men transform into wolves during a full moon.",
+          "quote": "certain southern regions of France believed in such, even well into the 1800s, and belief in the full moon causing werewolf transformations is also arguably indicated in some Greek legends.",
+          "verdict_reason": "The snippet provides historical and folkloric evidence supporting the idea but clarifies it is not a universal rule or scientific fact, making it partial support.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "A full moon forces werewolves to transform from human to wolf form rather than creating them.",
+          "quote": "The Moon acts as a weakness to Werewolves as it forces them to painfully turn from their human form into their feral wolf form when it is full.",
+          "verdict_reason": "The snippet addresses the query's entity and mechanism but describes transformation of existing werewolves, not their creation, providing partial but contradictory evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f97fef94decc",
+      "claim_index": 4,
+      "claim": "Additionally, VR headsets can offer vision benefits, such as improving eye coordination and depth perception under professional guidance",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Optometrists state there is no reliable evidence that VR headsets cause permanent eyesight deterioration, though one developer reported vision issues linked to prolonged use.",
+          "quote": "We currently do not have any reliable evidence that VR headsets cause permanent deterioration in eyesight in children or adults.",
+          "verdict_reason": "The snippet directly addresses the query with conflicting evidence: an anecdotal claim of harm versus expert consensus denying permanent damage, making it partially supportive but not definitive.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Virtual reality does not permanently change vision or pose a real threat to eye health, though it can cause digital eye strain.",
+          "quote": "Although virtual reality allows us to see different places and objects than what is real, it does not permanently change our vision or pose a real threat to eye health.",
+          "verdict_reason": "The snippet directly answers the query by stating VR does not permanently harm vision, while noting temporary strain, fully resolving the user's question.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "VR headsets do not cause direct or permanent eye damage but can lead to temporary symptoms like eye strain and dryness.",
+          "quote": "Virtual reality (VR) headsets don't cause direct damage to your eyes, though they can cause eye fatigue and other symptoms if not used in moderation",
+          "verdict_reason": "The snippet directly addresses the query by stating VR causes no permanent damage but admits temporary harm (fatigue), providing partial but not absolute resolution.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Studies found no serious vision deterioration in children using VR, though some participants had trouble detecting distance differences.",
+          "quote": "Likewise, a different study showed no serious deterioration of vision among children 8 to 12 who played a VR video game for 20 minutes. But two study participants had trouble detecting differences in distance.",
+          "verdict_reason": "The snippet directly addresses the query with specific study findings that are mixed (no serious deterioration vs. distance detection issues), providing conflict-bearing evidence rather than a definitive yes/no.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Virtual reality headsets display virtual magnified images equivalent to looking at a distance, making them healthier than long-term mobile phone use, though low resolution or distortion can cause eye fatigue.",
+          "quote": "images in virtual reality headsets are virtual magnified images, which are not close-up vision, and it's equivalent to looking at a distance. Compared to long-term use of mobile phones and computers, it is healthier.",
+          "verdict_reason": "The snippet directly addresses the query by arguing VR is generally healthier than screens but admits harm from poor quality or overuse, providing conflicting but relevant evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9251c7a33ec5",
+      "claim_index": 4,
+      "claim": "The overall health impact depends on various factors it is recommended to consult with a veterinarian to make an informed decision tailored to the specific needs of the pet",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Evidence indicates that spaying or neutering dogs correlates with both positive and adverse health effects, with risks potentially exceeding benefits for most male dogs.",
+          "quote": "The evidence shows that spay/neuter correlates with both positive AND adverse health effects in dogs. ... The number of health problems associated with neutering may exceed the associated health benefits in most cases.",
+          "verdict_reason": "The snippet directly addresses the query by confirming negative health impacts exist alongside benefits, providing conflict-bearing evidence rather than a simple yes/no answer.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Spaying and neutering carry potential negatives including surgical risks, weight gain, and hormonal changes affecting metabolism and coat quality.",
+          "quote": "Potential Negatives to Consider\nWhile spaying and neutering offer numerous benefits, there are some potential drawbacks to consider:\n1. Surgical Risks: Like any surgical procedure, spaying and neutering carry risks such as bleeding, infection, and adverse reactions to anesthesia.",
+          "verdict_reason": "The snippet directly addresses the query by listing specific negative health impacts (surgical risks, weight gain, hormonal changes), providing conflict-bearing evidence without fully resolving the overall net impact.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research indicates that spaying or neutering dogs can cause luteinizing hormone levels to rise up to 30 times higher, potentially contributing to diseases like urinary incontinence and lymphoma.",
+          "quote": "Dogs spayed or neutered can have LH levels up to 30 times higher than normal. Elevated LH may affect the thyroid, urinary tract, immune system, and even cancer development.",
+          "verdict_reason": "The snippet provides specific evidence of negative health impacts (elevated LH, disease risks) directly addressing the query, but represents ongoing research rather than a definitive final conclusion.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering disrupts hormonal feedback loops, causing luteinizing hormone levels to surge up to 30 times average concentrations, which researchers are investigating for potential links to cancer.",
+          "quote": "After sterilization, dogs can experience a surge in LH levels. This surge can reach as high as 30 times the average concentrations, particularly in males. Researchers are exploring if consistently high LH levels can harm different body parts.",
+          "verdict_reason": "The snippet directly addresses negative health impacts by citing a specific hormonal surge and ongoing research into cancer risks, providing conflict-bearing evidence alongside listed benefits.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_b797de4c6610",
+      "claim_index": 2,
+      "claim": "Additionally, lactate dehydrogenase (LD) is mentioned as another biomarker, although it has poor specificity for cardiac tissue",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Troponin is the current biomarker test of choice for detecting heart damage, though other less specific biomarkers exist.",
+          "quote": "Only a few cardiac biomarker tests are routinely used by physicians. The current biomarker test of choice for detecting heart damage is troponin.",
+          "verdict_reason": "The snippet identifies troponin as the primary biomarker but states 'other cardiac biomarkers' exist without listing them, making it incomplete for a query asking for 'different' biomarkers.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Aspartate aminotransferase (AST) was the first cardiac biomarker used for MI diagnosis in 1954, though it is non-specific.",
+          "quote": "The first cardiac biomarker, aspartate aminotransferase (AST), was used for MI diagnosis in 1954. AST is present in human tissues as two isoenzymes: cytoplasmic and mitochondrial.",
+          "verdict_reason": "Snippet identifies specific biomarkers (AST, LDH) and their characteristics but is truncated and incomplete regarding a full list of different biomarkers.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The document lists cardiac troponin T, troponin I, CK, CK-MB, and myoglobin as cardiac biomarkers used to diagnose heart attacks.",
+          "quote": "Does this test have other names? CK, CK-MB, cardiac troponin T, troponin I, myoglobin, cardiac enzymes",
+          "verdict_reason": "The snippet directly lists specific cardiac biomarkers and explains their use in diagnosing heart disease, fully addressing the user's query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The primary cardiac biomarker is troponin, and natriuretic peptides like NT-proBNP are also used to assess heart strain.",
+          "quote": "A biomarker test for troponin is the primary test healthcare providers use to detect heart damage from a heart attack or ACS. Healthcare providers may also test for natriuretic peptides (NPs) that may be elevated in conditions like heart failure.",
+          "verdict_reason": "The snippet identifies specific biomarkers (troponin, natriuretic peptides) but implies there are 'different types' without providing a complete list, making it partially supportive.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_cfe45b0c90b6",
+      "claim_index": 1,
+      "claim": "The WTO has expanded its membership to include 166 countries , which is an update from the previously reported 164 members",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The WTO currently has 164 member countries.",
+          "quote": "With 164 member countries, the WTO facilitates trade negotiations, monitors compliance with agreements, and provides technical assistance to developing nations.",
+          "verdict_reason": "The snippet directly states the number of member countries (164), answering the query about the present count.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "As of August 2024, the WTO has 166 members.",
+          "quote": "As of August 2024, the WTO has 166 members.",
+          "verdict_reason": "The snippet directly answers the query with a specific count (166) and a recent date (August 2024), providing decisive evidence for the current number of members.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that the WTO had 164 members as of July 2016.",
+          "quote": "As of July 2016, the WTO welcomed its 164th member. This number represents a significant portion of the world's countries",
+          "verdict_reason": "The snippet provides a specific membership count (164) but explicitly dates it to July 2016. For a query asking about the present number, this is relevant but potentially superseded evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The World Trade Organization currently has 164 member states.",
+          "quote": "The World Trade Organization (WTO) has 164 member states",
+          "verdict_reason": "Snippet provides a specific member count for the queried entity, but lacks a timestamp to confirm if this figure represents the present status or is outdated.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_076",
+      "claim_index": 2,
+      "claim": "These risks highlight why warnings are placed on aerosol cans to prevent such tragic outcomes",
+      "cited_docs": [
+        "d3",
+        "d2",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Inhaling highly concentrated amounts of chemicals in solvents or aerosol sprays can cause heart failure.",
+          "quote": "inhaling highly concentrated amounts of the chemicals in solvents or aerosol sprays can cause heart failure and",
+          "verdict_reason": "Snippet addresses the query by identifying heart failure as a consequence of aerosol solvent abuse, but the sentence is truncated and does not fully explain the mechanism of instant death.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Highly concentrated chemicals in aerosol sprays can induce irregular heart rhythms leading to fatal heart failure within minutes.",
+          "quote": "The highly concentrated chemicals in solvents or aerosol sprays can induce irregular and rapid heart rhythms and lead to fatal heart failure within minutes",
+          "verdict_reason": "Snippet directly addresses the query by explaining a mechanism (heart failure) for instant death from aerosol abuse, though it does not cover all potential mechanisms.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Mixing aerosols with alcohol increases effects and can lead to an increased risk of death.",
+          "quote": "Mixing gases, glues and aerosols with alcohol can have serious consequences ΓÇô the effects are increased and can lead to an increased risk of death.",
+          "verdict_reason": "Snippet addresses solvent abuse risks and death but does not explain the specific mechanism of instant killing requested by the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Inhalants can kill by oversensitizing the heart to stress, decreasing heart muscle contraction strength, or causing coronary artery spasms.",
+          "quote": "oversensitized the patient's heart, which can make any subsequent stress, like getting caught by a parent, cause cardiac arrest. Also, inhalants decrease the strength of contraction of the heart muscle. Another possibility was that inhalants can cause spasm of the coronary arteries.",
+          "verdict_reason": "Snippet provides specific medical mechanisms for instant death via solvent abuse but lacks explicit confirmation of the 'instant' timeframe or direct reference to aerosol can warnings.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1e9c6cd8e30b",
+      "claim_index": 3,
+      "claim": "These environmental impacts are particularly pronounced in major palm oil-producing countries like Indonesia and Malaysia",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production causes significant environmental damage including habitat destruction, deforestation, pollution, and soil erosion.",
+          "quote": "Despite palm oil's benefits and economic value, this unruly growth period caused significant environmental damage. And herein lies the catch: The Environmental Impacts Of Palm Oil Production",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating palm oil causes significant environmental damage and detailing specific harms like deforestation and habitat loss.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Palm oil cultivation often coincides with harmful environmental effects like deforestation on previously biodiverse forest land.",
+          "quote": "Its cultivation and production (often monoculture on previously carbon-sequestering, biodiverse forest land) often coincides with... displacement and disruption of human and animal populations, and other harmful environmental effects.",
+          "verdict_reason": "The snippet directly addresses environmental harms (deforestation, biodiversity loss) but also mentions economic benefits, providing partial rather than absolute support for the claim that it is 'bad'.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production causes deforestation, habitat loss for wildlife, increased greenhouse gas emissions, and human rights violations.",
+          "quote": "Unfortunately, this has led to palm oil deforestation as forests and peatlands have been destroyed in order to keep up with the increased demands. This has had devastating consequences, causing habitat loss for wildlife and increasing greenhouse gas emissions.",
+          "verdict_reason": "The snippet directly confirms environmental harms including deforestation, habitat loss, and emissions, decisively answering the query about negative environmental impacts.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_80c72c2797bf",
+      "claim_index": 3,
+      "claim": "The judicial branch, consisting of the Supreme Court and other federal courts, interprets the laws",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document defines government generally and lists historical and modern types but does not specify the form of government for a particular country.",
+          "quote": "Historically prevalent forms of government include monarchy, aristocracy, timocracy, oligarchy, democracy, theocracy, and tyranny.",
+          "verdict_reason": "The snippet defines 'government' broadly and lists types but fails to identify the specific form for the user's implied country, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The U.S. government is composed of three distinct branches: legislative, executive, and judicial, with powers reserved for States and the people.",
+          "quote": "The Federal Government is composed of three distinct branches: legislative, executive, and judicial, whose powers are vested by the U.S. Constitution in the Congress, the President, and the Federal courts, respectively.",
+          "verdict_reason": "The snippet directly answers the query by defining the form of the US government as a three-branch system established by the Constitution.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The United States government is divided into three branches: legislative, judicial, and executive.",
+          "quote": "The Constitution of the United States divides the federal government into three branches: Legislative branch... Judicial branch... Executive branch",
+          "verdict_reason": "The snippet directly answers the query by explicitly listing the three branches that constitute the U.S. government form.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_096",
+      "claim_index": 1,
+      "claim": "These fractures are significant in understanding the dynamics of the earth's crust and its geological processes",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Fault blocks are large blocks of rock created by tectonic stresses that break up bedrock into blocks by faults in the Earth's crust.",
+          "quote": "Fault blocks are very large blocks of rock, sometimes hundreds of kilometres in extent, created by tectonic and localized stresses in the Earth's crust. Large areas of bedrock are broken up into blocks by faults.",
+          "verdict_reason": "Snippet discusses fault blocks and fractures (faults) in the crust but does not explicitly define the general term for a fracture, offering only related specific concepts.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies a specific geological feature called Crack in the Ground as a volcanic fissure resulting from a tension fracture.",
+          "quote": "Crack in the Ground is a volcanic fissure about long The eruptions from the Four Craters Lava Field were accompanied by a slight sinking",
+          "verdict_reason": "The snippet describes a specific instance of a fracture (volcanic fissure) but does not provide the general definition requested by the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The Ceraunius Fossae fractures are extensional features produced when the crust is stretched apart.",
+          "quote": "The Ceraunius Fossae fractures are extensional features produced when the crust is stretched apart.",
+          "verdict_reason": "Snippet defines a specific fracture type as an extensional feature from crust stretching, partially answering the general query about crustal fractures.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_109",
+      "claim_index": 1,
+      "claim": "These events often result in structural collapses and fires, which can also contribute to casualties",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Gas leak explosions can kill multiple people at once, with an average of nine annual deaths in the U.S.",
+          "quote": "An average of 27 serious gas-leak incidents occur in the U.S. each year, killing nine people annually... these explosions can reap many lives at once",
+          "verdict_reason": "Snippet addresses explosion fatalities and confirms they kill, but focuses on gas leaks specifically rather than explaining the general mechanisms of how explosions kill.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The force generated by a combustible dust explosion can cause employee deaths and injuries.",
+          "quote": "The force from such an explosion can cause employee deaths, injuries, and destruction of entire buildings.",
+          "verdict_reason": "Snippet identifies 'force' as a killing mechanism in explosions but lacks other mechanisms like heat or shrapnel, making it incomplete evidence for the general query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document notes that people are killed in gas explosions but does not explain the specific mechanisms of how explosions cause death.",
+          "quote": "People are killed all the time in gas explosions; it's not something to fool with.",
+          "verdict_reason": "The snippet confirms fatalities occur in explosions (same entity) but fails to answer 'how' they kill, providing only partial, non-mechanistic evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_08757808c000",
+      "claim_index": 3,
+      "claim": "However, individuals with existing high blood pressure should exercise caution and consult medical advice to ensure safe practice",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Weight lifting causes temporary blood pressure spikes up to 200/100 mmHg during heavy lifts, though long-term effects are generally positive.",
+          "quote": "During a lift, blood pressure can spike temporarily, especially when you're lifting heavy or bracing (holding your breath during part of the lift). Blood pressure can reach 200/100 mmHg or higher",
+          "verdict_reason": "Snippet directly addresses the query by confirming temporary BP spikes during lifting (supporting the claim) while noting long-term benefits (nuance), making it conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Weight lifting causes a temporary rise in blood pressure during the activity, though long-term training may lower it.",
+          "quote": "Blood pressure typically rises temporarily during strength training. Over time, regular strength training may help lower blood pressure.",
+          "verdict_reason": "The snippet directly addresses the query by confirming temporary blood pressure spikes during lifting while noting long-term benefits, providing nuanced but incomplete resolution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0875b5f3262a",
+      "claim_index": 2,
+      "claim": "This legal victory was a significant moment in protecting freedom of speech and artistic expression",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document notes that Allen Ginsberg's poem \"Howl\" was banned for obscenity and involved in a landmark court case protecting First Amendment rights.",
+          "quote": "Tags: aclu Allen Ginsberg Banned for obscenity City Lights Eric Drooker first amendment Howl obscenity case poetry Shigeyoshi Murao",
+          "verdict_reason": "The snippet confirms the poem was banned for obscenity and discusses the trial's legacy, providing direct but incomplete evidence regarding the specific question of whether the work is obscene.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that Howl was officially cleared for sale after a court found it possessed redeeming social importance, though it notes ongoing objections to its language in schools.",
+          "quote": "Horne concluded that Roth obscenity required that the work \"arouses lustful thoughts of sex and tends to corrupt and deprave [the average sensual man]...\" Howl was officially cleared for sale.",
+          "verdict_reason": "The snippet addresses the query by confirming a historical legal ruling that Howl was not obscene, but it also mentions modern objections, making it conflict-bearing evidence rather than a complete current resolution.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4317242e485c",
+      "claim_index": 1,
+      "claim": "However, it is crucial to acknowledge the need for reform and better regulation to address ethical concerns and ensure sustainable practices",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The IUCN states that well-managed trophy hunting can provide revenue and incentives to conserve wild populations and protect wildlife from poaching.",
+          "quote": "The International Union for Conservation of Nature (IUCN) states",
+          "verdict_reason": "Relevant evidence: The IUCN states that well-managed trophy hunting can provide revenue and incentives to conserve wild populations and protect wildlife from poaching.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues that a trophy-hunting ban would not be good for wildlife on balance at this time.",
+          "quote": "But will a trophy-hunting ban at this time be good for wildlife? On balance, right now, I believe the answer is no.",
+          "verdict_reason": "Snippet directly addresses the query with a specific stance supporting hunting's current role, though it acknowledges flaws and presents opposing views, making it conflict-bearing evidence rather than a definitive sole answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4786f87b62be",
+      "claim_index": 3,
+      "claim": "While some argue that the gap is a myth because it can be explained by these factors , others highlight that the gap persists even when controlling for job type and employer",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document argues the gender pay gap is real but primarily caused by parenting choices rather than discrimination, citing that women earn $0.89 for every dollar men earn in a specific study.",
+          "quote": "Women account for 30% of the drivers, and on average earn $0.89 for every dollar earned by their male peers.",
+          "verdict_reason": "The snippet directly addresses the query by arguing the gap is not a myth but is explained by choices, providing specific evidence while presenting a nuanced view that partially resolves the binary question.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The gender pay gap is attributed to women entering lower-paying fields or working fewer hours rather than earning less for the same work.",
+          "quote": "My understanding is that it's not that women make less than men but they usually will enter into lower paying fields or work fewer hours.",
+          "verdict_reason": "The snippet addresses the query by offering an explanation often used to argue the gap is a myth, but it is framed as personal understanding rather than a definitive resolution.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_52e01830d2fe",
+      "claim_index": 1,
+      "claim": "patents may not be worth it if the software provides a significant advantage but the cost and time commitment outweigh the benefits if the software is quickly becoming obsolete",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "While controversy exists over whether software should be patentable, 62% of U.S. patents are software-related, making the debate largely academic in favor of practical application.",
+          "quote": "Despite the controversy over whether software should be patentable per se, 62% of all patents issued by the U.S. Patent Office are directed to software-related inventions.",
+          "verdict_reason": "The snippet addresses the query directly by acknowledging the controversy but providing evidence that patents are currently applied to software, though it frames the 'should' as a practical rather than purely academic question.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Recent US Supreme Court rulings suggest a higher standard applies to patenting software that implements known business methods.",
+          "quote": "Recent US Supreme Court rulings suggest that a higher standard will be applied when considering the patentability of using software to implement a known business method.",
+          "verdict_reason": "The snippet addresses the query by outlining specific conditions and legal standards for software patentability, providing partial but not definitive resolution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_613a0093714b",
+      "claim_index": 2,
+      "claim": "Additionally, the phrase was used in literature around this time, such as in Jonathan Swift's work",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The first recorded use of a phrase similar to 'raining cats and dogs' appeared in a 1651 collection of poems by British poet Henry Vaughan.",
+          "quote": "The first recorded use of a phrase similar to",
+          "verdict_reason": "Relevant evidence: The first recorded use of a phrase similar to 'raining cats and dogs' appeared in a 1651 collection of poems by British poet Henry Vaughan.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The etymology of the phrase is unknown, though an instance was found in a 1678 text by John Phillips.",
+          "quote": "the bottom line is, the etymology is unknown. [...] However, I have located the phrase Rains Dogs and Cats in 1678. It occurs in Maronides... by John Phillips",
+          "verdict_reason": "Snippet addresses the origin query directly but states etymology is unknown while providing a 1678 citation, offering partial but inconclusive evidence regarding 17th-century England.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_3227ea6c6056",
+      "claim_index": 1,
+      "claim": "However, the latest version of the .NET Framework is 4.8.1",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The latest major version of .NET Core listed is 10.0, which is currently active.",
+          "quote": "| 10.0 | Active (LTS) | Latest release: 10.0.8 | Last updated on 2026-05-12 | EOL: 2028-11-14 |",
+          "verdict_reason": "The snippet explicitly lists version 10.0 as the latest active release for .NET Core, directly answering the query about the latest major version.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies .NET Framework 4.8.1 as a version but cuts off before providing its release details or confirming it as the latest.",
+          "quote": "The most-recent release is 4.8.0 Build 4115, with an offline installer size of 115 MB (121,346,568 bytes) and a digital signature date of July 8, 2024.\n.NET Framework 4.8.1\n.NET Framework",
+          "verdict_reason": "The snippet discusses the same entity (.NET versions) and mentions 4.8.1, but the text is truncated before confirming the latest status, making it incomplete evidence for a 'latest' query.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 1,
+      "claim": "Stanford University is located in California",
+      "cited_docs": [
+        "d8"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d8": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "Stanford University (Stanford; officially Leland Stanford Junior University, colloquially the Farm) is a private research university in Stanford, California, adjacent to Palo Alto and between San Jose and San Francisco.",
+          "verdict_reason": "The query asks which university is in Chestnut Hill, Massachusetts. The snippet confirms Stanford is in California, not Massachusetts, providing no evidence for the queried location.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "Passover 2026 starts at sundown on April 1, 2026",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem holds the world's record for the fastest rap in a number one single with \"Godzilla,\" where he raps 225 words in 30 seconds, averaging 7.5 words per second",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "Hunter Emery plays CO Rick Hopper on Orange is the New Black",
+      "cited_docs": [
+        "d3",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

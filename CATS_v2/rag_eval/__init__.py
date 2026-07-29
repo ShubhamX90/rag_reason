@@ -8,11 +8,21 @@ Enhanced RAG evaluation with multi-LLM judge committee.
 
 from .config import (
     EvaluationConfig,
-    EnhancedTrustScoreConfig,
     EnhancedConflictEvalConfig,
+    EnhancedTrustScoreConfig,
     JudgeCommitteeConfig,
+    DEFAULT_JUDGE_PRIORITIES,
     create_default_committee,
-    create_conservative_committee,
+    create_cli_committee,
+    create_mixed_committee,
+    create_local_openai_committee,
+    get_sonnet_judge,
+    get_gpt54_judge,
+    get_deepseek_v32_judge,
+    get_deepseek_api_judge,
+    get_local_openai_judge,
+    get_sonnet_nli_judge,
+    get_codex_cli_judge,
 )
 from .evaluator import EnhancedEvaluator
 from .data import load_dataset, read_jsonl, write_jsonl
@@ -21,9 +31,10 @@ from .logging_config import logger, setup_file_logging
 __version__ = "2.0.0"
 __all__ = [
     "EvaluationConfig",
-    "EnhancedTrustScoreConfig",
     "EnhancedConflictEvalConfig",
+    "EnhancedTrustScoreConfig",
     "JudgeCommitteeConfig",
+    "DEFAULT_JUDGE_PRIORITIES",
     "EnhancedEvaluator",
     "load_dataset",
     "read_jsonl",
@@ -31,5 +42,14 @@ __all__ = [
     "logger",
     "setup_file_logging",
     "create_default_committee",
-    "create_conservative_committee",
+    "create_cli_committee",
+    "create_mixed_committee",
+    "create_local_openai_committee",
+    "get_sonnet_judge",
+    "get_gpt54_judge",
+    "get_deepseek_v32_judge",
+    "get_deepseek_api_judge",
+    "get_local_openai_judge",
+    "get_sonnet_nli_judge",
+    "get_codex_cli_judge",
 ]

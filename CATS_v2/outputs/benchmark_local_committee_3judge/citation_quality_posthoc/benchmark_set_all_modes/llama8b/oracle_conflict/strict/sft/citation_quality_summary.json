@@ -1,0 +1,1801 @@
+{
+  "variant": "benchmark_set_all_modes/llama8b/oracle_conflict/strict/sft",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "benchmark_sft_qd_collect27_20260706_r1",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_qd_collect27_20260706_r1/llama8b/oracle_conflict/strict/sft/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_qd_collect27_20260706_r1/llama8b/oracle_conflict/strict/sft/final/detailed_results.json",
+    "source_final_sha256": "27790f64acc27ff3c70207ec0e9c1d281a7ca58d1f631090b35fdf0fe56bd3e8",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/llama8b/oracle_conflict/strict/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/llama8b/oracle_conflict/strict/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1031,
+    "claims_with_citations": 1005,
+    "claims_with_committee_support_set": 957,
+    "claims_with_any_approved_citation": 878,
+    "claims_with_any_gold_positive_citation": 1002,
+    "committee_alignment_precision_macro": 0.7849004975124378,
+    "committee_alignment_precision_micro": 0.7648845686512759,
+    "gold_positive_citation_precision_macro": 0.9940381426202322,
+    "gold_positive_citation_precision_micro": 0.991494532199271,
+    "soft_extra_citation_rate_micro": 0.22660996354799515,
+    "hard_negative_citation_rate_micro": 0.00850546780072904,
+    "committee_support_citation_recall_macro": 0.9174503657262278,
+    "committee_support_citation_recall_micro": 0.9174503657262278,
+    "claims_with_any_soft_extra_rate": 0.3024875621890547,
+    "claims_with_any_hard_negative_rate": 0.009950248756218905,
+    "strict_committee_alignment_claim_rate": 0.6721629485935985,
+    "strict_gold_clean_claim_rate": 0.8448108632395732,
+    "strict_grounded_committee_clean_rate_all_claims": 0.6721629485935985,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8448108632395732,
+    "total_cited_docs": 1646,
+    "total_approved_cited_docs": 1259,
+    "total_gold_positive_cited_docs": 1632,
+    "total_soft_extra_cited_docs": 373,
+    "total_hard_negative_cited_docs": 14
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_734859937e46",
+      "claim_index": 2,
+      "claim": "However, some U.S. states have enacted their own laws prohibiting such sales: California's Consumer Privacy Act gives residents the right to opt out of data sharing , Maine has passed a law requiring express permission before selling personal data Oregon's H.B. 3284 similarly prohibits the sale of personal health data without affirmative consent",
+      "cited_docs": [
+        "d3",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "US ISPs have been allowed to sell anonymized browsing history since 2017, though some states now require explicit consent.",
+          "quote": "In the United States, ISPs have had the right to sell your private browsing history(new window) since 2017, as long as they anonymized your personal data.",
+          "verdict_reason": "Snippet directly addresses the query by confirming US ISPs can sell data under specific conditions, but notes varying state laws and opt-out issues, making it partial rather than absolute.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "In the US, ISPs are legally permitted to sell user browsing data without consent due to repealed FCC regulations.",
+          "quote": "In the US, internet service providers are well within their rights to sell your browsing data. In 2017, the Federal Communications Commission (FCC) repealed laws protecting the online privacy of US internet users",
+          "verdict_reason": "The snippet directly addresses the query by confirming ISPs can sell data in the US without consent, but limits the scope to the US and a specific 2017 regulatory context.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Pending legislation in South Carolina and Pennsylvania proposes prohibiting ISPs from selling user data without authorization.",
+          "quote": "SC H.B. 3014 Pending - Carryover | Enacts the State Data Privacy Protection Act, defines relevant terms, prohibits a mobile telecommunications provider from selling a customer's personal data to a third party",
+          "verdict_reason": "Snippet details pending state bills restricting ISP data sales, providing relevant but incomplete evidence on the broader question of current federal legality.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f777a43ba278",
+      "claim_index": 2,
+      "claim": "On the other hand, laboratory research has shown that yerba mate exhibits cytotoxic effects on cancer cells some studies have suggested it may lower the risk of colon cancer or other cancers under certain conditions , though these findings are not conclusively confirmed in human epidemiological studies",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking yerba mate is linked to higher esophageal cancer levels only when consumed at very high temperatures, not due to the drink itself.",
+          "quote": "Drinking yerba mate has also been linked with higher levels of esophageal cancer. This association only exists because many people drink yerba mate at very high temperatures, though. It has nothing to do with drinking yerba mate itself.",
+          "verdict_reason": "The snippet directly addresses the cancer query by distinguishing between temperature-related risk and the substance itself, providing nuanced but incomplete resolution regarding other cancer types.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking yerba maté tea at very hot temperatures may increase the risk of esophageal cancer.",
+          "quote": "Drinking yerba maté tea at very hot temperatures may increase the risk of esophageal cancer.",
+          "verdict_reason": "The snippet directly addresses the query by linking yerba maté to increased cancer risk under specific conditions (hot temperature), providing conflict-bearing evidence without fully resolving the general causation question.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Studies indicate that drinking large amounts of hot yerba mate over prolonged periods may increase the risk of esophageal, larynx, and oral cavity cancers.",
+          "quote": "some studies have indicated that people who drink large amounts of hot yerba mate over prolonged periods may be at increased risk of some types of cancer, such as cancer of the esophagus, larynx and oral cavity.",
+          "verdict_reason": "The snippet provides direct evidence linking hot yerba mate consumption to cancer risk, addressing the query with specific conditions rather than a definitive yes/no for all cases.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_3c1297608017",
+      "claim_index": 3,
+      "claim": "A third theory points to the ichthys fish symbol of early Christianity, where touching thumbs and crossing index fingers formed a symbol meaning 'Jesus Christ, Son of God, Savior' in Greek , while others attribute the gesture to sacred geometry or Norse/Germanic pagan oath-making rituals",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Historians theorize the practice originated from pre-Christian sacred geometry beliefs or as a secret sign among early Christians, though exact origins are not definitively known.",
+          "quote": "The exact origins of this practice aren't definitively known, but historians have a couple theories as to how the modern practice came about, though there is some guesswork in this.",
+          "verdict_reason": "The snippet addresses the query directly by offering historical theories but explicitly states the origins are not definitively known, making the evidence incomplete rather than decisive.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "One theory traces the origin to pre-Christian pagan beliefs where a cross symbolized concentrated good spirits to anchor wishes.",
+          "quote": "The first comes from a pre-Christian pagan belief in the powerful symbolism of a cross. The intersection was thought to mark a concentration of good spirits and served to anchor a wish until it could come true.",
+          "verdict_reason": "The snippet directly addresses the query by offering two specific origin theories but presents them as possibilities rather than a single definitive fact, making it partial support.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The practice of crossing fingers for luck originated in pre-Christian European traditions where the gesture was believed to manipulate supernatural forces.",
+          "quote": "Crossing fingers for luck and protection against evil has its earliest roots in pre-Christian traditions throughout Europe. Archaeological evidence indicates that ancient Europeans practiced elaborate rituals involving hand gestures and finger positioning, believing they could manipulate supernatural forces to their advantage.",
+          "verdict_reason": "The snippet directly addresses the query by identifying pre-Christian European traditions as the earliest roots, but it is incomplete as the text cuts off before detailing later evolutionary stages like Christianity.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f7c719d9b0be",
+      "claim_index": 1,
+      "claim": "It is composed of twelve members — seven from the Board of Governors and five presidents from Federal Reserve Banks — and meets regularly to decide on interest rates and the money supply through open market operations",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the organization responsible for setting monetary policy in the United States.",
+          "quote": "The organization that sets monetary policy for the United States is the Federal Open Market Committee (FOMC).",
+          "verdict_reason": "The snippet directly answers the query by explicitly identifying the FOMC as the organization that sets US monetary policy.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the Federal Reserve's monetary policymaking body.",
+          "quote": "The Federal Open Market Committee (FOMC) is the Fed's monetary policymaking body.",
+          "verdict_reason": "The snippet explicitly identifies the FOMC as the specific organization responsible for monetary policy, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the organization responsible for setting monetary policy in the United States.",
+          "quote": "The organization that sets monetary policy for the United States is the Federal Open Market Committee (FOMC).",
+          "verdict_reason": "The snippet directly answers the query by explicitly identifying the Federal Open Market Committee as the entity that sets US monetary policy.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_35156c8be377",
+      "claim_index": 2,
+      "claim": "These different metrics—total GDP versus GDP per capita—complement each other in identifying which country is the 'richest' depending on whether one prioritizes absolute output or standard of living",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Nigeria was the richest African country by GDP in 2021, though rankings vary by method and year.",
+          "quote": "Ranked by GDP in current USD, Nigeria comes out as the richest country in Africa during the year 2021.",
+          "verdict_reason": "Snippet identifies Nigeria as richest in 2021, but the query asks for the current richest, making this older data partially supportive.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Based on 2024 GDP data from the IMF, South Africa is the richest country in Africa with an economy valued at $403 billion.",
+          "quote": "Based on the GDP, it's fair to say that the Republic of South Africa is the richest country in Africa. In other words, in 2024, South Africa earned $403 billion, making it the number one economy in Africa by this measure.",
+          "verdict_reason": "The snippet directly answers the query by identifying South Africa as the richest country based on 2024 GDP data, providing specific figures and source attribution.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Seychelles is identified as the richest country in Africa with the highest GDP per capita (PPP) estimated at $42,110 in 2025.",
+          "quote": "Seychelles is the richest country in Africa, maintaining the highest GDP per capita (PPP) on the continent at an estimated $42,110.",
+          "verdict_reason": "The snippet directly answers the query by explicitly naming Seychelles as the richest country and providing the specific 2025 GDP per capita figure.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_44d30ce08bf5",
+      "claim_index": 1,
+      "claim": "Oklahoma is second with eight titles, including four consecutive from 2021 to 2024 , while Arizona and others have also claimed championships throughout the tournament's history",
+      "cited_docs": [
+        "d5",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists championship winners from 1982 through 1986, showing UCLA won in 1982, 1984, and 1985, but the data is incomplete for determining the all-time leader.",
+          "quote": "CHAMPIONSHIP HISTORY Year Champion (Final Record) Coach Score Runner-Up Site Game Att. Total Attendance # 1982 UCLA (33-7-2) Sharron Backus 2-0 (8 inn.) Fresno St. Omaha, Neb. 1,570 17,740 1983 Texas A&M (41-11) Bob Brock 2-0 (12 inn.) Cal St. Fullerton Omaha, Neb. 2,391 16,174 1984 UCLA (45-6-1) Sharron Backus 1-0 (13 inn.) Texas A&M Omaha, Neb. 734 20,759 1985 UCLA (41-9) Sharron Backus 2-1 (9 inn.) $Nebraska Omaha, Neb. 3,180 20,866 1986 Cal St",
+          "verdict_reason": "Snippet provides historical winner data for the queried entity but cuts off in 1986, making it incomplete for determining the all-time record holder through the present.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "UCLA has won the most college softball national championships with 12 titles.",
+          "quote": "12 — UCLA (2019, 2010, 2004, 2003, 1999, 1992, 1990, 1989, 1988, 1985, 1984, 1982)",
+          "verdict_reason": "The snippet directly answers the query by listing UCLA as the leader with 12 championships, surpassing all other listed teams.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "UCLA holds the record for the most Women's College World Series titles with 12 championships.",
+          "quote": "Who has the most Women's College World Series titles? UCLA | 12 titles Seasons won: 1982, '84, '85, '88, '89, '90, '92, '99, 2003, '04, '10, '19",
+          "verdict_reason": "The snippet explicitly answers the query by listing UCLA as the leader with 12 titles, comparing them to other programs with fewer wins.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0090",
+      "claim_index": 2,
+      "claim": "This is consistent across multiple sources, including the high-credibility Wikipedia articles on both the President of Indonesia and Prabowo Subianto himself",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Prabowo Subianto has served as the eighth president of Indonesia since 2024.",
+          "quote": "Prabowo Subianto Djojohadikusumo (born 17 October 1951) is an Indonesian politician, businessman, and retired military officer who has served as the eighth president of Indonesia since 2024.",
+          "verdict_reason": "The snippet directly identifies Prabowo Subianto as the current president of Indonesia since 2024, directly answering the query about the latest president.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Prabowo Subianto is the incumbent President of Indonesia as of 20 October 2024.",
+          "quote": "incumbent = Prabowo Subianto incumbentsince = 20 October 2024",
+          "verdict_reason": "The snippet directly identifies the current incumbent president and provides the official start date. Despite the document being labeled as an older revision, the timestamp (2026-02-19) and infobox data indicate Prabowo Subianto as the latest president.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Prabowo Subianto is the incumbent President of Indonesia as of 20 October 2024.",
+          "quote": "incumbent = Prabowo Subianto incumbentsince = 20 October 2024",
+          "verdict_reason": "The document directly identifies the current President of Indonesia with an official timestamp from 2026, confirming Prabowo Subianto holds the position as of the latest date.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_07e290a954ab",
+      "claim_index": 2,
+      "claim": "St. John's Wort is generally considered safe with mild side effects but can cause serious interactions its effectiveness for severe depression remains uncertain due to limited data",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Clinical evidence suggests St. John's wort is more effective than placebo and equivalent to standard antidepressants for mild to moderate depression.",
+          "quote": "Overall, the results of this body of work suggest that St. John's wort is more effective than placebo and about equivalent to low dose tricyclic antidepressants or to standard doses of SSRIs.",
+          "verdict_reason": "The snippet directly answers the query by summarizing clinical trials and meta-analyses confirming the remedy's effectiveness compared to placebo and antidepressants.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "St. John's wort has comparable efficacy to SSRIs for mild-to-moderate depression, but evidence is limited for severe cases or long-term use.",
+          "quote": "For patients with mild-to-moderate depression, St John's wort has comparable efficacy and safety when compared to SSRIs.",
+          "verdict_reason": "The snippet confirms efficacy for mild-to-moderate depression but explicitly limits this finding, noting unclear benefits for severe depression and limited long-term data.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_08757808c000",
+      "claim_index": 1,
+      "claim": "The temporary increase is not caused by the weight itself, but by the Valsalva maneuver and bracing that heavy lifting often involves by the body's stress response to the exercise",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Weight lifting causes increases in blood pressure, with the greatest rise occurring at the joint angle corresponding to the weakest point in the strength curve.",
+          "quote": "In weight lifting, the greatest increase in blood pressure occurred at the joint angle corresponding to the weakest point in the strength curve",
+          "verdict_reason": "The snippet provides direct scientific evidence that weight lifting increases blood pressure, addressing the query. It is marked partially supports as it details specific mechanics rather than a simple yes/no conclusion.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Weight lifting causes a temporary rise in blood pressure during the activity, though long-term training may lower it.",
+          "quote": "Blood pressure typically rises temporarily during strength training. Over time, regular strength training may help lower blood pressure.",
+          "verdict_reason": "The snippet directly addresses the query by confirming temporary blood pressure spikes during lifting while noting long-term benefits, providing nuanced but incomplete resolution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_2500bfd10608",
+      "claim_index": 1,
+      "claim": "The conflict arises because the benefits of fluoride on dental health are well established, but the safe upper limit for acceptable intake remains uncertain, with some studies suggesting harms at levels currently used in water fluoridation programs",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Excessive fluoride causes fluorosis and may weaken bones, while high levels show potential toxicity to brain cells in animals and possible links to cognitive deficits in humans.",
+          "quote": "Moreover, fluoride itself may be dangerous at high levels. Excessive fluoride causes fluorosis—changes in tooth enamel that range from barely noticeable white spots to staining and pitting. Fluoride can also become concentrated in bone—stimulating bone cell growth, altering the tissue's structure, and weakening the skeleton.",
+          "verdict_reason": "The snippet provides direct evidence of fluoride's dangers at high levels and potential risks, addressing the query. However, it qualifies these risks by noting most studies involve exposures higher than typical U.S. supplies, making it partial rather than definitive support.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Mounting scientific evidence suggests fluoride in drinking water could have harmful neurotoxic effects, particularly for children and infants.",
+          "quote": "Mounting scientific evidence suggests fluoride could have harmful neurotoxic effects. That's especially true among formula-fed infants, the elderly, African Americans, and the undernourished.",
+          "verdict_reason": "The snippet provides direct evidence supporting the claim that fluoride is dangerous by citing neurotoxic risks, though it presents one side of a controversial scientific debate rather than a definitive consensus.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_287debe5bb90",
+      "claim_index": 1,
+      "claim": "This methodological contradiction between incompleteness proofs and asserted factual claims reflects conflicting research outcomes regarding knowledge limits",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The text argues that thinking cannot grasp itself or provide rigorously solid ground for understanding, implying limits to knowing beyond conceptual thought.",
+          "quote": "As such, thinking cannot grasp itself. Apparently, understanding cannot be grounded by itself. Formal systems of understanding applied to themselves end up in the Mü",
+          "verdict_reason": "The snippet directly addresses the query's theme of mental limits and self-reference but offers a philosophical argument rather than a definitive answer to whether we can know anything beyond our minds.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The text claims it is possible to determine existence outside the mind by becoming mentally deaf to noisy thoughts.",
+          "quote": "Yes, and there's proof. The proof requires you to up your game in order to validate it. You have to go mentally deaf. Your thoughts are neurologically noisy.",
+          "verdict_reason": "The snippet directly addresses the query by asserting 'Yes' and offering a method, but the evidence is anecdotal and lacks rigorous proof, making it partial support.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_29f69e16a0c3",
+      "claim_index": 1,
+      "claim": "These signals can be so distinct that researchers were able to use artificial flowers with different electric field shapes to demonstrate bees preferentially visiting certain patterns flowers will even modify their nectar reward based on whether a bee has previously visited another flower of the same species",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Research indicates that flowers emit electrical signals to communicate information to bumblebees, creating a complex level of interaction.",
+          "quote": "new research indicates that bumblebees can also detect a flower's electric field, exhibiting a level of communication far more complex than previously understood.",
+          "verdict_reason": "The snippet directly confirms that flowers communicate with bees via electric fields, citing specific research findings and experimental evidence supporting this claim.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Flowers can hear the buzz of approaching bees and respond by producing sweeter nectar within minutes.",
+          "quote": "flowers not only hear the buzz of approaching bees but respond to the Sound by producing sweeter nectar this in turn entices bees to return more often",
+          "verdict_reason": "The snippet directly confirms that flowers communicate with bees by hearing their buzz and altering nectar sweetness in response, fully addressing the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_42d60ecaee9f",
+      "claim_index": 2,
+      "claim": "The debate is further complicated by platform-specific design differences and cultural context, which affect how emojis are interpreted and understood",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Face emojis are considered part of writing systems rather than language itself.",
+          "quote": "'Face' emojis are not part of language, they are part of the writing systems of some languages",
+          "verdict_reason": "The snippet directly addresses the query by arguing emojis are writing systems, not language, providing conflict-bearing evidence that partially resolves the claim.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Linguists generally agree that emoji do not yet meet the strict definition of language due to a lack of established grammar and mutual intelligibility.",
+          "quote": "Linguists generally agree that mutual intelligibility is a hallmark of language. Since the same emoji can be interpreted differently by two individuals, and there is no established grammar, emoji does not yet meet the strict definition of language.",
+          "verdict_reason": "The snippet directly addresses the query by presenting expert consensus that emoji are not yet a full language, while acknowledging they function as a supplementary code, representing conflict-bearing evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4317242e485c",
+      "claim_index": 2,
+      "claim": "However, critics counter that trophy hunting is often poorly regulated, that it primarily benefits wealthy hunters and local elites rather than the broader community that the revenue generated could be derived from non-consumptive tourism or other sources without the moral costs",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues that a trophy-hunting ban would not be good for wildlife on balance at this time.",
+          "quote": "But will a trophy-hunting ban at this time be good for wildlife? On balance, right now, I believe the answer is no.",
+          "verdict_reason": "Snippet directly addresses the query with a specific stance supporting hunting's current role, though it acknowledges flaws and presents opposing views, making it conflict-bearing evidence rather than a definitive sole answer.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The IUCN states that well-managed trophy hunting can provide revenue and incentives to conserve wild populations and protect wildlife from poaching.",
+          "quote": "The International Union for Conservation of Nature (IUCN) states",
+          "verdict_reason": "Relevant evidence: The IUCN states that well-managed trophy hunting can provide revenue and incentives to conserve wild populations and protect wildlife from poaching.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_52e01830d2fe",
+      "claim_index": 1,
+      "claim": "CLS Bank ruling and the European Patent Convention's Article 52(2)(a) exclusion of programs \"as such\" are notable legal landmarks in this debate patent eligibility criteria such as the machine-or-transformation test continue to evolve. Ultimately, whether software should be patented depends heavily on one's values regarding the balance between intellectual property rights and competition, as well as the specific context and jurisdiction in question",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Recent US Supreme Court rulings suggest a higher standard applies to patenting software that implements known business methods.",
+          "quote": "Recent US Supreme Court rulings suggest that a higher standard will be applied when considering the patentability of using software to implement a known business method.",
+          "verdict_reason": "The snippet addresses the query by outlining specific conditions and legal standards for software patentability, providing partial but not definitive resolution.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "While controversy exists over whether software should be patentable, 62% of U.S. patents are software-related, making the debate largely academic in favor of practical application.",
+          "quote": "Despite the controversy over whether software should be patentable per se, 62% of all patents issued by the U.S. Patent Office are directed to software-related inventions.",
+          "verdict_reason": "The snippet addresses the query directly by acknowledging the controversy but providing evidence that patents are currently applied to software, though it frames the 'should' as a practical rather than purely academic question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_57190bca6f7a",
+      "claim_index": 1,
+      "claim": "It caused a global cooling of up to 3°C and is known as the 'Year Without a Summer'",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the 1815 Tambora eruption was the largest in recorded history and caused at least 90,000 deaths, but does not explicitly rank it as the deadliest overall.",
+          "quote": "Mount Tambora... exploded in the largest volcanic eruption in recorded history... The blast, pyroclastic flows, and tsunamis that followed killed at least 10,000 islanders... Some 80,000 people perished from disease and famine",
+          "verdict_reason": "Snippet confirms Tambora was the 'largest' and details ~90,000 deaths, providing strong but incomplete evidence for the 'deadliest' claim without explicit comparative ranking against other historical disasters.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document describes the 1815 Mount Tambora eruption as the world's largest and most devastating volcanic eruption recorded in human history.",
+          "quote": "Today known as the world's largest, most devastating volcanic eruption recorded in human history, it remains a stark reminder of how powerful the earth's volcanic impact can be.",
+          "verdict_reason": "The snippet calls Tambora the 'most devastating' but does not explicitly confirm it was the 'deadliest' in terms of fatalities, leaving the specific mortality claim unverified.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_747727772a30",
+      "claim_index": 1,
+      "claim": "A bee's body is adapted to sense changes in humidity and temperature, which helps them anticipate and prepare for rain by returning to the hive before it starts in some cases they will forage in light rain when food is scarce or the hive is low on stores",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Bees do fly in the rain, though this behavior depends on genetics, hive needs, and rain intensity.",
+          "quote": "Yes, bees do fly in the rain, but I feel a lot depends on the current situation within the hive and it is also very dependent on genetics.",
+          "verdict_reason": "The snippet directly addresses the query by confirming bees fly in rain but adds conditional variables, making it relevant but not a simple unconditional confirmation.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Bees are capable of flying in the rain, though they prefer dry conditions and may suffer wing damage or reduced speed in heavy downpours.",
+          "quote": "So, while bees are capable of flying in the rain, they'd much prefer to keep their wings dry and their flight paths clear.",
+          "verdict_reason": "The snippet directly answers the query by confirming bees can fly in rain, while noting limitations like wing damage in heavy downpours.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_80baf25496cd",
+      "claim_index": 1,
+      "claim": "A third perspective holds that cultural differences are secondary to human spirituality and can be overcome through dialogue and shared values that monoculturalism poses its own risks through ethnocentrism and absolutist thinking",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Monoculturalism encourages normative cultural unity, whereas the text notes a strong global demand for multiculturalism in policy making.",
+          "quote": "Monoculturalism encourages a normative cultural unity or cultural homogeneity. ... The demand for multiculturalism is strong in the contemporary world and is invoked in the making of social, cultural and political policies",
+          "verdict_reason": "The snippet discusses the tension between monoculturalism (unity) and multiculturalism, providing relevant evidence about their relationship without definitively answering if multiculturalism hinders unity.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The text identifies cultural differences as desirable perspectives while noting that personal states can include hindrances to unity.",
+          "quote": "Cultural differences, seen as deeply engrained, are acceptable and even desirable as they may provide necessary perspectives. ... Personal states, however, comprise an area that also includes those hindrance",
+          "verdict_reason": "The snippet addresses the query by discussing cultural differences and hindrances but presents a nuanced view rather than a direct confirmation that multiculturalism hinders unity.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a2f06d54b240",
+      "claim_index": 1,
+      "claim": "Stalactites form through the slow accumulation of calcite crystals from water drips underwater caves can provide the necessary environment for this process to occur",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet questions how stalactites form underwater given that they typically form from dripping water which cannot occur submerged.",
+          "quote": "They're formed through water drips leaving a bit of rock behind, but in underwater caves water can't drip, so how do they still form?",
+          "verdict_reason": "The snippet directly addresses the query entity and mechanism but presents a conflicting question rather than a definitive answer, making it conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document describes stalactite formation via dripping water and mineral deposition but does not mention underwater formation.",
+          "quote": "Most soda straws, however, eventually conduct water along their external surface, as well, and there deposit radially oriented calcite crystals perpendicular to their outer surface.",
+          "verdict_reason": "The snippet addresses stalactite formation mechanisms but lacks information on underwater contexts, making it incomplete evidence for the specific query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_e2e2361dc28b",
+      "claim_index": 1,
+      "claim": "Others, however, insist that justification is tied to truth: on this view, a belief can only be justified if it is true the Gettier-style counterexamples are either blocked or do not pose a serious challenge to this requirement",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The text discusses conditions under which beliefs are justified, such as inference from other justified beliefs or perceptual experience, without explicitly addressing false beliefs.",
+          "quote": "Frances's belief that it is cloudy outside owes its justification to her inference from her other two beliefs, both of which are justified",
+          "verdict_reason": "The snippet addresses the nature of belief justification, which is central to the query, but does not explicitly confirm or deny whether a false belief can be justified.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The text argues that no truth can be justified and that knowledge consists of conjectures that have not yet been refuted.",
+          "quote": "The problem with this is that there is no method of showing any piece of knowledge is true. ... all we have are guesses about reality.",
+          "verdict_reason": "The snippet directly addresses the relationship between justification, truth, and belief, arguing justification of truth is impossible, which bears on the query but presents a specific philosophical stance rather than a definitive answer.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "It runs through April 9, with the first seder on April 1 after nightfall and the second seder on April 2 after nightfall",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 2,
+      "claim": "Stanford University, on the other hand, is a private research university located in Stanford, California is thus not the institution implied by the query",
+      "cited_docs": [
+        "d8"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d8": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "Stanford University (Stanford; officially Leland Stanford Junior University, colloquially the Farm) is a private research university in Stanford, California, adjacent to Palo Alto and between San Jose and San Francisco.",
+          "verdict_reason": "The query asks which university is in Chestnut Hill, Massachusetts. The snippet confirms Stanford is in California, not Massachusetts, providing no evidence for the queried location.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_56fd6bf22253",
+      "claim_index": 0,
+      "claim": "The retrieved evidence is mixed. Some sources report adenoid regrowth rates ranging from 13% to 55% in certain cohorts, while others suggest near-zero regrowth in specific subgroups d9 claims regrowth occurs in the majority of cases. The most balanced view is that adenoid regrowth is possible but relatively uncommon when it does occur it is often asymptomatic or causes only mild problems",
+      "cited_docs": [
+        "d11",
+        "d12",
+        "d4",
+        "d5",
+        "d8",
+        "d6",
+        "d2",
+        "d10"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d10",
+        "d11",
+        "d12",
+        "d6",
+        "d8"
+      ],
+      "committee_alignment_precision": 0.375,
+      "gold_positive_precision": 0.375,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d11": {},
+        "d12": {},
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Adenoids rarely regrow after surgery, though transnasal fibroscopy identified some regrowth in 19.1% of cases, which rarely manifested clinically.",
+          "quote": "Adenoids rarely regrow after surgery and where there were traces of adenoidal tissue, it did not manifest clinically.",
+          "verdict_reason": "The snippet directly addresses adenoid regrowth with specific findings but presents a nuanced view (rare but possible) rather than a simple yes/no, making it conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Adenoids can rarely grow back after surgery, particularly if the procedure is performed at a very young age or if small tissue portions remain.",
+          "quote": "Can Adenoids Come Back After Surgery? It's rare—but possible. Adenoids can regrow if surgery is done at a very young age or if small portions are left behind.",
+          "verdict_reason": "The snippet directly answers the query by confirming regrowth is rare but possible under specific conditions, providing a decisive resolution.",
+          "source_quality": "high"
+        },
+        "d8": {},
+        "d6": {},
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "A study found that adenoids rarely regrow enough to cause nasal obstruction symptoms after adenoidectomy involving electrocautery.",
+          "quote": "Adenoids rarely, if ever, regrow enough to cause symptoms of nasal obstruction after adenoidectomy that includes visualization and electrocautery of the adenoid bed.",
+          "verdict_reason": "The snippet directly addresses adenoid regrowth with specific findings but limits the conclusion to a specific surgical technique, making it partial evidence for the general query.",
+          "source_quality": "high"
+        },
+        "d10": {}
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "This year's Passover (2026) begins at sundown on April 1",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_1fe3ba1b1cba",
+      "claim_index": 2,
+      "claim": "2020 was Norris's first world championship, with the season being his maiden title win",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Lando Norris won the championship and notes Lewis Hamilton was the last British winner in 2020, but does not explicitly name the 2020 winner.",
+          "quote": "The 26-year-old Norris is the 11th British driver to win the championship and first since Sir Lewis Hamilton in 2020.",
+          "verdict_reason": "Snippet discusses the same entity (F1 champions) and references 2020, but describes a future/hypothetical scenario where Norris wins, failing to directly answer who won in 2020.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a 2025 event and driver, providing no evidence regarding the 2020 Formula 1 world driver's championship winner.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0100",
+      "claim_index": 2,
+      "claim": "MedStar Georgetown University Hospital is another large not-for-profit hospital in Washington, D.C., but it is not the largest private hospital; MedStar Washington Hospital Center holds that designation",
+      "cited_docs": [
+        "d9",
+        "d8"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d9"
+      ],
+      "approved_cited_docs": [
+        "d9"
+      ],
+      "gold_positive_docs": [
+        "d6",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d9"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d9": {
+          "verdict": "supports",
+          "key_fact": "MedStar Washington Hospital Center is the largest private hospital in Washington, D.C.",
+          "quote": "MedStar Washington Hospital Center is the largest private hospital in Washington, D.C. A member of MedStar Health, the not-for-profit Hospital Center is licensed for 926 beds.",
+          "verdict_reason": "The snippet directly states that MedStar Washington Hospital Center is the largest private hospital in Washington, D.C., directly answering the query's comparison question.",
+          "source_quality": "low"
+        },
+        "d8": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes MedStar Georgetown University Hospital, which is neither of the two hospitals named in the query (Children's National Medical Center or MedStar Washington Hospital Center). It provides no comparative information about which is the largest private hospital in Washington, D.C.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0196",
+      "claim_index": 1,
+      "claim": "This is confirmed by multiple sources that link St James Street to Whitecross Street and St James Square, all within the medieval town walls of Monmouth",
+      "cited_docs": [
+        "d9",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d6",
+        "d9"
+      ],
+      "approved_cited_docs": [
+        "d9"
+      ],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d5",
+        "d9"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d9": {
+          "verdict": "partially supports",
+          "key_fact": "St James Square is located at the eastern end of Whitecross Street in Monmouth.",
+          "quote": "St James Square is a historic square in the town centre of Monmouth, Monmouthshire, Wales. It is located at the eastern end of Whitecross Street, within the medieval town walls.",
+          "verdict_reason": "Snippet confirms St James location on Whitecross Street in Monmouth but does not address the 1610 map reference or the mapmaker's period, which are core query elements.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a listed building and archaeological findings at Whitecross Street but does not address the query's core question about the 1610 map, St James Street as a segment, or the mapmaker's period.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The Judges' Lodgings is located on Whitecross Street in Monmouth, near St James' Square.",
+          "quote": "The Judges' Lodgings, located in Whitecross Street, Monmouth, south east Wales, is an eighteenth-century building, with earlier origins, on the edge of St James' Square.",
+          "verdict_reason": "Snippet confirms Whitecross Street and St James' location in Monmouth but does not identify the mapmaker or answer the query's core question about the historian's primary expertise.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_5eeb46719843",
+      "claim_index": 0,
+      "claim": "Canada's independence from Great Britain was not a single date but a gradual process. Canada became an English possession after the 1763 Treaty of Paris, when France ceded its colony following the British victory on the Plains of Abraham was formed into the Dominion of Canada on July 1, 1867 ; this was a key step toward full independence",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Statute of Westminster in 1931 solidified Canada's legislative independence, marking a key step in its journey from Great Britain.",
+          "quote": "The Statute of Westminster in 1931 further solidified Canada's legislative independence.",
+          "verdict_reason": "The snippet addresses the query by identifying 1931 as a key date for legislative independence but describes it as part of a broader journey rather than a single definitive moment of total independence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The country called the Dominion of Canada was formed on July 1, 1867.",
+          "quote": "On July 1, 1867, the country called the Dominion of Canada was formed from New Brunswick, Nova Scotia and the Province of Canada.",
+          "verdict_reason": "The snippet explicitly states the date Canada was formed as a country (Dominion of Canada), directly answering the query about gaining independence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only website navigation text, headers, and the question title, but provides no actual answer or factual evidence regarding when Canada gained independence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_883303a2d535",
+      "claim_index": 2,
+      "claim": "Nana's presence in the film and her role as a key sled dog, further establishing her identity as an Australian Shepherd",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The dog named Nana in the movie Snow Dogs is an Australian shepherd.",
+          "quote": "'s his Australian shepherd, Nana.",
+          "verdict_reason": "The snippet explicitly identifies Nana as an Australian shepherd within the context of the movie Snow Dogs, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Nana as the dog actor in Snow Dogs but does not specify her breed.",
+          "quote": "It wasn't hard to get Nana the dog to curl up in bed with Cuba in a later scene.",
+          "verdict_reason": "The snippet confirms Nana is a dog in the film Snow Dogs but fails to state her specific breed, providing only partial evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The character Nana in the movie Snow Dogs is a Border Collie.",
+          "quote": "No one in the entire town thinks to mention her pet Border Collie Nana or her Siberian Husky sledding team",
+          "verdict_reason": "The snippet explicitly identifies Nana as a Border Collie, directly answering the user's query about the dog's breed.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "In the movie Snow Dogs, the dog named Nana is a collie.",
+          "quote": "In the movie, the dogs were named Nana, she was the collie",
+          "verdict_reason": "The snippet directly identifies Nana as a collie in the movie, fully answering the query about her breed.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a title header mentioning the character and movie but provides no factual evidence regarding the dog's breed.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

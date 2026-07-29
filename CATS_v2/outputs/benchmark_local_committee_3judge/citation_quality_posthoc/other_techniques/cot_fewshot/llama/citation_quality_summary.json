@@ -1,0 +1,2354 @@
+{
+  "variant": "other_techniques/cot_fewshot/llama",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "other_techniques_phase1_mistral_deepseek_20260708_r1",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/other_techniques_phase1_mistral_deepseek_20260708_r1/cot_fewshot/llama/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/other_techniques_phase1_mistral_deepseek_20260708_r1/cot_fewshot/llama/final/detailed_results.json",
+    "source_final_sha256": "e51ed36cfdd3964abf5e980aa5e64e3d13cf219971a136ac0d4feee9a7b929a3",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/other_techniques/cot_fewshot/llama/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/other_techniques/cot_fewshot/llama/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 2608,
+    "claims_with_citations": 2226,
+    "claims_with_committee_support_set": 2128,
+    "claims_with_any_approved_citation": 1743,
+    "claims_with_any_gold_positive_citation": 2220,
+    "committee_alignment_precision_macro": 0.7275681341719078,
+    "committee_alignment_precision_micro": 0.7179085785848466,
+    "gold_positive_citation_precision_macro": 0.9951332734351602,
+    "gold_positive_citation_precision_micro": 0.9937382592360676,
+    "soft_extra_citation_rate_micro": 0.27582968065122104,
+    "hard_negative_citation_rate_micro": 0.006261740763932373,
+    "committee_support_citation_recall_macro": 0.819078947368421,
+    "committee_support_citation_recall_micro": 0.819078947368421,
+    "claims_with_any_soft_extra_rate": 0.3288409703504043,
+    "claims_with_any_hard_negative_rate": 0.008086253369272238,
+    "strict_committee_alignment_claim_rate": 0.5678680981595092,
+    "strict_gold_clean_claim_rate": 0.6648773006134969,
+    "strict_grounded_committee_clean_rate_all_claims": 0.5678680981595092,
+    "strict_grounded_gold_clean_rate_all_claims": 0.6648773006134969,
+    "total_cited_docs": 3194,
+    "total_approved_cited_docs": 2293,
+    "total_gold_positive_cited_docs": 3174,
+    "total_soft_extra_cited_docs": 881,
+    "total_hard_negative_cited_docs": 20
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "freshqa_4e635a2542a8",
+      "claim_index": 3,
+      "claim": "The other sources provide additional context about Miles Davis' career and the various quintets he formed, but d1 and d3 provide the most direct and relevant information about the first quintet",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Red Garland as the pianist in Miles Davis' 1955 band but does not explicitly label this group as his first quintet.",
+          "quote": "In 1955, Davis assembled his first important band with John Coltrane, Red Garland, Paul Chambers, and Philly Joe Jones",
+          "verdict_reason": "The snippet names Red Garland as the pianist in Davis' 1955 band, which is historically the first quintet, but the text calls it his 'first important band' rather than explicitly 'first quintet'.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Red Garland is identified as the pianist for the Miles Davis Quintet on the 1957 album Relaxin'.",
+          "quote": "Again with John Coltrane's tenor sax and pianist Red Garland's trio with Paul Chambers on bass and Philly Joe Jones at the drums.",
+          "verdict_reason": "Snippet confirms Red Garland played piano in a 1957 Miles Davis Quintet lineup, which is relevant but does not explicitly confirm if this was the 'first' quintet.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Red Garland played piano in the Miles Davis Quintet of 1955-1956.",
+          "quote": "The marquee announces the musicians responsible for the crowd: Miles Davis on trumpet; John Coltrane on tenor saxophone; Red Garland on piano; Paul Chambers on bass;",
+          "verdict_reason": "The snippet explicitly lists Red Garland as the pianist in the 1955-1956 Miles Davis Quintet, directly answering the query about the first quintet's lineup.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Wynton Kelly played piano in the Miles Davis Quintet during their October 1960 Paris concerts.",
+          "quote": "Miles Davis (trumpet); Sonny Stitt (alto and tenor saxophones); Wynton Kelly (piano); Paul Chambers (bass); Jimmy Cobb (drums) Recording date 11 October 1960",
+          "verdict_reason": "The snippet identifies Wynton Kelly as the pianist for a 1960 quintet, which is relevant but likely not the 'first' quintet (1955-1957), making it incomplete evidence for the specific query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_b3264b37f54b",
+      "claim_index": 1,
+      "claim": "The team's performance is consistently reflected across multiple high-credibility sources, including official sports websites and news outlets",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document presents a 2025-26 Premier League table where Arsenal is ranked first with 85 points.",
+          "quote": "2025-26 Table CLUB M W D L GD PTS 1 Arsenal 38 26 7 5 44 85 2 Man City 38 23 9 6 42 78",
+          "verdict_reason": "Snippet shows Arsenal top in a specific 2025-26 table, addressing the entity but potentially representing future/hypothetical data rather than current real-time standings.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document shows Arsenal in first place with 85 points in the 2025/2026 Premier League table.",
+          "quote": "| 1 | Arsenal crestArsenal | | 38 | 26 | 7 | 5 | 71 | 27 | 44 | 85 | W W W W W |",
+          "verdict_reason": "Snippet shows Arsenal at the top of a table labeled '2025/2026', which may be a projection or future season rather than the current 'latest' standings, making it conflict-bearing but not definitive.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Arsenal is ranked first in the Premier League table with 85 points.",
+          "quote": "| 1  Arsenal | 38 | 26 | 7 | 5 | 71 | 27 | 44 | 85 |",
+          "verdict_reason": "The snippet explicitly lists Arsenal at position 1 in the Premier League table, directly confirming they are at the top of the standings shown.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Arsenal is ranked first in the 2025 Premier League standings with 85 points.",
+          "quote": "| 1 | ArsenalArsenalArsenal | 38 (19 | 19) | 26 (15 | 11) | 7 (2 | 5) | 5 (2 | 3) | 44 | 85 |",
+          "verdict_reason": "The snippet explicitly lists Arsenal at position 1 in the 2025 Premier League standings, directly confirming they are at the top.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_41c44ecfd0f0",
+      "claim_index": 3,
+      "claim": "The other sources, including Brainly, Quizlet, Quora another Quizlet explanation, mention lacteals but do not provide a clear explanation of their role in the small intestine",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Lacteals are the lymphatic vessels located in the small intestine.",
+          "quote": "Lecteal is a lymphatic vessels that serves the small intestine . So they are found in small intestine.",
+          "verdict_reason": "The snippet directly identifies 'Lecteal' as the lymphatic vessel serving the small intestine, answering the query despite minor spelling errors.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document claims Peyer's patches are the lymphatic vessels in the small intestine, though they are technically lymphoid nodules rather than vessels.",
+          "quote": "The name of the lymphatic vessels located in the small intestines is (E) Peyer's patches.",
+          "verdict_reason": "The snippet directly addresses the query but provides scientifically inaccurate information by misidentifying lymphoid nodules as vessels, making it conflict-bearing but not fully supportive.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The lymphatic vessels located in the small intestine are called lacteals.",
+          "quote": "There are lymphatic vessels in the small intestine called lacteals.",
+          "verdict_reason": "The snippet directly answers the query by explicitly naming the lymphatic vessels in the small intestine as lacteals.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The small lymphatic vessel located in the center of an intestinal villus is called a lacteal.",
+          "quote": "The small lymphatic vessel found in the center of an intestinal villus is called a lacteal.",
+          "verdict_reason": "The snippet directly answers the query by naming the specific lymphatic vessels (lacteals) found in the small intestine villi.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_143",
+      "claim_index": 1,
+      "claim": "However, I do not have any information about the current president the retrieved documents do not provide any updates on the presidency since 2018",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Cyril Ramaphosa became president of South Africa in February 2018 following Jacob Zuma's resignation.",
+          "quote": "Acting president Cyril Ramaphosa of the ruling African National Congress won the election unopposed... Ramaphosa was sworn-in by Chief Justice Mogoeng Mogoeng at 5pm, 15 February 2018.",
+          "verdict_reason": "Snippet confirms Ramaphosa became president in 2018, addressing the same entity. However, the 2021 document is outdated relative to the 'now' query, making it conflict-bearing but not definitive for the current status.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Thabo Mbeki replaced Nelson Mandela as President of South Africa five years after May 10, 1994.",
+          "quote": "On May 10, 1994, Mandela became President of South Africa, remaining in that office until replaced by Thabo Mbeki five years later.",
+          "verdict_reason": "Snippet addresses the same entity (South African presidency) but provides outdated historical data (1999) irrelevant to the current president.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Viljoen served as State President from 1979 to 1984 and is the second-longest serving President of South Africa.",
+          "quote": "in 1979, Viljoen held the post of non-executive State President from 4 June 1979 until 3 September 1984... He remains the second-longest serving President of South Africa",
+          "verdict_reason": "Snippet discusses a former president (Viljoen) and historical context, which is relevant to the entity but outdated and does not answer who the current president is.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Jacob Zuma was sworn in as President of South Africa on May 9, 2009.",
+          "quote": "The ANC won the national election on 6 May 2009 and Zuma was sworn in as President of South Africa on 9 May 2009.",
+          "verdict_reason": "Snippet addresses the query entity but provides outdated 2009 information, failing to identify the current president while confirming a past one.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_d295f9ea94b3",
+      "claim_index": 3,
+      "claim": "The other retrieved documents provide additional context and information about Botox, but they all agree that it is a non-surgical cosmetic treatment",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Botox injections alongside various plastic surgery procedures but does not explicitly define Botox as a type of plastic surgery.",
+          "quote": "Related Treatments\n Brow lift\n Chin Surgery\n Face Lift (Rhytidectomy)\n Injectable Fillers\n Cosmetic Nose Surgery (Rhinoplasty)",
+          "verdict_reason": "The snippet discusses Botox in the context of a plastic surgery department and lists it with surgical treatments, providing relevant but indirect evidence without explicitly answering the classification question.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses Botox in the context of cosmetic surgery procedures and injections by cosmetic surgeons.",
+          "quote": "ox® can be delivered for cosmetic surgery procedures is with a needle, so there is a risk of getting a bruise from Botox®.",
+          "verdict_reason": "Snippet links Botox to cosmetic surgery but does not explicitly define it as a type of plastic surgery, offering only partial evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Botox is described as an injectable botulinum toxin used to reduce wrinkles, not explicitly defined as plastic surgery itself.",
+          "quote": "The cosmetic form of botulinum toxin, sometimes referred to as \"Botox\" by patients, is an injectable that temporarily reduces or eliminates facial fine lines and wrinkles.",
+          "verdict_reason": "The snippet defines Botox as an injectable toxin from a plastic surgery organization but does not explicitly confirm or deny if it constitutes 'plastic surgery,' making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_114b9082bc42",
+      "claim_index": 3,
+      "claim": "The accuracy of this information is corroborated by multiple sources, including IMDb, Quora Ebsco",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley was discovered unconscious on August 16 and efforts to revive him failed, indicating his death occurred on that date.",
+          "quote": "On the afternoon of August 16, Presley was discovered unconscious in a bathroom of Graceland. Efforts by paramedics at the mansion failed to revive him, as did further attempts by doctors at Baptist Memorial Hospital.",
+          "verdict_reason": "The snippet explicitly states Presley was found unconscious on August 16 and could not be revived, directly answering the query about his death date.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "Assuming he didn't fake his death, he died August 16, 1977.",
+          "verdict_reason": "The snippet directly states the specific date of death requested in the query, providing a decisive answer despite the conditional phrasing.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977, in Memphis, Tennessee.",
+          "quote": "Died\n+ August 16\n, \n1977\n+ Memphis, Tennessee, USA\n(cardiac arrhythmia)",
+          "verdict_reason": "The snippet explicitly states the date of death (August 16, 1977) in the personal details section, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_1fe3ba1b1cba",
+      "claim_index": 3,
+      "claim": "The other retrieved documents either do not address the query or provide irrelevant information",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.75,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Max Verstappen won the World Driver's Championships in 2021, 2022, and 2023.",
+          "quote": "Max Verstappen won three World Driver's Championships in a row (2021, 22 and 23)",
+          "verdict_reason": "Snippet addresses the same entity (F1 champion) but lists years after 2020, providing context without directly answering who won in 2020.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses Lewis Hamilton's career and standings in 2023 and 2024 but does not mention the 2020 championship winner.",
+          "quote": "That energy took him to third in the 2023 standings, beaten only by the all-conquering Red Bulls – despite not winning a single Grand Prix.",
+          "verdict_reason": "The document concerns the queried entity (F1 driver standings) but addresses 2023/2024 seasons, leaving the specific 2020 query unanswered while remaining topically relevant.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Lewis Hamilton won the World Drivers' Championship at the Turkish Grand Prix.",
+          "quote": "Hamilton equalled Michael Schumacher's record of seven World Drivers' Championships at the Turkish Grand Prix",
+          "verdict_reason": "The snippet explicitly states Hamilton equalled the record of seven championships at the Turkish Grand Prix during the 2020 season, directly answering who won.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a 2025 event and driver, providing no evidence regarding the 2020 Formula 1 world driver's championship winner.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_5ecee1c55713",
+      "claim_index": 3,
+      "claim": "The high-credibility sources should be cited first in the answer, as they provide the most detailed and accurate information",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Portugal won the 2017 Eurovision Song Contest with Salvador Sobral's song Amar Pelos Dois.",
+          "quote": "Portugal have won the Eurovision Song Contest for the first time in the competition's history. Salvador Sobral, 27, won with his love ballad Amar Pelos Dois",
+          "verdict_reason": "The snippet explicitly states that Portugal won the contest and identifies the winner, directly answering the query about the 2017 event.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Portugal won the 2017 Eurovision Song Contest with 758 points.",
+          "quote": "Eurovision Song Contest 2017 result: Portugal won with the song \"Amar pelos dois\" by Salvador Sobral with 758 points",
+          "verdict_reason": "The snippet explicitly states that Portugal won the 2017 contest, directly answering the query with the winning country and song details.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Portugal won the 2017 Eurovision Song Contest final with 758 points.",
+          "quote": "Portugal won with 758 points, winning both the jury vote and the televote.",
+          "verdict_reason": "The snippet explicitly states that Portugal won the final of the 2017 contest, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_a5492f36ca23",
+      "claim_index": 4,
+      "claim": "The other sources provide additional context and insights into Bowie's life and legacy, but Britannica.com's confirmation of the date and cause of death is the most authoritative",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "David Bowie died on January 10, 2016, at his home in New York.",
+          "quote": "Hopes of 2016 bringing a respite were cruelly dashed at 6.30am on Monday January 10, when it was announced on his website that David Bowie had died at home in New York",
+          "verdict_reason": "The snippet explicitly states the date (January 10, 2016) and location of David Bowie's death, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "David Bowie died on January 10, 2016.",
+          "quote": "Bowie died on Jan. 10, 2016 — two days after his 69th birthday and two days after his final album _Blackstar_ was released.",
+          "verdict_reason": "The snippet explicitly states the exact date of David Bowie's death, directly and fully answering the user's query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "David Bowie died on Sunday, January 10, 2016, following an 18-month battle with liver cancer.",
+          "quote": "David Bowie dies after 18-month battle with cancer Jan 12, 2016 After releasing his last album,",
+          "verdict_reason": "The snippet explicitly states the date of the article (Jan 12, 2016) and that Bowie died the preceding Sunday, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_c3f10dc1632d",
+      "claim_index": 0,
+      "claim": "Zhejiang Province borders Shanghai to the north, as stated in multiple documents",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Shanghai municipality is bordered by Jiangsu province to the north and west.",
+          "quote": "Shanghai municipality is bordered by Jiangsu province to the north and west and Zhejiang province to the southwest.",
+          "verdict_reason": "The snippet explicitly states that Jiangsu province borders Shanghai to the north, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Zhejiang Province borders Shanghai to the south, implying Shanghai is to Zhejiang's north, but the text does not explicitly name the province bordering Shanghai to the north.",
+          "quote": "Zhejiang Province ... borders the East China Sea to the east, Fujian to the south, Jiangxi and Anhui to the west, and Shanghai and Jiangsu to the north.",
+          "verdict_reason": "The snippet identifies Zhejiang's neighbors, stating Shanghai and Jiangsu are to Zhejiang's north. This implies Jiangsu borders Shanghai, but does not explicitly state which province is north of Shanghai, making it partial evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Shanghai borders the Yangtze River estuary to the north rather than naming a specific province.",
+          "quote": "It borders the estuary of Yangtze River to the north, Jiangsu and Zhejiang Provinces to the west and Hangzhou Bay to the south.",
+          "verdict_reason": "Snippet addresses the northern border but cites a river estuary instead of a province, providing incomplete evidence for the specific query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_b281f09f0959",
+      "claim_index": 3,
+      "claim": "The Red Scare was a complex and multifaceted phenomenon understanding its causes and consequences requires a nuanced and contextualized approach",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Joseph McCarthy played a role in stoking fears of communism during the 1950s Red Scare.",
+          "quote": "Joseph McCarthy and his role in stoking fears of communism and its sympathizers during the 1950s.",
+          "verdict_reason": "The snippet identifies Joseph McCarthy's role in the 1950s Red Scare but does not explicitly state he 'started' it, making it partial evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Roy Cohn served as chief counsel to Senator Joseph McCarthy during the Red Scare in the 1950s.",
+          "quote": "Roy Cohn, who served as a chief counsel to Senator Joseph McCarthy during the Red Scare in the 1950s and would later become a leading mob attorney.",
+          "verdict_reason": "The snippet identifies Joseph McCarthy as a central figure of the Red Scare but does not explicitly state he started it, providing relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists secondary sources and photographs identifying Senator Joseph R. McCarthy as the central figure of the McCarthy era and Red Scare.",
+          "quote": "Nightmare in Red: The McCarthy Era in Perspective by Richard M. Fried... The Politics of Fear: Joseph R. McCarthy and the Senate by Robert Griffith",
+          "verdict_reason": "The snippet strongly associates McCarthy with the era through titles and photos but lists sources rather than explicitly stating he started the Red Scare.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_32d33d503f69",
+      "claim_index": 1,
+      "claim": "This information is confirmed by multiple sources, including IMDb and The Futon Critic",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Henry Danger: The Movie is scheduled to premiere on Friday, Jan. 17 at 7/6c on Nickelodeon.",
+          "quote": "Henry Danger: The Movie, a feature-length follow-up to the hit live-action series, will premiere Friday, Jan. 17 at 7/6c on Nickelodeon.",
+          "verdict_reason": "Snippet provides a specific premiere date for a Henry Danger movie, addressing the query about new content, though it specifies a movie rather than a series return.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Henry Danger The Movie will premiere on Nickelodeon on Friday, January 17 at 7 p.m. ET/PT.",
+          "quote": "\"Henry Danger The Movie\" will be available to stream in the U.S. on Paramount+ Friday, January 17, and premiere on Nickelodeon that same day at 7 p.m. (ET/PT).",
+          "verdict_reason": "The snippet explicitly states the premiere date and time for the new Henry Danger movie, directly answering the user's query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The release date for the new Henry Danger movie is January 17, 2025, in the United States.",
+          "quote": "Release date · January 17, 2025 (United States)",
+          "verdict_reason": "The snippet explicitly provides the specific release date for the queried entity, directly answering when it is coming out.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f099d9d1452b",
+      "claim_index": 3,
+      "claim": "The other documents, while credible, do not directly answer the query or provide relevant information",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "John Ratcliffe is identified as the current CIA Director in President Trump's second term.",
+          "quote": "Upcoming changes at CIA shine a spotlight on the spy agency's director John Ratcliffe",
+          "verdict_reason": "The snippet explicitly names John Ratcliffe as the CIA Director in the context of current events in 2025, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Tulsi Gabbard as the Director of National Intelligence, not the CIA Director.",
+          "quote": "She is honored to be President Trump's Director of National Intelligence and is committed to securing the nation",
+          "verdict_reason": "The snippet addresses US intelligence leadership but names the DNI, not the CIA Director, providing related but incomplete evidence for the specific query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "George Tenet is identified as the CIA Director in a speech regarding Iraq's weapons programs.",
+          "quote": "Speech of CIA Director George Tenet ... A text of CIA Director George Tenet, speaking on Thursday at Georgetown University",
+          "verdict_reason": "Snippet identifies George Tenet as CIA Director, but the content (Iraq WMD, 2002) indicates this is historical evidence, not the current director.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0010",
+      "claim_index": 2,
+      "claim": "The other documents do not provide information about Activision Blizzard's current ownership structure, making d4 the most relevant and up-to-date source",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Bobby Kotick and a small group of investors bought Activision around 1991 for approximately $500,000.",
+          "quote": "the company was bought for around US$500,000 by Bobby Kotick and a small group of investors around 1991",
+          "verdict_reason": "Snippet addresses Activision's ownership history but does not answer current ownership of Activision Blizzard. It provides historical ownership information that is outdated relative to the query's present-tense framing.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Activision Blizzard was traded on NASDAQ as ATVI from 2008 to 2023 and is described as a subsidiary.",
+          "quote": "type = Subsidiary | traded_as = NASDAQ was|ATVI (2008–2023)",
+          "verdict_reason": "Document is about Activision Blizzard but appears to be an older Wikipedia revision (timestamp 2025-06-14, but metadata indicates historical content). The snippet shows ATVI trading ended in 2023, suggesting ownership changed. Does not directly state current owner.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Activision Blizzard is listed as a subsidiary with an owner field present in the infobox, but the owner value is not populated in the provided snippet.",
+          "quote": "type = Subsidiary | traded_as = NASDAQ was|ATVI (2008–2023) | owner =",
+          "verdict_reason": "The snippet is about Activision Blizzard ownership structure but the owner field is empty. The document is clearly relevant to the query but does not provide the actual owner information needed to fully answer the question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0172",
+      "claim_index": 1,
+      "claim": "However, I do not have more recent information on the current champion, as the retrieved documents do not provide any updates beyond 2025",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Carlos Alcaraz was the two-time defending men's singles champion at the 2026 French Open but withdrew due to a wrist injury.",
+          "quote": "Two-time defending men's singles champion Carlos Alcaraz will not defend his title, as he withdrew before the start of the tournament due to a wrist injury.",
+          "verdict_reason": "Document addresses the 2026 French Open but does not identify the actual 2026 champion. It only confirms the defending champion withdrew, leaving the query unresolved.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the men's singles champion at the French Open.",
+          "quote": "Men Current = Carlos Alcaraz (singles)",
+          "verdict_reason": "Document explicitly identifies Carlos Alcaraz as the current men's singles champion. Timestamp (2026-04-16) is recent and aligns with latest tournament data.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the current men's singles champion at the French Open.",
+          "quote": "Men Current = Carlos Alcaraz (singles)",
+          "verdict_reason": "Document explicitly identifies Carlos Alcaraz as the current men's singles champion. Timestamp (2026-05-20) and infobox structure confirm this is the latest information about the French Open.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1d741779a31e",
+      "claim_index": 1,
+      "claim": "A large cohort study has shown an association between high artificial sweetener intake and increased mortality risk",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Recent studies indicate artificial sweeteners may worsen glycemic control by altering gut microbiota and affecting insulin secretion.",
+          "quote": "However, recent studies have shown that artificial sweeteners affect glucose absorption in the intestinal tract as well as insulin and incretin secretion in humans and animals.",
+          "verdict_reason": "The snippet directly addresses safety for diabetics but presents conflicting evidence (worsened control vs. previous beliefs) rather than a definitive yes/no answer.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document cites studies investigating artificial sweeteners' link to type 2 diabetes risk and vascular reactivity impairment.",
+          "quote": "Artificial sweeteners and risk of type 2 diabetes in the prospective NutriNet-Santé cohort. Diabetes Care. (2023) 46:1681–90.",
+          "verdict_reason": "Snippet lists relevant studies on sweeteners and diabetes/vascular health but provides only citations without specific safety conclusions for diabetics.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4317242e485c",
+      "claim_index": 2,
+      "claim": "The IUCN report cited in d4 suggests that trophy hunting is beneficial for conservation and animal welfare, but this perspective is not universally accepted",
+      "cited_docs": [
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Conservationist Amy Dickman argues that trophy hunting revenue makes lions and their habitat more likely to be conserved compared to areas without such income.",
+          "quote": "If lions and other species generate revenue through trophy hunting, she argues, they and their habitat are more likely to be conserved.",
+          "verdict_reason": "The snippet provides expert testimony supporting the benefit of trophy hunting for conservation but presents it as one side of an ongoing debate without a definitive final conclusion.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues that a trophy-hunting ban would not be good for wildlife on balance at this time.",
+          "quote": "But will a trophy-hunting ban at this time be good for wildlife? On balance, right now, I believe the answer is no.",
+          "verdict_reason": "Snippet directly addresses the query with a specific stance supporting hunting's current role, though it acknowledges flaws and presents opposing views, making it conflict-bearing evidence rather than a definitive sole answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_7998e59d9b97",
+      "claim_index": 3,
+      "claim": "While organic farming may not be the most efficient option, it can still be a viable choice for farmers and consumers who prioritize environmental sustainability and social responsibility",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming has limited options for no-till techniques compared to conventional farming due to restrictions on synthetic herbicides.",
+          "quote": "Since herbicide applications cannot be widely adopted in organic farming (with some approved exceptions), options for no-till farming can be more limited",
+          "verdict_reason": "Snippet addresses efficiency-related methods (tillage) comparing organic and conventional systems but does not explicitly state overall efficiency levels or yield differences.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming practices cannot compete with the crop yields of conventional systems.",
+          "quote": "Organic farming practices have more future value, contributing far less emissions during production processes, but yet cannot compete with the crop yields of conventional systems.",
+          "verdict_reason": "The snippet directly addresses the query by stating organic yields are lower than conventional, supporting the efficiency claim, though it also notes sustainability benefits.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_80baf25496cd",
+      "claim_index": 5,
+      "claim": "By embracing diversity and promoting unity in diversity, we can work towards creating a more inclusive and cohesive society",
+      "cited_docs": [
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet presents a perspective that multiculturalism flourishes when cultural values are accepted, which addresses the query about multiculturalism and unity.",
+          "quote": "YouTube Multiculturalism flourishes when Cultural values are accepted | Tahir Aslam Gora | TEDxIIMRohtak",
+          "verdict_reason": "The snippet addresses the same entity (multiculturalism) and implies a relationship to social cohesion, offering conflict-bearing evidence against the hindrance claim, though it lacks a direct answer.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The text identifies cultural differences as desirable perspectives while noting that personal states can include hindrances to unity.",
+          "quote": "Cultural differences, seen as deeply engrained, are acceptable and even desirable as they may provide necessary perspectives. ... Personal states, however, comprise an area that also includes those hindrance",
+          "verdict_reason": "The snippet addresses the query by discussing cultural differences and hindrances but presents a nuanced view rather than a direct confirmation that multiculturalism hinders unity.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_8cf8ebb94554",
+      "claim_index": 1,
+      "claim": "Prophylactic braces, for example, may be effective in preventing knee injuries during contact sports, while functional braces can provide stability and support for the knee after an injury",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Prophylactic knee braces are designed to shield the kneecap from damage caused by direct impact in contact sports.",
+          "quote": "Prophylactic brace: This is a protective knee pad that shields the kneecap from damage due to direct impact. It's used by athletes who play contact sports, such as football.",
+          "verdict_reason": "The snippet describes a specific brace type for preventing impact damage, partially addressing injury prevention, but lacks broad evidence on overall effectiveness for all knee injuries.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "There is no conclusive evidence supporting the effectiveness of knee braces for preventing injuries, and they are not recommended for regular use.",
+          "quote": "However, no conclusive evidence supports their effectiveness, and they are not recommended for regular use.",
+          "verdict_reason": "The snippet directly addresses the query by stating there is no conclusive evidence for prevention, providing conflict-bearing scientific evidence rather than a definitive support or irrelevant text.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_4d9a80505e01",
+      "claim_index": 0,
+      "claim": "The Federal Reserve cut interest rates by 25 basis points from August to December 2022",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes events in late 2025 and projections for 2026. It provides no evidence regarding interest rate changes between August and December 2022.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_4d9a80505e01",
+      "claim_index": 2,
+      "claim": "While other documents provide context and insights into the Fed's interest rate policy, d1 directly answers the query with the most relevant information",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes events in late 2025 and projections for 2026. It provides no evidence regarding interest rate changes between August and December 2022.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem holds the world record for the fastest rap in a hit single, with 225 words in 30 seconds, averaging 7.5 words per second, in his song \"Godzilla\"",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_071",
+      "claim_index": 0,
+      "claim": "The only birthdate of a person who played for the Aldershot Town F.C. mentioned in the retrieved documents is Gordon Atherton, born 18 June 1934",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Gordon Atherton's career with Bury, Swindon Town, and Drumcondra, but does not mention Aldershot Town F.C. or provide evidence linking him to that specific club.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0104",
+      "claim_index": 3,
+      "claim": "The Rapid Metro Gurgaon article does not provide any information about the official name of the city",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses Rapid Metro Gurgaon's operations and history but does not address the query about Gurgaon's official name or any renaming.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0142",
+      "claim_index": 2,
+      "claim": "The Office of the Vice President, which includes personnel who support the vice president, is headed by the chief of staff and provides staffing and support to the second lady of the United States",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the Office of the Vice President's structure and location but does not identify who the current or latest Vice President is. It provides no information about the person holding the office.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_114",
+      "claim_index": 1,
+      "claim": "The phrase may have originated from the title of the novel, but the documents do not provide a clear explanation of its origin",
+      "cited_docs": [
+        "d5",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses the novel All Quiet on the Western Front but does not state the origin of the saying.",
+          "quote": "\"All Quiet on the Western Front (novel)\", the text presents a series of war-related episodes rather than a distinct, teleological narrative.",
+          "verdict_reason": "The snippet addresses the same entity (the novel) but fails to answer the specific query about the saying's origin, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a TV show with a similar title but provides no evidence regarding the origin of the saying 'All Quiet on the Western Front'.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document mentions the 1930 film adaptation of All Quiet on the Western Front but does not state the origin of the saying.",
+          "quote": "Sullivan returned to the subject of World War I as the supervising story chief for the 1930 film adaptation of \"All Quiet on the Western Front\".",
+          "verdict_reason": "The snippet discusses the film adaptation of the title but fails to identify the source or origin of the saying itself, providing only tangential evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a different book title ('All Quiet on the Orient Express') and a fictional or unrelated title ('Murder on the Western Front'), failing to provide evidence about the origin of the specific saying 'All Quiet on the Western Front'.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_114",
+      "claim_index": 3,
+      "claim": "The phrase has since become a well-known idiom, but its exact origin remains unclear based on the available information",
+      "cited_docs": [
+        "d5",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses the novel All Quiet on the Western Front but does not state the origin of the saying.",
+          "quote": "\"All Quiet on the Western Front (novel)\", the text presents a series of war-related episodes rather than a distinct, teleological narrative.",
+          "verdict_reason": "The snippet addresses the same entity (the novel) but fails to answer the specific query about the saying's origin, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a TV show with a similar title but provides no evidence regarding the origin of the saying 'All Quiet on the Western Front'.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document mentions the 1930 film adaptation of All Quiet on the Western Front but does not state the origin of the saying.",
+          "quote": "Sullivan returned to the subject of World War I as the supervising story chief for the 1930 film adaptation of \"All Quiet on the Western Front\".",
+          "verdict_reason": "The snippet discusses the film adaptation of the title but fails to identify the source or origin of the saying itself, providing only tangential evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a different book title ('All Quiet on the Orient Express') and a fictional or unrelated title ('Murder on the Western Front'), failing to provide evidence about the origin of the specific saying 'All Quiet on the Western Front'.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "Passover 2026 begins at sundown on April 1 and ends on April 9",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_8eca5bd62ae0",
+      "claim_index": 2,
+      "claim": "The Testbook question and the Scribd document also mention Beijing as the first city to host both the Summer and Winter Olympics, but these sources are less credible than Wikipedia",
+      "cited_docs": [
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Beijing is the first city to have hosted both the summer and winter editions of the Olympic Games.",
+          "quote": "Which was the first city in the world to have hosted both, the summer and winter editions of the Olympic Games? ... The correct answer is Beijing.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating that Beijing is the correct answer to the question of which city first hosted both Olympic editions.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only website interface text and disclaimers, providing no evidence about Olympic host cities or the specific query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_301378915064",
+      "claim_index": 2,
+      "claim": "ET Online and Rachel's Media Channel also listed Wever as a nominee, but did not confirm the winner",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The article lists Julie Bowen, Jane Lynch, Sofia Vergara, Merritt Wever, Mayim Bialik, and Anna Chlumsky as contenders for the 2013 Emmy for Outstanding Supporting Actress in a Comedy.",
+          "quote": "The 2013 Emmys are closing in, and ET is breaking down your list of contenders, starting with the Outstanding Supporting Actress in a Comedy category.",
+          "verdict_reason": "The snippet lists nominees (contenders) for the 2013 award but does not explicitly state who won, making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"situatedqa_temp_301378915064_doc_2\", \"verdict\": \"partially support",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0134",
+      "claim_index": 3,
+      "claim": "The other documents are not directly relevant to the query",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the role and appointment process of the Deputy Prime Minister, not the identity of the current Prime Minister of Australia. It provides no information about who currently holds the PM position.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The prime minister of Australia is the leader of the Australian Government and the Cabinet of Australia, appointed by the governor-general with support of the House majority.",
+          "quote": "The prime minister of Australia is the leader of the Australian Government and the Cabinet of Australia, with the support of the majority of the House of Representatives.",
+          "verdict_reason": "Snippet defines the role and explains the appointment process but does not name the current prime minister. It provides structural context about the office rather than answering who currently holds it.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_5eeb46719843",
+      "claim_index": 4,
+      "claim": "The country's history and its transition to independence are complex and nuanced a specific date or year for independence is not clearly established in the retrieved documents",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The country called the Dominion of Canada was formed on July 1, 1867.",
+          "quote": "On July 1, 1867, the country called the Dominion of Canada was formed from New Brunswick, Nova Scotia and the Province of Canada.",
+          "verdict_reason": "The snippet explicitly states the date Canada was formed as a country (Dominion of Canada), directly answering the query about gaining independence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only website navigation text, headers, and the question title, but provides no actual answer or factual evidence regarding when Canada gained independence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Canada was the first country to gain independence through legislation in the 1800s but does not provide a specific date.",
+          "quote": "Canada was the first country to gain independence through legislation and in 1800s; there were different British colonies in North America from Vancouver Island to Newfoundland.",
+          "verdict_reason": "The snippet addresses the query topic directly but lacks the specific date requested, offering only a general century and context about colonies.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "Hunter Emery plays the role of CO Rick Hopper on Orange is the New Black",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 1,
+      "claim": "This is confirmed by multiple sources, including the show's wiki , a fan-made wiki a reputable online database (IMDb)",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_034",
+      "claim_index": 2,
+      "claim": "The other retrieved documents discuss different declarations of rights, including the Declaration of Human Rights and the Universal Declaration of Human Rights, but they do not provide information about the Declaration of Independence",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The document discusses the Universal Declaration of Human Rights, a different entity from the queried Declaration of Independence, providing no evidence about the latter's contents.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists rights such as assembly, petition, freedom of religion, speech, and press under sections of a Declaration of Human Rights.",
+          "quote": "Section three describes the rights of assembly, consultation, instruction, and petition... Section four establishes the freedom of religion... Section five protects the freedom of speech and the freedom of press.",
+          "verdict_reason": "Snippet details rights in a 'Declaration of Human Rights,' which is likely not the specific US 'Declaration of Independence' queried, but provides relevant conflict-bearing evidence on similar declarations.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Declaration prohibits attacks on civilians and recognizes rights against persecution, torture, and forcible evictions.",
+          "quote": "The Declaration specifically prohibits attacks and bombing of civilian populations (Article 1) and the use of chemical and biological weapons on civilian populations (Article 2).",
+          "verdict_reason": "Snippet discusses 'The Declaration' and lists specific prohibitions and rights, but likely refers to a different document than the US Declaration of Independence, making it conflicting or incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_1fe3ba1b1cba",
+      "claim_index": 3,
+      "claim": "The other retrieved documents either do not address the query or provide irrelevant information",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.75,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Max Verstappen won the World Driver's Championships in 2021, 2022, and 2023.",
+          "quote": "Max Verstappen won three World Driver's Championships in a row (2021, 22 and 23)",
+          "verdict_reason": "Snippet addresses the same entity (F1 champion) but lists years after 2020, providing context without directly answering who won in 2020.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses Lewis Hamilton's career and standings in 2023 and 2024 but does not mention the 2020 championship winner.",
+          "quote": "That energy took him to third in the 2023 standings, beaten only by the all-conquering Red Bulls – despite not winning a single Grand Prix.",
+          "verdict_reason": "The document concerns the queried entity (F1 driver standings) but addresses 2023/2024 seasons, leaving the specific 2020 query unanswered while remaining topically relevant.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Lewis Hamilton won the World Drivers' Championship at the Turkish Grand Prix.",
+          "quote": "Hamilton equalled Michael Schumacher's record of seven World Drivers' Championships at the Turkish Grand Prix",
+          "verdict_reason": "The snippet explicitly states Hamilton equalled the record of seven championships at the Turkish Grand Prix during the 2020 season, directly answering who won.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a 2025 event and driver, providing no evidence regarding the 2020 Formula 1 world driver's championship winner.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_168",
+      "claim_index": 2,
+      "claim": "Although other documents mention White Lion, they do not specify which album features the band as the performer",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Rock 'N' Roll Alive is a live album featuring former White Lion singer Mike Tramp and tracks from White Lion.",
+          "quote": "Rock 'N' Roll Alive is a double disc live album from former White Lion and Freak of Nature lead singer, Mike Tramp",
+          "verdict_reason": "Snippet identifies an album related to White Lion but clarifies it is by former singer Mike Tramp, not the band itself, providing partial but conflicting evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet confirms White Lion is over and mentions Mike Tramp's solo albums, but does not list any specific White Lion albums.",
+          "quote": "Following this release Tramp once again confirmed there would be no more White Lion. With White Lion officially over the voice of the band Mike Tramp continues with his solo career",
+          "verdict_reason": "The snippet discusses the same entity (White Lion) and confirms the band's end, providing context but failing to name any specific White Lion albums as requested.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Tramp released a live album featuring songs from White Lion, but the snippet does not name a specific studio album performed by White Lion.",
+          "quote": "Tramp released the double disc live album \"Rock 'N' Roll Alive\", which features Tramp performing live versions of songs from White Lion",
+          "verdict_reason": "The snippet discusses White Lion songs in the context of a solo live album, providing related but incomplete evidence regarding a specific White Lion studio album.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses Fleetwood Mac and their album nicknamed 'The White Album', which is a different entity from the band White Lion. It provides no evidence about albums performed by White Lion.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

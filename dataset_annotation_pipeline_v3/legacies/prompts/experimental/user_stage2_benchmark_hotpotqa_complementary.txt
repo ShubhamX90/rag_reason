@@ -1,0 +1,43 @@
+You are given the following structured information about a retrieval-augmented generation (RAG) query and the retrieved evidence notes.
+
+This benchmark slice is curated with a fixed gold conflict type:
+- "Complementary information"
+
+You must output that exact conflict_type for every row.
+
+Query:
+{QUERY}
+
+Per-document evidence notes (each note contains: doc_id, verdict, key_fact, quote, verdict_reason, source_quality):
+{PER_DOC_NOTES_JSON}
+
+---
+
+Your task has three parts:
+
+1. SET conflict_type
+   - Always output: "Complementary information"
+   - Do not use any other conflict label
+   - Do not argue against the fixed slice-level gold label
+
+2. WRITE conflict_reason (<= 35 words, exactly one sentence)
+   - Reference real document IDs
+   - Explicitly name the mechanism: "multi-facet synthesis", "supporting context", or "aligned evidence"
+   - State how the non-irrelevant evidence remains compatible under the fixed complementary label
+
+3. SET answerable_under_evidence
+   - true iff at least one document verdict is "supports" or "partially supports"
+   - otherwise false
+
+Before finalizing, verify:
+  - conflict_type is exactly "Complementary information"
+  - conflict_reason references real doc IDs from the notes above
+  - conflict_reason <= 35 words
+  - conflict_reason names the mechanism
+
+Output ONLY this JSON object (no commentary, no markdown):
+{
+  "conflict_type": "...",
+  "conflict_reason": "...",
+  "answerable_under_evidence": true
+}

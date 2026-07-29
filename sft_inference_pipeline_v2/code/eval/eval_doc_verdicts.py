@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Doc-Verdict Evaluation (v5)
----------------------------
+Doc-Verdict Evaluation
+----------------------
 Compares per-doc verdicts in model text-mode outputs against the canonical
 per_doc_notes verdicts from the Stage-3 dataset.
 
 Usage example:
 
-  python code/eval/eval_doc_verdicts_v5.py \
-    --canon_jsonl data/raw/stage3_final.jsonl \
-    --gens_jsonl  outputs/dev_generations/sft_qlora_v5.sanitized.jsonl \
-    --report_json outputs/eval_reports/doc_verdicts_v5.json \
-    --per_doc_csv outputs/eval_reports/doc_verdicts_v5_per_doc.csv
+  python code/eval/eval_doc_verdicts.py \
+    --canon_jsonl data/splits/val_stagewise.jsonl \
+    --gens_jsonl  outputs/sft_qwen_e2e_val_stagewise.sanitized.jsonl \
+    --report_json outputs/reports/sft_qwen_e2e_val_stagewise/doc_verdicts.json \
+    --per_doc_csv outputs/reports/sft_qwen_e2e_val_stagewise/doc_verdicts_per_doc.csv
 
 Inputs:
 - canon_jsonl: Stage-3 style JSONL with fields:
@@ -171,6 +171,20 @@ def normalize_verdict(v: Any) -> str:
     return ""
 
 
+def text_doc_verdicts_from_block(block: str) -> Dict[str, str]:
+    verdicts: Dict[str, str] = {}
+    for line in (block or "").splitlines():
+        m = re.match(
+            r"^\s*-\s*(d\d+)\s*:\s*(supports|partially supports|irrelevant)\b",
+            line,
+            flags=re.IGNORECASE,
+        )
+        if not m:
+            continue
+        verdicts[m.group(1)] = normalize_verdict(m.group(2))
+    return verdicts
+
+
 # ---------------- Metrics helpers ----------------
 
 def macro_f1_from_conf(conf: List[List[int]]) -> Tuple[float, List[float], List[float], List[float]]:
@@ -253,23 +267,25 @@ def main():
             error_counts[err] += 1
             continue
 
+        pred_docs: Dict[str, str] = {}
         arr, aerr, _ = json_array_from_block(think_block)
         if aerr:
-            error_counts[aerr] += 1
-            continue
-
-        # Build predicted doc_id -> verdict map
-        pred_docs: Dict[str, str] = {}
-        for obj in arr:
-            if not isinstance(obj, dict):
-                error_counts["array_item_not_object"] += 1
+            pred_docs = text_doc_verdicts_from_block(think_block)
+            if not pred_docs:
+                error_counts[aerr] += 1
                 continue
-            did = obj.get("doc_id")
-            v   = normalize_verdict(obj.get("verdict"))
-            if not isinstance(did, str):
-                error_counts["doc_id_missing_or_nonstring"] += 1
-                continue
-            pred_docs[did] = v
+        else:
+            # Build predicted doc_id -> verdict map
+            for obj in arr:
+                if not isinstance(obj, dict):
+                    error_counts["array_item_not_object"] += 1
+                    continue
+                did = obj.get("doc_id")
+                v   = normalize_verdict(obj.get("verdict"))
+                if not isinstance(did, str):
+                    error_counts["doc_id_missing_or_nonstring"] += 1
+                    continue
+                pred_docs[did] = v
 
         # Evaluate only on intersection of doc_ids that have both gold & pred
         common_doc_ids = sorted(set(gold_docs.keys()) & set(pred_docs.keys()),

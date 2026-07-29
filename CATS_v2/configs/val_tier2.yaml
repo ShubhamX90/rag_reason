@@ -1,0 +1,52 @@
+# CATS v2.0 — Val Split Evaluation Config (FG-v3 / committee_factual_grounding_v2)
+#
+# Run with:
+#   cd CATS_v2
+#   python run_evaluation.py \
+#     --input data/splits/92p5_7p5/stagewise_multi/val/stage3_final.jsonl \
+#     --config configs/val_tier2.yaml \
+#     --output-dir outputs/val_tier2
+#
+# Dataset notes (stage3_final.jsonl):
+#   - No model_output field — pipeline reads expected_response.answer as the
+#     model output (gold-dataset support added in pipeline).  The companion
+#     `think` field is the stage-1 annotator reasoning, not a model trace;
+#     it is ignored automatically.
+#   - No conflict_category_id field — pipeline maps conflict_type (string) to
+#     numeric id automatically (e.g. "Complementary information" -> 2).
+#   - answerable_under_evidence drives gold_answerable.
+#     abstain=True records have answer="CANNOT ANSWER, INSUFFICIENT EVIDENCE"
+#     and answerable_under_evidence=False -> correct_refusal=True -> excluded
+#     from behavior/FG/recall averages (N1 fix).
+#   - per_doc_notes carry verdict/key_fact/quote from the 5-model annotation
+#     committee -> used as 100% ground truth by committee_factual_grounding_v2.
+#
+# FG approach: committee_factual_grounding_v2 (FG-v3)
+#   The old NLI-based options (min_entail_confidence, neutral_as_support,
+#   ignore_contradictions_types, partial_credit_fg, majority_support_rule) are
+#   intentionally omitted — they applied to enhanced_factual_grounding only.
+#   FG-v3 uses the judge committee with gold verdicts as ground truth.
+
+outputs_dir: "outputs/val_tier2"
+report_md: "outputs/val_tier2/eval_report.md"
+detailed_results_json: "outputs/val_tier2/detailed_results.json"
+
+pipeline:
+  batch_size: 49        # all 49 val samples in one batch
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true     # correct refusals get GR=1.0, excluded from sub-metric averages
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8              # gold answers are longer than typical model outputs
+  allow_paraphrases: true
+
+  committee:
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 50
+    priority_overrides:
+      anthropic/claude-haiku-4-5: 3
+      openai/gpt-5.4:             2
+      deepseek/deepseek-v3.2:     2

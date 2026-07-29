@@ -1,0 +1,18 @@
+{
+  "mode": "behavior",
+  "model_id": "local/qwen3.5-397b-a17b",
+  "provider": "local_openai",
+  "prompt_sha256": "ab469a7a5803962c48116d3b24fc8a3635c7e820bb6bb7f6478ed943b463ca66",
+  "cached_at_unix": 1784012097.1767414,
+  "response": {
+    "judge_id": "local_openai_local/qwen3.5-397b-a17b",
+    "model_id": "local/qwen3.5-397b-a17b",
+    "provider": "local_openai",
+    "adherent": false,
+    "rationale": "The answer fails to disregard inaccurate sources. It claims Passover 2026 starts on April 1, 2026, which is factually incorrect (Passover 2026 begins in April 2026 on the Gregorian calendar only if the Hebrew date aligns, but April 1, 2026 is not the start; the start is actually around April 1st in some years but specifically for 2026, the 15th of Nisan falls on April 2nd, meaning the Seder is the night of April 1st? Wait, let's re-evaluate the behavior without external facts. The prompt says 'Ignore factual correctness'. However, the rubric is 'Disregard inaccurate sources'. The model cites d1-d5 as confirming the date. If the conflict type is 'Misinformation', it implies the retrieved documents contain conflicting or false info. The model blindly aggregates all sources [d1][d2][d3][d4][d5] to support a single date without identifying or disregarding any potential misinformation among them. It treats all sources as reliable and agreeing, which violates the instruction to 'disregard inaccurate sources' if there was a conflict/misinformation scenario implied by the conflict type. More critically, if the query asks about 'this year' (implying the current real-time year) and the model answers for 2026 without clarification, or if the sources provided conflicting dates and the model just picked one and claimed all agreed, that is a behavior failure. Given the specific rubric 'Disregard inaccurate sources', the model's behavior of citing all sources as confirmation suggests it did not filter or evaluate the reliability of the sources, thus failing the specific behavioral requirement to disregard inaccurate ones.",
+    "confidence": 0.9,
+    "cost": 0.0,
+    "latency_ms": 21246.617317199707,
+    "error": null
+  }
+}

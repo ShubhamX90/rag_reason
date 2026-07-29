@@ -1,0 +1,57 @@
+#!/bin/bash
+
+set -euo pipefail
+
+PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)}"
+source "$PROJECT_ROOT/slurm/sharanga/common_env.sh"
+cd "$PROJECT_ROOT"
+
+JOB_NAME_PREFIX="${JOB_NAME_PREFIX:-$SHARANGA_JOB_PREFIX}"
+
+export MODEL_NAME="${MODEL_NAME:-mistral7b}"
+export BASE_MODEL="${BASE_MODEL:-/scratch/$USER/rag-reason/models/Mistral-7B-Instruct-v0.3}"
+export TRAIN_STRATEGY="${TRAIN_STRATEGY:-stagewise}"
+export VAL_STRATEGY="${VAL_STRATEGY:-stagewise}"
+export RUN_NAME="${RUN_NAME:-main_trace_text_l_boundary_rebalanced}"
+export OUT_DIR="${OUT_DIR:-/scratch/$USER/rag-reason/checkpoints/${MODEL_NAME}_${TRAIN_STRATEGY}_e2e_${RUN_NAME}}"
+
+export TRAIN_JSONL="${TRAIN_JSONL:-data/messages/train_stagewise_prompt_robust_trace_text_l_boundary_rebalanced_messages.jsonl}"
+export VAL_JSONL="${VAL_JSONL:-data/messages/val_stagewise_e2e_minimal_messages.jsonl}"
+
+export EPOCHS="${EPOCHS:-2}"
+export LR="${LR:-2e-4}"
+export BSZ="${BSZ:-1}"
+export GRAD_ACCUM="${GRAD_ACCUM:-16}"
+export MAX_LEN="${MAX_LEN:-12288}"
+export LORA_R="${LORA_R:-32}"
+export LORA_ALPHA="${LORA_ALPHA:-64}"
+export LORA_DROPOUT="${LORA_DROPOUT:-0.05}"
+export NEFTUNE_ALPHA="${NEFTUNE_ALPHA:-5.0}"
+export CONFLICT_WEIGHT="${CONFLICT_WEIGHT:-3.55}"
+export CONTRACT_WEIGHT="${CONTRACT_WEIGHT:-3.0}"
+export ABSTAIN_WEIGHT="${ABSTAIN_WEIGHT:-0.4}"
+export ARRAY_WEIGHT="${ARRAY_WEIGHT:-1.25}"
+export CITATION_WEIGHT="${CITATION_WEIGHT:-1.7}"
+export CLASS_BALANCE_POWER="${CLASS_BALANCE_POWER:-0.4}"
+export PATIENCE="${PATIENCE:-3}"
+export DEV_SUBSET="${DEV_SUBSET:-0}"
+export DEV_MAX_NEW_BASE="${DEV_MAX_NEW_BASE:-900}"
+export DEV_MAX_NEW_CAP="${DEV_MAX_NEW_CAP:-1800}"
+export DEV_DOC_VERDICT_WEIGHT="${DEV_DOC_VERDICT_WEIGHT:-0.18}"
+export DEV_FORMAT_WEIGHT="${DEV_FORMAT_WEIGHT:-0.25}"
+export DEV_ABSTAIN_WEIGHT="${DEV_ABSTAIN_WEIGHT:-0.22}"
+export DEV_FALSE_ABSTAIN_PARTIAL_PENALTY="${DEV_FALSE_ABSTAIN_PARTIAL_PENALTY:-0.12}"
+export DEV_FALSE_ABSTAIN_SUPPORT_PENALTY="${DEV_FALSE_ABSTAIN_SUPPORT_PENALTY:-0.28}"
+export DEV_RETRY_ATTEMPTS="${DEV_RETRY_ATTEMPTS:-0}"
+export DEV_RETRY_SCALE="${DEV_RETRY_SCALE:-1.6}"
+export DEV_RETRY_CAP="${DEV_RETRY_CAP:-2600}"
+export ATTN_IMPL="${ATTN_IMPL:-sdpa}"
+export OVERWRITE_OUTPUT_DIR="${OVERWRITE_OUTPUT_DIR:-0}"
+
+SBATCH_ARGS=(--partition="${PARTITION:-gpu_a100_8}")
+if [ -n "${NODELIST:-}" ]; then
+  SBATCH_ARGS+=(--nodelist="$NODELIST")
+fi
+SBATCH_ARGS+=(--job-name="${JOB_NAME_PREFIX}-runl-mistral7b-train")
+
+sbatch "${SBATCH_ARGS[@]}" slurm/sharanga/train_experiment_1gpu.sh

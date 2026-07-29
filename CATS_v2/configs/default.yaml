@@ -1,24 +1,23 @@
-# CATS v2.0 Default Configuration
+# CATS v2 default config for the current main evaluator path.
+# This stays intentionally light: committee composition comes from code defaults
+# unless a more specific YAML is used.
 
-# Evaluation settings
-conflict_eval:
-  enable: true
-  use_judge_committee: true
-  committee:
-    voting_strategy: "weighted_majority"
-    confidence_threshold: 0.6
-    use_async: true
-    max_concurrent_requests: 10
-
-# Output settings
 outputs_dir: "outputs"
 report_md: "outputs/eval_report.md"
 detailed_results_json: "outputs/detailed_results.json"
 
-# Pipeline settings
 pipeline:
-  use_async_evaluation: true
-  max_workers: 10
   batch_size: 50
-  show_progress: true
   verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 50

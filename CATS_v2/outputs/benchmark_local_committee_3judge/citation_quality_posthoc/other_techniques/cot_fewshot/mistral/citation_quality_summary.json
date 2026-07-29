@@ -1,0 +1,1741 @@
+{
+  "variant": "other_techniques/cot_fewshot/mistral",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "other_techniques_phase1_mistral_deepseek_20260708_r1",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/other_techniques_phase1_mistral_deepseek_20260708_r1/cot_fewshot/mistral/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/other_techniques_phase1_mistral_deepseek_20260708_r1/cot_fewshot/mistral/final/detailed_results.json",
+    "source_final_sha256": "98103650e0d008f2a1e74372dada9adf5930841c6d7c0b16717bc528662bf6d1",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/other_techniques/cot_fewshot/mistral/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/other_techniques/cot_fewshot/mistral/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 2208,
+    "claims_with_citations": 2208,
+    "claims_with_committee_support_set": 6,
+    "claims_with_any_approved_citation": 1,
+    "claims_with_any_gold_positive_citation": 2066,
+    "committee_alignment_precision_macro": 0.0004528985507246377,
+    "committee_alignment_precision_micro": 0.0004528985507246377,
+    "gold_positive_citation_precision_macro": 0.9356884057971014,
+    "gold_positive_citation_precision_micro": 0.9356884057971014,
+    "soft_extra_citation_rate_micro": 0.9352355072463768,
+    "hard_negative_citation_rate_micro": 0.06431159420289854,
+    "committee_support_citation_recall_macro": 0.16666666666666666,
+    "committee_support_citation_recall_micro": 0.16666666666666666,
+    "claims_with_any_soft_extra_rate": 0.9352355072463768,
+    "claims_with_any_hard_negative_rate": 0.06431159420289854,
+    "strict_committee_alignment_claim_rate": 0.0004528985507246377,
+    "strict_gold_clean_claim_rate": 0.0004528985507246377,
+    "strict_grounded_committee_clean_rate_all_claims": 0.0004528985507246377,
+    "strict_grounded_gold_clean_rate_all_claims": 0.0004528985507246377,
+    "total_cited_docs": 2208,
+    "total_approved_cited_docs": 1,
+    "total_gold_positive_cited_docs": 2066,
+    "total_soft_extra_cited_docs": 2065,
+    "total_hard_negative_cited_docs": 142
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_04e1627e9fc5",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The study found that tillage and fertilization interactions significantly influence soil nematode abundance.",
+          "quote": "Our findings indicate that the interaction between tillage and fertilization significantly influenced the soil's total abundance of nematodes and trophic",
+          "verdict_reason": "Snippet addresses the same entity (nematodes/soil) and provides relevant findings on abundance drivers, but does not explicitly state whether nematodes increase fertility.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_04e1627e9fc5",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Some nematode species play essential roles in enhancing soil fertility.",
+          "quote": "The soil nematode community is highly diverse, with some nematode species playing essential roles in enhancing soil fertility.",
+          "verdict_reason": "The snippet confirms some species enhance fertility but implies not all do, offering partial rather than definitive support for the general query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_04e1627e9fc5",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Some nematode species play essential roles in enhancing soil fertility.",
+          "quote": "The soil nematode community is highly diverse, with some nematode species playing essential roles in enhancing soil fertility.",
+          "verdict_reason": "The snippet confirms some species enhance fertility but implies not all do, offering partial rather than definitive support for the general query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_05b33f4ca156",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Tiger salamanders are not poisonous or harmful to humans, though they may carry bacteria like Salmonella.",
+          "quote": "Tiger salamanders are not poisonous or harmful to humans, so it is generally safe for your child to gently hold one, but it's important to handle them carefully and wash hands afterward.",
+          "verdict_reason": "The snippet addresses the query by stating tiger salamanders are not poisonous, but it only covers one species rather than all salamanders, making it incomplete evidence for the general claim.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_05b33f4ca156",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Salamanders are poisonous to touch because their skins carry harmful toxins that can cause serious illness if ingested after handling.",
+          "quote": "these amphibians are equipped with harmful toxins all over their bodies. Salamanders are dangerous to humans, but they do not need to bite to make them dangerous as their skins themselves are the ones that carry poison.",
+          "verdict_reason": "The snippet directly confirms salamanders are poisonous via skin toxins, answering the query about toxicity upon touch/handling.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_05b33f4ca156",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Salamanders are poisonous to touch because their skins carry harmful toxins that can cause serious illness if ingested after handling.",
+          "quote": "these amphibians are equipped with harmful toxins all over their bodies. Salamanders are dangerous to humans, but they do not need to bite to make them dangerous as their skins themselves are the ones that carry poison.",
+          "verdict_reason": "The snippet directly confirms salamanders are poisonous via skin toxins, answering the query about toxicity upon touch/handling.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_060e5f26c453",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Researchers estimate the Great Pacific Garbage Patch covers more than 600,000 square miles, which is more than twice the size of Texas.",
+          "quote": "researchers with The Ocean Cleanup foundation estimate it covers more than 600,000 square miles, more than twice the size of Texas",
+          "verdict_reason": "The snippet directly answers the query by stating the patch is more than twice the size of Texas, providing decisive evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_060e5f26c453",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Great Pacific Garbage Patch is approximately 1.5 million square kilometers, which is more than twice the size of Texas at 700,000 square kilometers.",
+          "quote": "area of texas is about 700,000 km^2, area of great pacific garbage patch is 1.5 million (1,500,000), so its actually even larger than 2x texas.",
+          "verdict_reason": "The snippet directly compares the areas of both entities and explicitly confirms the garbage patch is larger than Texas.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_060e5f26c453",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Great Pacific Garbage Patch is approximately 1.5 million square kilometers, which is more than twice the size of Texas at 700,000 square kilometers.",
+          "quote": "area of texas is about 700,000 km^2, area of great pacific garbage patch is 1.5 million (1,500,000), so its actually even larger than 2x texas.",
+          "verdict_reason": "The snippet directly compares the areas of both entities and explicitly confirms the garbage patch is larger than Texas.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0717d0e62f3b",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "As of 2016, fashion design generally lacks the same copyright protection as other creative works in most countries because apparel is classified as functional, though exceptions exist.",
+          "quote": "As of 2016, in most countries (including the United States and the United Kingdom), fashion design does not have the same protection as other creative works... because apparel (clothes, shoes, handbags, etc.) are classified as \"functional items\", except when copyright laws can be applied.",
+          "verdict_reason": "The snippet directly addresses the query by explaining the general lack of protection due to functionality but notes exceptions and varying regulations, providing incomplete but highly relevant conflict-bearing evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0717d0e62f3b",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Copyright law protects specific fashion elements like graphic designs, textile patterns, and logos if they demonstrate sufficient creativity, but excludes colors.",
+          "quote": "Graphic Designs: Copyright law would protect the designs on the surface of fashion items just as it protects designs on the surface of a canvas or sheet of paper.",
+          "verdict_reason": "The snippet addresses the query by listing protectable and non-protectable fashion elements, providing partial but not comprehensive resolution to whether fashion designs are protected.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0717d0e62f3b",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Copyright law protects specific fashion elements like graphic designs, textile patterns, and logos if they demonstrate sufficient creativity, but excludes colors.",
+          "quote": "Graphic Designs: Copyright law would protect the designs on the surface of fashion items just as it protects designs on the surface of a canvas or sheet of paper.",
+          "verdict_reason": "The snippet addresses the query by listing protectable and non-protectable fashion elements, providing partial but not comprehensive resolution to whether fashion designs are protected.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_07e290a954ab",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Evidence suggests St. John's wort may help mild depression but was not more effective than a placebo for moderately severe major depression in large studies.",
+          "quote": "There is some scientific evidence that St. John's wort may help treat mild depression, with benefits similar to those of antidepressants. But two large studies... showed that the herb wasn't more effective than a placebo in treating moderately severe major depression.",
+          "verdict_reason": "The snippet provides direct, conflict-bearing evidence regarding the query, noting effectiveness for mild depression but lack thereof for severe cases, thus only partially resolving the general question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_07e290a954ab",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Clinical evidence suggests St. John's wort is more effective than placebo and equivalent to standard antidepressants for mild to moderate depression.",
+          "quote": "Overall, the results of this body of work suggest that St. John's wort is more effective than placebo and about equivalent to low dose tricyclic antidepressants or to standard doses of SSRIs.",
+          "verdict_reason": "The snippet directly answers the query by summarizing clinical trials and meta-analyses confirming the remedy's effectiveness compared to placebo and antidepressants.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_07e290a954ab",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Clinical evidence suggests St. John's wort is more effective than placebo and equivalent to standard antidepressants for mild to moderate depression.",
+          "quote": "Overall, the results of this body of work suggest that St. John's wort is more effective than placebo and about equivalent to low dose tricyclic antidepressants or to standard doses of SSRIs.",
+          "verdict_reason": "The snippet directly answers the query by summarizing clinical trials and meta-analyses confirming the remedy's effectiveness compared to placebo and antidepressants.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_08757808c000",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Weight lifting causes temporary blood pressure spikes up to 200/100 mmHg during heavy lifts, though long-term effects are generally positive.",
+          "quote": "During a lift, blood pressure can spike temporarily, especially when you're lifting heavy or bracing (holding your breath during part of the lift). Blood pressure can reach 200/100 mmHg or higher",
+          "verdict_reason": "Snippet directly addresses the query by confirming temporary BP spikes during lifting (supporting the claim) while noting long-term benefits (nuance), making it conflict-bearing evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_08757808c000",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The source claims that lifting weights does not cause high blood pressure, attributing the risk instead to fat gain during bulking.",
+          "quote": "Lifting weights does not cause high blood pressure but if you are bulking and gain too much fat that definitely will cause high blood pressure.",
+          "verdict_reason": "The snippet directly addresses the query with a specific claim but originates from a low-quality forum (Reddit), representing one side of potential scientific debate.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_08757808c000",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The source claims that lifting weights does not cause high blood pressure, attributing the risk instead to fat gain during bulking.",
+          "quote": "Lifting weights does not cause high blood pressure but if you are bulking and gain too much fat that definitely will cause high blood pressure.",
+          "verdict_reason": "The snippet directly addresses the query with a specific claim but originates from a low-quality forum (Reddit), representing one side of potential scientific debate.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0875b5f3262a",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "A 1957 San Francisco court decision ruled that Allen Ginsberg's poem 'Howl' was not obscene.",
+          "quote": "Hear a recording of Allen Ginsberg reciting his poem \"Howl\" in January 1959 in Chicago on \"Howl Against Censorship\" in commemoration of the 50th anniversary of the San Francisco court decision finding the poem was not obscene.",
+          "verdict_reason": "The snippet provides direct evidence of a 1957 court ruling finding the poem not obscene, addressing the query with historical legal context rather than a current status update.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0875b5f3262a",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "A judge ruled that Allen Ginsberg's book Howl was not obscene despite its sexual explicitness.",
+          "quote": "The sexual explicitness of the poem prompted the San Francisco police to seize Howl and to charge Ginsberg's publisher, Lawrence Ferlinghetti, with obscenity. The judge in the case found the book to be \"not obscene\"",
+          "verdict_reason": "The snippet directly answers the query by stating the judicial finding that the work was 'not obscene' following an obscenity charge.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "conflictingqa_34fef928d452",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only a technical error message and provides no factual evidence regarding Archaeopteryx or its flight capabilities.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_4d9a80505e01",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes events in late 2025 and projections for 2026. It provides no evidence regarding interest rate changes between August and December 2022.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_4d9a80505e01",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes events in late 2025 and projections for 2026. It provides no evidence regarding interest rate changes between August and December 2022.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_8eca5bd62ae0",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only website interface text and disclaimers, providing no evidence about Olympic host cities or the specific query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_cbfca321cce4",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only a redirect message and provides no factual evidence about the painter of The Starry Night or the entity itself.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_cbfca321cce4",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only a redirect message and provides no factual evidence about the painter of The Starry Night or the entity itself.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "healthcontradict_0060",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses scarlet fever symptoms, diagnosis, and complications in children, but contains no information about fever reduction methods or tepid sponge baths.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0025",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d5",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is about Han Myeong-sook, not Chang Ucchin. No information about Chang Ucchin's birth or the historical period ending with their birth is provided.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0025",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d5",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "The coup rendered powerless the democratically elected government of Yun Bo-seon and ended the Second Republic",
+          "verdict_reason": "The snippet is about the 1961 May 16 coup and the Second Republic, not Chang Ucchin’s birth in Korea or the period during which he was born.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0025",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d5",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "The coup rendered powerless the democratically elected government of Yun Bo-seon and ended the Second Republic",
+          "verdict_reason": "The snippet is about the 1961 May 16 coup and the Second Republic, not Chang Ucchin’s birth in Korea or the period during which he was born.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0031",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d10"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d10",
+        "d5",
+        "d6",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses GoGo Sentai Boukenger, a Super Sentai series, but does not identify any actress or character named Kimberly Ann Hart. The query asks about a specific actress in a Power Rangers franchise, not about this particular Super Sentai series.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Chestnut Hill West station in Philadelphia, Pennsylvania. The query asks about universities in Chestnut Hill, Massachusetts. Different locations; no meaningful evidence about the queried claim.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Chestnut Hill West station in Philadelphia, Pennsylvania. The query asks about universities in Chestnut Hill, Massachusetts. Different locations; no meaningful evidence about the queried claim.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0064",
+      "claim_index": 1,
+      "claim": "Dr. Robert Redfield was the CDC Director from March 2018 to January 2021 , but his tenure ended before Dr. Walensky's began",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Arthur Turner, an English actor known for 'Dixon of Dock Green', not an American actor who played Samson in the 1949 film 'Samson and Delilah'. No relevant information about the queried role or actor.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0064",
+      "claim_index": 2,
+      "claim": "The CDC website's information about Dr. Redfield's tenure is outdated",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Arthur Turner, an English actor known for 'Dixon of Dock Green', not an American actor who played Samson in the 1949 film 'Samson and Delilah'. No relevant information about the queried role or actor.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0071",
+      "claim_index": 0,
+      "claim": "Dr. Rochelle Walensky served as the Director of the United States Centers for Disease Control and Prevention (CDC) from January 2021 to June 2023",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d10",
+        "d3",
+        "d6"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Document is about T-Pain's album 'Revolver', not Trina's 'Still Da Baddest'. No information about Trina, the song 'I Got a Thang for You', or the featured artist born in Oakland, California.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

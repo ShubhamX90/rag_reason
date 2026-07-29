@@ -1,0 +1,57 @@
+#!/bin/bash
+
+set -euo pipefail
+
+PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
+cd "$PROJECT_ROOT"
+
+PYTHON_BIN="${PYTHON_BIN:-python3}"
+OUT_JSONL="${OUT_JSONL:-data/messages/train_stagewise_prompt_robust_trace_text_g_7b_source_guarded_messages.jsonl}"
+
+# Run G for 7B is not a copy of 32B G. It keeps F's boundary-guarded
+# conflict gains, restores extra minimal-prompt pressure from D, and adds
+# source-hygiene E2E drills for the minimal source-instruction leakage seen
+# in 7B F row #0531.
+PROMPT_PROFILE=default \
+MESSAGE_TAG=strict \
+ASSISTANT_TARGET_STYLE=trace_text \
+TRAIN_TASKS=e2e_trace \
+VAL_TASKS=e2e_trace \
+"$PYTHON_BIN" code/data/prepare_data.py \
+  --stagewise_train_jsonl data/splits/stagewise_multi/train/stage3_final.jsonl \
+  --stagewise_val_jsonl data/splits/stagewise_multi/val/stage3_final.jsonl \
+  --monolithic_train_jsonl data/splits/monolithic_multi/train/monolithic_final.jsonl \
+  --monolithic_val_jsonl data/splits/monolithic_multi/val/monolithic_final.jsonl \
+  --out_dir data \
+  --prompts_dir prompts \
+  --prompt_profile default \
+  --message_tag strict \
+  --assistant_target_style trace_text \
+  --train_tasks e2e_trace \
+  --val_tasks e2e_trace
+
+PYTHON_BIN="$PYTHON_BIN" bash slurm/examples/rebuild_messages_trace_text_multitask.sh
+PYTHON_BIN="$PYTHON_BIN" bash slurm/examples/rebuild_messages_minimal_inference.sh
+
+"$PYTHON_BIN" scripts/build_prompt_robust_messages.py \
+  --strict-input data/messages/train_stagewise_e2e_strict_messages.jsonl \
+  --runtime-input data/messages/train_stagewise_multitask_trace_text_messages.jsonl \
+  --minimal-input data/messages/train_stagewise_e2e_minimal_messages.jsonl \
+  --output "$OUT_JSONL" \
+  --strict-e2e-weight "${STRICT_E2E_WEIGHT:-2}" \
+  --runtime-task-weight e2e_trace="${RUNTIME_E2E_WEIGHT:-1}" \
+  --runtime-task-weight doc_verdict="${RUNTIME_DOC_VERDICT_WEIGHT:-1}" \
+  --runtime-task-weight conflict_type="${RUNTIME_CONFLICT_TYPE_WEIGHT:-2}" \
+  --runtime-task-weight answer_only="${RUNTIME_ANSWER_ONLY_WEIGHT:-1}" \
+  --boundary-conflict-label-weight "No conflict=${BOUNDARY_WEIGHT_NO_CONFLICT:-1}" \
+  --boundary-conflict-label-weight "Complementary information=${BOUNDARY_WEIGHT_COMPLEMENTARY:-2}" \
+  --boundary-conflict-label-weight "Conflicting opinions or research outcomes=${BOUNDARY_WEIGHT_CONFLICTING:-1}" \
+  --boundary-conflict-label-weight "Conflict due to outdated information=${BOUNDARY_WEIGHT_OUTDATED:-1}" \
+  --boundary-conflict-label-weight "Conflict due to misinformation=${BOUNDARY_WEIGHT_MISINFORMATION:-1}" \
+  --source-guard-e2e-weight "${SOURCE_GUARD_E2E_WEIGHT:-1}" \
+  --minimal-e2e-weight "${MINIMAL_E2E_WEIGHT:-5}"
+
+"$PYTHON_BIN" scripts/check_trace_text_messages.py "$OUT_JSONL"
+"$PYTHON_BIN" scripts/check_trace_text_messages.py --require_think data/messages/train_stagewise_e2e_strict_messages.jsonl
+"$PYTHON_BIN" scripts/check_trace_text_messages.py --require_think data/messages/val_stagewise_e2e_trace_text_messages.jsonl
+"$PYTHON_BIN" scripts/check_trace_text_messages.py --require_think data/messages/val_stagewise_e2e_minimal_messages.jsonl

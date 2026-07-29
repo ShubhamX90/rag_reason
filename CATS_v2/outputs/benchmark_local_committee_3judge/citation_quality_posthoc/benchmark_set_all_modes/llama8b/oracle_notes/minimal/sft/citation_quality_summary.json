@@ -1,0 +1,1046 @@
+{
+  "variant": "benchmark_set_all_modes/llama8b/oracle_notes/minimal/sft",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "benchmark_sft_remaining_47_20260704_compute_only",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_remaining_47_20260704_compute_only/llama8b/oracle_notes/minimal/sft/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_remaining_47_20260704_compute_only/llama8b/oracle_notes/minimal/sft/final/detailed_results.json",
+    "source_final_sha256": "b798ad69567685b8f43b16fc142b143a4c3569aafd2883b53f93223ad46565b3",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/llama8b/oracle_notes/minimal/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/llama8b/oracle_notes/minimal/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 913,
+    "claims_with_citations": 880,
+    "claims_with_committee_support_set": 866,
+    "claims_with_any_approved_citation": 804,
+    "claims_with_any_gold_positive_citation": 880,
+    "committee_alignment_precision_macro": 0.8477651515151515,
+    "committee_alignment_precision_micro": 0.8302028549962435,
+    "gold_positive_citation_precision_macro": 1.0,
+    "gold_positive_citation_precision_micro": 1.0,
+    "soft_extra_citation_rate_micro": 0.16979714500375656,
+    "hard_negative_citation_rate_micro": 0.0,
+    "committee_support_citation_recall_macro": 0.9284064665127021,
+    "committee_support_citation_recall_micro": 0.9284064665127021,
+    "claims_with_any_soft_extra_rate": 0.225,
+    "claims_with_any_hard_negative_rate": 0.0,
+    "strict_committee_alignment_claim_rate": 0.7469879518072289,
+    "strict_gold_clean_claim_rate": 0.8806133625410734,
+    "strict_grounded_committee_clean_rate_all_claims": 0.7469879518072289,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8806133625410734,
+    "total_cited_docs": 1331,
+    "total_approved_cited_docs": 1105,
+    "total_gold_positive_cited_docs": 1331,
+    "total_soft_extra_cited_docs": 226,
+    "total_hard_negative_cited_docs": 0
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_bf6e9339f2c5",
+      "claim_index": 1,
+      "claim": "One source notes that 100 grams of yeast biomass contains nearly 47 grams of protein, which is almost 100% of the recommended daily intake for adults nutritional yeast is also recognized for being high in B12 and other B vitamins, making it particularly valuable for vegans who cannot obtain these nutrients from animal products",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states nutritional yeast is high in protein and valuable for vegans but does not confirm if it is a complete protein.",
+          "quote": "Nutritional yeast is particularly valuable for vegans because it's high in B12, which you can't get from other vegan food. It's also high in protein.",
+          "verdict_reason": "The snippet confirms high protein content for vegans but fails to address the specific 'complete protein' claim, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Nutritional yeast is high in protein and B12, but the text advises vegans to eat a variety of plant proteins to ensure they meet their need for complete protein.",
+          "quote": "Most brands of nutritional yeast are also high in B12... That's why it's important for vegans and vegetarians to eat a variety of plant-based protein throughout the day, to make sure you're meeting your body's need for complete protein.",
+          "verdict_reason": "The snippet confirms nutritional yeast is protein-rich but implies it may not suffice alone for complete protein, advising variety. This is relevant but incomplete evidence regarding its status as a standalone complete protein.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Yeast protein contains all essential amino acids in the required quantity according to FAO recommendations, making it a complete protein.",
+          "quote": "Yeast protein also contains all essential amino acids in the required quantity according to FAO recommendation , making yeast SCP a complete protein.",
+          "verdict_reason": "The snippet explicitly states that yeast protein contains all essential amino acids in required quantities, directly confirming it is a complete protein source.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_bd2e652cd64d",
+      "claim_index": 3,
+      "claim": "The Cleveland Clinic notes that electric toothbrushes produce thousands of strokes per minute versus your own hand, making them more reliable for effective plaque removal , while also noting they are more expensive and require charging",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Studies indicate that electric toothbrushes clean teeth more effectively than manual ones, helping to prevent cavities and gum disease.",
+          "quote": "Studies show that electric toothbrushes do a better job of cleaning your teeth than manual toothbrushes do, which can help prevent cavities and gum disease.",
+          "verdict_reason": "The snippet directly answers the query by citing studies that confirm electric toothbrushes are more effective at cleaning than manual ones.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that electric toothbrushes are generally much more beneficial than manual ones, though it also lists cost and fragility as disadvantages.",
+          "quote": "Generally, an electric toothbrush is much more beneficial compared to a manual toothbrush. It also enhances the overall experience of brushing your teeth and can help you become more focused.",
+          "verdict_reason": "The snippet directly addresses the query by stating electric brushes are 'much more beneficial,' but also details pros/cons for both, making it a balanced but supportive piece of evidence rather than a definitive sole answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_0293a11bd364",
+      "claim_index": 1,
+      "claim": "This is consistent across multiple sources: one ranks it third with 600 million+ total speakers , another places it third with 542 million native speakers (implying a much larger total when including second-language speakers) a third confirms it as third with 380 million native speakers but notes the total could be much higher",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "English is ranked third with 380 million native speakers, but the data excludes total speakers including second-language users.",
+          "quote": "3. English — 380 Million Native Speakers If you're reading this article, you may be one of the 380 million-odd native English speakers, or one of the billion people who speak it as a second language.",
+          "verdict_reason": "Snippet addresses language rankings but provides data for native speakers only, not total speakers requested by the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hindi is the third most spoken language by total number of speakers with over 600 million speakers.",
+          "quote": "| 3 | Hindi | 600 Million+ |",
+          "verdict_reason": "The snippet explicitly ranks Hindi as number 3 in a table of total speakers, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_3c1297608017",
+      "claim_index": 2,
+      "claim": "Historians note that the practice was originally a two-person gesture where one person placed their index finger over the other's it wasn't until the Hundred Years' War that the modern solo version of crossing the index and middle fingers became popularized",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Historians theorize the practice originated from pre-Christian sacred geometry beliefs or as a secret sign among early Christians, though exact origins are not definitively known.",
+          "quote": "The exact origins of this practice aren't definitively known, but historians have a couple theories as to how the modern practice came about, though there is some guesswork in this.",
+          "verdict_reason": "The snippet addresses the query directly by offering historical theories but explicitly states the origins are not definitively known, making the evidence incomplete rather than decisive.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The practice of crossing fingers for good luck originated in pre-Christian times when the cross symbolized unity and benign spirits at the intersection point.",
+          "quote": "Crossing the fingers dates back to pre-Christian times when the cross was a symbol of unity and benign spirits dwelt at the intersection point.",
+          "verdict_reason": "The snippet directly answers the query by explaining the historical origin of crossing fingers for good luck, citing pre-Christian beliefs and early European customs.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a3c882e062c2",
+      "claim_index": 1,
+      "claim": "The basilica is considered nearly complete as of 2026, with only the last two towers of the Glory Façade remaining to be finished",
+      "cited_docs": [
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The construction board refuses to give an exact finish date, though rumors suggest completion in the early 2030s.",
+          "quote": "So they refuse to give an exact date. However, rumors are that the last towers should be done by the early 2030's.",
+          "verdict_reason": "The snippet addresses the query directly but states no exact date is given, offering only rumored timelines, thus partially resolving the question.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "La Sagrada Família is scheduled to be officially completed in 2026.",
+          "quote": "La Sagrada Família will officially be completed in 2026 – 100 years after Ga",
+          "verdict_reason": "The snippet directly answers the query by stating the specific completion year (2026) for the La Sagrada Família.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f75bc1a9cad8",
+      "claim_index": 2,
+      "claim": "By the 20th century, coffee had become the dominant beverage in the United States , though tea continued to thrive in specific regional cultures like the American South",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Coffee completely eclipsed hot tea in the United States in 1865 due to Civil War rations.",
+          "quote": "Coffee would completely eclipse hot tea in 1865, when Union soldiers trooped home from the Civil War.",
+          "verdict_reason": "The snippet provides a specific date (1865) for when coffee eclipsed tea, directly addressing the query, though it frames this as the completion of a shift that began earlier.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Americans switched from tea to coffee as a patriotic alternative following the Boston Tea Party in December 1773.",
+          "quote": "December 1773: colonists threw 342 chests of British East India Company tea into Boston Harbor as protest against British taxation. The act made drinking British tea politically suspect for revolutionary-era Americans. Coffee, imported through different supply chains (often Caribbean and Latin American), became the patriotic alternative.",
+          "verdict_reason": "The snippet identifies December 1773 and the Boston Tea Party as the turning point for the switch, directly addressing the query's topic but providing a historical event rather than a specific administrative switch date.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_fd48e977c2d0",
+      "claim_index": 1,
+      "claim": "However, federal policy is not the only level — state governments also play a significant role in environmental protection, as demonstrated by the Inflation Reduction Act of 2022, which provided tax incentives for individuals to adopt energy-efficient measures the U.S. EPA itself, which works closely with state governments to implement federal policies and develop additional state-level measures",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Environmental policy in the United States is operated by both federal and state governments.",
+          "quote": "In the United States, environmental policy is operated by both the federal and state governments, and often works to monitor and influence the actions of businesses and individuals to protect the environment.",
+          "verdict_reason": "The snippet confirms federal and state levels but does not explicitly mention local government or fully define the complete hierarchy of 'what level' today.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Environmental policy in the United States is described as a federal governmental action.",
+          "quote": "The environmental policy of the United States is a federal[citation needed] governmental action to regulate activities that have an environmental impact in the United States.",
+          "verdict_reason": "Snippet identifies the federal level but does not address state or local levels, making it incomplete for the general query about 'what level'.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_1baff64de20e",
+      "claim_index": 2,
+      "claim": "While her initial contract was for a single episode, there is a possibility of her recurring later in the season",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Rumer Willis was cast to play the character Zoe, a charity worker, in the fourth season of Pretty Little Liars.",
+          "quote": "Rumer Willis is to star in the new season of Pretty Little Liars. The actress - daughter of Bruce Willis and Demi Moore - will play charity worker Zoe in an episode of the ABC Family drama's fourth run",
+          "verdict_reason": "The snippet directly answers the query by identifying the character (Zoe) and context (season 4) Rumer Willis played on the show.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Rumer Willis played the character Zoe, a charity organizer, on Pretty Little Liars.",
+          "quote": "It's not confirmed whether she will stay on the mystery series, but she will play Zoe, a charity organizer.",
+          "verdict_reason": "The snippet explicitly states the character name (Zoe) and role (charity organizer) Rumer Willis played, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0172",
+      "claim_index": 1,
+      "claim": "This victory is confirmed across multiple sources, with the 2026 French Open representing the current year's edition of the tournament",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the current men's singles champion at the French Open.",
+          "quote": "Men Current = Carlos Alcaraz (singles)",
+          "verdict_reason": "Document explicitly identifies Carlos Alcaraz as the current men's singles champion. Timestamp (2026-05-20) and infobox structure confirm this is the latest information about the French Open.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Carlos Alcaraz is the men's singles champion at the French Open.",
+          "quote": "Men Current = Carlos Alcaraz (singles)",
+          "verdict_reason": "Document explicitly identifies Carlos Alcaraz as the current men's singles champion. Timestamp (2026-04-16) is recent and aligns with latest tournament data.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_08757808c000",
+      "claim_index": 0,
+      "claim": "Weight lifting causes a temporary increase in blood pressure during the actual lifting action — a response that is considered normal for most healthy individuals — but the long-term effects of regular strength training are generally positive the rise can be mitigated by factors such as proper technique, avoiding Valsalva maneuvers combining with other lifestyle changes",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The source claims that lifting weights does not cause high blood pressure, attributing the risk instead to fat gain during bulking.",
+          "quote": "Lifting weights does not cause high blood pressure but if you are bulking and gain too much fat that definitely will cause high blood pressure.",
+          "verdict_reason": "The snippet directly addresses the query with a specific claim but originates from a low-quality forum (Reddit), representing one side of potential scientific debate.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_111bef268aa6",
+      "claim_index": 0,
+      "claim": "Peeling an apple reduces some of its nutritional value by removing dietary fiber and certain vitamins, but not all nutrients are lost",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Peeling an apple reduces dietary fiber but does not decrease the amount of vitamins per 100 grams.",
+          "quote": "Peeling the apple does reduce some of the dietary fiber we eat, but does not reduce the amount of vitamins, including vitamin C.",
+          "verdict_reason": "The snippet directly addresses the query by specifying that peeling reduces fiber but not vitamins, providing a nuanced answer rather than a simple yes/no on total nutritional value.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1e9c6cd8e30b",
+      "claim_index": 0,
+      "claim": "Yes, palm oil is bad for the environment; it causes deforestation, biodiversity loss, habitat destruction, pollution greenhouse gas emissions",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production significantly impacts the environment by contributing to deforestation, threatening endangered species, and emitting an estimated 500 million tonnes of CO2 annually.",
+          "quote": "It contributes to deforestation, threatens endangered species and it estimated to emit 500 million tonnes of CO2 per year.",
+          "verdict_reason": "The snippet directly answers the query by listing specific negative environmental impacts (deforestation, emissions, biodiversity loss) linked to palm oil production.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_2500bfd10608",
+      "claim_index": 0,
+      "claim": "Fluoride in drinking water is considered largely safe at concentrations of 0.7 mg/L or lower, but high levels are linked to risks including fluorosis, skeletal damage potential neurotoxicity",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Emerging evidence links higher fluoride levels to lowered IQ in children and neurobehavioral problems, prompting a federal judge to order further EPA regulation.",
+          "quote": "A lengthy federal review published in August by the National Institutes of Health's toxicology program concluded that higher levels of fluoride is linked to lowered IQ in children.",
+          "verdict_reason": "The snippet provides direct scientific evidence of potential dangers (lowered IQ, neurobehavioral issues) relevant to the query, though it also mentions benefits, creating a conflict-bearing assessment rather than a definitive yes/no.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_287debe5bb90",
+      "claim_index": 1,
+      "claim": "These methodological and philosophical differences create conflicting research outcomes regarding what can be known beyond the mind",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The text argues that thinking cannot grasp itself or provide rigorously solid ground for understanding, implying limits to knowing beyond conceptual thought.",
+          "quote": "As such, thinking cannot grasp itself. Apparently, understanding cannot be grounded by itself. Formal systems of understanding applied to themselves end up in the Mü",
+          "verdict_reason": "The snippet directly addresses the query's theme of mental limits and self-reference but offers a philosophical argument rather than a definitive answer to whether we can know anything beyond our minds.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_2c0ea18839df",
+      "claim_index": 1,
+      "claim": "The conflict is methodological: d4 uses experimental research with C. elegans to demonstrate inheritance, while d5 cites evolutionary reasoning and DNA methylation biology to argue that inheritance has not been proven, with d2 offering partial support from reprogramming mechanisms",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Epigenetic changes and inheritance facilitate the non-genetic transmission of acquired complex phenotypes from parents to offspring.",
+          "quote": "Such epigenetic changes and inheritance result in non-genetic transmission of acquired complex phenotypes from parents to offspring.",
+          "verdict_reason": "The snippet directly confirms that epigenetic changes involve inheritance from parents to offspring, answering the query affirmatively.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_3bd13d25098b",
+      "claim_index": 2,
+      "claim": "Additionally, the Moon's interior is not thought to host a liquid outer core capable of driving a dynamo or volcanic activity like Earth's, which some consider a defining criterion for geological activity",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Moon exhibits some geological activity through impacts and chemical interactions with the solar wind.",
+          "quote": "It isn't completely without active geology, because impacts cause geological activity, and there are chemical interactions with the solar wind.",
+          "verdict_reason": "Snippet directly addresses the query by confirming specific forms of lunar activity, but lacks a comprehensive assessment of overall geological status.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_3dba586dca0f",
+      "claim_index": 2,
+      "claim": "Third, real trees absorb CO2 while growing and emit it only when burned, resulting in negligible net emissions; artificial trees, on the other hand, release embedded carbon emissions over their full lifecycle",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Real trees are more sustainable than fake ones unless the fake tree is used for more than 20 years.",
+          "quote": "It basically comes down to this: buying a fake tree is more sustainable if you use it for as long as possible (approx. more than 20 years). Otherwise, a real tree is a more sustainable option.",
+          "verdict_reason": "The snippet directly addresses the sustainability comparison but notes the amount is debated and provides conditional criteria rather than a definitive unconditional answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_411445406724",
+      "claim_index": 0,
+      "claim": "No, cycads did not dominate the Mesozoic era plant kingdom. According to paleobotanists, the Mesozoic is more accurately described as the 'age of dinosaurs' because flowering plants eventually replaced cycads as ecologically dominant species on land more than 100 million years ago",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Cycads were particularly abundant and diverse during the Mesozoic era, leading paleobotanists to call it the age of cycads.",
+          "quote": "Cycads were particularly abundant and diverse during the Mesozoic era, so paleobotanists often refer to the Mesozoic as",
+          "verdict_reason": "The snippet explicitly states cycads were abundant and diverse in the Mesozoic, directly supporting the query about their dominance.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4317242e485c",
+      "claim_index": 0,
+      "claim": "The evidence is mixed. Some sources argue that trophy hunting can benefit conservation by generating revenue, controlling wildlife populations funding anti-poaching efforts, while others argue it is morally inappropriate and that bans are not harmful but actually beneficial to conservation",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues that a trophy-hunting ban would not be good for wildlife on balance at this time.",
+          "quote": "But will a trophy-hunting ban at this time be good for wildlife? On balance, right now, I believe the answer is no.",
+          "verdict_reason": "Snippet directly addresses the query with a specific stance supporting hunting's current role, though it acknowledges flaws and presents opposing views, making it conflict-bearing evidence rather than a definitive sole answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_52e01830d2fe",
+      "claim_index": 1,
+      "claim": "CLS Bank decision and its progeny have placed significant limits on the patentability of software-based inventions that excluding software from patent protection may hamper technical development",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "National approaches to software patentability vary, with Europe allowing technical programs, the US limiting protection to recordable media, and Japan explicitly recognizing computer programs as patentable subject matter.",
+          "quote": "Japan's Patent Act (Article 2(3)(i)), on the other hand, explicitly refers to computer programs as patentable subject matter.",
+          "verdict_reason": "The snippet directly addresses the query by detailing varying international laws on software patents, providing specific evidence that patents do apply in some jurisdictions while noting limitations in others.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": []
+}

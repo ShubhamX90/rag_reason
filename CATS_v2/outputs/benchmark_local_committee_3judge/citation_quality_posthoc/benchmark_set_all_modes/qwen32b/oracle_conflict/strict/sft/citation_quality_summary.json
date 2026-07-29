@@ -1,0 +1,100 @@
+{
+  "variant": "benchmark_set_all_modes/qwen32b/oracle_conflict/strict/sft",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "benchmark_sft_qd_collect27_20260706_r1",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_qd_collect27_20260706_r1/qwen32b/oracle_conflict/strict/sft/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_qd_collect27_20260706_r1/qwen32b/oracle_conflict/strict/sft/final/detailed_results.json",
+    "source_final_sha256": "3a4900732ec9a197c1fe77a44a775b86bdfe04ffc86b685603686fd759f94fd8",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen32b/oracle_conflict/strict/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen32b/oracle_conflict/strict/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1021,
+    "claims_with_citations": 2,
+    "claims_with_committee_support_set": 932,
+    "claims_with_any_approved_citation": 2,
+    "claims_with_any_gold_positive_citation": 2,
+    "committee_alignment_precision_macro": 0.75,
+    "committee_alignment_precision_micro": 0.75,
+    "gold_positive_citation_precision_macro": 1.0,
+    "gold_positive_citation_precision_micro": 1.0,
+    "soft_extra_citation_rate_micro": 0.25,
+    "hard_negative_citation_rate_micro": 0.0,
+    "committee_support_citation_recall_macro": 0.002145922746781116,
+    "committee_support_citation_recall_micro": 0.002145922746781116,
+    "claims_with_any_soft_extra_rate": 0.5,
+    "claims_with_any_hard_negative_rate": 0.0,
+    "strict_committee_alignment_claim_rate": 0.0009794319294809011,
+    "strict_gold_clean_claim_rate": 0.0019588638589618022,
+    "strict_grounded_committee_clean_rate_all_claims": 0.0009794319294809011,
+    "strict_grounded_gold_clean_rate_all_claims": 0.0019588638589618022,
+    "total_cited_docs": 4,
+    "total_approved_cited_docs": 3,
+    "total_gold_positive_cited_docs": 4,
+    "total_soft_extra_cited_docs": 1,
+    "total_hard_negative_cited_docs": 0
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "situatedqa_temp_7bb7fe6c9287",
+      "claim_index": 1,
+      "claim": "The students are instructed to identify additional kennings in that specific section , though the particular line numbers or full context are not provided in the snippet",
+      "cited_docs": [
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document describes a lesson where students identify examples of kennings in The Battle with Grendel but does not list the specific examples.",
+          "quote": "While reading \"The Battle with Grendel students identify examples of kennings used in that section and who or what they describe.",
+          "verdict_reason": "The snippet confirms the existence of kennings in the text and describes an activity to find them, but fails to provide the actual examples requested by the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The document lists specific kennings for Grendel such as \"captain of evil,\" \"corpse-maker,\" \"shadow-stalker,\" and \"terror-monger.\"",
+          "quote": "To express the evilness of Grendel, the kennings",
+          "verdict_reason": "Relevant evidence: The document lists specific kennings for Grendel such as \"captain of evil,\" \"corpse-maker,\" \"shadow-stalker,\" and \"terror-monger.\"",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": []
+}

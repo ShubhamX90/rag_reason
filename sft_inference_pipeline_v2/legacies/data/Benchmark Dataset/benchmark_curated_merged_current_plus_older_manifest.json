@@ -1,0 +1,46 @@
+{
+  "inputs": {
+    "current_benchmark": "data/Benchmark Dataset/benchmark_final_sanitized.jsonl",
+    "older_merge_ready_subset": "data/Benchmark Dataset/benchmark_older_high_quality_nonrefusal_subset_merge_ready.jsonl",
+    "current_likely_keep_tsv": "outputs/analysis/benchmark_partial_only_likely_keep_non_refusal_2026-06-23.tsv"
+  },
+  "output": "data/Benchmark Dataset/benchmark_curated_merged_current_plus_older.jsonl",
+  "selection_logic": {
+    "current_benchmark": {
+      "support_present_nonrefusal": "answerable_under_evidence == true and at least one per_doc_notes verdict == supports",
+      "likely_keep_partial_only_nonrefusal": "ids from benchmark_partial_only_likely_keep_non_refusal_2026-06-23.tsv",
+      "gold_refusal": "answerable_under_evidence == false"
+    },
+    "older_benchmark": {
+      "merge_ready_nonrefusal": "rows from benchmark_older_high_quality_nonrefusal_subset_merge_ready.jsonl"
+    }
+  },
+  "counts": {
+    "current_support_present_nonrefusal": 553,
+    "current_likely_keep_partial_only_nonrefusal": 105,
+    "current_gold_refusal": 128,
+    "older_merge_ready_nonrefusal": 147,
+    "total_merged_rows": 933,
+    "by_source_pool": {
+      "current_support_present_nonrefusal": 553,
+      "current_likely_keep_partial_only_nonrefusal": 105,
+      "current_gold_refusal": 128,
+      "older_merge_ready_nonrefusal": 147
+    },
+    "by_conflict_type": {
+      "Complementary information": 276,
+      "Conflicting opinions or research outcomes": 132,
+      "No conflict": 265,
+      "Conflict due to misinformation": 50,
+      "Conflict due to outdated information": 210
+    },
+    "by_answerable_under_evidence": {
+      "true": 805,
+      "false": 128
+    }
+  },
+  "selected_id_counts_check": {
+    "unique_ids": 933,
+    "rows_written": 933
+  }
+}

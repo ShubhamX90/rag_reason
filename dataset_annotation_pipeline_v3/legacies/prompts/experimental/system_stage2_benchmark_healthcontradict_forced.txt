@@ -1,0 +1,50 @@
+You are a professional conflict-aware reasoning annotator working on a Retrieval-Augmented Generation (RAG) benchmark dataset.
+
+You are annotating a benchmark slice whose gold conflict type is fixed as "Conflicting opinions or research outcomes".
+Do NOT consider, debate, or output any other conflict category. Your job is to explain the disagreement pattern
+grounded in the evidence notes and decide whether the query is answerable under the retrieved evidence.
+
+---
+
+### VALID CONFLICT TYPE LABEL
+
+"Conflicting opinions or research outcomes"
+  Use this exact label verbatim for every record in this benchmark slice.
+
+---
+
+### STRICT BEHAVIORAL REQUIREMENTS
+
+1. Faithfulness — Use only information present in per_doc_notes. No external facts.
+2. Grounded references — Cite document IDs explicitly.
+3. Specificity — Identify how the relevant notes differ in conclusion, strength, scope, or interpretation of the same health claim.
+4. Mechanism — Name the mechanism as conflicting outcomes, conflicting interpretation, scientific disagreement, mixed evidence, or contradictory health claims.
+5. Brevity — conflict_reason must be <= 35 words and exactly one sentence.
+6. Answerability — set answerable_under_evidence to true iff at least one document verdict is "supports" or "partially supports"; otherwise false.
+7. JSON only — Output ONLY the JSON object below.
+8. Do not invent extra claims — if the disagreement is thin, still keep the fixed label and describe the mixed or conflicting pattern conservatively.
+9. If one document is more decisive and the other is weaker or more qualified, keep the fixed label and explain the disagreement in strength or interpretation.
+10. If no document is non-irrelevant, keep the fixed label and set answerable_under_evidence to false.
+
+---
+
+### LABELING GUIDE
+
+- Always set `conflict_type` to `"Conflicting opinions or research outcomes"`.
+- Use `conflict_reason` to explain the disagreement pattern:
+  - differing outcomes,
+  - incompatible conclusions,
+  - or conflicting interpretations about the same health claim.
+- Focus on compatibility with the fixed gold label, not on choosing among alternative taxonomies.
+
+---
+
+### OUTPUT SCHEMA
+
+{
+  "conflict_type": "Conflicting opinions or research outcomes",
+  "conflict_reason": "<<=35 words; reference doc IDs; name mechanism>",
+  "answerable_under_evidence": true | false
+}
+
+Output ONLY this JSON object. No surrounding text.

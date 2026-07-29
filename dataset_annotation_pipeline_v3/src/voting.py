@@ -3,7 +3,9 @@ src/voting.py
 =============
 Weighted majority voting for the multi-LLM annotation committee (v3).
 
-All models are accessed via OpenRouter — no direct-provider keys used.
+Default models are accessed via OpenRouter.  Stage runners can also switch the
+active committee to a local OpenAI-compatible backend by loading a local judge
+config and updating MODEL_WEIGHTS in-place before any voting starts.
 
 Committee
 ---------
@@ -20,23 +22,91 @@ all multi_async scripts read from this single source of truth.
 
 from __future__ import annotations
 
+import json
+import os
 from typing import Any, Dict, List, Optional, Tuple
+
+from src.utils import source_quality_from_url
 
 
 # ─── Committee definition ─────────────────────────────────────────────────────
 
-MODEL_WEIGHTS: Dict[str, float] = {
-    "anthropic/claude-sonnet-4.6":  0.35,
+_DEFAULT_MODEL_WEIGHTS: Dict[str, float] = {
+    "anthropic/claude-haiku-4.5":   0.35,
     "openai/gpt-5.4":               0.30,
     "deepseek/deepseek-v3.2":       0.20,
     "mistralai/mistral-small-2603": 0.15,
 }
+
+def _load_model_weights() -> Dict[str, float]:
+    raw = os.environ.get("V3_COMMITTEE_WEIGHTS_JSON", "").strip()
+    if not raw:
+        return dict(_DEFAULT_MODEL_WEIGHTS)
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError as exc:
+        raise ValueError(
+            "Invalid V3_COMMITTEE_WEIGHTS_JSON: expected JSON object of "
+            "{model_slug: weight}. "
+            f"Parse error: {exc}"
+        ) from exc
+    if not isinstance(parsed, dict) or not parsed:
+        raise ValueError("V3_COMMITTEE_WEIGHTS_JSON must be a non-empty JSON object")
+    weights: Dict[str, float] = {}
+    for model, weight in parsed.items():
+        if not isinstance(model, str) or not model.strip():
+            raise ValueError("Committee override contains an invalid model key")
+        try:
+            w = float(weight)
+        except Exception as exc:
+            raise ValueError(f"Invalid weight for model {model!r}: {weight!r}") from exc
+        if w <= 0:
+            raise ValueError(f"Weight must be positive for model {model!r}, got {w}")
+        weights[model.strip()] = w
+    return weights
+
+
+MODEL_WEIGHTS: Dict[str, float] = _load_model_weights()
 
 COMMITTEE_MODELS: List[str] = list(MODEL_WEIGHTS.keys())
 
 # Sanity-check
 _weight_sum = round(sum(MODEL_WEIGHTS.values()), 9)
 assert _weight_sum == 1.0, f"MODEL_WEIGHTS must sum to 1.0, got {_weight_sum}"
+
+
+def normalize_priorities(priorities: Dict[str, float]) -> Dict[str, float]:
+    """Convert positive priority/weight values to sum-normalized weights."""
+    if not priorities:
+        raise ValueError("Committee priorities must not be empty")
+    cleaned: Dict[str, float] = {}
+    for model, value in priorities.items():
+        if not isinstance(model, str) or not model.strip():
+            raise ValueError("Committee priority contains an invalid model key")
+        weight = float(value)
+        if weight <= 0:
+            raise ValueError(f"Committee priority must be positive for {model!r}")
+        cleaned[model.strip()] = weight
+    total = sum(cleaned.values())
+    return {model: weight / total for model, weight in cleaned.items()}
+
+
+def set_model_weights(weights: Dict[str, float], *, normalize: bool = False) -> None:
+    """Replace the active committee weights without breaking imported globals.
+
+    The multi-async scripts import MODEL_WEIGHTS and COMMITTEE_MODELS directly,
+    so this mutates the existing dict/list objects in-place.
+    """
+    new_weights = normalize_priorities(weights) if normalize else dict(weights)
+    weight_sum = round(sum(float(w) for w in new_weights.values()), 9)
+    if weight_sum != 1.0:
+        raise ValueError(f"MODEL_WEIGHTS must sum to 1.0, got {weight_sum}")
+
+    MODEL_WEIGHTS.clear()
+    MODEL_WEIGHTS.update({model: float(weight) for model, weight in new_weights.items()})
+
+    COMMITTEE_MODELS.clear()
+    COMMITTEE_MODELS.extend(MODEL_WEIGHTS.keys())
 
 
 # ─── Core vote logic ──────────────────────────────────────────────────────────
@@ -114,6 +184,7 @@ def _build_votes(
 def merge_stage1_votes(
     model_notes: Dict[str, Optional[Dict[str, Any]]],
     fallback_doc_id: str = "",
+    fallback_source_url: str = "",
 ) -> Dict[str, Any]:
     """
     Merge per-model Stage-1 per-doc notes into one consensus note.
@@ -137,18 +208,57 @@ def merge_stage1_votes(
     """
     votes = _build_votes(model_notes, "verdict", "irrelevant")
     winning_verdict, tally = weighted_majority_vote(votes)
+    if winning_verdict is None:
+        return {
+            "doc_id": fallback_doc_id,
+            "verdict": "irrelevant",
+            "key_fact": "",
+            "quote": "",
+            "verdict_reason": "No committee responses available.",
+            "source_quality": "low",
+            "_vote_tally": {},
+            "_winner_model": "",
+            "_all_verdicts": {m: None for m in COMMITTEE_MODELS},
+            "_all_models_failed": True,
+        }
     winning_model = select_winner_model(votes, winning_verdict)
 
     base: Dict[str, Any] = (model_notes.get(winning_model) or {}).copy()
+    # Normalize to the benchmark schema even if the winning parse was partially malformed.
+    key_fact = str(base.get("key_fact") or "").strip()
+    quote = str(base.get("quote") or "").strip()
+    if winning_verdict != "irrelevant":
+        if not key_fact and quote:
+            key_fact = quote
+        if not quote and key_fact:
+            quote = key_fact
+    else:
+        key_fact = ""
+        quote = ""
+    verdict_reason = str(base.get("verdict_reason") or "").strip()
+    if not verdict_reason:
+        if winning_verdict == "irrelevant":
+            verdict_reason = "The snippet does not directly answer the query."
+        elif key_fact:
+            verdict_reason = f"Relevant evidence: {key_fact[:160]}"
+        else:
+            verdict_reason = "The snippet contains relevant but incomplete evidence."
+    source_quality = str(base.get("source_quality") or "").strip().lower()
+    if source_quality not in {"high", "low"}:
+        source_quality = source_quality_from_url(fallback_source_url)
+
+    base["doc_id"] = fallback_doc_id
     base["verdict"]         = winning_verdict
+    base["key_fact"]        = key_fact
+    base["quote"]           = quote
+    base["verdict_reason"]  = verdict_reason
+    base["source_quality"]  = source_quality
     base["_vote_tally"]     = {str(k): round(v, 4) for k, v in tally.items()}
     base["_winner_model"]   = winning_model
     base["_all_verdicts"]   = {
         m: (model_notes.get(m) or {}).get("verdict")
         for m in COMMITTEE_MODELS
     }
-    if not base.get("doc_id"):
-        base["doc_id"] = fallback_doc_id
     return base
 
 
@@ -157,6 +267,7 @@ def merge_stage1_votes(
 def merge_stage2_votes(
     model_records: Dict[str, Optional[Dict[str, Any]]],
     is_refusal: bool,
+    vote_conflict_type: bool = False,
 ) -> Dict[str, Any]:
     """
     Merge per-model Stage-2 outputs.
@@ -189,6 +300,19 @@ def merge_stage2_votes(
     # ── 1. answerable_under_evidence vote ────────────────────────────────────
     ans_votes = _build_votes(model_records, "answerable_under_evidence", False)
     winning_ans, ans_tally = weighted_majority_vote(ans_votes)
+    if winning_ans is None:
+        base: Dict[str, Any] = {
+            "conflict_reason": "No committee responses available.",
+            "answerable_under_evidence": False,
+            "_ans_vote_tally": {},
+            "_ans_winner_model": "",
+            "_all_models_failed": True,
+        }
+        if vote_conflict_type:
+            base["conflict_type"] = ""
+            base["_ct_vote_tally"] = {}
+            base["_ct_winner_model"] = ""
+        return base
     ans_winner = select_winner_model(ans_votes, winning_ans)
 
     # Start with the ans-winner's full record as base
@@ -197,7 +321,7 @@ def merge_stage2_votes(
     base["_ans_vote_tally"]           = {str(k): round(v, 4) for k, v in ans_tally.items()}
     base["_ans_winner_model"]         = ans_winner
 
-    if not is_refusal:
+    if not vote_conflict_type:
         # Conflicts: conflict_reason from the answerable-winner is fine
         # conflict_type is NOT touched here — it remains the gold label in the record
         return base
@@ -258,6 +382,19 @@ def merge_stage3_votes(
 
     abstain_votes = _build_votes(flat_abstain, "abstain", False)
     winning_abstain, abstain_tally = weighted_majority_vote(abstain_votes)
+    if winning_abstain is None:
+        return {
+            "expected_response": {
+                "answer": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+                "evidence": [],
+                "abstain": True,
+                "abstain_reason": "No committee responses available.",
+            },
+            "think": "",
+            "_abstain_vote_tally": {},
+            "_abstain_winner_model": "",
+            "_all_models_failed": True,
+        }
     abstain_winner = select_winner_model(abstain_votes, winning_abstain)
 
     base: Dict[str, Any] = (model_records.get(abstain_winner) or {}).copy()

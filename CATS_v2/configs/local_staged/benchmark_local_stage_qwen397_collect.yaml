@@ -1,0 +1,38 @@
+# CATS v2.0 - benchmark staged local committee cache collection
+# Stage: Qwen3.5-397B-A17B only.
+#
+# Keep response_cache_dir identical across all benchmark staged configs and the
+# final read-only aggregation config.
+
+outputs_dir: "outputs/benchmark_local_committee_3judge/run_outputs/judge1_collect"
+report_md: "outputs/benchmark_local_committee_3judge/run_outputs/judge1_collect/eval_report.md"
+detailed_results_json: "outputs/benchmark_local_committee_3judge/run_outputs/judge1_collect/detailed_results.json"
+
+pipeline:
+  batch_size: 1
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "local_openai"
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 1
+    timeout_seconds: 900
+    response_cache_dir: "outputs/benchmark_local_committee_3judge/response_cache"
+    cache_mode: "read_write"
+    judges:
+      - model_id: "local/qwen3.5-397b-a17b"
+        base_url: "http://127.0.0.1:8001/v1"
+        priority: 6
+        max_tokens: 400
+        request_timeout: 900
+        extra_body:
+          chat_template_kwargs:
+            enable_thinking: false

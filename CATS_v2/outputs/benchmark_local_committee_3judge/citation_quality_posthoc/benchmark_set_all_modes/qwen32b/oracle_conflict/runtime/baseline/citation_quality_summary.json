@@ -1,0 +1,1469 @@
+{
+  "variant": "benchmark_set_all_modes/qwen32b/oracle_conflict/runtime/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_conflict/runtime/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_conflict/runtime/baseline/final/detailed_results.json",
+    "source_final_sha256": "e3cca252d35ac53fc1b39a3d44d2360f0906f9564ebbefd825c1037ad49a8a4d",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen32b/oracle_conflict/runtime/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen32b/oracle_conflict/runtime/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1393,
+    "claims_with_citations": 199,
+    "claims_with_committee_support_set": 1253,
+    "claims_with_any_approved_citation": 186,
+    "claims_with_any_gold_positive_citation": 199,
+    "committee_alignment_precision_macro": 0.7662479061976549,
+    "committee_alignment_precision_micro": 0.7244525547445255,
+    "gold_positive_citation_precision_macro": 0.998324958123953,
+    "gold_positive_citation_precision_micro": 0.9981751824817519,
+    "soft_extra_citation_rate_micro": 0.2737226277372263,
+    "hard_negative_citation_rate_micro": 0.0018248175182481751,
+    "committee_support_citation_recall_macro": 0.1484437350359138,
+    "committee_support_citation_recall_micro": 0.1484437350359138,
+    "claims_with_any_soft_extra_rate": 0.4120603015075377,
+    "claims_with_any_hard_negative_rate": 0.005025125628140704,
+    "strict_committee_alignment_claim_rate": 0.08399138549892318,
+    "strict_gold_clean_claim_rate": 0.13280689160086145,
+    "strict_grounded_committee_clean_rate_all_claims": 0.08399138549892318,
+    "strict_grounded_gold_clean_rate_all_claims": 0.13280689160086145,
+    "total_cited_docs": 548,
+    "total_approved_cited_docs": 397,
+    "total_gold_positive_cited_docs": 547,
+    "total_soft_extra_cited_docs": 150,
+    "total_hard_negative_cited_docs": 1
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_1d741779a31e",
+      "claim_index": 2,
+      "claim": "Further research and individual consultation with healthcare providers are recommended to make informed decisions",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Artificial sweeteners do not affect blood sugar levels and are safe for people with diabetes to consume.",
+          "quote": "Can People With Diabetes Have Artificial Sweeteners? Yes, they can. Artificial sweeteners are just as sweet ... but they have no calories and don't affect your blood sugar (glucose).",
+          "verdict_reason": "The snippet directly answers the query by confirming safety and explaining that artificial sweeteners do not impact blood glucose levels in diabetics.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Recent studies indicate artificial sweeteners may worsen glycemic control by altering gut microbiota and affecting insulin secretion.",
+          "quote": "However, recent studies have shown that artificial sweeteners affect glucose absorption in the intestinal tract as well as insulin and incretin secretion in humans and animals.",
+          "verdict_reason": "The snippet directly addresses safety for diabetics but presents conflicting evidence (worsened control vs. previous beliefs) rather than a definitive yes/no answer.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document cites studies investigating artificial sweeteners' link to type 2 diabetes risk and vascular reactivity impairment.",
+          "quote": "Artificial sweeteners and risk of type 2 diabetes in the prospective NutriNet-Santé cohort. Diabetes Care. (2023) 46:1681–90.",
+          "verdict_reason": "Snippet lists relevant studies on sweeteners and diabetes/vascular health but provides only citations without specific safety conclusions for diabetics.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The FDA deems synthetic sweeteners safe for consumption within acceptable daily intake limits, and they are considered beneficial for managing Type 2 Diabetes.",
+          "quote": "synthetic sweeteners are deemed safe for consumption by the U.S. Food and Drug Administration (FDA) when used within the acceptable daily intake (ADI).",
+          "verdict_reason": "Snippet confirms FDA safety status and potential benefits for diabetes management but notes the topic remains contentious, offering partial rather than definitive resolution.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Most artificial sweeteners are safe for use by individuals with diabetes.",
+          "quote": "Yes, you can use most artificial sweeteners if you have diabetes.",
+          "verdict_reason": "The snippet directly answers the query by confirming that most artificial sweeteners are usable for diabetics, providing decisive evidence from a high-quality medical source.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_fbdae168fc6f",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Sushma Swaraj became the first woman to serve as a full-time External Affairs Minister of India.",
+          "quote": "she has become the first woman External Affairs Minister of India. She is the country's first woman to be appointed as a full-time Cabinet minister with the external affairs portfolio.",
+          "verdict_reason": "The snippet explicitly states Sushma Swaraj is the first woman External Affairs Minister, directly answering the query while distinguishing her role from Indira Gandhi's.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Sushma Swaraj served as India's minister of external affairs from 2014 to 2019.",
+          "quote": "Sushma Swaraj Indian politician Sushma Swaraj served as minister for external affairs from 2014 to 2019.",
+          "verdict_reason": "Snippet confirms Sushma Swaraj held the role but does not explicitly state she was the first woman, leaving the specific superlative unverified by this text alone.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Sushma Swaraj was the first woman to serve as India's Minister of External Affairs.",
+          "quote": "Sushma was also the first woman to hold this crucial role! Her ability to communicate with people all over the world greatly strengthened India's presence on the international stage.",
+          "verdict_reason": "The snippet explicitly states Sushma Swaraj was the first woman to hold the role of Minister of External Affairs, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Sushma Swaraj was the second woman to hold the external affairs portfolio after Indira Gandhi.",
+          "quote": "She was only the second woman to hold the portfolio after Indira Gandhi, who briefly kept the external affairs ministry under her while being the prime minister.",
+          "verdict_reason": "The snippet identifies Sushma Swaraj as the second woman, implying Indira Gandhi was the first, but does not explicitly state Gandhi was the first to head the ministry.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document claims Indira Gandhi was the first woman External Affairs Minister of India.",
+          "quote": "The correct answer is Mrs Indira Gandhi.",
+          "verdict_reason": "The snippet addresses the query directly but provides a factually incorrect answer (Indira Gandhi vs Sushma Swaraj), making it conflict-bearing evidence that partially supports the topic while being erroneous.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_2e1b5edb5e0d",
+      "claim_index": 1,
+      "claim": "However, there may be conflicting opinions or research outcomes regarding its presence or absence in certain contexts",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The stratum lucidum is the epidermal layer absent from thin skin regions.",
+          "quote": "The stratum lucidum is a layer of the epidermis that is absent from certain areas of the skin. This layer is not present in thin skin regions.",
+          "verdict_reason": "The snippet directly identifies the stratum lucidum as the specific epidermal layer not found in all skin types (thin skin), fully answering the query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The stratum lucidum is an extra epidermal layer found only in hairless skin on the palms and soles, making it absent in other skin types.",
+          "quote": "Hairless skin in the palms of the hands and soles of the feet is the thickest due to the presence of the stratum lucidum, an extra layer in the epidermis.",
+          "verdict_reason": "The snippet explicitly identifies the stratum lucidum as an extra layer present only in specific regions (palms/soles), directly answering which layer is not found in all skin types.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The stratum lucidum is the epidermal layer absent in thin skin, being found only in thick skin.",
+          "quote": "Recall that the stratum lucidum is a translucent layer found only in thick skin, such as the palms of the hands and soles of the feet. It is absent in thin skin.",
+          "verdict_reason": "The snippet directly identifies the stratum lucidum as the specific layer missing in thin skin, fully answering the query about which layer is not found in all skin types.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_125",
+      "claim_index": 2,
+      "claim": "However, the exact mechanisms and reasons for differences in rewards between individuals are not fully detailed in the provided documents",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Using a credit card often makes the reward system incredibly useful, with many cards in India offering amazing cashback and rewards.",
+          "quote": "Having a Credit Card comes with its perks and rewards, and if you use the card often enough, you will see that the reward system can be incredibly useful.",
+          "verdict_reason": "Snippet addresses reward utility and frequency but lacks specific mechanics or reasons for varying point amounts, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Users can earn points and cashback rewards like free hotels and flights by using specific credit cards.",
+          "quote": "The Life Hunt rewards credit card that earns me points. During the last few years, my fianc├⌐ and I have earned hundreds of free dollars just by using our cashback reward cards.",
+          "verdict_reason": "Snippet confirms rewards exist and gives examples but lacks explanation of system mechanics or reasons for varying reward amounts.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Cashback credit cards provide money back on certain purchases, with some offering 0% cashback for specific periods or limits.",
+          "quote": "As its name suggests, a cashback credit card can give you money back when you make certain purchases. Some cards may offer a 0% cashback on purchases over a specific period of time",
+          "verdict_reason": "Snippet explains basic cashback mechanics but is from 2006, lacks details on point systems, and does not address why rewards vary between individuals.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_148",
+      "claim_index": 4,
+      "claim": "Therefore, based on the available information, we can discuss the diagnosis and management of allergies but cannot provide a complete explanation of the mechanism or determinants of allergies",
+      "cited_docs": [
+        "d5",
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Allergy testing is required to determine what specific substances an individual is allergic to.",
+          "quote": "The only way to decide what an individual is allergic to is through taking an allergy test.",
+          "verdict_reason": "Snippet addresses allergy identification via testing but fails to explain the biological mechanism or genetic determinants requested in the query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Itching is always present when a person has eye allergies, along with tearing and bloodshot eyes.",
+          "quote": "Itching is always present when a person has eye allergies. Tearing and bloodshot eyes are also common.",
+          "verdict_reason": "Snippet addresses allergy symptoms for a specific type (eye) but fails to explain the mechanism or determinants of developing allergies as requested.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "An elimination diet helps determine which foods cause allergies by eliminating and reintroducing them to see what is well-tolerated.",
+          "quote": "An elimination diet is a short-term eating plan that eliminates certain foods that may be causing allergies and other digestive reactions ΓÇö then reintroduces the foods one at a time in order to determine which foods are, and are not, well-tolerated.",
+          "verdict_reason": "The snippet addresses how to identify specific food allergies but does not explain the biological mechanism of allergies or what determines susceptibility, making it incomplete for the full query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4317242e485c",
+      "claim_index": 2,
+      "claim": "However, others highlight concerns about the ethical implications and potential negative impacts on wildlife populations and ecosystems",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Conservationist Amy Dickman argues that trophy hunting revenue makes lions and their habitat more likely to be conserved compared to areas without such income.",
+          "quote": "If lions and other species generate revenue through trophy hunting, she argues, they and their habitat are more likely to be conserved.",
+          "verdict_reason": "The snippet provides expert testimony supporting the benefit of trophy hunting for conservation but presents it as one side of an ongoing debate without a definitive final conclusion.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The IUCN states that well-managed trophy hunting can provide revenue and incentives to conserve wild populations and protect wildlife from poaching.",
+          "quote": "The International Union for Conservation of Nature (IUCN) states",
+          "verdict_reason": "Relevant evidence: The IUCN states that well-managed trophy hunting can provide revenue and incentives to conserve wild populations and protect wildlife from poaching.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_1fe3ba1b1cba",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENCY OF EVIDENCE",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Lewis Hamilton won the World Drivers' Championship at the Turkish Grand Prix.",
+          "quote": "Hamilton equalled Michael Schumacher's record of seven World Drivers' Championships at the Turkish Grand Prix",
+          "verdict_reason": "The snippet explicitly states Hamilton equalled the record of seven championships at the Turkish Grand Prix during the 2020 season, directly answering who won.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Lando Norris won the championship and notes Lewis Hamilton was the last British winner in 2020, but does not explicitly name the 2020 winner.",
+          "quote": "The 26-year-old Norris is the 11th British driver to win the championship and first since Sir Lewis Hamilton in 2020.",
+          "verdict_reason": "Snippet discusses the same entity (F1 champions) and references 2020, but describes a future/hypothetical scenario where Norris wins, failing to directly answer who won in 2020.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_15ffab2466f7",
+      "claim_index": 1,
+      "claim": "Additional context suggests the show was a significant cultural event in Toronto, contributing to the city's reputation as a destination for theatrical performances",
+      "cited_docs": [
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Phantom of the Opera played at the Princess of Wales Theatre in Toronto.",
+          "quote": "Theatre\nPrincess of Wales Theatre\n300 King Street West, Toronto",
+          "verdict_reason": "The snippet explicitly identifies the Princess of Wales Theatre in Toronto as the venue where the production was performed.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Toronto production of The Phantom of the Opera was staged at the Pantages Theatre on Yonge Street.",
+          "quote": "The painstaking restoration of the Pantages Theatre on Yonge Street was done specifically for the Toronto sitdown of The Phantom of the Opera.",
+          "verdict_reason": "The snippet identifies the specific venue (Pantages Theatre) but lacks dates or other location details, making it incomplete yet directly relevant evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_00f6ee9a6705",
+      "claim_index": 2,
+      "claim": "The Villages offer a range of recreational facilities and social clubs designed to enrich retirement living",
+      "cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "All 83 locations of The Villages are situated exclusively in the state of Florida.",
+          "quote": "The Villages has a total of 83 locations, all situated in Florida, representing 100% of its presence in the United States.",
+          "verdict_reason": "The snippet directly answers the query by stating that all locations of the entity 'The Villages' are located in Florida, providing the specific state distribution.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Villages is located in Inland Florida across Lake, Sumter, and Marion counties.",
+          "quote": "The Villages is an active retirement community in sunny Inland Florida. With about 115,000 residents as of 2015, it is still growing and new homes are being built across three Florida counties: Lake, Sumter and Marion.",
+          "verdict_reason": "Snippet identifies the state (Florida) and specific counties for the entity, partially answering the location query, though it lacks a list of individual villages.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_022",
+      "claim_index": 1,
+      "claim": "However, the specific reason for its use in \"unlocking\" is not explicitly detailed in the provided documents",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Bill Gates stated that the design team did not want to provide a single button, leading to the three-key combination.",
+          "quote": "design didnΓÇÖt want to give us our single button,ΓÇ¥ Gates said at a Harvard University event at the time.",
+          "verdict_reason": "The snippet provides a direct quote from Bill Gates explaining the lack of a single-button option, which is relevant evidence for the query, though it is an older excerpt and may not cover the full technical history.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM to reboot a computer or summon the task manager.",
+          "quote": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM.[249] ... used to reboot a computer, and summon the task manager or operating system.",
+          "verdict_reason": "Snippet identifies the inventor and original technical purpose (reboot/task manager) but does not explain the specific reason for its adoption as a widespread 'unlock' mechanism.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_025",
+      "claim_index": 2,
+      "claim": "However, specific details on where the debt goes are not clearly provided in the available documents",
+      "cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document introduces personal bankruptcy as a process involving debt concerns but does not define it or explain where the debt goes.",
+          "quote": "Those who find the need to file often worry about how they will be able to pay debts and live their daily life.",
+          "verdict_reason": "The snippet addresses the same entity (bankruptcy) and mentions debt worries but fails to define bankruptcy or explain debt disposition, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet indicates that old tax debts can be discharged in Chapter 7 bankruptcy, though it cuts off before explaining if liens are released.",
+          "quote": "I live in wisconsin and iΓÇÖm going through chapter 7 bankrupcy and my tax debts are old enough to be discarged. Will my liens get released? If your tax debt",
+          "verdict_reason": "The snippet addresses bankruptcy and debt discharge directly but is incomplete and cuts off before fully answering where the debt goes or if liens are released.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_048",
+      "claim_index": 3,
+      "claim": "Other sources do not specify exact numbers but imply standard jury sizes that typically require unanimous verdicts, suggesting a common jury size might be 12, though this is not explicitly stated in the provided documents",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "In severe criminal cases tried by Courts of Assizes, the petty jury consists of 9 jurors, or 12 on appeal.",
+          "quote": "Trial by jury is available only for severe criminal cases... A full Court is made up of a 3-judge panel and a petty jury of 9 jurors (vs. 12 jurors on appeal)",
+          "verdict_reason": "Snippet provides specific jury counts (9 or 12) but limits them to 'severe criminal cases' and a specific court type, not all criminal trials.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "In Greece, felonies are tried by a Mixed Court with three professional judges and four jurors.",
+          "quote": "The Constitution of Greece and Code of criminal procedure provide that felonies ... are tried by a \"Mixed Court\" composed of three professional judges, including the President of the Court, and four jurors",
+          "verdict_reason": "Snippet provides specific jury counts for Greece but does not answer the general query about criminal trials universally or specify a default jurisdiction.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_166",
+      "claim_index": 1,
+      "claim": "This contrasts with the grey ships and green surroundings of naval bases, reflecting the diverse environments in which naval personnel operate",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Nigerian Navy's camouflage uniform includes blue and grey-white colors and is worn during combined duties with the army.",
+          "quote": "Unlike the Army, the NavyΓÇÖs camouflage has a touch of blue with grey-white.",
+          "verdict_reason": "Snippet addresses navy camouflage colors (blue/grey) for a specific navy, providing partial evidence though not explaining the general rationale for US Navy NWU.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Navy replaced its blue camouflage with the green and tan NWU Type III because ground combat forces operate inland where familiar camo is needed.",
+          "quote": "At the end of 2016 the navy announced that the new uniform would be the NWU Type III (green and tan) already used by NECC",
+          "verdict_reason": "Snippet addresses the query by explaining the shift from blue to green/tan camo for ground operations, though it lacks specific rationale for the original blue pattern.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_e60bdcf75ba7",
+      "claim_index": 3,
+      "claim": "Additionally, the overall impact of farming practices should consider factors beyond yield, such as environmental sustainability and biodiversity",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Organic farming yields are 18.4% lower than conventional farming yields.",
+          "quote": "Yield of organic farming is 18.4% lower than that of conventional farming.",
+          "verdict_reason": "The snippet directly answers the query with a specific quantitative comparison confirming organic yields are lower.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The text acknowledges that yield gaps between organic and conventional farming occur and discusses efforts to reduce them.",
+          "quote": "Finally, reducing the yield gap between organic and conventional agriculture (or, more accurately, between biologically diversified versus chemically intensive farming systems) has the potential benefit",
+          "verdict_reason": "The snippet explicitly references a 'yield gap' between organic and conventional systems, providing conflict-bearing evidence relevant to the query without definitively quantifying the difference.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "A USDA-based analysis found that organic yields were lower in 84% of comparisons across major US crops in 2014.",
+          "quote": "For 292 of those comparisons, the organic yields were lower (84% on an area basis). There were 55 comparisons where organic yield was higher, but 89% of the higher yielding organic examples involved hay and silage crops rather than food crops.",
+          "verdict_reason": "The snippet directly answers the query with specific statistical evidence from a USDA survey showing organic yields are typically lower than conventional ones.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Conventional farming practices usually lead to higher yields than organic farming.",
+          "quote": "Yes, usually conventional farming practices lead to a higher yield than organic farming.",
+          "verdict_reason": "The snippet directly addresses the query by stating conventional yields are usually higher, but the evidence is anecdotal ('I have heard') and incomplete, warranting partial support.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "A study found that overall organic yields are 25 percent lower than conventional yields, though the gap narrows to 13 percent with best management practices.",
+          "quote": "Overall, organic yields are 25 percent lower than conventional, the study finds. The difference varies widely across crop types and species, however.",
+          "verdict_reason": "The snippet directly answers the query by stating organic yields are 25% lower overall, providing specific evidence that supports the claim.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_3c1297608017",
+      "claim_index": 3,
+      "claim": "Due to these conflicting opinions, the exact origin remains uncertain",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "One theory traces the origin to pre-Christian pagan beliefs where a cross symbolized concentrated good spirits to anchor wishes.",
+          "quote": "The first comes from a pre-Christian pagan belief in the powerful symbolism of a cross. The intersection was thought to mark a concentration of good spirits and served to anchor a wish until it could come true.",
+          "verdict_reason": "The snippet directly addresses the query by offering two specific origin theories but presents them as possibilities rather than a single definitive fact, making it partial support.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Historians theorize the practice originated from pre-Christian sacred geometry beliefs or as a secret sign among early Christians, though exact origins are not definitively known.",
+          "quote": "The exact origins of this practice aren't definitively known, but historians have a couple theories as to how the modern practice came about, though there is some guesswork in this.",
+          "verdict_reason": "The snippet addresses the query directly by offering historical theories but explicitly states the origins are not definitively known, making the evidence incomplete rather than decisive.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The gesture originated from pre-Christian wishes on cross variations and later Christian practices invoking God's protection, evolving from two people crossing fingers to one person doing so alone.",
+          "quote": "It's believed that, in pre-Christian times, people would wish on variations of the cross... Later, two people would cross each other's fingers... and this eventually evolved into one person crossing their fingers on their own.",
+          "verdict_reason": "The snippet directly answers the query by explaining the historical and religious origins of crossing fingers for luck, tracing it from pre-Christian times through Christian evolution.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The practice of crossing fingers for good luck originated in pre-Christian times when the cross symbolized unity and benign spirits at the intersection point.",
+          "quote": "Crossing the fingers dates back to pre-Christian times when the cross was a symbol of unity and benign spirits dwelt at the intersection point.",
+          "verdict_reason": "The snippet directly answers the query by explaining the historical origin of crossing fingers for good luck, citing pre-Christian beliefs and early European customs.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The practice of crossing fingers for luck originated in pre-Christian European traditions where the gesture was believed to manipulate supernatural forces.",
+          "quote": "Crossing fingers for luck and protection against evil has its earliest roots in pre-Christian traditions throughout Europe. Archaeological evidence indicates that ancient Europeans practiced elaborate rituals involving hand gestures and finger positioning, believing they could manipulate supernatural forces to their advantage.",
+          "verdict_reason": "The snippet directly addresses the query by identifying pre-Christian European traditions as the earliest roots, but it is incomplete as the text cuts off before detailing later evolutionary stages like Christianity.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a6df0af8c2ba",
+      "claim_index": 4,
+      "claim": "Additionally, d5 notes that \"hosanna\" combines the Hebrew words \"yasha\" (to save) and \"na\" (please), emphasizing its urgent nature as a plea for rescue",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The word literally means \"Help, Please!\" or \"Save, Please!\" and refers to prayers recited on the 7th day of Sukkot.",
+          "quote": "It literally means \"Help, Please!\" or \"Save, Please!\" It refers to prayers recited on the 7th day of the holiday of Sukkot.",
+          "verdict_reason": "The snippet provides a specific definition and context for 'hosanna', directly addressing the query, but as a single Quora answer, it may not represent the complete or standard dictionary definition.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The word Hosanna is defined as meaning 'save now' or 'save, I pray' in Hebrew, though it evolved into an ejaculation of praise.",
+          "quote": "Hosanna: \"save Now!\"; \"save, I Pray!\". ... in the Hebrew, means \"save, we pray.\" The word seems to have become an utterance of praise rather than of prayer",
+          "verdict_reason": "The snippet directly provides multiple dictionary definitions for 'Hosanna' from authoritative biblical sources, fully answering the query about its meaning.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The word Hosanna means save us now and represents a cry for salvation.",
+          "quote": "The word",
+          "verdict_reason": "The snippet directly defines the word Hosanna as requested by the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Hosanna is a Hebrew expression combining words meaning 'save us please' used as a cry for rescue or praise.",
+          "quote": "The term Hosanna is of Hebrew origin, combining the words",
+          "verdict_reason": "The snippet directly defines the word Hosanna, explaining its Hebrew roots and meaning as a plea for salvation.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "In Hebrew and Greek, the word hosanna means \"help us\" or \"save us\" rather than a celebratory greeting.",
+          "quote": "In both Hebrew and the equivalent Greek, hosanna means \"help us\" or \"save us.\" The people waving leafy branches are calling for Jesus to deliver them.",
+          "verdict_reason": "The snippet directly defines the word 'hosanna' as requested by the query, providing specific translations from Hebrew and Greek.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_21f33954c8af",
+      "claim_index": 3,
+      "claim": "Therefore, the ethical stance on dog breeding depends on the practices involved, with a consensus that unethical breeding should be avoided",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues dog breeding is unnecessary and treats dogs like science experiments.",
+          "quote": "It's unnecessary. dog breeds are fine as is today, and dogs don't deserve to be treated like science experiments.",
+          "verdict_reason": "The snippet directly addresses the query by arguing breeding is unethical/unnecessary, but as a single opinion on a debated topic, it represents one side of the conflict rather than a definitive resolution.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Unethical dog breeding causes severe consequences including animal exploitation, physical deformities, and risks to public health.",
+          "quote": "The unethical breeding of dogs has far-reaching effects on animal welfare, public health, and society as a whole. From the exploitation of popular breeds to the physical deformities caused by extreme breeding practices, the consequences are severe and long-lasting.",
+          "verdict_reason": "The snippet details severe negative impacts of 'unethical breeding' but does not explicitly declare all dog breeding unethical, addressing only a specific subset of the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document argues that even responsible dog breeding contributes to overpopulation and exploits dogs for profit, suggesting it may be unethical.",
+          "quote": "Despite these efforts, supporting responsible dog breeders over the options listed previously still contributes to the overpopulation issue. This begs the question, can we really call any form of dog breeding responsible when the lives of abandoned dogs are being lost as a result?",
+          "verdict_reason": "The snippet directly addresses the ethics of dog breeding with arguments against it, but presents a specific viewpoint rather than a definitive universal resolution, fitting the 'partially supports' criteria for conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues that breeding should not stop but rather be regulated to eliminate unethical practices like puppy mills.",
+          "quote": "If breeding stopped completely, pedigree breeds would extinguish and we would lose our incredible working and service breeds. Instead, it's my belief that we should improve breeding regulations and spread awareness of how to spot red flags.",
+          "verdict_reason": "The snippet addresses the ethics of dog breeding by arguing against a total ban and distinguishing between ethical and unethical practices, providing relevant but incomplete evidence for the binary query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_288cd1b45aab",
+      "claim_index": 2,
+      "claim": "To maximize benefits, it is crucial to use wrist rests correctly, ensuring they do not cause additional strain or pressure",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Wrist rests are designed to reduce strain on wrists by encouraging a neutral position and minimizing discomfort during typing.",
+          "quote": "Its purpose is to provide comfort and ergonomic support by reducing strain on your wrists during long typing or gaming sessions.",
+          "verdict_reason": "The snippet claims wrist rests reduce strain and discomfort, directly addressing the query, but offers general assertions rather than definitive proof of pain minimization.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Wrist rests can reduce muscle fatigue in upper arm muscles by up to 32% during long typing sessions.",
+          "quote": "Wrist supports can reduce muscle fatigue in upper arm muscles by up to 32% during long typing sessions.",
+          "verdict_reason": "Snippet provides specific evidence that wrist rests reduce fatigue, addressing the query about minimizing pain, but frames it as conditional on correct usage rather than a definitive universal solution.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Wrist rests are not necessary for good ergonomics and carry serious risks despite some benefits.",
+          "quote": "Wrist rests are a double-edged sword. They can provide benefits but have serious risks. Wrist rests are not necessary for good ergonomics.",
+          "verdict_reason": "The snippet directly addresses the query about wrist rests and pain/ergonomics but offers a nuanced, non-definitive view rather than a clear confirmation.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Proper use of a wrist rest during typing pauses can reduce reported wrist discomfort by up to 30%.",
+          "quote": "In fact, studies show proper use can lead to as much as a 30% reduction in reported wrist discomfort.",
+          "verdict_reason": "The snippet provides specific data supporting pain reduction but limits the benefit to 'proper use' during pauses, contradicting continuous use.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_311fca0928d0",
+      "claim_index": 3,
+      "claim": "Therefore, the fundamental security of IPv6 compared to IPv4 depends on how it is implemented and managed",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "IPv6 is not automatically more secure than IPv4, though it mandates IPsec support and offers some design advantages.",
+          "quote": "It would be more accurate to say that IPv6 is no less secure than IPv4. The main security mechanism built into IPv6 is IPsec.",
+          "verdict_reason": "The snippet directly addresses the query by refuting the 'automatic' security claim while noting specific IPv6 advantages, providing nuanced, conflict-bearing evidence rather than a simple yes/no.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "IPv6 provides a more secure foundation than IPv4 due to built-in IPSec support and improved data integrity.",
+          "quote": "Regarding security, IPv6 has a definitive edge over its predecessor. With built-in IPSec support and improved data integrity, IPv6 provides a more secure foundation for internet communication.",
+          "verdict_reason": "The snippet directly answers the query by stating IPv6 has a definitive security edge over IPv4 due to native IPSec and data integrity features.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "IPv6 is considered safer on a basic level because it has native IP Security (IPSec) support, unlike IPv4 where it must be added individually.",
+          "quote": "When it comes to IPv4 vs IPv6 security, IPv6 is safer on a basic level, simply because it's easier to hide amongst 340 undecillion",
+          "verdict_reason": "The snippet directly addresses the security comparison, stating IPv6 is safer due to native IPSec and address space, but the text is truncated and lacks a definitive conclusion on 'fundamental' superiority.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The IPv6 protocol suite is not inherently more or less secure than IPv4, as most security incidents stem from human error rather than protocol weaknesses.",
+          "quote": "IPv6 as a protocol suite isn't inherently more or less secure than its predecessor. Just as with IPv4, the vast majority of security incidents arise from design and implementation issues rather than weaknesses in the underlying technology.",
+          "verdict_reason": "The snippet directly addresses the query by stating IPv6 is not inherently more secure, providing conflict-bearing evidence that refutes the premise while remaining highly relevant to the topic.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9251c7a33ec5",
+      "claim_index": 4,
+      "claim": "Given the conflicting opinions and research outcomes, it is clear that the health impacts of spaying/neutering are multifaceted and require careful consideration of each pet's specific needs and circumstances",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research indicates that spaying or neutering dogs can cause luteinizing hormone levels to rise up to 30 times higher, potentially contributing to diseases like urinary incontinence and lymphoma.",
+          "quote": "Dogs spayed or neutered can have LH levels up to 30 times higher than normal. Elevated LH may affect the thyroid, urinary tract, immune system, and even cancer development.",
+          "verdict_reason": "The snippet provides specific evidence of negative health impacts (elevated LH, disease risks) directly addressing the query, but represents ongoing research rather than a definitive final conclusion.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Evidence indicates that spaying or neutering dogs correlates with both positive and adverse health effects, with risks potentially exceeding benefits for most male dogs.",
+          "quote": "The evidence shows that spay/neuter correlates with both positive AND adverse health effects in dogs. ... The number of health problems associated with neutering may exceed the associated health benefits in most cases.",
+          "verdict_reason": "The snippet directly addresses the query by confirming negative health impacts exist alongside benefits, providing conflict-bearing evidence rather than a simple yes/no answer.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering disrupts hormonal feedback loops, causing luteinizing hormone levels to surge up to 30 times average concentrations, which researchers are investigating for potential links to cancer.",
+          "quote": "After sterilization, dogs can experience a surge in LH levels. This surge can reach as high as 30 times the average concentrations, particularly in males. Researchers are exploring if consistently high LH levels can harm different body parts.",
+          "verdict_reason": "The snippet directly addresses negative health impacts by citing a specific hormonal surge and ongoing research into cancer risks, providing conflict-bearing evidence alongside listed benefits.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Spaying and neutering carry potential negatives including surgical risks, weight gain, and hormonal changes affecting metabolism and coat quality.",
+          "quote": "Potential Negatives to Consider\nWhile spaying and neutering offer numerous benefits, there are some potential drawbacks to consider:\n1. Surgical Risks: Like any surgical procedure, spaying and neutering carry risks such as bleeding, infection, and adverse reactions to anesthesia.",
+          "verdict_reason": "The snippet directly addresses the query by listing specific negative health impacts (surgical risks, weight gain, hormonal changes), providing conflict-bearing evidence without fully resolving the overall net impact.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "However, there is conflicting information suggesting it might start on April 2",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "This year's Passover starts on Thursday, April 2, 2026.",
+          "quote": "This year: Thu, Apr 2, 2026",
+          "verdict_reason": "The snippet explicitly states the start date for 'This year' as April 2, 2026, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

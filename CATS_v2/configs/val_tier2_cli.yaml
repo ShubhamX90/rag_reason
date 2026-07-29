@@ -1,0 +1,34 @@
+# CATS v2.0 — Val Split Evaluation Config (CLI-based judges)
+#
+# Uses npx @openai/codex exec (Codex Pro) instead of OpenRouter for the CLI judge.
+# No OPENROUTER_API_KEY is required for the committee itself.
+#
+# Run with:
+#   cd CATS_v2
+#   python run_evaluation.py \
+#     --input data/splits/85_7p5_7p5/monolithic_multi/val/monolithic_final.jsonl \
+#     --config configs/val_tier2_cli.yaml \
+#     --committee cli \
+#     --output-dir outputs/val_tier2_cli
+
+outputs_dir: "outputs/val_stage3_codex_gpt54"
+report_md: "outputs/val_stage3_codex_gpt54/eval_report.md"
+detailed_results_json: "outputs/val_stage3_codex_gpt54/detailed_results.json"
+
+pipeline:
+  batch_size: 10    # CLI subprocesses are slower than HTTP; keep concurrency manageable
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "cli"           # triggers create_cli_committee in _apply_yaml_to_config
+    codex_model: "gpt-5.4"   # codex CLI -m flag; omit for codex default (gpt-5.5)
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 4   # max simultaneous CLI subprocesses

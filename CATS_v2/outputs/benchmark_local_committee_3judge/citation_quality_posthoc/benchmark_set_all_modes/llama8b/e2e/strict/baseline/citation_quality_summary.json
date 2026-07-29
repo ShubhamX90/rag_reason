@@ -1,0 +1,2125 @@
+{
+  "variant": "benchmark_set_all_modes/llama8b/e2e/strict/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/e2e/strict/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/e2e/strict/baseline/final/detailed_results.json",
+    "source_final_sha256": "6f2ee229886eb197e7f25e8a2bbe7de455bf8ee3f3cdf8576fd2220fe6adf7d8",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/llama8b/e2e/strict/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/llama8b/e2e/strict/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1182,
+    "claims_with_citations": 912,
+    "claims_with_committee_support_set": 1052,
+    "claims_with_any_approved_citation": 831,
+    "claims_with_any_gold_positive_citation": 909,
+    "committee_alignment_precision_macro": 0.8119334795321638,
+    "committee_alignment_precision_micro": 0.7889004149377593,
+    "gold_positive_citation_precision_macro": 0.9923062865497077,
+    "gold_positive_citation_precision_micro": 0.9922199170124482,
+    "soft_extra_citation_rate_micro": 0.2033195020746888,
+    "hard_negative_citation_rate_micro": 0.007780082987551867,
+    "committee_support_citation_recall_macro": 0.7899239543726235,
+    "committee_support_citation_recall_micro": 0.7899239543726235,
+    "claims_with_any_soft_extra_rate": 0.30153508771929827,
+    "claims_with_any_hard_negative_rate": 0.015350877192982455,
+    "strict_committee_alignment_claim_rate": 0.5296108291032149,
+    "strict_gold_clean_claim_rate": 0.6954314720812182,
+    "strict_grounded_committee_clean_rate_all_claims": 0.5296108291032149,
+    "strict_grounded_gold_clean_rate_all_claims": 0.6954314720812182,
+    "total_cited_docs": 1928,
+    "total_approved_cited_docs": 1521,
+    "total_gold_positive_cited_docs": 1913,
+    "total_soft_extra_cited_docs": 392,
+    "total_hard_negative_cited_docs": 15
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "qacc_a927c4cccc6a",
+      "claim_index": 2,
+      "claim": "also confirm that Seattle Slew won the Triple Crown, although they do not provide the specific year",
+      "cited_docs": [
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Seattle Slew won the Triple Crown in 1977, becoming the tenth horse to do so.",
+          "quote": "Next, Slew won the Belmont by four lengths, the tenth of only 13 horses to capture the Triple Crown.",
+          "verdict_reason": "The snippet confirms Slew completed the Triple Crown and provides the year 1977 via his death anniversary context, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Seattle Slew won the Kentucky Derby two weeks before May 21, 1977, and competed in the Preakness Stakes on May 21, 1977, as part of his Triple Crown campaign.",
+          "quote": "Two weeks earlier he had captured the Kentucky Derby while \"overcoming great travail\", as noted by the Daily Racing Form. On this picturesque day the racing fans poured in... for Seattle Slew would vie for the second jewel of the Triple Crown.",
+          "verdict_reason": "Snippet confirms two Triple Crown races (Kentucky Derby, Preakness) and dates but omits the Belmont Stakes and the specific date of the final win needed to fully answer when the Crown was secured.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Seattle Slew became America's 10th Triple Crown winner in 1977 by winning the Belmont Stakes.",
+          "quote": "(Jean Cruguet up) winning the 1977 Belmont Stakes and becoming America's 10th Triple Crown winner",
+          "verdict_reason": "The snippet explicitly states Seattle Slew won the 1977 Belmont Stakes to become the 10th Triple Crown winner, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Seattle Slew won the Triple Crown in 1977.",
+          "quote": "In 1977, he became the first horse to win the Triple Crown while undefeated",
+          "verdict_reason": "The snippet explicitly states that Seattle Slew won the Triple Crown in 1977, directly answering the user's query about the year of victory.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_035",
+      "claim_index": 1,
+      "claim": "However, the specific situations in which they are more efficient are not clearly defined",
+      "cited_docs": [
+        "d5",
+        "d4",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet explains that hybrid batteries are charged via regenerative braking rather than solely by the petrol engine.",
+          "quote": "The battery running the motor is charged up when the driver brakes. This is called ΓÇ£regenerative brakingΓÇ¥.",
+          "verdict_reason": "The snippet addresses hybrid efficiency mechanisms but focuses on regenerative braking, failing to directly explain the efficiency of using the petrol engine to charge the battery as asked.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Regular hybrid cars recharge their batteries using excess power produced by the engine when idling or braking.",
+          "quote": "The first is a regular hybrid car with a petrol engine and a battery that is recharged by the car itself. Any excess power produced by the engine, such as when it idles or brakes, is used to charge the battery",
+          "verdict_reason": "The snippet explains the mechanism of charging via excess engine power but does not address the user's specific question regarding efficiency comparisons or justification.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Hybrid car engines are designed to be smaller with greater efficiency and work together with the electrical system.",
+          "quote": "But whatever engine is used, will be more advanced than the usual ones, as they have to work together with the electrical system. They will be smaller with greater efficiency",
+          "verdict_reason": "The snippet addresses hybrid engine efficiency and the engine-electric system relationship but does not specifically explain the efficiency mechanism of using the engine to charge the battery.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hybrid cars optimize fuel efficiency by using both the gasoline engine and electric motor simultaneously when traveling at a normal rate.",
+          "quote": "Moreover, hybrid cars optimize fuel efficiency by using both gasoline engine and electric motor when traveling at normal rate.",
+          "verdict_reason": "The snippet addresses hybrid efficiency mechanisms but fails to explain the specific scenario of using the petrol engine to charge the battery.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_095",
+      "claim_index": 1,
+      "claim": "However, the exact reason why it cannot recover from damage caused by excessive alcohol consumption is unclear from the retrieved documents",
+      "cited_docs": [
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Excessive alcohol overwhelms the liver, leading to scar tissue, fibrosis, and cirrhosis.",
+          "quote": "While serious liver damage, including the development of scar tissue, fibrosis and cirrhosis, is a common result of alcoholism",
+          "verdict_reason": "Snippet confirms alcohol causes permanent scarring (cirrhosis) but does not explain liver regeneration mechanisms, addressing only half the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Prolonged excessive alcohol drinking can permanently scar and damage the liver, resulting in cirrhosis.",
+          "quote": "Prolonged excessive alcohol drinking can also permanently scar and damage the liver resulting in liver cirrhosis.",
+          "verdict_reason": "The snippet directly confirms the query's premise about alcohol causing permanent scarring but provides no information regarding liver regeneration after donation.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Excess alcohol can damage liver cells and lead to scarring known as liver cirrhosis.",
+          "quote": "Excess alcohol can damage or even destroy your liver cells. Over time liver damage may lead to the building of fat in your liver which causes swelling or scarring of the liver, also called as liver cirrhosis.",
+          "verdict_reason": "The snippet confirms alcohol causes permanent scarring (cirrhosis), addressing half the query. It lacks information on liver regeneration, making it incomplete but directly relevant conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking excessive amounts of alcohol can cause progressive scarring of the liver.",
+          "quote": "Drinking excessive amounts of alcohol can cause the progressive scarring of liver",
+          "verdict_reason": "The snippet confirms alcohol causes liver scarring, addressing half the query, but lacks information on liver regeneration after donation.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_5d6e5db69928",
+      "claim_index": 2,
+      "claim": "The other documents are either irrelevant or provide partial information",
+      "cited_docs": [
+        "d5",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The oldest sequenced DNA was found in a mammoth frozen in Siberian permafrost.",
+          "quote": "The oldest DNA we've sequenced is from a mammoth that lived over a million years ago. Scientists found this frozen in Siberian permafrost.",
+          "verdict_reason": "Snippet directly addresses the query with a specific location (Siberian permafrost) but comes from a low-quality source (Reddit) and may be superseded by newer findings.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The oldest DNA ever found reveals secrets of the ancient Arctic.",
+          "quote": "Oldest DNA Ever Found Reveals Secrets of the Ancient Arctic",
+          "verdict_reason": "Snippet identifies the general region (Arctic) for the oldest DNA but lacks the specific location required to fully answer the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The video title indicates the world's oldest DNA was found in ancient Greenland.",
+          "quote": "The world's oldest DNA: Extinct beasts of ancient Greenland",
+          "verdict_reason": "The snippet identifies 'ancient Greenland' as the location via the video title, directly addressing the query entity but lacking specific site details or confirmation within the text.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_66684169f016",
+      "claim_index": 1,
+      "claim": "The march was accompanied by 79 people, including women",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Pyare Lal Nayar, Gandhi's personal secretary, participated in the Dandi March.",
+          "quote": "TOOK PART IN THE DANDI MARCH lifelong Gandhian Pyare Lal Nayar was among. Gandhi's. March. He was the personal secretary of Mahatma. Gandhi",
+          "verdict_reason": "Snippet identifies one specific participant (Pyare Lal Nayar) but implies others existed ('was among'), thus only partially answering the query about who participated.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists specific individuals from Gujarat and Maharashtra who accompanied Gandhi on the Dandi March.",
+          "quote": "Persons Who Accompanied Gandhi On The Dandi March | State | Members | --- | | GUJARAT, | 31: 1. Chhaganlal Joshi, 2. Jayanti Parekh, 3. Rasik Desai, 4. Vitthal, 5. Harakhji, 6. Tansukh Bhatt, 7. Kanti Gandhi",
+          "verdict_reason": "The snippet directly addresses the query by listing participants but is incomplete as it cuts off before listing all members from all states.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Mithuben Petit as a lady who participated in the Dandi March with Mahatma Gandhi.",
+          "quote": "The lady who participated in the Dandi March along with Mahatma Gandhi was Mithuben Petit.",
+          "verdict_reason": "The snippet names one specific participant (Mithuben Petit) but the query asks for all participants, making the evidence incomplete. It also contains a contradictory claim about Annie Besant.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f7c719d9b0be",
+      "claim_index": 1,
+      "claim": "The FOMC consists of twelve members, including seven from the Board of Governors and five presidents from Federal Reserve Banks meets regularly to make decisions that affect the economy",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the organization responsible for setting monetary policy in the United States.",
+          "quote": "The organization that sets monetary policy for the United States is the Federal Open Market Committee (FOMC).",
+          "verdict_reason": "The snippet directly answers the query by explicitly identifying the Federal Open Market Committee as the entity that sets US monetary policy.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the Federal Reserve's monetary policymaking body.",
+          "quote": "The Federal Open Market Committee (FOMC) is the Fed's monetary policymaking body.",
+          "verdict_reason": "The snippet explicitly identifies the FOMC as the specific organization responsible for monetary policy, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the organization responsible for setting monetary policy in the United States.",
+          "quote": "The organization that sets monetary policy for the United States is the Federal Open Market Committee (FOMC).",
+          "verdict_reason": "The snippet directly answers the query by explicitly identifying the FOMC as the organization that sets US monetary policy.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_b6c75b99a2f4",
+      "claim_index": 2,
+      "claim": "However provide less clear information about the longest wavelengths in the visible spectrum is not relevant to this question",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states that radio waves have the longest wavelengths in the electromagnetic spectrum, not the visible spectrum.",
+          "quote": "Radio: Radio waves have the longest wavelengths in the electromagnetic spectrum. These waves can range from less than one centimeter to greater than 100 meters",
+          "verdict_reason": "The document addresses wavelength rankings in the electromagnetic spectrum but identifies radio waves, not visible light colors, as having the longest wavelengths, providing conflicting but relevant context.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The visible spectrum for humans ranges from 700 nm (red) to 400 nm (violet), making 700 nm the longest wavelength.",
+          "quote": "Humans see a visible spectrum ranging from 700 nm (red) to 400 nm (violet).",
+          "verdict_reason": "The snippet explicitly states the range of the visible spectrum and identifies 700 nm (red) as the upper limit, directly answering the query about the longest wavelengths.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Red is identified as the range of colors having the longest wavelengths (670 nm) in the visible spectrum.",
+          "quote": "RED · any of a range of colours having the longest",
+          "verdict_reason": "The snippet directly answers the query by identifying 'RED' as the color with the longest wavelengths in the visible spectrum.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_002",
+      "claim_index": 0,
+      "claim": "George R. R. Martin publishes \"A Song of Ice and Fire\"",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The text states that A Song of Ice and Fire is a single story published in several volumes but does not name the publisher.",
+          "quote": "Martin does not consider \"A Song of Ice and Fire\" a \"series\" but a single story published in several volumes.",
+          "verdict_reason": "The snippet discusses the publication format of the specific work queried but fails to identify the publisher, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies George R. R. Martin as the author of A Song of Ice and Fire but does not name the publisher.",
+          "quote": "George R. R. Martin's \"A Song of Ice and Fire\" (the basis of the American fantasy drama television series \"Game of Thrones\").",
+          "verdict_reason": "The snippet confirms the author and existence of the series but fails to provide the specific publisher requested, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "HBO Productions purchased the television rights for the A Song of Ice and Fire series.",
+          "quote": "HBO Productions purchased the television rights for the \"A Song of Ice and Fire\" series in 2007",
+          "verdict_reason": "Snippet discusses the same entity but addresses TV rights rather than the book publisher, providing incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_37ebad668bb7",
+      "claim_index": 2,
+      "claim": "However, the law of diminishing returns applies initial increases in data volume can lead to significant performance gains, but these gains decrease as more data is added",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Machine learning models learn from data, which acts as a textbook of examples for the model to study.",
+          "quote": "But just like how we learn from experience, ML models learn from data. ... Think of training data as the \"textbook\" your machine learning model studies from.",
+          "verdict_reason": "The snippet confirms ML models learn from data but discusses data volume rather than explicitly stating if data is always strictly required, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The amount of data needed for machine learning varies based on project error tolerance and input diversity rather than being a fixed requirement.",
+          "quote": "different projects have different levels of tolerance for errors... The more uncontrolled the environment is, the more data you need for your ML project.",
+          "verdict_reason": "Snippet discusses factors determining data quantity but does not explicitly answer if data is always required, leaving the absolute necessity question partially unresolved.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_7cf85109a70d",
+      "claim_index": 1,
+      "claim": "However, some documents suggest that brass is more resistant to corrosion, which may affect its overall durability",
+      "cited_docs": [
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document describes bronze as durable with strength and wear resistance, and brass as having variable strength and hardness, but does not explicitly state which is more durable.",
+          "quote": "Bronze is a durable, copper-based alloy known for its strength, wear resistance... Brass... amount of zinc in brass can vary, altering its strength, hardness, and color.",
+          "verdict_reason": "Snippet discusses durability properties of both metals but lacks a direct comparative statement resolving which is more durable, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Bronze is harder and more durable than brass due to the addition of tin, whereas brass is softer and less durable in demanding environments.",
+          "quote": "The addition of tin in bronze plays a crucial role in making it harder and more durable compared to brass. Tin increases the strength and wear resistance of bronze, making it more suitable for high-stress applications",
+          "verdict_reason": "The snippet directly answers the query by stating bronze is more durable than brass, providing specific reasoning and hardness values that decisively resolve the comparison.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a1c73439eca9",
+      "claim_index": 1,
+      "claim": "The ninth season premiered on 13 February 2024",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Production for season 10 of El Señor de los Cielos has officially kicked off, but no specific premiere date is provided.",
+          "quote": "Telemundo has officially kicked off production for the tenth season of El Señor de los Cielos, one of the network's biggest Super Series hits.",
+          "verdict_reason": "The snippet confirms production has started for the new season but does not state the specific start date requested by the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Production for season 10 of El Señor de los Cielos has begun.",
+          "quote": "El Señor de los Cielos arranca la producción de la temporada 10",
+          "verdict_reason": "Snippet confirms production start for season 10 but does not provide the specific premiere date requested by the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_b0346f60b6ab",
+      "claim_index": 1,
+      "claim": "It is available to stream on YouTube TV in the U.S",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Celebrity Big Brother aired on CBS from 2018 to 2022.",
+          "quote": "Celebrity Big Brother\n Watchlist\n 2018-2022\n 3 Seasons\n CBS\n Reality\n TV-PG",
+          "verdict_reason": "Snippet confirms the show aired on CBS but lists dates ending in 2022, making it potentially outdated for a current channel query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Celebrity Big Brother alongside CBS in a directory of available channels and shows.",
+          "quote": "Celebrity Big Brother\nCBS\nCelebrity Big Brother\nBig Brother: Celebrity Edition thumbnail",
+          "verdict_reason": "The snippet associates the show with CBS but is a generic channel list without explicit confirmation of the current US broadcast channel, making it incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_fbe562911999",
+      "claim_index": 2,
+      "claim": "The other documents and provide additional information but do not contradict this fact",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists the Deputy Speaker of the Lok Sabha in the order of precedence but does not mention the Speaker.",
+          "quote": "precedence of the persons in Article 10 shall be assigned in the following order: -. Deputy Chairman, Rajya Sabha. Deputy Speaker, Lok Sabha.",
+          "verdict_reason": "The snippet addresses the order of precedence for Lok Sabha officials but only lists the Deputy Speaker, failing to provide the specific placement of the Speaker requested.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The Speaker of the Lok Sabha ranks above the Chief Justice of India in the Indian Warrant of Precedence.",
+          "quote": "The correct answer is - Speaker of Lok Sabha",
+          "verdict_reason": "The snippet explicitly identifies the Speaker of Lok Sabha as the entity ranking above the Chief Justice of India, directly answering the query about their placement.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_6a683d0d04f0",
+      "claim_index": 1,
+      "claim": "The exact key cannot be determined from the retrieved evidence",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Key signatures can contain between 1 to 7 sharps, and the order of sharps is F–C–G–D–A–E–B.",
+          "quote": "The other key signatures can have between 1 to 7 sharps and 1 to 7 flats... The order of sharps is F–C–G–D–A–E–B",
+          "verdict_reason": "The snippet confirms the range of sharps and their order but does not explicitly state which specific key corresponds to 5 sharps.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The order of sharps in a key signature is F, C, G, D, A, E, B, and the major key is found a half step above the last sharp.",
+          "quote": "So these are all the sharps, F, C, G, D, A, E, B. ... If you go up a half step from the last sharp to the right, that's the major key.",
+          "verdict_reason": "The snippet explains the rule to determine the key from sharps but cuts off before applying it to five sharps specifically, providing the method but not the direct answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_7ee5807518be",
+      "claim_index": 0,
+      "claim": "The Union Health Minister of India in 2013 was Dr. Harsh Vardhan",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Dr. Harsh Vardhan served as Union Health Minister from 2014 onwards, which does not cover the year 2013.",
+          "quote": "His track record as a Union Minister from 2014 onwards has been stellar. As the Union Health Minister, at the center stage of managing the present COVID19 crisis in India, Dr Harsh Vardhan's graded, pre-emptive and proactive approach",
+          "verdict_reason": "Snippet identifies a Health Minister but specifies tenure starting in 2014, failing to answer who held the post in 2013 while remaining relevant to the entity.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Harsh Vardhan became Union Minister of Health and Family Welfare for the second time in 2019.",
+          "quote": "Harsh Vardhan became Union Minister of Health and Family Welfare for the second time in 2019, and has been at the forefront of India's response",
+          "verdict_reason": "Snippet addresses the same entity (Health Minister) but provides 2019 data, not the requested 2013 information, making it conflict-bearing but incomplete.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_bc0542b3c97d",
+      "claim_index": 1,
+      "claim": "The exact date of coming into service may vary, but the commissioning date is confirmed",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "HMS Queen Elizabeth was commissioned on December 7, 2017.",
+          "quote": "According to an article published on the UK Ministry of Defence website, the HMS Queen Elizabeth was commissioned on December 7, 2017.",
+          "verdict_reason": "The snippet explicitly states the commissioning date, directly answering when the ship came into service.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "HMS Queen Elizabeth was commissioned in 2017 and formally declared operational in 2020.",
+          "quote": "HMS Queen Elizabeth was commissioned in 2017 as the lead ship of the class. She conducted her first sea trials in 2017 and was formally declared operational in 2020.",
+          "verdict_reason": "The snippet directly answers the query by providing the specific commissioning year (2017) and operational declaration year (2020) for HMS Queen Elizabeth.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_034",
+      "claim_index": 3,
+      "claim": "However, the exact rights included in the Declaration of Independence cannot be determined from the provided evidence",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The document discusses the Universal Declaration of Human Rights, a different entity from the queried Declaration of Independence, providing no evidence about the latter's contents.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Declaration prohibits attacks on civilians and recognizes rights against persecution, torture, and forcible evictions.",
+          "quote": "The Declaration specifically prohibits attacks and bombing of civilian populations (Article 1) and the use of chemical and biological weapons on civilian populations (Article 2).",
+          "verdict_reason": "Snippet discusses 'The Declaration' and lists specific prohibitions and rights, but likely refers to a different document than the US Declaration of Independence, making it conflicting or incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists rights such as assembly, petition, freedom of religion, speech, and press under sections of a Declaration of Human Rights.",
+          "quote": "Section three describes the rights of assembly, consultation, instruction, and petition... Section four establishes the freedom of religion... Section five protects the freedom of speech and the freedom of press.",
+          "verdict_reason": "Snippet details rights in a 'Declaration of Human Rights,' which is likely not the specific US 'Declaration of Independence' queried, but provides relevant conflict-bearing evidence on similar declarations.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_045",
+      "claim_index": 0,
+      "claim": "Jennifer Coolidge plays Stifler's mom in the American Pie film series",
+      "cited_docs": [
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses Jennifer Pickett's role as a mother in Ferris Bueller's Day Off but does not mention Stifler's mom or American Pie.",
+          "quote": "Pickett, however, is best known to audiences for her lighter turn as Katie Bueller, Ferris Bueller's loving and unsuspecting mother, in the 1986 American comedy movie",
+          "verdict_reason": "The snippet discusses an actress playing a 'mom' role in a different movie, providing tangential but incomplete evidence regarding the specific query about Stifler's mom.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Stifler's Mom appearing in a Mercedes-Benz coupe but does not name the actress who plays her.",
+          "quote": "a Mercedes-Benz coupe with darkened windows turns up, Finch approaches and it turns out Stifler's Mom has come after all.",
+          "verdict_reason": "The snippet confirms the character's presence in the film but fails to identify the actress, providing incomplete evidence for the specific query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_166",
+      "claim_index": 1,
+      "claim": "The exact reason for wearing blue camouflage on ships is not explicitly stated in the retrieved documents",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses how US battleships were painted during World War II, which is relevant to naval camouflage but does not address modern sailor uniforms.",
+          "quote": "The book is devoted entirely to the question of how US battleships were painted during the Second World War",
+          "verdict_reason": "Snippet addresses naval camouflage history (ships) but is outdated (WWII) and focuses on hull paint, not modern sailor uniforms or current rationale.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a specific political incident involving sailors' access to a speech. It mentions uniforms but provides no evidence regarding the rationale for navy blue camouflage patterns.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The USS Freedom warship is painted in newly-applied grey and black dazzle camouflage.",
+          "quote": "a sleek, futuristic warship painted in newly-applied grey and black 'dazzle' camouflage will push off from a naval dock",
+          "verdict_reason": "Snippet confirms ships use grey camouflage, addressing part of the query, but fails to explain why sailors wear blue or address the base environment.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_167",
+      "claim_index": 0,
+      "claim": "The book \"Harry Potter and the Deathly Hallows Part 1\" was released on 21 July 2007",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states the novel Deathly Hallows was released on July 21, 2007, but does not provide the release date for the film Part 1.",
+          "quote": "Madeleine McCann to be made available to book sellers when \"Deathly Hallows\" was launched on 21 July 2007",
+          "verdict_reason": "The snippet addresses the Harry Potter entity and gives the book's 2007 release date, but fails to answer the specific query about the Part 1 film release date.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet provides the release date for the book Harry Potter and the Deathly Hallows, not the movie Part 1.",
+          "quote": "Updates then followed in her online diary chronicling the progress of \"Harry Potter and the Deathly Hallows\", with the release date of 21 July 2007.",
+          "verdict_reason": "The snippet addresses the same entity (Harry Potter and the Deathly Hallows) but provides the book's release date instead of the movie Part 1's date, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "situatedqa_temp_301378915064",
+      "claim_index": 2,
+      "claim": "Anna Chlumsky, Merritt Wever others were also nominated",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"situatedqa_temp_301378915064_doc_2\", \"verdict\": \"partially support",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_071",
+      "claim_index": 0,
+      "claim": "Gordon Atherton was born on 18 June 1934",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Gordon Atherton's career with Bury, Swindon Town, and Drumcondra, but does not mention Aldershot Town F.C. or provide evidence linking him to that specific club.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_175",
+      "claim_index": 2,
+      "claim": "Saskatoon is colder than both the North and South Poles, but this does not directly answer the question",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet makes a comparative temperature claim about Saskatoon versus the poles but provides no evidence or explanation regarding why the South Pole is colder than the North Pole.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem holds the world record for fastest rap in a hit single, with a record of 225 words in 30 seconds, averaging 7.5 words per second",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0192",
+      "claim_index": 2,
+      "claim": "The exact number of scientists recruited cannot be determined from the retrieved evidence, but it is clear that Operation Paperclip was a significant program that brought many German experts to the U.S",
+      "cited_docs": [
+        "d7",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d7"
+      ],
+      "approved_cited_docs": [
+        "d7"
+      ],
+      "gold_positive_docs": [
+        "d3",
+        "d5",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [
+        "d7"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d7": {
+          "verdict": "supports",
+          "key_fact": "More than 1,600 German scientists, engineers, and technicians were recruited in post-Nazi Germany through Operation Paperclip, a secret program where Arthur Rudolph and others became developers of the U.S. space program.",
+          "quote": "more than 1,600 German scientists, engineers, and technicians, such as Wernher von Braun and his V-2 rocket team, were recruited in post-Nazi Germany and taken to the U.S. for government employment",
+          "verdict_reason": "The snippet directly answers the query by providing the specific number (1,600+) of German scientists, engineers, and technicians recruited through Operation Paperclip, the clandestine operation referenced in the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "detained ten German scientists who were thought to have worked on Nazi Germany's nuclear program.",
+          "verdict_reason": "The snippet is about Operation Epsilon detaining ten nuclear scientists, not the clandestine recruitment operation tied to Arthur Rudolph and the U.S. space program.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_087",
+      "claim_index": 1,
+      "claim": "However, based on the evidence from , it is likely that the song is not by The Kinks or Huey Lewis and the News",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a different song (\"Living on a Thin Line\" by The Kinks) than the one queried (\"It's a Thin Line Between Love and Hate\"), providing no evidence about the requested entity.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies a similarly titled song, \"Walking on a Thin Line,\" performed by Huey Lewis and the News, rather than the queried song.",
+          "quote": "\"Walking On a Thin Line\" is a song performed by Huey Lewis and the News, released in 1984 as the fifth and final single from their 1983 album, \"Sports\".",
+          "verdict_reason": "The snippet addresses a song with a nearly identical title and theme but refers to a different artist and exact title, providing conflict-bearing evidence regarding the query's premise.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_114",
+      "claim_index": 0,
+      "claim": "The origin of the phrase \"all quiet on the western front\" is unclear, but it is associated with the novel of the same name. provides information about the novel's publication in 1927, but does not mention the origin of the phrase. also mentions the novel, but does not provide any information about the phrase's origin. do not provide any useful information about the phrase's origin",
+      "cited_docs": [
+        "d5",
+        "d4",
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "committee_alignment_precision": 0.6,
+      "gold_positive_precision": 0.6,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses the novel All Quiet on the Western Front but does not state the origin of the saying.",
+          "quote": "\"All Quiet on the Western Front (novel)\", the text presents a series of war-related episodes rather than a distinct, teleological narrative.",
+          "verdict_reason": "The snippet addresses the same entity (the novel) but fails to answer the specific query about the saying's origin, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The novel All Quiet on the Western Front was written in 1927.",
+          "quote": "\"All Quiet on the Western Front\" (\"Im Westen nichts Neues\") was written in 1927, but",
+          "verdict_reason": "Snippet confirms the author and writing year of the novel containing the saying, but does not explain the specific origin or first usage of the phrase itself.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a different book title ('All Quiet on the Orient Express') and a fictional or unrelated title ('Murder on the Western Front'), failing to provide evidence about the origin of the specific saying 'All Quiet on the Western Front'.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a TV show with a similar title but provides no evidence regarding the origin of the saying 'All Quiet on the Western Front'.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document mentions the 1930 film adaptation of All Quiet on the Western Front but does not state the origin of the saying.",
+          "quote": "Sullivan returned to the subject of World War I as the supervising story chief for the 1930 film adaptation of \"All Quiet on the Western Front\".",
+          "verdict_reason": "The snippet discusses the film adaptation of the title but fails to identify the source or origin of the saying itself, providing only tangential evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "Passover 2026 begins on April 1",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover start dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover 2027: Begins Wednesday night, April 21 → Ends Thursday, April 29\n Passover 2028: Begins Monday night, April 10 → Ends Tuesday, April 18",
+          "verdict_reason": "The snippet addresses the query topic (Passover dates) but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "Hunter Emery plays the role of CO Rick Hopper in Orange is the New Black",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_034",
+      "claim_index": 3,
+      "claim": "However, the exact rights included in the Declaration of Independence cannot be determined from the provided evidence",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The document discusses the Universal Declaration of Human Rights, a different entity from the queried Declaration of Independence, providing no evidence about the latter's contents.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Declaration prohibits attacks on civilians and recognizes rights against persecution, torture, and forcible evictions.",
+          "quote": "The Declaration specifically prohibits attacks and bombing of civilian populations (Article 1) and the use of chemical and biological weapons on civilian populations (Article 2).",
+          "verdict_reason": "Snippet discusses 'The Declaration' and lists specific prohibitions and rights, but likely refers to a different document than the US Declaration of Independence, making it conflicting or incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists rights such as assembly, petition, freedom of religion, speech, and press under sections of a Declaration of Human Rights.",
+          "quote": "Section three describes the rights of assembly, consultation, instruction, and petition... Section four establishes the freedom of religion... Section five protects the freedom of speech and the freedom of press.",
+          "verdict_reason": "Snippet details rights in a 'Declaration of Human Rights,' which is likely not the specific US 'Declaration of Independence' queried, but provides relevant conflict-bearing evidence on similar declarations.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_109",
+      "claim_index": 0,
+      "claim": "People are killed in explosions, which can be caused by various factors, including gas-leak explosions , combustible dust explosions intentional explosions",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Gas leak explosions can kill multiple people at once, with an average of nine annual deaths in the U.S.",
+          "quote": "An average of 27 serious gas-leak incidents occur in the U.S. each year, killing nine people annually... these explosions can reap many lives at once",
+          "verdict_reason": "Snippet addresses explosion fatalities and confirms they kill, but focuses on gas leaks specifically rather than explaining the general mechanisms of how explosions kill.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The force generated by a combustible dust explosion can cause employee deaths and injuries.",
+          "quote": "The force from such an explosion can cause employee deaths, injuries, and destruction of entire buildings.",
+          "verdict_reason": "Snippet identifies 'force' as a killing mechanism in explosions but lacks other mechanisms like heat or shrapnel, making it incomplete evidence for the general query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a philosophical thought experiment about decision-making and damage levels, not a factual explanation of the physiological or physical mechanisms by which explosions cause death.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_166",
+      "claim_index": 1,
+      "claim": "The exact reason for wearing blue camouflage on ships is not explicitly stated in the retrieved documents",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses how US battleships were painted during World War II, which is relevant to naval camouflage but does not address modern sailor uniforms.",
+          "quote": "The book is devoted entirely to the question of how US battleships were painted during the Second World War",
+          "verdict_reason": "Snippet addresses naval camouflage history (ships) but is outdated (WWII) and focuses on hull paint, not modern sailor uniforms or current rationale.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a specific political incident involving sailors' access to a speech. It mentions uniforms but provides no evidence regarding the rationale for navy blue camouflage patterns.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The USS Freedom warship is painted in newly-applied grey and black dazzle camouflage.",
+          "quote": "a sleek, futuristic warship painted in newly-applied grey and black 'dazzle' camouflage will push off from a naval dock",
+          "verdict_reason": "Snippet confirms ships use grey camouflage, addressing part of the query, but fails to explain why sailors wear blue or address the base environment.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0166",
+      "claim_index": 0,
+      "claim": "The current Prime Minister of India is Narendra Modi, as stated in and . provides additional context on the role of the Prime Minister, but is irrelevant to the query",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Narendra Modi is the incumbent Prime Minister of India, serving since 26 May 2014.",
+          "quote": "incumbent = Narendra Modi acting = incumbentsince = 26 May 2014",
+          "verdict_reason": "The snippet directly identifies the current Prime Minister as Narendra Modi with incumbency date, directly answering the query about the current PM of India.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses the Deputy Prime Minister of India, not the Prime Minister. It provides no information about the current Prime Minister, making it off-topic to the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Narendra Modi is the incumbent Prime Minister of India, having held office since 26 May 2014.",
+          "quote": "incumbent = Narendra Modi acting = incumbentsince = 26 May 2014",
+          "verdict_reason": "Document identifies Narendra Modi as incumbent PM with tenure start date, but is an older Wikipedia revision (timestamp 2025-12-13) that may not reflect current status. Provides conflict-bearing evidence about the same entity.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Prime Minister of India is the chief executive of the Government of India and chair of the Union Council of Ministers.",
+          "quote": "The prime minister of India is the chief executive of the Government of India and chair of the Union Council of Ministers.",
+          "verdict_reason": "Snippet defines the role and responsibilities of the Prime Minister but does not name the current Prime Minister, only describing the office itself.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_050",
+      "claim_index": 1,
+      "claim": "However, the information is not consistent across all documents the dates of death of some individuals are not mentioned in all documents. provides the most reliable information about Charles Booth, who died in 1535. and provide information about Charles Este and Charles Nisbet, who died in 1745 and 1804, respectively. provides information about John Booth, who died in 1478. provides information about Arthur Carlisle, who died in 1943",
+      "cited_docs": [
+        "d5",
+        "d4",
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.8,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet concerns a person named Carlisle who held a different position (Bishop of Montreal). It provides no evidence about persons who held the specific position of Bishop of Carlisle.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Charles Nisbet died on January 18, 1804.",
+          "quote": "Charles Nisbet died two and a half weeks later on January 18, 1804, aged 68.",
+          "verdict_reason": "Snippet provides a death date for Charles Nisbet, who held a leadership role in Carlisle, but does not confirm he was Bishop of Carlisle or list other bishops.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Charles Booth, who served as Bishop of Hereford, died in 1535.",
+          "quote": "He died in office on 5 May 1535. Charles Booth (bishop) Charles Booth, D.C.L. (died 1535) was a sixteenth-century clergyman who served as the Bishop of Hereford",
+          "verdict_reason": "Snippet provides a death date for a bishop, but explicitly identifies him as Bishop of Hereford, not Carlisle, making it relevant but not directly responsive to the specific position queried.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Charles Este, a bishop, died on 2 December 1745.",
+          "quote": "He died on 2 December 1745. Charles Este Charles Este, (1696ΓÇô1745), was bishop of",
+          "verdict_reason": "Snippet provides a death date for a bishop (Charles Este) but does not confirm he held the specific position of Bishop of Carlisle, offering only partial evidence for the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "John Booth, who served as Bishop of Exeter, died on 5 April 1478.",
+          "quote": "Following a visit to Croydon Palace, Booth died on 5 April 1478 at Horsley, where he was \"ex-officio\" lord of the manor.",
+          "verdict_reason": "Snippet provides a death date for John Booth, but identifies him as Bishop of Exeter, not Bishop of Carlisle. It is relevant evidence regarding the entity type but does not answer the specific position query.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

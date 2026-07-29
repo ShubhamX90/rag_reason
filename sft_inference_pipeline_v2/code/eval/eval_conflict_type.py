@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """
-eval_conflict_type_v5.py
-------------------------
+eval_conflict_type.py
+---------------------
 Compares the gold conflict_type (from Stage-3 schema) with the predicted
 conflict_type inside <think>...</think> of v5 text-mode generations.
 
 Typical usage:
-  python code/eval/eval_conflict_type_v5.py \
-    --canon_jsonl data/splits/dev.jsonl \
-    --gens_jsonl  outputs/dev_generations/sft_qlora_v5_run2.sanitized.jsonl \
-    --report_json outputs/eval_reports/sft_qlora_v5_run2.conflict_type.json \
-    --per_id_csv  outputs/eval_reports/sft_qlora_v5_run2.conflict_type_per_id.csv
+  python code/eval/eval_conflict_type.py \
+    --canon_jsonl data/splits/val_stagewise.jsonl \
+    --gens_jsonl  outputs/sft_qwen_e2e_val_stagewise.sanitized.jsonl \
+    --report_json outputs/reports/sft_qwen_e2e_val_stagewise/conflict_type.json \
+    --per_id_csv  outputs/reports/sft_qwen_e2e_val_stagewise/conflict_type_per_id.csv
 """
 
 import re
@@ -131,14 +131,38 @@ def parse_conflict_type_from_think(think_block: str) -> Tuple[Optional[str], Opt
     From the think block, skip the first JSON array, then read the next
     non-empty line and split by an em/en/hyphen dash. Return (ctype, err).
     """
-    end_idx, err = json_array_end_index(think_block)
-    if err:
-        return None, err
-    tail = (think_block[end_idx:] or "").strip()
+    stripped = (think_block or "").lstrip()
+    if not stripped.startswith("["):
+        tail = think_block or ""
+    else:
+        end_idx, err = json_array_end_index(think_block)
+        if err:
+            tail = think_block or ""
+        else:
+            tail = (think_block[end_idx:] or "").strip()
     if not tail:
         return None, "conflict_line_missing"
-    # first non-empty line after the array
-    first_line = next((ln.strip() for ln in tail.splitlines() if ln.strip()), "")
+    # first non-empty line after the array, or text-trace conflict line.
+    first_line = ""
+    for ln in tail.splitlines():
+        candidate = ln.strip()
+        if not candidate:
+            continue
+        if candidate.lower().startswith("conflict type:"):
+            raw = candidate.split(":", 1)[1].strip()
+            ctype = normalize_label(raw)
+            if ctype in CANON_TYPES:
+                return ctype, None
+            return None, "conflict_type_invalid_or_unexpected"
+        for sep in (" - ", " — ", " – "):
+            if sep not in candidate:
+                continue
+            left = candidate.split(sep, 1)[0].strip()
+            if normalize_label(left) in CANON_TYPES:
+                first_line = candidate
+                break
+        if first_line:
+            break
     if not first_line:
         return None, "conflict_line_missing"
 

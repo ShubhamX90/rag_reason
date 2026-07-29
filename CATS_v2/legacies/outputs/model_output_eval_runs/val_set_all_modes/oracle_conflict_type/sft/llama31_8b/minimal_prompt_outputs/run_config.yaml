@@ -1,0 +1,24 @@
+outputs_dir: "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/model_output_eval_runs/val_set_all_modes/oracle_conflict_type/sft/llama31_8b/minimal_prompt_outputs"
+report_md: "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/model_output_eval_runs/val_set_all_modes/oracle_conflict_type/sft/llama31_8b/minimal_prompt_outputs/eval_report.md"
+detailed_results_json: "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/model_output_eval_runs/val_set_all_modes/oracle_conflict_type/sft/llama31_8b/minimal_prompt_outputs/detailed_results.json"
+
+pipeline:
+  batch_size: 6
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "mixed"
+    codex_model: "gpt-5.4"
+    codex_priority: 3
+    deepseek_model: "deepseek-v4-flash"
+    deepseek_priority: 2
+    max_concurrent_requests: 3
+    voting_strategy: "weighted_majority"

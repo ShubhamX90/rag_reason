@@ -25,6 +25,28 @@ DEFAULT_CACHE_DIR = PROJECT_ROOT / "data" / ".llm_cache"
 CACHE_VERSION = "llm-response-cache-v1"
 
 
+class CacheMissError(RuntimeError):
+    """Raised when a read-only cache lookup cannot satisfy an LLM request."""
+
+
+VALID_CACHE_MODES = {"off", "read_write", "read_only", "write_only"}
+
+
+def normalize_cache_mode(cache_mode: str | None, cache_enabled: bool = False) -> str:
+    """Normalize legacy boolean cache flags and explicit cache modes."""
+    if cache_mode is None:
+        return "read_write" if cache_enabled else "off"
+    mode = str(cache_mode).strip().lower()
+    if mode == "on":
+        mode = "read_write"
+    if mode not in VALID_CACHE_MODES:
+        raise ValueError(
+            f"Invalid cache mode {cache_mode!r}; expected one of "
+            f"{', '.join(sorted(VALID_CACHE_MODES))}"
+        )
+    return mode
+
+
 def cache_root() -> Path:
     override = os.getenv("RAG_REASON_LLM_CACHE_DIR", "").strip()
     return Path(override).expanduser() if override else DEFAULT_CACHE_DIR

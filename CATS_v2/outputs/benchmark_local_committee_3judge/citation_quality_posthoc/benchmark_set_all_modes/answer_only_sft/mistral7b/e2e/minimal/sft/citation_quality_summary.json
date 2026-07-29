@@ -1,0 +1,2264 @@
+{
+  "variant": "benchmark_set_all_modes/answer_only_sft/mistral7b/e2e/minimal/sft",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "answer_only_sft_phase1_qwen_deepseek_20260707",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/answer_only_sft_phase1_qwen_deepseek_20260707/answer_only_sft/mistral7b/e2e/minimal/sft/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/answer_only_sft_phase1_qwen_deepseek_20260707/answer_only_sft/mistral7b/e2e/minimal/sft/final/detailed_results.json",
+    "source_final_sha256": "dbb07c473757f424d508f6994ea6d2a46052aac8db2513ec99ca766b44fc37fc",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/answer_only_sft/mistral7b/e2e/minimal/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/answer_only_sft/mistral7b/e2e/minimal/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 894,
+    "claims_with_citations": 893,
+    "claims_with_committee_support_set": 837,
+    "claims_with_any_approved_citation": 739,
+    "claims_with_any_gold_positive_citation": 887,
+    "committee_alignment_precision_macro": 0.7430944382232176,
+    "committee_alignment_precision_micro": 0.7109144542772862,
+    "gold_positive_citation_precision_macro": 0.9826054497946995,
+    "gold_positive_citation_precision_micro": 0.9786135693215339,
+    "soft_extra_citation_rate_micro": 0.2676991150442478,
+    "hard_negative_citation_rate_micro": 0.021386430678466076,
+    "committee_support_citation_recall_macro": 0.8829151732377539,
+    "committee_support_citation_recall_micro": 0.8829151732377539,
+    "claims_with_any_soft_extra_rate": 0.322508398656215,
+    "claims_with_any_hard_negative_rate": 0.029115341545352745,
+    "strict_committee_alignment_claim_rate": 0.6577181208053692,
+    "strict_gold_clean_claim_rate": 0.8109619686800895,
+    "strict_grounded_committee_clean_rate_all_claims": 0.6577181208053692,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8109619686800895,
+    "total_cited_docs": 1356,
+    "total_approved_cited_docs": 964,
+    "total_gold_positive_cited_docs": 1327,
+    "total_soft_extra_cited_docs": 363,
+    "total_hard_negative_cited_docs": 29
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "situatedqa_geo_48e19f6b37bc",
+      "claim_index": 2,
+      "claim": "All available evidence consistently confirms this ranking, with no contradictions across sources",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d5",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.8,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists US states ranked by size from 21st to 50th, excluding the top three largest states.",
+          "quote": "| 21 | Missouri | 69,706.99 | ... | 50 | Rhode Island | 1,544.89 |",
+          "verdict_reason": "The snippet provides a ranked list of US states by area but only covers ranks 21-50, failing to identify the 3rd largest state directly while remaining topically relevant.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "California is the third largest U.S. state by total area with 163,695 square miles.",
+          "quote": "| 3. California | 163,695 | 423,967 |",
+          "verdict_reason": "The snippet contains a ranked table explicitly listing California as the 3rd largest state by area, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Alaska as the largest state and Texas as the second largest, but cuts off before naming the third largest state.",
+          "quote": "Texas ranks 2nd, California is",
+          "verdict_reason": "The snippet addresses the ranking of US states by area and begins to identify the third state (California) but truncates mid-sentence, failing to explicitly confirm the rank.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "California is the third largest state in the U.S. by area with 163,696 square miles.",
+          "quote": "| 3 | California | 163,696 |",
+          "verdict_reason": "The snippet explicitly lists California as rank 3 in a table of largest U.S. states by area, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only user profile metadata and interface text, providing no factual information about the 3rd largest state or any geographic entity.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_3601f7480501",
+      "claim_index": 1,
+      "claim": "Overall, the evidence suggests that unlimited vacation time can be beneficial for employees in specific contexts — for example, knowledge workers in creative fields where output rather than hours on the clock drives performance — but that a fixed-vacation-day policy may work better for most organizations",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Unlimited PTO offers benefits like reduced stress and increased productivity but also carries pitfalls such as employees hesitating to take time off due to fear of appearing uncommitted.",
+          "quote": "Pros for employees: • Never run out of vacation days • Reduces stress - increases productivity • No worrying about unused time Cons for employees: • Hesitate to take time off - Fear of looking like a",
+          "verdict_reason": "The snippet directly addresses the query by listing both benefits and drawbacks, providing conflict-bearing evidence rather than a definitive yes/no answer.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Unlimited PTO is actually worse for employees and companies compared to mandated fixed vacation days.",
+          "quote": "unlimited PTO is one of those things that sounds really good but underneath it is actually worse for employees and also for the companies",
+          "verdict_reason": "The snippet directly addresses the query by arguing unlimited vacation is harmful, providing conflict-bearing evidence against the benefit claim.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research indicates that taking time off increases employee productivity, job satisfaction, and health, though unlimited PTO requires active encouragement to be effective.",
+          "quote": "Research also shows that time off can help employees work more productively, inevitably benefitting your business in the long run. \"When employees take vacations, it increases their productivity, provides greater job satisfaction, reduces their stress levels...",
+          "verdict_reason": "The snippet provides evidence that time off benefits employees but notes unlimited PTO has caveats requiring management oversight, offering partial rather than definitive support for the specific query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_894f4a4b9552",
+      "claim_index": 2,
+      "claim": "Unlike normal matter, dark matter does not interact with the electromagnetic force, making it difficult to detect directly, but researchers have been able to infer its existence from the gravitational effect it exerts on visible matter",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document presents evidence suggesting that dark matter almost certainly exists.",
+          "quote": "YouTube Evidence Showing Why Dark Matter Almost Certainly Exists",
+          "verdict_reason": "The snippet directly addresses the query by asserting evidence for dark matter's existence, but as a video title without specific data in the text, it is incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Strong evidence for the existence of dark matter was provided by observations of the Bullet Cluster in the mid-2000s.",
+          "quote": "Strong evidence for the existence of dark matter finally arrived in the mid-2000s in the form of the Bullet Cluster, shown here, which is actually two clusters of galaxies colliding with each other.",
+          "verdict_reason": "The snippet explicitly states that strong evidence for dark matter's existence arrived via the Bullet Cluster observations, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Observational clues such as galaxy dynamics and gravitational lensing indicate the existence of unaccounted mass referred to as dark matter.",
+          "quote": "There are plenty of observational clues that something called dark matter exists. These include: the dynamics of stars and gas in galaxies and the dynamics of galaxies in clusters; the gravitational lensing of light by clusters",
+          "verdict_reason": "The snippet provides direct evidence supporting dark matter's existence via observational clues but also notes scientific debate and alternatives, making it conflict-bearing rather than decisive.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_047057d22309",
+      "claim_index": 1,
+      "claim": "Harry's dukedom was never formally revoked — and that the title 'Duke of Sussex' is still his, though he no longer holds the HRH prefix",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses speculation and analysis regarding stripping Prince Harry's titles but does not state that King Charles has done so.",
+          "quote": "Amidst the clamour for the Duke of Sussex to be stripped of his titles, Master Graham Zellick examines Prince Harry's various titles – prince, duke, HRH. He analyses if and how they might be removed",
+          "verdict_reason": "The snippet addresses the exact query topic but frames it as a hypothetical analysis and speculation rather than confirming the event occurred, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The video title speculates that King Charles stripped Prince Andrew's titles and questions if Harry and Meghan are next, rather than confirming Harry's title was stripped.",
+          "quote": "BREAKING! King Charles DID IT, He Stripped ALL Andrew's Titles and Are Harry and Meghan Next?",
+          "verdict_reason": "The snippet addresses the same entity and claim but poses it as a question about future action rather than confirming the event occurred, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Prince William is reportedly pressuring King Charles to strip Prince Harry and Meghan Markle of their royal titles, but no action has been taken yet.",
+          "quote": "prince william himself allegedly agrees, and has been pressuring his father to \"cut ties\" despite his consideration of reconciling with his estranged youngest son.",
+          "verdict_reason": "The snippet addresses the same entity and claim but reports only on pressure to act, contradicting the query's premise that the titles were already stripped.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_e502143179d6",
+      "claim_index": 2,
+      "claim": "Musk's acquisition of Twitter marked the end of Twitter as an independent company and the beginning of X",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document outlines a timeline of Elon Musk's takeover of Twitter, noting the deal was accepted in April 2022 and completed last month relative to the article's publication.",
+          "quote": "A lot has happened since Elon Musk completed his acquisition of Twitter last month — layoffs of thousands of employees, firings of engineers critical of him",
+          "verdict_reason": "The snippet addresses the same entity and event but provides only a relative timeframe ('last month') rather than the specific official date requested.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Elon Musk officially bought Twitter in October 2022.",
+          "quote": "Musk bought Twitter in October 2022 for $44 billion at his original proposed price of $54.20 a share.",
+          "verdict_reason": "The snippet explicitly states the month and year Musk bought Twitter, directly answering the query about when he became the owner.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Elon Musk completed the deal to acquire Twitter on October 28.",
+          "quote": "On Oct. 28, he finally did. Tesla CEO Elon Musk completed the deal to acquire Twitter at his original offer price of $54.20 a share",
+          "verdict_reason": "The snippet explicitly states the date Musk completed the acquisition (Oct. 28), directly answering the query about when he became owner.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_0b75ed799d46",
+      "claim_index": 1,
+      "claim": "The ceremony streamed live on Netflix at 8:00 p.m. EST / 5:00 p.m. PST, with Kristen Bell hosting for the third time",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The 2026 SAG-AFTRA Actor Awards will be held at the Shrine Auditorium & Expo Hall in Los Angeles.",
+          "quote": "The 2026 Actor Awards, presented by SAG-AFTRA will begin streaming live on Netflix beginning on Sunday at 8 p.m. ET / 5 p.m. PT from the Shrine Auditorium & Expo Hall in Los Angeles.",
+          "verdict_reason": "The snippet explicitly states the venue for the 2026 SAG-AFTRA Actor Awards, directly answering the query about where the event is being held.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The 31st Screen Actors Guild Awards were held at the Shrine Auditorium and Expo Hall in Los Angeles, California.",
+          "quote": "The 31st Annual Screen Actors Guild Awards... were presented on February 23, 2025, at the Shrine Auditorium and Expo Hall in Los Angeles, California.",
+          "verdict_reason": "The snippet explicitly states the location of the Screen Actors Guild Awards, directly answering the user's query with specific venue details.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The 32nd Actor Awards (formerly Screen Actors Guild Awards) were held at the Shrine Auditorium and Expo Hall in Los Angeles, California.",
+          "quote": "The 32nd Actor Awards (formerly known as the Screen Actors Guild Awards)... were presented on March 1, 2026, at the Shrine Auditorium and Expo Hall in Los Angeles, California.",
+          "verdict_reason": "The snippet explicitly states the location of the event formerly known as the Screen Actors Guild Awards, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_09a6a048cfbf",
+      "claim_index": 2,
+      "claim": "Elsewhere in the UK, the law is the same: 18 is the minimum age to buy and consume alcohol anyone under 18 is prohibited from purchasing alcohol",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The minimum legal drinking age in the United States is 21 years, meaning alcohol cannot be sold to anyone younger.",
+          "quote": "The MLDA in the United States is 21 years. This means that alcohol cannot be sold to people younger than 21.",
+          "verdict_reason": "The snippet directly answers the query by stating the specific legal drinking age (21) and the restriction on sales to those younger.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "In the UK, it is illegal for children under 5 to drink alcohol, while those aged 16 can drink wine, beer, or cider with a meal.",
+          "quote": "The general laws are: Under 5It's illegal for a child under 5 to drink or be given alcohol Age 16You can drink wine, beer or cider with a meal at a restaurant",
+          "verdict_reason": "Snippet provides specific legal age thresholds for drinking alcohol but lacks a single definitive minimum age for all contexts, offering partial rather than complete resolution.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The minimum drinking age in Texas is 21, with exceptions for minors consuming alcohol in the visible presence of a parent, guardian, or spouse.",
+          "quote": "In the Lone Star State, the Texas drinking age is firmly set at 21 years old. This means anyone under the age of 21 is prohibited from purchasing, possessing, or consuming alcohol.",
+          "verdict_reason": "Snippet directly answers the query for Texas specifically, but the query is general; thus it provides relevant but geographically limited evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_adcb94e5d70e",
+      "claim_index": 2,
+      "claim": "This deployment was part of the broader U.S. foreign policy during the Cold War, aimed at preventing the spread of communism in Southeast Asia",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "President Kennedy was the first to send 16,000 American advisers to South Vietnam.",
+          "quote": "President Kennedy sent 16,000 American",
+          "verdict_reason": "Relevant evidence: President Kennedy was the first to send 16,000 American advisers to South Vietnam.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that President Dwight Eisenhower sent military advisors to South Vietnam in 1955.",
+          "quote": "the U.S. administration under President Dwight Eisenhower decided to send military advisors to enhance the South Vietnamese military's capabilities.",
+          "verdict_reason": "The snippet identifies Eisenhower as the president who sent advisors in 1955, directly addressing the query, but lacks explicit confirmation that he was the absolute first to do so.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "President Kennedy authorized sending troops and military advisers to South Vietnam.",
+          "quote": "However, he authorized sending troops and military advisers to the U.S.-backed nation of South Vietnam and steadily increased their numbers throughout his presidency.",
+          "verdict_reason": "The snippet confirms Kennedy sent military advisers but does not explicitly state he was the first president to do so, leaving the 'first' claim unverified by this text alone.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_8808c106a115",
+      "claim_index": 1,
+      "claim": "This deficiency leads to the abnormal accumulation of GM2-ganglioside in brain and nerve cells, eventually causing the progressive deterioration of the central nervous system",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Tay-Sachs disease is classified as an autosomal recessive genetic disorder.",
+          "quote": "Tay-Sachs disease (abbreviated TSD, also known as GM2 gangliosidosis or Hexosaminidase A deficiency) is an autosomal recessive genetic disorder.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating the specific type of genetic disorder Tay-Sachs is.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Tay-Sachs is a genetic disorder caused by the absence of the Hex-A enzyme, with types determined by the age of symptom onset.",
+          "quote": "Tay-Sachs is a genetic disorder caused by the absence of a vital enzyme known as Hex-A. The form or type is determined by the age of the individual when symptoms first appear.",
+          "verdict_reason": "The snippet directly defines Tay-Sachs as a genetic disorder and explains its classification types, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Tay-Sachs disease is inherited as an autosomal recessive genetic disorder caused by variants in the HEXA gene.",
+          "quote": "Tay-Sachs disease is inherited as an autosomal recessive disease. Recessive genetic disorders occur when an individual inherits a disease-causing gene variant from each parent.",
+          "verdict_reason": "The snippet explicitly states the inheritance pattern (autosomal recessive) and genetic cause, directly answering the query about the type of genetic disorder.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0047",
+      "claim_index": 2,
+      "claim": "Argentina's victory gave the country its third title and the first for any non-European nation since 2002",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Argentina is the current FIFA World Cup champion with their 3rd title.",
+          "quote": "current champions = Nowrap|fb|ARG (3rd title)",
+          "verdict_reason": "Document explicitly identifies Argentina as current champions. Timestamp (2026-05-14) is recent and document title indicates newer revision, confirming current status.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Argentina is the defending FIFA World Cup champion, having won its third World Cup title in 2022.",
+          "quote": "Argentina is the defending champion, having won its third World Cup title in 2022.",
+          "verdict_reason": "Snippet identifies Argentina as the current defending champion from the 2022 World Cup, directly answering the query about who holds the current title.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Argentina is the current FIFA World Cup champion with their 3rd title.",
+          "quote": "current champions = Nowrap|fb|ARG (3rd title)",
+          "verdict_reason": "Document explicitly identifies Argentina as current World Cup champions. Timestamp is February 2026, which is current relative to the query. Wikipedia source is high-quality for factual reference.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0a05aabca56a",
+      "claim_index": 0,
+      "claim": "Yes, anime is a form of cartoon — it is animation produced in Japan, though it originated in the United States",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that anime is considered by many to be a Japanese cartoon genre, though it also highlights distinctions between the two.",
+          "quote": "Anime is considered by many to be a Japanese cartoon genre but is more often referred to as just anime.",
+          "verdict_reason": "The snippet directly addresses the query by stating anime is considered a Japanese cartoon genre by many, providing conflict-bearing evidence despite also listing differences.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that anime and cartoons share traditional animation production processes but distinguishes them by subject matter and target audience.",
+          "quote": "Anime and cartoons both use traditional animation production processes of storyboarding, voice acting, character design and cel production.",
+          "verdict_reason": "The snippet addresses the relationship between anime and cartoons by noting shared techniques but emphasizing differences, providing conflict-bearing evidence rather than a direct yes/no answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_2c0ea18839df",
+      "claim_index": 2,
+      "claim": "These rare, specific marks are the exception rather than the rule researchers continue to investigate the mechanisms by which epigenetic information can be transmitted across generations",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The inheritance of epigenetic changes generally depends on how the change is encoded.",
+          "quote": "Generally speaking, how an epigenetic change gets inherited depends on how it is encoded.",
+          "verdict_reason": "Snippet directly addresses the query by explaining the mechanism of inheritance but is incomplete as it cuts off before detailing specific conditions or confirming heredity definitively.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Current evidence suggests epigenetic information likely cannot survive the two rounds of demethylation that occur during mammalian reproduction.",
+          "quote": "To date, there is no evidence that epigenetic information can survive two rounds of this biochemical cleansing.",
+          "verdict_reason": "The snippet directly addresses the query by presenting expert skepticism and biological mechanisms against heritability, serving as conflict-bearing evidence despite not definitively resolving the scientific debate.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_37ebad668bb7",
+      "claim_index": 1,
+      "claim": "The amount of data needed depends heavily on the complexity of the problem, the type of model being used the degree of tolerance for error",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Machine learning models learn from data, which acts as a textbook of examples for the model to study.",
+          "quote": "But just like how we learn from experience, ML models learn from data. ... Think of training data as the \"textbook\" your machine learning model studies from.",
+          "verdict_reason": "The snippet confirms ML models learn from data but discusses data volume rather than explicitly stating if data is always strictly required, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet suggests that having more data is almost always more important than better algorithms in Machine Learning, implying data is highly critical but not explicitly stating it is always required.",
+          "quote": "In Machine Learning, having more data is (almost) always more important than having better algorithms.",
+          "verdict_reason": "The snippet addresses the importance of data in ML but does not definitively answer whether data is 'always' required, offering only a comparative statement on data versus algorithms.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_3dba586dca0f",
+      "claim_index": 2,
+      "claim": "However, it is worth noting that some sources suggest the carbon savings are only significant if the real tree is used for at most 10 years that artificial trees are not inherently non-recyclable if properly disposed of",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Real Christmas trees are more eco-friendly and a better choice for the environment than artificial ones.",
+          "quote": "Yes, real Christmas trees are more eco-friendly and a better choice for the environment. It may feel counter-intuitive, but it's much more sustainable to cut down a real",
+          "verdict_reason": "The snippet directly answers the query by stating real trees are more eco-friendly and sustainable, providing specific emissions comparisons to support the claim.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Real Christmas trees act as carbon sinks and produce oxygen, whereas artificial trees are non-biodegradable and require fossil fuels for manufacturing and transport.",
+          "quote": "Real Christmas Trees are the environmentally friendly option. Like all trees, Christmas tree plantations act as a Carbon Dioxide sink... In comparison, artificial trees are non-biodegradable, and their manufacturing process requires large amounts of fossil fuels.",
+          "verdict_reason": "The snippet directly addresses the sustainability comparison with specific environmental claims for both tree types, providing conflict-bearing evidence from a grower's perspective.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4786f87b62be",
+      "claim_index": 1,
+      "claim": "On the other side, progressive and feminist perspectives argue that the gap is the result of sexist discrimination and that women's choices are shaped by structural barriers and societal norms",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document argues that the gender pay gap is not a myth despite claims that it is illegal to pay women less or that the gap results from personal choices.",
+          "quote": "The Gender Pay Gap Is a Myth Gender pay gap deniers come out in droves on Equal Pay Day, telling us that it's all just a big myth.",
+          "verdict_reason": "The snippet directly addresses the query by presenting the 'myth' argument and refuting it, providing conflict-bearing evidence relevant to the claim verification.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document argues the gender pay gap is real but primarily caused by parenting choices rather than discrimination, citing that women earn $0.89 for every dollar men earn in a specific study.",
+          "quote": "Women account for 30% of the drivers, and on average earn $0.89 for every dollar earned by their male peers.",
+          "verdict_reason": "The snippet directly addresses the query by arguing the gap is not a myth but is explained by choices, providing specific evidence while presenting a nuanced view that partially resolves the binary question.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_52e01830d2fe",
+      "claim_index": 2,
+      "claim": "However, not all software is patentable: the U.S. Patent Office's own guidelines exclude 'computer programs as such' from patentability the Supreme Court's 2020 decision in Athena v",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "National approaches to software patentability vary, with Europe allowing technical programs, the US limiting protection to recordable media, and Japan explicitly recognizing computer programs as patentable subject matter.",
+          "quote": "Japan's Patent Act (Article 2(3)(i)), on the other hand, explicitly refers to computer programs as patentable subject matter.",
+          "verdict_reason": "The snippet directly addresses the query by detailing varying international laws on software patents, providing specific evidence that patents do apply in some jurisdictions while noting limitations in others.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Recent US Supreme Court rulings suggest a higher standard applies to patenting software that implements known business methods.",
+          "quote": "Recent US Supreme Court rulings suggest that a higher standard will be applied when considering the patentability of using software to implement a known business method.",
+          "verdict_reason": "The snippet addresses the query by outlining specific conditions and legal standards for software patentability, providing partial but not definitive resolution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_263eca8e024e",
+      "claim_index": 1,
+      "claim": "This feat, with Box Office India reporting ₹1,810 crore the Times of India noting ₹1,750 crore",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Dangal as the highest grossing Indian movie worldwide with 2024 Crore.",
+          "quote": "| 1.Dangal | 2024 Crore |",
+          "verdict_reason": "Snippet addresses the query by listing a top grossing movie but includes non-Bollywood films and lacks explicit confirmation of the current record holder.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "As of 2021, Baahubali 2: The Conclusion was the highest grossing Bollywood movie.",
+          "quote": "As of 2021, the highest grossing Bollywood movie of all time is \"Baahubali 2: The Conclusion\" (2017).",
+          "verdict_reason": "Snippet addresses the query entity but is temporally limited to 2021, making it potentially superseded by newer data for a 'current' record.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_354e7097602d",
+      "claim_index": 1,
+      "claim": "The U.S. Army conducted the test at approximately 5:30 a.m., detonating a plutonium-powered implosion device atop a 100-foot steel tower, releasing 18.6 kilotons of energy",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The first atomic bomb test occurred at a site 210 miles south of Los Alamos, New Mexico, known as the Jornada del Muerto on the Alamogordo Bombing Range.",
+          "quote": "The world's first nuclear explosion occurred on July 16, 1945, when a plutonium implosion device was tested at a site located 210 miles south of Los Alamos, New Mexico, on the barren plains of the Alamogordo Bombing Range, known as the Jornada del Muerto.",
+          "verdict_reason": "The snippet explicitly states the location of the world's first nuclear explosion in the United States, directly answering the query with specific geographic details.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The first test of a nuclear weapon was staged in the New Mexican desert on July 16, 1945.",
+          "quote": "Early in the morning of 16 July 1945, 80 years ago, the U.S. Manhattan Project staged the first test of a nuclear weapon in the New Mexican desert.",
+          "verdict_reason": "The snippet explicitly states the location (New Mexican desert) and date of the first atomic bomb test, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_a50d0f1f3cdf",
+      "claim_index": 0,
+      "claim": "Queen Elizabeth II of England died on 8 September 2022, at Balmoral Castle in Scotland, where she had been staying with her family",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Queen Elizabeth II died on 8 September 2022.",
+          "quote": "Died | 8 September 2022(2022-09-08) (aged 96) Balmoral Castle, Aberdeenshire, Scotland",
+          "verdict_reason": "The snippet explicitly states the date of death as 8 September 2022 in the infobox, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Queen Elizabeth II died on 8 September 2022 at Balmoral Castle in Scotland.",
+          "quote": "Elizabeth II, Queen of the United Kingdom and the other Commonwealth realms, died on 8 September 2022 at Balmoral Castle in Scotland, at the age of 96.",
+          "verdict_reason": "The snippet explicitly states the exact date of Queen Elizabeth II's death, directly answering the user's query with definitive evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_a50d0f1f3cdf",
+      "claim_index": 1,
+      "claim": "She was 96 years old",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Queen Elizabeth II died on 8 September 2022.",
+          "quote": "Died | 8 September 2022(2022-09-08) (aged 96) Balmoral Castle, Aberdeenshire, Scotland",
+          "verdict_reason": "The snippet explicitly states the date of death as 8 September 2022 in the infobox, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Queen Elizabeth II died on 8 September 2022 at Balmoral Castle in Scotland.",
+          "quote": "Elizabeth II, Queen of the United Kingdom and the other Commonwealth realms, died on 8 September 2022 at Balmoral Castle in Scotland, at the age of 96.",
+          "verdict_reason": "The snippet explicitly states the exact date of Queen Elizabeth II's death, directly answering the user's query with definitive evidence.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "healthcontradict_0060",
+      "claim_index": 1,
+      "claim": "Children with scarlet fever should not be sponged down with tepid water, as the bacteria causing scarlet fever can spread to other areas of the body ; similarly, the American Academy of Family Physicians advises that sponging does not work",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses scarlet fever symptoms, diagnosis, and complications in children, but contains no information about fever reduction methods or tepid sponge baths.",
+          "source_quality": "high"
+        },
+        "d3": {}
+      }
+    },
+    {
+      "sample_id": "freshqa_4d9a80505e01",
+      "claim_index": 0,
+      "claim": "The Federal Reserve cut interest rates by 50 basis points from August to December 2022, bringing the federal funds rate down to 3.5% — a 1.5 percentage point decline from its September 2024 peak of 4.25%",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes events in late 2025 and projections for 2026. It provides no evidence regarding interest rate changes between August and December 2022.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0155",
+      "claim_index": 0,
+      "claim": "2011",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d3",
+        "d4",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses goCatch, an Australian taxi app company founded in 2011. It does not mention BlackBerry DTEK60 or any company that co-developed/distributed it. No connection to the queried device exists.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0186",
+      "claim_index": 2,
+      "claim": "Additionally, a cover version of the song was recorded by Girls' Generation in 2007, though that version is a separate composition from the original",
+      "cited_docs": [
+        "d10"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d10"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d10": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Document is about 'Girls' Generation' song by Lee Seung-chul and others, not about 'Apocalyptic' by Lizzy Hale. No meaningful evidence addresses the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0141",
+      "claim_index": 1,
+      "claim": "Sinner's victory gave him his first major title and the 2026 Wimbledon Championships are scheduled to take place from 29 June to 12 July 2026, marking the first time video reviews will be used in the tournament's history",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the 2026 Wimbledon Championships (a future event), not the latest/current men's singles champion. It provides no information about any champion.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0073",
+      "claim_index": 0,
+      "claim": "El Nuevo Cojo is not owned by Time Inc. It is an American online Spanish language magazine published from Los Angeles, California, founded in 2003 as a free webzine and later converted to a monthly publication in 2004 it is distinct from the Venezuelan newspaper El Nuevo Herald, which is owned by the McClatchy Company",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d6"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d10",
+        "d3",
+        "d4",
+        "d8"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d6"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.3333333333333333,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "two articles that appeared in both the online and print editions of the New York newspaper \"El Nuevo Cojo Ilustrado\" in 2004.",
+          "verdict_reason": "It mentions El Nuevo Cojo Ilustrado but gives no ownership information and does not mention Golf Magazine or Time Inc., so it does not meaningfully answer the comparison.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "El Nuevo Cojo Ilustrado is an American online Spanish language magazine published from Los Angeles, California.",
+          "quote": "El Nuevo Cojo Ilustrado is an American online Spanish language magazine published from Los Angeles, California.",
+          "verdict_reason": "Snippet confirms El Nuevo Cojo is a special interest publication but does not address ownership by Time Inc, which is the decisive query element.",
+          "source_quality": "low"
+        },
+        "d6": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses El Nuevo Herald, not El Nuevo Cojo. The query asks which of two publications is owned by Time Inc; this snippet provides no information about Time Inc ownership or Golf Magazine.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0192",
+      "claim_index": 1,
+      "claim": "This figure is consistent across multiple sources, with one reporting 1,650 scientists , another 1,600 a third 1,660 , reflecting the same underlying estimate",
+      "cited_docs": [
+        "d7",
+        "d1",
+        "d10"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d7"
+      ],
+      "approved_cited_docs": [
+        "d7"
+      ],
+      "gold_positive_docs": [
+        "d3",
+        "d5",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [
+        "d7"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1",
+        "d10"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.3333333333333333,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d7": {
+          "verdict": "supports",
+          "key_fact": "More than 1,600 German scientists, engineers, and technicians were recruited in post-Nazi Germany through Operation Paperclip, a secret program where Arthur Rudolph and others became developers of the U.S. space program.",
+          "quote": "more than 1,600 German scientists, engineers, and technicians, such as Wernher von Braun and his V-2 rocket team, were recruited in post-Nazi Germany and taken to the U.S. for government employment",
+          "verdict_reason": "The snippet directly answers the query by providing the specific number (1,600+) of German scientists, engineers, and technicians recruited through Operation Paperclip, the clandestine operation referenced in the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a video game (Kerbal Space Program) and contains no information about Arthur Rudolph, German scientists recruited post-WWII, or any clandestine operation related to the U.S. space program.",
+          "source_quality": "low"
+        },
+        "d10": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet defines 'read into' security procedures for classified programs but provides no information about German scientists recruited post-WWII, Arthur Rudolph, Operation Paperclip, or U.S. space program recruitment numbers.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_e60bdcf75ba7",
+      "claim_index": 1,
+      "claim": "However, some research presents a more nuanced picture: a comparative analysis found organic yields lower than conventional for row crops and fruit crops but higher for vegetables a long-term study found that organic yields can match conventional yields with appropriate management practices , suggesting that the yield gap is not inherent to organic farming itself but can be reduced with better farming techniques and crop selection",
+      "cited_docs": [
+        "d3",
+        "d54"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d54"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "A USDA-based analysis found that organic yields were lower in 84% of comparisons across major US crops in 2014.",
+          "quote": "For 292 of those comparisons, the organic yields were lower (84% on an area basis). There were 55 comparisons where organic yield was higher, but 89% of the higher yielding organic examples involved hay and silage crops rather than food crops.",
+          "verdict_reason": "The snippet directly answers the query with specific statistical evidence from a USDA survey showing organic yields are typically lower than conventional ones.",
+          "source_quality": "high"
+        },
+        "d54": {}
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "This year's Passover (2026) begins at sundown on Wednesday, April 1 ends at nightfall on Thursday, April 9, according to the Hebrew calendar",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "In 2026, the first Seder is held on the evening of April 1 the second Seder is held on April 2",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "healthcontradict_0060",
+      "claim_index": 0,
+      "claim": "No, a tepid sponge bath is not a good way to reduce fever in children. Research shows that neither tepid water nor sponging actually helps reduce fever in children under 5 — in fact, sponging may even raise the temperature slightly",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {},
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Research shows that sponging a child down with tepid water does not actually help reduce fever.",
+          "quote": "there's no need to undress your child or sponge them down with tepid water – research shows neither actually helps reduce fever",
+          "verdict_reason": "The snippet directly addresses the query by citing research evidence that tepid sponge baths are not effective for reducing fever in children.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "healthcontradict_0060",
+      "claim_index": 2,
+      "claim": "Instead, the NHS recommends giving children paracetamol or ibuprofen to reduce fever the AAFP suggests using a cool (not cold) sponge bath for children over 5",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {},
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Research shows that sponging a child down with tepid water does not actually help reduce fever.",
+          "quote": "there's no need to undress your child or sponge them down with tepid water – research shows neither actually helps reduce fever",
+          "verdict_reason": "The snippet directly addresses the query by citing research evidence that tepid sponge baths are not effective for reducing fever in children.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "healthcontradict_0145",
+      "claim_index": 1,
+      "claim": "However, a 2014 meta-analysis of available data concludes that 'yoga cannot be considered a routine intervention for asthmatic patients at this point' and suggests it may be considered an ancillary intervention or an alternative to breathing exercises for those interested in complementary interventions ; similarly, a 2016 review notes that while some evidence suggests yoga may be beneficial, it is not conclusive and that more rigorous RCTs are needed",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "A 2014 meta-analysis concluded that yoga cannot be considered a routine intervention for asthma but may serve as an ancillary intervention or alternative to breathing exercises for interested patients.",
+          "quote": "yoga cannot be considered a routine intervention for asthmatic patients at this point. It can be considered an ancillary intervention or an alternative to breathing exercises for asthma patients interested in complementary interventions",
+          "verdict_reason": "Directly addresses the query with peer-reviewed meta-analysis findings, but concludes yoga has limited efficacy as primary asthma management, making it conflict-bearing evidence that partially rather than fully supports the query claim.",
+          "source_quality": "low"
+        },
+        "d3": {}
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0025",
+      "claim_index": 1,
+      "claim": "He was born on November 26, 1917, in Hamyeong Buk-do (now North Korea) died on December 27, 1990",
+      "cited_docs": [
+        "d9",
+        "d10"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d10"
+      ],
+      "approved_cited_docs": [
+        "d10"
+      ],
+      "gold_positive_docs": [
+        "d10",
+        "d5",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [
+        "d10"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d9"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d9": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "Chang Yong-hak (25 April 1921 – 31 August 1999) was a Korean writer. Chang was born in Hamyeong Buk-do in what is now North Korea.",
+          "verdict_reason": "The document discusses Chang Yong-hak, not Chang Ucchin, and does not provide evidence about the queried person or birth period.",
+          "source_quality": "low"
+        },
+        "d10": {
+          "verdict": "partially supports",
+          "key_fact": "Chang Ucchin was born in 1917 when Korea was under Japanese colonial rule.",
+          "quote": "Chang was born when Korea was still under Japanese colonial rule.",
+          "verdict_reason": "Snippet confirms Chang Ucchin's birth during Japanese colonial rule but does not explicitly state what event concluded that period (e.g., 1945 liberation). Provides relevant context but incomplete answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_8dd2323c077d",
+      "claim_index": 0,
+      "claim": "The first McDonald's in Phoenix was built in 1953, though the exact location varies by source. One source states it was on West Indian School Road , while a peer-reviewed academic source confirms the first golden-arch stand was built in Phoenix in 1953",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The first McDonald's stand in Phoenix was built in 1953 but has since been demolished.",
+          "quote": "The first golden-arch stand was built in Phoenix in 1953. It has been demolished",
+          "verdict_reason": "Snippet confirms the 1953 construction date but states the location is demolished, failing to provide the specific address or site requested.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet consists of unrelated news headlines and does not mention McDonald's, Phoenix, or any restaurant locations, providing no evidence for the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a44267c115d0",
+      "claim_index": 2,
+      "claim": "This intracellular water is constantly moving across the cell membrane in response to osmotic gradients, with sodium ions as the predominant osmole driving water distribution",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is merely a video title and platform name; it contains no factual information about where water is located in the body.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Most of the body's water is located within the cells, comprising about two-thirds of the total in the intracellular space.",
+          "quote": "Most of the water in the body is found within the cells of the body (about two thirds is in the intracellular space)",
+          "verdict_reason": "The snippet directly answers the query by stating that most body water is found within the cells (intracellular space).",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0007",
+      "claim_index": 1,
+      "claim": "Google LLC (also referred to as Google) is then a wholly owned subsidiary of Alphabet Inc. the two entities are further correlated by additional investments and cross-ownership",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Google's parent company is Alphabet Inc., which owns Google as a wholly owned subsidiary since 2015.",
+          "quote": "Google's parent company Alphabet Inc. has been described as a Big Tech company. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating that Alphabet Inc. is Google's parent company and owns Google as a wholly owned subsidiary.",
+          "source_quality": "high"
+        },
+        "d5": {}
+      }
+    },
+    {
+      "sample_id": "wikirevision_0057",
+      "claim_index": 0,
+      "claim": "Google is owned by Alphabet Inc., the parent company of Google LLC, which is itself owned by its founders Larry Page and Sergey Brin. Alphabet Inc. is a public company traded on the Nasdaq stock exchange under the ticker symbols GOOGL (Class A shares) and GOOG (Class C shares), with over $1 trillion in market capitalization as of 2026",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Alphabet Inc. is a public company traded on Nasdaq under ticker symbols GOOGL and GOOG, with key leadership including CEO Sundar Pichai.",
+          "quote": "type = Public company Public traded_as = ubl * nowrap Nasdaq : NasdaqSymbol GOOGL ( Class A share Class A ) * nowrap Nasdaq: NasdaqSymbol GOOG ( Class C share Class C ) * Sundar Pichai ( Chief executive officer CEO )",
+          "verdict_reason": "Document describes Alphabet Inc. as a public company with multiple shareholders, not a single owner. Query asks 'who owns Google' but snippet shows public ownership structure without identifying individual/entity ownership.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet is corrupted/garbled with non-English text and metadata fragments. No coherent information about Google ownership is extractable.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0119",
+      "claim_index": 1,
+      "claim": "2026 is the current year of the tournament Sinner's win there makes him the champion for that edition",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the 2026 Wimbledon Championships (a future event), not the current champion. It provides no information about who won the men's singles title.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Jannik Sinner is the current Wimbledon men's singles champion.",
+          "quote": "Men Current = Jannik Sinner (singles)",
+          "verdict_reason": "Document explicitly identifies Jannik Sinner as the current men's singles champion at Wimbledon. Timestamp (2026-02-26) is recent and reflects current tournament status.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

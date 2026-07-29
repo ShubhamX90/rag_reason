@@ -1,0 +1,1452 @@
+{
+  "variant": "benchmark_set_all_modes/llama8b/oracle_notes/runtime/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/oracle_notes/runtime/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/oracle_notes/runtime/baseline/final/detailed_results.json",
+    "source_final_sha256": "a40a0cb4f74805a022e89aad52ae15155d12cca42286e58c8ffbe068cfe713f0",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/llama8b/oracle_notes/runtime/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/llama8b/oracle_notes/runtime/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 683,
+    "claims_with_citations": 474,
+    "claims_with_committee_support_set": 584,
+    "claims_with_any_approved_citation": 461,
+    "claims_with_any_gold_positive_citation": 474,
+    "committee_alignment_precision_macro": 0.8987693389592124,
+    "committee_alignment_precision_micro": 0.8728668941979523,
+    "gold_positive_citation_precision_macro": 0.9989451476793249,
+    "gold_positive_citation_precision_micro": 0.9982935153583617,
+    "soft_extra_citation_rate_micro": 0.12542662116040956,
+    "hard_negative_citation_rate_micro": 0.0017064846416382253,
+    "committee_support_citation_recall_macro": 0.7893835616438356,
+    "committee_support_citation_recall_micro": 0.7893835616438356,
+    "claims_with_any_soft_extra_rate": 0.20675105485232068,
+    "claims_with_any_hard_negative_rate": 0.002109704641350211,
+    "strict_committee_alignment_claim_rate": 0.5505124450951684,
+    "strict_gold_clean_claim_rate": 0.6749633967789166,
+    "strict_grounded_committee_clean_rate_all_claims": 0.5505124450951684,
+    "strict_grounded_gold_clean_rate_all_claims": 0.6749633967789166,
+    "total_cited_docs": 1172,
+    "total_approved_cited_docs": 1023,
+    "total_gold_positive_cited_docs": 1170,
+    "total_soft_extra_cited_docs": 147,
+    "total_hard_negative_cited_docs": 2
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_9251c7a33ec5",
+      "claim_index": 2,
+      "claim": "Consult with a veterinarian to determine the best course of action for your pet's health and well-being",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering provides health benefits by preventing cancers and diseases, though the snippet focuses primarily on behavioral changes rather than negative health impacts.",
+          "quote": "And while neutering dogs can decrease the risk of ovarian and breast cancers, prostate disease, and pyometras, it can also decrease or even eliminate socially unacceptable behaviors in dogs.",
+          "verdict_reason": "The snippet addresses the health impact of neutering by listing benefits, which is relevant evidence to the query about negative impacts, but it does not explicitly discuss or confirm negative health consequences.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering disrupts hormonal feedback loops, causing luteinizing hormone levels to surge up to 30 times average concentrations, which researchers are investigating for potential links to cancer.",
+          "quote": "After sterilization, dogs can experience a surge in LH levels. This surge can reach as high as 30 times the average concentrations, particularly in males. Researchers are exploring if consistently high LH levels can harm different body parts.",
+          "verdict_reason": "The snippet directly addresses negative health impacts by citing a specific hormonal surge and ongoing research into cancer risks, providing conflict-bearing evidence alongside listed benefits.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Spaying and neutering carry potential negatives including surgical risks, weight gain, and hormonal changes affecting metabolism and coat quality.",
+          "quote": "Potential Negatives to Consider\nWhile spaying and neutering offer numerous benefits, there are some potential drawbacks to consider:\n1. Surgical Risks: Like any surgical procedure, spaying and neutering carry risks such as bleeding, infection, and adverse reactions to anesthesia.",
+          "verdict_reason": "The snippet directly addresses the query by listing specific negative health impacts (surgical risks, weight gain, hormonal changes), providing conflict-bearing evidence without fully resolving the overall net impact.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Evidence indicates that spaying or neutering dogs correlates with both positive and adverse health effects, with risks potentially exceeding benefits for most male dogs.",
+          "quote": "The evidence shows that spay/neuter correlates with both positive AND adverse health effects in dogs. ... The number of health problems associated with neutering may exceed the associated health benefits in most cases.",
+          "verdict_reason": "The snippet directly addresses the query by confirming negative health impacts exist alongside benefits, providing conflict-bearing evidence rather than a simple yes/no answer.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research indicates that spaying or neutering dogs can cause luteinizing hormone levels to rise up to 30 times higher, potentially contributing to diseases like urinary incontinence and lymphoma.",
+          "quote": "Dogs spayed or neutered can have LH levels up to 30 times higher than normal. Elevated LH may affect the thyroid, urinary tract, immune system, and even cancer development.",
+          "verdict_reason": "The snippet provides specific evidence of negative health impacts (elevated LH, disease risks) directly addressing the query, but represents ongoing research rather than a definitive final conclusion.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a7ff288bc615",
+      "claim_index": 1,
+      "claim": "However, some experts, such as Gary Marcus, have expressed skepticism about the significance of this achievement, arguing that the Turing test is a flawed measure of intelligence and that passing it does not necessarily mean that AI has reached a level of true intelligence or consciousness",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "In a study, GPT-4.5 was judged to be human 73% of the time, surpassing actual humans in a Turing test framework.",
+          "quote": "Across the four LLMs, GPT-4.5 was judged to be the human 73% of the time, meaning interrogators selected it as",
+          "verdict_reason": "Relevant evidence: In a study, GPT-4.5 was judged to be human 73% of the time, surpassing actual humans in a Turing test framework.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "A study found that OpenAI's GPT-4.5 passed the Turing test by fooling humans 73 percent of the time.",
+          "quote": "A study by scientists at UC San Diego found that OpenAI's large language model GPT-4.5 passed for human 73 percent of the time",
+          "verdict_reason": "The snippet directly answers the query by providing empirical evidence that an AI (GPT-4.5) passed the Turing test, citing a specific success rate from a UC San Diego study.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The document states that as of 2025, AI has passed the Turing test.",
+          "quote": "As of 2025, AI has passed the Turing test. But what does that mean for us?",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating that AI has passed the Turing test as of 2025.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The paper claims that large language models pass the Turing test.",
+          "quote": "Title:Large Language Models Pass the Turing Test",
+          "verdict_reason": "The document title directly asserts that large language models pass the Turing test, providing a definitive affirmative answer to the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_6988dd820a61",
+      "claim_index": 1,
+      "claim": "However, a study by USGS researcher Susan Hough found no correlation between lunar phases and earthquakes the relationship is not universally accepted",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "A study argues that major earthquakes are more likely to occur during full and new moons when tidal stresses are highest.",
+          "quote": "A new study has argued that major earthquakes, such as those that devastated Chile in 2010 and Japan in 2011, are more likely to occur during full and new moons",
+          "verdict_reason": "The snippet directly addresses the query by citing a study linking major earthquakes to full moons, but limits the correlation to large quakes, making it partial support.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A study suggests high tidal stress during new and full moons may increase the probability that an earthquake grows larger, though not every such moon brings an earthquake.",
+          "quote": "This makes it more likely that major earthquakes will strike at these times, according to a new study.",
+          "verdict_reason": "The snippet directly addresses the query with scientific findings supporting a link between moon phases and earthquake likelihood, but qualifies the claim as probabilistic rather than absolute.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Geologic strain from tides during full and new moons could increase the magnitude of tremors.",
+          "quote": "Geologic strain of tides during full and new moons could increase magnitude of tremors.",
+          "verdict_reason": "The snippet directly addresses the query by linking full moons to earthquake triggers, but uses cautious language ('could increase') and lacks a definitive yes/no conclusion.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_73560dfab1ae",
+      "claim_index": 0,
+      "claim": "The final answer is",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "A meta-analysis found that vitamin C significantly decreased the severity of common colds by 15% compared to placebo.",
+          "quote": "Compared to placebo, vitamin C significantly decreased the severity of the common cold by 15% (95% CI 9–21%).",
+          "verdict_reason": "The snippet directly answers the query with specific quantitative evidence from a meta-analysis showing vitamin C reduces cold severity.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "High doses of vitamin C do not prevent colds but may slightly reduce recovery time by about 13 hours for a seven-day illness.",
+          "quote": "While it doesn't prevent you from getting a cold, Dr. Bracamonte says there is some limited research that additional vitamin C might speed up the recovery process slightly in some people.",
+          "verdict_reason": "The snippet directly addresses the query by stating vitamin C does not prevent colds but offers limited evidence it may slightly alleviate symptoms by shortening duration, providing partial but not definitive support.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The average dosage of vitamin C for colds is 1,000 mg to 2,000 mg per day, based on study ranges, though most people get enough from their diet.",
+          "quote": "The average dosage of vitamin C for colds is anywhere from 1,000 mg to 2,000 mg per day. But this is based on the dosage range in studies that looked at vitamin C for treating colds.",
+          "verdict_reason": "Snippet addresses the query by citing study dosages for treating colds but notes most people don't need supplements, providing partial rather than decisive support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_864fc7e36714",
+      "claim_index": 1,
+      "claim": "in 2018, the top country of origin for new immigrants coming into the U.S. was China. d3 suggests that from 1965 to 2007, most immigrants came from Latin America (49%) or Asia (27%), with Mexico alone accounting for about 25% of these new immigrants. d4 states that recent immigrants predominantly originate from South and Central America and the Caribbean, with Mexico, India China being the top three countries of origin",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "In 2018, the top country of origin for new immigrants coming into the U.S. was China.",
+          "quote": "In 2018, the top country of origin for new immigrants coming into the U.S. was China, with 149,000 people, followed by India (129,000), Mexico (120,000) and the Philippines (46,000).",
+          "verdict_reason": "Snippet identifies top source countries for new arrivals in 2018, addressing the query's entity but providing specific year data rather than a general or current bulk statistic.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Recent immigrants predominantly originate from South and Central America and the Caribbean, with Mexico, India, and China being the top three countries of origin.",
+          "quote": "Geographically, the new immigrants predominantly originate from South and Central America and the Caribbean, with nearly half of recent immigrants hailing from this region. The top three countries of origin were Mexico (13.19%), India (9.6%), and China (4.99%).",
+          "verdict_reason": "The snippet directly answers the query by identifying the primary regions and specific top countries of origin for recent immigrants.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "From 1965 to 2007, most immigrants came from Latin America (49%) or Asia (27%), with Mexico alone accounting for about 25%.",
+          "quote": "Most immigrants in this wave came from Latin America (49%) or Asia (27%). Mexico alone accounted for about 25% of these new immigrants.",
+          "verdict_reason": "Snippet provides specific origins for the 1965-2007 wave but cuts off before detailing the 'today' period requested by the implied current tense of the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_103",
+      "claim_index": 1,
+      "claim": "However, the author of the final document is not explicitly stated in the provided sources",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "An unnamed author with a clerical vocation drafted the Declaration of the Rights of Man and of the Citizen.",
+          "quote": "its author, despite his clerical vocation (which made him part of the First Estate), was elected as the last (the twentieth) of the deputies to the Third Estate from Paris",
+          "verdict_reason": "Snippet confirms a specific individual drafted the document but omits their name, providing incomplete evidence for the 'Who' query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Thomas Paine authored the book Rights of Man in 1791.",
+          "quote": "Rights of Man (1791), a book by Thomas Paine, including 31 articles, posits that popular political revolution is permissible",
+          "verdict_reason": "Snippet identifies Thomas Paine as the author of 'Rights of Man', but refers to a book, not the specific 'Declaration of the Rights of Man' document requested.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Thomas Jefferson appealed to unalienable rights in the Declaration of Independence.",
+          "quote": "Thomas Jefferson, arguably echoing Locke, appealed to unalienable rights in the \"Declaration of Independence\"",
+          "verdict_reason": "Snippet discusses Thomas Jefferson and the Declaration of Independence, which is related but distinct from the queried Declaration of the Rights of Man, providing incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_173",
+      "claim_index": 1,
+      "claim": "However, a comprehensive understanding of the nutritional differences between 'good' and 'bad' sugars requires more detailed information",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Sugars are categorized as naturally occurring (like fructose in fruit) or added during processing.",
+          "quote": "there are two different types of sugars found in food: sugar that's present naturally, like fructose, the sugar in fruit... and added sugar, which is any sugar or sweetener that's added to food or drinks",
+          "verdict_reason": "Snippet defines the key distinction between natural and added sugars relevant to the query but cuts off before explaining the health implications or differences.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "High-fructose corn syrup (HFCS), found in candy and sodas, is a significant dietary source of fructose created from corn starch.",
+          "quote": "The most significant sources of fructose in the diet include: HFCS, which is present in candy, baked goods, and sodas, and other processed foods",
+          "verdict_reason": "Snippet identifies fructose sources in 'bad' sugars (candy, soda) but fails to explain the physiological difference or address 'good' sugars like fruit directly.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document distinguishes fruit sugar from candy sugar by stating that candy is not a whole food and asserts that fruit sugar is beneficial.",
+          "quote": "sugars in fruits and the sugar in candy simply because candy is not a whole food. ... Why fruit sugar is good (not bad) for you",
+          "verdict_reason": "Snippet addresses the specific comparison between fruit and candy sugars but offers limited reasoning (whole food status) without detailed nutritional differences.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0717d0e62f3b",
+      "claim_index": 1,
+      "claim": "However, clothing designs are generally not protected due to their utilitarian nature",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Copyright law protects specific fashion elements like graphic designs, textile patterns, and logos if they demonstrate sufficient creativity, but excludes colors.",
+          "quote": "Graphic Designs: Copyright law would protect the designs on the surface of fashion items just as it protects designs on the surface of a canvas or sheet of paper.",
+          "verdict_reason": "The snippet addresses the query by listing protectable and non-protectable fashion elements, providing partial but not comprehensive resolution to whether fashion designs are protected.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Clothing designs can receive copyright protection for graphic designs, artistic works, and works of artistic craftsmanship such as fabrics and surface patterns.",
+          "quote": "Yes, you can have copyright protection for clothing designs. In the fashion world, copyright protects graphic designs, artistic works, literary works and works of artistic craftsmanship.",
+          "verdict_reason": "The snippet directly answers the query by confirming that fashion designs are protected under copyright law, specifically detailing the types of works covered.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_022",
+      "claim_index": 1,
+      "claim": "However, the exact reason for this design choice is not clearly established different sources provide different information about its usage and purpose. provides a clear reason for the original technical purpose of the combination, but it does not explain the specific reason for its adoption as a widespread 'unlock' mechanism. provides a different context for its usage, but it does not explain the historical reason for its use as an unlock mechanism. and do not provide any relevant information",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Attackers with network KVM access could send a Ctrl + Alt + Del sequence to a system.",
+          "quote": "If an attacker gain access to the network KVM, then they could send keystrokes to your system. They wouldn't have access to the power button, but they could send a Ctrl + Alt + Del sequence.",
+          "verdict_reason": "Snippet addresses Ctrl+Alt+Del usage in a security context but discusses remote attacks rather than explaining the historical reason for its use as an unlock mechanism.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet lists generic keyboard shortcuts for a specific workshop tool and does not address the query about the history or reason for the Control-Alt-Delete combination used to unlock computers.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM to reboot a computer or summon the task manager.",
+          "quote": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM.[249] ... used to reboot a computer, and summon the task manager or operating system.",
+          "verdict_reason": "Snippet identifies the inventor and original technical purpose (reboot/task manager) but does not explain the specific reason for its adoption as a widespread 'unlock' mechanism.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a fictional narrative about a specific computer glitch in a story, providing no historical or technical evidence explaining why Control-Alt-Delete was used to unlock computers.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_c4976f8629cb",
+      "claim_index": 0,
+      "claim": "The green anaconda is the heaviest reptile, with a maximum weight of 550 pounds",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that crocodiles are currently the largest reptiles on Earth, while identifying the green anaconda as the heaviest snake.",
+          "quote": "Currently, crocodiles are the largest reptiles on Earth; however, a variety of other reptiles grow to impressive sizes.",
+          "verdict_reason": "The snippet addresses the query by stating crocodiles are the largest reptiles but lacks specific weight data to confirm them as the heaviest, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_070",
+      "claim_index": 0,
+      "claim": "The final answer is: Big Brother",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies Big Brother as a supreme figure in Nineteen Eighty-Four but cuts off before fully describing the character.",
+          "quote": "\"Big Brother\" is a supreme",
+          "verdict_reason": "The snippet addresses the query by naming a character (Big Brother) but is incomplete due to truncation, providing only partial evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_103",
+      "claim_index": 0,
+      "claim": "Lafayette presented a draft of the Declaration of the Rights of Man and of the Citizen to the Assembly, written by himself in consultation with Jefferson",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Lafayette presented a draft of the Declaration written by himself in consultation with Jefferson.",
+          "quote": "on 11 July 1789, Lafayette presented a draft of the \"Declaration of the Rights of Man and of the Citizen\" to the Assembly, written by himself in consultation with Jefferson.",
+          "verdict_reason": "Snippet identifies Lafayette as the author of a draft presented to the Assembly, addressing the query about who made the declaration, though it specifies this was a draft rather than the final adopted document.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_144",
+      "claim_index": 1,
+      "claim": "However, a more comprehensive answer would require more detailed and direct comparisons between electric and manual toothbrushes",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Electric toothbrushes provide significantly more brush strokes per minute and require less effort than manual brushing, allowing for longer and easier cleaning.",
+          "quote": "30,000 brush strokes per minute. That is a considerable amount more than a person can do manually. It also requires less effort to brush one's teeth with an electric toothbrush.",
+          "verdict_reason": "Snippet directly addresses why electric toothbrushes are better (speed, effort) but appears truncated and lacks complete comparative data or context.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_d295f9ea94b3",
+      "claim_index": 0,
+      "claim": "Botox is not a type of plastic surgery",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses Botox in the context of cosmetic surgery procedures and injections by cosmetic surgeons.",
+          "quote": "ox® can be delivered for cosmetic surgery procedures is with a needle, so there is a risk of getting a bruise from Botox®.",
+          "verdict_reason": "Snippet links Botox to cosmetic surgery but does not explicitly define it as a type of plastic surgery, offering only partial evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Botox injections are classified as non-surgical cosmetic treatments provided by both dermatologists and plastic surgeons.",
+          "quote": "provide Botox injections, other neuromodulators, dermal fillers, and various non-surgical cosmetic treatments.",
+          "verdict_reason": "The snippet identifies Botox as a non-surgical treatment, which addresses the query about its relation to plastic surgery, but does not explicitly define whether it constitutes a type of plastic surgery.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Botox is described as an injectable botulinum toxin used to reduce wrinkles, not explicitly defined as plastic surgery itself.",
+          "quote": "The cosmetic form of botulinum toxin, sometimes referred to as \"Botox\" by patients, is an injectable that temporarily reduces or eliminates facial fine lines and wrinkles.",
+          "verdict_reason": "The snippet defines Botox as an injectable toxin from a plastic surgery organization but does not explicitly confirm or deny if it constitutes 'plastic surgery,' making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Botox injections alongside various plastic surgery procedures but does not explicitly define Botox as a type of plastic surgery.",
+          "quote": "Related Treatments\n Brow lift\n Chin Surgery\n Face Lift (Rhytidectomy)\n Injectable Fillers\n Cosmetic Nose Surgery (Rhinoplasty)",
+          "verdict_reason": "The snippet discusses Botox in the context of a plastic surgery department and lists it with surgical treatments, providing relevant but indirect evidence without explicitly answering the classification question.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Botox is not considered plastic surgery but rather a non-surgical cosmetic procedure.",
+          "quote": "Is it considered plastic surgery? The short answer is no. Botox falls under the category of non-surgical cosmetic procedures, distinguishing itself from the more invasive techniques associated with traditional plastic surgery.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating Botox is not plastic surgery and explaining the distinction between surgical and non-surgical procedures.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0196",
+      "claim_index": 0,
+      "claim": "The final answer is:\nJohn Speed was the English historian best known as a mapmaker of the Stuart period",
+      "cited_docs": [
+        "d6",
+        "d3",
+        "d10",
+        "d2",
+        "d7"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d10",
+        "d2",
+        "d3",
+        "d6",
+        "d7"
+      ],
+      "soft_extra_cited_docs": [
+        "d10",
+        "d2",
+        "d6",
+        "d7"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d6": {
+          "verdict": "partially supports",
+          "key_fact": "St James Street appears as a segment of Whitecross Street on the 1610 map of Monmouth by cartographer John Speed.",
+          "quote": "It appears as a segment of Whitecross Street on the 1610 map of the town by cartographer John Speed",
+          "verdict_reason": "Snippet confirms St James Street on 1610 Monmouth map by John Speed, but does not answer the query's main question about what period Speed was best known as a mapmaker of.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "John Speed was an English cartographer and historian best known as a mapmaker of the Stuart period.",
+          "quote": "John Speed (1551 or 1552 – 28 July 1629) was an English cartographer and historian. He is the best known English mapmaker of the Stuart period.",
+          "verdict_reason": "The snippet directly identifies John Speed as the English historian best known as a mapmaker of the Stuart period, which directly answers the query's question about the period.",
+          "source_quality": "high"
+        },
+        "d10": {
+          "verdict": "partially supports",
+          "key_fact": "Whitecross Street appears on the 1610 map of Monmouth by cartographer John Speed.",
+          "quote": "appears as \"Whit crose\" on the 1610 map of the town by cartographer John Speed",
+          "verdict_reason": "Snippet confirms the 1610 map reference and identifies John Speed as the cartographer, but does not answer what period Speed was best known for mapping.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "A 1610 map of Monmouth was created by cartographer John Speed.",
+          "quote": "appears on the 1610 map of the town by cartographer John Speed",
+          "verdict_reason": "Snippet confirms John Speed created the 1610 Monmouth map, but does not answer the query's core question about what period Speed was best known as a mapmaker of.",
+          "source_quality": "low"
+        },
+        "d7": {
+          "verdict": "partially supports",
+          "key_fact": "St James Street was a street in Wye Bridge Ward, Monmouth, and the ward existed by the early seventeenth century.",
+          "quote": "Streets in the ward included St Mary's Street, Almshouse Street, St James Street, St James Square, Whitecross Street and Monk Street. The ward existed as a division of the town by the early seventeenth century.",
+          "verdict_reason": "Snippet confirms St James Street and Whitecross Street existed in Monmouth by early 17th century, but does not identify the mapmaker or answer the query's core question about the historian's primary period.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_085",
+      "claim_index": 0,
+      "claim": "The final answer is: CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Earwax production can increase due to stress or fear, potentially causing blockages if not naturally expelled.",
+          "quote": "Sometimes our bodies overproduce earwax, especially if weΓÇÖre stressed or afraid. If there is an overproduction, and it doesnΓÇÖt get forced out of the ear, it can cause a blockage.",
+          "verdict_reason": "The snippet addresses variability in earwax levels by citing overproduction triggers like stress, partially explaining why ears feel full sometimes but not always.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Earwax naturally moves to the ear opening where older wax falls out or is washed away as new wax develops.",
+          "quote": "For most, earwax moves to the opening of the ear naturally, and as new earwax develops the older either falls out or is washed out.",
+          "verdict_reason": "The snippet explains the natural mechanism of earwax clearance, which partially addresses why ears are sometimes clear, but does not explain the variability or causes of blockage.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Earwax can become impacted and prevent natural drainage due to excessive buildup or factors like dust.",
+          "quote": "Sometimes excessive earwax build up as well as other factors like excessive dust can prevent the earwax from draining out naturally.",
+          "verdict_reason": "The snippet explains causes of earwax impaction and fullness but does not explicitly address why the condition fluctuates over time.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Ears self-clean by pushing out wax, which can sometimes cause buildup on the external part of the ear.",
+          "quote": "your ears have their own way of self cleaning by pushing out wax on their own. Sometimes this can cause earwax to build up on the external part of the ear",
+          "verdict_reason": "The snippet addresses the mechanism of earwax movement and occasional buildup, partially explaining the variability in earwax presence, though it does not fully answer why it fluctuates.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that the reasons why some people experience intermittent earwax blockage are unknown.",
+          "quote": "We also don't know why some people experience earwax blockage or why earwax blockage sometimes occurs in only one of their ears.",
+          "verdict_reason": "The snippet directly addresses the query about variable earwax levels but explicitly states the cause is unknown, providing relevant but non-explanatory evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_132",
+      "claim_index": 2,
+      "claim": "While some companies have reported that productivity has risen after implementing a 4-day work week, the exact reasons for this are not clear",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Productivity benefits require understanding how to use days off and avoiding work during downtime, though science on shorter weeks is incomplete.",
+          "quote": "For productivity benefits to show themselves, people need to understand how to make the most of their days off as well as their work days.",
+          "verdict_reason": "Snippet addresses the query's core topic by offering partial explanations (efficient meetings, proper downtime) but explicitly states much is left to learn.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Companies testing a 4-day work week have generally reported that productivity has risen after staff adjustment.",
+          "quote": "Companies worldwide who have taken the leap and tested a 4day work week have generally reported that productivity has risen once staff adjusted to the new working week.",
+          "verdict_reason": "Snippet directly addresses the query by stating productivity rises, but lacks specific causal mechanisms explaining why it doesn't drop to 4/5ths.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Studies indicate that a shortened workweek leads to increased productivity rather than a proportional decrease.",
+          "quote": "Studies have shown that a shortened workweek results in happier workers, decreased stress-levels and increased productivity.",
+          "verdict_reason": "The snippet directly addresses the query by stating studies show increased productivity with a shorter week, but it lacks the specific causal explanation requested.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Tests of shorter work weeks aim to determine if time spent at work is proportional to employee efficiency, suggesting productivity may not scale linearly with hours.",
+          "quote": "These tests are intended to see whether the time spent at work is proportional with the employee efficiency. What actually matters is how productive you are at work.",
+          "verdict_reason": "The snippet addresses the query's core premise by questioning the proportionality of work time and efficiency, though it lacks specific data explaining why productivity remains high.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Working longer hours does not translate to better results because the law of diminishing returns applies quickly when overworked.",
+          "quote": "working longer hours doesnΓÇÖt translate to better results. The law of diminishing returns kicks in quick when youΓÇÖre overworked.",
+          "verdict_reason": "Snippet addresses the query by explaining diminishing returns on long hours, but cuts off before fully explaining how 4-day weeks maintain total productivity.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_35491baf4f4b",
+      "claim_index": 2,
+      "claim": "The moon's atmosphere is not a stable, long-term feature, but rather a transient one that has existed in the past and may have been present in ancient times",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The moon possesses an atmosphere, though it is very light and lacks gases due to low gravity.",
+          "quote": "Moon has an atmosphere but it is very light and lacks in gases. Such an atmosphere of moon is due it's low gravity",
+          "verdict_reason": "Snippet directly addresses the query by confirming the moon has an atmosphere but provides incomplete context on its composition, serving as conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Moon possessed a transient atmosphere billions of years ago due to volcanic activity, but it was eventually lost to space.",
+          "quote": "A new study shows that an atmosphere was produced around the ancient Moon, 3 to 4 billion years ago... persisted for about 70 million years before being lost to space.",
+          "verdict_reason": "The snippet addresses the query by confirming a past atmosphere but clarifies it was transient and ancient, not current, making it partial evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The moon possesses a very thin atmosphere, technically called an exosphere, composed of elements like helium, argon, and neon.",
+          "quote": "The moon has an atmosphere (sort of). ... Technically speaking, a lunar atmosphere is not really an atmosphere. [As] scientists, we call it an exosphere, just because it's very, very thin.",
+          "verdict_reason": "The snippet directly confirms the moon has an atmosphere (exosphere), explicitly answering the query with supporting details on its composition and nature.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_eb7c676e133e",
+      "claim_index": 0,
+      "claim": "December 14, 1972 .",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Humans last stepped on the moon on December 14, 1972, during the Apollo 17 mission.",
+          "quote": "On this day, December 14, 1972, humans stepped on the moon for the final time. The final astronaut to take steps on the lunar surface was Apollo 17 Commander Eugene Cernan.",
+          "verdict_reason": "The snippet directly answers the query by stating the exact date (December 14, 1972) and context of the last human moonwalk.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The last time humans traveled to the moon was in 1972 during the Apollo 17 mission.",
+          "quote": "Schmitt, 90, left his bootprints on the lunar surface in 1972, as part of Apollo 17 — the final mission in the program, which was the last time humans traveled to the moon.",
+          "verdict_reason": "The snippet explicitly states that Apollo 17 in 1972 was the last time humans traveled to the moon, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Apollo 17 was the final lunar landing mission, ending with a splashdown on December 19, 1972.",
+          "quote": "Following their Dec. 19, 1972, splashdown that ended their successful 13-day Moon landing mission, Apollo 17 astronauts Eugene A. Cernan,",
+          "verdict_reason": "The snippet explicitly identifies Apollo 17 as the final lunar landing mission and provides the specific date it ended, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_051502801f9c",
+      "claim_index": 0,
+      "claim": "July 13, 1972",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The song Saturday In The Park was released in 1972.",
+          "quote": "Cover of Saturday In The Park, 1972, Vinyl · Saturday In The Park.",
+          "verdict_reason": "The snippet explicitly links the song title to the year 1972 in the context of a vinyl release, directly answering the query about its release date.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The song Saturday in the Park was released in July 1972.",
+          "quote": "\"Saturday in the Park\" was released in July 1972, and was Chicago's highest-charting song of the time.",
+          "verdict_reason": "The snippet explicitly states the release month and year of the song, directly answering the user's query about when it came out.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The single \"Saturday in the Park\" was released on July 13, 1972.",
+          "quote": "Released | July 13, 1972",
+          "verdict_reason": "The snippet explicitly states the release date of the song in the infobox, directly answering the user's query.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "trust_align_022",
+      "claim_index": 1,
+      "claim": "However, the exact reason for this design choice is not clearly established different sources provide different information about its usage and purpose. provides a clear reason for the original technical purpose of the combination, but it does not explain the specific reason for its adoption as a widespread 'unlock' mechanism. provides a different context for its usage, but it does not explain the historical reason for its use as an unlock mechanism. and do not provide any relevant information",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Attackers with network KVM access could send a Ctrl + Alt + Del sequence to a system.",
+          "quote": "If an attacker gain access to the network KVM, then they could send keystrokes to your system. They wouldn't have access to the power button, but they could send a Ctrl + Alt + Del sequence.",
+          "verdict_reason": "Snippet addresses Ctrl+Alt+Del usage in a security context but discusses remote attacks rather than explaining the historical reason for its use as an unlock mechanism.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet lists generic keyboard shortcuts for a specific workshop tool and does not address the query about the history or reason for the Control-Alt-Delete combination used to unlock computers.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM to reboot a computer or summon the task manager.",
+          "quote": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM.[249] ... used to reboot a computer, and summon the task manager or operating system.",
+          "verdict_reason": "Snippet identifies the inventor and original technical purpose (reboot/task manager) but does not explain the specific reason for its adoption as a widespread 'unlock' mechanism.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a fictional narrative about a specific computer glitch in a story, providing no historical or technical evidence explaining why Control-Alt-Delete was used to unlock computers.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

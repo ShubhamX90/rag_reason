@@ -1,0 +1,1606 @@
+{
+  "variant": "benchmark_set_all_modes/qwen7b/oracle_notes/minimal/sft",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "benchmark_sft_missing8_qd_collect_20260708_r1",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_missing8_qd_collect_20260708_r1/qwen7b/oracle_notes/minimal/sft/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_missing8_qd_collect_20260708_r1/qwen7b/oracle_notes/minimal/sft/final/detailed_results.json",
+    "source_final_sha256": "123f9c46f533588d9222d698cf5dda5d4feec4ec7b9ba007400d74bcd6658d47",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen7b/oracle_notes/minimal/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen7b/oracle_notes/minimal/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1123,
+    "claims_with_citations": 1108,
+    "claims_with_committee_support_set": 1067,
+    "claims_with_any_approved_citation": 1004,
+    "claims_with_any_gold_positive_citation": 1106,
+    "committee_alignment_precision_macro": 0.810664861612515,
+    "committee_alignment_precision_micro": 0.7787759685569905,
+    "gold_positive_citation_precision_macro": 0.9951865222623345,
+    "gold_positive_citation_precision_micro": 0.9943851768669287,
+    "soft_extra_citation_rate_micro": 0.21560920830993824,
+    "hard_negative_citation_rate_micro": 0.005614823133071308,
+    "committee_support_citation_recall_macro": 0.9409559512652296,
+    "committee_support_citation_recall_micro": 0.9409559512652296,
+    "claims_with_any_soft_extra_rate": 0.286101083032491,
+    "claims_with_any_hard_negative_rate": 0.008122743682310469,
+    "strict_committee_alignment_claim_rate": 0.6999109528049866,
+    "strict_gold_clean_claim_rate": 0.8913624220837043,
+    "strict_grounded_committee_clean_rate_all_claims": 0.6999109528049866,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8913624220837043,
+    "total_cited_docs": 1781,
+    "total_approved_cited_docs": 1387,
+    "total_gold_positive_cited_docs": 1771,
+    "total_soft_extra_cited_docs": 384,
+    "total_hard_negative_cited_docs": 10
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_57190bca6f7a",
+      "claim_index": 1,
+      "claim": "While it is not explicitly confirmed as the absolutely deadliest eruption in all of recorded history across every source, it is consistently ranked among the deadliest no other eruption is cited in the evidence as surpassing it",
+      "cited_docs": [
+        "d3",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The eruption caused between 10,000 and 11,000 direct deaths and up to 90,000 indirect deaths from famine and disease.",
+          "quote": "Impact | 10,000 to 11,000 deaths from direct volcanic effects; 49,000 to 90,000 deaths from post-eruption famine and epidemic diseases on Sumbawa, Lombok and Bali",
+          "verdict_reason": "Snippet provides specific death tolls for Tambora, which is essential evidence to evaluate if it was the deadliest, but does not explicitly compare this total to other historical eruptions.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the 1815 Tambora eruption was the largest in recorded history and caused at least 90,000 deaths, but does not explicitly rank it as the deadliest overall.",
+          "quote": "Mount Tambora... exploded in the largest volcanic eruption in recorded history... The blast, pyroclastic flows, and tsunamis that followed killed at least 10,000 islanders... Some 80,000 people perished from disease and famine",
+          "verdict_reason": "Snippet confirms Tambora was the 'largest' and details ~90,000 deaths, providing strong but incomplete evidence for the 'deadliest' claim without explicit comparative ranking against other historical disasters.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document describes the 1815 Mount Tambora eruption as the world's largest and most devastating volcanic eruption recorded in human history.",
+          "quote": "Today known as the world's largest, most devastating volcanic eruption recorded in human history, it remains a stark reminder of how powerful the earth's volcanic impact can be.",
+          "verdict_reason": "The snippet calls Tambora the 'most devastating' but does not explicitly confirm it was the 'deadliest' in terms of fatalities, leaving the specific mortality claim unverified.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a8ec1c0d2b92",
+      "claim_index": 3,
+      "claim": "However, experts differ: Dr. John Milner warns that iced tea is among the worst drinks for people prone to forming the most common type of kidney stones a Reddit thread notes that research on green tea's effects on stone risk is inconclusive",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Drinking tea, including green tea, does not directly cause kidney stones and may actually help prevent them through hydration and antioxidants.",
+          "quote": "Dr. Ren Limin, an attending physician at Fudan Zhongshan Xiamen Hospital, clarifies,",
+          "verdict_reason": "The snippet directly answers the query by citing a physician who states green tea does not cause kidney stones and explains the preventive mechanisms.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Green tea can be beneficial for people with kidney stones rather than causing them.",
+          "quote": "Green tea: Green tea can be beneficial for people with kidney stones.",
+          "verdict_reason": "The snippet directly addresses the query about green tea and kidney stones but offers a contradictory finding (beneficial) rather than confirming the risk, representing conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "A 2019 study found that drinking green tea daily did not raise the risk of kidney stone formation.",
+          "quote": "A 2019 study also found that drinking green tea daily did not raise the risk of stone formation.",
+          "verdict_reason": "The snippet directly addresses the query with specific research findings but presents conflicting expert opinions, making it conflict-bearing evidence rather than a definitive single answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0717d0e62f3b",
+      "claim_index": 2,
+      "claim": "Outside the U.S., some countries offer distinct sui generis protection regimes for fashion designs, such as the European Union's Creative Designs Directive, which grants protection to new designs for three or five years",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "As of 2016, fashion design generally lacks the same copyright protection as other creative works in most countries because apparel is classified as functional, though exceptions exist.",
+          "quote": "As of 2016, in most countries (including the United States and the United Kingdom), fashion design does not have the same protection as other creative works... because apparel (clothes, shoes, handbags, etc.) are classified as \"functional items\", except when copyright laws can be applied.",
+          "verdict_reason": "The snippet directly addresses the query by explaining the general lack of protection due to functionality but notes exceptions and varying regulations, providing incomplete but highly relevant conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Copyright Office states that while there may be merit to protecting fashion designs, it has not reached a conclusion on the need for such legislation as of 2006.",
+          "quote": "the tentative view of the Office is that there may well be merit to the view that fashion designs should be given protection similar to that enjoyed by vessel hull designs, but the Office does not believe it has thus far been presented with sufficient information to reach a conclusion",
+          "verdict_reason": "The snippet directly addresses the query about fashion design protection but represents an older, non-definitive stance (2006) where no conclusion was reached, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0a05aabca56a",
+      "claim_index": 2,
+      "claim": "Unlike cartoons, which are typically aimed at younger children, anime spans a broader age range from childhood through adulthood across various genres",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that anime and cartoons share traditional animation production processes but distinguishes them by subject matter and target audience.",
+          "quote": "Anime and cartoons both use traditional animation production processes of storyboarding, voice acting, character design and cel production.",
+          "verdict_reason": "The snippet addresses the relationship between anime and cartoons by noting shared techniques but emphasizing differences, providing conflict-bearing evidence rather than a direct yes/no answer.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that anime is considered by many to be a Japanese cartoon genre, though it also highlights distinctions between the two.",
+          "quote": "Anime is considered by many to be a Japanese cartoon genre but is more often referred to as just anime.",
+          "verdict_reason": "The snippet directly addresses the query by stating anime is considered a Japanese cartoon genre by many, providing conflict-bearing evidence despite also listing differences.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_311fca0928d0",
+      "claim_index": 1,
+      "claim": "Additionally, IPv6's larger address space facilitates more granular security policies, such as allocating random addresses within subnets to reduce scanning attacks, though this comes with its own trade-offs",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "IPv6 is not automatically more secure than IPv4, though it mandates IPsec support and offers some design advantages.",
+          "quote": "It would be more accurate to say that IPv6 is no less secure than IPv4. The main security mechanism built into IPv6 is IPsec.",
+          "verdict_reason": "The snippet directly addresses the query by refuting the 'automatic' security claim while noting specific IPv6 advantages, providing nuanced, conflict-bearing evidence rather than a simple yes/no.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "IPv6 is considered safer on a basic level because it has native IP Security (IPSec) support, unlike IPv4 where it must be added individually.",
+          "quote": "When it comes to IPv4 vs IPv6 security, IPv6 is safer on a basic level, simply because it's easier to hide amongst 340 undecillion",
+          "verdict_reason": "The snippet directly addresses the security comparison, stating IPv6 is safer due to native IPSec and address space, but the text is truncated and lacks a definitive conclusion on 'fundamental' superiority.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_3dba586dca0f",
+      "claim_index": 0,
+      "claim": "Real Christmas trees are generally considered more sustainable than artificial ones, primarily because they absorb carbon dioxide while growing and can be recycled as mulch or wood chips, whereas artificial trees are made from plastic and metal and release pollutants during manufacturing",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "A 2009 study indicates an artificial tree must be reused for about 20 years to surpass real trees in climate impact benefits.",
+          "quote": "Meanwhile, a 2009 Ellipsos study found that an artificial tree would have to be reused for about 20 Christmases before it became a better choice in terms of climate change impacts.",
+          "verdict_reason": "The snippet provides specific scientific evidence comparing sustainability but relies on a 2009 study and cuts off mid-sentence, offering incomplete support for the current query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Real Christmas trees are more eco-friendly and a better choice for the environment than artificial ones.",
+          "quote": "Yes, real Christmas trees are more eco-friendly and a better choice for the environment. It may feel counter-intuitive, but it's much more sustainable to cut down a real",
+          "verdict_reason": "The snippet directly answers the query by stating real trees are more eco-friendly and sustainable, providing specific emissions comparisons to support the claim.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_544ebeeccda5",
+      "claim_index": 3,
+      "claim": "KDIGO guidelines recommend sodium bicarbonate orally to normalize blood bicarbonate levels when serum bicarbonate is less than 18 mEq/L, but the supplementation remains uncertain in patients with normal serum bicarbonate levels",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The study demonstrates that bicarbonate supplementation slows the progression of renal failure to end-stage renal disease.",
+          "quote": "This study demonstrates that bicarbonate supplementation slows the rate of progression of renal failure to ESRD and improves nutritional status among patients",
+          "verdict_reason": "The snippet directly answers the query by stating that bicarbonate supplementation slows the progression of renal failure, which supports the claim that it prevents progression in chronic kidney disease.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "While bicarbonate supplementation may slow CKD progression in some cases, a study found low doses did not significantly reduce biomarkers in advanced diabetic CKD, and efficacy in patients with normal levels remains uncertain.",
+          "quote": "However, in the advanced-stage diabetic CKD with normal bicarbonate levels, a low dose of 0.5 mEq/kg/day sodium bicarbonate did not significantly reduce urinary TGF-β over six months.",
+          "verdict_reason": "The snippet addresses the query directly but presents mixed evidence: it notes potential benefits yet highlights a study where supplementation failed to show significant effects, leaving the overall prevention claim uncertain.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_6ea6bbcb8743",
+      "claim_index": 2,
+      "claim": "That said, some treatments can temporarily mask the appearance of split ends — such as protein-based conditioners that leave positive ions to reduce the hair's negative charge — though these effects typically last only until the next shampoo",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Split ends cannot be permanently repaired because hair is dead tissue, though products can temporarily smooth them.",
+          "quote": "once a split end forms, you can't permanently fuse it back together. Hair is dead tissue that can't regenerate, so the damage won't reverse.",
+          "verdict_reason": "The snippet directly addresses the query by stating permanent repair is impossible but temporary fixes exist, providing conflict-bearing evidence rather than a simple yes/no.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The only real way to get rid of split ends is to trim them off, though products can prevent them.",
+          "quote": "While the only real way to get rid of them is to simply trim them off, the good news is that the best products for split ends can prevent you from having to deal with them in the first place.",
+          "verdict_reason": "Snippet directly addresses the query by stating trimming is the only removal method, while noting prevention is possible; this partially resolves the repair question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_747727772a30",
+      "claim_index": 1,
+      "claim": "When rain is light, bees can still forage and move about some species like bumblebees appear more tolerant of poor weather conditions than others",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Bees do fly in the rain, though this behavior depends on genetics, hive needs, and rain intensity.",
+          "quote": "Yes, bees do fly in the rain, but I feel a lot depends on the current situation within the hive and it is also very dependent on genetics.",
+          "verdict_reason": "The snippet directly addresses the query by confirming bees fly in rain but adds conditional variables, making it relevant but not a simple unconditional confirmation.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Bees are capable of flying in the rain, though they prefer dry conditions and may suffer wing damage or reduced speed in heavy downpours.",
+          "quote": "So, while bees are capable of flying in the rain, they'd much prefer to keep their wings dry and their flight paths clear.",
+          "verdict_reason": "The snippet directly answers the query by confirming bees can fly in rain, while noting limitations like wing damage in heavy downpours.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_7998e59d9b97",
+      "claim_index": 1,
+      "claim": "However, organic farming practices have significant advantages in terms of environmental sustainability — they generate fewer greenhouse gas emissions, require less fossil fuel input build soil health over time",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming practices cannot compete with the crop yields of conventional systems.",
+          "quote": "Organic farming practices have more future value, contributing far less emissions during production processes, but yet cannot compete with the crop yields of conventional systems.",
+          "verdict_reason": "The snippet directly addresses the query by stating organic yields are lower than conventional, supporting the efficiency claim, though it also notes sustainability benefits.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming has limited options for no-till techniques compared to conventional farming due to restrictions on synthetic herbicides.",
+          "quote": "Since herbicide applications cannot be widely adopted in organic farming (with some approved exceptions), options for no-till farming can be more limited",
+          "verdict_reason": "Snippet addresses efficiency-related methods (tillage) comparing organic and conventional systems but does not explicitly state overall efficiency levels or yield differences.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_7998e59d9b97",
+      "claim_index": 2,
+      "claim": "Some critics argue that the path to global food security requires balancing these trade-offs by adopting more organic-style practices while also improving conventional farming efficiency, particularly through reduced chemical use and better waste management",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming aims to maximize beneficial microbes to help plants achieve maximum productivity, but the text states the answer regarding efficiency is not clear-cut.",
+          "quote": "Farmers make choices designed to maximize beneficial microbes such as bacteria, fungi, nematodes, and more in their growing space to help plants achieve maximum productivity",
+          "verdict_reason": "The snippet addresses the query topic but explicitly states the answer is 'not clear-cut' and focuses on principles rather than providing a direct efficiency comparison.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming practices cannot compete with the crop yields of conventional systems.",
+          "quote": "Organic farming practices have more future value, contributing far less emissions during production processes, but yet cannot compete with the crop yields of conventional systems.",
+          "verdict_reason": "The snippet directly addresses the query by stating organic yields are lower than conventional, supporting the efficiency claim, though it also notes sustainability benefits.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9251c7a33ec5",
+      "claim_index": 1,
+      "claim": "Some sources note that neutering can decrease the risk of ovarian and breast cancers, prostate disease pyometras, while also reducing socially unacceptable behaviors in dogs that the procedure can help pets maintain healthier weights and prevent hormonal-driven diseases",
+      "cited_docs": [
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering disrupts hormonal feedback loops, causing luteinizing hormone levels to surge up to 30 times average concentrations, which researchers are investigating for potential links to cancer.",
+          "quote": "After sterilization, dogs can experience a surge in LH levels. This surge can reach as high as 30 times the average concentrations, particularly in males. Researchers are exploring if consistently high LH levels can harm different body parts.",
+          "verdict_reason": "The snippet directly addresses negative health impacts by citing a specific hormonal surge and ongoing research into cancer risks, providing conflict-bearing evidence alongside listed benefits.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering provides health benefits by preventing cancers and diseases, though the snippet focuses primarily on behavioral changes rather than negative health impacts.",
+          "quote": "And while neutering dogs can decrease the risk of ovarian and breast cancers, prostate disease, and pyometras, it can also decrease or even eliminate socially unacceptable behaviors in dogs.",
+          "verdict_reason": "The snippet addresses the health impact of neutering by listing benefits, which is relevant evidence to the query about negative impacts, but it does not explicitly discuss or confirm negative health consequences.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_962d8f5d5574",
+      "claim_index": 1,
+      "claim": "Some notable exceptions include burrowing snakes, which lack the physical adaptations required for aquatic locomotion",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "While it is often claimed that all snakes can swim, swimming ability remains unknown for the vast majority of snake species.",
+          "quote": "It is often claimed that all snakes can swim. · However, for the vast majority of snake families, species and therefore ecologies, swimming ability is unknown.",
+          "verdict_reason": "The snippet directly addresses the query by challenging the universal claim and noting that evidence is missing for most species, making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "A 2024 study found that all 525 snake species with available information or tested directly appear to be able to swim.",
+          "quote": "The results show that, 1) all snakes for which information is available (525 species) appear to be able to swim, 2) this is a trait shared by many land vertebrates that undulate laterally.",
+          "verdict_reason": "The snippet directly answers the query by stating that all snakes with available data or tested in the study appear to be able to swim.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a3264277980a",
+      "claim_index": 1,
+      "claim": "Michael Socolow, a scholar cited by PBS's American Experience documentary, further challenges the claim that the press exaggerated the public reaction, noting that memory and media reporting can distort how events are remembered",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Historians argue the supposed panic was exaggerated and most listeners knew it was fiction, while newspapers pushed the hysteria narrative.",
+          "quote": "historians, such as Professor W Joseph Campbell of the American University in Washington DC, have argued that the supposed panic was always exaggerated, and that the majority of listeners understood that the programme was a work of fiction.",
+          "verdict_reason": "The snippet directly addresses the query by presenting evidence that challenges the mass panic claim, offering a nuanced view rather than a simple confirmation.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Scholars contend the broadcast did not cause mass panic, citing flawed newspaper accounts and surveys showing few listeners believed it was real.",
+          "quote": "Many scholars contend that the program didn't actually cause mass panic at all. ... The surveys done immediately after the program illustrated that not only did very few people hear the broadcast, but that virtually no one thought it was real.",
+          "verdict_reason": "The snippet directly addresses the query by presenting evidence contradicting the mass panic claim, serving as conflict-bearing evidence rather than a definitive resolution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a507c5b61631",
+      "claim_index": 1,
+      "claim": "Mercury proxies from North Sea sedimentary cores show pulsed volcanism preceded the early PETM, while carbon isotope data confirm a comparatively heavy carbon source consistent with organic matter deposition linked to volcanic perturbation",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The study's pH reconstruction and carbon isotope data strongly implicate volcanism as the dominant trigger for the Paleocene-Eocene Thermal Maximum.",
+          "quote": "Our pH reconstruction, in conjunction with the observed δ13C decline, constrains the dominant carbon source during the PETM onset to have had a comparatively heavy carbon isotope ratio, strongly implicating volcanism as having been dominant in triggering and driving the event.",
+          "verdict_reason": "The snippet directly answers the query by stating that evidence strongly implicates volcanism as the dominant trigger for the PETM.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Pulsed volcanism likely provided the trigger for the PETM, though a subsequent carbon reservoir release was also involved.",
+          "quote": "signifying pulsed volcanism from the North Atlantic Igneous Province likely provided the trigger and subsequently sustained elevated CO2. However, the PETM onset coincides with a mercury low, suggesting at least one other carbon reservoir released significant greenhouse gases",
+          "verdict_reason": "The snippet directly addresses the query by identifying volcanism as a likely trigger but qualifies this by suggesting additional carbon reservoirs were involved, making the evidence relevant but not a simple affirmative.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a8ec1c0d2b92",
+      "claim_index": 1,
+      "claim": "Harvard urologist Dr. Anthony L. Komaroff notes that while tea contains oxalate, increased fluid intake—including from tea—decreases the risk of calcium oxalate stones by making urine more dilute",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Drinking tea, including green tea, does not directly cause kidney stones and may actually help prevent them through hydration and antioxidants.",
+          "quote": "Dr. Ren Limin, an attending physician at Fudan Zhongshan Xiamen Hospital, clarifies,",
+          "verdict_reason": "The snippet directly answers the query by citing a physician who states green tea does not cause kidney stones and explains the preventive mechanisms.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "A 2019 study found that drinking green tea daily did not raise the risk of kidney stone formation.",
+          "quote": "A 2019 study also found that drinking green tea daily did not raise the risk of stone formation.",
+          "verdict_reason": "The snippet directly addresses the query with specific research findings but presents conflicting expert opinions, making it conflict-bearing evidence rather than a definitive single answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_b9854bd5a19e",
+      "claim_index": 1,
+      "claim": "This reduction is further corroborated by a study of 276 fossil estimates, which shows a parallel decrease in body size alongside the cognitive shift to more abstract 'symbolic information processing'",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Modern human skulls are on average 12.7% smaller than those of Homo sapiens from the last ice age, indicating a decrease in brain size.",
+          "quote": "The skulls of men and women today are on average 12.7% smaller than that of Homo sapiens who lived during the last ice age.",
+          "verdict_reason": "The snippet directly confirms the query by stating modern human brains are significantly smaller than those of ancestors from the last ice age.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Human brain size has decreased by approximately 10% since the Late Pleistocene.",
+          "quote": "Since the Late Pleistocene (approximately 30,000 years ago), human brain size decreased by approximately 10%; yet again, this decrease was paralleled by a decrease in body size.",
+          "verdict_reason": "The snippet directly confirms a decrease in human brain size over time, specifically citing a 10% reduction since the Late Pleistocene.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_d9a36fe4c135",
+      "claim_index": 0,
+      "claim": "Protestant Christians generally distinguish between biblical inerrancy (no factual error) and infallibility (no theological error), though some denominations treat them as equivalent. The Roman Catholic Church defines the Bible as true and without error in matters of faith and practice, though it acknowledges human imperfection and historical discrepancies in the details",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Christians believe the Bible is an infallible book because God guided the human authors to record His revelation without error.",
+          "quote": "We simply believe that the Bible is right when it claims that God guided these men in their task of writing Scripture, in such a way that the result is an infallible book.",
+          "verdict_reason": "The snippet directly answers the query by affirming the Bible's infallibility based on divine guidance, explicitly stating the result is an infallible book.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The Bible teaches truth for salvation without error but may contain discrepancies in historical or scientific details due to human authorship.",
+          "quote": "The books of scripture, firmly, faithfully, and without error, teach that truth which God, for the sake of our salvation, wished to see confided to the sacred Scriptures",
+          "verdict_reason": "The snippet addresses the query directly by defining a specific type of infallibility (salvific truth) while acknowledging potential historical/scientific errors, offering a nuanced rather than absolute answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f4811561af0c",
+      "claim_index": 1,
+      "claim": "Over the following decades, other Dutch navigators such as Dirk Hartog, Frederik de Houtman Abel Tasman charted significant portions of Australia's western, southern northern coasts, respectively",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses the Dutch discovery, exploration, and mapping of Australia.",
+          "quote": "The Dutch Discovery, Exploration, & Mapping of Australia",
+          "verdict_reason": "The snippet explicitly addresses the Dutch discovery of Australia, providing direct but incomplete evidence regarding the query without confirming if they were the sole or first discoverers.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Dutch explorer Willem Janszoon reached the western coast of Cape York Peninsula in 1606, marking an early European encounter with Australia.",
+          "quote": "In 1606, Willem Janszoon, who commanded the Duyfken, sailed south from the Dutch East Indies and reached the western coast of Cape York Peninsula.",
+          "verdict_reason": "The snippet confirms Dutch exploration of Australia starting in 1606 but does not explicitly resolve whether they were the absolute first discoverers, leaving room for prior claims.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f4811561af0c",
+      "claim_index": 2,
+      "claim": "While the Dutch were not the very first to encounter Australia — that distinction belongs to the Macassan fishermen who traded along the northern coast for centuries before the Europeans arrived — their systematic exploration and mapping of the continent laid the groundwork for future colonization",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Dutch explored Australia and made the first recorded European landing there.",
+          "quote": "The Dutch had explored Australia from their bases in what's now Indonesia, including the first recorded European landing on Australia by Willem",
+          "verdict_reason": "Snippet confirms Dutch exploration and first landing but does not explicitly state they 'discovered' the continent, leaving the specific claim partially unresolved.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "A Dutch merchant vessel named Koning Willem de Tweede was discovered off the coast of South Australia.",
+          "quote": "Marine archaeologists have discovered the long-lost Dutch merchant vessel Koning Willem de Tweede, which sank nearly 170 years ago off the coast of South Australia.",
+          "verdict_reason": "The snippet confirms Dutch maritime presence and a specific shipwreck discovery in Australia, providing partial evidence related to Dutch interaction with Australia, though it does not address the initial discovery of the continent.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "wikirevision_0002",
+      "claim_index": 2,
+      "claim": "This is corroborated by additional sources noting that following Elon Musk's acquisition, Twitter was renamed X",
+      "cited_docs": [
+        "d13",
+        "d12"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d12",
+        "d13"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d13": {},
+        "d12": {}
+      }
+    },
+    {
+      "sample_id": "trust_align_175",
+      "claim_index": 1,
+      "claim": "Saskatoon, Canada experienced temperatures colder than both the North and South Poles on occasion , suggesting local conditions and variability can complicate general comparisons",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet makes a comparative temperature claim about Saskatoon versus the poles but provides no evidence or explanation regarding why the South Pole is colder than the North Pole.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "It began at sundown on the first night of the Hebrew month of Nissan, as observed across the global Jewish community",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_3dc3cf00bce6",
+      "claim_index": 1,
+      "claim": "These dogs were almost as famous as their royal owner, featuring in official photographs and even starring in a James Bond spoof film for the 2012 London Olympics",
+      "cited_docs": [
+        "d4",
+        "d8"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Queen Elizabeth II was famous for keeping Pembroke Welsh corgis, which she preferred over Cardigan corgis.",
+          "quote": "She always preferred the Pembrokeshire corgis rather than the Cardigan corgi. The Queen's corgis featured in official photographs, ran around the palaces as presidents visited",
+          "verdict_reason": "The snippet explicitly identifies the specific breed (Pembroke Welsh corgis) the Queen preferred and kept, directly answering the query with evidence from a high-quality source.",
+          "source_quality": "high"
+        },
+        "d8": {}
+      }
+    },
+    {
+      "sample_id": "freshqa_4d9a80505e01",
+      "claim_index": 1,
+      "claim": "By December 2025, the Fed had cut rates by a total of 25 basis points, with one 25-basis-point cut announced in December 2025",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes events in late 2025 and projections for 2026. It provides no evidence regarding interest rate changes between August and December 2022.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions a Federal Reserve interest rate cut of 25 basis points.",
+          "quote": "Fed cuts interest rates 25 basis points",
+          "verdict_reason": "Snippet addresses the same entity and action (Fed rate cut) with a specific value, but lacks the August-December 2022 timeframe required to fully answer the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_0ad0871fcc33",
+      "claim_index": 1,
+      "claim": "This record is confirmed by multiple sources, including Wikipedia's list of NBA single-game scoring leaders, which notes that as of the 2025–26 season, no player has surpassed the 100-point mark",
+      "cited_docs": [
+        "d4",
+        "d7"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d7"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Wilt Chamberlain holds the single-game scoring record with 100 points scored in 1962.",
+          "quote": "Chamberlain holds the single-game scoring record, having scored 100 points in a game in 1962.",
+          "verdict_reason": "The snippet explicitly states that Wilt Chamberlain holds the record with 100 points, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d7": {}
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_bc0542b3c97d",
+      "claim_index": 1,
+      "claim": "However, the ship was formally declared operational in 2020, having conducted its first sea trials in 2017 and completing formal operational acceptance that year",
+      "cited_docs": [
+        "d8",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d8": {},
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "HMS Queen Elizabeth was commissioned in 2017 and formally declared operational in 2020.",
+          "quote": "HMS Queen Elizabeth was commissioned in 2017 as the lead ship of the class. She conducted her first sea trials in 2017 and was formally declared operational in 2020.",
+          "verdict_reason": "The snippet directly answers the query by providing the specific commissioning year (2017) and operational declaration year (2020) for HMS Queen Elizabeth.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_bc0542b3c97d",
+      "claim_index": 2,
+      "claim": "As a result, the carrier's service entry is commonly cited as 2020, reflecting its readiness for active duty rather than its initial commissioning",
+      "cited_docs": [
+        "d6",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d6"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d6": {},
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The Merlin Mk2 helicopter has been in service since 2014 and will support the Queen Elizabeth Class carriers.",
+          "quote": "Since coming into service in 2014, Merlin Mk2s have been deployed from a number of platforms including HMS Ocean, HMS Illustrious, Type 45 destroyers, Type 23 frigates and RFA vessels.",
+          "verdict_reason": "The snippet discusses the Queen Elizabeth Class carriers and related equipment but provides the service date for the Merlin Mk2 helicopter (2014), not the HMS Queen Elizabeth ship itself.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_f6cc6071caa5",
+      "claim_index": 1,
+      "claim": "This figure represents the culmination of multiple AI-assisted phases of discovery: an initial 303 new geoglyphs identified in a 2024 PNAS study , followed by an additional 248 found in 2023–2024 further augmented by over 300 new ones revealed by AI over a six-month period in 2024",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d7"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d7"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "AI revealed over 300 new geoglyphs, nearly matching the 430 previously known, implying a total around 730 but not stating the exact final count.",
+          "quote": "over 300 previously unknown 'Nazca Lines' geoglyphs... nearly matches the 430 previously known Nazca Lines geoglyphs found more than 80 years ago.",
+          "verdict_reason": "Snippet provides components to calculate the total (300 new + 430 old) but does not explicitly state the final combined total number discovered so far.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Recent discoveries have raised the total count of known figurative Nazca geoglyphs to 893.",
+          "quote": "In July 2025, Yamagata University and Peruvian officials announced 248 additional geoglyphs found through AI-supported field surveys conducted in 2023 and 2024. Of those, 160 were figurative geoglyphs, raising the known number of figurative geoglyphs to 893",
+          "verdict_reason": "The snippet directly answers the query by providing the latest total count (893) of discovered figurative geoglyphs as of July 2025.",
+          "source_quality": "high"
+        },
+        "d7": {}
+      }
+    }
+  ]
+}

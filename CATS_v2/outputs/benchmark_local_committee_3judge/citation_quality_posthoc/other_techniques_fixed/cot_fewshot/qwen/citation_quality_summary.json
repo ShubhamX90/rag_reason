@@ -1,0 +1,2741 @@
+{
+  "variant": "other_techniques_fixed/cot_fewshot/qwen",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "",
+    "remote_cache": "",
+    "source_final": "",
+    "source_final_sha256": "b02e50c24287036c52416dbc8427a1f7d02acfeb9efb3e9ad1fa600e2cc8f8ff",
+    "provenance_type": "local_fixed_sync"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/other_techniques_fixed/cot_fewshot/qwen/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/other_techniques_fixed/cot_fewshot/qwen/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1883,
+    "claims_with_citations": 1649,
+    "claims_with_committee_support_set": 1616,
+    "claims_with_any_approved_citation": 1376,
+    "claims_with_any_gold_positive_citation": 1642,
+    "committee_alignment_precision_macro": 0.679300586213867,
+    "committee_alignment_precision_micro": 0.6421511627906977,
+    "gold_positive_citation_precision_macro": 0.992581362441884,
+    "gold_positive_citation_precision_micro": 0.9933139534883721,
+    "soft_extra_citation_rate_micro": 0.3511627906976744,
+    "hard_negative_citation_rate_micro": 0.006686046511627907,
+    "committee_support_citation_recall_macro": 0.8514851485148515,
+    "committee_support_citation_recall_micro": 0.8514851485148515,
+    "claims_with_any_soft_extra_rate": 0.47119466343238325,
+    "claims_with_any_hard_negative_rate": 0.01212856276531231,
+    "strict_committee_alignment_claim_rate": 0.45724907063197023,
+    "strict_gold_clean_claim_rate": 0.7265002655337228,
+    "strict_grounded_committee_clean_rate_all_claims": 0.45724907063197023,
+    "strict_grounded_gold_clean_rate_all_claims": 0.7265002655337228,
+    "total_cited_docs": 3440,
+    "total_approved_cited_docs": 2209,
+    "total_gold_positive_cited_docs": 3417,
+    "total_soft_extra_cited_docs": 1208,
+    "total_hard_negative_cited_docs": 23
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_8bedefe7ac1a",
+      "claim_index": 1,
+      "claim": "While songs are often unique to species, the documents do not provide clear evidence that individual bird calls are unique to each bird",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Bird species produce a wide variety of distinct vocalization categories, with calls differing from songs in function and complexity.",
+          "quote": "most species make a wide variety of different sounds. This is especially true among the Passeriformes... Most of these have impressive playlists of sounds.",
+          "verdict_reason": "Snippet confirms birds have many distinct vocalizations but discusses species-level variety rather than individual uniqueness, providing partial but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Bird calls, unlike songs, can be understood and elicit responses from unrelated species, such as alarm calls.",
+          "quote": "Most species have a variety of calls they use to communicate with each other, but other species can take information from them. Specifically, these types of calls are alarm calls warning of predators or other dangers.",
+          "verdict_reason": "The snippet addresses bird calls and their function across species, providing relevant evidence that calls are not unique to individuals but shared/understood, though it doesn't explicitly state 'uniqueness' per individual.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Birds use a syrinx to produce different sounds, and different situations call for different volumes, but the text does not confirm if calls are unique to each individual.",
+          "quote": "While humans can make sounds with help from their vocal cords, birds use a part called the syrinx (SEE-RINKS). As air moves through the syrinx, it helps produce the different sounds.",
+          "verdict_reason": "The snippet discusses bird sound production and variation by situation but lacks specific evidence on whether calls are unique to individuals, making it relevant but incomplete.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Some young birds learn calls from adults and may sing poorly if isolated, while others like ducks are born with innate vocalization skills.",
+          "quote": "Your suggestion is correct that many young birds, especially songbirds, need to learn their songs and calls from the adults. Tests have shown that when some baby birds are raised in soundproof chambers, they aren't able to sing as well as birds that are exposed to the proper calls.",
+          "verdict_reason": "The snippet addresses bird call learning mechanisms (innate vs. learned) relevant to individuality but does not explicitly confirm if calls are unique to each individual bird.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The study analyzes factors like body mass and beak size that influence bird vocalization frequency at the species level, but does not address individual uniqueness.",
+          "quote": "Ecological and evolutionary traits like body mass and beak size influence the vocalization frequency of bird species, such as the white-rumped shama",
+          "verdict_reason": "The snippet discusses factors influencing bird sounds at the species level, which is relevant to the query about individual uniqueness but does not directly answer whether calls are unique to individuals.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9251c7a33ec5",
+      "claim_index": 1,
+      "claim": "It is important for pet owners to consult with their veterinarian to weigh the specific risks and benefits for their individual pet",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Evidence indicates that spaying or neutering dogs correlates with both positive and adverse health effects, with risks potentially exceeding benefits for most male dogs.",
+          "quote": "The evidence shows that spay/neuter correlates with both positive AND adverse health effects in dogs. ... The number of health problems associated with neutering may exceed the associated health benefits in most cases.",
+          "verdict_reason": "The snippet directly addresses the query by confirming negative health impacts exist alongside benefits, providing conflict-bearing evidence rather than a simple yes/no answer.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Spaying and neutering carry potential negatives including surgical risks, weight gain, and hormonal changes affecting metabolism and coat quality.",
+          "quote": "Potential Negatives to Consider\nWhile spaying and neutering offer numerous benefits, there are some potential drawbacks to consider:\n1. Surgical Risks: Like any surgical procedure, spaying and neutering carry risks such as bleeding, infection, and adverse reactions to anesthesia.",
+          "verdict_reason": "The snippet directly addresses the query by listing specific negative health impacts (surgical risks, weight gain, hormonal changes), providing conflict-bearing evidence without fully resolving the overall net impact.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering provides health benefits by preventing cancers and diseases, though the snippet focuses primarily on behavioral changes rather than negative health impacts.",
+          "quote": "And while neutering dogs can decrease the risk of ovarian and breast cancers, prostate disease, and pyometras, it can also decrease or even eliminate socially unacceptable behaviors in dogs.",
+          "verdict_reason": "The snippet addresses the health impact of neutering by listing benefits, which is relevant evidence to the query about negative impacts, but it does not explicitly discuss or confirm negative health consequences.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research indicates that spaying or neutering dogs can cause luteinizing hormone levels to rise up to 30 times higher, potentially contributing to diseases like urinary incontinence and lymphoma.",
+          "quote": "Dogs spayed or neutered can have LH levels up to 30 times higher than normal. Elevated LH may affect the thyroid, urinary tract, immune system, and even cancer development.",
+          "verdict_reason": "The snippet provides specific evidence of negative health impacts (elevated LH, disease risks) directly addressing the query, but represents ongoing research rather than a definitive final conclusion.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering disrupts hormonal feedback loops, causing luteinizing hormone levels to surge up to 30 times average concentrations, which researchers are investigating for potential links to cancer.",
+          "quote": "After sterilization, dogs can experience a surge in LH levels. This surge can reach as high as 30 times the average concentrations, particularly in males. Researchers are exploring if consistently high LH levels can harm different body parts.",
+          "verdict_reason": "The snippet directly addresses negative health impacts by citing a specific hormonal surge and ongoing research into cancer risks, providing conflict-bearing evidence alongside listed benefits.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a927c4cccc6a",
+      "claim_index": 2,
+      "claim": "The information is consistently reported across multiple credible racing sources",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Seattle Slew became America's 10th Triple Crown winner in 1977 by winning the Belmont Stakes.",
+          "quote": "(Jean Cruguet up) winning the 1977 Belmont Stakes and becoming America's 10th Triple Crown winner",
+          "verdict_reason": "The snippet explicitly states Seattle Slew won the 1977 Belmont Stakes to become the 10th Triple Crown winner, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Seattle Slew won the Kentucky Derby two weeks before May 21, 1977, and competed in the Preakness Stakes on May 21, 1977, as part of his Triple Crown campaign.",
+          "quote": "Two weeks earlier he had captured the Kentucky Derby while \"overcoming great travail\", as noted by the Daily Racing Form. On this picturesque day the racing fans poured in... for Seattle Slew would vie for the second jewel of the Triple Crown.",
+          "verdict_reason": "Snippet confirms two Triple Crown races (Kentucky Derby, Preakness) and dates but omits the Belmont Stakes and the specific date of the final win needed to fully answer when the Crown was secured.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document confirms Seattle Slew is a Triple Crown winner but does not state the specific year he won.",
+          "quote": "Seattle Slew sired more than 100 stakes winners including A.P. Indy, Swale, and Slew o' Gold – he died on the 25th anniversary of his victory in the Kentucky Derby.",
+          "verdict_reason": "The snippet confirms Seattle Slew won the Kentucky Derby and implies Triple Crown status via context, but fails to provide the specific year requested by the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Seattle Slew won the Triple Crown in 1977.",
+          "quote": "In 1977, he became the first horse to win the Triple Crown while undefeated",
+          "verdict_reason": "The snippet explicitly states that Seattle Slew won the Triple Crown in 1977, directly answering the user's query about the year of victory.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Seattle Slew won the Triple Crown in 1977, becoming the tenth horse to do so.",
+          "quote": "Next, Slew won the Belmont by four lengths, the tenth of only 13 horses to capture the Triple Crown.",
+          "verdict_reason": "The snippet confirms Slew completed the Triple Crown and provides the year 1977 via his death anniversary context, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_c675e6cd8ad6",
+      "claim_index": 2,
+      "claim": "No other composers are mentioned as contributing to the original film's score",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The soundtrack album page lists Roger Miller as a featured artist with songs from Robin Hood.",
+          "quote": "More By Roger Miller\nOo-De-Lally (From \"Robin Hood\") - Single",
+          "verdict_reason": "Snippet identifies Roger Miller performing songs from the film but does not explicitly state he composed the entire score, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The music for Disney's Robin Hood was composed by George Bruns.",
+          "quote": "The majority of the tracks consist of composer George Bruns'",
+          "verdict_reason": "The snippet explicitly identifies George Bruns as the composer of the majority of the tracks for the film.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Roger Miller and Floyd Huddleston composed music for specific songs in the 1972 film.",
+          "quote": "Whistle-Stop. (1972). Music and Lyrics by Roger Miller ; Oo-de-lally. (1972). Music and Lyrics by Roger Miller ; Love. (1972). Music by Floyd Huddleston",
+          "verdict_reason": "Snippet identifies composers for specific songs but does not explicitly name the composer for the entire film's score, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Elton Hayes composed the music for the 1952 Disney film The Story of Robin Hood and His Merrie Men.",
+          "quote": "Hayes and Watkin worked closely together; the screenwriter wrote the framing ballads, and Hayes composed the music, drawing upon the melodies of medieval English for inspiration.",
+          "verdict_reason": "Snippet confirms Elton Hayes composed music for the 1952 live-action Disney Robin Hood, but the query likely refers to the famous 1973 animated version, making this evidence relevant but incomplete.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies a YouTube playlist for the Walt Disney Legacy Collection Soundtrack of Robin Hood.",
+          "quote": "YouTube Robin Hood [Walt Disney Legacy Collection Soundtrack]] - YouTube - YouTube",
+          "verdict_reason": "The snippet confirms the existence of an official soundtrack for the queried entity but does not name the specific composer, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_3026b0491e32",
+      "claim_index": 1,
+      "claim": "His contributions to these films laid the foundation for the iconic scores that have become synonymous with the Harry Potter series",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "John Williams scored the first three Harry Potter films, though William Ross adapted and conducted the second film due to Williams's conflicting commitments.",
+          "quote": "John Williams scored the first three films: Philosopher's Stone), Chamber of Secrets), and Prisoner of Azkaban). However, the second entry was adapted and conducted by William Ross) due to Williams's conflicting commitments.",
+          "verdict_reason": "The snippet explicitly states that John Williams scored the first three films, directly answering the query while noting the specific nuance regarding the second film's conductor.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "John Williams composed the scores for the first three Harry Potter films.",
+          "quote": "The scores were composed by John Williams (1-3), Patrick Doyle (4), Nicholas Hooper (5 & 6) and Alexandre Desplat (7 & 8).",
+          "verdict_reason": "The snippet explicitly states that John Williams composed the scores for films 1 through 3, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies Nicholas Hooper as the composer for the fifth and sixth films and Alexandre Desplat for the final two, implying they did not compose the first three.",
+          "quote": "Nicholas Hooper took a different approach with the soundtrack for",
+          "verdict_reason": "The snippet discusses composers for films 4-8 but does not explicitly name the composer(s) for the first three films, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "John Williams composed the scores for the first three Harry Potter films.",
+          "quote": "Williams scored the first three films of the Harry Potter series, (The Sorcerer's Stone, The Chamber of Secrets, and the Prisoner of Azkaban)",
+          "verdict_reason": "The snippet explicitly states that John Williams scored the first three films, directly answering the user's query about the composer.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "John Williams composed the music for the first and third Harry Potter films.",
+          "quote": "John Williams was the first — and undeniably the most famous — of the composers to tackle Harry Potter. ... Two of those nominations were for Harry Potter and the Philosopher's Stone and Harry Potter and the Prisoner of Azkaban",
+          "verdict_reason": "Snippet confirms John Williams for films 1 and 3 but omits the composer for the second film, providing only partial evidence for the 'first three' query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_125",
+      "claim_index": 4,
+      "claim": "While the documents provide some insights, they do not fully explain the detailed mechanics of how reward systems work or the exact reasons for varying rewards across individuals",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Users can earn points and cashback rewards like free hotels and flights by using specific credit cards.",
+          "quote": "The Life Hunt rewards credit card that earns me points. During the last few years, my fianc├⌐ and I have earned hundreds of free dollars just by using our cashback reward cards.",
+          "verdict_reason": "Snippet confirms rewards exist and gives examples but lacks explanation of system mechanics or reasons for varying reward amounts.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Some individuals do not receive cashback rewards because they choose to live without using credit cards.",
+          "quote": "Oh, and I donΓÇÖt get any cashback rewards. Which is fine with me. If you need those cashback rewards, and a credit score is important to you, you might not enjoy life without a credit card.",
+          "verdict_reason": "The snippet addresses why some people get no rewards (choosing not to use cards), which is one side of the user's question about reward disparities, though it lacks a full explanation of reward systems.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Credit card points become more effective and yield higher real cashback for individuals with higher monthly spending levels.",
+          "quote": "points become more effective the more you spend per month. For those with higher incomes that tend to spend $2,000, $3,000, or more per month, the real cashback becomes higher.",
+          "verdict_reason": "Snippet addresses why some get more rewards (higher spending/income) but only covers one specific card example and lacks a general explanation of how reward systems work.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Using a credit card often makes the reward system incredibly useful, with many cards in India offering amazing cashback and rewards.",
+          "quote": "Having a Credit Card comes with its perks and rewards, and if you use the card often enough, you will see that the reward system can be incredibly useful.",
+          "verdict_reason": "Snippet addresses reward utility and frequency but lacks specific mechanics or reasons for varying point amounts, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Cashback credit cards provide money back on certain purchases, with some offering 0% cashback for specific periods or limits.",
+          "quote": "As its name suggests, a cashback credit card can give you money back when you make certain purchases. Some cards may offer a 0% cashback on purchases over a specific period of time",
+          "verdict_reason": "Snippet explains basic cashback mechanics but is from 2006, lacks details on point systems, and does not address why rewards vary between individuals.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_188",
+      "claim_index": 1,
+      "claim": "This surpasses earlier calculations and is the most recent and specific information available among the retrieved documents",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "In 1949, a team led by George Reitwiesner and John von Neumann calculated 2,037 digits of pi using the ENIAC computer.",
+          "quote": "a team led by George Reitwiesner and John von Neumann that same year achieved 2,037 digits with a calculation that took 70 hours of computer time on the ENIAC computer.",
+          "verdict_reason": "The snippet provides historical records for pi calculations but is from 1949, making it outdated evidence for the current record holder requested by the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Vega calculated pi to 140 places and held the record for 52 years until 1841.",
+          "quote": "he calculated pi to 140 places, of which the first 126 were correct. ... Vega retained his record 52 years until 1841",
+          "verdict_reason": "Snippet provides historical evidence about a specific record holder (Vega) but implies the record was superseded in 1841, making it incomplete for identifying the current record holder.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Daniel Ferguson calculated 620 digits of pi in 1946, which was the best approximation achieved without computers.",
+          "quote": "culminating in a 620-digit approximation in 1946 by Daniel Ferguson ΓÇô the best approximation achieved without",
+          "verdict_reason": "Snippet provides historical record holders for pi calculation but stops at 1946, failing to identify the current record holder requested by the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Peter Trueb computed approximately 22 trillion digits of pi in 2016, ranking second behind the PiHex project's least significant digit calculation.",
+          "quote": "second place is held by Peter Trueb who computed some 22+ trillion digits in 2016 and third place by \"houkouonchi\" who derived the 13.3 trillionth digit",
+          "verdict_reason": "Snippet addresses the query by listing specific record-holders for pi calculations, but the 1994 timestamp and mention of a 2016 record indicate the data is outdated and incomplete for a 'most digits' query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Akira Haraguchi held the world record for memorizing 100,000 digits of pi as of October 2006.",
+          "quote": "The world record for the number of digits memorized has exploded since the mid-1990s, and it stood at 100,000 as of October 2006.",
+          "verdict_reason": "Snippet addresses pi digit records but focuses on memorization rather than calculation, and the 2006 data is likely superseded for a 'most digits' query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1e9c6cd8e30b",
+      "claim_index": 2,
+      "claim": "Recent studies and reports highlight the need for sustainable practices and responsible sourcing to mitigate these environmental impacts",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production significantly impacts the environment by contributing to deforestation, threatening endangered species, and emitting an estimated 500 million tonnes of CO2 annually.",
+          "quote": "It contributes to deforestation, threatens endangered species and it estimated to emit 500 million tonnes of CO2 per year.",
+          "verdict_reason": "The snippet directly answers the query by listing specific negative environmental impacts (deforestation, emissions, biodiversity loss) linked to palm oil production.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Palm oil cultivation often coincides with harmful environmental effects like deforestation on previously biodiverse forest land.",
+          "quote": "Its cultivation and production (often monoculture on previously carbon-sequestering, biodiverse forest land) often coincides with... displacement and disruption of human and animal populations, and other harmful environmental effects.",
+          "verdict_reason": "The snippet directly addresses environmental harms (deforestation, biodiversity loss) but also mentions economic benefits, providing partial rather than absolute support for the claim that it is 'bad'.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production causes deforestation, habitat loss for wildlife, increased greenhouse gas emissions, and human rights violations.",
+          "quote": "Unfortunately, this has led to palm oil deforestation as forests and peatlands have been destroyed in order to keep up with the increased demands. This has had devastating consequences, causing habitat loss for wildlife and increasing greenhouse gas emissions.",
+          "verdict_reason": "The snippet directly confirms environmental harms including deforestation, habitat loss, and emissions, decisively answering the query about negative environmental impacts.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production causes significant environmental damage including habitat destruction, deforestation, pollution, and soil erosion.",
+          "quote": "Despite palm oil's benefits and economic value, this unruly growth period caused significant environmental damage. And herein lies the catch: The Environmental Impacts Of Palm Oil Production",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating palm oil causes significant environmental damage and detailing specific harms like deforestation and habitat loss.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_3c1297608017",
+      "claim_index": 1,
+      "claim": "The gesture was initially a two-person act, but it eventually simplified to a solo act, forming the modern practice we know today",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The practice of crossing fingers for luck originated in pre-Christian European traditions where the gesture was believed to manipulate supernatural forces.",
+          "quote": "Crossing fingers for luck and protection against evil has its earliest roots in pre-Christian traditions throughout Europe. Archaeological evidence indicates that ancient Europeans practiced elaborate rituals involving hand gestures and finger positioning, believing they could manipulate supernatural forces to their advantage.",
+          "verdict_reason": "The snippet directly addresses the query by identifying pre-Christian European traditions as the earliest roots, but it is incomplete as the text cuts off before detailing later evolutionary stages like Christianity.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The practice of crossing fingers for good luck originated in pre-Christian times when the cross symbolized unity and benign spirits at the intersection point.",
+          "quote": "Crossing the fingers dates back to pre-Christian times when the cross was a symbol of unity and benign spirits dwelt at the intersection point.",
+          "verdict_reason": "The snippet directly answers the query by explaining the historical origin of crossing fingers for good luck, citing pre-Christian beliefs and early European customs.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Historians theorize the practice originated from pre-Christian sacred geometry beliefs or as a secret sign among early Christians, though exact origins are not definitively known.",
+          "quote": "The exact origins of this practice aren't definitively known, but historians have a couple theories as to how the modern practice came about, though there is some guesswork in this.",
+          "verdict_reason": "The snippet addresses the query directly by offering historical theories but explicitly states the origins are not definitively known, making the evidence incomplete rather than decisive.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "One theory traces the origin to pre-Christian pagan beliefs where a cross symbolized concentrated good spirits to anchor wishes.",
+          "quote": "The first comes from a pre-Christian pagan belief in the powerful symbolism of a cross. The intersection was thought to mark a concentration of good spirits and served to anchor a wish until it could come true.",
+          "verdict_reason": "The snippet directly addresses the query by offering two specific origin theories but presents them as possibilities rather than a single definitive fact, making it partial support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_3c1297608017",
+      "claim_index": 2,
+      "claim": "The gesture's religious significance and its evolution from a two-person act to a solo act provide a comprehensive understanding of its origins",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The practice of crossing fingers for luck originated in pre-Christian European traditions where the gesture was believed to manipulate supernatural forces.",
+          "quote": "Crossing fingers for luck and protection against evil has its earliest roots in pre-Christian traditions throughout Europe. Archaeological evidence indicates that ancient Europeans practiced elaborate rituals involving hand gestures and finger positioning, believing they could manipulate supernatural forces to their advantage.",
+          "verdict_reason": "The snippet directly addresses the query by identifying pre-Christian European traditions as the earliest roots, but it is incomplete as the text cuts off before detailing later evolutionary stages like Christianity.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The practice of crossing fingers for good luck originated in pre-Christian times when the cross symbolized unity and benign spirits at the intersection point.",
+          "quote": "Crossing the fingers dates back to pre-Christian times when the cross was a symbol of unity and benign spirits dwelt at the intersection point.",
+          "verdict_reason": "The snippet directly answers the query by explaining the historical origin of crossing fingers for good luck, citing pre-Christian beliefs and early European customs.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Historians theorize the practice originated from pre-Christian sacred geometry beliefs or as a secret sign among early Christians, though exact origins are not definitively known.",
+          "quote": "The exact origins of this practice aren't definitively known, but historians have a couple theories as to how the modern practice came about, though there is some guesswork in this.",
+          "verdict_reason": "The snippet addresses the query directly by offering historical theories but explicitly states the origins are not definitively known, making the evidence incomplete rather than decisive.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "One theory traces the origin to pre-Christian pagan beliefs where a cross symbolized concentrated good spirits to anchor wishes.",
+          "quote": "The first comes from a pre-Christian pagan belief in the powerful symbolism of a cross. The intersection was thought to mark a concentration of good spirits and served to anchor a wish until it could come true.",
+          "verdict_reason": "The snippet directly addresses the query by offering two specific origin theories but presents them as possibilities rather than a single definitive fact, making it partial support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_8882ab46be5d",
+      "claim_index": 1,
+      "claim": "This number is consistently reported across multiple high-credibility sources, including Reddit, Medium StatMuse, which provide detailed and corroborative information about Jordan's playoff performances",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Michael Jordan holds the record for the most 40+ point games in the playoffs with 38.",
+          "quote": "His most prominent records include: ... the most 40+ point games (38), the most 50+ point games (8)",
+          "verdict_reason": "The snippet explicitly states the total count of Michael Jordan's 40+ point playoff games is 38, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Michael Jordan scored 40 or more points in 35 playoff games.",
+          "quote": "Total 35 1,649 1,534 216 178 78 41 611 1,115 54.8 39 98 39.8 388 458 84.7 62.6 53 163 111 124",
+          "verdict_reason": "The snippet explicitly lists a 'Total' of 35 games in the context of Michael Jordan's playoff performances where he scored over 40 points, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document displays Michael Jordan playoff statistics but does not explicitly state the total count of his 40-point games.",
+          "quote": "2.7 2.9 8.3 Total 173 7,813 7,157 1,116 886 489 192 2,917 5,100 57.2 117 334 35.0 1,862 2,159 86.2 64.6 327 789 472 494 +232 Unlock 2x data Related Searches Michael Jordan most rebounds in a playoff game",
+          "verdict_reason": "Snippet contains Michael Jordan playoff stats and related search links but fails to provide the specific count of 40-point games requested.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Michael Jordan has 38 playoff games with 40 or more points.",
+          "quote": "Jordan has 38 40-Point playoff Games.",
+          "verdict_reason": "The snippet directly answers the query by stating the specific count of 40-point playoff games for Michael Jordan.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a44267c115d0",
+      "claim_index": 2,
+      "claim": "This distribution is consistent across multiple high-credibility sources",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Most animal body water is contained in various body fluids, including intracellular and extracellular fluid.",
+          "quote": "Most animal body water is contained in various body fluids. These include intracellular fluid, extracellular fluid, plasma, interstitial fluid, and transcellular fluid.",
+          "verdict_reason": "The snippet identifies that most water is in body fluids and lists compartments, but does not explicitly state which single compartment holds the majority.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet lists water percentages for specific organs like the brain and lungs but does not state where the majority of total body water is located.",
+          "quote": "According to Mitchell and others (1945), the brain and heart are composed of 73% water, and the lungs are about 83% water.",
+          "verdict_reason": "The document provides water content percentages for specific organs but fails to answer where most of the body's total water volume is located (e.g., intracellular fluid).",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Two-thirds of the body's water is located within the intracellular space.",
+          "quote": "of the 42 L of water found in the body, two-thirds of it is within the intracellular space, which equates to 28 L, forming the ICF.",
+          "verdict_reason": "The snippet explicitly states that the majority (two-thirds) of body water is located in the intracellular space, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Most of the body's water is located within the cells, comprising about two-thirds of the total in the intracellular space.",
+          "quote": "Most of the water in the body is found within the cells of the body (about two thirds is in the intracellular space)",
+          "verdict_reason": "The snippet directly answers the query by stating that most body water is found within the cells (intracellular space).",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_fbdae168fc6f",
+      "claim_index": 2,
+      "claim": "The information provided by multiple high-credibility sources consistently confirms this fact",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Sushma Swaraj was the first woman to serve as India's Minister of External Affairs.",
+          "quote": "Sushma was also the first woman to hold this crucial role! Her ability to communicate with people all over the world greatly strengthened India's presence on the international stage.",
+          "verdict_reason": "The snippet explicitly states Sushma Swaraj was the first woman to hold the role of Minister of External Affairs, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Sushma Swaraj was the second woman to hold the external affairs portfolio after Indira Gandhi.",
+          "quote": "She was only the second woman to hold the portfolio after Indira Gandhi, who briefly kept the external affairs ministry under her while being the prime minister.",
+          "verdict_reason": "The snippet identifies Sushma Swaraj as the second woman, implying Indira Gandhi was the first, but does not explicitly state Gandhi was the first to head the ministry.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Sushma Swaraj served as India's minister of external affairs from 2014 to 2019.",
+          "quote": "Sushma Swaraj Indian politician Sushma Swaraj served as minister for external affairs from 2014 to 2019.",
+          "verdict_reason": "Snippet confirms Sushma Swaraj held the role but does not explicitly state she was the first woman, leaving the specific superlative unverified by this text alone.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Sushma Swaraj became the first woman to serve as a full-time External Affairs Minister of India.",
+          "quote": "she has become the first woman External Affairs Minister of India. She is the country's first woman to be appointed as a full-time Cabinet minister with the external affairs portfolio.",
+          "verdict_reason": "The snippet explicitly states Sushma Swaraj is the first woman External Affairs Minister, directly answering the query while distinguishing her role from Indira Gandhi's.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_4cb699778b59",
+      "claim_index": 1,
+      "claim": "This is confirmed by multiple credible sources, including the official Senate website and a reputable tertiary source like Wikipedia",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Senators are elected to six-year terms.",
+          "quote": "Senators are elected to six-year terms, and every two years the members of one class—approximately one-third of the senators—face election or reelection.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating the length of a senator's term is six years, sourced from the official U.S. Senate website.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states Senators were originally chosen by state legislatures for six-year terms.",
+          "quote": "The Senate of the United States shall be composed of two Senators from each State, chosen by the Legislature thereof, for six Years",
+          "verdict_reason": "Snippet confirms the six-year term but describes the original selection method (by legislatures) superseded by the 17th Amendment, making it incomplete for current practices.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Each senator is elected for a six-year term.",
+          "quote": "Each senator is elected at-large in their state for a six-year term, with terms staggered, so every two years approximately one-third of the Senate is up for election.",
+          "verdict_reason": "The snippet explicitly states the six-year term length for senators, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The U.S. Constitution establishes a six-year term for Senators.",
+          "quote": "The Senate of the United States shall be composed of two Senators from each State, chosen by the Legislature thereof, for six Years.",
+          "verdict_reason": "The snippet directly quotes the U.S. Constitution stating the Senate term is six years, fully answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_2f45ec399f17",
+      "claim_index": 2,
+      "claim": "The information is supported by multiple high-credibility sources, including a sports statistics website, a major sports news outlet a reputable record-keeping organization",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Novak Djokovic and Margaret Court are tied for the most Grand Slam singles titles in history with 24 each.",
+          "quote": "Novak Djokovic has won more Grand Slams than any other active tennis player, with 24 titles. ... MEN'S GRAND SLAM SINGLES TITLES 1. Novak Djokovic, 24 ... WOMEN'S GRAND SLAM SINGLES TITLES 1. Margaret Court, 24",
+          "verdict_reason": "The snippet directly answers the query by listing the all-time leaders for men and women, identifying Djokovic and Court as the top winners with 24 titles each.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "As of February 2026, Novak Djokovic holds the record for the most men's tennis Grand Slam titles with 24.",
+          "quote": "As of February 2026, Novak Djokovic held the record for the most men's tennis Grand Slam titles, with a total of 24.",
+          "verdict_reason": "The snippet directly answers the query by identifying Novak Djokovic as the player with the most Grand Slam titles (24) and noting he surpassed Rafael Nadal.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Rafael Nadal holds the record for most wins at a single Grand Slam with 14 French Open titles, while Margaret Court has 11 Australian Open titles.",
+          "quote": "Rafael Nadal (Spain) won his 14th French Open singles title on 5 June 2022... No other player – male or female – has won one of tennis' four Grand Slam singles tournaments more than 11 times",
+          "verdict_reason": "Snippet provides specific single-tournament records (Nadal 14, Court 11) but does not state the total career Grand Slam counts needed to answer who has won more overall.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Novak Djokovic has won 24 Grand Slam singles titles.",
+          "quote": "Novak Djokovic won 24 Grand Slam titles in singles.",
+          "verdict_reason": "Snippet provides a specific count for one player but fails to compare across players or explicitly state who holds the overall record, making it incomplete for the comparative query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_e3caa7edab1f",
+      "claim_index": 2,
+      "claim": "The information is consistently reported across multiple reliable sources, confirming the accuracy of this record",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The Golden State Warriors hold the record for most wins in an NBA season with 73 wins in 2015–16.",
+          "quote": "The best-ever regular season record by an NBA team is 73 wins and 9 losses by the Golden State Warriors (USA) in the 2015–16 season",
+          "verdict_reason": "The snippet directly answers the query by identifying the team with the most wins (73) and explicitly stating it is the best-ever record.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The Golden State Warriors hold the record for most wins in an NBA season with 73 wins in 2015-16.",
+          "quote": "Most wins, season\nHighest winning percentage, season Table\n| Value | Entity |  | Notes |\n| .8902 | Golden State Warriors | 2015-16 | 73-9",
+          "verdict_reason": "The snippet explicitly lists the Golden State Warriors with 73 wins under the 'Most wins, season' context, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The Golden State Warriors hold the record for most wins in an NBA season with a 73-9 record in 2015-16.",
+          "quote": "Most Wins In the NBA Regular Season | Rank | Regular Season Record | Team | Season | --- --- | | 1 | 73-9 | Golden State Warriors | 2015-16 |",
+          "verdict_reason": "The snippet directly answers the query by providing a ranked table identifying the Golden State Warriors' 73-9 season as the record for most wins.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Golden State Warriors hold the record for most wins in a single NBA season with 73 wins in 2015-16.",
+          "quote": "The Golden State Warriors have the most wins by a team in a season, with 73 wins in 2015-16.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating the team with the most wins in a season and the specific win count.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_ebd3c33e8be8",
+      "claim_index": 1,
+      "claim": "The most recent and authoritative source confirms that Bailey was the first openly LGBTQ+ celebrity to receive this honor",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists past winners of the Sexiest Man Alive title, including Mel Gibson as the first, but the snippet cuts off before identifying the current or most recent record holder.",
+          "quote": "The annual feature the \"Sexiest Man Alive\" is billed as a benchmark of male attractiveness and typically includes only famous people. ... Dates of magazine issues, winners, ages of winners at the time of selection, and pertinent comments are listed below.",
+          "verdict_reason": "The snippet describes the award and lists historical winners but is incomplete, cutting off mid-sentence in the 2015 entry without providing the latest winner to answer 'who holds the record'.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Jonathan Bailey was crowned People Magazine's 2025 Sexiest Man Alive.",
+          "quote": "The 40th anniversary of People's iconic Sexiest Man Alive edition celebrates actor Jonathan Bailey, crowned 2025's Sexiest Man Alive.",
+          "verdict_reason": "The snippet directly identifies Jonathan Bailey as the 2025 recipient of the title, answering the query about who holds the record.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Jonathan Bailey is identified as PEOPLE's Sexiest Man Alive.",
+          "quote": "YouTube Jonathan Bailey Is PEOPLE's Sexiest Man Alive",
+          "verdict_reason": "The snippet explicitly states that Jonathan Bailey is PEOPLE's Sexiest Man Alive, directly answering the query about who holds the record.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Jonathan Bailey was named the 2025 Sexiest Man Alive by People magazine.",
+          "quote": "In 2025, People named Jonathan Bailey as the \"Sexiest Man Alive\" — and the actor made history as the first-ever out gay celebrity to be featured as the cover stars of this annual issue.",
+          "verdict_reason": "The snippet directly answers the query by identifying the current (2025) record holder, Jonathan Bailey, as named by People magazine.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_071",
+      "claim_index": 1,
+      "claim": "Unfortunately, the other retrieved documents do not provide the dates of birth for other players who played for Aldershot Town F.C., so I cannot give a complete list based on the available information",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Charles played for Aldershot Town F.C. during their first season back in the Football League and signed a contract in June 2010.",
+          "quote": "Charles was a regular starter for Aldershot Town, in their first season back in the Football League and he was rewarded with a double award",
+          "verdict_reason": "The snippet confirms a specific player (Charles) for the queried entity but lacks the requested date of birth, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Supporters established a new club named Aldershot Town following the original club's bankruptcy.",
+          "quote": "In response to the bankruptcy a group of supporters set up a new club, Aldershot Town, which started in the Isthmian League Division Three",
+          "verdict_reason": "The snippet confirms the entity Aldershot Town F.C. and its origin but provides no dates of birth for any players, making it relevant but incomplete.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet lists Anthony Charles, Anthony Straker, Danny Hylton, and Gary Abbott as players for Aldershot Town F.C. but does not provide their dates of birth.",
+          "quote": "Anthony Charles, Anthony Straker and Danny Hylton reached the landmark. Gary Abbott is, apart from Butler, the only Shots player to have ever scored over 100 goals for the club.",
+          "verdict_reason": "The snippet identifies specific players for the queried entity but lacks the requested dates of birth, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Teddy Sheringham played for Aldershot on loan but does not provide his date of birth.",
+          "quote": "In 1984ΓÇô85, Aldershot took a young striker at the time on loan from Millwall ΓÇô Teddy Sheringham, the future England international player.",
+          "verdict_reason": "The snippet identifies a player (Teddy Sheringham) relevant to the query entity but fails to provide the requested date of birth, making it incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_136",
+      "claim_index": 3,
+      "claim": "Given the available information, we cannot pinpoint the precise date when New Zealand was founded as a country",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Treaty of Waitangi was first copied on February 6, 1840, as part of the process to acquire sovereignty for New Zealand.",
+          "quote": "On 6 February 1840, the first copy of the Treaty of",
+          "verdict_reason": "Snippet addresses the founding timeline via the 1840 Treaty but is truncated and lacks the final establishment date, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The first European settlement in the South Island was founded at Bluff in 1823.",
+          "quote": "The first European settlement in the South Island was founded at Bluff in 1823 by James Spencer",
+          "verdict_reason": "Snippet discusses New Zealand's history and early settlements but does not state when it was founded as a country.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The first company in New Zealand was established on September 1, 1840, and Auckland was founded on September 18, 1840.",
+          "quote": "first company formed in New Zealand and which was established on 1 September 1840 at Kororareka... founding of Auckland on 18 September 1840",
+          "verdict_reason": "Snippet provides specific 1840 dates for early entities but does not state the official country founding date, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Treaty of Waitangi is widely regarded as the founding document of New Zealand.",
+          "quote": "Nonetheless, the Treaty is widely regarded as the founding document of New Zealand.",
+          "verdict_reason": "Snippet identifies the founding document but does not state the specific date or year New Zealand was founded as a country.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_157",
+      "claim_index": 3,
+      "claim": "While some critics, like Brian Sewell, may dispute certain aspects of his work , the overall consensus is that Da Vinci's multifaceted genius has left a lasting impact on human history",
+      "cited_docs": [
+        "d3",
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Da Vinci is considered a genius due to his myriad interests and observations of the natural world, anatomy, and cosmos.",
+          "quote": "Leonardo Da Vinci: Facing Genius ... evidence a mind whose interests were myriad and diverse. His observation of the natural world, anatomy and the cosmos reveal a man",
+          "verdict_reason": "Snippet directly attributes genius to Da Vinci's diverse interests and observations but includes contradictory views and cuts off before fully explaining the appreciation of his talents.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The text acknowledges Da Vinci as a genius but attributes renewed public awareness of this status to Dan Brown's book rather than explaining the specific reasons for his genius.",
+          "quote": "History nuts and art lovers know that Leonardo Da Vinci is a genius. But this brilliance is lost among the multitudes of ordinary people",
+          "verdict_reason": "The snippet confirms Da Vinci is a genius but fails to explain why, instead discussing public perception and an exhibition, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Leonardo Da Vinci is widely considered a genius, evidenced by his functional inventions and musical instruments like the Great Continuous Organ.",
+          "quote": "This celebrates Italian Renaissance painter and inventor Leonardo Da Vinci, who is widely considered to be a genius. You see examples of that genius in the functional inventions on display.",
+          "verdict_reason": "The snippet confirms Da Vinci is considered a genius and cites inventions as examples, but does not fully explain the underlying reasons for this status.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The exhibit aims to uncover the mysteries behind Da Vinci's brilliant mind through replicas from his codices and paintings.",
+          "quote": "Uncovering Da VinciΓÇÖs Genius at the Mind Museum... is peeling off more of the mysteries surrounding the wonders behind Da VinciΓÇÖs brilliant mind",
+          "verdict_reason": "The snippet addresses the query topic by mentioning an exhibit exploring Da Vinci's genius but fails to explain the specific reasons why he is considered one.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "trust_align_040",
+      "claim_index": 0,
+      "claim": "The first season of Anne with an e contains 26 episodes",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_eligible_docs",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet provides evidence about a different entity ('Annedroids') than the queried show ('Anne with an E'), offering no meaningful information to answer the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_040",
+      "claim_index": 1,
+      "claim": "This information is directly provided by a document discussing the show, confirming the number of episodes in its first season",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_eligible_docs",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet provides evidence about a different entity ('Annedroids') than the queried show ('Anne with an E'), offering no meaningful information to answer the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_071",
+      "claim_index": 0,
+      "claim": "Gordon Atherton, a player who played for Aldershot Town, was born on 18 June 1934",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Gordon Atherton's career with Bury, Swindon Town, and Drumcondra, but does not mention Aldershot Town F.C. or provide evidence linking him to that specific club.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_186",
+      "claim_index": 0,
+      "claim": "Rick Jason starred in several movies including \"Uzi Brothers 9mm\" (1989), \"Target: Maganto\" (1989), \"Gapos Gang\" (1989), \"Baril Ko Ang Uusig\" (1990) \"Matira Ang Matibay\" (1995)",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet lists movies starring 'Ricketts' (likely Bong Ricketts), not the queried entity 'Rick Jason'. It provides no evidence about Rick Jason.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_186",
+      "claim_index": 1,
+      "claim": "These films were produced through his own movie outfit, Rockets Productions he played opposite leading ladies such as Beverly Vergel and Vina Morales",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet lists movies starring 'Ricketts' (likely Bong Ricketts), not the queried entity 'Rick Jason'. It provides no evidence about Rick Jason.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0028",
+      "claim_index": 1,
+      "claim": "The detailed description in supports the role but does not contradict the current Prime Minister's identity",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet defines the role and constitutional powers of the Prime Minister of India but does not identify who the current or latest Prime Minister is. It provides no name or temporal information answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0141",
+      "claim_index": 2,
+      "claim": "The upcoming 2026 Wimbledon Championships are discussed in d3, but it does not change the current champion status",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the 2026 Wimbledon Championships (a future event), not the latest/current men's singles champion. It provides no information about any champion.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0171",
+      "claim_index": 1,
+      "claim": "This information is directly stated in the document and is supported by the context provided by the other documents",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.3333333333333333,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet contains only tournament metadata, disambiguation information, and structural details. It does not identify or name the current men's singles champion.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Jannik Sinner was the defending men's singles champion at the 2026 Australian Open but lost in the semifinals.",
+          "quote": "The defending men's singles champion, Jannik Sinner, lost in the semifinals.",
+          "verdict_reason": "Document addresses the 2026 Australian Open men's singles champion context but does not identify the current/2026 winner. It only confirms Sinner was defending champion, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet contains only tournament metadata and structural information (founding date, venue, surface, prize money, draw sizes). It does not identify any men's singles champion, current or otherwise.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "Hunter Emery plays CO Rick Hopper on Orange is the New Black",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), while the snippet discusses a different character named 'Rick Hopper'. The entity mismatch makes this irrelevant.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_150",
+      "claim_index": 2,
+      "claim": "The other documents either discuss different bands or do not provide current information about the Eagles' lineup",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet identifies the bass player for Queensrÿche, not the Eagles. It provides no evidence regarding the queried entity.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Chris Mostert is a saxophonist who played with the Eagles, not a bass player.",
+          "quote": "Chris Mostert Christiaan \"Chris\" Mostert is a Dutch saxophonist who has played with the Eagles during their \"Farewell 1 Tour\" in 2005.",
+          "verdict_reason": "Snippet addresses the query's entity (Eagles band members) but identifies a saxophonist, not the requested bass player, providing partial context.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses Norm Fisher and his work with Bryan Adams but contains no mention of the band 'the Eagles' or any connection to them.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Timothy B. Schmit joined the band on bass in September 1969 after Messina briefly took over.",
+          "quote": "Messina briefly took over on bass until Timothy B. Schmit joined the band in September 1969.",
+          "verdict_reason": "Snippet identifies Timothy B. Schmit as a bass player for the Eagles but provides an outdated 1969 timeline, lacking current lineup information.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem holds the world's record for the fastest rap in a number one single, as evidenced by his performance in \"Godzilla,\" where he rapped 225 words in 30 seconds, averaging 7.5 words per second",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 1,
+      "claim": "This record is confirmed by multiple authoritative sources and is the most recent and relevant information available",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "healthcontradict_0060",
+      "claim_index": 0,
+      "claim": "There is no evidence to support the use of tepid sponge baths as a way to reduce fever in children",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses scarlet fever symptoms, diagnosis, and complications in children, but contains no information about fever reduction methods or tepid sponge baths.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Research shows that sponging a child down with tepid water does not actually help reduce fever.",
+          "quote": "there's no need to undress your child or sponge them down with tepid water – research shows neither actually helps reduce fever",
+          "verdict_reason": "The snippet directly addresses the query by citing research evidence that tepid sponge baths are not effective for reducing fever in children.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0142",
+      "claim_index": 3,
+      "claim": "The other documents do not provide relevant information about the current Vice President",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes the Office of the Vice President's structure and location but does not identify who the current or latest Vice President is. It provides no information about the person holding the office.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "JD Vance is the incumbent Vice President of the United States as of January 20, 2025.",
+          "quote": "incumbent = JD Vance incumbentsince = January 20, 2025",
+          "verdict_reason": "The snippet directly identifies the current Vice President and provides the inauguration date. Despite the URL label 'older_Wikipedia_revision', the timestamp (2026-01-25) and content indicate this is current information.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_9049c197a579",
+      "claim_index": 1,
+      "claim": "The other documents provide context and historical data but do not offer a specific current tax figure",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "California's total gas tax is approximately 70 cents per gallon.",
+          "quote": "California's total gas tax stands at about 70 cents per gallon, the highest in the country.",
+          "verdict_reason": "The snippet directly answers the query by stating the specific amount of California's total gas tax per gallon.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only navigation headers and author bios. It mentions gas taxes generally but provides no specific data, rates, or facts about California's gas tax.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Californians pay nearly 90 cents per gallon in taxes, fees, and surcharges on gas.",
+          "quote": "Californians pay nearly 90 cents per gallon in taxes, fees and surcharges, according to the U.S. Energy Information Administration.",
+          "verdict_reason": "The snippet directly answers the query by providing a specific monetary value for the total tax burden per gallon in California.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_022",
+      "claim_index": 3,
+      "claim": "While later documents mention its use for forcing a computer to quit when it freezes and its role in remote access security, the original intention was rooted in system reliability and user control",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Attackers with network KVM access could send a Ctrl + Alt + Del sequence to a system.",
+          "quote": "If an attacker gain access to the network KVM, then they could send keystrokes to your system. They wouldn't have access to the power button, but they could send a Ctrl + Alt + Del sequence.",
+          "verdict_reason": "Snippet addresses Ctrl+Alt+Del usage in a security context but discusses remote attacks rather than explaining the historical reason for its use as an unlock mechanism.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a fictional narrative about a specific computer glitch in a story, providing no historical or technical evidence explaining why Control-Alt-Delete was used to unlock computers.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Bill Gates stated that the design team did not want to provide a single button, leading to the three-key combination.",
+          "quote": "design didnΓÇÖt want to give us our single button,ΓÇ¥ Gates said at a Harvard University event at the time.",
+          "verdict_reason": "The snippet provides a direct quote from Bill Gates explaining the lack of a single-button option, which is relevant evidence for the query, though it is an older excerpt and may not cover the full technical history.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_2a7f7e06e365",
+      "claim_index": 1,
+      "claim": "The other documents either do not address the specific first vertebrate or provide less precise information",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.75,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only the publisher name and provides no factual information about vertebrate evolution or the first vertebrate.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The text states that the origin of chordates, which resulted in vertebrates, occurred about 570 million years ago from deuterostomes.",
+          "quote": "the origin of chordates, which took place about 570 million years ago during the Precambrian, must be from some deuterostomes",
+          "verdict_reason": "The snippet discusses the origin of vertebrates and provides a timeline for their ancestors (chordates) but does not explicitly name the first specific kind of vertebrate.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The earliest vertebrates still relied on a notochord but possessed vertebral elements.",
+          "quote": "Earliest vertebrates still relied on notochord, but had vertebral elements",
+          "verdict_reason": "Snippet addresses the earliest vertebrates and their characteristics but does not name the specific first kind or group, providing only partial evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The first vertebrate land species were called Sarcopterygians and started as various species of fish.",
+          "quote": "The first vertebrate land species, Questioner, were all called Sarcopterygians. They started out as various species of fish, all of which had",
+          "verdict_reason": "Snippet addresses the origin of vertebrates (Sarcopterygians/fish) but is incomplete, cuts off mid-sentence, and focuses on land species rather than the absolute first vertebrate.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_135",
+      "claim_index": 1,
+      "claim": "This race is the oldest continuing regulated horserace in the world and predates other races mentioned in the retrieved documents",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.75,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a specific American horse named Old England, not the oldest horse race event in England. It provides no evidence regarding the query's target entity.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Duke of Cambridge Stakes was introduced in 2004 and was originally titled the Windsor Forest Stakes.",
+          "quote": "The race is one of several for older fillies which were introduced across Europe in 2004. It was originally titled the Windsor Forest Stakes",
+          "verdict_reason": "Snippet discusses a specific English horse race and its history but does not identify the oldest race, offering only partial context.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document mentions the earliest written mention of running-horses in the 9th/10th century but cuts off before identifying the first recorded race meetings.",
+          "quote": "The earliest written mention of 'running-horses' is a record of Hugh, from the French House of Capet, gifting some as a present to King Athelstan of England in the 9th/10th century.",
+          "verdict_reason": "The snippet addresses the history of English horse racing and begins to answer the query about first recorded meetings but is incomplete, cutting off before providing the specific race name or date.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Middleton Stakes is a horse race in Great Britain established in 1981.",
+          "quote": "The Middleton Stakes is a Group 2 flat horse race in Great Britain... The event was established in 1981",
+          "verdict_reason": "Snippet provides evidence about a specific English horse race and its founding year, addressing the query topic, but does not confirm if it is the oldest.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "Passover 2026 started at sundown on April 1",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.4,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "This year's Passover starts on Thursday, April 2, 2026.",
+          "quote": "This year: Thu, Apr 2, 2026",
+          "verdict_reason": "The snippet explicitly states the start date for 'This year' as April 2, 2026, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover dates for the next several years\nPassover 2027: April 21-29\nPassover 2028: April 10-18\nPassover 2029: March 30 – April 7",
+          "verdict_reason": "The snippet addresses the query topic by listing Passover dates but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover start dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover 2027: Begins Wednesday night, April 21 → Ends Thursday, April 29\n Passover 2028: Begins Monday night, April 10 → Ends Tuesday, April 18",
+          "verdict_reason": "The snippet addresses the query topic (Passover dates) but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "This date is confirmed by multiple credible sources, including Almanac.com, PassoverListings.com, Providence Journal, TimeAndDate.com TotallyJewishTravel.com",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.4,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "This year's Passover starts on Thursday, April 2, 2026.",
+          "quote": "This year: Thu, Apr 2, 2026",
+          "verdict_reason": "The snippet explicitly states the start date for 'This year' as April 2, 2026, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover dates for the next several years\nPassover 2027: April 21-29\nPassover 2028: April 10-18\nPassover 2029: March 30 – April 7",
+          "verdict_reason": "The snippet addresses the query topic by listing Passover dates but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover start dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover 2027: Begins Wednesday night, April 21 → Ends Thursday, April 29\n Passover 2028: Begins Monday night, April 10 → Ends Tuesday, April 18",
+          "verdict_reason": "The snippet addresses the query topic (Passover dates) but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,1537 @@
+{
+  "variant": "benchmark_set_all_modes/answer_only_sft/llama8b/e2e/final_only/sft",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "answer_only_sft_phase1_qwen_deepseek_20260707",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/answer_only_sft_phase1_qwen_deepseek_20260707/answer_only_sft/llama8b/e2e/final_only/sft/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/answer_only_sft_phase1_qwen_deepseek_20260707/answer_only_sft/llama8b/e2e/final_only/sft/final/detailed_results.json",
+    "source_final_sha256": "928e35cf98c847be1c77f529b305c827436f60967602bad9c3a9b3b653eaf0a1",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/answer_only_sft/llama8b/e2e/final_only/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/answer_only_sft/llama8b/e2e/final_only/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 886,
+    "claims_with_citations": 842,
+    "claims_with_committee_support_set": 811,
+    "claims_with_any_approved_citation": 730,
+    "claims_with_any_gold_positive_citation": 837,
+    "committee_alignment_precision_macro": 0.7754552652414886,
+    "committee_alignment_precision_micro": 0.750381679389313,
+    "gold_positive_citation_precision_macro": 0.993368962787015,
+    "gold_positive_citation_precision_micro": 0.9946564885496183,
+    "soft_extra_citation_rate_micro": 0.24427480916030533,
+    "hard_negative_citation_rate_micro": 0.0053435114503816794,
+    "committee_support_citation_recall_macro": 0.9001233045622689,
+    "committee_support_citation_recall_micro": 0.9001233045622689,
+    "claims_with_any_soft_extra_rate": 0.3182897862232779,
+    "claims_with_any_hard_negative_rate": 0.00831353919239905,
+    "strict_committee_alignment_claim_rate": 0.6410835214446953,
+    "strict_gold_clean_claim_rate": 0.8227990970654627,
+    "strict_grounded_committee_clean_rate_all_claims": 0.6410835214446953,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8227990970654627,
+    "total_cited_docs": 1310,
+    "total_approved_cited_docs": 983,
+    "total_gold_positive_cited_docs": 1303,
+    "total_soft_extra_cited_docs": 320,
+    "total_hard_negative_cited_docs": 7
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_bea0b68b5d7f",
+      "claim_index": 1,
+      "claim": "Life cycle assessments that include manufacturing emissions and waste management costs generally favor reusable alternatives like metal or glass straws, which are used hundreds of times and rarely sent to landfill , while paper straws are used primarily for cold drinks and have a limited lifespan that makes their cost and environmental impact harder to justify",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A UK government assessment concluded that paper straws emit more greenhouse gases when rotting in landfills compared to plastic straws.",
+          "quote": "an assessment by the UK government also concluded that paper straws emit more greenhouse gases when they rot in landfill compared with plastic.",
+          "verdict_reason": "The snippet provides direct, conflict-bearing evidence regarding the query by citing a specific assessment where paper straws have higher emissions than plastic in landfills, though it notes the overall evidence is mixed.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Paper straws are biodegradable and decompose naturally without leaving harmful residue, unlike plastic straws which take centuries to decompose.",
+          "quote": "First, they are biodegradable, meaning they decompose naturally without leaving harmful residue in the environment. ... Plastic straws ... take centuries to decompose, significantly contributing to ocean and land pollution.",
+          "verdict_reason": "Snippet directly compares environmental impacts (biodegradability vs. persistence) but lacks a definitive overall conclusion on which is 'more friendly' considering other factors mentioned.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Paper straws may have a higher carbon footprint than plastic due to production factors, challenging their environmental superiority.",
+          "quote": "Paper straws may have a higher carbon footprint than plastic due to production factors.",
+          "verdict_reason": "The snippet directly addresses the query by presenting evidence that paper straws might be less environmentally friendly regarding carbon footprint, offering a conflicting but relevant perspective.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that paper straws generate 44 times more greenhouse gas emissions than plastic straws.",
+          "quote": "straw is responsible for 44 times as many greenhouse gas emissions compared to a plastic one, while stainless steel straws emit 148 times as much.",
+          "verdict_reason": "The snippet provides specific comparative data on emissions for paper vs. plastic straws, directly addressing the query with conflicting evidence rather than a simple affirmation.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_32318bdc3cf9",
+      "claim_index": 1,
+      "claim": "For non-commercial vehicles, most states allow 16- or 17-year-olds to obtain a restricted license with supervised driving requirements, while a standard, full license is typically issued at 18",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "In West Virginia, individuals may apply for a Level I Instructional Permit at 15 years old.",
+          "quote": "Level I – If you are 15 years old, you may apply for a Level I Instructional Permit.",
+          "verdict_reason": "Snippet addresses driving age in West Virginia but only specifies the permit age (15), not the minimum age for a full transport vehicle license.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "A temporary driving permit can be obtained at age 15 years and 6 months.",
+          "quote": "A temporary permit can be obtained at age 15 years 6 months. The permit is valid for one year.",
+          "verdict_reason": "Snippet provides a specific minimum age (15 years 6 months) for a permit, which is a facet of driving, but does not explicitly state the minimum age for a full transport vehicle license.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document details restrictions and suspension periods for youth operators under 20 but does not state the minimum age to obtain a license.",
+          "quote": "the Director is authorized to revoke or suspend any original license held by a person under 20 years of age after a hearing",
+          "verdict_reason": "Snippet addresses youth operator rules and mentions drivers under 20, but fails to provide the specific minimum driving age requested.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f7c719d9b0be",
+      "claim_index": 1,
+      "claim": "The FOMC consists of twelve members — seven from the Board of Governors and five presidents from the Federal Reserve Banks — and it meets regularly to decide on interest rates and open market operations",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the organization responsible for setting monetary policy in the United States.",
+          "quote": "The organization that sets monetary policy for the United States is the Federal Open Market Committee (FOMC).",
+          "verdict_reason": "The snippet directly answers the query by explicitly identifying the Federal Open Market Committee as the entity that sets US monetary policy.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the Federal Reserve's monetary policymaking body.",
+          "quote": "The Federal Open Market Committee (FOMC) is the Fed's monetary policymaking body.",
+          "verdict_reason": "The snippet explicitly identifies the FOMC as the specific organization responsible for monetary policy, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the organization responsible for setting monetary policy in the United States.",
+          "quote": "The organization that sets monetary policy for the United States is the Federal Open Market Committee (FOMC).",
+          "verdict_reason": "The snippet directly answers the query by explicitly identifying the FOMC as the organization that sets US monetary policy.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_05d714be23fd",
+      "claim_index": 2,
+      "claim": "This is confirmed across multiple sources, including the official iHeartMedia press release and entertainment outlets",
+      "cited_docs": [
+        "d3",
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The 2026 iHeartRadio Music Awards will be hosted by the Atlanta-based rapper Ludacris.",
+          "quote": "The show will be hosted by Atlanta-based rapper Ludacris. He will also be receiving an achievement award for the iHeartRadio Landmark Award",
+          "verdict_reason": "The snippet explicitly identifies Ludacris as the host for the 2026 iHeartRadio Music Awards, directly answering the user's query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Ludacris is hosting the 2026 iHeartRadio Music Awards.",
+          "quote": "And it's all hosted by Ludacris who will also be taking on hosting duties.",
+          "verdict_reason": "The snippet explicitly states Ludacris is the host for the 2026 iHeartRadio Music Awards, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The 2026 iHeartRadio Music Awards are hosted by Ludacris.",
+          "quote": "The 2026 iHeartRadio Music Awards, hosted by Ludacris, brought out some of the biggest stars in music and entertainment who showed off their fashion.",
+          "verdict_reason": "The snippet explicitly identifies Ludacris as the host of the iHeartRadio Music Awards, directly answering the user's query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_04e1627e9fc5",
+      "claim_index": 1,
+      "claim": "Research also shows that organic fertilizers can suppress plant-parasitic nematodes while promoting beneficial nematode populations, further enhancing soil health",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The study found that tillage and fertilization interactions significantly influence soil nematode abundance.",
+          "quote": "Our findings indicate that the interaction between tillage and fertilization significantly influenced the soil's total abundance of nematodes and trophic",
+          "verdict_reason": "Snippet addresses the same entity (nematodes/soil) and provides relevant findings on abundance drivers, but does not explicitly state whether nematodes increase fertility.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Soil nematodes directly influence nutrient cycling by feeding on microorganisms and releasing nutrients available to plants.",
+          "quote": "Soil nematodes are key indicators of soil health and directly influence nutrient cycling. ... Both groups, by feeding on microorganisms, release nutrients available to plants.",
+          "verdict_reason": "The snippet confirms nematodes release nutrients, supporting fertility, but notes inorganic fertilizers can negatively affect them, making the evidence nuanced rather than a simple yes.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_04e1627e9fc5",
+      "claim_index": 2,
+      "claim": "However, inorganic fertilizers can have mixed effects, potentially reducing the abundance of beneficial nematode groups such as fungivores and omnivores increasing plant-parasitic nematodes",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The study found that tillage and fertilization interactions significantly influence soil nematode abundance.",
+          "quote": "Our findings indicate that the interaction between tillage and fertilization significantly influenced the soil's total abundance of nematodes and trophic",
+          "verdict_reason": "Snippet addresses the same entity (nematodes/soil) and provides relevant findings on abundance drivers, but does not explicitly state whether nematodes increase fertility.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Soil nematodes directly influence nutrient cycling by feeding on microorganisms and releasing nutrients available to plants.",
+          "quote": "Soil nematodes are key indicators of soil health and directly influence nutrient cycling. ... Both groups, by feeding on microorganisms, release nutrients available to plants.",
+          "verdict_reason": "The snippet confirms nematodes release nutrients, supporting fertility, but notes inorganic fertilizers can negatively affect them, making the evidence nuanced rather than a simple yes.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0717d0e62f3b",
+      "claim_index": 2,
+      "claim": "Trademark law provides additional protections for logos, brand names trade dress, but does not protect the look of the garment itself",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Clothing design is typically not protected under copyright law unless it contains a functional or utilitarian aspect, as the law favors utility over aesthetics.",
+          "quote": "Clothing design typically isn't protected under copyright law unless there is a functional or utilitarian aspect to it. The law currently favors utility over aesthetic in this space.",
+          "verdict_reason": "The snippet directly addresses the query by explaining that copyright generally does not protect clothing designs due to their utilitarian nature, providing a nuanced answer rather than a simple yes/no.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Clothing designs can receive copyright protection for graphic designs, artistic works, and works of artistic craftsmanship such as fabrics and surface patterns.",
+          "quote": "Yes, you can have copyright protection for clothing designs. In the fashion world, copyright protects graphic designs, artistic works, literary works and works of artistic craftsmanship.",
+          "verdict_reason": "The snippet directly answers the query by confirming that fashion designs are protected under copyright law, specifically detailing the types of works covered.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_37ab7146eb9b",
+      "claim_index": 1,
+      "claim": "Others argue that true pain requires biological processes such as nociceptors, neurotransmitters a functioning somatosensory cortex, which robots currently lack that any robot 'pain' would be a form of pseudoscientific simulation",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Experts describe robot pain as a complex issue tied to consciousness rather than a simple programming task.",
+          "quote": "People think, for instance, that pain is a simple issue, but it is complex and opens up all sorts of questions about consciousness.",
+          "verdict_reason": "The snippet addresses the query by framing robot pain as a complex question of consciousness, providing relevant but non-definitive evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Researchers are developing empathic robots designed to detect human emotional distress and respond with appropriate behaviors, rather than feeling pain themselves.",
+          "quote": "Electronic caregivers will need to be able to detect emotional signs of distress or anxiety—in order, for instance, to provide companionship and offer gentle reminders to take medication.",
+          "verdict_reason": "The snippet addresses the query's topic of robot emotion but focuses on detecting human pain rather than robots feeling it, providing relevant but incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_80baf25496cd",
+      "claim_index": 2,
+      "claim": "The debate is further complicated by the recognition that multiculturalism has multiple forms—demographic, philosophical governmental—each with its own effects that the relationship between socioeconomic and political integration remains poorly understood",
+      "cited_docs": [
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Evidence suggests multiculturalism does not harm immigrant citizenship or political integration and may facilitate these processes.",
+          "quote": "We have growing evidence that multiculturalism does not hurt immigrant citizenship or political integration, and might facilitate such processes.",
+          "verdict_reason": "The snippet directly addresses the query by providing evidence that multiculturalism is not a hindrance to specific forms of unity (citizenship/political integration), though it notes less is known about socioeconomic outcomes.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Research indicates that multiculturalism can act as a barrier to promoting a common identity and fostering civic unity.",
+          "quote": "Research has revealed that to some extent, multiculturalism acts as a barrier in promoting a common identity within a country... This factor presents multiculturalism as a major setback in fostering civic unity.",
+          "verdict_reason": "The snippet directly addresses the query by presenting evidence that multiculturalism hinders unity, but it frames this as one side of an ongoing debate rather than a definitive, universal fact.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_e2e2361dc28b",
+      "claim_index": 2,
+      "claim": "A third perspective holds that the very idea of a justified false belief is incoherent, since justification requires a belief to be true that the appearance of such a thing is an illusion",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The text discusses conditions under which beliefs are justified, such as inference from other justified beliefs or perceptual experience, without explicitly addressing false beliefs.",
+          "quote": "Frances's belief that it is cloudy outside owes its justification to her inference from her other two beliefs, both of which are justified",
+          "verdict_reason": "The snippet addresses the nature of belief justification, which is central to the query, but does not explicitly confirm or deny whether a false belief can be justified.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The text argues that no truth can be justified and that knowledge consists of conjectures that have not yet been refuted.",
+          "quote": "The problem with this is that there is no method of showing any piece of knowledge is true. ... all we have are guesses about reality.",
+          "verdict_reason": "The snippet directly addresses the relationship between justification, truth, and belief, arguing justification of truth is impossible, which bears on the query but presents a specific philosophical stance rather than a definitive answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_fbedb688b1d9",
+      "claim_index": 1,
+      "claim": "However, the LDS Church's definition of 'Christian' differs from the historic, biblical one: it rejects the authority of the Bible as the sole source of divine truth, replaces the doctrine of the Trinity with a different understanding of God's nature adds additional scriptures such as the Book of Mormon and the Doctrine and Covenants to the Christian canon",
+      "cited_docs": [
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The author asserts that Mormons are not Christians because their theology differs from historic orthodox faith and biblical standards.",
+          "quote": "Are Mormons Christians? In short, no, Mormons are not Christians. Of course, I would expect Mormon readers to disagree with this statement",
+          "verdict_reason": "The snippet directly addresses the query with a definitive negative answer from a specific theological perspective, serving as conflict-bearing evidence against the claim.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document is a YouTube debate featuring an LDS Apologist and an Evangelical Christian discussing whether Mormons are Christians.",
+          "quote": "YouTube DEBATE: Are Mormons Christians? LDS Apologist vs. Evangelical Christian | Jacob Hansen | Ep 1338",
+          "verdict_reason": "The snippet directly addresses the query by presenting a debate on the topic, offering conflicting perspectives rather than a single definitive answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_a47283064972",
+      "claim_index": 1,
+      "claim": "This is corroborated by the fact that they missed the playoffs in the 2023–24 season, which is consistent with a losing record",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Raptors achieved a 56–26 record in the 2015–16 season, their best regular season ever at that time.",
+          "quote": "The 56–26 record became the best Raptors regular season ever, fourth overall in the league and second only to the Cleveland Cavaliers in the Eastern Conference.",
+          "verdict_reason": "Snippet provides historical win records for 2015-2017, which is relevant evidence about the entity but too old to answer the 'latest NBA season' query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Toronto Raptors finished the 2023–24 season with a 25–57 record, which is not a winning record.",
+          "quote": "| 2023–24 | 25–57 | missed playoffs |",
+          "verdict_reason": "The snippet provides the specific win-loss record for the 2023–24 season, directly answering whether the team had a winning record in the latest season listed.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_5eeb46719843",
+      "claim_index": 1,
+      "claim": "Historically, Canada was first used as an official name in 1791, when the colonies of Upper and Lower Canada were united , but full sovereignty was not fully established until after the Statute of Westminster in 1931",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The country called the Dominion of Canada was formed on July 1, 1867.",
+          "quote": "On July 1, 1867, the country called the Dominion of Canada was formed from New Brunswick, Nova Scotia and the Province of Canada.",
+          "verdict_reason": "The snippet explicitly states the date Canada was formed as a country (Dominion of Canada), directly answering the query about gaining independence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Canada's independence was an evolutionary process impossible to ascribe to a particular date, with key milestones in 1919, 1931, and 1982.",
+          "quote": "Canada's transition from a self-governing British colony into a fully independent state was an evolutionary process, which arose in such a gradual fashion that it is impossible to ascribe independence to a particular date.",
+          "verdict_reason": "The snippet directly addresses the query by explaining that no single date exists for Canadian independence, offering relevant context and dates while noting the complexity.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_6af6e8cb8f34",
+      "claim_index": 2,
+      "claim": "The tradition then spread to the wider population through the influence of Queen Victoria and Prince Albert, who popularized the custom after 1848",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Charlotte of Mecklenburg-Strelitz, the German-born wife of George III, was the first to display a Christmas tree in Britain in 1800.",
+          "quote": "It was the German-born wife of George III who first displayed the decoration in Britain. Charlotte of Mecklenburg-Strelitz held a party in 1800 in which the tree had become the centrepiece of the festivities.",
+          "verdict_reason": "The snippet explicitly identifies Charlotte of Mecklenburg-Strelitz as the person who first displayed the Christmas tree in Britain in 1800, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Prince Albert introduced the Christmas tree to England in 1841 by bringing one from Germany to Windsor Castle.",
+          "quote": "The Christmas tree became popular in England in 1841 when Queen Victoria's husband, Prince Albert, brought a Christmas tree over from Germany and put it in Windsor Castle.",
+          "verdict_reason": "The snippet directly identifies Prince Albert as the person who brought the first Christmas tree to England in 1841, fully answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_8ef7b3cf5c3f",
+      "claim_index": 2,
+      "claim": "African and indigenous peoples are also present in both countries, but in smaller proportions",
+      "cited_docs": [
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies the nations of the Southern Cone, including Argentina and Uruguay, but does not specify their dominant ethnic group.",
+          "quote": "The Southern Cone is the southernmost region of South America and includes the nations of Chile to the west and Argentina, Paraguay, and Uruguay to the east.",
+          "verdict_reason": "The snippet confirms the geographic scope including Argentina and Uruguay but lacks the specific demographic data regarding the dominant ethnic group requested by the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Uruguayans share a Spanish linguistic and cultural background, with about one-quarter of the population of Italian origin.",
+          "quote": "Uruguayans share a Spanish linguistic and cultural background, even though about one-quarter of the population is of Italian origin.",
+          "verdict_reason": "Snippet addresses the ethnic composition of Uruguay (part of the query) but omits Argentina and does not explicitly label a single 'dominant' group for the whole region.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_cb5bcdb1ef9b",
+      "claim_index": 2,
+      "claim": "The character was also portrayed by Pernell Roberts in the M*A*S*H spin-off TV series Trapper John, M.D., but that is a separate entity from the original film and TV show",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Elliott Gould played the character of Trapper John in the Robert Altman movie MASH.",
+          "quote": "He succeeded Elliott Gould, who had played the character in the Robert Altman movie MASH",
+          "verdict_reason": "The snippet explicitly states that Elliott Gould played the character in the movie MASH, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Elliot Gould played Trapper John in the M*A*S*H movie.",
+          "quote": "TIL in the M*A*S*H universe,",
+          "verdict_reason": "Relevant evidence: Elliot Gould played Trapper John in the M*A*S*H movie.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_f2218f8c979e",
+      "claim_index": 2,
+      "claim": "The cut is also commonly known as the rib roast or standing rib roast it is worth noting that the name 'prime rib' does not always refer to USDA Prime-graded beef, but rather to any cut from the rib section",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Prime rib and ribeye steak are cut from the same section of the cow.",
+          "quote": "Technically, a prime rib and a rib-eye steak are cut from the same section of the cow.",
+          "verdict_reason": "The snippet directly answers the query by stating prime rib comes from the same section as ribeye, identifying the specific anatomical origin relative to known cuts.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Prime rib is a beef cut sourced from the primal rib section of the cow.",
+          "quote": "Prime rib is a high-quality beef cut that comes from the primal rib section of the cow.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating that prime rib comes from the primal rib section of the cow.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_5f5c20228969",
+      "claim_index": 2,
+      "claim": "Additionally, there were smaller-scale fighting in North Africa, the Balkans other regional theaters, bringing the total number of major fronts to at least three, with the Eastern Front being the broadest and bloodiest",
+      "cited_docs": [
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet poses a question suggesting Germany fought on over three different fronts against Britain, the US, and the USSR.",
+          "quote": "Why was Germany in WW2 able to fight so well against three superpowers (Britain, US, USSR) on over three different fronts?",
+          "verdict_reason": "The snippet addresses the query's entity and topic but frames the number of fronts as a question rather than providing a definitive factual answer.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Eastern Front was the broadest land front in military history during World War II.",
+          "quote": "The fighting involved millions of Axis and Soviet troops along the broadest land front in military history.",
+          "verdict_reason": "The snippet confirms the existence of the Eastern Front but does not list other fronts or provide a total count, making it incomplete evidence for the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f2a7d027353d",
+      "claim_index": 2,
+      "claim": "In response, a Constitutional Convention was held in Philadelphia in 1787, where the United States Constitution was drafted and signed, eventually ratified in 1788",
+      "cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The Articles of Confederation was America's first framework of national government, adopted in 1777 and ratified in 1781.",
+          "quote": "Adopted by the Second Continental Congress on November 15, 1777, and ratified by the states in 1781, the Articles of Confederation was America's first framework of national government.",
+          "verdict_reason": "The snippet explicitly identifies the Articles of Confederation as the first framework of national government, directly answering the query about the first form of government after the Revolutionary War.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "After winning independence, Americans governed themselves under the Articles of Confederation before creating a new constitution.",
+          "quote": "After winning their independence, Americans continued to experiment with how to govern themselves under the Articles of Confederation.",
+          "verdict_reason": "The snippet explicitly identifies the Articles of Confederation as the form of government adopted after independence and before the Constitution, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f75bc1a9cad8",
+      "claim_index": 2,
+      "claim": "No single document in the retrieved set provides an exact date when the switch from tea to coffee became universal, but the evidence consistently places the transition in the 19th century, with coffee dominating American culture by the 20th century",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Americans switched from tea to coffee as a patriotic alternative following the Boston Tea Party in December 1773.",
+          "quote": "December 1773: colonists threw 342 chests of British East India Company tea into Boston Harbor as protest against British taxation. The act made drinking British tea politically suspect for revolutionary-era Americans. Coffee, imported through different supply chains (often Caribbean and Latin American), became the patriotic alternative.",
+          "verdict_reason": "The snippet identifies December 1773 and the Boston Tea Party as the turning point for the switch, directly addressing the query's topic but providing a historical event rather than a specific administrative switch date.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Coffee completely eclipsed hot tea in the United States in 1865 due to Civil War rations.",
+          "quote": "Coffee would completely eclipse hot tea in 1865, when Union soldiers trooped home from the Civil War.",
+          "verdict_reason": "The snippet provides a specific date (1865) for when coffee eclipsed tea, directly addressing the query, though it frames this as the completion of a shift that began earlier.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "This year's Passover (2026) began at sundown on April 1 and ends at nightfall on April 9",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 1,
+      "claim": "Stanford University is a private research university located in Stanford, California, adjacent to Palo Alto and between San Jose and San Francisco",
+      "cited_docs": [
+        "d8"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d8": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "Stanford University (Stanford; officially Leland Stanford Junior University, colloquially the Farm) is a private research university in Stanford, California, adjacent to Palo Alto and between San Jose and San Francisco.",
+          "verdict_reason": "The query asks which university is in Chestnut Hill, Massachusetts. The snippet confirms Stanford is in California, not Massachusetts, providing no evidence for the queried location.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_7f07f7a6c607",
+      "claim_index": 0,
+      "claim": "Mohamed Salah",
+      "cited_docs": [
+        "d20"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d20"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d20": {}
+      }
+    },
+    {
+      "sample_id": "wikirevision_0151",
+      "claim_index": 2,
+      "claim": "The 2027 ICC Men's Cricket World Cup is scheduled for South Africa, Zimbabwe Namibia in October and November 2027, but that edition has not yet been played",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a future 2027 Cricket World Cup event, not the current champion. It provides no information about who currently holds the Cricket World Cup title.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0099",
+      "claim_index": 2,
+      "claim": "The 2027 ICC Men's Cricket World Cup is scheduled to be the next edition, the 14th, but it has not yet been played, so the 2023 result is the most recent available",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "India won the 2023 Cricket World Cup, making them the latest Cricket World Cup champion as of the document timestamp.",
+          "quote": "last = ubl 2023 Cricket World Cup 2023 India next = ubl 2027 Cricket World Cup 2027 South Africa Zimbabwe Namibia participants = 14 champions = cr AUS (6th title)",
+          "verdict_reason": "Document explicitly identifies 2023 Cricket World Cup won by India as the most recent tournament. Timestamp (May 2026) confirms this is current information. Wikipedia source is high-quality.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a future 2027 Cricket World Cup event, not the latest/current champion. It provides no information about who won the most recent World Cup.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "India won the 2023 Cricket World Cup, which is listed as the most recent completed tournament.",
+          "quote": "last = ubl 2023 Cricket World Cup 2023 India next = ubl 2027 Cricket World Cup 2027 South Africa Zimbabwe Namibia",
+          "verdict_reason": "Document identifies India as 2023 champion but is timestamped March 2026, making it potentially outdated for 'latest' query. No 2027 or later results shown, so 2023 may be current, but recency cannot be confirmed from snippet alone.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_b3ad3248b7d4",
+      "claim_index": 1,
+      "claim": "This timeframe is consistently confirmed across multiple sources, with the empire's rise tracing back to Pachacuti's expansionist policies in the 1430s its fall coming after the civil war and the arrival of the Spanish in the early 1530s",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is merely a video title and platform name; it contains no dates or factual evidence regarding the start or end of the Inca Empire.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Inca Empire began its rapid expansion around 1463 under Pachacuti, and the empire effectively ended with the capture of Atahualpa in 1532.",
+          "quote": "1463 — Pachacuti places his son, Túpac Inca Yupanqui... in charge of the Inca army. The Inca Empire... is born... 1532 — Francisco Pizarro... capture Atahualpa in Cajamarca",
+          "verdict_reason": "Snippet provides specific dates for the empire's birth (1463) and the pivotal 1532 capture of its leader, but lacks a definitive end date for the empire's total dissolution.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Inca Empire lasted from 1438 to 1533.",
+          "quote": "The Inca Empire lasted from 1438 to 1533.",
+          "verdict_reason": "The snippet explicitly states the start year (1438) and end year (1533) of the Inca Empire, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Inca Empire was ruled until the Spanish conquest in 1532.",
+          "quote": "of the Spanish conquest in 1532, ruled an empire that extended along the Pacific coast and Andean highlands",
+          "verdict_reason": "Snippet provides the end date (1532) but lacks the start date, making it incomplete for the full query.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

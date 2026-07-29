@@ -1,0 +1,1296 @@
+{
+  "variant": "benchmark_set_all_modes/qwen7b/oracle_notes/minimal/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/oracle_notes/minimal/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/oracle_notes/minimal/baseline/final/detailed_results.json",
+    "source_final_sha256": "fa6ecd70df474ee4a69a9a907402e17aa7b6d7ccd92d782b47871e93b917a56b",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen7b/oracle_notes/minimal/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen7b/oracle_notes/minimal/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1520,
+    "claims_with_citations": 163,
+    "claims_with_committee_support_set": 1362,
+    "claims_with_any_approved_citation": 149,
+    "claims_with_any_gold_positive_citation": 163,
+    "committee_alignment_precision_macro": 0.8537832310838446,
+    "committee_alignment_precision_micro": 0.8020833333333334,
+    "gold_positive_citation_precision_macro": 0.995398773006135,
+    "gold_positive_citation_precision_micro": 0.9895833333333334,
+    "soft_extra_citation_rate_micro": 0.1875,
+    "hard_negative_citation_rate_micro": 0.010416666666666666,
+    "committee_support_citation_recall_macro": 0.10939794419970632,
+    "committee_support_citation_recall_micro": 0.10939794419970632,
+    "claims_with_any_soft_extra_rate": 0.2085889570552147,
+    "claims_with_any_hard_negative_rate": 0.006134969325153374,
+    "strict_committee_alignment_claim_rate": 0.08421052631578947,
+    "strict_gold_clean_claim_rate": 0.09736842105263158,
+    "strict_grounded_committee_clean_rate_all_claims": 0.08421052631578947,
+    "strict_grounded_gold_clean_rate_all_claims": 0.09736842105263158,
+    "total_cited_docs": 288,
+    "total_approved_cited_docs": 231,
+    "total_gold_positive_cited_docs": 285,
+    "total_soft_extra_cited_docs": 54,
+    "total_hard_negative_cited_docs": 3
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_3afd7f725cb4",
+      "claim_index": 1,
+      "claim": "Documents provide varying levels of support, with d3 offering strong support through scientific evidence",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues that audiobooks facilitate empathy and offer a pure narrative experience through vocal performance, counting them as real reading.",
+          "quote": "Reading books offers views and glimpses into the minds of others... that it cannot help but facilitate empathy. At least, that is the case in my own personal experience.",
+          "verdict_reason": "The snippet directly addresses the query by arguing audiobooks count as reading, but it is an opinion piece rather than a definitive factual resolution.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Audiobooks count as reading if the goal is to be a more prolific reader.",
+          "quote": "If your goal is to be a more prolific reader, audiobooks definitely count.",
+          "verdict_reason": "The snippet directly addresses the query by affirming audiobooks count in specific contexts, but the sentence is incomplete and conditional, offering only partial resolution.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet asserts that audiobooks count as reading, comparing them to composing via dictation.",
+          "quote": "Of course an audiobook counts as reading, just as composing via dictation counts as writing.",
+          "verdict_reason": "The snippet directly addresses the query with a supportive opinion but represents a single user comment on a forum rather than a definitive or comprehensive resolution.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "A recent poll indicates that 41 percent of adults do not consider audiobooks to be reading.",
+          "quote": "A recent NPR-Ipsos poll found that 41 percent of adults don't believe audiobooks qualify as reading.",
+          "verdict_reason": "The snippet provides direct statistical evidence regarding the query but only presents one side of the debate (those who disagree), making it conflict-bearing but incomplete.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_5574b1447bdb",
+      "claim_index": 1,
+      "claim": "Documents explicitly state this, while d1 and d2 provide additional context about the early cases and clusters in Wuhan, including the Huanan Seafood Wholesale Market",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The first cases in nine out of ten countries were linked to residence in or travel to Wuhan, China.",
+          "quote": "the first cases of 9 out of 10 countries were infected via residence in or travel to Wuhan in China",
+          "verdict_reason": "The snippet directly identifies Wuhan as the location connected to the earliest international cases, answering the query about the city associated with the outbreak's origin.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The outbreak of novel coronavirus began in Wuhan, China.",
+          "quote": "An outbreak of novel coronavirus (2019-nCoV) that began in Wuhan, China, has spread rapidly",
+          "verdict_reason": "The snippet explicitly states the outbreak began in Wuhan, directly answering the query about the city connected with the earliest cases.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "COVID-19 was initially discovered in Wuhan, China, in late 2019.",
+          "quote": "Though initially discovered in Wuhan, China, in late 2019, COVID-19 entered the conversation in the U.S. in January 2020.",
+          "verdict_reason": "The snippet explicitly identifies Wuhan, China as the location where COVID-19 was initially discovered, directly answering the query about the city connected with the earliest cases.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 1,
+      "claim": "Documents directly confirm this information, while other documents either do not mention the relevant universities or are irrelevant to the specific query",
+      "cited_docs": [
+        "d10",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d10",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d10",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d10": {
+          "verdict": "supports",
+          "key_fact": "Boston College is located in Chestnut Hill, Massachusetts.",
+          "quote": "Chestnut Hill is best known as the home of Boston College, part of the Boston Marathon route, as well as the Collegiate Gothic canvas of landscape architect Frederick Law Olmsted.",
+          "verdict_reason": "The snippet directly confirms Boston College is located in Chestnut Hill, Massachusetts, answering the query's binary choice. Stanford University is not mentioned, implying it is not located there.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Boston College is located in Chestnut Hill, Massachusetts and is a private research university.",
+          "quote": "Boston College has played their home games at Alumni Stadium in Chestnut Hill, Massachusetts since 1957.",
+          "verdict_reason": "The snippet directly confirms Boston College is located in Chestnut Hill, Massachusetts, answering the query's location question. Boston College is a known private research university, making it the correct answer to the either/or question.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Boston College is a private research university located in Chestnut Hill, Massachusetts.",
+          "quote": "Boston College (also referred to as BC) is a private Jesuit Catholic research university located in the affluent village of Chestnut Hill, Massachusetts, United States",
+          "verdict_reason": "The snippet directly answers the query by confirming Boston College is a private research university in Chestnut Hill, Massachusetts, decisively resolving the either/or question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_883303a2d535",
+      "claim_index": 2,
+      "claim": "However, is cited as having low source quality, while are considered to have higher source quality",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The character Nana in the movie Snow Dogs is a Border Collie.",
+          "quote": "No one in the entire town thinks to mention her pet Border Collie Nana or her Siberian Husky sledding team",
+          "verdict_reason": "The snippet explicitly identifies Nana as a Border Collie, directly answering the user's query about the dog's breed.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The dog named Nana in the movie Snow Dogs is an Australian shepherd.",
+          "quote": "'s his Australian shepherd, Nana.",
+          "verdict_reason": "The snippet explicitly identifies Nana as an Australian shepherd within the context of the movie Snow Dogs, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "In the movie Snow Dogs, the dog named Nana is a collie.",
+          "quote": "In the movie, the dogs were named Nana, she was the collie",
+          "verdict_reason": "The snippet directly identifies Nana as a collie in the movie, fully answering the query about her breed.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_b198a514fff8",
+      "claim_index": 1,
+      "claim": "Documents explicitly confirm this information",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "New Mexico was admitted to the Union as the 47th state on January 6, 1912.",
+          "quote": "Eventually on January 6, 1912, New Mexico became the 47th state admitted to the Union when President William Taft signed the New Mexico statehood bill.",
+          "verdict_reason": "The snippet explicitly states that New Mexico became the 47th state admitted to the Union, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "New Mexico achieved statehood on January 6, 1912.",
+          "quote": "New Mexico achieved statehood on January 6, 1912. At that time, the state had a population of about 330,000 people.",
+          "verdict_reason": "The snippet explicitly states the date New Mexico achieved statehood, directly addressing the query about its admission to the union.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "New Mexico was admitted to the Union as the 47th state on January 6, 1912.",
+          "quote": "President William Howard Taft signed the legislation soon after, admitting New Mexico as the 47th state on January 6, 1912",
+          "verdict_reason": "The snippet explicitly states that New Mexico was admitted as the 47th state, directly answering the query about its admission order.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_362420ec2416",
+      "claim_index": 0,
+      "claim": "While lists populations for some major states but does not specify the least populated state provides information about the least populous state based on 2020 census data rather than 2011, the consensus from the reliable sources is that Sikkim has the lowest population in India as per the 2011 Census",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists populations for several major Indian states as per the 2011 census but does not identify the state with the lowest population.",
+          "quote": "States of India India, a union of provinces, is a ruling, national, democratic republic with a parliamentary system of government. The constitutional head is the President of the Executive of the Union.",
+          "verdict_reason": "The snippet discusses the 2011 census and lists populations for large states, but fails to list smaller states or identify the one with the lowest population, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Wyoming is identified as the least populous state based on 2020 census data.",
+          "quote": "Wyoming, the least populous state, has a population less than any of the 31 most populous U.S. cities.",
+          "verdict_reason": "Snippet identifies Wyoming as the least populous state but cites 2020 census data, not the requested 2011 census, making it conflict-bearing but temporally mismatched evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_ac0e6a4a7e32",
+      "claim_index": 1,
+      "claim": "explicitly state this, while other documents provide supporting context or alternative perspectives",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Sun Yat-sen is recognized as the Father of the Nation for his role in the 1911 Revolution.",
+          "quote": "Both recognize Sun Yat-sen as the Father of the Nation, but in Taiwan, \"Father of the Republic of China\" is meant.",
+          "verdict_reason": "The snippet explicitly identifies Sun Yat-sen as the central figure (Father of the Nation) of the 1911 Revolution, directly answering the query about its leader.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Sun Yat-sen was the central leader of the Xinhai Revolution.",
+          "quote": "The central leader of the Xinhai Revolution was Sun Yat-sen.",
+          "verdict_reason": "The snippet directly identifies Sun Yat-sen as the central leader of the Xinhai Revolution, which is the 1911 Chinese Revolution, fully answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_0293a11bd364",
+      "claim_index": 1,
+      "claim": "This information is directly stated in , which is marked as having low source quality but provides a clear and relevant fact to answer the query",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hindi is the third most spoken language by total number of speakers with over 600 million speakers.",
+          "quote": "| 3 | Hindi | 600 Million+ |",
+          "verdict_reason": "The snippet explicitly ranks Hindi as number 3 in a table of total speakers, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_c3f10dc1632d",
+      "claim_index": 1,
+      "claim": "explicitly states this fact, making it the most reliable source for this information",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Shanghai municipality is bordered by Jiangsu province to the north and west.",
+          "quote": "Shanghai municipality is bordered by Jiangsu province to the north and west and Zhejiang province to the southwest.",
+          "verdict_reason": "The snippet explicitly states that Jiangsu province borders Shanghai to the north, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_dc4d0c4e24ab",
+      "claim_index": 1,
+      "claim": "While the exact year 2015 is not mentioned in the document with the most direct evidence , the context and timeframe align with the query",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Riyad Mahrez won the PFA Player of the Year award for the 2015-16 season.",
+          "quote": "Leicester forward Riyad Mahrez has been crowned PFA Player of the Year for 2015-16.",
+          "verdict_reason": "The snippet confirms the winner for the 2015-16 season, which is the award associated with 2015, but the specific year label differs slightly from the query's '2015'.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_dc4d0c4e24ab",
+      "claim_index": 2,
+      "claim": "clearly states that \"Riyad Mahrez wins PFA Player of the Year 2015-16,\" confirming he was the winner for the relevant period",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Riyad Mahrez won the PFA Player of the Year award for the 2015-16 season.",
+          "quote": "Leicester forward Riyad Mahrez has been crowned PFA Player of the Year for 2015-16.",
+          "verdict_reason": "The snippet confirms the winner for the 2015-16 season, which is the award associated with 2015, but the specific year label differs slightly from the query's '2015'.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_e3caa7edab1f",
+      "claim_index": 1,
+      "claim": "also supports this but with slightly lower quality due to its format",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The Golden State Warriors hold the record for most wins in an NBA season with a 73-9 record in 2015-16.",
+          "quote": "Most Wins In the NBA Regular Season | Rank | Regular Season Record | Team | Season | --- --- | | 1 | 73-9 | Golden State Warriors | 2015-16 |",
+          "verdict_reason": "The snippet directly answers the query by providing a ranked table identifying the Golden State Warriors' 73-9 season as the record for most wins.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_189",
+      "claim_index": 3,
+      "claim": "discusses the use of magnesium in chemical reactions but does not relate to manufacturing car parts or computer casings",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Magnesium is described as a highly reactive metal used in comparisons for carbon-metal bond stability.",
+          "quote": "This bond is considerably more stable than comparable bonds between carbon and the highly reactive metals lithium or magnesium.",
+          "verdict_reason": "Snippet addresses magnesium's reactivity relevant to the query but discusses drug production chemistry, not manufacturing car parts or computer casings.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0028",
+      "claim_index": 1,
+      "claim": "This information is confirmed by the newer Wikipedia revision , which has a timestamp of 2026-05-18, indicating it contains the most recent data",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Narendra Modi is the incumbent Prime Minister of India, serving since 26 May 2014.",
+          "quote": "incumbent = Narendra Modi | acting = | incumbentsince = 26 May 2014",
+          "verdict_reason": "The document clearly identifies Narendra Modi as the current (incumbent) Prime Minister of India with his start date. Wikipedia's newer revision timestamp (2026-05-18) confirms this is the latest information.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_42796b35e143",
+      "claim_index": 1,
+      "claim": "Documents all support this conclusion to varying degrees, while explicitly states that there is no confirmed information on the total number of seasons for The Mandalorian",
+      "cited_docs": [
+        "d5",
+        "d3",
+        "d4",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists episodes for Season 3 of The Mandalorian but does not state the total number of released seasons.",
+          "quote": "EPISODES thumbnail - S3:E1 Chapter 17: The Apostate ... thumbnail - S3:E8 Chapter 24: The Return",
+          "verdict_reason": "The snippet confirms Season 3 exists by listing its episodes, addressing the entity, but fails to provide the total count of released seasons required to fully answer the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states there is no confirmed information on the total number of seasons for The Mandalorian.",
+          "quote": "There is no information regarding how many seasons The Mandalorian will run in total.",
+          "verdict_reason": "The snippet addresses the exact query about season count but explicitly states the information is unknown, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that The Mandalorian has 3 seasons and notes no plans for a fourth season have been revealed yet.",
+          "quote": "The Mandalorian has yet to reveal any plans for season 4... Seasons : 3",
+          "verdict_reason": "The snippet explicitly lists 3 seasons but frames this within a context where season 4 plans are unrevealed, making it potentially outdated or incomplete evidence for a 'how many released' query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet confirms the existence and episode count of The Mandalorian season 1.",
+          "quote": "The release schedule for the eight episodes of The Mandalorian season 1 is: Tuesday November 12th, 3 a.m. PST.",
+          "verdict_reason": "The snippet addresses the same entity but only confirms season 1, leaving the total number of released seasons incomplete.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The document confirms that three seasons of The Mandalorian have been released, with premiere dates in 2019, 2020, and 2023.",
+          "quote": "The Mandalorian premiered on the streaming service Disney+ on its United States launch day, November 12, 2019. The second season premiered on October 30, 2020. The third season premiered on March 1, 2023.",
+          "verdict_reason": "The snippet explicitly lists the premiere dates for the first, second, and third seasons, directly answering how many seasons have been released.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f8da23d84ecc",
+      "claim_index": 0,
+      "claim": "Given the conflicting evidence, the most reliable sources indicate that Brontosaurus and Apatosaurus are indeed the same dinosaur, with Apatosaurus being the correct taxonomic name",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Brontosaurus and Apatosaurus were found to be the same species, with Apatosaurus taking precedence as the first name.",
+          "quote": "Over time they found that they were in fact the same species, and by convention the first name has precedent, and Apatosaurus was the first name",
+          "verdict_reason": "The snippet directly answers the query by confirming they are the same species and explaining the naming convention.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "A 2015 study concluded that Brontosaurus and Apatosaurus are distinct genera, though some experts remain hesitant due to subjective trait selection.",
+          "quote": "A 2015 study found that Brontosaurus and Apatosaurus are actually distinct from each other. Some experts have been more hesitant, however.",
+          "verdict_reason": "The snippet directly addresses the query with a specific study finding they are distinct, but notes ongoing scientific disagreement, making it conflict-bearing evidence rather than a definitive resolution.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "It was determined that Apatosaurus and Brontosaurus fossils belonged to the same genus, making Apatosaurus the valid name.",
+          "quote": "Much later, it was determined that these two fossils belonged to the same genus—meaning that, according to the rules of paleontology, the name Apatosaurus took precedence",
+          "verdict_reason": "The snippet explicitly states that the two fossils were determined to belong to the same genus, directly answering the query about whether they are the same dinosaur.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Scientists have determined that Brontosaurus and Apatosaurus were distinct enough to be classified as separate genera rather than the same dinosaur.",
+          "quote": "In fact, Apatosaurus and Brontosaurus were different enough to be separate genera, rather than related species of the same genus.",
+          "verdict_reason": "The snippet directly answers the query by stating that recent scientific findings confirm Brontosaurus and Apatosaurus are separate genera, resolving the question of whether they are the same.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_15ffab2466f7",
+      "claim_index": 0,
+      "claim": "Given the conflicting information, the most reliable sources indicate that The Phantom of the Opera played at the Pantages Theatre in Toronto",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Toronto production of The Phantom of the Opera was staged at the Pantages Theatre on Yonge Street.",
+          "quote": "The painstaking restoration of the Pantages Theatre on Yonge Street was done specifically for the Toronto sitdown of The Phantom of the Opera.",
+          "verdict_reason": "The snippet identifies the specific venue (Pantages Theatre) but lacks dates or other location details, making it incomplete yet directly relevant evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Phantom of the Opera played at the Pantages Theatre in Toronto.",
+          "quote": "Venue: Toronto, Canada @ Pantages Theatre.",
+          "verdict_reason": "The snippet explicitly identifies the Pantages Theatre as the venue where the production played in Toronto, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Phantom of the Opera played at the Princess of Wales Theatre in Toronto.",
+          "quote": "Theatre\nPrincess of Wales Theatre\n300 King Street West, Toronto",
+          "verdict_reason": "The snippet explicitly identifies the Princess of Wales Theatre in Toronto as the venue where the production was performed.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_1ef881d26e2e",
+      "claim_index": 1,
+      "claim": "explicitly states that Maryam Mirzakhani is the only woman to ever receive the Fields Medal, while other documents indicate that there have been two female recipients, Maryam Mirzakhani and Maryna Viazovska",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states there have been two female recipients, Maryam Mirzakhani and Maryna Viazovska, contradicting the query's premise of only one.",
+          "quote": "Female recipients The Fields Medal has had two female recipients, Maryam Mirzakhani from Iran in 2014, and Maryna Viazovska from Ukraine in 2022.",
+          "verdict_reason": "The snippet directly addresses the query about female recipients but contradicts the 'only one' premise by listing two, serving as conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Maryna Viazovska is the second female winner, making Maryam Mirzakhani one of only two females to win the Fields Medal to date.",
+          "quote": "one is a female Ukrainian mathematician Maryna Sergiivna Viazovska making her the second female winner of the Medal and to date one of the only two females to win the prestigious honor.",
+          "verdict_reason": "Snippet addresses the query by identifying a second female recipient, contradicting the premise that there is only one, thus providing conflict-bearing evidence rather than direct support.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Maryam Mirzakhani was the first woman to be awarded a Fields Medal in 2014.",
+          "quote": "Maryam Mirzakhani ... was an Iranian mathematician who became (2014) the first woman and the first Iranian to be awarded a Fields Medal.",
+          "verdict_reason": "The snippet confirms Mirzakhani was the first female recipient but does not explicitly state she is the only one, leaving the 'only' part of the query unverified by this text alone.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Maryam Mirzakhani is the only woman to ever receive the Fields Medal.",
+          "quote": "Maryam Mirzakhani was an Iranian mathematician who is the only woman to ever receive the Fields Medal",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating that Maryam Mirzakhani is the only woman to ever receive the Fields Medal.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_80857a692531",
+      "claim_index": 1,
+      "claim": "The key fact from the most reliable sources is that farmed salmon has the same nutritional value as wild salmon, with nearly identical profiles of protein and Omega-3 fatty acids",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Farmed salmon has the same nutritional value as wild salmon, with nearly identical profiles of protein and Omega-3 fatty acids.",
+          "quote": "Farmed salmon has just as much nutritional value as its wild counterpart. ... their tastes and nutritional profile are nearly identical. Both wild and farmed salmon are an excellent source of lean protein, Omega-3 fatty acids, and other vital nutrients.",
+          "verdict_reason": "The snippet directly answers the query by stating farmed and wild salmon have nearly identical nutritional profiles and equal value.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Farmed and wild salmon have similar nutrient profiles, though they can vary slightly based on species, harvest time, and diet.",
+          "quote": "Both varieties have a similar nutrient profile, though it can vary slightly depending on species, the time of year the fish is harvested, and its diet.",
+          "verdict_reason": "The snippet directly addresses the comparison, stating profiles are similar but vary slightly, which partially answers the query without providing specific comparative data.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_b9854bd5a19e",
+      "claim_index": 0,
+      "claim": "While presents conflicting evidence by disputing claims that the human brain shrank during the Bronze Age due to societal complexity provides information on the evolution of brain size without directly addressing the current trend, the majority of the evidence supports the notion that human brain size has decreased over time",
+      "cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Scientists from UNLV and Liverpool John Moores University dispute claims that the human brain shrank during the Bronze Age due to societal complexity.",
+          "quote": "Last year, a study was widely circulated in which scientists claimed that the human brain shrank as a result of our transition into living in more complex urban societies. But scientists from the University of Nevada, Las Vegas (UNLV) and Liverpool John Moores University beg to differ.",
+          "verdict_reason": "The snippet directly addresses the query by presenting scientific evidence disputing the claim of brain size decrease, serving as conflict-bearing evidence regarding the specific proposition.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Human brain volume increased during evolution up to 1680 cm3, with Neanderthals exceeding modern Homo sapiens in size.",
+          "quote": "From early primates to hominids and finally to Homo sapiens, the brain gets progressively larger - with the exception of extinct Neanderthals whose brain size exceeded that of modern Homo sapiens.",
+          "verdict_reason": "Snippet addresses human brain size evolution and notes Neanderthals were larger than modern humans, providing partial evidence relevant to size changes over time.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "trust_align_004",
+      "claim_index": 2,
+      "claim": "Documents are all considered irrelevant or partially support without explicitly naming the St. Louis Cardinals or confirming their spring training location",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 0.25,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet exclusively discusses the Chicago Cubs' spring training location and management changes. It provides no information regarding the St. Louis Cardinals, making it irrelevant to the specific entity queried.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses spring training in Florida and mentions renovations to Pirate City, but does not explicitly state that the St. Louis Cardinals train there.",
+          "quote": "Florida. Only the Detroit Tigers in Lakeland (65 years), and the Philadelphia Phillies in Clearwater (64 years) have been in their Spring training locations longer.",
+          "verdict_reason": "Snippet discusses Florida spring training context and Pirate City (Cardinals' facility) but fails to explicitly name the St. Louis Cardinals or confirm their location.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet exclusively details the spring training history and facilities of the Chicago Cubs ('North Siders'), providing no evidence regarding the St. Louis Cardinals.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses spring training for multiple other MLB teams but contains no mention of the St. Louis Cardinals or their training location.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

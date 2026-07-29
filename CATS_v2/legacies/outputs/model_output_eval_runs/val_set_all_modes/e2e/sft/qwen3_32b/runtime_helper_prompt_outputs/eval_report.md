@@ -1,0 +1,165 @@
+# CATS v2.0 Evaluation Report
+
+================================================================================
+
+## Overall Conflict-Aware Metrics
+
+**Total Samples**: 49
+
+**Correct Refusals**: 15 (GR=1.0 only; excluded from behavior/grounding/recall averages)
+
+**GR Accuracy**: 0.980 (over 49 samples)
+
+**GR F1** *(used in CATS)*: 0.985
+
+**Behavior Adherence**: 0.765 (over 34 applicable samples)
+
+**Factual Grounding**: 0.912 (over 34 applicable samples)
+
+**Single-Truth Recall**: 0.853 (over 17 applicable samples)
+
+--------------------------------------------------------------------------------
+
+### CATS Score: 0.879
+
+*(average of 4 applicable sub-metrics)*
+
+--------------------------------------------------------------------------------
+
+
+### Dataset-level GR Metrics
+
+- **F1** *(CATS component)*: 0.985
+- **Precision**: 1.000
+- **Recall**: 0.971
+- **Accuracy**: 0.980
+- TP=33, FP=0, FN=1, TN=15
+
+
+## Per Conflict Type Breakdown
+
+### Type 1: No Conflict
+
+- **Samples**: 19 (7 correct refusals excluded from sub-metrics)
+- **GR Accuracy**: 1.000
+- **GR F1** *(used in CATS)*: 1.000
+- **Behavior**: 0.667 (n=12)
+- **Grounding**: 0.972 (n=12)
+- **Recall**: 0.917 (n=12)
+- **CATS**: 0.889
+
+### Type 2: Complementary Info
+
+- **Samples**: 15 (7 correct refusals excluded from sub-metrics)
+- **GR Accuracy**: 0.933
+- **GR F1** *(used in CATS)*: 0.933
+- **Behavior**: 0.750 (n=8)
+- **Grounding**: 0.750 (n=8)
+- **Recall**: 0.000 (n=0)
+- **CATS**: 0.811
+
+### Type 3: Conflicting Opinions
+
+- **Samples**: 10 (1 correct refusals excluded from sub-metrics)
+- **GR Accuracy**: 1.000
+- **GR F1** *(used in CATS)*: 1.000
+- **Behavior**: 0.889 (n=9)
+- **Grounding**: 0.963 (n=9)
+- **Recall**: 0.000 (n=0)
+- **CATS**: 0.951
+
+### Type 4: Outdated Info
+
+- **Samples**: 5
+- **GR Accuracy**: 1.000
+- **GR F1** *(used in CATS)*: 1.000
+- **Behavior**: 0.800 (n=5)
+- **Grounding**: 0.933 (n=5)
+- **Recall**: 0.700 (n=5)
+- **CATS**: 0.858
+
+
+================================================================================
+
+## Cost Summary
+
+**Total Cost**: $0.0896
+
+**Decisions Made**: 152
+
+**Average Cost per Decision**: $0.000590
+
+
+### Per-Model Cost Breakdown
+
+#### codex-cli/default
+
+- **Billing Note**: Cost is **unmetered in this report**. This judge ran via local CLI, and token usage was not available to the evaluator.
+- **Total Cost**: $0.0000
+- **Total Requests**: 152
+- **Average Cost per Request**: $0.000000
+
+#### deepseek-v4-flash
+
+- **Total Cost**: $0.0896
+- **Total Requests**: 152
+- **Average Cost per Request**: $0.000590
+
+
+## Unsupported Grounding Claims
+
+These claims reduced the factual-grounding score and are useful for ceiling debugging.
+
+### Sample #0127
+
+- **Reason**: no_supporting_doc_found
+- **Cited Docs**: d5, d9
+- **Supporting Docs Found**: None
+- **Claim**: It first set foot on the Indian subcontinent on August 24, 1608, when it landed at the port of Surat was granted permission to establish trading posts by the Mughal Empire
+
+### Sample #0159
+
+- **Reason**: supporting_doc_not_cited
+- **Cited Docs**: d1, d11
+- **Supporting Docs Found**: d2, d6, d5, d10, d3, d8, d7
+- **Claim**: Ultimately, the degree to which heat treatment affects value is highly variable by gemstone type, with ruby and sapphire being the most sensitive to heating, while other stones are more tolerant of the practice
+
+### Sample #0190
+
+- **Reason**: no_supporting_doc_found
+- **Cited Docs**: d9
+- **Supporting Docs Found**: None
+- **Claim**: In international contexts, the General Law on the Rights of Children and Adolescents establishes 18 as the general age of marriage in some countries in colonial America the default minimum was 12 for females and 14 for males under English common law
+
+### Sample #0229
+
+- **Reason**: supporting_doc_not_cited
+- **Cited Docs**: d4
+- **Supporting Docs Found**: d5
+- **Claim**: A peer-reviewed study published in the Annals of the Rheumatic Diseases further confirms that smoking increases RA risk and interacts with RA-risk genes to produce an excessive risk of anticitrullinated protein antibodies-positive RA
+
+### Sample #0333
+
+- **Reason**: supporting_doc_not_cited
+- **Cited Docs**: d8, d6
+- **Supporting Docs Found**: d3, d1, d4
+- **Claim**: Her confirmation as the 116th Associate Justice made her the most recent addition to the Court, superseding earlier appointments such as Amy Coney Barrett (confirmed October 26, 2020)
+
+### Sample #0416
+
+- **Reason**: supporting_doc_not_cited
+- **Cited Docs**: d3, d4
+- **Supporting Docs Found**: d6
+- **Claim**: The Word of Wisdom, received as a revelation in 1833, was not initially given as a commandment but as 'a principle with promise'
+
+### Sample #0427
+
+- **Reason**: no_supporting_doc_found
+- **Cited Docs**: None
+- **Supporting Docs Found**: None
+- **Claim**: CANNOT ANSWER, INSUFFICIENT EVIDENCE
+
+
+================================================================================
+
+*Report generated by CATS v2.0*

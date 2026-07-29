@@ -31,6 +31,12 @@ Usage:
         --output data/stage2_outputs/refusals_stage2_multi.jsonl \\
         --refusal-mode \\
         --concurrency 20
+BENCHMARK dataset  (run WITH --benchmark-mode):
+    Use this when benchmark labels should be re-annotated by the committee
+    from per-document notes, without forcing a refusal outcome.
+    Votes on   : conflict_type  AND  answerable_under_evidence independently
+    Adopts     : conflict_reason from the conflict_type-vote winner
+    Prompts    : system_stage2_benchmark.txt / user_stage2_benchmark.txt
 """
 
 import argparse
@@ -46,7 +52,16 @@ THIS_FILE    = Path(__file__).resolve()
 PROJECT_ROOT = THIS_FILE.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.llm_client import LLMClient, Provider
+from src.llm_client import LLMClient
+from src.llm_cache import CacheMissError
+from src.committee_config import (
+    build_clients_for_committee,
+    cache_mode_for_backend,
+    client_max_tokens,
+    configure_committee_for_backend,
+    describe_committee,
+    max_concurrency_for_backend,
+)
 from src.parsers    import parse_stage2, parse_stage2_refusal
 from src.voting     import COMMITTEE_MODELS, MODEL_WEIGHTS, merge_stage2_votes
 from src.cost_tracker import (
@@ -61,6 +76,8 @@ SYSTEM_CONFLICTS = PROJECT_ROOT / "prompts" / "system_stage2.txt"
 USER_CONFLICTS   = PROJECT_ROOT / "prompts" / "user_stage2.txt"
 SYSTEM_REFUSALS  = PROJECT_ROOT / "prompts" / "system_stage2_refusal.txt"
 USER_REFUSALS    = PROJECT_ROOT / "prompts" / "user_stage2_refusal.txt"
+SYSTEM_BENCHMARK = PROJECT_ROOT / "prompts" / "system_stage2_benchmark.txt"
+USER_BENCHMARK   = PROJECT_ROOT / "prompts" / "user_stage2_benchmark.txt"
 
 STAGE2_MAX_TOKENS = 400   # slightly more than v2 to accommodate conflict_type field in refusal output
 
@@ -129,35 +146,43 @@ async def call_one_model(
     semaphore: asyncio.Semaphore,
     system_prompt: str,
     user_prompt: str,
-    is_refusal: bool,
+    mode: str,
     tracker: CostTracker,
     cache_enabled: bool,
-) -> Dict[str, Any]:
+    cache_mode: str,
+) -> Dict[str, Any] | None:
     """One API call: one committee model for one record."""
     async with semaphore:
         try:
             raw = await client.acomplete(
                 system=system_prompt,
                 user=user_prompt,
-                max_tokens=STAGE2_MAX_TOKENS,
+                max_tokens=client_max_tokens(client, STAGE2_MAX_TOKENS),
                 cost_tracker=tracker,
                 cache_enabled=cache_enabled,
-                cache_namespace="stage2_multi_refusal" if is_refusal else "stage2_multi",
+                cache_mode=cache_mode,
+                cache_namespace=(
+                    "stage2_multi_refusal" if mode == "refusal"
+                    else "stage2_multi_benchmark" if mode == "benchmark"
+                    else "stage2_multi"
+                ),
             )
-            if is_refusal:
+            if mode in {"refusal", "benchmark"}:
                 parsed, errors = parse_stage2_refusal(raw)
             else:
                 parsed, errors = parse_stage2(raw)
             if errors:
                 parsed["_validation_errors"] = errors
             return parsed
+        except CacheMissError:
+            raise
         except Exception as exc:
             base: Dict[str, Any] = {
                 "conflict_reason":           f"API error: {str(exc)[:120]}",
                 "answerable_under_evidence": False,
                 "_error":                    str(exc),
             }
-            if is_refusal:
+            if mode in {"refusal", "benchmark"}:
                 base["conflict_type"] = ""
             return base
 
@@ -172,30 +197,31 @@ async def process_record(
     system_prompt: str,
     user_prompt: str,
     record: Dict[str, Any],
-    is_refusal: bool,
+    mode: str,
     out_lock: asyncio.Lock,
     output_path: str,
     tracker: CostTracker,
     cache_enabled: bool,
+    cache_mode: str,
 ) -> None:
     # Run all committee models concurrently for this single record
     coros = [
         call_one_model(
             clients[model], semaphore, system_prompt, user_prompt,
-            is_refusal, tracker, cache_enabled
+            mode, tracker, cache_enabled, cache_mode
         )
         for model in COMMITTEE_MODELS
     ]
     raw_results   = await asyncio.gather(*coros)
     model_records = {model: raw_results[i] for i, model in enumerate(COMMITTEE_MODELS)}
 
-    merged = merge_stage2_votes(model_records, is_refusal=is_refusal)
+    merged = merge_stage2_votes(model_records, is_refusal=(mode == "refusal"), vote_conflict_type=(mode != "conflicts"))
 
     # Write consensus back into the record
     record["answerable_under_evidence"] = merged["answerable_under_evidence"]
     record["conflict_reason"]           = merged.get("conflict_reason", "")
 
-    if is_refusal:
+    if mode != "conflicts":
         # Preserve original input label for analysis; overwrite with committee vote
         if "conflict_type" in record:
             record["_gold_conflict_type"] = record["conflict_type"]
@@ -216,9 +242,11 @@ async def process_record(
 # ─────────────────────────────────────────────
 
 async def run(args: argparse.Namespace) -> None:
-    is_refusal = args.refusal_mode
+    if args.refusal_mode and args.benchmark_mode:
+        raise ValueError("Choose only one of --refusal-mode or --benchmark-mode")
 
-    if is_refusal:
+    if args.refusal_mode:
+        mode = "refusal"
         if not SYSTEM_REFUSALS.exists():
             raise FileNotFoundError(
                 f"Refusal system prompt not found: {SYSTEM_REFUSALS}\n"
@@ -232,7 +260,25 @@ async def run(args: argparse.Namespace) -> None:
         system_prompt = load_text(SYSTEM_REFUSALS)
         user_template = load_text(USER_REFUSALS)
         mode_label    = "REFUSAL (ground-truth refusal; committee votes conflict_type)"
+    elif args.benchmark_mode:
+        mode = "benchmark"
+        system_path = Path(args.system_prompt) if args.system_prompt else SYSTEM_BENCHMARK
+        user_path = Path(args.user_prompt) if args.user_prompt else USER_BENCHMARK
+        if not system_path.exists():
+            raise FileNotFoundError(
+                f"Benchmark system prompt not found: {system_path}\n"
+                "Ensure prompts/system_stage2_benchmark.txt exists."
+            )
+        if not user_path.exists():
+            raise FileNotFoundError(
+                f"Benchmark user prompt not found: {user_path}\n"
+                "Ensure prompts/user_stage2_benchmark.txt exists."
+            )
+        system_prompt = load_text(system_path)
+        user_template = load_text(user_path)
+        mode_label = "BENCHMARK (committee votes conflict_type and answerability)"
     else:
+        mode = "conflicts"
         system_prompt = load_text(
             Path(args.system_prompt) if args.system_prompt else SYSTEM_CONFLICTS
         )
@@ -241,15 +287,25 @@ async def run(args: argparse.Namespace) -> None:
         )
         mode_label = "CONFLICTS (uses gold conflict_type)"
 
-    clients = {
-        model: LLMClient(
-            provider    = Provider.OPENROUTER,
-            model       = model,
-            temperature = args.temperature,
-            max_retries = args.max_retries,
-        )
-        for model in COMMITTEE_MODELS
-    }
+    committee_cfg = configure_committee_for_backend(
+        backend=args.committee_backend,
+        config_path=args.committee_config,
+        cache_mode_override=args.cache_mode,
+        cache_dir_override=args.cache_dir,
+    )
+    args.concurrency = max_concurrency_for_backend(args.concurrency, committee_cfg)
+    resolved_cache_mode = cache_mode_for_backend(
+        backend=args.committee_backend,
+        committee_config=committee_cfg,
+        use_cache=args.use_cache,
+        cache_mode_override=args.cache_mode,
+    )
+    clients = build_clients_for_committee(
+        backend=args.committee_backend,
+        committee_config=committee_cfg,
+        temperature=args.temperature,
+        max_retries=args.max_retries,
+    )
 
     records  = load_records(args.input)
     done_ids = load_processed_ids(args.output)
@@ -264,15 +320,15 @@ async def run(args: argparse.Namespace) -> None:
 
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
     print(
-        f"⚙️  Stage-2 multi-LLM | mode={mode_label} | "
+        f"⚙️  Stage-2 multi-LLM | backend={args.committee_backend} | mode={mode_label} | "
         f"committee={len(COMMITTEE_MODELS)} models | "
         f"records={len(records)} | concurrency={args.concurrency}"
     )
-    for model, weight in MODEL_WEIGHTS.items():
-        print(f"   {weight:.0%}  {model}")
+    for line in describe_committee(backend=args.committee_backend, committee_config=committee_cfg):
+        print(line)
     if done_ids:
         print(f"⏩ Resuming: {len(done_ids)} already processed")
-    print(f"   cache={'on' if args.use_cache else 'off'}")
+    print(f"   cache_mode={resolved_cache_mode}")
 
     semaphore = asyncio.Semaphore(args.concurrency)
     out_lock  = asyncio.Lock()
@@ -280,7 +336,7 @@ async def run(args: argparse.Namespace) -> None:
 
     # Pre-build user prompts per record (done outside async for clarity)
     def make_user_prompt(record: Dict[str, Any]) -> str:
-        if is_refusal:
+        if mode in {"refusal", "benchmark"}:
             return build_user_prompt_refusals(user_template, record)
         return build_user_prompt_conflicts(user_template, record)
 
@@ -288,10 +344,11 @@ async def run(args: argparse.Namespace) -> None:
         process_record(
             clients, semaphore,
             system_prompt, make_user_prompt(rec),
-            rec, is_refusal,
+            rec, mode,
             out_lock, args.output,
             tracker,
-            args.use_cache,
+            resolved_cache_mode != "off",
+            resolved_cache_mode,
         )
         for rec in records
     ]
@@ -316,9 +373,10 @@ def main() -> None:
     ap = argparse.ArgumentParser(
         description=(
             "Multi-LLM Stage-2 conflict reasoning + answerability with weighted majority voting.\n"
-            "All committee models are accessed via OpenRouter.\n\n"
+            "Default backend is OpenRouter; local_openai is available via --committee-config.\n\n"
             "  Default (no --refusal-mode): CONFLICTS dataset — gold conflict_type used as-is.\n"
-            "  With --refusal-mode: REFUSALS dataset — refusal is ground truth; committee still votes conflict_type."
+            "  With --refusal-mode: REFUSALS dataset — refusal is ground truth; committee still votes conflict_type.\n"
+            "  With --benchmark-mode: BENCHMARK dataset — committee votes conflict_type and answerability."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
@@ -330,6 +388,11 @@ def main() -> None:
                     help=(
                         "Activate refusal ground-truth mode: committee still votes conflict_type "
                         "while producing refusal-oriented Stage-2 annotations."
+                    ))
+    ap.add_argument("--benchmark-mode", dest="benchmark_mode", action="store_true", default=False,
+                    help=(
+                        "Activate benchmark mode: committee votes conflict_type and "
+                        "answerable_under_evidence without forcing refusal behavior."
                     ))
     ap.add_argument("--temperature",   type=float, default=0.0)
     ap.add_argument("--concurrency",   type=int,   default=20,
@@ -348,8 +411,21 @@ def main() -> None:
                     help="Path to save cumulative cost summary JSON (default: <output>_cost_cumulative.json)")
     ap.add_argument("--use-cache",     dest="use_cache", action="store_true", default=False,
                     help="Reuse/write local raw-response cache for exact matching calls")
+    ap.add_argument("--committee-backend", choices=["openrouter", "local_openai"],
+                    default="openrouter",
+                    help="Committee backend (default: openrouter)")
+    ap.add_argument("--committee-config", default=None,
+                    help="JSON local_openai committee config")
+    ap.add_argument("--cache-mode", choices=["off", "read_write", "read_only", "write_only"],
+                    default=None,
+                    help="Explicit raw-response cache mode")
+    ap.add_argument("--cache-dir", default=None,
+                    help="Override response cache root directory")
     args = ap.parse_args()
-    asyncio.run(run(args))
+    try:
+        asyncio.run(run(args))
+    except CacheMissError as exc:
+        raise SystemExit(f"Read-only cache miss: {exc}") from None
 
 
 if __name__ == "__main__":

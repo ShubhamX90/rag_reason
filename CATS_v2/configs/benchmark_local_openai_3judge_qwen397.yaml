@@ -1,0 +1,65 @@
+# CATS v2.0 - Benchmark local OpenAI-compatible 3-judge committee
+#
+# Benchmark input root:
+#   inputs/prepped_model_eval_inputs/benchmark_set_all_modes/.../input.jsonl
+#
+# Committee shape:
+#   - Qwen3.5-397B-A17B        priority 6
+#   - Mistral Small 4          priority 3
+#   - DeepSeek-R1-Distill-32B  priority 2
+#
+# Notes:
+#   - Gemma is intentionally removed from this benchmark committee.
+#   - Behavior + single-truth voting use priority * judge_confidence.
+#   - Factual-grounding doc/support votes use raw priority only.
+#
+# Run with:
+#   python run_evaluation.py \
+#     --input inputs/prepped_model_eval_inputs/benchmark_set_all_modes/<...>/input.jsonl \
+#     --config configs/benchmark_local_openai_3judge_qwen397.yaml \
+#     --committee local
+
+outputs_dir: "outputs/benchmark_local_committee_3judge/run_outputs/all_at_once"
+report_md: "outputs/benchmark_local_committee_3judge/run_outputs/all_at_once/eval_report.md"
+detailed_results_json: "outputs/benchmark_local_committee_3judge/run_outputs/all_at_once/detailed_results.json"
+
+pipeline:
+  batch_size: 3
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "local_openai"
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 3
+    timeout_seconds: 900
+    response_cache_dir: "outputs/benchmark_local_committee_3judge/response_cache"
+    cache_mode: "read_write"
+    judges:
+      - model_id: "local/qwen3.5-397b-a17b"
+        base_url: "http://127.0.0.1:8001/v1"
+        priority: 6
+        max_tokens: 400
+        request_timeout: 900
+        extra_body:
+          chat_template_kwargs:
+            enable_thinking: false
+
+      - model_id: "local/mistral-small-4"
+        base_url: "http://127.0.0.1:8004/v1"
+        priority: 3
+        max_tokens: 400
+        request_timeout: 900
+
+      - model_id: "local/deepseek-r1-distill-32b"
+        base_url: "http://127.0.0.1:8002/v1"
+        priority: 2
+        max_tokens: 500
+        request_timeout: 900

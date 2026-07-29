@@ -7,7 +7,7 @@ Run RAG evaluation with multi-judge committee.
 
 Usage:
     python run_evaluation.py --input data/input.jsonl --config configs/default.yaml
-    python run_evaluation.py --input data/input.jsonl --committee conservative
+    python run_evaluation.py --input data/input.jsonl --config configs/val_tier2_local_openai.yaml --committee local
 """
 
 import argparse
@@ -30,9 +30,151 @@ from rag_eval import (
     logger,
     setup_file_logging,
     create_default_committee,
-    create_conservative_committee,
 )
-from rag_eval.config import EnhancedConflictEvalConfig
+from rag_eval.config import (
+    EnhancedConflictEvalConfig,
+    create_cli_committee,
+    create_local_openai_committee,
+    create_mixed_committee,
+    get_codex_cli_judge,
+    get_deepseek_api_judge,
+)
+
+
+def _load_yaml_config(path: str) -> dict:
+    """Load YAML config file. Returns {} if path is None or file unreadable."""
+    if not path:
+        return {}
+    try:
+        import yaml  # PyYAML
+    except ImportError:
+        logger.warning("PyYAML not installed; --config will be ignored. Run: pip install pyyaml")
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+        logger.info(f"Loaded config from {path}")
+        return data
+    except FileNotFoundError:
+        logger.error(f"Config file not found: {path}")
+        return {}
+    except Exception as e:
+        logger.error(f"Failed to parse YAML config {path}: {e}")
+        return {}
+
+
+def _apply_yaml_to_config(yaml_data: dict, config: EvaluationConfig, args) -> EvaluationConfig:
+    """Overlay parsed YAML onto a base EvaluationConfig.
+
+    Honors: outputs_dir, report_md, detailed_results_json,
+    pipeline.*, conflict_eval.* (committee voting_strategy / max_concurrent_requests
+    / priority_overrides, correct_refusal_full_credit,
+    require_cross_doc_verification, max_claims_per_answer).
+    """
+    if not yaml_data:
+        return config
+
+    # Top-level paths
+    for k in ("outputs_dir", "report_md", "detailed_results_json"):
+        if k in yaml_data:
+            setattr(config, k, yaml_data[k])
+
+    # Pipeline section
+    pipeline_section = yaml_data.get("pipeline") or {}
+    for k in ("batch_size", "verbose", "show_progress", "skip_on_error"):
+        if k in pipeline_section:
+            setattr(config.pipeline, k, pipeline_section[k])
+
+    # Conflict-eval section
+    ce = yaml_data.get("conflict_eval") or {}
+    for k in ("correct_refusal_full_credit", "require_cross_doc_verification",
+              "max_claims_per_answer", "allow_paraphrases", "aggregate_by_conflict_type",
+              "min_entail_confidence", "majority_support_rule", "neutral_as_support",
+              "partial_credit_fg"):
+        if k in ce:
+            setattr(config.conflict, k, ce[k])
+
+    # ignore_contradictions_types is a list in YAML but a tuple in the dataclass.
+    if "ignore_contradictions_types" in ce:
+        setattr(config.conflict, "ignore_contradictions_types", tuple(ce["ignore_contradictions_types"]))
+
+    # Committee section: voting strategy + priority overrides + explicit backend type
+    committee_section = ce.get("committee") or {}
+
+    committee_type = committee_section.get("type")
+    if committee_type == "cli":
+        # Rebuild as Codex-only CLI committee regardless of --committee arg.
+        codex_model = committee_section.get("codex_model")  # None → codex CLI default
+        max_conc = int(committee_section.get("max_concurrent_requests", 4))
+        config.conflict.use_judge_committee = True
+        config.conflict.committee = create_cli_committee(
+            codex_model=codex_model,
+            max_concurrent_requests=max_conc,
+        )
+        config.conflict.nli_judge = None
+        logger.info(f"YAML override: Codex-only CLI committee (codex_model={codex_model or 'default'})")
+    elif committee_type == "mixed":
+        codex_model = committee_section.get("codex_model", "gpt-5.4")
+        codex_priority = int(committee_section.get("codex_priority", 3))
+        deepseek_model = str(committee_section.get("deepseek_model", "deepseek-v4-flash"))
+        deepseek_priority = int(committee_section.get("deepseek_priority", 2))
+        max_conc = int(committee_section.get("max_concurrent_requests", 4))
+
+        config.conflict.use_judge_committee = True
+        config.conflict.committee = create_mixed_committee(
+            codex_model=codex_model,
+            codex_priority=codex_priority,
+            deepseek_model=deepseek_model,
+            deepseek_priority=deepseek_priority,
+            max_concurrent_requests=max_conc,
+        )
+        config.conflict.nli_judge = None
+        logger.info(
+            f"YAML override: MIXED committee (codex_model={codex_model}, "
+            f"deepseek_model={deepseek_model}, priorities={codex_priority}/{deepseek_priority})"
+        )
+    elif committee_type in ("local_openai", "local"):
+        judges = committee_section.get("judges") or []
+        if not judges:
+            raise ValueError(
+                "Local committee config requires conflict_eval.committee.judges with model_id and base_url entries"
+            )
+        max_conc = int(committee_section.get("max_concurrent_requests", 4))
+        timeout = float(committee_section.get("timeout_seconds", 600.0))
+        voting_strategy = committee_section.get("voting_strategy", "weighted_majority")
+        response_cache_dir = committee_section.get("response_cache_dir")
+        cache_mode = committee_section.get("cache_mode", "off")
+
+        config.conflict.use_judge_committee = True
+        config.conflict.committee = create_local_openai_committee(
+            judges=judges,
+            voting_strategy=voting_strategy,
+            max_concurrent_requests=max_conc,
+            timeout_seconds=timeout,
+            response_cache_dir=response_cache_dir,
+            cache_mode=cache_mode,
+        )
+        config.conflict.nli_judge = None
+        logger.info(
+            f"YAML override: local OpenAI-compatible committee "
+            f"({len(judges)} judges, max_concurrent_requests={max_conc})"
+        )
+    elif config.conflict.committee is not None:
+        if "voting_strategy" in committee_section:
+            config.conflict.committee.voting_strategy = committee_section["voting_strategy"]
+        if "max_concurrent_requests" in committee_section:
+            config.conflict.committee.max_concurrent_requests = int(committee_section["max_concurrent_requests"])
+
+        # Apply priority overrides — rebuild the OpenRouter committee with new priorities.
+        overrides = committee_section.get("priority_overrides")
+        if overrides:
+            from rag_eval.config import create_default_committee
+            config.conflict.committee = create_default_committee(
+                priority_overrides=overrides,
+                max_concurrent_requests=config.conflict.committee.max_concurrent_requests,
+            )
+
+    return config
 
 
 def parse_args():
@@ -59,9 +201,9 @@ def parse_args():
     parser.add_argument(
         "--committee",
         type=str,
-        choices=["default", "conservative", "none"],
+        choices=["default", "cli", "local", "none"],
         default="default",
-        help="Judge committee preset: default (Haiku+DeepSeek+Qwen), conservative (cheaper), none (single judge)"
+        help="Judge committee preset: default (OpenRouter API), cli (Codex CLI only), local (YAML local_openai), none (skip committee)"
     )
     
     # Configuration
@@ -113,35 +255,66 @@ def setup_config(args, input_file: str, output_dir: str) -> EvaluationConfig:
     config.pipeline.batch_size = args.batch_size
     config.pipeline.verbose = args.verbose
     
-    # Validate API keys before setting up committee
-    anthropic_key = os.getenv("ANTHROPIC_API_KEY")
-    openrouter_key = os.getenv("OPENROUTER_API_KEY")
-    
-    if not anthropic_key:
-        logger.error("ANTHROPIC_API_KEY not found in environment!")
-        logger.error("Please set it in your .env file or export it:")
-        logger.error("  export ANTHROPIC_API_KEY=sk-ant-your-key-here")
-        sys.exit(1)
-    
-    if not openrouter_key and args.committee in ["default", "conservative"]:
-        logger.error("OPENROUTER_API_KEY not found in environment!")
-        logger.error("Please set it in your .env file or export it:")
-        logger.error("  export OPENROUTER_API_KEY=your-key-here")
-        sys.exit(1)
-    
+    # Load YAML early so committee-type overrides can influence key checks.
+    yaml_data = _load_yaml_config(args.config)
+    yaml_committee_type = ((yaml_data.get("conflict_eval") or {}).get("committee") or {}).get("type")
+
     # Setup judge committee
-    if args.committee == "default":
+    local_yaml_types = ("cli", "mixed", "local_openai", "local")
+    if args.committee == "default" and yaml_committee_type not in local_yaml_types:
+        openrouter_key = os.getenv("OPENROUTER_API_KEY")
+        if not openrouter_key:
+            logger.error("OPENROUTER_API_KEY not found in environment!")
+            logger.error("Please set it in your .env file or export it:")
+            logger.error("  export OPENROUTER_API_KEY=your-key-here")
+            logger.error("Or use CLI/local judges with: --committee cli or --committee local")
+            sys.exit(1)
         config.conflict.use_judge_committee = True
         config.conflict.committee = create_default_committee()
-        logger.info("Using default judge committee (Haiku + DeepSeek + Qwen + Mistral)")
-    elif args.committee == "conservative":
+        logger.info("Using default judge committee (Haiku + GPT-5.4 + DeepSeek V3.2 via OpenRouter)")
+    elif args.committee == "cli":
         config.conflict.use_judge_committee = True
-        config.conflict.committee = create_conservative_committee()
-        logger.info("Using conservative judge committee (lower cost)")
+        config.conflict.committee = create_cli_committee()
+        config.conflict.nli_judge = None
+        logger.info("Using Codex-only CLI judge committee (codex exec, no Claude CLI)")
+    elif args.committee == "local":
+        config.conflict.use_judge_committee = True
+        config.conflict.committee = None
+        config.conflict.nli_judge = None
+        logger.info("Using local OpenAI-compatible judge committee from YAML config")
     else:
         config.conflict.use_judge_committee = False
         logger.info("Using single judge mode")
-    
+
+    # Apply YAML config overrides (if --config was passed). YAML wins over CLI
+    # for fields it specifies; CLI args remain authoritative for everything else.
+    config = _apply_yaml_to_config(yaml_data, config, args)
+
+    if args.committee == "local" and config.conflict.committee is None:
+        logger.error("--committee local requires a YAML config with conflict_eval.committee.type: local_openai")
+        sys.exit(1)
+
+    # Post-override provider-specific key checks.
+    committee = config.conflict.committee
+    if committee:
+        needs_openrouter = any(j.api_key_env == "OPENROUTER_API_KEY" for j in committee.judges)
+        needs_deepseek = any(j.api_key_env == "DEEPSEEK_API_KEY" for j in committee.judges)
+        nli_key = getattr(config.conflict.nli_judge, "api_key_env", None)
+        if nli_key == "OPENROUTER_API_KEY":
+            needs_openrouter = True
+        if nli_key == "DEEPSEEK_API_KEY":
+            needs_deepseek = True
+
+        if needs_openrouter and not os.getenv("OPENROUTER_API_KEY"):
+            logger.error("OPENROUTER_API_KEY not found in environment!")
+            logger.error("Please set it in your .env file or export it.")
+            sys.exit(1)
+
+        if needs_deepseek and not os.getenv("DEEPSEEK_API_KEY"):
+            logger.error("DEEPSEEK_API_KEY not found in environment!")
+            logger.error("Please set it in your .env file or export it.")
+            sys.exit(1)
+
     return config
 
 
@@ -197,21 +370,26 @@ async def process_single_file(args, input_file: str, file_idx: int, total: int):
         
         if "conflict_overall" in results:
             overall = results["conflict_overall"]
+            n = overall["n"]
+            n_cr = overall.get("correct_refusals", 0)
             logger.info("\nMetrics Summary:")
-            logger.info(f"  Samples evaluated: {overall['n']}")
-            logger.info(f"  F1_GR: {overall['f1_gr']:.3f}")
-            logger.info(f"  Behavior Adherence: {overall['behavior']:.3f}")
-            logger.info(f"  Factual Grounding: {overall['factual_grounding']:.3f}")
-            logger.info(f"  Single-Truth Recall: {overall['single_truth_recall']:.3f}")
-            
-            # CATS Score
-            import numpy as np
-            cats_score = np.mean([
-                overall['f1_gr'],
-                overall['behavior'],
-                overall['factual_grounding'],
-                overall['single_truth_recall']
-            ])
+            logger.info(f"  Samples evaluated: {n}")
+            if n_cr:
+                logger.info(f"  Correct refusals: {n_cr} (GR=1.0; excluded from sub-metric averages)")
+            logger.info(f"  GR Accuracy:        {overall['gr_accuracy']:.3f}  (n={n})")
+            if "gr_f1" in overall:
+                logger.info(f"  GR F1 (CATS input): {overall['gr_f1']:.3f}")
+            logger.info(f"  Behavior Adherence: {overall['behavior']:.3f}  (n={overall.get('behavior_n', n)})")
+            logger.info(f"  Factual Grounding:  {overall['factual_grounding']:.3f}  (n={overall.get('factual_grounding_n', n)})")
+            logger.info(f"  Single-Truth Recall:{overall['single_truth_recall']:.3f}  (n={overall.get('single_truth_recall_n', 0)})")
+
+            # Dataset-level F1 (proper precision/recall over TP/FP/FN)
+            if "gr_dataset_metrics" in results and results["gr_dataset_metrics"]:
+                g = results["gr_dataset_metrics"]
+                logger.info(f"  GR Dataset F1: {g['f1']:.3f} "
+                            f"(P={g['precision']:.3f}, R={g['recall']:.3f})")
+
+            cats_score = overall.get("cats_score", 0.0)
             logger.info(f"\nCATS Score: {cats_score:.3f}")
         
         if "cost_summary" in results:
@@ -223,16 +401,26 @@ async def process_single_file(args, input_file: str, file_idx: int, total: int):
             logger.info(f"Decisions Made: {cost['decisions_made']}")
             logger.info(f"Average Cost per Decision: ${cost['avg_cost_per_decision']:.6f}")
             
-            # Per-model costs
+            # Per-model costs (committee judges + NLI judge)
             if "per_judge_costs" in cost:
                 logger.info(f"\nPer-Model Costs:")
                 for model_id, model_cost in cost["per_judge_costs"].items():
-                    # Shorten model names for display
                     display_name = model_id.split('/')[-1] if '/' in model_id else model_id
-                    logger.info(f"  {display_name}:")
+                    logger.info(f"  {display_name} (committee):")
+                    if not model_cost.get("metered", True):
+                        logger.info("    Note: cost is unmetered in this report (local CLI token usage unavailable)")
                     logger.info(f"    Total: ${model_cost['total_cost']:.4f}")
                     logger.info(f"    Requests: {model_cost['requests']}")
                     logger.info(f"    Avg/Request: ${model_cost['avg_cost']:.6f}")
+            if "nli_judge_cost" in cost:
+                n = cost["nli_judge_cost"]
+                display_name = n["model_id"].split("/")[-1] if "/" in n["model_id"] else n["model_id"]
+                logger.info(f"  {display_name} (NLI judge):")
+                if not n.get("metered", True):
+                    logger.info("    Note: cost is unmetered in this report (local CLI token usage unavailable)")
+                logger.info(f"    Total: ${n['total_cost']:.4f}")
+                logger.info(f"    Requests: {n['requests']}")
+                logger.info(f"    Avg/Request: ${n['avg_cost']:.6f}")
         
         logger.info(f"\nOutput Files:")
         logger.info(f"  Report: {config.report_md}")

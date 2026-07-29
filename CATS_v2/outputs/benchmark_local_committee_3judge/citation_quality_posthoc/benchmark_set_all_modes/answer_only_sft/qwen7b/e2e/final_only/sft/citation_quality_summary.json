@@ -1,0 +1,1854 @@
+{
+  "variant": "benchmark_set_all_modes/answer_only_sft/qwen7b/e2e/final_only/sft",
+  "provenance": {
+    "account": "pabitra",
+    "launch": "answer_only_sft_phase1_qwen_deepseek_20260707",
+    "remote_cache": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/answer_only_sft_phase1_qwen_deepseek_20260707/answer_only_sft/qwen7b/e2e/final_only/sft/response_cache",
+    "source_final": "/scratch/pabitra/rag-reason/cats_outputs/benchmark_local_committee_3judge/answer_only_sft_phase1_qwen_deepseek_20260707/answer_only_sft/qwen7b/e2e/final_only/sft/final/detailed_results.json",
+    "source_final_sha256": "e942f50138cea8ffc5e73364db2fb3c51a8e5e2fa7b32e6e5632f811fb1e4977",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/answer_only_sft/qwen7b/e2e/final_only/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/answer_only_sft/qwen7b/e2e/final_only/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 941,
+    "claims_with_citations": 919,
+    "claims_with_committee_support_set": 874,
+    "claims_with_any_approved_citation": 774,
+    "claims_with_any_gold_positive_citation": 918,
+    "committee_alignment_precision_macro": 0.7705476967718534,
+    "committee_alignment_precision_micro": 0.7403482210446631,
+    "gold_positive_citation_precision_macro": 0.9943779470438883,
+    "gold_positive_citation_precision_micro": 0.991672975018925,
+    "soft_extra_citation_rate_micro": 0.2513247539742619,
+    "hard_negative_citation_rate_micro": 0.008327024981074944,
+    "committee_support_citation_recall_macro": 0.88558352402746,
+    "committee_support_citation_recall_micro": 0.88558352402746,
+    "claims_with_any_soft_extra_rate": 0.2981501632208923,
+    "claims_with_any_hard_negative_rate": 0.011969532100108813,
+    "strict_committee_alignment_claim_rate": 0.6780021253985122,
+    "strict_gold_clean_claim_rate": 0.8129649309245484,
+    "strict_grounded_committee_clean_rate_all_claims": 0.6780021253985122,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8129649309245484,
+    "total_cited_docs": 1321,
+    "total_approved_cited_docs": 978,
+    "total_gold_positive_cited_docs": 1310,
+    "total_soft_extra_cited_docs": 332,
+    "total_hard_negative_cited_docs": 11
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_f777a43ba278",
+      "claim_index": 1,
+      "claim": "Research suggests that chemicals in yerba mate, including polycyclic aromatic hydrocarbons (PAHs) — known carcinogens also found in grilled meat and tobacco smoke — may contribute to this risk , as well as the synergistic effect between mate, alcohol tobacco ; however, the evidence does not establish causation conclusively some studies have shown that yerba mate exhibits a cytotoxic effect on cancer cells in laboratory settings, suggesting it may have some anti-cancer properties in vitro",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking yerba mate is linked to higher esophageal cancer levels only when consumed at very high temperatures, not due to the drink itself.",
+          "quote": "Drinking yerba mate has also been linked with higher levels of esophageal cancer. This association only exists because many people drink yerba mate at very high temperatures, though. It has nothing to do with drinking yerba mate itself.",
+          "verdict_reason": "The snippet directly addresses the cancer query by distinguishing between temperature-related risk and the substance itself, providing nuanced but incomplete resolution regarding other cancer types.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Several studies found an association between the temperature of hot mate infusion and increased risks of oral, esophageal, and laryngeal cancer.",
+          "quote": "Several studies found an association between the temperature of the mate infusion and oral, esophageal, and/or laryngeal cancer risks",
+          "verdict_reason": "The snippet provides direct epidemiological evidence linking hot mate consumption to cancer risks, addressing the query but noting varied results and specific conditions like temperature.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Studies indicate that drinking large amounts of hot yerba mate over prolonged periods may increase the risk of esophageal, larynx, and oral cavity cancers.",
+          "quote": "some studies have indicated that people who drink large amounts of hot yerba mate over prolonged periods may be at increased risk of some types of cancer, such as cancer of the esophagus, larynx and oral cavity.",
+          "verdict_reason": "The snippet provides direct evidence linking hot yerba mate consumption to cancer risk, addressing the query with specific conditions rather than a definitive yes/no for all cases.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking yerba maté tea at very hot temperatures may increase the risk of esophageal cancer.",
+          "quote": "Drinking yerba maté tea at very hot temperatures may increase the risk of esophageal cancer.",
+          "verdict_reason": "The snippet directly addresses the query by linking yerba maté to increased cancer risk under specific conditions (hot temperature), providing conflict-bearing evidence without fully resolving the general causation question.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research links excessive yerba mate consumption to cancer due to PAH content and high drinking temperatures, though more research is needed for confirmation.",
+          "quote": "Consuming large quantities of mate tea has been linked to cancer, but more research is necessary to confirm all known side effects.",
+          "verdict_reason": "The snippet directly addresses the query by linking yerba mate to cancer via PAHs and temperature but notes research is incomplete, making it conflict-bearing but not definitive.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f7c719d9b0be",
+      "claim_index": 1,
+      "claim": "The FOMC is composed of twelve members — seven from the Board of Governors and five rotating presidents from Federal Reserve Banks — who meet regularly to influence money supply and interest rates through open market operations",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the organization responsible for setting monetary policy in the United States.",
+          "quote": "The organization that sets monetary policy for the United States is the Federal Open Market Committee (FOMC).",
+          "verdict_reason": "The snippet directly answers the query by explicitly identifying the FOMC as the organization that sets US monetary policy.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the organization responsible for setting monetary policy in the United States.",
+          "quote": "The organization that sets monetary policy for the United States is the Federal Open Market Committee (FOMC).",
+          "verdict_reason": "The snippet directly answers the query by explicitly identifying the Federal Open Market Committee as the entity that sets US monetary policy.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Federal Open Market Committee (FOMC) is the Federal Reserve's monetary policymaking body.",
+          "quote": "The Federal Open Market Committee (FOMC) is the Fed's monetary policymaking body.",
+          "verdict_reason": "The snippet explicitly identifies the FOMC as the specific organization responsible for monetary policy, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_07e290a954ab",
+      "claim_index": 1,
+      "claim": "Effectiveness appears to depend on depression severity—studies generally support St. John's wort for mild depression but not for severe depression or high suicidality",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Clinical evidence suggests St. John's wort is more effective than placebo and equivalent to standard antidepressants for mild to moderate depression.",
+          "quote": "Overall, the results of this body of work suggest that St. John's wort is more effective than placebo and about equivalent to low dose tricyclic antidepressants or to standard doses of SSRIs.",
+          "verdict_reason": "The snippet directly answers the query by summarizing clinical trials and meta-analyses confirming the remedy's effectiveness compared to placebo and antidepressants.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "St. John's wort has comparable efficacy to SSRIs for mild-to-moderate depression, but evidence is limited for severe cases or long-term use.",
+          "quote": "For patients with mild-to-moderate depression, St John's wort has comparable efficacy and safety when compared to SSRIs.",
+          "verdict_reason": "The snippet confirms efficacy for mild-to-moderate depression but explicitly limits this finding, noting unclear benefits for severe depression and limited long-term data.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_2395695f1604",
+      "claim_index": 2,
+      "claim": "The most cautious conclusion",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Excessive milk consumption is associated with increased respiratory tract mucus production.",
+          "quote": "Excessive milk consumption has a long association with increased respiratory tract mucus production and asthma.",
+          "verdict_reason": "Snippet directly addresses the query by stating an association between milk and mucus, but uses 'association' rather than confirming causation, making it partial evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "A review of studies concludes that milk consumption does not lead to mucus production or asthma occurrence.",
+          "quote": "Milk consumption does not lead to mucus production or occurrence of asthma",
+          "verdict_reason": "The snippet directly answers the query by stating a review's conclusion that milk consumption does not cause mucus production.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_288cd1b45aab",
+      "claim_index": 2,
+      "claim": "Additional sources note that while wrist rests can reduce muscle fatigue and pressure, they are not necessary for good ergonomics and may even cause compression of delicate nerves and tendons if used incorrectly",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Wrist rests are designed to reduce strain on wrists by encouraging a neutral position and minimizing discomfort during typing.",
+          "quote": "Its purpose is to provide comfort and ergonomic support by reducing strain on your wrists during long typing or gaming sessions.",
+          "verdict_reason": "The snippet claims wrist rests reduce strain and discomfort, directly addressing the query, but offers general assertions rather than definitive proof of pain minimization.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Wrist rests can reduce muscle fatigue in upper arm muscles by up to 32% during long typing sessions.",
+          "quote": "Wrist supports can reduce muscle fatigue in upper arm muscles by up to 32% during long typing sessions.",
+          "verdict_reason": "Snippet provides specific evidence that wrist rests reduce fatigue, addressing the query about minimizing pain, but frames it as conditional on correct usage rather than a definitive universal solution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_6ea6bbcb8743",
+      "claim_index": 1,
+      "claim": "However, many products can temporarily make split ends look smoother by coating the hair shaft or creating temporary bonds, though these effects are temporary and do not constitute true repair",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Split ends cannot be permanently repaired because hair is dead tissue, though products can temporarily smooth them.",
+          "quote": "once a split end forms, you can't permanently fuse it back together. Hair is dead tissue that can't regenerate, so the damage won't reverse.",
+          "verdict_reason": "The snippet directly addresses the query by stating permanent repair is impossible but temporary fixes exist, providing conflict-bearing evidence rather than a simple yes/no.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The only real way to get rid of split ends is to trim them off, though products can prevent them.",
+          "quote": "While the only real way to get rid of them is to simply trim them off, the good news is that the best products for split ends can prevent you from having to deal with them in the first place.",
+          "verdict_reason": "Snippet directly addresses the query by stating trimming is the only removal method, while noting prevention is possible; this partially resolves the repair question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_8cf8ebb94554",
+      "claim_index": 2,
+      "claim": "While braces may provide some benefit in specific circumstances—such as functional braces aiding stability during recovery from an injury—they should not be relied upon as a sole preventive strategy individuals should consult a healthcare provider to determine the most appropriate use",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Prophylactic knee braces are designed to prevent injuries during contact sports and have proven effective for football players.",
+          "quote": "Prophylactic braces. These are designed to prevent injury to the knees during contact sports. ... Knee braces have proven to be a wise preventative measure in this particular sport.",
+          "verdict_reason": "The snippet directly addresses injury prevention for specific sports (football) but lacks broad evidence for all knee injuries, making it partially supportive.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Prophylactic knee braces are designed to shield the kneecap from damage caused by direct impact in contact sports.",
+          "quote": "Prophylactic brace: This is a protective knee pad that shields the kneecap from damage due to direct impact. It's used by athletes who play contact sports, such as football.",
+          "verdict_reason": "The snippet describes a specific brace type for preventing impact damage, partially addressing injury prevention, but lacks broad evidence on overall effectiveness for all knee injuries.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_dc6f972e8447",
+      "claim_index": 2,
+      "claim": "While manipulation is a recognized problem, the extent and frequency of successful attempts remain actively debated",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Price manipulation in cryptocurrencies is a problem caused by bots known as Momentum Ignition algorithms.",
+          "quote": "Yes manipulation is a problem. Simply put, these patterns are caused by bots, commonly referred to as 'Momentum Ignition algorithms'.",
+          "verdict_reason": "The snippet confirms manipulation exists and identifies a cause, partially answering the query, but lacks details on how 'easily' it occurs.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The video title claims the crypto market is rigged and users are being played.",
+          "quote": "YouTube The Crypto Market Is Rigged… You're Being Played! - YouTube",
+          "verdict_reason": "The snippet directly addresses the query about manipulation by asserting the market is rigged, serving as conflict-bearing evidence despite lacking detailed proof in the title alone.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f3b163170581",
+      "claim_index": 1,
+      "claim": "The most widely supported scientific view holds that humans and apes share a common ancestor who lived millions of years ago, though the evidence is contested by creationist sources that read Genesis literally and reject the idea of evolution entirely",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that humans did not evolve from modern apes but shared a common ancestor with them according to Darwinian evolution.",
+          "quote": "Humans did not evolve from chimps, gorillas, or orangutans. However, according to Darwinian evolution, humans are related to modern apes in that we shared a common ancestor.",
+          "verdict_reason": "The snippet directly addresses the query by clarifying the evolutionary relationship (common ancestor vs. direct descent), providing conflict-bearing evidence relevant to the scientific claim.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document argues that humans did not evolve from apes, asserting they were separate creations by God.",
+          "quote": "So clearly, from a biblical perspective, man didn't evolve from any creature. This is very different from the evolution story, and both cannot be correct.",
+          "verdict_reason": "The snippet directly addresses the query by providing a contradictory viewpoint (creationism) to the evolutionary claim, serving as conflict-bearing evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_02b3ba89ebd0",
+      "claim_index": 1,
+      "claim": "Multiple candidates were nominated, including Jeffries (212 votes), Byron Donalds (17) Kevin Hern (3–7), but none won the speakership",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Kevin McCarthy failed to win the speakership on the ninth ballot, receiving only 200 votes.",
+          "quote": "McCarthy won 200 votes on the ninth ballot, leaving him 18 votes short of the 218 needed for a victory.",
+          "verdict_reason": "The snippet addresses the specific entity and ballot number but reports a failure to elect, providing conflict-bearing evidence that contradicts the query's premise without resolving the final outcome.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The House completed the eighth vote without electing a speaker, leaving the outcome of a potential ninth vote unclear at the time of reporting.",
+          "quote": "House completes 8th vote without electing a speaker... It's unclear whether a ninth vote will take place next, or whether the House will attempt to adjourn.",
+          "verdict_reason": "The snippet addresses the specific election event but only covers up to the eighth ballot, explicitly stating uncertainty about the ninth vote, thus providing incomplete but relevant conflict-bearing evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_64c12116affc",
+      "claim_index": 2,
+      "claim": "Multiple authoritative sources, including the White House itself, corroborate that Biden is the current president, superseding earlier terms of Trump (45th president, 2017–2021) and Barack Obama (44th president, 2009–2017)",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists historical U.S. Presidents from George Washington to Millard Fillmore but does not identify the current President.",
+          "quote": "Presidents of the United States of America | No. | Name | Politics | Date and state of birth | Year inaugurated | Date of Death | --- --- --- | | 1 | George WASHINGTON | Federalist | 1732, Feb 22. VA | 1789 | 1799, Dec 1 |",
+          "verdict_reason": "The snippet provides a list of past presidents relevant to the entity but is incomplete and outdated, failing to name the current President requested by the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Donald J. Trump is identified as the 45th and 47th President of the United States.",
+          "quote": "Donald J. Trump\n45th & 47th President of the United States",
+          "verdict_reason": "The snippet explicitly names Donald J. Trump as the 45th and 47th President, directly answering the query about the current US President.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_a41257e9d6f6",
+      "claim_index": 2,
+      "claim": "Rosenblatt's death came two years after the publication of Perceptrons by Marvin Minsky and Seymour Papert, which argued that the Perceptron could only solve linearly separable functions, leading to a decline in funding and interest in the field",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Frank Rosenblatt died in a boating accident two years after the publication of Minsky and Papert's book.",
+          "quote": "Sadly, two years after the book was published, Rosenblatt died in a boating accident.",
+          "verdict_reason": "The snippet explicitly states the cause of death (boating accident) for Rosenblatt, the inventor of the Perceptron, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet confirms Frank Rosenblatt died in 1971 but does not state the cause of his death.",
+          "quote": "When Rosenblatt died in 1971",
+          "verdict_reason": "The document addresses the specific entity (Rosenblatt) and confirms his death year, but fails to provide the cause of death requested by the query, making it incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_0b3b6452e224",
+      "claim_index": 1,
+      "claim": "He completed the head and the torch-bearing arm before the statue was fully designed these pieces were exhibited for publicity at international expositions",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies the designer as Frédéric Auguste Bartholdi but does not state who the statue was modeled after.",
+          "quote": "The Statue of Liberty, a gift from the people of France to the United States, arrived in the USA in 1885. Here's how it happened: Design and Construction: The statue was designed by French sculptor Frédéric Auguste Bartholdi",
+          "verdict_reason": "The document addresses the same entity and designer but fails to provide the specific answer regarding the model or inspiration for the design, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Frédéric Auguste Bartholdi modeled the Statue of Liberty's face after his mother.",
+          "quote": "Bartholdi added a personal touch by modeling the statue's face after his mother.",
+          "verdict_reason": "The snippet directly answers the query by stating the specific person (Bartholdi's mother) after whom the statue's face was modeled.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_3c1297608017",
+      "claim_index": 1,
+      "claim": "The other theory points to early Christianity: followers developed hand gestures to recognize each other in secret crossing fingers (or thumbs and index fingers) was one such sign; over time, the gesture evolved from requiring a partner to being performed solo",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Historians theorize the practice originated from pre-Christian sacred geometry beliefs or as a secret sign among early Christians, though exact origins are not definitively known.",
+          "quote": "The exact origins of this practice aren't definitively known, but historians have a couple theories as to how the modern practice came about, though there is some guesswork in this.",
+          "verdict_reason": "The snippet addresses the query directly by offering historical theories but explicitly states the origins are not definitively known, making the evidence incomplete rather than decisive.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The practice of crossing fingers for good luck originated in pre-Christian times when the cross symbolized unity and benign spirits at the intersection point.",
+          "quote": "Crossing the fingers dates back to pre-Christian times when the cross was a symbol of unity and benign spirits dwelt at the intersection point.",
+          "verdict_reason": "The snippet directly answers the query by explaining the historical origin of crossing fingers for good luck, citing pre-Christian beliefs and early European customs.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_5eeb46719843",
+      "claim_index": 2,
+      "claim": "The Statute of Westminster in 1931 further solidified Canada's legislative independence Canada's constitutional framework was fully decolonized with the 1982 Canada Act, which declared no British law would henceforth apply to Canada",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The country called the Dominion of Canada was formed on July 1, 1867.",
+          "quote": "On July 1, 1867, the country called the Dominion of Canada was formed from New Brunswick, Nova Scotia and the Province of Canada.",
+          "verdict_reason": "The snippet explicitly states the date Canada was formed as a country (Dominion of Canada), directly answering the query about gaining independence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Canada's independence was an evolutionary process impossible to ascribe to a particular date, with key milestones in 1919, 1931, and 1982.",
+          "quote": "Canada's transition from a self-governing British colony into a fully independent state was an evolutionary process, which arose in such a gradual fashion that it is impossible to ascribe independence to a particular date.",
+          "verdict_reason": "The snippet directly addresses the query by explaining that no single date exists for Canadian independence, offering relevant context and dates while noting the complexity.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_720d8b210357",
+      "claim_index": 2,
+      "claim": "The average number across eukaryotes is estimated at roughly 5,000–10,000 origins per chromosome , but this figure can be significantly higher in large genomes or under certain cellular conditions",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Humans activate between 30,000 and 50,000 DNA replication origins at each cell division.",
+          "quote": "At each cell division in humans, 30,000–50,000 DNA replication origins are activated, and it remains unclear how they are selected",
+          "verdict_reason": "The snippet directly answers the query by providing a specific numerical range (30,000–50,000) for DNA replication origins in humans, a key eukaryote.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Eukaryotic chromosomes require coordinated initiation of DNA replication from multiple origins due to their large genome size.",
+          "quote": "the entire genome is divided into multiple chromosomes... creating a problem for ensuring that all the DNA molecules on separate chromosomes are replicated only once per cell division cycle",
+          "verdict_reason": "The snippet confirms eukaryotes use 'multiple origins' but does not provide a specific count or range, making it relevant but incomplete for the 'how many' query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a3c882e062c2",
+      "claim_index": 2,
+      "claim": "This apparent contradiction reflects differing perspectives: some sources focus on the most visible and symbolically important milestones, while others emphasize that the project's completion is a gradual process with no single 'finished' date",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Sagrada Família is expected to be completed in 2026, though the exact date is still being updated.",
+          "quote": "operator has not yet decided whether it will create additional special tours around the cathedral's completion in 2026",
+          "verdict_reason": "Snippet mentions the 2026 completion year but states the exact date is not yet finalized, offering partial rather than definitive evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "La Sagrada Família is scheduled to be officially completed in 2026.",
+          "quote": "La Sagrada Família will officially be completed in 2026 – 100 years after Ga",
+          "verdict_reason": "The snippet directly answers the query by stating the specific completion year (2026) for the La Sagrada Família.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a44267c115d0",
+      "claim_index": 2,
+      "claim": "This distribution holds true for the average adult male (about 60% body weight from water), though percentages do vary slightly by sex, age adiposity",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Most animal body water is contained in various body fluids, including intracellular and extracellular fluid.",
+          "quote": "Most animal body water is contained in various body fluids. These include intracellular fluid, extracellular fluid, plasma, interstitial fluid, and transcellular fluid.",
+          "verdict_reason": "The snippet identifies that most water is in body fluids and lists compartments, but does not explicitly state which single compartment holds the majority.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet lists water percentages for specific organs like the brain and lungs but does not state where the majority of total body water is located.",
+          "quote": "According to Mitchell and others (1945), the brain and heart are composed of 73% water, and the lungs are about 83% water.",
+          "verdict_reason": "The document provides water content percentages for specific organs but fails to answer where most of the body's total water volume is located (e.g., intracellular fluid).",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_b281f09f0959",
+      "claim_index": 2,
+      "claim": "He then launched investigations and hearings through his Senate Investigations Subcommittee, publicly accusing government officials, military personnel others of being Communist sympathizers, using dramatic tactics that amplified national anxiety",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists secondary sources and photographs identifying Senator Joseph R. McCarthy as the central figure of the McCarthy era and Red Scare.",
+          "quote": "Nightmare in Red: The McCarthy Era in Perspective by Richard M. Fried... The Politics of Fear: Joseph R. McCarthy and the Senate by Robert Griffith",
+          "verdict_reason": "The snippet strongly associates McCarthy with the era through titles and photos but lists sources rather than explicitly stating he started the Red Scare.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Joseph McCarthy played a role in stoking fears of communism during the 1950s Red Scare.",
+          "quote": "Joseph McCarthy and his role in stoking fears of communism and its sympathizers during the 1950s.",
+          "verdict_reason": "The snippet identifies Joseph McCarthy's role in the 1950s Red Scare but does not explicitly state he 'started' it, making it partial evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_b281f09f0959",
+      "claim_index": 3,
+      "claim": "While McCarthy is the dominant symbol of the 1950s Red Scare, it is important to note that his rise was enabled by a broader context of Cold War anticommunism many other organizations and individuals — including the House Un-American Activities Committee (HUAC) — were also active in fostering similar fears",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Joseph McCarthy played a role in stoking fears of communism during the 1950s Red Scare.",
+          "quote": "Joseph McCarthy and his role in stoking fears of communism and its sympathizers during the 1950s.",
+          "verdict_reason": "The snippet identifies Joseph McCarthy's role in the 1950s Red Scare but does not explicitly state he 'started' it, making it partial evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet lists McCarthyism as a key event during the Early Cold War period (1948–1953) in US history.",
+          "quote": "Early Cold War \"Cold War (1948–1953)\") + North Atlantic Treaty + Korean War + Ivy Mike + McCarthyism",
+          "verdict_reason": "The snippet identifies McCarthyism within the correct 1950s timeframe, providing relevant context about the Red Scare era, but does not explicitly name who started it.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "It runs through the 22nd day of the Hebrew month of Nissan, with the first seder held on the evening of April 1",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "This year's Passover (2026) began at sundown on Wednesday, April 1, 2026, as confirmed by multiple current sources",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem holds the current Guinness World Record for the fastest rap in a hit single, as recognized by both Guinness World Records and the official Guinness Book of World Records",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 1,
+      "claim": "In the third verse of his No.1 single \"Godzilla\" (2020), Eminem squeezed 225 words into a 30-second segment, averaging 7.5 words per second — surpassing the previous record he set on Nicki Minaj's \"Majesty\" (2018), which averaged 6.5 words per second",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0123",
+      "claim_index": 2,
+      "claim": "While \"Zip-Lock\" (1999) and \"Lifeline\" (2009) are also notable singles from Lit, \"My Own Worst Enemy\" remains their most well-known song",
+      "cited_docs": [
+        "d5",
+        "d6"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d5",
+        "d9"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d4",
+        "d5",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d6"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Lit's best-known song is \"My Own Worst Enemy\", their number one rock hit from the album \"A Place in the Sun\".",
+          "quote": "\"My Own Worst Enemy\" from their second album, \"A Place in the Sun\" in 1999",
+          "verdict_reason": "Snippet identifies \"My Own Worst Enemy\" as Lit's number one rock hit, directly answering the query about their best-known song. However, it states the album was released in 1999, not 1995 as claimed in the query.",
+          "source_quality": "low"
+        },
+        "d6": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Document is about Papa Roach, not Lit. Query asks about Lit's best-known song; this snippet provides no information about Lit or their discography.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_bdc0853f9a23",
+      "claim_index": 1,
+      "claim": "This ranking has remained relatively stable, with India placing 116th out of 163 countries in the 2024 GPI 136th out of 163 countries in the 2025 GPI",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document confirms India's inclusion in the Global Peace Index from 2014 to 2024 but only provides specific ranking data for 2024.",
+          "quote": "Global Peace Index | India | 2014 - 2024 | Data, Charts and Analysis... 2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024",
+          "verdict_reason": "Snippet confirms India's presence in the 2018 index via a year list but lacks the specific 2018 ranking, providing only 2024 data.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet lists report titles for 2010 and 2025 but provides no data, rank, or mention of the 2018 Global Peace Index.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0057",
+      "claim_index": 2,
+      "claim": "This structure means that while Google operates as a separate entity, it is legally and financially integrated into the broader Alphabet Inc. ecosystem",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet is corrupted/garbled with non-English text and metadata fragments. No coherent information about Google ownership is extractable.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Alphabet Inc. is a public company traded on Nasdaq under ticker symbols GOOGL and GOOG, with key leadership including CEO Sundar Pichai.",
+          "quote": "type = Public company Public traded_as = ubl * nowrap Nasdaq : NasdaqSymbol GOOGL ( Class A share Class A ) * nowrap Nasdaq: NasdaqSymbol GOOG ( Class C share Class C ) * Sundar Pichai ( Chief executive officer CEO )",
+          "verdict_reason": "Document describes Alphabet Inc. as a public company with multiple shareholders, not a single owner. Query asks 'who owns Google' but snippet shows public ownership structure without identifying individual/entity ownership.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_34fef928d452",
+      "claim_index": 1,
+      "claim": "However, some researchers argue that Archaeopteryx's flight capabilities were limited: it may have only performed short, burst-type flights a 2000 Wilson Bulletin study (cited but not fully accessible) explored whether Archaeopteryx's unique skeletal structure is better explained by gliding rather than powered flight ; the overall picture is of a creature capable of flight, but possibly not fully evolved or specialized for it by modern standards",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Scientists determined that Archaeopteryx was capable of short bursts of active flight similar to a pheasant.",
+          "quote": "The famous winged dinosaur Archaeopteryx was capable of flying, according to a new study. ... The creature flew like a pheasant, using short bursts of active flight, say scientists.",
+          "verdict_reason": "The snippet directly answers the query by stating Archaeopteryx was capable of flying, citing specific evidence from bone scans and expert consensus.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only a technical error message and provides no factual evidence regarding Archaeopteryx or its flight capabilities.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The document states that Archaeopteryx could fly, though it was a poor flyer by modern standards and also walked on the ground.",
+          "quote": "Archaeopteryx could fly, but it had a lot of ways of getting around, the team says. ... It was the first dinosaur to use feathers to fly, but by modern standards it was a very poor flyer.",
+          "verdict_reason": "The snippet directly answers the query by confirming Archaeopteryx could fly, while adding context about its limited capabilities and other modes of movement.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 2,
+      "claim": "It is worth noting that a claim circulated briefly about Eminem breaking his own record on \"Godzilla\" and becoming the first person to rap 229 words in 30 seconds, but Guinness confirmed this was premature, as the record does not currently exist in their database ; nonetheless, Eminem's performance in \"Godzilla\" remains the benchmark for the fastest rap in a hit single",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Guinness World Records confirmed they do not currently monitor any record titles for fastest rapping on a song, contradicting reports about Eminem.",
+          "quote": "I can confirm that Guinness World Records does not currently monitor any record-titles similar to this one.",
+          "verdict_reason": "The snippet directly addresses the query by stating Guinness does not track this specific record, providing conflict-bearing evidence against the premise of a current holder.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_73560dfab1ae",
+      "claim_index": 1,
+      "claim": "However, a clinical expert source notes that while vitamin C does help the immune system function, there is limited research showing it speeds recovery any additional supplementation should be discussed with a healthcare team ; most sources agree it does not clearly prevent colds, though some suggest it may shorten the duration slightly",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "High doses of vitamin C do not prevent colds but may slightly reduce recovery time by about 13 hours for a seven-day illness.",
+          "quote": "While it doesn't prevent you from getting a cold, Dr. Bracamonte says there is some limited research that additional vitamin C might speed up the recovery process slightly in some people.",
+          "verdict_reason": "The snippet directly addresses the query by stating vitamin C does not prevent colds but offers limited evidence it may slightly alleviate symptoms by shortening duration, providing partial but not definitive support.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document poses the question of whether Vitamin C can help fight off the common cold.",
+          "quote": "Can Vitamin C Really Help Fight Off the Common Cold?",
+          "verdict_reason": "The snippet directly addresses the query topic by posing the central question, serving as conflict-bearing evidence, though it does not provide the specific answer or data regarding high doses.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only website footer information, legal disclaimers, and delivery policies. It provides no evidence, claims, or data regarding vitamin C or common cold symptoms.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The average dosage of vitamin C for colds is 1,000 mg to 2,000 mg per day, based on study ranges, though most people get enough from their diet.",
+          "quote": "The average dosage of vitamin C for colds is anywhere from 1,000 mg to 2,000 mg per day. But this is based on the dosage range in studies that looked at vitamin C for treating colds.",
+          "verdict_reason": "Snippet addresses the query by citing study dosages for treating colds but notes most people don't need supplements, providing partial rather than decisive support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f3b3face1b6b",
+      "claim_index": 1,
+      "claim": "For example, during the 2025 U.S. iteration, more than 30 popular menu items were eligible to receive a game piece, though some were digital-only and some required registration before ordering ; earlier U.S. promotions have also awarded pieces with breakfast sandwiches, Big Macs large fries",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a YouTube video title about a challenge and provides no factual information listing the specific food items or products that come with McDonald's Monopoly pieces.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "McDonald's Monopoly game pieces are typically printed on the packaging of specific menu items like Big Macs or large fries.",
+          "quote": "Game pieces are usually printed on the packaging of certain items, such as a Big Mac or large fries.",
+          "verdict_reason": "The snippet directly answers the query by stating that game pieces are found on the packaging of certain items, providing specific examples.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "More than 30 popular McDonald's menu items are eligible to receive a game piece, though the specific list is cut off in the snippet.",
+          "quote": "More than 30 of the chain's most popular items are eligible to receive a game piece. Some will be digital-only, but don't worry, plenty of physical game pieces will be offered as well",
+          "verdict_reason": "The snippet confirms game pieces come on over 30 menu items but cuts off before listing the specific items requested by the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A user reports that a kiosk indicates game pieces are on most breakfast sandwiches.",
+          "quote": "On the kiosk it shows game pieces are on most breakfast sandwiches.",
+          "verdict_reason": "The snippet addresses the query by stating game pieces are on breakfast sandwiches, but it is anecdotal, unverified, and notes a discrepancy, making it partial evidence.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

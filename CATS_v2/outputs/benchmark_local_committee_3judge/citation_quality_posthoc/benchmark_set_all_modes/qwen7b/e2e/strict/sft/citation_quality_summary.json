@@ -1,0 +1,1573 @@
+{
+  "variant": "benchmark_set_all_modes/qwen7b/e2e/strict/sft",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_sft_rescheduled_from_pabitra_10_20260706",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_rescheduled_from_pabitra_10_20260706/qwen7b/e2e/strict/sft/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_rescheduled_from_pabitra_10_20260706/qwen7b/e2e/strict/sft/final/detailed_results.json",
+    "source_final_sha256": "33ec9f0e8bd2bee8bbcefe0e1d7a8e05a3e3c14b045e8308dd7fc12b34e4dd71",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen7b/e2e/strict/sft/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen7b/e2e/strict/sft/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 940,
+    "claims_with_citations": 907,
+    "claims_with_committee_support_set": 887,
+    "claims_with_any_approved_citation": 798,
+    "claims_with_any_gold_positive_citation": 904,
+    "committee_alignment_precision_macro": 0.7896545387725101,
+    "committee_alignment_precision_micro": 0.7551470588235294,
+    "gold_positive_citation_precision_macro": 0.994119808893789,
+    "gold_positive_citation_precision_micro": 0.9941176470588236,
+    "soft_extra_citation_rate_micro": 0.23897058823529413,
+    "hard_negative_citation_rate_micro": 0.0058823529411764705,
+    "committee_support_citation_recall_macro": 0.8996617812852311,
+    "committee_support_citation_recall_micro": 0.8996617812852311,
+    "claims_with_any_soft_extra_rate": 0.29437706725468576,
+    "claims_with_any_hard_negative_rate": 0.008820286659316428,
+    "strict_committee_alignment_claim_rate": 0.674468085106383,
+    "strict_gold_clean_claim_rate": 0.8446808510638298,
+    "strict_grounded_committee_clean_rate_all_claims": 0.674468085106383,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8446808510638298,
+    "total_cited_docs": 1360,
+    "total_approved_cited_docs": 1027,
+    "total_gold_positive_cited_docs": 1352,
+    "total_soft_extra_cited_docs": 325,
+    "total_hard_negative_cited_docs": 8
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_a1e36a8db854",
+      "claim_index": 2,
+      "claim": "Current regulatory practice in the U.S. treats glyphosate as minimally absorbed into the body and primarily excreted unchanged, with permitted exposure levels set more than one hundred times lower than the amount that might cause harm , though some researchers and advocacy groups call for further regulation and stricter safety standards",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The EPA found no risks of concern to human health from current glyphosate uses and no evidence that it causes cancer in humans.",
+          "quote": "No risks of concern to human health from current uses of glyphosate. ... No evidence that glyphosate causes cancer in humans.",
+          "verdict_reason": "Snippet directly addresses the query with EPA findings of no harm, but represents one side of a scientific conflict (disagreeing with IARC), warranting partial support.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Strong epidemiological evidence links glyphosate exposure to increased risks of non-Hodgkin lymphoma and other adverse health effects in humans.",
+          "quote": "with the strongest epidemiological evidence linking exposure to increased risk of non-Hodgkin lymphoma, a cancer of the lymphatic system.",
+          "verdict_reason": "The snippet directly answers the query by stating strong evidence links glyphosate to human health harms like cancer and organ damage.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "New findings suggest glyphosate ingestion poses a health hazard and may affect the brain, challenging previous EPA safety assertions.",
+          "quote": "Additionally, the new findings suggest that ingestion of glyphosate residues on foods sprayed with the herbicide potentially poses a health hazard.",
+          "verdict_reason": "Snippet provides direct evidence of potential harm (neurodegenerative risks) but notes further research is needed, making it conflict-bearing but not definitive.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_bdee100fa8e5",
+      "claim_index": 1,
+      "claim": "A study by the Radio Project found that less than one-third of panicked listeners mistook the Martians for German invaders or a natural catastrophe historian W. Joseph Campbell has noted that the narrative of mass panic was primarily advanced by newspapers at the time as a means to discredit radio as a credible news source",
+      "cited_docs": [
+        "d5",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Historical research indicates the panic was significantly less widespread than newspapers reported, with evidence suggesting it was practically immeasurable.",
+          "quote": "Historical research suggests the panic was significantly less widespread than newspapers had indicated",
+          "verdict_reason": "The snippet directly addresses the query by providing evidence that the panic was exaggerated and less widespread than claimed, offering a nuanced answer rather than a simple yes/no.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Historians argue the supposed panic was exaggerated and that most listeners understood the program was fiction.",
+          "quote": "But in recent years historians, such as Professor W Joseph Campbell of the American University in Washington DC, have argued that the supposed panic was always exaggerated, and that the majority of listeners understood that the programme was a work of fiction.",
+          "verdict_reason": "The snippet directly addresses the query by presenting evidence that challenges the extent of the panic, offering a conflicting but highly relevant perspective on the event.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Scholars contend the broadcast did not cause mass panic, citing flawed newspaper accounts and surveys showing few listeners believed it was real.",
+          "quote": "Many scholars contend that the program didn't actually cause mass panic at all. The surveys done immediately after the program illustrated that not only did very few people hear the broadcast, but that virtually no one thought it was real.",
+          "verdict_reason": "The snippet directly addresses the query by presenting evidence contradicting the panic narrative, offering a specific scholarly perspective rather than a definitive resolution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0875b5f3262a",
+      "claim_index": 1,
+      "claim": "However, the legal battle itself — initiated when the San Francisco police seized the poem and charged Lawrence Ferlinghetti with obscenity — demonstrated that \"Howl\" was widely regarded as containing graphic sexual content and coarse language, with the judge's ruling hinging on the work's artistic merit and social value",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "A 1957 San Francisco court decision ruled that Allen Ginsberg's poem 'Howl' was not obscene.",
+          "quote": "Hear a recording of Allen Ginsberg reciting his poem \"Howl\" in January 1959 in Chicago on \"Howl Against Censorship\" in commemoration of the 50th anniversary of the San Francisco court decision finding the poem was not obscene.",
+          "verdict_reason": "The snippet provides direct evidence of a 1957 court ruling finding the poem not obscene, addressing the query with historical legal context rather than a current status update.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document notes that Allen Ginsberg's poem \"Howl\" was banned for obscenity and involved in a landmark court case protecting First Amendment rights.",
+          "quote": "Tags: aclu Allen Ginsberg Banned for obscenity City Lights Eric Drooker first amendment Howl obscenity case poetry Shigeyoshi Murao",
+          "verdict_reason": "The snippet confirms the poem was banned for obscenity and discusses the trial's legacy, providing direct but incomplete evidence regarding the specific question of whether the work is obscene.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_111bef268aa6",
+      "claim_index": 2,
+      "claim": "The primary nutrient concern, therefore, revolves around fiber — a food processor removes roughly half of it — while vitamins remain largely intact, making the extent of nutritional value loss context-dependent on one's dietary priorities",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Not peeling apples is a more nutritious choice because the peels contain significantly more flavonoids and antioxidants than the flesh.",
+          "quote": "Generally, those who are consuming apples due to easy accessibility, are generally not peeling the fruit before consuming it, which can be the better and more nutritious choice!",
+          "verdict_reason": "The snippet directly answers the query by stating that not peeling apples is the 'more nutritious choice' due to higher nutrient content in the peel.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The apple peel contains approximately 72% of the apple's antioxidant vitamin E and vitamin K, nearly half of its iron, and all of its folate.",
+          "quote": "The peel contains approximately 72 % of the apples anti-oxidant vitamin E and vitamin K. The skin also holds nearly half of the total iron and all of the apple's folate",
+          "verdict_reason": "Snippet details specific nutrients lost if peeling occurs, directly addressing the query about nutritional value loss, though it does not explicitly summarize the total impact.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_264e97231363",
+      "claim_index": 1,
+      "claim": "Some sources describe the process as follows: when copper is oxidized (exposed to air), it turns from orange to dull green this green compound then adheres to the hair shaft",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hair turns green from oxidized hard metals like copper in pool water, not directly from chlorine itself.",
+          "quote": "Contrary to popular belief, the greening of hair from swimming pools is not caused by the chlorine in pool water... Your hair turns green from the presence of hard metals (copper, iron, and manganese, in particular) in the pool water.",
+          "verdict_reason": "The snippet directly addresses the query by clarifying that metals, not chlorine, cause the green color, providing relevant but corrective scientific evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Chlorine is not the culprit for green hair; rather, oxidized copper from algaecide causes the discoloration.",
+          "quote": "Contrary to popular belief, chlorine is not the culprit when it comes to blonde hair turning greenish after a swim. Chlorine actually works to lighten hair, which sets the stage for the real menace to step in: copper.",
+          "verdict_reason": "The snippet directly addresses the query by clarifying that copper, not chlorine, causes green hair, providing relevant but corrective evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_3c835387fe6d",
+      "claim_index": 1,
+      "claim": "Multiple studies confirm it had its origins in Queensland about four million years ago and persisted there until approximately 300,000 years ago, after which it crossed over to the Indonesian archipelago",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Fossil evidence suggests the Komodo dragon originated in Australia and lived there until at least 300,000 years ago before going extinct.",
+          "quote": "Hocknull says the fossils show that the komodo dragon had its origins here in Australia about four million years ago and persisted in Australia until at least 300,000 years ago.",
+          "verdict_reason": "The snippet addresses the query by confirming historical native status via fossils but indicates current extinction in Australia, making it conflict-bearing but not a full 'yes' to current nativity.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A study suggests Komodo dragons originated in Australia before migrating to Indonesia and becoming extinct in Australia.",
+          "quote": "Our data supports the theory that Komodo dragons originated in Australia and then crossed over to Indonesia before becoming extinct here.",
+          "verdict_reason": "The snippet addresses the query by stating the species originated in Australia but clarifies they are now extinct there, providing nuanced rather than direct confirmation of current nativity.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_62b1aff6586d",
+      "claim_index": 2,
+      "claim": "However, regional holes persist, persistent warming threatens recovery emerging concerns like rocket launches could slow the healing process",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Scientists have worked for 30 years to reduce ozone-destroying chemicals, but the snippet cuts off before stating if the layer is actually healing.",
+          "quote": "For 30 years countries around the world had worked together to reduce and eliminate the use of chlorofluorocarbons (CFCs) and other ozone-destroying chemicals (ODCs). However, scientists still could not say whether these efforts were helping.",
+          "verdict_reason": "The snippet addresses the query directly by discussing healing efforts but explicitly states uncertainty at this point in the text, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The hole in the ozone layer still exists but is healing gradually over time.",
+          "quote": "It's still there, but it's healing a little at a time",
+          "verdict_reason": "The snippet directly addresses the query by stating the hole persists but is healing, providing partial confirmation without a definitive 'fully healed' status.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_6ea6bbcb8743",
+      "claim_index": 1,
+      "claim": "However, many products can temporarily mask the damage by smoothing the cuticle, adding weight to frayed ends creating temporary glue-like bonds between split fibers — though the effects typically persist only until the next shampoo",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The only real way to get rid of split ends is to trim them off, though products can prevent them.",
+          "quote": "While the only real way to get rid of them is to simply trim them off, the good news is that the best products for split ends can prevent you from having to deal with them in the first place.",
+          "verdict_reason": "Snippet directly addresses the query by stating trimming is the only removal method, while noting prevention is possible; this partially resolves the repair question.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Split ends cannot be permanently repaired because hair is dead tissue, though products can temporarily smooth them.",
+          "quote": "once a split end forms, you can't permanently fuse it back together. Hair is dead tissue that can't regenerate, so the damage won't reverse.",
+          "verdict_reason": "The snippet directly addresses the query by stating permanent repair is impossible but temporary fixes exist, providing conflict-bearing evidence rather than a simple yes/no.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_7998e59d9b97",
+      "claim_index": 2,
+      "claim": "Some sources further note that organic standards prohibit synthetic pesticides, meaning organic farms do use pesticides — albeit naturally derived ones — and that the trade-off between reduced chemical use and lower efficiency is a subject of ongoing debate",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming aims to maximize beneficial microbes to help plants achieve maximum productivity, but the text states the answer regarding efficiency is not clear-cut.",
+          "quote": "Farmers make choices designed to maximize beneficial microbes such as bacteria, fungi, nematodes, and more in their growing space to help plants achieve maximum productivity",
+          "verdict_reason": "The snippet addresses the query topic but explicitly states the answer is 'not clear-cut' and focuses on principles rather than providing a direct efficiency comparison.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Organic farms are approximately 20% less efficient than conventional farms regarding crop yields.",
+          "quote": "When it comes to crop yields, organic farms are about 20% less efficient than conventional farms.",
+          "verdict_reason": "The snippet directly answers the query by stating organic farms are 20% less efficient in crop yields than conventional farms.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_a507c5b61631",
+      "claim_index": 1,
+      "claim": "However, the PETM onset also coincided with a mercury low, suggesting at least one other carbon reservoir was simultaneously released in response to initial warming , making the full causal picture more complex than a single trigger mechanism",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Pulsed volcanism likely provided the trigger for the PETM, though a subsequent carbon reservoir release was also involved.",
+          "quote": "signifying pulsed volcanism from the North Atlantic Igneous Province likely provided the trigger and subsequently sustained elevated CO2. However, the PETM onset coincides with a mercury low, suggesting at least one other carbon reservoir released significant greenhouse gases",
+          "verdict_reason": "The snippet directly addresses the query by identifying volcanism as a likely trigger but qualifies this by suggesting additional carbon reservoirs were involved, making the evidence relevant but not a simple affirmative.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Volcanic activity from the North Atlantic Igneous Province is listed as a top candidate for the source of carbon that caused the PETM.",
+          "quote": "Top candidates include volcanic activity (at this time, rifting of northern continents created the North Atlantic Igneous Province, which would have produced lots of Carbon-rich gases)",
+          "verdict_reason": "The snippet identifies volcanic activity as a 'top candidate' cause but presents it as one of several possibilities alongside methane release, thus providing relevant but non-definitive evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_b7fd50f9f980",
+      "claim_index": 1,
+      "claim": "'alright' is a valid spelling the Oxford Dictionary notes there is no logical reason to insist on writing it as two words since other merged forms like 'already' and 'altogether' are widely accepted",
+      "cited_docs": [
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document is a video titled 'Alright vs. All Right' from Merriam-Webster, indicating it addresses the comparison between the two spellings.",
+          "quote": "YouTube Alright vs. All Right - Merriam-Webster Ask the Editor - YouTube",
+          "verdict_reason": "The snippet identifies a relevant source comparing the spellings but lacks the specific answer or verdict within the text itself.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The spelling 'alright' is widely found but remains nonstandard according to The New Oxford American Dictionary.",
+          "quote": "The New Oxford American Dictionary says: ... although found widely, alright remains nonstandard.",
+          "verdict_reason": "Snippet directly addresses the query with conflicting expert opinions, noting 'alright' is common but nonstandard, providing partial rather than definitive support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_bf6e9339f2c5",
+      "claim_index": 1,
+      "claim": "It is particularly valuable for vegans because it is high in B12, which is otherwise difficult to obtain from plant-based diets also provides 5–6 grams of protein per 100g",
+      "cited_docs": [
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Nutritional yeast is described as an excellent source of highly digestible complete protein.",
+          "quote": "Nutritional yeast is an excellent source of highly digestible complete protein. The protein content of S. cerevisiae yeast offers an interesting alternative to traditional protein sources",
+          "verdict_reason": "The snippet explicitly states that nutritional yeast is a 'complete protein,' directly answering the user's query about its status as a complete protein source.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Yeast protein contains all essential amino acids in the required quantity according to FAO recommendations, making it a complete protein.",
+          "quote": "Yeast protein also contains all essential amino acids in the required quantity according to FAO recommendation , making yeast SCP a complete protein.",
+          "verdict_reason": "The snippet explicitly states that yeast protein contains all essential amino acids in required quantities, directly confirming it is a complete protein source.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_c3e66630928c",
+      "claim_index": 1,
+      "claim": "However, research indicates that dry grounds alone are only partially effective, with a University of Nebraska study finding snails are deterred when the soil contains a caffeine concentration of more than 0.1% are even killed at 1% or above",
+      "cited_docs": [
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The document states that coffee grounds act as an environmentally friendly and safe deterrent for slugs while improving soil health.",
+          "quote": "There are various benefits to using coffee grounds as a pest control for slugs in the garden: Environmentally friendly – Coffee grounds are a natural byproduct... Safe for plants, pets, and people",
+          "verdict_reason": "The snippet directly affirms that coffee grounds are effective as a slug deterrent, explicitly listing benefits and citing supporting references.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Dry coffee grounds act only as an unreliable deterrent because their caffeine concentration is too low to stop hungry slugs.",
+          "quote": "As for pure coffee grounds, it is only a deterrent and does not work quite reliably, because the concentration of caffeine in coffee grounds is not sufficiently high.",
+          "verdict_reason": "The snippet directly addresses the query but limits effectiveness, stating grounds are unreliable deterrents compared to higher caffeine concentrations.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f97fef94decc",
+      "claim_index": 1,
+      "claim": "Symptoms such as eye strain, dryness, headaches blurred vision are common some researchers note that prolonged use may worsen conditions like convergence insufficiency",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Studies found no serious vision deterioration in children using VR, though some participants had trouble detecting distance differences.",
+          "quote": "Likewise, a different study showed no serious deterioration of vision among children 8 to 12 who played a VR video game for 20 minutes. But two study participants had trouble detecting differences in distance.",
+          "verdict_reason": "The snippet directly addresses the query with specific study findings that are mixed (no serious deterioration vs. distance detection issues), providing conflict-bearing evidence rather than a definitive yes/no.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Optometrists state there is no reliable evidence that VR headsets cause permanent eyesight deterioration, though one developer reported vision issues linked to prolonged use.",
+          "quote": "We currently do not have any reliable evidence that VR headsets cause permanent deterioration in eyesight in children or adults.",
+          "verdict_reason": "The snippet directly addresses the query with conflicting evidence: an anecdotal claim of harm versus expert consensus denying permanent damage, making it partially supportive but not definitive.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_fbedb688b1d9",
+      "claim_index": 1,
+      "claim": "However, scholars and some religious observers differ: Robert Millet, a Brigham Young University professor, argues that Mormons should be considered Christians because they worship Jesus Christ as the Son of God, though the official definition of Christianity emphasized correct belief over mere good works or social conservatism",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document presents conflicting views, noting that Mormons affirm they are Christians while the author argues they are not based on doctrinal definitions.",
+          "quote": "The official church website states: \"Members of The Church of Jesus Christ of Latter-day Saints unequivocally affirm themselves to be Christians.\" But I do not consider Mormons, Christians.",
+          "verdict_reason": "The snippet directly addresses the query by presenting both the Mormon self-identification as Christians and the author's contradictory theological argument, serving as conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document presents conflicting perspectives, noting that most Mormons consider themselves Christian while people from other religious perspectives often do not.",
+          "quote": "For most Mormons, the answer to this question is obvious. Yes, yes they are. They believe in Jesus Christ. This settles it for them For people from other religious perspectives, the answer is obvious but in the negative. Mormons are not Christians.",
+          "verdict_reason": "The snippet directly addresses the query by presenting both affirmative and negative arguments regarding whether Mormons are Christian, representing a conflict-bearing discussion rather than a single definitive answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_25b286cb2af1",
+      "claim_index": 1,
+      "claim": "The idea that Venus could have had a moon in the past is also discussed, as scientists are not entirely sure why Venus lacks a moon today",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that Venus has zero moons, implying it has no smallest moon.",
+          "quote": "Venus moons = 0\nPlanet Venus may have had a moon in the distant past, which collided with another object and then impacted Venus.",
+          "verdict_reason": "The snippet directly addresses the query by stating Venus has zero moons, contradicting the premise of a 'smallest moon' existing, thus providing conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Venus does not have any moons, not even a small one.",
+          "quote": "No, Venus does not have a moon – not even a small one. Venus isn't alone in being moonless; its neighbouring planet, Mercury, also has no moons.",
+          "verdict_reason": "The snippet directly addresses the query by stating Venus has no moons, which refutes the premise of a 'smallest moon' existing. This is conflict-bearing evidence relevant to the entity.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_50f8f03fd30f",
+      "claim_index": 2,
+      "claim": "It is worth noting that while d3 lists several children who died in the disaster, it does not explicitly state the exact age of the youngest passenger, which is confirmed to be Millvina Dean through multiple corroborating sources",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Ms Dean was the youngest passenger on board the Titanic.",
+          "quote": "Ms Dean was a Third Class Passenger on board the Titanic; she was both the youngest passenger on board",
+          "verdict_reason": "Snippet identifies the youngest passenger but omits her specific age, providing only partial evidence for the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Millvina Dean was the youngest passenger aboard the Titanic at two months old.",
+          "quote": "At two months old, she was also the youngest passenger aboard.",
+          "verdict_reason": "The snippet explicitly states Millvina Dean's age (two months) and confirms she was the youngest passenger, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_7bc7bb2dde20",
+      "claim_index": 1,
+      "claim": "This result, with the ceremony also seeing wins for Michael B. Jordan in Best Actor and Autumn Durald Arkapaw as the first female cinematographer to win an Oscar",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The movie 'One Battle After Another' won Best Picture at the 98th Academy Awards.",
+          "quote": "'One Battle After Another' wins best picture at 98th Academy Awards... Paul Thomas Anderson's \"One Battle After Another\" was crowned best picture at the 98th Academy Awards",
+          "verdict_reason": "The snippet directly answers the query by identifying the winner of the latest (98th) Academy Award for Best Picture.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The movie One Battle After Another won Best Picture at the 98th Academy Awards.",
+          "quote": "The latest: One Battle After Another wins Best Picture at the 98th Academy Awards!",
+          "verdict_reason": "The snippet explicitly identifies the latest Best Picture winner as 'One Battle After Another' at the 98th Academy Awards, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_a41257e9d6f6",
+      "claim_index": 2,
+      "claim": "This untimely death dealt a significant blow to the field of neural networks, as Rosenblatt was the original proponent of the perceptron concept his passing occurred in 1971",
+      "cited_docs": [
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Frank Rosenblatt as the inventor of the perceptron but does not state how he died.",
+          "quote": "The giant computer simulator was the brainchild of Frank Rosenblatt, a scientist at Cornell University.",
+          "verdict_reason": "The snippet confirms the identity of the perceptron's inventor (Frank Rosenblatt) but lacks any information regarding his death or cause of death, making it incomplete evidence for the specific query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet confirms Frank Rosenblatt died in 1971 but does not state the cause of his death.",
+          "quote": "When Rosenblatt died in 1971",
+          "verdict_reason": "The document addresses the specific entity (Rosenblatt) and confirms his death year, but fails to provide the cause of death requested by the query, making it incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_a50d0f1f3cdf",
+      "claim_index": 0,
+      "claim": "Queen Elizabeth II of England died on 8 September 2022 at Balmoral Castle in Aberdeenshire, Scotland",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Queen Elizabeth II died on 8 September 2022.",
+          "quote": "Died | 8 September 2022(2022-09-08) (aged 96) Balmoral Castle, Aberdeenshire, Scotland",
+          "verdict_reason": "The snippet explicitly states the date of death as 8 September 2022 in the infobox, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Queen Elizabeth II died on 8 September 2022 at Balmoral Castle in Scotland.",
+          "quote": "Elizabeth II, Queen of the United Kingdom and the other Commonwealth realms, died on 8 September 2022 at Balmoral Castle in Scotland, at the age of 96.",
+          "verdict_reason": "The snippet explicitly states the exact date of Queen Elizabeth II's death, directly answering the user's query with definitive evidence.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0025",
+      "claim_index": 2,
+      "claim": "The May 16 coup in 1961 marked a significant internal Korean political event, but the external historical framework of Japan's rule and WWII's conclusion provides the most direct and comprehensive answer to the query",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d5",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "The coup rendered powerless the democratically elected government of Yun Bo-seon and ended the Second Republic",
+          "verdict_reason": "The snippet is about the 1961 May 16 coup and the Second Republic, not Chang Ucchin’s birth in Korea or the period during which he was born.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0100",
+      "claim_index": 1,
+      "claim": "Separately, Brad Robert Wenstrup was treated at MedStar Washington Hospital Center following the Steve Scalise shooting , further contextualizing that institution within the D.C. hospital landscape",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d6",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is about Brad Wenstrup's political career and mentions MedStar Washington Hospital Center only as the location where he attended to a wounded congressman. It provides no information about hospital size, private status, or comparison between the two hospitals queried.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f4811561af0c",
+      "claim_index": 1,
+      "claim": "However, the evidence does not definitively confirm that the Dutch were the sole discoverers of Australia, as earlier encounters by Portuguese navigators and later British expeditions are also referenced",
+      "cited_docs": [
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a blog post title and comments discussing fictional books and mutineers, but it provides no factual evidence answering whether the Dutch discovered Australia.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Dutch explorer Willem Janszoon reached the western coast of Cape York Peninsula in 1606, marking an early European encounter with Australia.",
+          "quote": "In 1606, Willem Janszoon, who commanded the Duyfken, sailed south from the Dutch East Indies and reached the western coast of Cape York Peninsula.",
+          "verdict_reason": "The snippet confirms Dutch exploration of Australia starting in 1606 but does not explicitly resolve whether they were the absolute first discoverers, leaving room for prior claims.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "This year's Passover (2026) began at sundown on April 1",
+      "cited_docs": [
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f1e9ce4608b3",
+      "claim_index": 0,
+      "claim": "Azzi Fudd .",
+      "cited_docs": [
+        "d11",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d11"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d11": {},
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Azzi Fudd was selected as the number 1 pick in the WNBA draft.",
+          "quote": "Azzi Fudd Goes No. 1",
+          "verdict_reason": "The snippet explicitly states that Azzi Fudd went number 1 in the WNBA draft, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0057",
+      "claim_index": 0,
+      "claim": "Google was reorganized as a wholly owned subsidiary of Alphabet Inc. in 2015, with Larry Page and Sergey Brin owning about 14% of its publicly listed shares and controlling 56% of its stockholder voting power through super-voting stock",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Google was founded by Larry Page and Sergey Brin, who together own about 14% of publicly listed shares and control 56% of stockholder voting power through super-voting stock, while Google is a subsidiary of parent company Alphabet Inc.",
+          "quote": "Google was founded in 1998 by American computer scientists Larry Page and Sergey Brin. Together, they own about 14% of its publicly listed shares and control 56% of its stockholder voting power through super-voting stock. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc.",
+          "verdict_reason": "Snippet directly answers ownership question by identifying founders as primary owners with specific shareholding percentages and control structure, plus parent company Alphabet Inc.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet is corrupted/garbled with non-English text and metadata fragments. No coherent information about Google ownership is extractable.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0057",
+      "claim_index": 1,
+      "claim": "Alphabet Inc. remains the owner of Google , though the company has undergone additional changes — such as acquiring Wiz, Inc., a cloud security firm previously part of Google Cloud — reflecting the ongoing evolution of the broader Google ecosystem",
+      "cited_docs": [
+        "d2",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Alphabet Inc. is a public company traded on Nasdaq under ticker symbols GOOGL and GOOG, with key leadership including CEO Sundar Pichai.",
+          "quote": "type = Public company Public traded_as = ubl * nowrap Nasdaq : NasdaqSymbol GOOGL ( Class A share Class A ) * nowrap Nasdaq: NasdaqSymbol GOOG ( Class C share Class C ) * Sundar Pichai ( Chief executive officer CEO )",
+          "verdict_reason": "Document describes Alphabet Inc. as a public company with multiple shareholders, not a single owner. Query asks 'who owns Google' but snippet shows public ownership structure without identifying individual/entity ownership.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Alphabet Inc. acquired Wiz, Inc. in a $32 billion deal on March 11, 2026, making it part of Google Cloud.",
+          "quote": "On 11 March 2026, Alphabet Inc. acquired Wiz in a $32 billion deal.",
+          "verdict_reason": "The snippet directly states that Alphabet Inc. (Google's parent company) acquired Wiz, establishing ownership. This directly answers who owns Google's cloud subsidiary.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet is corrupted/garbled with non-English text and metadata fragments. No coherent information about Google ownership is extractable.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

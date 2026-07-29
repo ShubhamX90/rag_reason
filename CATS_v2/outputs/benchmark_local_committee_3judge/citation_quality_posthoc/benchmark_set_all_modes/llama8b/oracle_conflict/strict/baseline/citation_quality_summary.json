@@ -1,0 +1,1727 @@
+{
+  "variant": "benchmark_set_all_modes/llama8b/oracle_conflict/strict/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/oracle_conflict/strict/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/oracle_conflict/strict/baseline/final/detailed_results.json",
+    "source_final_sha256": "d99b53cb7e419ab7c76405239840ccef320a1fc8218278cf19048daec4727e26",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/llama8b/oracle_conflict/strict/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/llama8b/oracle_conflict/strict/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1242,
+    "claims_with_citations": 355,
+    "claims_with_committee_support_set": 1043,
+    "claims_with_any_approved_citation": 333,
+    "claims_with_any_gold_positive_citation": 354,
+    "committee_alignment_precision_macro": 0.8615492957746479,
+    "committee_alignment_precision_micro": 0.7082847141190198,
+    "gold_positive_citation_precision_macro": 0.9927230046948357,
+    "gold_positive_citation_precision_micro": 0.838973162193699,
+    "soft_extra_citation_rate_micro": 0.1306884480746791,
+    "hard_negative_citation_rate_micro": 0.16102683780630106,
+    "committee_support_citation_recall_macro": 0.3192713326941515,
+    "committee_support_citation_recall_micro": 0.3192713326941515,
+    "claims_with_any_soft_extra_rate": 0.23380281690140844,
+    "claims_with_any_hard_negative_rate": 0.014084507042253521,
+    "strict_committee_alignment_claim_rate": 0.21658615136876005,
+    "strict_gold_clean_claim_rate": 0.26570048309178745,
+    "strict_grounded_committee_clean_rate_all_claims": 0.21658615136876005,
+    "strict_grounded_gold_clean_rate_all_claims": 0.26570048309178745,
+    "total_cited_docs": 857,
+    "total_approved_cited_docs": 607,
+    "total_gold_positive_cited_docs": 719,
+    "total_soft_extra_cited_docs": 112,
+    "total_hard_negative_cited_docs": 138
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_111bef268aa6",
+      "claim_index": 2,
+      "claim": "Further research is needed to determine the effects of peeling on the nutritional value of apples",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Not peeling apples is a more nutritious choice because the peels contain significantly more flavonoids and antioxidants than the flesh.",
+          "quote": "Generally, those who are consuming apples due to easy accessibility, are generally not peeling the fruit before consuming it, which can be the better and more nutritious choice!",
+          "verdict_reason": "The snippet directly answers the query by stating that not peeling apples is the 'more nutritious choice' due to higher nutrient content in the peel.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The apple peel contains approximately 72% of the apple's antioxidant vitamin E and vitamin K, nearly half of its iron, and all of its folate.",
+          "quote": "The peel contains approximately 72 % of the apples anti-oxidant vitamin E and vitamin K. The skin also holds nearly half of the total iron and all of the apple's folate",
+          "verdict_reason": "Snippet details specific nutrients lost if peeling occurs, directly addressing the query about nutritional value loss, though it does not explicitly summarize the total impact.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Peeling an apple reduces dietary fiber but does not decrease the amount of vitamins per 100 grams.",
+          "quote": "Peeling the apple does reduce some of the dietary fiber we eat, but does not reduce the amount of vitamins, including vitamin C.",
+          "verdict_reason": "The snippet directly addresses the query by specifying that peeling reduces fiber but not vitamins, providing a nuanced answer rather than a simple yes/no on total nutritional value.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Peeling an apple removes approximately 50% of its total fiber and 30% of its vitamin C.",
+          "quote": "YSK that peeling an apple will remove 50% of it's total fiber, and around 30% of it's vitamin C",
+          "verdict_reason": "The snippet provides specific data on nutrient loss (fiber, vitamin C) but does not address total nutritional value or other nutrients, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_120",
+      "claim_index": 0,
+      "claim": "While stimulants can be beneficial for people with ADHD, the exact reasons for their effectiveness are not well understood more research is needed to determine why they may work in reverse",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Traditional ADHD treatments like Adderall and Ritalin are psycho-stimulant medications that have side effects and may require trying different options to find an effective one.",
+          "quote": "Traditional treatments, such as Adderall and Ritalin do have side effects. (Adderall is a psycho-stimulant prescription medication that contains amphetamine. Ritalin (methylphenidate) is also a pyscho-stimulant.)",
+          "verdict_reason": "The snippet identifies stimulants used for ADHD but does not explain the mechanism of reverse action or paradoxical effects, offering only partial context about the entities in the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Stimulant medication removes the need for children with ADHD to self-stimulate because it provides the stimulation they lack from non-stimulating activities.",
+          "quote": "If you give them a stimulant medication, they no longer have the need to self-stimulate.",
+          "verdict_reason": "The snippet addresses why stimulants work for ADHD but offers a behavioral explanation rather than the specific 'reverse' mechanism queried, making it relevant but incomplete.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Prescription stimulants for ADHD are chemically similar to recreational drugs and have similar physical and psychological effects on people with ADHD as on others.",
+          "quote": "Central nervous system stimulant drugs that are commonly prescribed for ADHD are chemically similar to recreational stimulants like amphetamines, cocaine and street ΓÇ£methΓÇ¥, and as a result have similar physical and psychological effects.",
+          "verdict_reason": "The snippet addresses the query by stating effects are similar, not reversed, providing conflict-bearing evidence regarding the user's premise, though it lacks a specific mechanistic explanation.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Stimulant medication helps individuals with ADHD improve functioning in school, work, family, and social life.",
+          "quote": "Stimulant medication helps youngsters and adults with ADHD do better in school, work, family and social life.",
+          "verdict_reason": "The snippet confirms stimulants help ADHD patients but does not explain the mechanism or address the 'reverse' effect query, making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_264e97231363",
+      "claim_index": 3,
+      "claim": "If your hair is already green, you can try at-home remedies such as rinsing with tomato juice, ketchup lemon juice",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Chlorine alone does not turn hair green; the green color results from copper bonding with chlorine to form a film on hair proteins.",
+          "quote": "Often the misconception to the hair turning green is the chlorine. It's not 100 just the chlorine though. It's also copper.",
+          "verdict_reason": "The snippet directly addresses the query by clarifying that chlorine is not the sole cause, identifying copper as the primary culprit, thus providing relevant but corrective evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Chlorine does not turn hair green, but copper in pools can cause this effect.",
+          "quote": "Chlorine doesn't turn hair green. It can bleach it lighter shades, but doesn't do the green thing. That actually happened in the past with pools with copper",
+          "verdict_reason": "The snippet directly addresses the query by refuting chlorine as the cause and identifying copper as the actual cause, providing relevant but corrective evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0a05aabca56a",
+      "claim_index": 1,
+      "claim": "It can range from humorous adventures to complex stories is often aimed at a more mature audience",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that anime is considered by many to be a Japanese cartoon genre, though it also highlights distinctions between the two.",
+          "quote": "Anime is considered by many to be a Japanese cartoon genre but is more often referred to as just anime.",
+          "verdict_reason": "The snippet directly addresses the query by stating anime is considered a Japanese cartoon genre by many, providing conflict-bearing evidence despite also listing differences.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_2395695f1604",
+      "claim_index": 0,
+      "claim": "Milk consumption does not have a clear link to increased mucus production, according to a 2012 study by the BC Children's Hospital",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Research indicates that milk consumption does not impact mucus production or cause extra mucus during illness.",
+          "quote": "a body of research shows this is untrue and that milk consumption does not impact mucus production.",
+          "verdict_reason": "The snippet directly answers the query by stating research shows milk does not increase mucus production, citing expert opinion and studies.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_2395695f1604",
+      "claim_index": 3,
+      "claim": "Overall, the evidence is inconclusive more research is needed to determine the relationship between milk consumption and mucus production",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research studies have not found a definitive link between milk consumption and increased mucus production, attributing the sensation to oral enzyme interactions.",
+          "quote": "A 2012 study by the BC Children's Hospital states that",
+          "verdict_reason": "Relevant evidence: Research studies have not found a definitive link between milk consumption and increased mucus production, attributing the sensation to oral enzyme interactions",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f97fef94decc",
+      "claim_index": 1,
+      "claim": "However, some studies suggest that VR headsets can also help people enhance their vision",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Studies found no serious vision deterioration in children using VR, though some participants had trouble detecting distance differences.",
+          "quote": "Likewise, a different study showed no serious deterioration of vision among children 8 to 12 who played a VR video game for 20 minutes. But two study participants had trouble detecting differences in distance.",
+          "verdict_reason": "The snippet directly addresses the query with specific study findings that are mixed (no serious deterioration vs. distance detection issues), providing conflict-bearing evidence rather than a definitive yes/no.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_354e7097602d",
+      "claim_index": 1,
+      "claim": "The Trinity test site is now part of the White Sands Missile Range and is owned by the U.S. Department of Defense",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The first atomic bomb test occurred at a site 210 miles south of Los Alamos, New Mexico, known as the Jornada del Muerto on the Alamogordo Bombing Range.",
+          "quote": "The world's first nuclear explosion occurred on July 16, 1945, when a plutonium implosion device was tested at a site located 210 miles south of Los Alamos, New Mexico, on the barren plains of the Alamogordo Bombing Range, known as the Jornada del Muerto.",
+          "verdict_reason": "The snippet explicitly states the location of the world's first nuclear explosion in the United States, directly answering the query with specific geographic details.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_354e7097602d",
+      "claim_index": 2,
+      "claim": "The test was conducted in the Alamogordo Bombing Range, southeast of Socorro, New Mexico",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Trinity test, the world's first nuclear detonation, was conducted in New Mexico in July 1945.",
+          "quote": "The Trinity test, which was the world's first nuclear detonation, was conducted in New Mexico in July 1945.",
+          "verdict_reason": "The snippet explicitly states that the first nuclear detonation (Trinity) occurred in New Mexico, directly answering the query about the location of the first atomic bomb test.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_4590bdd9e269",
+      "claim_index": 0,
+      "claim": "The final answer is:\nWhile transmutation of lead into gold is theoretically possible, it is not currently practical due to the high energy requirements and the resulting radioactive isotopes",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Gold can be created from mercury or platinum through nuclear reactions, not chemical reactions.",
+          "quote": "we can remove one proton from mercury (which has 80) or add one proton to platinum (which has 78) in order to make gold.",
+          "verdict_reason": "Snippet identifies mercury and platinum as source elements but clarifies the process requires nuclear, not chemical, reactions, partially addressing the query's premise.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_8f302f0bfe82",
+      "claim_index": 0,
+      "claim": "Someone You Can Build a Nest In, as listed in",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The book Someone You Can Build a Nest In won the 2025 Nebula Award for Best Novel.",
+          "quote": "Current and Previous Award Winners:\n2025\nSomeone You Can Build a Nest In\nThe Dragonfly Gambit",
+          "verdict_reason": "The snippet explicitly lists 'Someone You Can Build a Nest In' as the 2025 winner, which is the latest year shown, directly answering the query about the latest winner.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0070",
+      "claim_index": 1,
+      "claim": "However, the exact answer to the query about his age at the time of winning the championship cannot be determined from the provided documents, as and provide complementary information but do not provide a complete answer",
+      "cited_docs": [
+        "d9",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d9"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d9": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is about Glencora Ralph, a water polo player, not a diving mentor. The query asks about an expert mentor to celebrities on 'Splash!' (a diving competition show) who won the 2009 FINA World Championship in an individual event. This document provides no evidence about diving, mentoring, or the 2009 FINA World Championship in an individual event.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Tom Daley is the expert mentor to the celebrities on Splash!",
+          "quote": "Team GB Olympic Bronze Medal winning diver Tom Daley is the expert mentor to the celebrities.",
+          "verdict_reason": "Snippet identifies Tom Daley as the expert mentor but does not provide his 2009 FINA World Championship age or individual event details needed to fully answer the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f2031e426cee",
+      "claim_index": 0,
+      "claim": "The present law minister is Kiren Rijiju",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies Arjun Ram Meghwal as the Minister of the Ministry of Law and Justice.",
+          "quote": "Ministry of Law and Justice    Minister   Arjun Ram Meghwal  ---   Attorney-General   R. Venkataramani",
+          "verdict_reason": "The snippet names a minister for the queried entity but lacks temporal markers to confirm if this is the 'present' minister, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f2a7d027353d",
+      "claim_index": 0,
+      "claim": "The first form of government after the Revolutionary War was the Articles of Confederation, as stated in",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The United States became the first nation to establish a federal republic with a written constitution based on universal natural rights.",
+          "quote": "The United States became the first nation to establish a federal republic with a written constitution based on the principles of universal natural rights",
+          "verdict_reason": "Snippet identifies the post-war government as a federal republic but lacks specific timing relative to the war's end or mention of the Articles of Confederation.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_14a587def215",
+      "claim_index": 0,
+      "claim": "The Carolina Hurricanes last made the playoffs in 2026,",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the Hurricanes made the playoffs in 2009, 2019, 2023, and 2025 while reaching the Eastern Conference Finals.",
+          "quote": "This encompassed the East Final in 2009, 2019, 2023, and 2025.",
+          "verdict_reason": "Snippet lists specific recent playoff years (2023, 2025) but focuses on a specific 2026 narrative, making it relevant but potentially incomplete or conflicting regarding the absolute 'last' time depending on current date.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_7bb7fe6c9287",
+      "claim_index": 1,
+      "claim": "These metaphors add a captivating element to the epic and make it more interesting by avoiding repetition of names",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The document lists specific kennings for Grendel such as \"captain of evil,\" \"corpse-maker,\" \"shadow-stalker,\" and \"terror-monger.\"",
+          "quote": "To express the evilness of Grendel, the kennings",
+          "verdict_reason": "Relevant evidence: The document lists specific kennings for Grendel such as \"captain of evil,\" \"corpse-maker,\" \"shadow-stalker,\" and \"terror-monger.\"",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_b797de4c6610",
+      "claim_index": 5,
+      "claim": "Elevated heart enzymes may show that you have cardiovascular disease or other heart problems",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The primary cardiac biomarker is troponin, and natriuretic peptides like NT-proBNP are also used to assess heart strain.",
+          "quote": "A biomarker test for troponin is the primary test healthcare providers use to detect heart damage from a heart attack or ACS. Healthcare providers may also test for natriuretic peptides (NPs) that may be elevated in conditions like heart failure.",
+          "verdict_reason": "The snippet identifies specific biomarkers (troponin, natriuretic peptides) but implies there are 'different types' without providing a complete list, making it partially supportive.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f7d6e484b579",
+      "claim_index": 0,
+      "claim": "The 76ers have a 23-25 record in the playoffs between June 1, 2021 June 1, 2026",
+      "cited_docs": [
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Philadelphia 76ers played playoff games in June 2021, with a specific game recorded on June 18, 2021.",
+          "quote": "7 76ers 6/18/2021 1-0 PHI @ ATL W 104-99 1.000 240 104 51 15 7 5 38 93 40.9 12 29 41.4 16 23 69.6 50.",
+          "verdict_reason": "Snippet confirms 2021 playoff participation but lacks information on subsequent years to determine the absolute last time they made the playoffs.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f971e49123a1",
+      "claim_index": 0,
+      "claim": "The final answer is:\nThere are 13 episodes in Season 5 of The Originals",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The Originals Season 5 consists of 13 episodes.",
+          "quote": "Season 5 Episode Guide\nSeason 5\n13 Episodes 2018 - 2018",
+          "verdict_reason": "The snippet explicitly states that Season 5 of The Originals contains 13 episodes, directly answering the user's query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0013",
+      "claim_index": 0,
+      "claim": "Microsoft owns LinkedIn, as stated in the 2025 Annual Report",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Microsoft acquired LinkedIn in December 2016.",
+          "quote": "Microsoft acquired LinkedIn in December 2016.",
+          "verdict_reason": "The snippet directly answers who owns LinkedIn by stating Microsoft acquired it in December 2016. This is the current ownership information.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "conflictingqa_747727772a30",
+      "claim_index": 5,
+      "claim": "Source quality: high.\n- d6: - d7: - d8: - d9: - d10: - d11: - d12: - d13: - d14: - d15: - d16: - d17: - d18: - d19: - d20: - d21: - d22: - d23: - d24: - d25: - d26: - d27: - d28: - d29: - d30: - d31: - d32: - d33: - d34: - d35: - d36: - d37: - d38: - d39: - d40: - d41: - d42: - d43: - d44: - d45: - d46: - d47: - d48: - d49: - d50: - d51: - d52: - d53: - d54: - d55: - d56: - d57: - d58: - d59: - d60: - d61: - d62: - d63: - d64: - d65: - d66: - d67: - d68: - d69: - d70: - d71: - d72: - d73: - d74: - d75: - d76: - d77: - d78: - d79: - d80: - d81: - d82: - d83: - d84: - d85: - d86: - d87: - d88: - d89: - d90: - d91: - d92: - d93: - d94: - d95: - d96: - d97: - d98: - d99: - d100: - d101: - d102: - d103: - d104: - d105: - d106: - d107: - d108: - d109: - d110: - d111: - d112: - d113: - d114: - d115: - d116: - d117: - d118: - d119: - d120: - d121: - d122: - d123: - d124: - d125: - d126: - d127: - d128: - d129: - d130: - d131: - d132: - d133: - d134: - d135: - d136: - d137: - d138: - d139: (no d139; only 5 documents provided",
+      "cited_docs": [
+        "d101",
+        "d102",
+        "d84",
+        "d48",
+        "d20",
+        "d58",
+        "d7",
+        "d25",
+        "d120",
+        "d90",
+        "d110",
+        "d91",
+        "d68",
+        "d104",
+        "d138",
+        "d109",
+        "d72",
+        "d137",
+        "d14",
+        "d97",
+        "d133",
+        "d35",
+        "d129",
+        "d69",
+        "d132",
+        "d49",
+        "d81",
+        "d67",
+        "d96",
+        "d26",
+        "d99",
+        "d93",
+        "d87",
+        "d56",
+        "d135",
+        "d118",
+        "d89",
+        "d78",
+        "d108",
+        "d18",
+        "d62",
+        "d111",
+        "d88",
+        "d130",
+        "d22",
+        "d12",
+        "d92",
+        "d29",
+        "d117",
+        "d45",
+        "d61",
+        "d63",
+        "d13",
+        "d60",
+        "d57",
+        "d21",
+        "d33",
+        "d44",
+        "d23",
+        "d51",
+        "d41",
+        "d28",
+        "d74",
+        "d71",
+        "d100",
+        "d113",
+        "d52",
+        "d98",
+        "d70",
+        "d47",
+        "d105",
+        "d43",
+        "d46",
+        "d15",
+        "d9",
+        "d119",
+        "d40",
+        "d125",
+        "d42",
+        "d94",
+        "d126",
+        "d116",
+        "d131",
+        "d54",
+        "d53",
+        "d86",
+        "d112",
+        "d38",
+        "d27",
+        "d8",
+        "d32",
+        "d134",
+        "d83",
+        "d16",
+        "d106",
+        "d115",
+        "d123",
+        "d36",
+        "d85",
+        "d37",
+        "d76",
+        "d80",
+        "d95",
+        "d11",
+        "d24",
+        "d136",
+        "d59",
+        "d39",
+        "d128",
+        "d64",
+        "d82",
+        "d127",
+        "d34",
+        "d10",
+        "d55",
+        "d17",
+        "d66",
+        "d79",
+        "d73",
+        "d65",
+        "d31",
+        "d103",
+        "d107",
+        "d121",
+        "d114",
+        "d77",
+        "d19",
+        "d124",
+        "d30",
+        "d122",
+        "d6",
+        "d50",
+        "d75"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d10",
+        "d100",
+        "d101",
+        "d102",
+        "d103",
+        "d104",
+        "d105",
+        "d106",
+        "d107",
+        "d108",
+        "d109",
+        "d11",
+        "d110",
+        "d111",
+        "d112",
+        "d113",
+        "d114",
+        "d115",
+        "d116",
+        "d117",
+        "d118",
+        "d119",
+        "d12",
+        "d120",
+        "d121",
+        "d122",
+        "d123",
+        "d124",
+        "d125",
+        "d126",
+        "d127",
+        "d128",
+        "d129",
+        "d13",
+        "d130",
+        "d131",
+        "d132",
+        "d133",
+        "d134",
+        "d135",
+        "d136",
+        "d137",
+        "d138",
+        "d14",
+        "d15",
+        "d16",
+        "d17",
+        "d18",
+        "d19",
+        "d20",
+        "d21",
+        "d22",
+        "d23",
+        "d24",
+        "d25",
+        "d26",
+        "d27",
+        "d28",
+        "d29",
+        "d30",
+        "d31",
+        "d32",
+        "d33",
+        "d34",
+        "d35",
+        "d36",
+        "d37",
+        "d38",
+        "d39",
+        "d40",
+        "d41",
+        "d42",
+        "d43",
+        "d44",
+        "d45",
+        "d46",
+        "d47",
+        "d48",
+        "d49",
+        "d50",
+        "d51",
+        "d52",
+        "d53",
+        "d54",
+        "d55",
+        "d56",
+        "d57",
+        "d58",
+        "d59",
+        "d6",
+        "d60",
+        "d61",
+        "d62",
+        "d63",
+        "d64",
+        "d65",
+        "d66",
+        "d67",
+        "d68",
+        "d69",
+        "d7",
+        "d70",
+        "d71",
+        "d72",
+        "d73",
+        "d74",
+        "d75",
+        "d76",
+        "d77",
+        "d78",
+        "d79",
+        "d8",
+        "d80",
+        "d81",
+        "d82",
+        "d83",
+        "d84",
+        "d85",
+        "d86",
+        "d87",
+        "d88",
+        "d89",
+        "d9",
+        "d90",
+        "d91",
+        "d92",
+        "d93",
+        "d94",
+        "d95",
+        "d96",
+        "d97",
+        "d98",
+        "d99"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d101": {},
+        "d102": {},
+        "d84": {},
+        "d48": {},
+        "d20": {},
+        "d58": {},
+        "d7": {},
+        "d25": {},
+        "d120": {},
+        "d90": {},
+        "d110": {},
+        "d91": {},
+        "d68": {},
+        "d104": {},
+        "d138": {},
+        "d109": {},
+        "d72": {},
+        "d137": {},
+        "d14": {},
+        "d97": {},
+        "d133": {},
+        "d35": {},
+        "d129": {},
+        "d69": {},
+        "d132": {},
+        "d49": {},
+        "d81": {},
+        "d67": {},
+        "d96": {},
+        "d26": {},
+        "d99": {},
+        "d93": {},
+        "d87": {},
+        "d56": {},
+        "d135": {},
+        "d118": {},
+        "d89": {},
+        "d78": {},
+        "d108": {},
+        "d18": {},
+        "d62": {},
+        "d111": {},
+        "d88": {},
+        "d130": {},
+        "d22": {},
+        "d12": {},
+        "d92": {},
+        "d29": {},
+        "d117": {},
+        "d45": {},
+        "d61": {},
+        "d63": {},
+        "d13": {},
+        "d60": {},
+        "d57": {},
+        "d21": {},
+        "d33": {},
+        "d44": {},
+        "d23": {},
+        "d51": {},
+        "d41": {},
+        "d28": {},
+        "d74": {},
+        "d71": {},
+        "d100": {},
+        "d113": {},
+        "d52": {},
+        "d98": {},
+        "d70": {},
+        "d47": {},
+        "d105": {},
+        "d43": {},
+        "d46": {},
+        "d15": {},
+        "d9": {},
+        "d119": {},
+        "d40": {},
+        "d125": {},
+        "d42": {},
+        "d94": {},
+        "d126": {},
+        "d116": {},
+        "d131": {},
+        "d54": {},
+        "d53": {},
+        "d86": {},
+        "d112": {},
+        "d38": {},
+        "d27": {},
+        "d8": {},
+        "d32": {},
+        "d134": {},
+        "d83": {},
+        "d16": {},
+        "d106": {},
+        "d115": {},
+        "d123": {},
+        "d36": {},
+        "d85": {},
+        "d37": {},
+        "d76": {},
+        "d80": {},
+        "d95": {},
+        "d11": {},
+        "d24": {},
+        "d136": {},
+        "d59": {},
+        "d39": {},
+        "d128": {},
+        "d64": {},
+        "d82": {},
+        "d127": {},
+        "d34": {},
+        "d10": {},
+        "d55": {},
+        "d17": {},
+        "d66": {},
+        "d79": {},
+        "d73": {},
+        "d65": {},
+        "d31": {},
+        "d103": {},
+        "d107": {},
+        "d121": {},
+        "d114": {},
+        "d77": {},
+        "d19": {},
+        "d124": {},
+        "d30": {},
+        "d122": {},
+        "d6": {},
+        "d50": {},
+        "d75": {}
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem holds the record for the fastest rap in a hit single, rapping 225 words in 30 seconds at 7.5 words per second, according to",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0070",
+      "claim_index": 1,
+      "claim": "However, the exact answer to the query about his age at the time of winning the championship cannot be determined from the provided documents, as and provide complementary information but do not provide a complete answer",
+      "cited_docs": [
+        "d9",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d9"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d9": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is about Glencora Ralph, a water polo player, not a diving mentor. The query asks about an expert mentor to celebrities on 'Splash!' (a diving competition show) who won the 2009 FINA World Championship in an individual event. This document provides no evidence about diving, mentoring, or the 2009 FINA World Championship in an individual event.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Tom Daley is the expert mentor to the celebrities on Splash!",
+          "quote": "Team GB Olympic Bronze Medal winning diver Tom Daley is the expert mentor to the celebrities.",
+          "verdict_reason": "Snippet identifies Tom Daley as the expert mentor but does not provide his 2009 FINA World Championship age or individual event details needed to fully answer the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_1009f5c49e12",
+      "claim_index": 0,
+      "claim": "The Louvre Museum is located in the heart of Paris, with multiple documents providing consistent information about its location and accessibility features",
+      "cited_docs": [
+        "d1",
+        "d8",
+        "d10",
+        "d3",
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d10",
+        "d8"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Louvre Museum is located in the heart of Paris.",
+          "quote": "Located in the heart of Paris, on the banks of the Seine and close to the Tuileries Palace, the building was a residence for many kings of France.",
+          "verdict_reason": "The snippet explicitly states the Louvre is located in the heart of Paris, directly answering the query about the city.",
+          "source_quality": "low"
+        },
+        "d8": {},
+        "d10": {},
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The Louvre Museum is located in Paris, France.",
+          "quote": "The Louvre Museum in Paris is the world's most-visited and largest art museum. Located on the right bank of the river Seine in the heart of Paris",
+          "verdict_reason": "The snippet explicitly states the Louvre Museum is located in Paris, directly answering the query about the city.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The Musée du Louvre is located in Paris, France.",
+          "quote": "The Musée du Louvre, located in Paris, France, is one of the world's largest and most visited museums.",
+          "verdict_reason": "The snippet explicitly states the museum is located in Paris, directly answering the query about the city.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The Louvre Museum is located in Paris, France.",
+          "quote": "Where is the Louvre Museum located? Address: Rue de Rivoli, 75001 Paris, France.",
+          "verdict_reason": "The snippet explicitly states the address and city of the Louvre Museum, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_151",
+      "claim_index": 1,
+      "claim": "The transition to a fully integrated school system did not begin until 1971",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Brown v. Board of Education case was a landmark 1954 U.S. Supreme Court decision.",
+          "quote": "landmark 1954 U.S. Supreme Court case \"Oliver Brown, et al. v. Board of Education of Topeka, et al\".",
+          "verdict_reason": "Snippet identifies the 1954 ruling date for the queried case but does not specify when the case or its effects ended, providing only partial evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states that de facto segregation still existed in 1972, eighteen years after the 1954 Brown v. Board of Education ruling.",
+          "quote": "In the 1954 landmark case, Brown v. Board of Education, the legal basis for segregation within public schools is dismantled. ... Eighteen years later, in 1972, de facto segregation still existed",
+          "verdict_reason": "The snippet addresses the query by providing a 1972 status update on segregation post-Brown, but it does not specify an end date, offering only partial evidence regarding when the effects ended.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Transition to a fully integrated school system in Greensboro did not begin until 1971.",
+          "quote": "Transition to a fully integrated school system did not begin until 1971, after numerous local lawsuits and both nonviolent and violent demonstrations.",
+          "verdict_reason": "Snippet addresses school desegregation timelines related to Brown v. Board but focuses on specific local cases (Greensboro, Moberly) rather than the national end date of the case itself.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses the Montgomery bus boycott and a 1956 Supreme Court order regarding buses, which is a different legal event and entity than the queried Brown v. Board of Education case.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

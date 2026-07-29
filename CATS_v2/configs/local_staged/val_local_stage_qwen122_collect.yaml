@@ -1,0 +1,38 @@
+# CATS v2.0 - staged local committee cache collection
+# Stage: Qwen3.5-122B fallback anchor only.
+#
+# Keep response_cache_dir identical across all staged collection configs and
+# the final read-only aggregation config.
+
+outputs_dir: "outputs/val_local_staged/qwen122_collect"
+report_md: "outputs/val_local_staged/qwen122_collect/eval_report.md"
+detailed_results_json: "outputs/val_local_staged/qwen122_collect/detailed_results.json"
+
+pipeline:
+  batch_size: 1
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "local_openai"
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 1
+    timeout_seconds: 900
+    response_cache_dir: "outputs/local_committee_cache/val_tier2_2xh200_fallback"
+    cache_mode: "read_write"
+    judges:
+      - model_id: "local/qwen3.5-122b"
+        base_url: "http://127.0.0.1:8001/v1"
+        priority: 3
+        max_tokens: 1600
+        request_timeout: 900
+        extra_body:
+          chat_template_kwargs:
+            enable_thinking: false

@@ -1,0 +1,135 @@
+{
+  "created_at": "2026-06-01",
+  "purpose": "External QA/query sources for building a benchmark set while excluding existing CONFLICTS queries.",
+  "sources": [
+    {
+      "name": "CONFLICTS",
+      "role": "dedupe_exclusion_set",
+      "source_url": "https://github.com/google-research-datasets/rag_conflicts.git",
+      "local_path": "data/external_sources/rag_conflicts",
+      "commit": "81ba921dd684a93db41a7e9dda6b6a7c67348a88",
+      "primary_files": [
+        {
+          "path": "data/external_sources/rag_conflicts/conflicts.jsonl",
+          "rows": 458,
+          "question_field": "question",
+          "source_distribution": {
+            "conflicting_qa": 162,
+            "situated_qa_geo": 105,
+            "freshqa": 95,
+            "qacc": 55,
+            "situated_qa_temp": 41
+          }
+        }
+      ],
+      "notes": "Use this as the canonical list of questions to exclude from new benchmark candidate pools."
+    },
+    {
+      "name": "FreshQA",
+      "role": "candidate_query_source",
+      "source_url": "https://github.com/freshllms/freshqa.git",
+      "local_path": "data/external_sources/freshqa",
+      "commit": "7d2d3683991916f3633e480548a6aa5c9a62e3db",
+      "downloaded_files": [
+        {
+          "path": "data/external_sources/freshqa/downloads/freshqa_2026-04-21.csv",
+          "origin": "https://docs.google.com/spreadsheets/d/1_8mi-yuK30mvoDJu1KQXD6ODem7MKMcIgVAwDSzJkjM/export?format=csv",
+          "rows": 600,
+          "question_field": "question",
+          "header_line": 3,
+          "split_distribution": {
+            "TEST": 500,
+            "DEV": 100
+          }
+        }
+      ],
+      "notes": "The exported CSV starts with two Google warning/blank rows; parsing should locate the header row where the first cell is id."
+    },
+    {
+      "name": "SituatedQA",
+      "role": "candidate_query_source",
+      "source_url": "https://github.com/mikejqzhang/SituatedQA.git",
+      "local_path": "data/external_sources/situatedqa",
+      "commit": "1ef854512fe0f692ca55f92ff2feedf3d7612eda",
+      "primary_files": [
+        {
+          "path": "data/external_sources/situatedqa/data/qa_data/geo.train.jsonl",
+          "rows": 3548,
+          "unique_ids": 3548,
+          "question_field": "question"
+        },
+        {
+          "path": "data/external_sources/situatedqa/data/qa_data/geo.dev.jsonl",
+          "rows": 1398,
+          "unique_ids": 351,
+          "question_field": "question"
+        },
+        {
+          "path": "data/external_sources/situatedqa/data/qa_data/geo.test.jsonl",
+          "rows": 506,
+          "unique_ids": 129,
+          "question_field": "question"
+        },
+        {
+          "path": "data/external_sources/situatedqa/data/qa_data/temp.train.jsonl",
+          "rows": 6009,
+          "unique_ids": 2667,
+          "question_field": "question"
+        },
+        {
+          "path": "data/external_sources/situatedqa/data/qa_data/temp.dev.jsonl",
+          "rows": 3423,
+          "unique_ids": 1178,
+          "question_field": "question"
+        },
+        {
+          "path": "data/external_sources/situatedqa/data/qa_data/temp.test.jsonl",
+          "rows": 2795,
+          "unique_ids": 876,
+          "question_field": "question"
+        }
+      ],
+      "notes": "Dev/test splits include repeated ids across situated variants. Use id-aware dedupe after extracting candidate questions."
+    },
+    {
+      "name": "QACC / ConflictQA",
+      "role": "candidate_query_source",
+      "source_url": "https://github.com/amazon-science/qa-with-conflicting-context.git",
+      "local_path": "data/external_sources/qacc",
+      "commit": "fff5a4cd4fbfb51fadea92a3aaf3226875d0bce5",
+      "primary_files": [
+        {
+          "path": "data/external_sources/qacc/data/ConflictQA_Dataset.json",
+          "rows": 1617,
+          "question_field": "question",
+          "split_distribution": {
+            "train": 394,
+            "dev": 410,
+            "test": 813
+          }
+        }
+      ]
+    },
+    {
+      "name": "ConflictingQA retrieval windows from RAG convincingness repo",
+      "role": "supporting_candidate_or_retrieval_reference",
+      "source_url": "https://github.com/AlexWan0/rag-convincingness.git",
+      "local_path": "data/external_sources/conflictingqa_rag_convincingness",
+      "commit": "001b6d98b0e5731a6577d5cee6ea1df4ff62c114",
+      "downloaded_files": [
+        {
+          "path": "data/external_sources/conflictingqa_rag_convincingness/downloads/data.pkl",
+          "origin": "https://drive.google.com/drive/folders/1fU52Jg6wVXCr6J03i0bRy7hA02iVbeS_?usp=sharing",
+          "drive_file_id": "1yPxzZsKzT96I6K_WLKDDxYTUZ9gQHZoU",
+          "dataframe_shape": [
+            4002,
+            9
+          ],
+          "unique_search_queries": 434,
+          "query_field": "search_query"
+        }
+      ],
+      "notes": "This pickle is not a plain QA source file. It contains search/retrieval windows with columns category, search_query, search_type, search_engine_input, url, title, text_raw, text_window, and stance."
+    }
+  ]
+}

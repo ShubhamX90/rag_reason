@@ -1,0 +1,1949 @@
+{
+  "variant": "benchmark_set_all_modes/qwen32b/oracle_conflict/strict/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_conflict/strict/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_conflict/strict/baseline/final/detailed_results.json",
+    "source_final_sha256": "584e422678cb136046f5a856c1bc0ad469ff8602ac9a22877f842107ec174530",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen32b/oracle_conflict/strict/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen32b/oracle_conflict/strict/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1811,
+    "claims_with_citations": 1518,
+    "claims_with_committee_support_set": 1672,
+    "claims_with_any_approved_citation": 1390,
+    "claims_with_any_gold_positive_citation": 1514,
+    "committee_alignment_precision_macro": 0.8441809398331137,
+    "committee_alignment_precision_micro": 0.8110091743119267,
+    "gold_positive_citation_precision_macro": 0.9955533596837944,
+    "gold_positive_citation_precision_micro": 0.9959633027522936,
+    "soft_extra_citation_rate_micro": 0.18495412844036696,
+    "hard_negative_citation_rate_micro": 0.004036697247706422,
+    "committee_support_citation_recall_macro": 0.8313397129186603,
+    "committee_support_citation_recall_micro": 0.8313397129186603,
+    "claims_with_any_soft_extra_rate": 0.2318840579710145,
+    "claims_with_any_hard_negative_rate": 0.007246376811594203,
+    "strict_committee_alignment_claim_rate": 0.6399779127553837,
+    "strict_gold_clean_claim_rate": 0.7658752070679182,
+    "strict_grounded_committee_clean_rate_all_claims": 0.6399779127553837,
+    "strict_grounded_gold_clean_rate_all_claims": 0.7658752070679182,
+    "total_cited_docs": 2725,
+    "total_approved_cited_docs": 2210,
+    "total_gold_positive_cited_docs": 2714,
+    "total_soft_extra_cited_docs": 504,
+    "total_hard_negative_cited_docs": 11
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_734859937e46",
+      "claim_index": 5,
+      "claim": "Despite these efforts, the specific legal status of selling user data without consent remains unclear across all jurisdictions",
+      "cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Pending legislation in South Carolina and Pennsylvania proposes prohibiting ISPs from selling user data without authorization.",
+          "quote": "SC H.B. 3014 Pending - Carryover | Enacts the State Data Privacy Protection Act, defines relevant terms, prohibits a mobile telecommunications provider from selling a customer's personal data to a third party",
+          "verdict_reason": "Snippet details pending state bills restricting ISP data sales, providing relevant but incomplete evidence on the broader question of current federal legality.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "US ISPs have been allowed to sell anonymized browsing history since 2017, though some states now require explicit consent.",
+          "quote": "In the United States, ISPs have had the right to sell your private browsing history(new window) since 2017, as long as they anonymized your personal data.",
+          "verdict_reason": "Snippet directly addresses the query by confirming US ISPs can sell data under specific conditions, but notes varying state laws and opt-out issues, making it partial rather than absolute.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "US law S.J.Res.34 allows ISPs to sell and share users' browsing history with advertisers.",
+          "quote": "Thanks to the passage of S.J.Res.34 in 2017, Internet service providers can sell and share users' browsing history with advertisers.",
+          "verdict_reason": "Snippet confirms ISPs can sell data under a 2017 law but does not explicitly address the 'consent' condition or current legal status beyond that date.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Some ISPs share personal information with parent companies, while FCC rules require transparency and customer consent before using data.",
+          "quote": "Other ISPs, as reported by the FTC, share personal information with their parent companies and affiliates, undercutting the promise not to sell information.",
+          "verdict_reason": "Snippet addresses ISP data sharing practices and consent requirements but presents conflicting evidence without definitively resolving if selling without consent is legally permitted.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "In the US, ISPs are legally permitted to sell user browsing data without consent due to repealed FCC regulations.",
+          "quote": "In the US, internet service providers are well within their rights to sell your browsing data. In 2017, the Federal Communications Commission (FCC) repealed laws protecting the online privacy of US internet users",
+          "verdict_reason": "The snippet directly addresses the query by confirming ISPs can sell data in the US without consent, but limits the scope to the US and a specific 2017 regulatory context.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_115",
+      "claim_index": 1,
+      "claim": "However, there may be more recent championships not covered in the provided documents, indicating potential outdated information",
+      "cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Celtics won their eighth NBA Championship in the 1964–65 season by defeating the Los Angeles Lakers.",
+          "quote": "The 1964ΓÇô65 NBA season was the Celtics' 19th season in the NBA. The Celtics finished the season by winning their eighth NBA Championship, defeating the Los Angeles Lakers in five games.",
+          "verdict_reason": "Snippet confirms a specific championship win (1965) but is outdated and does not answer 'when was the last time' relative to the present.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Celtics won the 1981 NBA Championship against the Houston Rockets.",
+          "quote": "The Celtics went on to capture the 1981 NBA Championship over the Houston Rockets, just two years after Bird had been drafted.",
+          "verdict_reason": "Snippet confirms a 1981 championship but does not answer 'last time' as it is older evidence; it is conflict-bearing regarding the entity but incomplete for the specific temporal query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Boston Celtics won eight straight NBA championships from 1959 through 1966.",
+          "quote": "They won eight straight NBA championships from 1959 through 1966.",
+          "verdict_reason": "Snippet provides historical championship data for the Celtics but only covers 1959-1966, failing to answer the 'last time' query which requires more recent information.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document notes the Celtics had 17 titles as of 2017 but only details their first championship in 1957, failing to identify the most recent one.",
+          "quote": "It was the first title in Celtics history; as of 2017, they led the NBA in titles won with 17.",
+          "verdict_reason": "The snippet addresses the entity and total count but provides outdated data (2017) and focuses on the first title, leaving the 'last time' query unresolved.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Celtics won the 1986 NBA Finals against the Rockets.",
+          "quote": "The Celtics rebounded the following year to win the 1986 NBA Finals against the Rockets.",
+          "verdict_reason": "Snippet confirms a specific 1986 championship but is from 2009, making it outdated evidence for a 'last time' query without confirming later wins.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_193",
+      "claim_index": 1,
+      "claim": "However, the documents do not provide a clear explanation for why blue cheese is generally considered safe to eat despite having mould",
+      "cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Hard cheeses are safer because they contain less water, making bacteria less likely to grow compared to soft cheeses.",
+          "quote": "Hard cheeses don't contain as much water as soft cheeses, so bacteria are less likely to grow in them.",
+          "verdict_reason": "The snippet addresses the query's core mechanism (water content/bacteria growth) regarding cheese safety but discusses soft vs. hard cheese generally, not specifically blue cheese mould.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Blue cheese is considered unsafe during pregnancy because it is often made from unpasteurized milk that may host listeria bacteria.",
+          "quote": "Since blue cheese is made from unpasteurized milk, it is likelier to host the listeria bacteria.",
+          "verdict_reason": "The snippet addresses the safety of blue cheese and mentions mould-related bacteria (listeria), providing conflict-bearing evidence about risks, though it focuses on pregnancy rather than the general comparison requested.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Soft blue-veined cheeses like roquefort contain moulds that can harbor listeria bacteria, which poses risks during pregnancy.",
+          "quote": "You should also avoid soft blue-veined cheeses such as roquefort and gorgonzola. These are made with moulds that can contain listeria",
+          "verdict_reason": "Snippet addresses the safety of blue cheese moulds and listeria risks, providing relevant evidence about the query topic, though it focuses on pregnancy restrictions rather than the general mechanism of safety.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Pregnant women are advised to avoid soft blue-veined cheeses like Danish blue, gorgonzola, and roquefort due to listeria risk.",
+          "quote": "soft blue-veined cheeses ΓÇô such Danish blue, gorgonzola and roquefort",
+          "verdict_reason": "Snippet addresses blue cheese safety but only for pregnant women regarding listeria, failing to explain the general safety mechanism queried.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Mould-ripened soft cheeses like ch├¿vre should be avoided in pregnancy because they can contain Listeria bacteria.",
+          "quote": "White rind Ch├¿vre is mould-ripened and has a white rind, similar to brie and camembert ΓÇô you should avoid all these mould-ripened soft cheeses in pregnancy. This is because soft cheese like this can contain bacteria called Listeria",
+          "verdict_reason": "Snippet addresses safety of mould-ripened cheese and Listeria risk, providing partial context for why some mouldy cheeses are unsafe, though it lacks specific comparison to blue cheese.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_e1a40e76ba15",
+      "claim_index": 0,
+      "claim": "<final answer with proper citations exactly CANNOT ANSWER, INSUFFICIENT EVIDENCE>\nCANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The game was suspended 21 minutes after the injury and officially suspended until further notice, rather than resuming play.",
+          "quote": "The game was suspended 21 minutes after the injury, and players walked off the field slowly. The game has been officially suspended until further notice, according to ESPN.",
+          "verdict_reason": "Snippet addresses the timeline but states the game was suspended indefinitely, contradicting the query's premise that it resumed, thus providing conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The article states the NFL officially postponed the game at 8:11 PM MT after an hour of waiting, rather than resuming play.",
+          "quote": "After an hour of waiting and some members of the Bengals warming up to resume play, the NFL officially postponed the game at 8:11 PM MT, and would eventually cancel the game indefinitely.",
+          "verdict_reason": "The snippet addresses the same event and timeline but states the game was postponed/canceled rather than resumed, providing conflict-bearing evidence regarding the query's premise.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The game was indefinitely postponed with no immediate update on its future status.",
+          "quote": "There was no immediate update about the future status of the game.",
+          "verdict_reason": "Snippet addresses the game's status but states it was postponed with no resumption time, failing to answer the specific minutes query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The game was temporarily suspended after Hamlin's collapse, but the snippet does not state when or if play resumed.",
+          "quote": "The crowd was told the game would be temporarily suspended and cheers erupted from the stands as players retreated to the tunnel.",
+          "verdict_reason": "The snippet addresses the same event and confirms suspension but lacks the specific resumption time requested, making it incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_125",
+      "claim_index": 3,
+      "claim": "However, the exact mechanisms and reasons for disparities in rewards are not fully explained in the provided documents",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Users can earn points and cashback rewards like free hotels and flights by using specific credit cards.",
+          "quote": "The Life Hunt rewards credit card that earns me points. During the last few years, my fianc├⌐ and I have earned hundreds of free dollars just by using our cashback reward cards.",
+          "verdict_reason": "Snippet confirms rewards exist and gives examples but lacks explanation of system mechanics or reasons for varying reward amounts.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Cashback credit cards provide money back on certain purchases, with some offering 0% cashback for specific periods or limits.",
+          "quote": "As its name suggests, a cashback credit card can give you money back when you make certain purchases. Some cards may offer a 0% cashback on purchases over a specific period of time",
+          "verdict_reason": "Snippet explains basic cashback mechanics but is from 2006, lacks details on point systems, and does not address why rewards vary between individuals.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Using a credit card often makes the reward system incredibly useful, with many cards in India offering amazing cashback and rewards.",
+          "quote": "Having a Credit Card comes with its perks and rewards, and if you use the card often enough, you will see that the reward system can be incredibly useful.",
+          "verdict_reason": "Snippet addresses reward utility and frequency but lacks specific mechanics or reasons for varying point amounts, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Credit card points become more effective and yield higher real cashback for individuals with higher monthly spending levels.",
+          "quote": "points become more effective the more you spend per month. For those with higher incomes that tend to spend $2,000, $3,000, or more per month, the real cashback becomes higher.",
+          "verdict_reason": "Snippet addresses why some get more rewards (higher spending/income) but only covers one specific card example and lacks a general explanation of how reward systems work.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_136",
+      "claim_index": 1,
+      "claim": "While this event marks a significant milestone, the exact date of New Zealand's founding as a country is not explicitly stated in the provided evidence",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Treaty of Waitangi was first copied on February 6, 1840, as part of the process to acquire sovereignty for New Zealand.",
+          "quote": "On 6 February 1840, the first copy of the Treaty of",
+          "verdict_reason": "Snippet addresses the founding timeline via the 1840 Treaty but is truncated and lacks the final establishment date, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The first company in New Zealand was established on September 1, 1840, and Auckland was founded on September 18, 1840.",
+          "quote": "first company formed in New Zealand and which was established on 1 September 1840 at Kororareka... founding of Auckland on 18 September 1840",
+          "verdict_reason": "Snippet provides specific 1840 dates for early entities but does not state the official country founding date, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The first European settlement in the South Island was founded at Bluff in 1823.",
+          "quote": "The first European settlement in the South Island was founded at Bluff in 1823 by James Spencer",
+          "verdict_reason": "Snippet discusses New Zealand's history and early settlements but does not state when it was founded as a country.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Treaty of Waitangi is widely regarded as the founding document of New Zealand.",
+          "quote": "Nonetheless, the Treaty is widely regarded as the founding document of New Zealand.",
+          "verdict_reason": "Snippet identifies the founding document but does not state the specific date or year New Zealand was founded as a country.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_049cc3f14d5e",
+      "claim_index": 1,
+      "claim": "Earlier information from other sources is outdated",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The University of Warsaw won the 2007 ACM-ICPC World Finals.",
+          "quote": "Gold medal 1 | Poland | University of Warsaw  (Warsaw Eagles):  Filip Wolski, Marcin Pilipczuk, Marek Cygan",
+          "verdict_reason": "Snippet provides results for 2004-2007, which are outdated relative to the 'most recent' query, but constitute conflict-bearing evidence about the same entity.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists winners from 2009 to 2012 but does not identify the most recent champion.",
+          "quote": "St. Petersburg Institute of Fine Mechanics and Optics won their fourth world championship, the most by any University at the time.",
+          "verdict_reason": "Snippet addresses the query entity but provides outdated data (ending in 2012), failing to answer the 'most recent' question while remaining conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "St. Petersburg National Research University ITMO won the 2012 ACM-ICPC World Finals gold medal.",
+          "quote": "2012 Gold: St. Petersburg National Research University ITMO (Russia) University of Warsaw (Poland) Moscow Institute of Physics & Technology (Russia)",
+          "verdict_reason": "Snippet provides 2012 winner data but predates the query's 'most recent' requirement, offering outdated conflict-bearing evidence rather than the current answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_2e1b5edb5e0d",
+      "claim_index": 2,
+      "claim": "Despite the agreement on this point, there may be slight variations in how the layers are defined or categorized across different sources",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The stratum lucidum is the epidermal layer absent in thin skin, being found only in thick skin.",
+          "quote": "Recall that the stratum lucidum is a translucent layer found only in thick skin, such as the palms of the hands and soles of the feet. It is absent in thin skin.",
+          "verdict_reason": "The snippet directly identifies the stratum lucidum as the specific layer missing in thin skin, fully answering the query about which layer is not found in all skin types.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The stratum lucidum is an extra epidermal layer found only in hairless skin on the palms and soles, making it absent in other skin types.",
+          "quote": "Hairless skin in the palms of the hands and soles of the feet is the thickest due to the presence of the stratum lucidum, an extra layer in the epidermis.",
+          "verdict_reason": "The snippet explicitly identifies the stratum lucidum as an extra layer present only in specific regions (palms/soles), directly answering which layer is not found in all skin types.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The stratum lucidum is the epidermal layer absent from thin skin regions.",
+          "quote": "The stratum lucidum is a layer of the epidermis that is absent from certain areas of the skin. This layer is not present in thin skin regions.",
+          "verdict_reason": "The snippet directly identifies the stratum lucidum as the specific epidermal layer not found in all skin types (thin skin), fully answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_cfe45b0c90b6",
+      "claim_index": 1,
+      "claim": "Earlier counts of 164 members are outdated",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The WTO currently has 164 member countries.",
+          "quote": "With 164 member countries, the WTO facilitates trade negotiations, monitors compliance with agreements, and provides technical assistance to developing nations.",
+          "verdict_reason": "The snippet directly states the number of member countries (164), answering the query about the present count.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The World Trade Organization currently has 164 member states.",
+          "quote": "The World Trade Organization (WTO) has 164 member states",
+          "verdict_reason": "Snippet provides a specific member count for the queried entity, but lacks a timestamp to confirm if this figure represents the present status or is outdated.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that the WTO had 164 members as of July 2016.",
+          "quote": "As of July 2016, the WTO welcomed its 164th member. This number represents a significant portion of the world's countries",
+          "verdict_reason": "The snippet provides a specific membership count (164) but explicitly dates it to July 2016. For a query asking about the present number, this is relevant but potentially superseded evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f971e49123a1",
+      "claim_index": 1,
+      "claim": "While some documents do not provide this specific information, the majority of the evidence supports this claim",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The Originals Season 5 consists of 13 episodes.",
+          "quote": "Season 5 Episode Guide\nSeason 5\n13 Episodes 2018 - 2018",
+          "verdict_reason": "The snippet explicitly states that Season 5 of The Originals contains 13 episodes, directly answering the user's query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet lists episode counts for seasons 1 through 3 but cuts off before providing the count for season 5.",
+          "quote": "| 1) | 22 | | October 3, 2013 (2013-10-03) | May 13, 2014 (2014-05-13) |\n| 2) | 22 | | October 6, 2014 (2014-10-06) | May 11, 2015 (2015-05-11) |\n| 3) | 22 | | October 8, 2015 (2015-10-08) | May 20, 2016 (2016-05-20) |\n|",
+          "verdict_reason": "The document is about the correct series and mentions a fifth season exists, but the table snippet truncates before listing the episode count for season 5, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document references an episodes list for Season Five of The Originals but does not state the total count.",
+          "quote": "5 Episodes List: 2018; 6 Production News; 7 Notes; 8 Timeline; 9 Multimedia. 9.1 ... Joseph Morgan directed episode three, Charles Michael Davis directed episode",
+          "verdict_reason": "Snippet confirms the existence of an episodes list for the queried season but omits the specific total count, providing incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_022",
+      "claim_index": 4,
+      "claim": "While these snippets provide various uses and historical context, they do not explicitly state the reason for its widespread use across many computers",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.75,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Attackers with network KVM access could send a Ctrl + Alt + Del sequence to a system.",
+          "quote": "If an attacker gain access to the network KVM, then they could send keystrokes to your system. They wouldn't have access to the power button, but they could send a Ctrl + Alt + Del sequence.",
+          "verdict_reason": "Snippet addresses Ctrl+Alt+Del usage in a security context but discusses remote attacks rather than explaining the historical reason for its use as an unlock mechanism.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a fictional narrative about a specific computer glitch in a story, providing no historical or technical evidence explaining why Control-Alt-Delete was used to unlock computers.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Bill Gates stated that the design team did not want to provide a single button, leading to the three-key combination.",
+          "quote": "design didnΓÇÖt want to give us our single button,ΓÇ¥ Gates said at a Harvard University event at the time.",
+          "verdict_reason": "The snippet provides a direct quote from Bill Gates explaining the lack of a single-button option, which is relevant evidence for the query, though it is an older excerpt and may not cover the full technical history.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM to reboot a computer or summon the task manager.",
+          "quote": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM.[249] ... used to reboot a computer, and summon the task manager or operating system.",
+          "verdict_reason": "Snippet identifies the inventor and original technical purpose (reboot/task manager) but does not explain the specific reason for its adoption as a widespread 'unlock' mechanism.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0074",
+      "claim_index": 0,
+      "claim": "<final answer with proper citations exactly CANNOT ANSWER, INSUFFICIENT EVIDENCE>\nThe current Vice President of the United States is JD Vance, who assumed office on January 20, 2025",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "JD Vance is the current Vice President of the United States, having assumed office on January 20, 2025.",
+          "quote": "incumbent = JD Vance incumbentsince = January 20, 2025",
+          "verdict_reason": "The document directly identifies the current Vice President with the incumbent name and start date. The timestamp (May 2026) confirms this is recent information.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "JD Vance is the current Vice President of the United States, having assumed office on January 20, 2025.",
+          "quote": "incumbent = JD Vance incumbentsince = January 20, 2025",
+          "verdict_reason": "The snippet directly identifies the current Vice President and provides the incumbent's name and start date, fully answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "JD Vance is the current Vice President of the United States, having assumed office as the 50th vice president on January 20, 2025.",
+          "quote": "The incumbent vice president is JD Vance, who assumed office as the 50th vice president on January 20, 2025.",
+          "verdict_reason": "The snippet directly identifies the current Vice President by name and provides the date of assumption of office, fully answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0151",
+      "claim_index": 1,
+      "claim": "Although older and newer Wikipedia revisions also mention Australia as the winner, the most recent and credible source confirms this information",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Australia is the current Cricket World Cup champion with their 6th title, as of the 2023 Cricket World Cup.",
+          "quote": "last = ubl 2023 Cricket World Cup 2023 India next = ubl 2027 Cricket World Cup 2027 South Africa Zimbabwe Namibia participants = 14 champions = cr AUS (6th title)",
+          "verdict_reason": "Snippet directly identifies Australia as the 2023 Cricket World Cup champion. Document timestamp (2026-05-01) confirms this is current information, with next tournament scheduled for 2027.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "India won the 2023 Cricket World Cup, making Australia the most successful team with 6 titles overall.",
+          "quote": "last = ubl 2023 Cricket World Cup 2023 India next = ubl 2027 Cricket World Cup 2027 South Africa Zimbabwe Namibia champions = cr AUS (6th title) most successful = cr AUS (6 titles)",
+          "verdict_reason": "Document identifies India as 2023 champion but is dated January 2026, potentially superseded by newer tournaments. Provides historical context but may not reflect current champion if 2027 or later World Cup has occurred.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Australia won the 2023 Cricket World Cup final against India, claiming their sixth title.",
+          "quote": "Australia beat India in the final by six wickets, winning their sixth Cricket World Cup title.",
+          "verdict_reason": "The snippet directly identifies the most recent World Cup winner, answering who the current Cricket World Cup champion is.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_060e5f26c453",
+      "claim_index": 2,
+      "claim": "However, d2 and d5 mention that the patch is growing and provide more nuanced descriptions, indicating that the exact size is subject to ongoing research",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Researchers estimate the Great Pacific Garbage Patch covers more than 600,000 square miles, which is more than twice the size of Texas.",
+          "quote": "researchers with The Ocean Cleanup foundation estimate it covers more than 600,000 square miles, more than twice the size of Texas",
+          "verdict_reason": "The snippet directly answers the query by stating the patch is more than twice the size of Texas, providing decisive evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Great Pacific Garbage Patch is twice the size of Texas, covering 617,000 square miles.",
+          "quote": "What weighs more than 43,000 cars and is twice the size of Texas? The Great Pacific Garbage Patch.",
+          "verdict_reason": "The snippet directly answers the query by stating the patch is twice the size of Texas, confirming it is larger.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_24fa0020a521",
+      "claim_index": 1,
+      "claim": "The American Academy of Pediatrics (AAP) does not recommend a daily multivitamin for children eating a well-balanced diet",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The American Academy of Pediatrics does not recommend daily multivitamins for children who eat a well-balanced diet.",
+          "quote": "However, the American Academy of Pediatrics (AAP) does not recommend a daily multivitamin for children eating a well-balanced diet.",
+          "verdict_reason": "The snippet directly addresses the query with a specific guideline against routine use for healthy eaters, though it notes exceptions for specific deficiencies, making it partial rather than absolute support.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Most children do not need a daily multivitamin if they have a well-rounded diet, though supplements may help those with dietary restrictions.",
+          "quote": "For most children, a well-rounded diet provides all the vitamins and minerals they need. However, picky eating, food allergies, or dietary restrictions can sometimes make it challenging to meet these nutritional requirements.",
+          "verdict_reason": "The snippet addresses the query by stating most children don't need multivitamins but hints at exceptions; however, the text cuts off before fully detailing when they are beneficial.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_4786f87b62be",
+      "claim_index": 3,
+      "claim": "These differing perspectives highlight the complexity of the issue and the need for further analysis to understand the underlying causes",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document argues the gender pay gap is real but primarily caused by parenting choices rather than discrimination, citing that women earn $0.89 for every dollar men earn in a specific study.",
+          "quote": "Women account for 30% of the drivers, and on average earn $0.89 for every dollar earned by their male peers.",
+          "verdict_reason": "The snippet directly addresses the query by arguing the gap is not a myth but is explained by choices, providing specific evidence while presenting a nuanced view that partially resolves the binary question.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document argues that the gender pay gap is not a myth despite claims that it is illegal to pay women less or that the gap results from personal choices.",
+          "quote": "The Gender Pay Gap Is a Myth Gender pay gap deniers come out in droves on Equal Pay Day, telling us that it's all just a big myth.",
+          "verdict_reason": "The snippet directly addresses the query by presenting the 'myth' argument and refuting it, providing conflict-bearing evidence relevant to the claim verification.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_6988dd820a61",
+      "claim_index": 2,
+      "claim": "Therefore, the evidence is conflicting the relationship between the moon's phase and the likelihood of earthquakes remains uncertain",
+      "cited_docs": [
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Geologic strain from tides during full and new moons could increase the magnitude of tremors.",
+          "quote": "Geologic strain of tides during full and new moons could increase magnitude of tremors.",
+          "verdict_reason": "The snippet directly addresses the query by linking full moons to earthquake triggers, but uses cautious language ('could increase') and lacks a definitive yes/no conclusion.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document claims major earthquakes occur more frequently during full or new moons.",
+          "quote": "Major earthquakes are more frequent during full moons or new moons, and also during periods of high solar activity.",
+          "verdict_reason": "Snippet directly addresses the query with a relevant scientific claim but is an incomplete sentence lacking full context or evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_b9854bd5a19e",
+      "claim_index": 2,
+      "claim": "Other researchers argue that this decrease is not significant and may be related to changes in body size",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Human brain size has decreased by approximately 10% since the Late Pleistocene.",
+          "quote": "Since the Late Pleistocene (approximately 30,000 years ago), human brain size decreased by approximately 10%; yet again, this decrease was paralleled by a decrease in body size.",
+          "verdict_reason": "The snippet directly confirms a decrease in human brain size over time, specifically citing a 10% reduction since the Late Pleistocene.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Skeletal evidence indicates that human brains have become smaller over the past 10,000 to 20,000 years.",
+          "quote": "Indeed, skeletal evidence from every inhabited continent suggests that our brains have become smaller in the past 10,000 to 20,000 years.",
+          "verdict_reason": "The snippet directly confirms the query by stating skeletal evidence shows human brains have shrunk over the last 10,000 to 20,000 years.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_bea0b68b5d7f",
+      "claim_index": 3,
+      "claim": "However, paper straws are biodegradable and do not often end up in the ocean",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that paper straws generate 44 times more greenhouse gas emissions than plastic straws.",
+          "quote": "straw is responsible for 44 times as many greenhouse gas emissions compared to a plastic one, while stainless steel straws emit 148 times as much.",
+          "verdict_reason": "The snippet provides specific comparative data on emissions for paper vs. plastic straws, directly addressing the query with conflicting evidence rather than a simple affirmation.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A UK government assessment concluded that paper straws emit more greenhouse gases when rotting in landfills compared to plastic straws.",
+          "quote": "an assessment by the UK government also concluded that paper straws emit more greenhouse gases when they rot in landfill compared with plastic.",
+          "verdict_reason": "The snippet provides direct, conflict-bearing evidence regarding the query by citing a specific assessment where paper straws have higher emissions than plastic in landfills, though it notes the overall evidence is mixed.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_4590bdd9e269",
+      "claim_index": 2,
+      "claim": "Additionally, the gold produced is often radioactive and unusable for commercial purposes",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that converting lead directly into gold remains challenging and impractical, noting that successful transmutation experiments involved bismuth or mercury rather than lead.",
+          "quote": "However, converting lead directly into gold remains challenging. The difficulty lies in the massive energy input required and the fact that many of the resulting gold isotopes are radioactive",
+          "verdict_reason": "The snippet addresses the specific query about lead-to-gold transmutation but indicates it is impractical and highlights other elements (bismuth, mercury) instead, providing conflict-bearing evidence rather than a direct affirmation.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Gold can be created from mercury or platinum through nuclear reactions, not chemical reactions.",
+          "quote": "we can remove one proton from mercury (which has 80) or add one proton to platinum (which has 78) in order to make gold.",
+          "verdict_reason": "Snippet identifies mercury and platinum as source elements but clarifies the process requires nuclear, not chemical, reactions, partially addressing the query's premise.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 0,
+      "claim": "<final answer with proper citations exactly CANNOT ANSWER, INSUFFICIENT EVIDENCE>\nAccording to the evidence, Passover 2026 begins at sundown on April 1, 2026",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 1,
+      "claim": "Stanford University is located in California and is not relevant to the query",
+      "cited_docs": [
+        "d8"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d8": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "Stanford University (Stanford; officially Leland Stanford Junior University, colloquially the Farm) is a private research university in Stanford, California, adjacent to Palo Alto and between San Jose and San Francisco.",
+          "verdict_reason": "The query asks which university is in Chestnut Hill, Massachusetts. The snippet confirms Stanford is in California, not Massachusetts, providing no evidence for the queried location.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_022",
+      "claim_index": 1,
+      "claim": "It is used to reboot a computer or summon the task manager",
+      "cited_docs": [
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a fictional narrative about a specific computer glitch in a story, providing no historical or technical evidence explaining why Control-Alt-Delete was used to unlock computers.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_174",
+      "claim_index": 1,
+      "claim": "Additionally, LeBron James has won the ESPY Award seven times, the most by any player",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet details ESPY Award statistics, which is a different entity and metric than Sports Illustrated cover appearances. It provides no evidence regarding the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "<final answer with proper citations exactly CANNOT ANSWER, INSUFFICIENT EVIDENCE>\nEminem holds the record for the fastest rap in a hit single with 225 words in 30 seconds in \"Godzilla\"",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0073",
+      "claim_index": 1,
+      "claim": "However, there is no information provided about the ownership of \"El Nuevo Cojo\"",
+      "cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d3",
+        "d4",
+        "d8"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "two articles that appeared in both the online and print editions of the New York newspaper \"El Nuevo Cojo Ilustrado\" in 2004.",
+          "verdict_reason": "It mentions El Nuevo Cojo Ilustrado but gives no ownership information and does not mention Golf Magazine or Time Inc., so it does not meaningfully answer the comparison.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "El Nuevo Cojo Ilustrado is an American online Spanish language magazine published from Los Angeles, California.",
+          "quote": "El Nuevo Cojo Ilustrado is an American online Spanish language magazine published from Los Angeles, California.",
+          "verdict_reason": "Snippet confirms El Nuevo Cojo is a special interest publication but does not address ownership by Time Inc, which is the decisive query element.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_012",
+      "claim_index": 1,
+      "claim": "It is celebrated on Pi Day, which falls on March 14 (3-14), reflecting its approximate value of 3.14",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Pi is a never-ending mathematical ratio close to 3.14, which is why Pi Day is celebrated on March 14.",
+          "quote": "Pi is a never-ending mathematical ratio which is very close to 3.14, so you can see why we celebrate pi on 3-14.",
+          "verdict_reason": "The snippet explains why Pi is special (never-ending ratio) and links it to Pi Day, partially addressing the query, but omits discovery history.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses personal anecdotes about Pi Day celebrations and food, providing no evidence regarding the mathematical properties of Pi or its historical discovery.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "<final answer with proper citations exactly CANNOT ANSWER, INSUFFICIENT EVIDENCE>\nHunter Emery plays CO Rick Hopper in Orange is the New Black",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_012",
+      "claim_index": 2,
+      "claim": "While the documents provide some historical context and celebration details, they do not fully explain why Pi is special or how it was discovered",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Pi is one of the oldest known mathematical constants, dating back to 2589–2566 BC with the construction of the Great Pyramid of Giza.",
+          "quote": "It's one of the oldest known constants in mathematics. It dates back to 2589ΓÇô2566 BC, when the Egyptians built the Great Pyramid of Giza,",
+          "verdict_reason": "The snippet addresses why Pi is special and offers a specific historical origin, but it is an incomplete answer to the full discovery history and significance.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Pi is a never-ending mathematical ratio close to 3.14, which is why Pi Day is celebrated on March 14.",
+          "quote": "Pi is a never-ending mathematical ratio which is very close to 3.14, so you can see why we celebrate pi on 3-14.",
+          "verdict_reason": "The snippet explains why Pi is special (never-ending ratio) and links it to Pi Day, partially addressing the query, but omits discovery history.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses personal anecdotes about Pi Day celebrations and food, providing no evidence regarding the mathematical properties of Pi or its historical discovery.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0109",
+      "claim_index": 1,
+      "claim": "While other sources also mention Mark Carney as the incumbent Prime Minister, d3 provides the most recent and specific information . does not contribute to answering the query",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Mark Carney is the incumbent Prime Minister of Canada as of March 14, 2025.",
+          "quote": "incumbent = Mark Carney incumbentsince = nobold March 14, 2025",
+          "verdict_reason": "The snippet directly identifies the current Prime Minister and inauguration date. Wikipedia source with recent timestamp (2026-05-17) provides authoritative, up-to-date information.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses historical rankings of past Canadian prime ministers based on academic surveys, not the current Prime Minister. It provides no information about who currently holds the office.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Mark Carney is listed as the incumbent Prime Minister according to this document.",
+          "quote": "incumbent = Mark Carney incumbent...",
+          "verdict_reason": "Document addresses the same entity (Prime Minister of Canada) and names an incumbent, but the timestamp (2026-03-11) and corrupted/mixed content raise reliability concerns. Appears to be a malformed or vandalized Wikipedia revision.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_022",
+      "claim_index": 4,
+      "claim": "While these snippets provide various uses and historical context, they do not explicitly state the reason for its widespread use across many computers",
+      "cited_docs": [
+        "d2",
+        "d5",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.75,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Attackers with network KVM access could send a Ctrl + Alt + Del sequence to a system.",
+          "quote": "If an attacker gain access to the network KVM, then they could send keystrokes to your system. They wouldn't have access to the power button, but they could send a Ctrl + Alt + Del sequence.",
+          "verdict_reason": "Snippet addresses Ctrl+Alt+Del usage in a security context but discusses remote attacks rather than explaining the historical reason for its use as an unlock mechanism.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a fictional narrative about a specific computer glitch in a story, providing no historical or technical evidence explaining why Control-Alt-Delete was used to unlock computers.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Bill Gates stated that the design team did not want to provide a single button, leading to the three-key combination.",
+          "quote": "design didnΓÇÖt want to give us our single button,ΓÇ¥ Gates said at a Harvard University event at the time.",
+          "verdict_reason": "The snippet provides a direct quote from Bill Gates explaining the lack of a single-button option, which is relevant evidence for the query, though it is an older excerpt and may not cover the full technical history.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM to reboot a computer or summon the task manager.",
+          "quote": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM.[249] ... used to reboot a computer, and summon the task manager or operating system.",
+          "verdict_reason": "Snippet identifies the inventor and original technical purpose (reboot/task manager) but does not explain the specific reason for its adoption as a widespread 'unlock' mechanism.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

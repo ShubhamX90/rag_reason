@@ -1,0 +1,42 @@
+outputs_dir: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/e2e/strict/baseline/final"
+report_md: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/e2e/strict/baseline/final/eval_report.md"
+detailed_results_json: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/e2e/strict/baseline/final/detailed_results.json"
+
+pipeline:
+  batch_size: 12
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "local_openai"
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 12
+    timeout_seconds: 30
+    response_cache_dir: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/e2e/strict/baseline/response_cache"
+    cache_mode: "read_only"
+    judges:
+      - model_id: "local/qwen3.5-397b-a17b"
+        base_url: "http://gpunode7:18101/v1"
+        priority: 6
+        max_tokens: 400
+        request_timeout: 30
+        extra_body:
+          chat_template_kwargs:
+            enable_thinking: false
+      - model_id: "local/mistral-small-4"
+        base_url: "http://gpunode6:18104/v1"
+        priority: 3
+        max_tokens: 400
+        request_timeout: 30
+      - model_id: "local/deepseek-r1-distill-32b"
+        base_url: "http://gpunode4:18102/v1"
+        priority: 2
+        max_tokens: 500
+        request_timeout: 30

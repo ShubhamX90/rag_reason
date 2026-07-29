@@ -10,7 +10,9 @@ The complete expected_response block (answer, evidence, abstain_reason)
 and the think trace are adopted wholesale from the highest-weight model
 that voted for the winning abstain value.
 
-All models are accessed via OpenRouter (OPENROUTER_API_KEY required).
+By default, models are accessed via OpenRouter (OPENROUTER_API_KEY required).
+Use --committee-backend local_openai with a JSON committee config for local
+OpenAI-compatible endpoints.
 
 Default mode uses the standard conflicts prompts.
 With --refusal-mode, refusal-specific prompts are used so the final
@@ -43,7 +45,16 @@ THIS_FILE    = Path(__file__).resolve()
 PROJECT_ROOT = THIS_FILE.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.llm_client import LLMClient, Provider
+from src.llm_client import LLMClient
+from src.llm_cache import CacheMissError
+from src.committee_config import (
+    build_clients_for_committee,
+    cache_mode_for_backend,
+    client_max_tokens,
+    configure_committee_for_backend,
+    describe_committee,
+    max_concurrency_for_backend,
+)
 from src.parsers    import parse_stage3
 from src.voting     import COMMITTEE_MODELS, MODEL_WEIGHTS, merge_stage3_votes
 from src.cost_tracker import (
@@ -130,17 +141,19 @@ async def call_one_model(
     user_prompt: str,
     tracker: CostTracker,
     cache_enabled: bool,
+    cache_mode: str,
     is_refusal: bool,
-) -> Dict[str, Any]:
+) -> Dict[str, Any] | None:
     """One API call: one committee model for one record."""
     async with semaphore:
         try:
             raw = await client.acomplete(
                 system=system_prompt,
                 user=user_prompt,
-                max_tokens=STAGE3_MAX_TOKENS,
+                max_tokens=client_max_tokens(client, STAGE3_MAX_TOKENS),
                 cost_tracker=tracker,
                 cache_enabled=cache_enabled,
+                cache_mode=cache_mode,
                 cache_namespace="stage3_multi_refusal" if is_refusal else "stage3_multi",
             )
             parsed, errors = parse_stage3(raw)
@@ -148,6 +161,8 @@ async def call_one_model(
                 parsed["_stage3_errors"] = errors
                 parsed["_raw_output"]    = raw[:500]
             return parsed
+        except CacheMissError:
+            raise
         except Exception as exc:
             return {
                 "expected_response": {
@@ -175,11 +190,13 @@ async def process_record(
     output_path: str,
     tracker: CostTracker,
     cache_enabled: bool,
+    cache_mode: str,
     is_refusal: bool,
 ) -> None:
     coros = [
         call_one_model(
-            clients[model], semaphore, system_prompt, user_prompt, tracker, cache_enabled, is_refusal
+            clients[model], semaphore, system_prompt, user_prompt, tracker,
+            cache_enabled, cache_mode, is_refusal
         )
         for model in COMMITTEE_MODELS
     ]
@@ -214,15 +231,25 @@ async def run(args: argparse.Namespace) -> None:
         Path(args.user_prompt) if args.user_prompt else default_user
     )
 
-    clients = {
-        model: LLMClient(
-            provider    = Provider.OPENROUTER,
-            model       = model,
-            temperature = args.temperature,
-            max_retries = args.max_retries,
-        )
-        for model in COMMITTEE_MODELS
-    }
+    committee_cfg = configure_committee_for_backend(
+        backend=args.committee_backend,
+        config_path=args.committee_config,
+        cache_mode_override=args.cache_mode,
+        cache_dir_override=args.cache_dir,
+    )
+    args.concurrency = max_concurrency_for_backend(args.concurrency, committee_cfg)
+    resolved_cache_mode = cache_mode_for_backend(
+        backend=args.committee_backend,
+        committee_config=committee_cfg,
+        use_cache=args.use_cache,
+        cache_mode_override=args.cache_mode,
+    )
+    clients = build_clients_for_committee(
+        backend=args.committee_backend,
+        committee_config=committee_cfg,
+        temperature=args.temperature,
+        max_retries=args.max_retries,
+    )
 
     records  = load_records(args.input)
     done_ids = load_processed_ids(args.output)
@@ -237,14 +264,15 @@ async def run(args: argparse.Namespace) -> None:
 
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
     print(
-        f"⚙️  Stage-3 multi-LLM | committee={len(COMMITTEE_MODELS)} models | "
+        f"⚙️  Stage-3 multi-LLM | backend={args.committee_backend} | "
+        f"committee={len(COMMITTEE_MODELS)} models | "
         f"records={len(records)} | concurrency={args.concurrency}"
     )
-    for model, weight in MODEL_WEIGHTS.items():
-        print(f"   {weight:.0%}  {model}")
+    for line in describe_committee(backend=args.committee_backend, committee_config=committee_cfg):
+        print(line)
     if done_ids:
         print(f"⏩ Resuming: {len(done_ids)} already processed")
-    print(f"   cache={'on' if args.use_cache else 'off'}")
+    print(f"   cache_mode={resolved_cache_mode}")
 
     semaphore = asyncio.Semaphore(args.concurrency)
     out_lock  = asyncio.Lock()
@@ -255,7 +283,8 @@ async def run(args: argparse.Namespace) -> None:
             clients, semaphore,
             system_prompt, build_user_prompt(user_template, rec),
             rec, out_lock, args.output, tracker,
-            args.use_cache,
+            resolved_cache_mode != "off",
+            resolved_cache_mode,
             args.refusal_mode,
         )
         for rec in records
@@ -296,7 +325,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(
         description=(
             "Multi-LLM Stage-3 response synthesis with weighted majority vote on abstain.\n"
-            "All committee models are accessed via OpenRouter.\n"
+            "Default backend is OpenRouter; local_openai is available via --committee-config.\n"
             "Default (no --refusal-mode): conflicts prompts.\n"
             "With --refusal-mode: refusal-specific prompts force abstaining outputs."
         )
@@ -320,8 +349,21 @@ def main() -> None:
                     help="Path to save cumulative cost summary JSON (default: <output>_cost_cumulative.json)")
     ap.add_argument("--use-cache",     dest="use_cache", action="store_true", default=False,
                     help="Reuse/write local raw-response cache for exact matching calls")
+    ap.add_argument("--committee-backend", choices=["openrouter", "local_openai"],
+                    default="openrouter",
+                    help="Committee backend (default: openrouter)")
+    ap.add_argument("--committee-config", default=None,
+                    help="JSON local_openai committee config")
+    ap.add_argument("--cache-mode", choices=["off", "read_write", "read_only", "write_only"],
+                    default=None,
+                    help="Explicit raw-response cache mode")
+    ap.add_argument("--cache-dir", default=None,
+                    help="Override response cache root directory")
     args = ap.parse_args()
-    asyncio.run(run(args))
+    try:
+        asyncio.run(run(args))
+    except CacheMissError as exc:
+        raise SystemExit(f"Read-only cache miss: {exc}") from None
 
 
 if __name__ == "__main__":

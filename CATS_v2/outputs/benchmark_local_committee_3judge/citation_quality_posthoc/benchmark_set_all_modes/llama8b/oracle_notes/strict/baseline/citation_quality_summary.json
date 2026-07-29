@@ -1,0 +1,1438 @@
+{
+  "variant": "benchmark_set_all_modes/llama8b/oracle_notes/strict/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/oracle_notes/strict/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/llama8b/oracle_notes/strict/baseline/final/detailed_results.json",
+    "source_final_sha256": "f4032922566430694fac3609076f9d5405a121ce8922f2f28c6f81a91b494f81",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/llama8b/oracle_notes/strict/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/llama8b/oracle_notes/strict/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1135,
+    "claims_with_citations": 838,
+    "claims_with_committee_support_set": 996,
+    "claims_with_any_approved_citation": 795,
+    "claims_with_any_gold_positive_citation": 838,
+    "committee_alignment_precision_macro": 0.878033015115354,
+    "committee_alignment_precision_micro": 0.840021990104453,
+    "gold_positive_citation_precision_macro": 0.9996022275258553,
+    "gold_positive_citation_precision_micro": 0.999450247388675,
+    "soft_extra_citation_rate_micro": 0.1594282572842221,
+    "hard_negative_citation_rate_micro": 0.0005497526113249038,
+    "committee_support_citation_recall_macro": 0.7981927710843374,
+    "committee_support_citation_recall_micro": 0.7981927710843374,
+    "claims_with_any_soft_extra_rate": 0.21360381861575178,
+    "claims_with_any_hard_negative_rate": 0.0011933174224343676,
+    "strict_committee_alignment_claim_rate": 0.5806167400881057,
+    "strict_gold_clean_claim_rate": 0.6995594713656388,
+    "strict_grounded_committee_clean_rate_all_claims": 0.5806167400881057,
+    "strict_grounded_gold_clean_rate_all_claims": 0.6995594713656388,
+    "total_cited_docs": 1819,
+    "total_approved_cited_docs": 1528,
+    "total_gold_positive_cited_docs": 1818,
+    "total_soft_extra_cited_docs": 290,
+    "total_hard_negative_cited_docs": 1
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "freshqa_114b9082bc42",
+      "claim_index": 1,
+      "claim": "The date of death is also supported by . provide high-quality evidence, while is a lower-credibility source",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley was discovered unconscious on August 16 and efforts to revive him failed, indicating his death occurred on that date.",
+          "quote": "On the afternoon of August 16, Presley was discovered unconscious in a bathroom of Graceland. Efforts by paramedics at the mansion failed to revive him, as did further attempts by doctors at Baptist Memorial Hospital.",
+          "verdict_reason": "The snippet explicitly states Presley was found unconscious on August 16 and could not be revived, directly answering the query about his death date.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "IN LOVING MEMORY OF Elvis Aaron Presley ... January 8, 1935 – August 16, 1977",
+          "verdict_reason": "The snippet explicitly states the death date of Elvis Presley as August 16, 1977, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "Assuming he didn't fake his death, he died August 16, 1977.",
+          "verdict_reason": "The snippet directly states the specific date of death requested in the query, providing a decisive answer despite the conditional phrasing.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977, in Memphis, Tennessee.",
+          "quote": "Died\n+ August 16\n, \n1977\n+ Memphis, Tennessee, USA\n(cardiac arrhythmia)",
+          "verdict_reason": "The snippet explicitly states the date of death (August 16, 1977) in the personal details section, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "The world went into mourning on August 16, 1977, when the King of Rock 'n' Roll died at the age of 42.",
+          "verdict_reason": "The snippet explicitly states the date of Elvis Presley's death as August 16, 1977, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_b3264b37f54b",
+      "claim_index": 1,
+      "claim": "also support this claim, but with a note that the tables may represent future or hypothetical data rather than current real-time standings",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document presents a 2025-26 Premier League table where Arsenal is ranked first with 85 points.",
+          "quote": "2025-26 Table CLUB M W D L GD PTS 1 Arsenal 38 26 7 5 44 85 2 Man City 38 23 9 6 42 78",
+          "verdict_reason": "Snippet shows Arsenal top in a specific 2025-26 table, addressing the entity but potentially representing future/hypothetical data rather than current real-time standings.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Arsenal is ranked 1st in the Premier League table with 85 points.",
+          "quote": "| 1  Arsenal | 38 | 26 | 7 | 5 | 71 | 27 | 44 | 85 |",
+          "verdict_reason": "The snippet explicitly lists Arsenal at position 1 in the Premier League table, directly confirming they are at the top of the standings shown.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document shows Arsenal in first place with 85 points in the 2025/2026 Premier League table.",
+          "quote": "| 1 | Arsenal crestArsenal | | 38 | 26 | 7 | 5 | 71 | 27 | 44 | 85 | W W W W W |",
+          "verdict_reason": "Snippet shows Arsenal at the top of a table labeled '2025/2026', which may be a projection or future season rather than the current 'latest' standings, making it conflict-bearing but not definitive.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Arsenal is ranked first in the Premier League table with 85 points.",
+          "quote": "| 1  Arsenal | 38 | 26 | 7 | 5 | 71 | 27 | 44 | 85 |",
+          "verdict_reason": "The snippet explicitly lists Arsenal at position 1 in the Premier League table, directly confirming they are at the top of the standings shown.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Arsenal is ranked first in the 2025 Premier League standings with 85 points.",
+          "quote": "| 1 | ArsenalArsenalArsenal | 38 (19 | 19) | 26 (15 | 11) | 7 (2 | 5) | 5 (2 | 3) | 44 | 85 |",
+          "verdict_reason": "The snippet explicitly lists Arsenal at position 1 in the 2025 Premier League standings, directly confirming they are at the top.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_a3a59c3f4b9b",
+      "claim_index": 1,
+      "claim": "The information is consistent across the documents, with and providing related but incomplete information. and are low-credibility sources, while is a high-credibility source",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Sahitya Akademi Award winners for Hindi from 1955 to 1978 but does not include the 2017 winner.",
+          "quote": "| 1955–1959 |  Makhanlal Chaturvedi(1955)  Vasudeva Saran Agrawal(1956)  Acharya Narendra Dev(1957)  Rahul Sankrityayan(1958)  Ramdhari Singh 'Dinkar'(1959) |",
+          "verdict_reason": "The snippet is from a relevant list of Hindi award winners but only covers years 1955-1978, failing to provide the specific 2017 winner requested.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists authors returning Sahitya Akademi awards in 2015 but does not identify the 2017 Hindi award winner.",
+          "quote": "Latest to return Sahitya Akademi award: Hindi poet Rajesh Joshi. _intoday.in_. 12 October 2015.",
+          "verdict_reason": "Snippet concerns the same entity (Sahitya Akademi Awards) and language (Hindi) but covers 2015 return events, not the 2017 winner, making it incomplete conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Ramesh Kuntal Megh was recognized for literary criticism in the Hindi language among the 2017 Sahitya Akademi winners.",
+          "quote": "Ramesh Kuntal Megh (Hindi), TP Ashoka (Kannada), Urmi Ghanshyam Desai (Gujarati), Bina Hangkhim (Nepali), and Neeraj Daiya (Rajasthani) have been recognised for their literary criticism.",
+          "verdict_reason": "The snippet explicitly lists Ramesh Kuntal Megh as the Hindi winner for literary criticism in the context of the 2017 Sahitya Akademi awards article.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Ramesh Kuntal Megh won the 2017 Sahitya Akademi award in Hindi for his work Vishw Mithak Sarit Sagar.",
+          "quote": "Answer: Ramesh Kuntal Megh Notes: Ramesh Kuntal Megh, IN December 2017, won the Sahitya Akademi award in Hindi for his literary criticism work Vishw Mithak Sarit Sagar.",
+          "verdict_reason": "The snippet directly answers the query by naming Ramesh Kuntal Megh as the 2017 Hindi Sahitya Akademi Award winner.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Ramesh Kuntal Megh won the 2017 Sahitya Akademi Award in Hindi for his book of literary criticism \"Vishw Mithak Sarit Sagar\".",
+          "quote": "Answer: Ramesh Kuntal Megh Notes: Ramesh Kuntal Megh has been conferred with the 2017 Sahitya Akademi Award for Hindi literature for his book of literary criticism \"Vishw Mithak Sarit Sagar\".",
+          "verdict_reason": "The snippet directly answers the query by naming Ramesh Kuntal Megh as the winner and specifying the awarded work.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_189",
+      "claim_index": 3,
+      "claim": "However, the exact process of manufacturing car parts and computer casings using magnesium is not explicitly mentioned in the retrieved documents",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Magnesium is used as an alloying agent to make aluminium-magnesium alloys prized for lightness and strength.",
+          "quote": "In commerce, the chief use for the metal is as an alloying agent to make aluminium-magnesium alloys, sometimes called magnalium or magnelium.",
+          "verdict_reason": "Snippet confirms magnesium's use in alloys for strength/lightness but does not explicitly mention car parts or computer casings.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Magnesium is used in the car parts industry for die casting, specifically in steering wheels and support brackets.",
+          "quote": "Demand for magnesium has grown steadily in recent years, driven largely by the car parts industry, where magnesium is used for die casting. Specifically, magnesium can be found in car steering wheels and support brackets.",
+          "verdict_reason": "The snippet confirms magnesium's use in car parts via die casting but omits details on computer casings or the manufacturing process beyond casting, making it incomplete relative to the full query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Magnesium is described as a highly reactive metal used in comparisons for carbon-metal bond stability.",
+          "quote": "This bond is considerably more stable than comparable bonds between carbon and the highly reactive metals lithium or magnesium.",
+          "verdict_reason": "Snippet addresses magnesium's reactivity relevant to the query but discusses drug production chemistry, not manufacturing car parts or computer casings.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Solid magnesium is not flammable, but shavings are very flammable and serve as a fuel source.",
+          "quote": "In it's solid form, magnesium is not flammable, but when you cut off small shavings it is very flammable and makes a great fuel source for your fire.",
+          "verdict_reason": "Snippet addresses magnesium's flammability properties relevant to the query but fails to explain its use in manufacturing car parts or computer casings.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Magnesium is a flammable metal used in flares, pyrotechnics, and as a sacrificial anode, but the snippet does not mention its use in car parts or computer casings.",
+          "quote": "Magnesium is flammable, burning at a temperature of approximately 3,100 ┬░C... Other uses include flash photography, flares, pyrotechnics, and fireworks sparklers.",
+          "verdict_reason": "The snippet confirms magnesium is flammable and used in flares but fails to address its application in car parts or computer casings, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_7bc92b47dc43",
+      "claim_index": 2,
+      "claim": "The exact count of titles cannot be determined from the retrieved evidence",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the Houston Astros won the World Series once in 2017.",
+          "quote": "Houston won the World Series, just once, in 2017 when they beat Los Angeles 4 game to 3.",
+          "verdict_reason": "Snippet addresses the query directly but claims only one title (2017), which is likely outdated or incomplete given the team's subsequent wins, making it conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the Houston Astros have won one World Series title in 2017, though this count may be outdated given the 2022 publication date.",
+          "quote": "The Houston Astros have played in four World Series, of which they won just one in 2017 against the Los Angeles Dodgers.",
+          "verdict_reason": "The snippet directly addresses the query but reflects a count (one title) that is likely superseded by later events (2022 win) given the article's 2022 date.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document confirms the Astros won their first World Series title in 2017 but does not mention any subsequent championships.",
+          "quote": "2017 The Astros won their first World Series title, beating the Dodgers in Game 7 of the World Series, 5-1, at Dodger Stadium.",
+          "verdict_reason": "The snippet confirms one title (2017) but lacks information on later wins, making it incomplete for the total count query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet lists two World Series appearances for the Astros in 2021 and 2022 but does not state the total number of titles won.",
+          "quote": "2021 World Series HOU vs ATL L 0-7 ... 2022 World Series HOU vs PHI L 5-6",
+          "verdict_reason": "The snippet addresses the query entity by listing specific World Series games but fails to provide the total count of titles won, making it incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_d15849658c20",
+      "claim_index": 1,
+      "claim": "The evidence from the other documents is conflicting or superseded",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Anthony Joshua is identified as the WBA, WBO, and IBF world heavyweight champion, though the IBO is not mentioned.",
+          "quote": "Anthony Joshua is the WBA, WBO, and IBF world heavyweight champion.",
+          "verdict_reason": "Snippet addresses the same entity and claim but is incomplete (missing IBO) and likely superseded given the query asks for the 'current' champion.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Oleksandr Usyk as the WBC, WBA, and IBF heavyweight champion, but identifies Fabio Wardley as the WBO champion.",
+          "quote": "| Heavyweight Unlimited | Oleksandr Usyk (Interim: Agit Kabayel) | Oleksandr Usyk (Super) (Regular: Murat Gassiev) | Oleksandr Usyk | Fabio Wardley |",
+          "verdict_reason": "Snippet addresses the query directly but presents a future-dated (2026) scenario where the WBO titleholder differs from the unified champions, offering conflicting or superseded evidence for the 'current' status.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Oleksandr Usyk is listed as the current champion for the IBF, IBO, and WBC titles.",
+          "quote": "IBF World · Oleksandr Usyk ; IBO World · Oleksandr Usyk ; UBO World · Alessio Bisutti ; WBC Interim World · Agit Kabayel ; WBC World · Oleksandr Usyk.",
+          "verdict_reason": "Snippet confirms Usyk holds IBF and IBO titles but omits WBA and WBO status requested in the query, providing incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Oleksandr Usyk as the WBA, WBC, and IBF champion, and Daniel Dubois as the WBO champion, with future dates suggesting potential inaccuracies.",
+          "quote": "| WBA | Super world champion | Oleksandr Usyk (def. Anthony Joshua) | September 25, 2021 | TBD |\n| WBC | World champion | Oleksandr Usyk (def. Tyson Fury) | May 18, 2024 | TBD |\n| IBF | World champion | Oleksander Usyk (def. Daniel Dubois) | July 19, 2025 | TBD |\n| WBO | World champion | Daniel Dubois (def. Fabio Wardley) | May 9, 2026 | TBD |",
+          "verdict_reason": "Snippet addresses the query entities directly but contains future dates (2025, 2026) indicating hallucinated or superseded data, making it conflict-bearing but not fully reliable.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_028",
+      "claim_index": 1,
+      "claim": "The other documents provide partial information, but d4's clear statement takes precedence",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Large coin mintages occurred in 1983, 1984, and 1985 to facilitate the changeover from paper notes.",
+          "quote": "1983, 1984 and 1985 in particular had large mintages to facilitate the changeover from paper notes",
+          "verdict_reason": "Snippet addresses the transition from paper notes but discusses coins and lacks the specific date paper pounds left circulation.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Series D £1 note was withdrawn from circulation on 11 March 1988 following the introduction of the £1 coin.",
+          "quote": "following the introduction on 21 April 1983 of the £1 coin, the note was withdrawn from circulation on 11 March 1988.",
+          "verdict_reason": "Snippet provides a specific withdrawal date for the Series D £1 note but does not explicitly confirm this was the final paper £1 note or address other series.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "A commemorative one-pound note was issued on July 4, 2013, and remains in circulation alongside the standard note.",
+          "quote": "A commemorative one-pound note was issued on 4 July 2013 to mark 200 years since the first commercial operation of Thomas De La Rue. The commemorative note is in circulation alongside the standard one-pound note",
+          "verdict_reason": "Snippet discusses one-pound notes and their circulation status but fails to state when paper notes went out of circulation, offering only partial context.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses design changes to one pound notes during and after World War II but does not state when they went out of circulation.",
+          "quote": "In 1940, following the outbreak of the Second World War, one pound notes were issued in a new blue-orange colour scheme to deter counterfeiters, although the design remained the same.",
+          "verdict_reason": "The snippet addresses the same entity (paper one pound notes) and their history but fails to provide the specific date they went out of circulation, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_193",
+      "claim_index": 1,
+      "claim": "The safety of blue cheese is a topic of conflicting opinions or research outcomes, with some sources suggesting it is unsafe and others not addressing the specific safety of blue cheese",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Soft blue-veined cheeses like roquefort contain moulds that can harbor listeria bacteria, which poses risks during pregnancy.",
+          "quote": "You should also avoid soft blue-veined cheeses such as roquefort and gorgonzola. These are made with moulds that can contain listeria",
+          "verdict_reason": "Snippet addresses the safety of blue cheese moulds and listeria risks, providing relevant evidence about the query topic, though it focuses on pregnancy restrictions rather than the general mechanism of safety.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Hard cheeses are safer because they contain less water, making bacteria less likely to grow compared to soft cheeses.",
+          "quote": "Hard cheeses don't contain as much water as soft cheeses, so bacteria are less likely to grow in them.",
+          "verdict_reason": "The snippet addresses the query's core mechanism (water content/bacteria growth) regarding cheese safety but discusses soft vs. hard cheese generally, not specifically blue cheese mould.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Pregnant women are advised to avoid soft blue-veined cheeses like Danish blue, gorgonzola, and roquefort due to listeria risk.",
+          "quote": "soft blue-veined cheeses ΓÇô such Danish blue, gorgonzola and roquefort",
+          "verdict_reason": "Snippet addresses blue cheese safety but only for pregnant women regarding listeria, failing to explain the general safety mechanism queried.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Mould-ripened soft cheeses like ch├¿vre should be avoided in pregnancy because they can contain Listeria bacteria.",
+          "quote": "White rind Ch├¿vre is mould-ripened and has a white rind, similar to brie and camembert ΓÇô you should avoid all these mould-ripened soft cheeses in pregnancy. This is because soft cheese like this can contain bacteria called Listeria",
+          "verdict_reason": "Snippet addresses safety of mould-ripened cheese and Listeria risk, providing partial context for why some mouldy cheeses are unsafe, though it lacks specific comparison to blue cheese.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f39c966c2ec1",
+      "claim_index": 3,
+      "claim": "Therefore, while the play has a history of accidents and mishaps, the curse claim remains unsubstantiated",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet claims the curse began when a witch coven objected to Shakespeare using their spells, causing the actor playing Lady Macbeth to die during the first performance.",
+          "quote": "The witch coven objected to Shakespeare's use of the spells and ended up cursing the play... During the first performance (around 1606), the actor playing Lady Macbeth died suddenly",
+          "verdict_reason": "The snippet directly addresses the query by claiming the curse originated at the first performance, but it presents unverified folklore rather than definitive historical fact.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that some believe the play is cursed and lists historical accidents, but does not confirm if the curse existed from the very first performance.",
+          "quote": "Some people believe the play Macbeth is",
+          "verdict_reason": "The snippet discusses the curse and lists accidents but does not explicitly confirm or deny if the curse started from the first performance, making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Sources list an accident where the male actor intended to play Lady Macbeth in the very first performance fell ill and died before appearing on stage.",
+          "quote": "Wikipedia and other sources (my theatre history books) list a number of such",
+          "verdict_reason": "Relevant evidence: Sources list an accident where the male actor intended to play Lady Macbeth in the very first performance fell ill and died before appearing on stage.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_6969589d80c1",
+      "claim_index": 1,
+      "claim": "The evidence from multiple sources confirms this, including and",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The theme song for the 1963 James Bond film From Russia With Love was sung by Matt Monro.",
+          "quote": "From Russia With Love, the theme song to the 1963 James Bond film of the same name, was sung by Matt Monro",
+          "verdict_reason": "The snippet directly identifies Matt Monro as the singer of the theme song for the specific James Bond film queried.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Matt Monro performed the song From Russia With Love.",
+          "quote": "YouTube MATT MONRO ~ From Russia With Love ~ - YouTube",
+          "verdict_reason": "The snippet explicitly links Matt Monro to the song From Russia With Love, directly answering the query about who sang the theme.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The theme song for the film From Russia with Love was sung by Matt Monro.",
+          "quote": "The theme song was composed by Lionel Bart of Oliver! fame and sung by Matt Monro.",
+          "verdict_reason": "The snippet explicitly identifies Matt Monro as the singer of the theme song for the specific James Bond film queried.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_180f238d8296",
+      "claim_index": 1,
+      "claim": "The list may not be exhaustive, as and provide incomplete information is dated",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists West Indies, India, Australia, Pakistan, Sri Lanka, and England as winners of the Cricket World Cup between 1975 and 2019.",
+          "quote": "Cricket World Cup Winner: At a Glance\n|  |  |  |  |\n ---  --- |\n| Year | Hosted Country | Winner | Runner up |\n| 1975 | England | West Indies | Australia |\n| 1979 | England | West Indies | England |\n| 1983 | England | India | West Indies |\n| 1987 | India | Australia | England |\n| 1992 | Australia | Pakistan | England |\n| 1996 | India – Pakistan | Sri Lanka | Australia |\n| 1999 | England | Australia | Pakistan |\n| 2003 | South Africa | Australia | India |\n| 2007 | West Indies | Australia | Sri Lanka |\n| 2011 | India, Sri Lanka, Bangladesh | India | Sri Lanka |\n| 2015 | Australia, New Zealand | Australia | New Zealand |\n| 2019 | England, Wales | England | New Zealand",
+          "verdict_reason": "The snippet lists winners from 1975 to 2019, directly addressing the query but potentially missing tournaments held after 2019, making it incomplete for a current list.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Australia, West Indies, India, Pakistan, and Sri Lanka are the five teams that have won the Cricket World Cup.",
+          "quote": "Australia has been the most successful of the five teams to have won the tournament, taking four titles. The West Indies and India have won twice, while Pakistan and Sri Lanka have each won once.",
+          "verdict_reason": "Snippet lists specific winning countries but is dated (stops at 2011), missing subsequent winners like England, thus partially supporting the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document is titled as a list of Cricket World Cup winners from 1975 to 2023.",
+          "quote": "Cricket World Cup Winners 1975-2023",
+          "verdict_reason": "The snippet contains a title indicating the document lists winners, which is directly relevant to the query, but the actual list of countries is not present in the provided text.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_185",
+      "claim_index": 0,
+      "claim": "The countries bordering the Caspian Sea are Kazakhstan, Azerbaijan, Turkmenistan, Russia Iran",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states that only Kazakhstan and Turkmenistan border the Caspian Sea among the discussed republics.",
+          "quote": "Only Kazakhstan and Turkmenistan border the Caspian Sea and none of the republics has direct access to an ocean",
+          "verdict_reason": "The snippet addresses the query entity but only lists two bordering countries instead of the requested five, providing incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet confirms that some rivers in Kazakhstan flow into the Caspian Sea, establishing Kazakhstan as a bordering country.",
+          "quote": "They either flow into isolated bodies of water such as the Caspian Sea or simply disappear into the steppes and deserts",
+          "verdict_reason": "The snippet identifies Kazakhstan as a country bordering the Caspian Sea but fails to list the other four required countries, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies Kazakhstan as a country with ports on the Caspian Sea.",
+          "quote": "Although the canal would traverse Russian territory, it would benefit Kazakhstan through its Caspian Sea ports.",
+          "verdict_reason": "The snippet confirms Kazakhstan borders the Caspian Sea but fails to list the other four required countries, providing only partial evidence for the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_76956c2fba7d",
+      "claim_index": 1,
+      "claim": "However, some studies have found no association or mixed results, highlighting the complexity of the relationship between saturated fat intake and heart disease risk",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Saturated fats increase LDL cholesterol levels, which raises the risk of heart disease.",
+          "quote": "Saturated fats, found in foods like red meat and butter, increase levels of LDL cholesterol, raising heart disease risk.",
+          "verdict_reason": "The snippet directly confirms that saturated fats increase LDL cholesterol and raise heart disease risk, decisively answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "A diet high in saturated fat increases heart disease risk factors like cholesterol and liver fat even without weight gain.",
+          "quote": "A diet high in saturated fat is more dangerous for the heart than a diet high in unsaturated fat, even when there has been no weight gain",
+          "verdict_reason": "The snippet directly answers the query by stating saturated fat diets are more dangerous for the heart and increase specific risk factors.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_3d4ebfa8b6dd",
+      "claim_index": 1,
+      "claim": "However, we cannot determine who has the most overall championships between coaches and players",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Bill Russell holds the record for most NBA championships won by a player with 11 rings.",
+          "quote": "| 1 | Bill Russell\\ | BOS | 1957 | 1969 | 11 |",
+          "verdict_reason": "Snippet identifies the top player (Bill Russell, 11 rings) but lacks data on coaches to fully answer the comparative query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Phil Jackson holds the record for most NBA championships as a coach with eleven rings, while Bill Russell holds the record as a player.",
+          "quote": "While Bill Russell holds the record for the most rings as a player, Phil Jackson holds the title for most championships as a coach, with eleven rings.",
+          "verdict_reason": "The snippet directly answers the query by identifying the record holders for both categories (coach and player) and providing the specific ring counts to determine the overall winner.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_67b35f41ba84",
+      "claim_index": 0,
+      "claim": "Jessica Biel plays Bill Pullman's wife in The Sinner",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Bill Pullman's character as Harry Ambrose in the series The Sinner but does not identify an actress playing his wife.",
+          "quote": "Bill Pullman\nBill Pullman\nHarry Ambrose (32 Episodes)",
+          "verdict_reason": "Snippet confirms Bill Pullman's role in 'The Sinner' but fails to name the actress playing his wife, providing incomplete evidence for the specific query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Alice Kremelberg appears alongside Bill Pullman in the cast of The Sinner (2017).",
+          "quote": "Bill Pullman and Alice Kremelberg in The Sinner (2017). Full cast & crew.",
+          "verdict_reason": "Snippet identifies Alice Kremelberg with Bill Pullman in 'The Sinner' but does not explicitly state she plays his wife, making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_e064a7a717ed",
+      "claim_index": 2,
+      "claim": "The exact filming locations are confirmed by multiple high-credibility sources",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Glass Castle was filmed in Montreal, Quebec; McDowell County, West Virginia; and New Mexico.",
+          "quote": "Most of the principal production for The Glass Castle was shot on location in Montreal. The house they move into early in the movie was in Welch, West Virginia. Some exterior shots were captured on the To'hajiillee and Laguna Pueblo tribal lands about 40 miles west of Albuquerque, New Mexico.",
+          "verdict_reason": "The snippet directly answers the query by listing the specific filming locations: Montreal, West Virginia, and New Mexico.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The movie was filmed in Welch, West Virginia, and other locations in West Virginia and the USA.",
+          "quote": "Filming locations ; Welch, West Virginia, USA · 21. 1 ; West Virginia, USA · 2. 0 ; USA · 2. 0",
+          "verdict_reason": "The snippet explicitly lists filming locations for the movie, directly answering the query with specific places like Welch, West Virginia.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_557d04a28d7f",
+      "claim_index": 1,
+      "claim": "This is consistent with the evidence from all documents, which agree that LeBron James is the all-time leading scorer",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The table lists LeBron James with 8,521 points, but the game counts (e.g., 302 for James) indicate this is an All-Star game record, not a full career record.",
+          "quote": "| 1 | LeBron James | 302 | 12446 | 8521 | 3055 | 6167 | 49.5 | 497 | 1495 | 33.2 | 1914 | 2582 | 74.1 | 446 | 2249 | 2695 | 2168 | 506 | 287 | 1085 | 53.6 | 58.3 |",
+          "verdict_reason": "Snippet shows LeBron James leading with 8,521 points, but the low game counts (302 GP) reveal this is an All-Star specific list, not the full career record requested, making it conflicting but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Luka Doncic reaching 15,000 career points and LeBron James setting a record for most NBA wins.",
+          "quote": "Luka Doncic reaches 15,000 CAREER POINTS + LeBron sets record for MOST NBA Wins",
+          "verdict_reason": "The snippet discusses career points and records for specific players (Doncic, LeBron) relevant to the query but does not identify the all-time leading scorer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_144",
+      "claim_index": 3,
+      "claim": "However, the exact reasons why electric toothbrushes are better are not fully explained in any of the documents",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document addresses the common patient question of whether electric toothbrushes are better than manual ones.",
+          "quote": "Are electric toothbrushes better than manual toothbrushes? As your Denver, CO dentist, we want to answer this question, once and for all.",
+          "verdict_reason": "The snippet directly addresses the query topic but cuts off before providing the specific reasons or evidence explaining why electric brushes might be better.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Both electric and manual toothbrushes are suitable for removing plaque, though each has distinct advantages and disadvantages.",
+          "quote": "Both electric and manual toothbrushes are suitable for removing plaque, which is the main purpose of a toothbrush. There are however, advantages and disadvantages to both options.",
+          "verdict_reason": "The snippet addresses the comparison directly but states both are suitable rather than explaining why electric is better, offering only partial evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_175",
+      "claim_index": 1,
+      "claim": "However, the exact reason for this temperature difference is not fully explained by the provided documents",
+      "cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "On a specific morning, temperatures in Moosomin, Saskatchewan were colder than at the South Pole.",
+          "quote": "Actual temperature around 7:30 this morning was minus-30 in Moosomin, and a balmy -27 at the Amundsen-Scott Research Centre at the South Pole.",
+          "verdict_reason": "Snippet provides specific temperature data for the South Pole but fails to explain the climatic reasons for the general temperature difference queried.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Temperatures at the South Pole can drop to minus 60 degrees centigrade.",
+          "quote": "pulled a 100kg sledge in temperatures which dropped to minus 60 degrees centigrade for the 38 days of the journey.",
+          "verdict_reason": "Snippet provides specific temperature data for the South Pole, addressing the query's subject, but lacks the comparative explanation or North Pole data needed to fully answer 'why'.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0124",
+      "claim_index": 1,
+      "claim": "This information is consistent across high-credibility",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Frank-Walter Steinmeier is the incumbent Federal President of Germany, serving since 19 March 2017.",
+          "quote": "incumbent = Frank-Walter Steinmeier incumbentsince = 19 March 2017",
+          "verdict_reason": "Document identifies Steinmeier as incumbent president with start date, but timestamp (Sept 2023) and URL label ('older revision') suggest this may be superseded. Provides relevant but potentially outdated information about the same entity.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Frank-Walter Steinmeier is the incumbent President of Germany, serving since 19 March 2017.",
+          "quote": "incumbent = Frank-Walter Steinmeier incumbentsince = 19 March 2017",
+          "verdict_reason": "The document directly identifies the current President of Germany as Frank-Walter Steinmeier with his incumbency date. The timestamp (2026-04-28) confirms this is recent information.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_1fe3ba1b1cba",
+      "claim_index": 2,
+      "claim": "The other documents either provide irrelevant or partially relevant information",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Max Verstappen won the World Driver's Championships in 2021, 2022, and 2023.",
+          "quote": "Max Verstappen won three World Driver's Championships in a row (2021, 22 and 23)",
+          "verdict_reason": "Snippet addresses the same entity (F1 champion) but lists years after 2020, providing context without directly answering who won in 2020.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a 2025 event and driver, providing no evidence regarding the 2020 Formula 1 world driver's championship winner.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses Lewis Hamilton's career and standings in 2023 and 2024 but does not mention the 2020 championship winner.",
+          "quote": "That energy took him to third in the 2023 standings, beaten only by the all-conquering Red Bulls – despite not winning a single Grand Prix.",
+          "verdict_reason": "The document concerns the queried entity (F1 driver standings) but addresses 2023/2024 seasons, leaving the specific 2020 query unanswered while remaining topically relevant.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

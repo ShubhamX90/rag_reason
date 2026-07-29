@@ -8,10 +8,12 @@ Unified LLM client supporting:
                      Supports sync, async, and OpenAI Batch API.
   - OpenRouter API : qwen/qwen-2.5-72b-instruct (default), any provider/model slug.
                      Supports sync and async (no batch).
+  - Local OpenAI-compatible API: vLLM/SGLang/LMDeploy-style /v1/chat/completions.
+                    Supports sync and async (no batch).
 
 ⚠  V3 PIPELINE NOTE
-   All v3 annotation (run_stage*_multi_async.py) uses OpenRouter exclusively.
-   Only OPENROUTER_API_KEY is required for v3 workflows.
+   V3 annotation defaults to OpenRouter, but the multi_async scripts can switch
+   to local_openai with a local committee config.
    The Anthropic and OpenAI providers are retained for legacy single-model
    scripts and backward compatibility, but are not used in multi-LLM runs.
    Batch mode scripts (run_*_batch.py) are NOT used in v3.
@@ -50,7 +52,13 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional
 if TYPE_CHECKING:
     from src.cost_tracker import CostTracker
 
-from src.llm_cache import build_cache_key, read_cached_response, write_cached_response
+from src.llm_cache import (
+    CacheMissError,
+    build_cache_key,
+    normalize_cache_mode,
+    read_cached_response,
+    write_cached_response,
+)
 
 
 # ─────────────────────────────────────────────
@@ -96,13 +104,16 @@ class Provider(str, Enum):
     ANTHROPIC  = "anthropic"
     OPENAI     = "openai"
     OPENROUTER = "openrouter"
+    LOCAL_OPENAI = "local_openai"
 
 
 ANTHROPIC_DEFAULT_MODEL  = "claude-sonnet-4-6"
 OPENAI_DEFAULT_MODEL     = "gpt-4o"
 OPENROUTER_DEFAULT_MODEL = "qwen/qwen-2.5-72b-instruct"
+LOCAL_OPENAI_DEFAULT_MODEL = "local/model"
 
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+LOCAL_OPENAI_DEFAULT_BASE_URL = "http://127.0.0.1:8000/v1"
 
 _BATCH_POLL_INTERVAL = 30
 _BATCH_MAX_WAIT_H    = 24   # hours before TimeoutError
@@ -204,6 +215,20 @@ def openai_key()     -> str: return _load_key("OPENAI_API_KEY",      "openai_key
 def openrouter_key() -> str: return _load_key("OPENROUTER_API_KEY",  "openrouter_key")
 
 
+def _local_openai_key(api_key_env: Optional[str] = None) -> str:
+    """Return an API key value for OpenAI-compatible local servers.
+
+    vLLM/SGLang-style local servers usually ignore auth, but the OpenAI SDK
+    still expects a non-empty key. If an env var is configured, use it;
+    otherwise pass a harmless placeholder.
+    """
+    if api_key_env:
+        val = os.getenv(api_key_env, "").strip()
+        if val:
+            return val
+    return os.getenv("LOCAL_OPENAI_API_KEY", "").strip() or "local-openai"
+
+
 # ─────────────────────────────────────────────
 #  LLMClient
 # ─────────────────────────────────────────────
@@ -214,10 +239,14 @@ class LLMClient:
 
     Parameters
     ----------
-    provider    : Provider.ANTHROPIC | Provider.OPENAI | Provider.OPENROUTER
+    provider    : Provider.ANTHROPIC | Provider.OPENAI | Provider.OPENROUTER | Provider.LOCAL_OPENAI
     model       : Model name; omit to use the provider default.
     temperature : Generation temperature (default 0.0).
     max_retries : Retries per call on transient errors (default 3).
+    base_url    : OpenAI-compatible endpoint base URL for LOCAL_OPENAI.
+    api_key_env : Optional env var for LOCAL_OPENAI bearer token.
+    request_timeout : Optional per-request timeout for LOCAL_OPENAI.
+    extra_body  : Extra JSON body fields, e.g. response_format or chat_template_kwargs.
     """
 
     def __init__(
@@ -226,6 +255,11 @@ class LLMClient:
         model: Optional[str] = None,
         temperature: float = 0.0,
         max_retries: int = 3,
+        base_url: Optional[str] = None,
+        api_key_env: Optional[str] = None,
+        request_timeout: Optional[float] = None,
+        extra_body: Optional[Dict[str, Any]] = None,
+        default_max_tokens: Optional[int] = None,
     ) -> None:
         self.provider = Provider(provider)
 
@@ -233,6 +267,7 @@ class LLMClient:
             Provider.ANTHROPIC:  ANTHROPIC_DEFAULT_MODEL,
             Provider.OPENAI:     OPENAI_DEFAULT_MODEL,
             Provider.OPENROUTER: OPENROUTER_DEFAULT_MODEL,
+            Provider.LOCAL_OPENAI: LOCAL_OPENAI_DEFAULT_MODEL,
         }
         _raw = model or _defaults[self.provider]
 
@@ -243,6 +278,11 @@ class LLMClient:
         self.model       = _raw
         self.temperature = temperature
         self.max_retries = max_retries
+        self.base_url = base_url
+        self.api_key_env = api_key_env
+        self.request_timeout = request_timeout
+        self.extra_body = extra_body or {}
+        self.default_max_tokens = default_max_tokens
         self._sync_client:  Any = None
         self._async_client: Any = None
 
@@ -262,9 +302,15 @@ class LLMClient:
                 self._sync_client = _anthropic().Anthropic(api_key=anthropic_key())
             elif self.provider == Provider.OPENAI:
                 self._sync_client = _openai().OpenAI(api_key=openai_key())
-            else:  # OPENROUTER
+            elif self.provider == Provider.OPENROUTER:
                 self._sync_client = _openai().OpenAI(
                     api_key=openrouter_key(), base_url=OPENROUTER_BASE_URL
+                )
+            else:  # LOCAL_OPENAI
+                self._sync_client = _openai().OpenAI(
+                    api_key=_local_openai_key(self.api_key_env),
+                    base_url=self.base_url or LOCAL_OPENAI_DEFAULT_BASE_URL,
+                    timeout=self.request_timeout,
                 )
         return self._sync_client
 
@@ -274,9 +320,15 @@ class LLMClient:
                 self._async_client = _anthropic().AsyncAnthropic(api_key=anthropic_key())
             elif self.provider == Provider.OPENAI:
                 self._async_client = _openai().AsyncOpenAI(api_key=openai_key())
-            else:  # OPENROUTER
+            elif self.provider == Provider.OPENROUTER:
                 self._async_client = _openai().AsyncOpenAI(
                     api_key=openrouter_key(), base_url=OPENROUTER_BASE_URL
+                )
+            else:  # LOCAL_OPENAI
+                self._async_client = _openai().AsyncOpenAI(
+                    api_key=_local_openai_key(self.api_key_env),
+                    base_url=self.base_url or LOCAL_OPENAI_DEFAULT_BASE_URL,
+                    timeout=self.request_timeout,
                 )
         return self._async_client
 
@@ -321,21 +373,17 @@ class LLMClient:
                 system=system, messages=[{"role": "user", "content": user}], **kw,
             )
             return resp.content[0].text
-        else:   # OPENAI or OPENROUTER (both use openai SDK)
+        else:   # OPENAI, OPENROUTER, or LOCAL_OPENAI (OpenAI-compatible)
+            extra_body = self._extra_body_for_request()
             resp = client.chat.completions.create(
                 model=self.model, max_tokens=max_tokens, temperature=self.temperature,
                 messages=[
                     {"role": "system", "content": system},
                     {"role": "user",   "content": user},
                 ],
-                extra_body={"include_reasoning": True} if self.provider == Provider.OPENROUTER else None,
+                extra_body=extra_body,
             )
-            msg = resp.choices[0].message
-            content = msg.content or ""
-            reasoning = getattr(msg, "reasoning", "")
-            if reasoning:
-                return f"<think>\n{reasoning}\n</think>\n" + content
-            return content
+            return self._message_to_text(resp.choices[0].message)
 
     # ── Async completion ──────────────────────────────────────────
 
@@ -347,20 +395,18 @@ class LLMClient:
         extra_headers: Optional[Dict] = None,
         cost_tracker: Optional["CostTracker"] = None,
         cache_enabled: bool = False,
+        cache_mode: Optional[str] = None,
         cache_namespace: Optional[str] = None,
     ) -> str:
         """Non-blocking completion with exponential back-off retries."""
         cache_key = None
         namespace = cache_namespace or self.provider.value
+        resolved_cache_mode = normalize_cache_mode(cache_mode, cache_enabled=cache_enabled)
         request_options = {
             "api": "chat.completions",
-            "extra_body": (
-                {"include_reasoning": True}
-                if self.provider == Provider.OPENROUTER
-                else None
-            ),
+            "extra_body": self._extra_body_for_request(),
         }
-        if cache_enabled:
+        if resolved_cache_mode != "off":
             cache_key = build_cache_key(
                 provider=self.provider.value,
                 model=self.model,
@@ -370,9 +416,15 @@ class LLMClient:
                 temperature=self.temperature,
                 request_options=request_options,
             )
-            cached = read_cached_response(cache_key, namespace=namespace)
-            if cached is not None:
-                return cached
+            if resolved_cache_mode in {"read_write", "read_only"}:
+                cached = read_cached_response(cache_key, namespace=namespace)
+                if cached is not None:
+                    return cached
+                if resolved_cache_mode == "read_only":
+                    raise CacheMissError(
+                        f"Cache miss for {self.provider.value}/{self.model} "
+                        f"in namespace {namespace!r}"
+                    )
 
         backoff, last_err = 1.0, RuntimeError("Unknown error")
         for attempt in range(self.max_retries):
@@ -380,7 +432,10 @@ class LLMClient:
                 response_text = await self._call_async(
                     system, user, max_tokens, extra_headers, cost_tracker
                 )
-                if cache_enabled and cache_key is not None:
+                if (
+                    resolved_cache_mode in {"read_write", "write_only"}
+                    and cache_key is not None
+                ):
                     write_cached_response(
                         cache_key=cache_key,
                         namespace=namespace,
@@ -426,18 +481,17 @@ class LLMClient:
                 system=system, messages=[{"role": "user", "content": user}], **kw,
             )
             return resp.content[0].text
-        else:   # OPENAI or OPENROUTER
+        else:   # OPENAI, OPENROUTER, or LOCAL_OPENAI
+            extra_body = self._extra_body_for_request()
             resp = await client.chat.completions.create(
                 model=self.model, max_tokens=max_tokens, temperature=self.temperature,
                 messages=[
                     {"role": "system", "content": system},
                     {"role": "user",   "content": user},
                 ],
-                extra_body={"include_reasoning": True} if self.provider == Provider.OPENROUTER else None,
+                extra_body=extra_body,
             )
             msg = resp.choices[0].message
-            content = msg.content or ""
-            reasoning = getattr(msg, "reasoning", "")
             resp_dict = _response_to_dict(resp)
 
             # ── Cost tracking (OpenRouter only) ──────────────────────────
@@ -479,9 +533,27 @@ class LLMClient:
                     )
             # ─────────────────────────────────────────────────────────────
 
-            if reasoning:
-                return f"<think>\n{reasoning}\n</think>\n" + content
-            return content
+            return self._message_to_text(msg)
+
+    def _extra_body_for_request(self) -> Optional[Dict[str, Any]]:
+        if self.provider == Provider.OPENROUTER:
+            body: Dict[str, Any] = {"include_reasoning": True}
+            body.update(self.extra_body)
+            return body
+        if self.provider == Provider.LOCAL_OPENAI:
+            return self.extra_body or None
+        return self.extra_body or None
+
+    def _message_to_text(self, msg: Any) -> str:
+        content = msg.content or ""
+        reasoning = getattr(msg, "reasoning", "")
+        if self.provider == Provider.LOCAL_OPENAI and "</think>" in content:
+            content = content.split("</think>", 1)[1].strip()
+        if self.provider == Provider.LOCAL_OPENAI and reasoning:
+            return f"<think>\n{reasoning}\n</think>\n" + content
+        if self.provider == Provider.OPENROUTER and reasoning:
+            return f"<think>\n{reasoning}\n</think>\n" + content
+        return content
 
     # ── Batch API ─────────────────────────────────────────────────
     # ⚠  V3 NOTE: OpenRouter has NO native batch API.

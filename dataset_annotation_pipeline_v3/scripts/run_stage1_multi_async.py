@@ -10,7 +10,9 @@ Every (query, doc) pair is sent to ALL committee models concurrently.
 (key_fact, quote, verdict_reason, source_quality) are adopted from the
 highest-weight model that voted for the winning verdict.
 
-All models are accessed via OpenRouter (OPENROUTER_API_KEY required).
+By default, models are accessed via OpenRouter (OPENROUTER_API_KEY required).
+Use --committee-backend local_openai with a JSON committee config for local
+OpenAI-compatible endpoints.
 
 Concurrency
 -----------
@@ -46,7 +48,16 @@ THIS_FILE    = Path(__file__).resolve()
 PROJECT_ROOT = THIS_FILE.parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.llm_client import LLMClient, Provider
+from src.llm_client import LLMClient
+from src.llm_cache import CacheMissError
+from src.committee_config import (
+    build_clients_for_committee,
+    cache_mode_for_backend,
+    client_max_tokens,
+    configure_committee_for_backend,
+    describe_committee,
+    max_concurrency_for_backend,
+)
 from src.parsers    import parse_stage1
 from src.voting     import COMMITTEE_MODELS, MODEL_WEIGHTS, merge_stage1_votes
 from src.cost_tracker import (
@@ -122,22 +133,26 @@ async def call_one_model(
     doc_id: str,
     tracker: CostTracker,
     cache_enabled: bool,
-) -> Dict[str, Any]:
+    cache_mode: str,
+) -> Dict[str, Any] | None:
     """One API call: one committee model × one (query, doc) pair."""
     async with semaphore:
         try:
             raw = await client.acomplete(
                 system=system_prompt,
                 user=user_prompt,
-                max_tokens=STAGE1_MAX_TOKENS,
+                max_tokens=client_max_tokens(client, STAGE1_MAX_TOKENS),
                 cost_tracker=tracker,
                 cache_enabled=cache_enabled,
+                cache_mode=cache_mode,
                 cache_namespace="stage1_multi",
             )
             note, errors = parse_stage1(raw, fallback_doc_id=doc_id)
             if errors:
                 note["_validation_errors"] = errors
             return note
+        except CacheMissError:
+            raise
         except Exception as exc:
             return {
                 "doc_id":         doc_id,
@@ -163,6 +178,7 @@ async def adjudicate_doc_committee(
     doc: Dict[str, Any],
     tracker: CostTracker,
     cache_enabled: bool,
+    cache_mode: str,
 ) -> Dict[str, Any]:
     """
     Run ALL committee models concurrently on one (query, doc) pair.
@@ -174,14 +190,19 @@ async def adjudicate_doc_committee(
 
     coros = [
         call_one_model(
-            clients[model], semaphore, system_prompt, user_prompt, doc_id, tracker, cache_enabled
+            clients[model], semaphore, system_prompt, user_prompt, doc_id,
+            tracker, cache_enabled, cache_mode
         )
         for model in COMMITTEE_MODELS
     ]
     raw_results = await asyncio.gather(*coros)
     model_notes = {model: raw_results[i] for i, model in enumerate(COMMITTEE_MODELS)}
 
-    return merge_stage1_votes(model_notes, fallback_doc_id=doc_id)
+    return merge_stage1_votes(
+        model_notes,
+        fallback_doc_id=doc_id,
+        fallback_source_url=str(doc.get("source_url", "")),
+    )
 
 
 # ─────────────────────────────────────────────
@@ -198,6 +219,7 @@ async def process_record(
     output_path: str,
     tracker: CostTracker,
     cache_enabled: bool,
+    cache_mode: str,
 ) -> None:
     """Adjudicate all docs for one query record via the committee."""
     query = record.get("query", "")
@@ -205,7 +227,8 @@ async def process_record(
 
     per_doc_notes = await asyncio.gather(*[
         adjudicate_doc_committee(
-            clients, semaphore, system_prompt, user_template, query, doc, tracker, cache_enabled
+            clients, semaphore, system_prompt, user_template, query, doc,
+            tracker, cache_enabled, cache_mode
         )
         for doc in docs
     ])
@@ -227,16 +250,25 @@ async def run(args: argparse.Namespace) -> None:
     system_prompt = load_text(system_path)
     user_template = load_text(user_path)
 
-    # One LLMClient per committee model — all share the same OpenRouter key
-    clients = {
-        model: LLMClient(
-            provider    = Provider.OPENROUTER,
-            model       = model,
-            temperature = args.temperature,
-            max_retries = args.max_retries,
-        )
-        for model in COMMITTEE_MODELS
-    }
+    committee_cfg = configure_committee_for_backend(
+        backend=args.committee_backend,
+        config_path=args.committee_config,
+        cache_mode_override=args.cache_mode,
+        cache_dir_override=args.cache_dir,
+    )
+    args.concurrency = max_concurrency_for_backend(args.concurrency, committee_cfg)
+    resolved_cache_mode = cache_mode_for_backend(
+        backend=args.committee_backend,
+        committee_config=committee_cfg,
+        use_cache=args.use_cache,
+        cache_mode_override=args.cache_mode,
+    )
+    clients = build_clients_for_committee(
+        backend=args.committee_backend,
+        committee_config=committee_cfg,
+        temperature=args.temperature,
+        max_retries=args.max_retries,
+    )
 
     records  = load_records(args.input)
     done_ids = load_processed_ids(args.output)
@@ -251,14 +283,15 @@ async def run(args: argparse.Namespace) -> None:
 
     Path(args.output).parent.mkdir(parents=True, exist_ok=True)
     print(
-        f"⚙️  Stage-1 multi-LLM | committee={len(COMMITTEE_MODELS)} models | "
+        f"⚙️  Stage-1 multi-LLM | backend={args.committee_backend} | "
+        f"committee={len(COMMITTEE_MODELS)} models | "
         f"records={len(records)} | concurrency={args.concurrency}"
     )
-    for model, weight in MODEL_WEIGHTS.items():
-        print(f"   {weight:.0%}  {model}")
+    for line in describe_committee(backend=args.committee_backend, committee_config=committee_cfg):
+        print(line)
     if done_ids:
         print(f"⏩ Resuming: {len(done_ids)} already processed")
-    print(f"   cache={'on' if args.use_cache else 'off'}")
+    print(f"   cache_mode={resolved_cache_mode}")
 
     semaphore = asyncio.Semaphore(args.concurrency)
     out_lock  = asyncio.Lock()
@@ -268,7 +301,8 @@ async def run(args: argparse.Namespace) -> None:
         process_record(
             clients, semaphore, system_prompt, user_template,
             rec, out_lock, args.output, tracker,
-            args.use_cache,
+            resolved_cache_mode != "off",
+            resolved_cache_mode,
         )
         for rec in records
     ]
@@ -293,7 +327,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(
         description=(
             "Multi-LLM Stage-1 evidence adjudication with weighted majority voting.\n"
-            "All committee models are accessed via OpenRouter."
+            "Default backend is OpenRouter; local_openai is available via --committee-config."
         )
     )
     ap.add_argument("--input",       required=True,  help="Input JSONL (normalized conflicts or refusals dataset)")
@@ -315,8 +349,21 @@ def main() -> None:
                     help="Path to save cumulative cost summary JSON (default: <output>_cost_cumulative.json)")
     ap.add_argument("--use-cache",     dest="use_cache", action="store_true", default=False,
                     help="Reuse/write local raw-response cache for exact matching calls")
+    ap.add_argument("--committee-backend", choices=["openrouter", "local_openai"],
+                    default="openrouter",
+                    help="Committee backend (default: openrouter)")
+    ap.add_argument("--committee-config", default=None,
+                    help="JSON local_openai committee config")
+    ap.add_argument("--cache-mode", choices=["off", "read_write", "read_only", "write_only"],
+                    default=None,
+                    help="Explicit raw-response cache mode")
+    ap.add_argument("--cache-dir", default=None,
+                    help="Override response cache root directory")
     args = ap.parse_args()
-    asyncio.run(run(args))
+    try:
+        asyncio.run(run(args))
+    except CacheMissError as exc:
+        raise SystemExit(f"Read-only cache miss: {exc}") from None
 
 
 if __name__ == "__main__":

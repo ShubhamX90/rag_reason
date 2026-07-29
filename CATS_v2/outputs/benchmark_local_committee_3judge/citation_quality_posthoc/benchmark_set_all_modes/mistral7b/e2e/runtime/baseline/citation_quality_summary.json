@@ -1,0 +1,3066 @@
+{
+  "variant": "benchmark_set_all_modes/mistral7b/e2e/runtime/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/mistral7b/e2e/runtime/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/mistral7b/e2e/runtime/baseline/final/detailed_results.json",
+    "source_final_sha256": "0d6bfa3d3c8bb87c2f5814fca15aa4b407e4b468893b8ae6f06021b771dbe8a0",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/mistral7b/e2e/runtime/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/mistral7b/e2e/runtime/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1001,
+    "claims_with_citations": 715,
+    "claims_with_committee_support_set": 875,
+    "claims_with_any_approved_citation": 630,
+    "claims_with_any_gold_positive_citation": 714,
+    "committee_alignment_precision_macro": 0.7075291375291375,
+    "committee_alignment_precision_micro": 0.6639919759277834,
+    "gold_positive_citation_precision_macro": 0.9893706293706294,
+    "gold_positive_citation_precision_micro": 0.9879638916750251,
+    "soft_extra_citation_rate_micro": 0.3239719157472417,
+    "hard_negative_citation_rate_micro": 0.012036108324974924,
+    "committee_support_citation_recall_macro": 0.72,
+    "committee_support_citation_recall_micro": 0.72,
+    "claims_with_any_soft_extra_rate": 0.4727272727272727,
+    "claims_with_any_hard_negative_rate": 0.02937062937062937,
+    "strict_committee_alignment_claim_rate": 0.36863136863136864,
+    "strict_gold_clean_claim_rate": 0.6153846153846154,
+    "strict_grounded_committee_clean_rate_all_claims": 0.36863136863136864,
+    "strict_grounded_gold_clean_rate_all_claims": 0.6153846153846154,
+    "total_cited_docs": 1994,
+    "total_approved_cited_docs": 1324,
+    "total_gold_positive_cited_docs": 1970,
+    "total_soft_extra_cited_docs": 646,
+    "total_hard_negative_cited_docs": 24
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_1e9c6cd8e30b",
+      "claim_index": 2,
+      "claim": "It is important to find sustainable solutions to minimize these impacts",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production causes deforestation, habitat loss for wildlife, increased greenhouse gas emissions, and human rights violations.",
+          "quote": "Unfortunately, this has led to palm oil deforestation as forests and peatlands have been destroyed in order to keep up with the increased demands. This has had devastating consequences, causing habitat loss for wildlife and increasing greenhouse gas emissions.",
+          "verdict_reason": "The snippet directly confirms environmental harms including deforestation, habitat loss, and emissions, decisively answering the query about negative environmental impacts.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Palm oil's environmental harm stems from its production methods rather than the oil itself.",
+          "quote": "Palm oil is bad for the environment not necessarily because of the palm oil itself, but rather, it is bad because of how it is made.",
+          "verdict_reason": "The snippet directly addresses the query by confirming palm oil is bad for the environment but limits the scope to production methods, offering incomplete evidence on the full environmental impact.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production significantly impacts the environment by contributing to deforestation, threatening endangered species, and emitting an estimated 500 million tonnes of CO2 annually.",
+          "quote": "It contributes to deforestation, threatens endangered species and it estimated to emit 500 million tonnes of CO2 per year.",
+          "verdict_reason": "The snippet directly answers the query by listing specific negative environmental impacts (deforestation, emissions, biodiversity loss) linked to palm oil production.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Palm oil production causes significant environmental damage including habitat destruction, deforestation, pollution, and soil erosion.",
+          "quote": "Despite palm oil's benefits and economic value, this unruly growth period caused significant environmental damage. And herein lies the catch: The Environmental Impacts Of Palm Oil Production",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating palm oil causes significant environmental damage and detailing specific harms like deforestation and habitat loss.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Palm oil cultivation often coincides with harmful environmental effects like deforestation on previously biodiverse forest land.",
+          "quote": "Its cultivation and production (often monoculture on previously carbon-sequestering, biodiverse forest land) often coincides with... displacement and disruption of human and animal populations, and other harmful environmental effects.",
+          "verdict_reason": "The snippet directly addresses environmental harms (deforestation, biodiversity loss) but also mentions economic benefits, providing partial rather than absolute support for the claim that it is 'bad'.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_24fa0020a521",
+      "claim_index": 1,
+      "claim": "It is important to consult a pediatrician before starting any supplement",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The AAP states children do not need multivitamins if they eat a well-balanced diet, though specific groups like picky eaters or those with restrictive diets may benefit.",
+          "quote": "The short answer from the AAP: not if they eat a well-balanced diet. But \"well-balanced\" is doing a lot of heavy lifting in that sentence.",
+          "verdict_reason": "Snippet directly addresses the query with AAP guidelines but provides conditional nuance rather than a simple yes/no, making it conflict-bearing evidence that partially supports the answer.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Most healthy children do not require multivitamins if they grow typically and eat diverse foods.",
+          "quote": "Most healthy children don't need multivitamins if they are growing at the typical rate and eating a variety of foods.",
+          "verdict_reason": "Snippet addresses the query directly but only covers healthy children, leaving the question unanswered for children with specific health needs or deficiencies.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The American Academy of Pediatrics does not recommend daily multivitamins for children who eat a well-balanced diet.",
+          "quote": "However, the American Academy of Pediatrics (AAP) does not recommend a daily multivitamin for children eating a well-balanced diet.",
+          "verdict_reason": "The snippet directly addresses the query with a specific guideline against routine use for healthy eaters, though it notes exceptions for specific deficiencies, making it partial rather than absolute support.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The AAP does not recommend a daily multivitamin for most children but advises specific vitamin D and iron supplements at certain life stages.",
+          "quote": "The AAP doesn't recommend a daily multivitamin for most children. But it does recommend vitamin D and iron supplements at certain points in a child's life.",
+          "verdict_reason": "The snippet directly addresses the query by stating the AAP's stance against routine multivitamins while noting exceptions for specific nutrients, providing partial but not absolute resolution.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Most children do not need a daily multivitamin if they have a well-rounded diet, though supplements may help those with dietary restrictions.",
+          "quote": "For most children, a well-rounded diet provides all the vitamins and minerals they need. However, picky eating, food allergies, or dietary restrictions can sometimes make it challenging to meet these nutritional requirements.",
+          "verdict_reason": "The snippet addresses the query by stating most children don't need multivitamins but hints at exceptions; however, the text cuts off before fully detailing when they are beneficial.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_52e01830d2fe",
+      "claim_index": 1,
+      "claim": "However, there are also challenges and limitations to obtaining software patents, such as the difficulty of detecting infringement, the high cost and time commitment of applying for a patent the need to consider the life cycle of the software and its intellectual property valuation",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Software can be patent-eligible if it meets specific criteria, though applying generic tech to abstract ideas may fail eligibility.",
+          "quote": "be patent-eligible. If it simply applies generic tech to an abstract idea, it will likely fail to meet the patent requirements.",
+          "verdict_reason": "The snippet addresses the query by explaining conditions for software patentability and providing examples, but notes eligibility is conditional and changing, not a simple yes.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Recent US Supreme Court rulings suggest a higher standard applies to patenting software that implements known business methods.",
+          "quote": "Recent US Supreme Court rulings suggest that a higher standard will be applied when considering the patentability of using software to implement a known business method.",
+          "verdict_reason": "The snippet addresses the query by outlining specific conditions and legal standards for software patentability, providing partial but not definitive resolution.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "While controversy exists over whether software should be patentable, 62% of U.S. patents are software-related, making the debate largely academic in favor of practical application.",
+          "quote": "Despite the controversy over whether software should be patentable per se, 62% of all patents issued by the U.S. Patent Office are directed to software-related inventions.",
+          "verdict_reason": "The snippet addresses the query directly by acknowledging the controversy but providing evidence that patents are currently applied to software, though it frames the 'should' as a practical rather than purely academic question.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "National approaches to software patentability vary, with Europe allowing technical programs, the US limiting protection to recordable media, and Japan explicitly recognizing computer programs as patentable subject matter.",
+          "quote": "Japan's Patent Act (Article 2(3)(i)), on the other hand, explicitly refers to computer programs as patentable subject matter.",
+          "verdict_reason": "The snippet directly addresses the query by detailing varying international laws on software patents, providing specific evidence that patents do apply in some jurisdictions while noting limitations in others.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Despite legal limits on patentability, software patents remain valuable and should be pursued for protecting core functions and algorithms.",
+          "quote": "software patents are still valuable for a variety of reasons. ... software patents still have value today and such protection therefore should be pursued.",
+          "verdict_reason": "The snippet argues software patents should apply and have value, directly addressing the query, but offers a specific advocacy perspective rather than a definitive legal resolution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9251c7a33ec5",
+      "claim_index": 2,
+      "claim": "It is important to consult with a veterinarian to determine the best course of action for an individual pet's health and well-being",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering disrupts hormonal feedback loops, causing luteinizing hormone levels to surge up to 30 times average concentrations, which researchers are investigating for potential links to cancer.",
+          "quote": "After sterilization, dogs can experience a surge in LH levels. This surge can reach as high as 30 times the average concentrations, particularly in males. Researchers are exploring if consistently high LH levels can harm different body parts.",
+          "verdict_reason": "The snippet directly addresses negative health impacts by citing a specific hormonal surge and ongoing research into cancer risks, providing conflict-bearing evidence alongside listed benefits.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research indicates that spaying or neutering dogs can cause luteinizing hormone levels to rise up to 30 times higher, potentially contributing to diseases like urinary incontinence and lymphoma.",
+          "quote": "Dogs spayed or neutered can have LH levels up to 30 times higher than normal. Elevated LH may affect the thyroid, urinary tract, immune system, and even cancer development.",
+          "verdict_reason": "The snippet provides specific evidence of negative health impacts (elevated LH, disease risks) directly addressing the query, but represents ongoing research rather than a definitive final conclusion.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Spaying and neutering carry potential negatives including surgical risks, weight gain, and hormonal changes affecting metabolism and coat quality.",
+          "quote": "Potential Negatives to Consider\nWhile spaying and neutering offer numerous benefits, there are some potential drawbacks to consider:\n1. Surgical Risks: Like any surgical procedure, spaying and neutering carry risks such as bleeding, infection, and adverse reactions to anesthesia.",
+          "verdict_reason": "The snippet directly addresses the query by listing specific negative health impacts (surgical risks, weight gain, hormonal changes), providing conflict-bearing evidence without fully resolving the overall net impact.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Evidence indicates that spaying or neutering dogs correlates with both positive and adverse health effects, with risks potentially exceeding benefits for most male dogs.",
+          "quote": "The evidence shows that spay/neuter correlates with both positive AND adverse health effects in dogs. ... The number of health problems associated with neutering may exceed the associated health benefits in most cases.",
+          "verdict_reason": "The snippet directly addresses the query by confirming negative health impacts exist alongside benefits, providing conflict-bearing evidence rather than a simple yes/no answer.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering provides health benefits by preventing cancers and diseases, though the snippet focuses primarily on behavioral changes rather than negative health impacts.",
+          "quote": "And while neutering dogs can decrease the risk of ovarian and breast cancers, prostate disease, and pyometras, it can also decrease or even eliminate socially unacceptable behaviors in dogs.",
+          "verdict_reason": "The snippet addresses the health impact of neutering by listing benefits, which is relevant evidence to the query about negative impacts, but it does not explicitly discuss or confirm negative health consequences.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f777a43ba278",
+      "claim_index": 1,
+      "claim": "However, more research is necessary to confirm all known side effects and the documents also mention that yerba mate has also been shown to have anticancer abilities",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Studies indicate that drinking large amounts of hot yerba mate over prolonged periods may increase the risk of esophageal, larynx, and oral cavity cancers.",
+          "quote": "some studies have indicated that people who drink large amounts of hot yerba mate over prolonged periods may be at increased risk of some types of cancer, such as cancer of the esophagus, larynx and oral cavity.",
+          "verdict_reason": "The snippet provides direct evidence linking hot yerba mate consumption to cancer risk, addressing the query with specific conditions rather than a definitive yes/no for all cases.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research links excessive yerba mate consumption to cancer due to PAH content and high drinking temperatures, though more research is needed for confirmation.",
+          "quote": "Consuming large quantities of mate tea has been linked to cancer, but more research is necessary to confirm all known side effects.",
+          "verdict_reason": "The snippet directly addresses the query by linking yerba mate to cancer via PAHs and temperature but notes research is incomplete, making it conflict-bearing but not definitive.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking yerba maté tea at very hot temperatures may increase the risk of esophageal cancer.",
+          "quote": "Drinking yerba maté tea at very hot temperatures may increase the risk of esophageal cancer.",
+          "verdict_reason": "The snippet directly addresses the query by linking yerba maté to increased cancer risk under specific conditions (hot temperature), providing conflict-bearing evidence without fully resolving the general causation question.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking yerba mate is linked to higher esophageal cancer levels only when consumed at very high temperatures, not due to the drink itself.",
+          "quote": "Drinking yerba mate has also been linked with higher levels of esophageal cancer. This association only exists because many people drink yerba mate at very high temperatures, though. It has nothing to do with drinking yerba mate itself.",
+          "verdict_reason": "The snippet directly addresses the cancer query by distinguishing between temperature-related risk and the substance itself, providing nuanced but incomplete resolution regarding other cancer types.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Several studies found an association between the temperature of hot mate infusion and increased risks of oral, esophageal, and laryngeal cancer.",
+          "quote": "Several studies found an association between the temperature of the mate infusion and oral, esophageal, and/or laryngeal cancer risks",
+          "verdict_reason": "The snippet provides direct epidemiological evidence linking hot mate consumption to cancer risks, addressing the query but noting varied results and specific conditions like temperature.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_1a764b8b6cf5",
+      "claim_index": 0,
+      "claim": "The rule of the three rightly guided caliphs (Abu Bakr, Umar Uthman) is not explicitly stated in the provided documents",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The caliphs who followed the Prophet's footsteps are called 'The Rightly-Guided Caliphs' (Al-Khulafa-ur-Rashidun).",
+          "quote": "Those Caliphs who truly followed in the Prophet's foot steps are called 'The Rightly-Guided Caliphs' (Al-Khulafa-ur Rashidun in Arabic).",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating the name given to the rule of the first four caliphs.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The rule of the first four caliphs is called the Rashidun Caliphate, which means Rightly Guided.",
+          "quote": "The term Rashidun, or \"Rightly Guided\", is derived from a famous Sunni hadith where Muhammad foretold that the caliphate of prophecy after him would last for 30 years",
+          "verdict_reason": "The snippet explicitly identifies the term 'Rashidun' as 'Rightly Guided' and associates it with the caliphate lasting 30 years, directly answering the query about the name of their rule.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The reign of the first four caliphs is called the Rashidun Caliphate.",
+          "quote": "The reign of these caliphs, called the Rashidun Caliphate (632–661), is considered in Sunni Islam to have been 'rightly guided'",
+          "verdict_reason": "The snippet explicitly states that the reign of the rightly-guided caliphs is called the Rashidun Caliphate, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Rightly Guided Caliphs are also known as the Rashidun.",
+          "quote": "Also known as the Rashidun, the Rightly Guided Caliphs were the leaders of the Islamic Empire founded by Muhammad",
+          "verdict_reason": "Snippet identifies the group as 'Rashidun' but does not explicitly name the specific term for their collective rule, making it relevant but incomplete.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The formal name for the combined reigns of the four Rightly Guided Caliphs is the Rashidun Caliphate.",
+          "quote": "The Rashidun Caliphate The formal name for the combined reigns of",
+          "verdict_reason": "Snippet identifies 'Rashidun Caliphate' as the formal name for the combined reigns but cuts off before explicitly stating 'the rule was called'.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a4dde83c35da",
+      "claim_index": 1,
+      "claim": "However, the specific type of government is not explicitly stated in the provided documents",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The Ming dynasty was an autocratic imperial government where the emperor abolished the prime minister position to rule personally with the Grand Secretariat.",
+          "quote": "The Ming became one of the most stable but also one of the most autocratic of all Chinese dynasties. ... The position of prime minister was abolished. Instead, the emperor took over personal control of the government, ruling with the assistance of the especially appointed Neige, or Grand Secretariat.",
+          "verdict_reason": "The snippet directly answers the query by defining the government as autocratic, detailing the abolition of the prime minister, and explaining the emperor's personal control via the Grand Secretariat.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Ming dynasty government was characterized by absolute and too centralized rule.",
+          "quote": "biggest flaw of the Ming dynasty was its government is too absolute and too centralized rule.",
+          "verdict_reason": "Snippet identifies the government type as absolute and centralized but is incomplete, cutting off mid-sentence without full context.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Ming governmental system persisted through the Ching, indicating the same form of government prevailed from 1368 to 1911.",
+          "quote": "The Ming governmental system persisted through the Ching: effectively, the same form of government prevailed in China for the entire 1368–1911 period",
+          "verdict_reason": "Snippet confirms continuity of the Ming system but does not explicitly define the specific type of government, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Ming Dynasty was a Chinese government based on traditional values that re-established law and order after defeating the Mongol Yuan dynasty.",
+          "quote": "He had defeated the Mongol Yuan dynasty (1279-1368) with the intention of re-establishing law and order under a Chinese government based on a value system derived from Chinese traditions.",
+          "verdict_reason": "The snippet describes the government's basis and intentions but does not explicitly name the specific type of government (e.g., absolute monarchy), making it incomplete.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Ming Dynasty featured an authoritarian government where the founder abolished the prime minister's office to centralize power.",
+          "quote": "Zhu's rule was also marked by authoritarianism, including the abolition of the prime minister's office and the use of severe punishments against perceived threats to his power.",
+          "verdict_reason": "The snippet describes specific authoritarian characteristics and structural changes (abolishing the prime minister) but does not provide a comprehensive classification of the overall government type.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_adcb94e5d70e",
+      "claim_index": 2,
+      "claim": "Therefore, it is not possible to definitively answer the question based on the provided documents",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "President Kennedy authorized sending troops and military advisers to South Vietnam.",
+          "quote": "However, he authorized sending troops and military advisers to the U.S.-backed nation of South Vietnam and steadily increased their numbers throughout his presidency.",
+          "verdict_reason": "The snippet confirms Kennedy sent military advisers but does not explicitly state he was the first president to do so, leaving the 'first' claim unverified by this text alone.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that President Dwight Eisenhower sent military advisors to South Vietnam in 1955.",
+          "quote": "the U.S. administration under President Dwight Eisenhower decided to send military advisors to enhance the South Vietnamese military's capabilities.",
+          "verdict_reason": "The snippet identifies Eisenhower as the president who sent advisors in 1955, directly addressing the query, but lacks explicit confirmation that he was the absolute first to do so.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Eisenhower and Kennedy sent military advisors to Vietnam, while LBJ sent regular combat troops.",
+          "quote": "Eisenhower and Kennedy sent money and advisors. Advisors were there to train the",
+          "verdict_reason": "Snippet identifies Eisenhower and Kennedy as sending advisors but fails to specify which was first, providing incomplete evidence for the specific query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "JFK increased the number of US military advisors in Vietnam from 500 to 11,000 within a year.",
+          "quote": "JFK increased US military",
+          "verdict_reason": "The snippet provides relevant evidence about JFK sending military advisors but does not explicitly confirm he was the *first* president to do so, making it incomplete for the specific query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "President Kennedy was the first to send 16,000 American advisers to South Vietnam.",
+          "quote": "President Kennedy sent 16,000 American",
+          "verdict_reason": "Relevant evidence: President Kennedy was the first to send 16,000 American advisers to South Vietnam.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_074",
+      "claim_index": 1,
+      "claim": "Without further information, it is not possible to determine which team has won the most trophies",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Celtic reached a milestone of 100 major trophies in November 2016, comprising one European Cup, 47 league titles, 36 Scottish Cups, and 16 League Cups.",
+          "quote": "It was a milestone trophy for the club, as it was the 100th major trophy won during the club's existence. (one European Cup, 47 Scottish League championships, 36 Scottish Cups, and 16 League Cups).",
+          "verdict_reason": "Snippet provides specific trophy counts for Celtic but lacks any data for Rangers, preventing a direct comparison to answer who has won the most.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Rangers equalled Celtic's record of nine successive championships in the 1996–97 season.",
+          "quote": "Rangers equalled Celtic's record of nine successive championships in 1996–97.",
+          "verdict_reason": "Snippet addresses the same entities and comparison but only mentions a specific historical parity in successive titles, not the total trophy count requested.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Celtic defeated Rangers 1-0 in the 1980 Scottish Cup Final.",
+          "quote": "Rangers did reach the 1980 Scottish Cup Final only to lose out to Old Firm rivals Celtic, 1ΓÇô0 thanks to a deflected George McCluskey shot in extra time.",
+          "verdict_reason": "Snippet provides specific evidence of one trophy won by Celtic over Rangers but does not address the total trophy count required to answer the query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Rangers won their first and only European trophy, the European Cup Winners' Cup, in the 1971-72 season.",
+          "quote": "They won their first and only European trophy this season. The side won the European Cup Winners' Cup in Barcelona, Spain.",
+          "verdict_reason": "Snippet provides specific trophy evidence for Rangers but lacks total counts or Celtic data needed to answer 'most'.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Rangers winning the League Cup and Scottish Cup in the early 1980s but does not provide total trophy counts for either club.",
+          "quote": "Rangers would win that trophy the following year, in addition to the 1980ΓÇô81 Scottish Cup, overcoming Dundee United in both finals.",
+          "verdict_reason": "The snippet discusses specific trophies won by Rangers in the 1980s, addressing the same entities, but lacks the cumulative data needed to answer who has won the most overall.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_146",
+      "claim_index": 1,
+      "claim": "The refrigerant then condenses and releases the heat outside the cooled air is circulated back into the room",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "An air conditioner is described as a complex device simplified into three sections: compressor, condenser, and an implied third section.",
+          "quote": "A complex device which has been simplified into 3 sections: compressor, condenser,",
+          "verdict_reason": "The snippet identifies key components (compressor, condenser) relevant to cooling but is incomplete, cutting off before explaining the mechanism or the third section.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document explains that swamp coolers cool air by evaporating moisture from wet pads, but only mentions noise regarding air conditioner condensers.",
+          "quote": "1 Swamp coolers: A system for cooling the air in a home by passing warmer outdoor air over wet pads. This causes the moisture on the pads to evaporate, cooling the air.",
+          "verdict_reason": "The snippet discusses cooling systems but primarily defines swamp coolers, offering no direct explanation of the air conditioner cooling mechanism beyond a mention of condenser noise.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Ductless air conditioners are a type of air conditioner that uses an outdoor unit.",
+          "quote": "Ductless air conditioners are air conditioners that use an outdoor",
+          "verdict_reason": "Snippet addresses the query topic by defining a specific AC type but cuts off before explaining the cooling mechanism, providing only partial evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists six types of air conditioners and notes that central air conditioners can cool homes efficiently.",
+          "quote": "There are six different types of air conditioners; Central Air Conditioning Air Conditioners, Ductless Air Conditioners, Split System Air Conditioners, Hybrid Air Conditioners, Portable Air Conditioners, and Window Air Conditioners. Most people go for Central Air Conditioning Air Conditioners as they can cool homes efficiently.",
+          "verdict_reason": "The snippet addresses the same entity (air conditioners) and mentions cooling efficiency but fails to explain the mechanism of how they cool air, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses air conditioner installation locations but does not explain the cooling mechanism.",
+          "quote": "Installing Air Conditioner Units How to Install an Air Conditioner The location for installing air conditioner units depend if you want to cool a single room or the whole house.",
+          "verdict_reason": "Snippet addresses the same entity (air conditioners) and goal (cooling) but discusses installation rather than the requested mechanism, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_154",
+      "claim_index": 3,
+      "claim": "Further research is needed to confirm the exact year India hosted the Commonwealth Games for the first time",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "India was designated as the next host city for the Commonwealth Games following the 2006 event in Melbourne.",
+          "quote": "The flags of Australia (current host), England (previous host) and India (next host) were raised.",
+          "verdict_reason": "Snippet confirms India's status as a future host in 2006 but does not state the specific year India first hosted the games.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The 1966 British Empire and Commonwealth Games were held in Kingston, Jamaica.",
+          "quote": "1966 British Empire and Commonwealth Games The 1966 British Empire and Commonwealth Games were held in Kingston, Jamaica, from 4 to 13 August 1966.",
+          "verdict_reason": "Snippet addresses the Commonwealth Games entity but discusses the 1966 Jamaica event, not India's hosting, providing context but not the specific answer.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The 1966 British Empire and Commonwealth Games were held in Kingston, Jamaica.",
+          "quote": "The 1966 British Empire and Commonwealth Games were held in Kingston, Jamaica, from 4 to 13 August 1966.",
+          "verdict_reason": "Snippet discusses Commonwealth Games history but references Jamaica 1966, not India; it is relevant context but does not answer when India hosted.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The 1998 Commonwealth Games were held in Malaysia, not India.",
+          "quote": "Cricket was included in the 1998 Commonwealth Games in Malaysia. This is the only time cricket was played at a Commonwealth Games.",
+          "verdict_reason": "Snippet discusses Commonwealth Games history and locations (Malaysia 1998), providing relevant context but failing to state when India hosted, thus partially addressing the entity.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "India participated in the 2002 Commonwealth Games held in Manchester.",
+          "quote": "India participated in the 2002 Commonwealth Games in Manchester.",
+          "verdict_reason": "Snippet addresses India's Commonwealth Games history but discusses the 2002 event, not the first time India hosted, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_188",
+      "claim_index": 1,
+      "claim": "The record for the number of digits calculated is not clearly established in the provided documents",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Akira Haraguchi held the world record for memorizing 100,000 digits of pi as of October 2006.",
+          "quote": "The world record for the number of digits memorized has exploded since the mid-1990s, and it stood at 100,000 as of October 2006.",
+          "verdict_reason": "Snippet addresses pi digit records but focuses on memorization rather than calculation, and the 2006 data is likely superseded for a 'most digits' query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Peter Trueb computed approximately 22 trillion digits of pi in 2016, ranking second behind the PiHex project's least significant digit calculation.",
+          "quote": "second place is held by Peter Trueb who computed some 22+ trillion digits in 2016 and third place by \"houkouonchi\" who derived the 13.3 trillionth digit",
+          "verdict_reason": "Snippet addresses the query by listing specific record-holders for pi calculations, but the 1994 timestamp and mention of a 2016 record indicate the data is outdated and incomplete for a 'most digits' query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Vega calculated pi to 140 places and held the record for 52 years until 1841.",
+          "quote": "he calculated pi to 140 places, of which the first 126 were correct. ... Vega retained his record 52 years until 1841",
+          "verdict_reason": "Snippet provides historical evidence about a specific record holder (Vega) but implies the record was superseded in 1841, making it incomplete for identifying the current record holder.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "In 1949, a team led by George Reitwiesner and John von Neumann calculated 2,037 digits of pi using the ENIAC computer.",
+          "quote": "a team led by George Reitwiesner and John von Neumann that same year achieved 2,037 digits with a calculation that took 70 hours of computer time on the ENIAC computer.",
+          "verdict_reason": "The snippet provides historical records for pi calculations but is from 1949, making it outdated evidence for the current record holder requested by the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Daniel Ferguson calculated 620 digits of pi in 1946, which was the best approximation achieved without computers.",
+          "quote": "culminating in a 620-digit approximation in 1946 by Daniel Ferguson ΓÇô the best approximation achieved without",
+          "verdict_reason": "Snippet provides historical record holders for pi calculation but stops at 1946, failing to identify the current record holder requested by the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_3afd7f725cb4",
+      "claim_index": 2,
+      "claim": "However, it is also acknowledged that some people may not consider audiobooks as real reading",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The author argues that audiobooks facilitate empathy and offer a pure narrative experience through vocal performance, counting them as real reading.",
+          "quote": "Reading books offers views and glimpses into the minds of others... that it cannot help but facilitate empathy. At least, that is the case in my own personal experience.",
+          "verdict_reason": "The snippet directly addresses the query by arguing audiobooks count as reading, but it is an opinion piece rather than a definitive factual resolution.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Audiobooks count as reading if the goal is to be a more prolific reader.",
+          "quote": "If your goal is to be a more prolific reader, audiobooks definitely count.",
+          "verdict_reason": "The snippet directly addresses the query by affirming audiobooks count in specific contexts, but the sentence is incomplete and conditional, offering only partial resolution.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "A study from The Journal of Neuroscience found that human brains process narratives identically whether reading visually or listening auditorily.",
+          "quote": "A study from The Journal of Neuroscience found our brains take in narratives the same way whether we visually read it or listen to it.",
+          "verdict_reason": "The snippet directly answers the query by citing scientific evidence that the brain engages with audiobooks and physical books similarly, supporting the claim that audiobooks are real reading.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet asserts that audiobooks count as reading, comparing them to composing via dictation.",
+          "quote": "Of course an audiobook counts as reading, just as composing via dictation counts as writing.",
+          "verdict_reason": "The snippet directly addresses the query with a supportive opinion but represents a single user comment on a forum rather than a definitive or comprehensive resolution.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_c3f10dc1632d",
+      "claim_index": 0,
+      "claim": "Shanghai borders Zhejiang Province to the north",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Zhejiang Province borders Shanghai to the south, implying Shanghai is to Zhejiang's north, but the text does not explicitly name the province bordering Shanghai to the north.",
+          "quote": "Zhejiang Province ... borders the East China Sea to the east, Fujian to the south, Jiangxi and Anhui to the west, and Shanghai and Jiangsu to the north.",
+          "verdict_reason": "The snippet identifies Zhejiang's neighbors, stating Shanghai and Jiangsu are to Zhejiang's north. This implies Jiangsu borders Shanghai, but does not explicitly state which province is north of Shanghai, making it partial evidence.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Shanghai municipality is bordered by Jiangsu province to the north and west.",
+          "quote": "Shanghai municipality is bordered by Jiangsu province to the north and west and Zhejiang province to the southwest.",
+          "verdict_reason": "The snippet explicitly states that Jiangsu province borders Shanghai to the north, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states Shanghai borders Jiangsu and Zhejiang to the west but cuts off before specifying the northern border.",
+          "quote": "Bordering on Jiangsu and. Zhejiang provinces on the west, Shanghai is washed by the East China. Sea on the east and Hangzhou Bay on the south. North of the city",
+          "verdict_reason": "The snippet addresses the same entity and border context but is incomplete, cutting off exactly where the northern border information should appear.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Shanghai borders the Yangtze River estuary to the north rather than naming a specific province.",
+          "quote": "It borders the estuary of Yangtze River to the north, Jiangsu and Zhejiang Provinces to the west and Hangzhou Bay to the south.",
+          "verdict_reason": "Snippet addresses the northern border but cites a river estuary instead of a province, providing incomplete evidence for the specific query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_0a580da7f2cd",
+      "claim_index": 0,
+      "claim": "The play \"My Mother Said I Never Should\" does not contain the specific instance where the mother says \"I never should set.\"",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The play was first staged in Manchester in 1987.",
+          "quote": "My Mother Said I Never Should is a play in three acts written by Charlotte Keatley and first staged in Manchester in 1987.",
+          "verdict_reason": "The snippet identifies the play and provides its premiere date (1987), which partially addresses the query about 'when', though it does not explicitly confirm if this is the specific date the user's mother referenced.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The play was scheduled for performances in Japan and Australia in 1991.",
+          "quote": "MY MOTHER SAID I NEVER SHOULD has now been performed across Europe, in America and is scheduled for Japan and Australia in 1991.",
+          "verdict_reason": "The snippet addresses the play's timeline with a 1991 schedule but does not provide the specific date or context for the phrase 'said i never should set' requested in the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The play My Mother Said I Never Should was first premiered at the Contact Theatre in Manchester in 1987.",
+          "quote": "John Yorke looks at Charlotte Keatley's play My Mother Said I Never Should, written aged just 25 and first premiered at the Contact Theatre in Manchester in 1987.",
+          "verdict_reason": "The snippet identifies the play's premiere date (1987) but does not provide the specific setting time or era where the story takes place, which the query likely seeks.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The play My Mother Said I Never Should was running at St James Theatre until May 21st, 2016.",
+          "quote": "St James Theatre Running until May 21st 2016 It's the first time Charlotte Keatley's play has been performed in London in 25 years",
+          "verdict_reason": "The snippet identifies the play and provides a specific past performance date, addressing the entity but failing to answer the likely intended question about the play's origin or general timeline due to being an older, specific review.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_41c44ecfd0f0",
+      "claim_index": 1,
+      "claim": "Peyer's patches are organized lymphoid nodules that play a role in filtering foreign particles and antigens from the intestines, while lacteals are specialized lymphatic capillaries that absorb fats and fat-soluble vitamins",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document claims Peyer's patches are the lymphatic vessels in the small intestine, though they are technically lymphoid nodules rather than vessels.",
+          "quote": "The name of the lymphatic vessels located in the small intestines is (E) Peyer's patches.",
+          "verdict_reason": "The snippet directly addresses the query but provides scientifically inaccurate information by misidentifying lymphoid nodules as vessels, making it conflict-bearing but not fully supportive.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Lacteals are the lymphatic vessels located in the small intestine.",
+          "quote": "Lecteal is a lymphatic vessels that serves the small intestine . So they are found in small intestine.",
+          "verdict_reason": "The snippet directly identifies 'Lecteal' as the lymphatic vessel serving the small intestine, answering the query despite minor spelling errors.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The small lymphatic vessel located in the center of an intestinal villus is called a lacteal.",
+          "quote": "The small lymphatic vessel found in the center of an intestinal villus is called a lacteal.",
+          "verdict_reason": "The snippet directly answers the query by naming the specific lymphatic vessels (lacteals) found in the small intestine villi.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The lymphatic vessels located in the small intestine are called lacteals or central lymphatic vessels.",
+          "quote": "Lacteals are blunt‐ended lymphatic vessels located centrally in the intestinal villi which are responsible for absorbing dietary lipids in the small intestine.",
+          "verdict_reason": "The snippet directly identifies 'lacteals' as the specific name for lymphatic vessels in the small intestine, fully answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_883303a2d535",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.8,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "In the movie Snow Dogs, the dog named Nana is a collie.",
+          "quote": "In the movie, the dogs were named Nana, she was the collie",
+          "verdict_reason": "The snippet directly identifies Nana as a collie in the movie, fully answering the query about her breed.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The character Nana in the movie Snow Dogs is a Border Collie.",
+          "quote": "No one in the entire town thinks to mention her pet Border Collie Nana or her Siberian Husky sledding team",
+          "verdict_reason": "The snippet explicitly identifies Nana as a Border Collie, directly answering the user's query about the dog's breed.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a title header mentioning the character and movie but provides no factual evidence regarding the dog's breed.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The dog named Nana in the movie Snow Dogs is an Australian shepherd.",
+          "quote": "'s his Australian shepherd, Nana.",
+          "verdict_reason": "The snippet explicitly identifies Nana as an Australian shepherd within the context of the movie Snow Dogs, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Nana as the dog actor in Snow Dogs but does not specify her breed.",
+          "quote": "It wasn't hard to get Nana the dog to curl up in bed with Cuba in a later scene.",
+          "verdict_reason": "The snippet confirms Nana is a dog in the film Snow Dogs but fails to state her specific breed, providing only partial evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_b0ee06f2950d",
+      "claim_index": 1,
+      "claim": "However, there is no clear consensus on the exact name",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The name of Season 6 of American Horror Story is Roanoke.",
+          "quote": "American Horror Story: Roanoke | Season 6: Official Trailer",
+          "verdict_reason": "The snippet explicitly identifies 'Roanoke' as the name for 'Season 6' of 'American Horror Story' in the video title.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The sixth season of American Horror Story is titled My Roanoke Nightmare.",
+          "quote": "Friends, this is American Horror Story: My Roanoke Nightmare . And you can join me on my Roanoke nightmare as I attempt to make sense of the very mysterious new season",
+          "verdict_reason": "The snippet explicitly identifies the theme and title for the sixth cycle as 'American Horror Story: My Roanoke Nightmare', directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document is a trailer for American Horror Story Season 6 released in 2016.",
+          "quote": "YouTube AMERICAN HORROR STORY Season 6 Trailer (2016) FX Series",
+          "verdict_reason": "The snippet confirms the existence and year of Season 6 but does not explicitly state the specific subtitle name requested by the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The name of season 6 of American Horror Story is Roanoke.",
+          "quote": "AMERICAN HORROR STORY: ROANOKE | SEASON 6",
+          "verdict_reason": "The snippet explicitly identifies 'Roanoke' as the name for 'Season 6' of 'American Horror Story', directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_e064a7a717ed",
+      "claim_index": 1,
+      "claim": "However, it is not clear if these are the only locations where the movie was filmed",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The Glass Castle was filmed in Montreal, Quebec; McDowell County, West Virginia; and New Mexico.",
+          "quote": "Most of the principal production for The Glass Castle was shot on location in Montreal. The house they move into early in the movie was in Welch, West Virginia. Some exterior shots were captured on the To'hajiillee and Laguna Pueblo tribal lands about 40 miles west of Albuquerque, New Mexico.",
+          "verdict_reason": "The snippet directly answers the query by listing the specific filming locations: Montreal, West Virginia, and New Mexico.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Several scenes for the movie were filmed in and around Welch, West Virginia, including a high school football game scene.",
+          "quote": "Several scenes for",
+          "verdict_reason": "The snippet confirms filming occurred in Welch, WV, but explicitly states uncertainty about whether these scenes made the final cut and does not list other potential filming locations.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The movie was filmed in Welch, West Virginia, and other locations in West Virginia and the USA.",
+          "quote": "Filming locations ; Welch, West Virginia, USA · 21. 1 ; West Virginia, USA · 2. 0 ; USA · 2. 0",
+          "verdict_reason": "The snippet explicitly lists filming locations for the movie, directly answering the query with specific places like Welch, West Virginia.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Pre-production for the film began in Welch, West Virginia, where locals served as extras.",
+          "quote": "Pre-production for the film began in May 2016 in Welch, where locals posed as extras at Vic Nystrom Stadium",
+          "verdict_reason": "The snippet confirms filming activities (pre-production/extras) occurred in Welch but does not list all filming locations or confirm if principal photography happened elsewhere.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_a5e5db28902b",
+      "claim_index": 1,
+      "claim": "However, the exact current number of members is not specified in the documents",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Seventh-day Adventist Church is described as a global denomination with over 23 million members.",
+          "quote": "Seventh-day Adventists are a vibrant, global Christian denomination of over 23 million members who share a passion for Jesus Christ",
+          "verdict_reason": "The snippet provides a specific membership count (over 23 million) for the queried entity, directly addressing the question, though it lacks a precise date or breakdown.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The Seventh-day Adventist Church has a worldwide membership of more than 18 million believers.",
+          "quote": "Basing its faith on the Bible, the church today is a closely-knit, worldwide organization with a membership of more than 18 million believers.",
+          "verdict_reason": "The snippet directly answers the query by stating the current worldwide membership count is over 18 million.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The Seventh-day Adventist Church claimed a membership of 23,000,000 in 2025.",
+          "quote": "In 2025, the church claimed a membership of 23,000,000 when Erton Köhler was elected the new president of the General Conference.",
+          "verdict_reason": "The snippet directly answers the query with the most recent membership figure (23 million in 2025) found in the text.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The Seventh-day Adventist Church has approximately 19.5 million members worldwide and 1.2 million in the United States and Canada.",
+          "quote": "Membership: + Worldwide: 19.5 million + United States and Canada: 1.2 million",
+          "verdict_reason": "The snippet directly answers the query by providing specific worldwide and North American membership statistics for the Seventh-day Adventist Church.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "trust_align_155",
+      "claim_index": 0,
+      "claim": "Heather Graham is a member of the cast in films such as \"Frost/Nixon\" (2008), \"The Town\" (2010), \"The Awakening\" (2011), \"Iron Man 3\" (2013), \"Transcendence\" (2014), \"The Gift\" (2015) \"Professor Marston and the Wonder Women\" (2017)",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses films starring an actress named 'Hall' (likely Rebecca Hall), not Heather Graham. It provides no evidence regarding Heather Graham's cast members.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_4d9a80505e01",
+      "claim_index": 0,
+      "claim": "The number of interest rate cuts made by the Federal Reserve from August to December 2022 cannot be definitively determined based on the provided documents",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.25,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes events in late 2025 and projections for 2026. It provides no evidence regarding interest rate changes between August and December 2022.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the Fed raised interest rates in 2022 due to surging inflation, contradicting the query's premise of a rate cut.",
+          "quote": "For example, in 2022, as inflation surged, the FOMC began raising interest rates to make borrowing more expensive and slow economic activity.",
+          "verdict_reason": "The snippet addresses the Fed's 2022 rate actions but indicates rates were raised, not cut. It is conflict-bearing evidence regarding the query's premise.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a hypothetical future scenario in 2026 with different Fed leadership and rates. It provides no evidence regarding actual Federal Reserve rate cuts between August and December 2022.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about rate cuts from August to December 2022. The snippet exclusively discusses rate cuts in 2024 and provides no data regarding 2022 rates or changes.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_029",
+      "claim_index": 0,
+      "claim": "The Sacramento Kings play at home in Long Beach Arena and Papa Murphy's Park",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The Kings played home games at Long Beach Arena and Los Angeles during their inaugural campaign before moving to The Forum.",
+          "quote": "The Kings played their home games in three locations during that inaugural campaign. Before the brand new arena built by Cooke and known as The Forum would become their permanent home, the team played their first two games at the Long Beach Arena, and 14 more at the Los Angeles",
+          "verdict_reason": "Snippet addresses the query entity but provides only historical, superseded venue information from 2001 rather than the current home location.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses other Sacramento teams (Republic FC, River Cats) but provides no evidence regarding the Sacramento Kings or their home venue.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_072",
+      "claim_index": 0,
+      "claim": "The capital gains tax rate on real estate in Canada is 6% and there is a real property gains tax (RPGT) that may apply if the property is sold less than six years after purchase, but the tax rate for RPGT in Canada is not specified in the provided documents",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet provides tax information exclusively for Malaysia and references LTL (Lithuania), offering no evidence regarding capital gains tax rates on real estate in Canada.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states a 6% tax rate on capital gains from real property sales, though the jurisdiction is not explicitly named in the snippet.",
+          "quote": "Capital gains from the sale of real property are taxed at the rate of 6%, except when such proceeds would be used to construct",
+          "verdict_reason": "Snippet addresses real property capital gains tax but lacks explicit confirmation of Canada and appears to describe a different jurisdiction's rates.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_101",
+      "claim_index": 0,
+      "claim": "The fourth season of The Flash aired on The CW from October 10, 2017, to May 22, 2018, but the specific episode release dates are not provided in the retrieved documents",
+      "cited_docs": [
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about new episodes of 'The Flash' TV series, while the document discusses a specific Lego animated film release, making it off-topic.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Season 4 of The Flash premiered on October 10, 2017, and concluded on May 22, 2018.",
+          "quote": "The fourth season of the American television series \"The Flash\"... premiered on The CW on October 10, 2017, and ran for 23 episodes until May 22, 2018.",
+          "verdict_reason": "Snippet provides specific air dates for Season 4, addressing the entity but failing to answer the query about current or new episodes as it is outdated information.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_166",
+      "claim_index": 0,
+      "claim": "Navy sailors may wear blue camouflage uniforms because the U.S. Navy replaced its blue camouflage uniforms with green and tan ones, but mentions that navy sailors were wearing uniforms with the ship's name and insignia, which could be the old blue camouflage uniforms",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses a specific political incident involving sailors' access to a speech. It mentions uniforms but provides no evidence regarding the rationale for navy blue camouflage patterns.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Navy replaced its blue camouflage with the green and tan NWU Type III because ground combat forces operate inland where familiar camo is needed.",
+          "quote": "At the end of 2016 the navy announced that the new uniform would be the NWU Type III (green and tan) already used by NECC",
+          "verdict_reason": "Snippet addresses the query by explaining the shift from blue to green/tan camo for ground operations, though it lacks specific rationale for the original blue pattern.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_018",
+      "claim_index": 0,
+      "claim": "None of the retrieved documents mention Eva Birthistle as a member of any film's cast",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.6,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The 1962 film Eva stars Jeanne Moreau, Stanley Baker, and Virna Lisi, but the snippet does not mention Eva Birthistle.",
+          "quote": "Eva, released in the United Kingdom as \"Eve\", is a 1962 Italian-French co-production drama film directed by Joseph Losey and starring Jeanne Moreau, Stanley Baker and Virna Lisi.",
+          "verdict_reason": "The snippet discusses a film titled 'Eva' relevant to the query entity name but lists a different cast, providing negative evidence rather than confirming Eva Birthistle's involvement.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet lists the cast of the 1968 film 'Eve' but does not mention Eva Birthistle. It provides no evidence regarding her filmography.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet lists the cast of the 1962 film 'Hitler' but does not mention Eva Birthistle. It provides no evidence regarding the queried entity.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The film Deliver Us from Eva stars LL Cool J and Gabrielle Union but the snippet does not mention Eva Birthistle.",
+          "quote": "Deliver Us from Eva is a 2003 American romantic comedy film starring LL Cool J and Gabrielle Union",
+          "verdict_reason": "Snippet discusses a film with 'Eva' in the title and lists cast, addressing the query's entity type, but fails to confirm Eva Birthistle's involvement.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The 1985 film The Bride stars Jennifer Beals as the character Eva, not the actress Eva Birthistle.",
+          "quote": "The film stars Sting as Baron Charles Frankenstein and Jennifer Beals as Eva, a woman he creates in the same fashion as his infamous monster.",
+          "verdict_reason": "The snippet addresses the query by discussing a film with a character named Eva, but clarifies the actress is Jennifer Beals, providing negative evidence regarding Eva Birthistle's involvement.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 0,
+      "claim": "Eminem holds the world's record for the fastest rap in a number one single, as supported by documents",
+      "cited_docs": [
+        "d1",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Eminem's \"Rap God\" holds the record for most words in a hit single but only reached number 5 in the UK and number 7 in the US, not number one.",
+          "quote": "\"Rap God\" by Eminem (USA) packs 1,560 words into a fast and furious 6 min 4 sec – that's a tongue-twisting average of 4.28 words per second!",
+          "verdict_reason": "The snippet addresses the entity (fastest rap record) but clarifies the song was not a number one single, providing conflict-bearing evidence that partially resolves the query's specific constraints.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Eminem holds the Guinness World Record for the fastest rap in a hit single, averaging 7.5 words per second in his No. 1 single \"Godzilla\".",
+          "quote": "Guiness Book Of World Records Says Eminem is the Fastest Rapper Of All Time- Can Spit 7.5 Words Per Second. ... In Eminem's third verse of his No. 1 single \"Godzilla,\" the King of Rap squeezes 225 words into a single 30-second segment — averaging 7.5 words per second.",
+          "verdict_reason": "The snippet explicitly identifies Eminem as holding the record for fastest rap in a No. 1 single with specific metrics, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "Hunter Emery plays CO Rick Hopper in Orange is the New Black",
+      "cited_docs": [
+        "d1",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_191",
+      "claim_index": 0,
+      "claim": "The War of Spanish Succession ended between 1652 and 1714",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses conflicts in 1652 and 1662 involving Portugal and Catalonia, providing no evidence regarding the War of Spanish Succession which occurred later.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "The War of the Spanish Succession lasted from 1701 to 1714.",
+          "quote": "These were then followed by the War of the Spanish Succession (1701ΓÇô1714).",
+          "verdict_reason": "The snippet explicitly states the start and end years (1701–1714) of the War of the Spanish Succession, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions a war with France continuing for eleven more years after 1668 but cuts off before stating when it ended.",
+          "quote": "War with France continued for eleven more years. Although France suffered from a civil war from 1648 to 1652",
+          "verdict_reason": "The snippet discusses the relevant historical period and conflicts involving Spain and France but is incomplete and does not explicitly state the end date of the War of Spanish Succession.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "The end date is not explicitly stated in the provided documents, but it typically lasts for seven days, ending on April 9, according to",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover start dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover 2027: Begins Wednesday night, April 21 → Ends Thursday, April 29\n Passover 2028: Begins Monday night, April 10 → Ends Tuesday, April 18",
+          "verdict_reason": "The snippet addresses the query topic (Passover dates) but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover dates for the next several years\nPassover 2027: April 21-29\nPassover 2028: April 10-18\nPassover 2029: March 30 – April 7",
+          "verdict_reason": "The snippet addresses the query topic by listing Passover dates but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0083",
+      "claim_index": 0,
+      "claim": "The birth year of the winner of the 2016 Marrakesh ePrix is not available in the provided documents",
+      "cited_docs": [
+        "d1",
+        "d7",
+        "d4",
+        "d8"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d4",
+        "d5",
+        "d7",
+        "d8"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d7",
+        "d8"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d7",
+        "d8"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.75,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Document is about Anu Namshir, a Mongolian model and beauty pageant contestant, not about the 2016 Marrakesh ePrix winner. No connection to the queried motorsport event.",
+          "source_quality": "low"
+        },
+        "d7": {
+          "verdict": "supports",
+          "key_fact": "Sébastien Buemi, winner of the 2016 Marrakesh ePrix, was born in 1988.",
+          "quote": "Sébastien Olivier Buemi (born 31 October 1988) is a Swiss professional racing driver... He won the second ever Formula E championship, the season held across 2015–2016",
+          "verdict_reason": "Snippet confirms Buemi won the 2015–2016 Formula E championship (which included the 2016 Marrakesh ePrix) and states his birth year as 1988.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Jérôme d'Ambrosio, who won the 2016 Mexican ePrix, was born in 1985.",
+          "quote": "Jérôme d'Ambrosio (born 27 December 1985) is a Belgian professional racing driver. D'Ambrosio achieved his first Formula E victory in 2015 at the 2015 Berlin ePrix, and a second at the 2016 Mexican ePrix",
+          "verdict_reason": "Snippet confirms d'Ambrosio's birth year (1985) and mentions a 2016 ePrix victory, but specifies Mexican ePrix, not Marrakesh ePrix. Query asks for 2016 Marrakesh ePrix winner; this addresses a different 2016 race.",
+          "source_quality": "high"
+        },
+        "d8": {
+          "verdict": "supports",
+          "key_fact": "Lucas di Grassi, the 2016 Marrakesh ePrix winner, was born in 1984.",
+          "quote": "Lucas Tucci di Grassi (born 11 August 1984) is a Brazilian professional racing driver who currently competes for Audi Sport ABT in Formula E and is the 2016-17 World Champion.",
+          "verdict_reason": "Snippet confirms Lucas di Grassi was born in 1984 and identifies him as 2016-17 World Champion, directly answering the query about the 2016 Marrakesh ePrix winner's birth year.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_5eeb46719843",
+      "claim_index": 2,
+      "claim": "However, the exact date of Canada's independence is not provided in the documents",
+      "cited_docs": [
+        "d1",
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet contains only website navigation text, headers, and the question title, but provides no actual answer or factual evidence regarding when Canada gained independence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The Statute of Westminster in 1931 solidified Canada's legislative independence, marking a key step in its journey from Great Britain.",
+          "quote": "The Statute of Westminster in 1931 further solidified Canada's legislative independence.",
+          "verdict_reason": "The snippet addresses the query by identifying 1931 as a key date for legislative independence but describes it as part of a broader journey rather than a single definitive moment of total independence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The country called the Dominion of Canada was formed on July 1, 1867.",
+          "quote": "On July 1, 1867, the country called the Dominion of Canada was formed from New Brunswick, Nova Scotia and the Province of Canada.",
+          "verdict_reason": "The snippet explicitly states the date Canada was formed as a country (Dominion of Canada), directly answering the query about gaining independence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Canada was the first country to gain independence through legislation in the 1800s but does not provide a specific date.",
+          "quote": "Canada was the first country to gain independence through legislation and in 1800s; there were different British colonies in North America from Vancouver Island to Newfoundland.",
+          "verdict_reason": "The snippet addresses the query topic directly but lacks the specific date requested, offering only a general century and context about colonies.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_301378915064",
+      "claim_index": 0,
+      "claim": "The 2013 winner of the Emmy for Outstanding Supporting Actress in a Comedy Series was Merritt Wever",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d4",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Merritt Wever won the 2013 Emmy for Outstanding Supporting Actress in a Comedy Series for Nurse Jackie.",
+          "quote": "Outstanding Supporting Actress in a Comedy Series\nMerritt Wever, Nurse Jackie",
+          "verdict_reason": "The snippet explicitly lists Merritt Wever as the winner of the specific award category requested for the 2013 Emmys.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Merritt Wever won the 2013 Emmy for outstanding supporting actress in a comedy series for her role in Nurse Jackie.",
+          "quote": "And the Emmy goes to Merritt Weaver, Nurse Jackie. This is the first Emmy win and second consecutive nomination for Merit. fever.",
+          "verdict_reason": "The snippet explicitly states Merritt Wever won the award for Nurse Jackie in the context of the 2013 ceremony mentioned in the title.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The article lists Julie Bowen, Jane Lynch, Sofia Vergara, Merritt Wever, Mayim Bialik, and Anna Chlumsky as contenders for the 2013 Emmy for Outstanding Supporting Actress in a Comedy.",
+          "quote": "The 2013 Emmys are closing in, and ET is breaking down your list of contenders, starting with the Outstanding Supporting Actress in a Comedy category.",
+          "verdict_reason": "The snippet lists nominees (contenders) for the 2013 award but does not explicitly state who won, making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"situatedqa_temp_301378915064_doc_2\", \"verdict\": \"partially support",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_175",
+      "claim_index": 0,
+      "claim": "The South Pole is colder than the North Pole due to a combination of factors, including the angle of the sun, longer nights the movement of the Polar Vortex, which can bring cold air from the North Pole to other regions",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "On a specific morning, temperatures in Moosomin, Saskatchewan were colder than at the South Pole.",
+          "quote": "Actual temperature around 7:30 this morning was minus-30 in Moosomin, and a balmy -27 at the Amundsen-Scott Research Centre at the South Pole.",
+          "verdict_reason": "Snippet provides specific temperature data for the South Pole but fails to explain the climatic reasons for the general temperature difference queried.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The polar vortex is a mass of cold air that circulates around the Arctic and usually remains over the North Pole.",
+          "quote": "basically a big mass of cold air that circulates around the Arctic. Though it usually remains over the North Pole",
+          "verdict_reason": "Snippet discusses cold air at the North Pole, which is relevant to the query's entities, but fails to explain why the South Pole is colder or compare the two poles.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet makes a comparative temperature claim about Saskatoon versus the poles but provides no evidence or explanation regarding why the South Pole is colder than the North Pole.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The sun at the poles receives only 40% of the heat energy per unit area compared to the equator due to lower solar angles.",
+          "quote": "the sun at the poles on the most intense day of sunlight receives heat energy per unit area that is only 40% of what the equator receives at noon.",
+          "verdict_reason": "Snippet explains polar coldness via solar angle and energy absorption but compares poles to the Equator, not the North Pole specifically.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_883303a2d535",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.8,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "In the movie Snow Dogs, the dog named Nana is a collie.",
+          "quote": "In the movie, the dogs were named Nana, she was the collie",
+          "verdict_reason": "The snippet directly identifies Nana as a collie in the movie, fully answering the query about her breed.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The character Nana in the movie Snow Dogs is a Border Collie.",
+          "quote": "No one in the entire town thinks to mention her pet Border Collie Nana or her Siberian Husky sledding team",
+          "verdict_reason": "The snippet explicitly identifies Nana as a Border Collie, directly answering the user's query about the dog's breed.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a title header mentioning the character and movie but provides no factual evidence regarding the dog's breed.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The dog named Nana in the movie Snow Dogs is an Australian shepherd.",
+          "quote": "'s his Australian shepherd, Nana.",
+          "verdict_reason": "The snippet explicitly identifies Nana as an Australian shepherd within the context of the movie Snow Dogs, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Nana as the dog actor in Snow Dogs but does not specify her breed.",
+          "quote": "It wasn't hard to get Nana the dog to curl up in bed with Cuba in a later scene.",
+          "verdict_reason": "The snippet confirms Nana is a dog in the film Snow Dogs but fails to state her specific breed, providing only partial evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_a6b48b7accc4",
+      "claim_index": 0,
+      "claim": "The location of the first T20 match is not definitively determined in the provided documents, as they mention the first ever T20 match but do not agree on the location",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.4,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses T20 leagues, duration, and rules but provides no evidence regarding the location or date of the first T20 match.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The first ever T20 international match was played between New Zealand and Australia.",
+          "quote": "New Zealand vs Australia - THE FIRST EVER T20 INTERNATIONAL",
+          "verdict_reason": "Snippet identifies the teams in the first T20 international but omits the specific location requested by the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The first official Twenty20 matches were played on 13 June 2003 between English counties in the Twenty20 Cup.",
+          "quote": "The first official Twenty20 matches were played on 13 June 2003 between the English counties in the Twenty20 Cup.",
+          "verdict_reason": "Snippet identifies the first official matches (England, 2003) but does not explicitly name the specific venue or ground where the very first match occurred.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The first-ever T20 match was played between Sussex and Surrey in England in 2003.",
+          "quote": "The first-ever T20 match was played between two county teams, Sussex and Surrey, in England in 2003.",
+          "verdict_reason": "The snippet directly answers the query by stating the location (England), teams, and year of the first T20 match.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document is a YouTube video titled about the first ever T20 match highlights.",
+          "quote": "YouTube The First Ever T20 Match | Highlights | Blasts From The Past | Episode 1 - YouTube",
+          "verdict_reason": "The snippet identifies a video about the first T20 match but does not state the location where it was played, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_f75bc1a9cad8",
+      "claim_index": 0,
+      "claim": "The exact date when we switched from tea to coffee cannot be determined based on the provided documents",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [
+        "d5"
+      ],
+      "committee_alignment_precision": 0.2,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about a historical societal switch from tea to coffee. The snippet discusses a modern individual switching from coffee to tea, which is the opposite direction and scope.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Coffee completely eclipsed hot tea in the United States in 1865 due to Civil War rations.",
+          "quote": "Coffee would completely eclipse hot tea in 1865, when Union soldiers trooped home from the Civil War.",
+          "verdict_reason": "The snippet provides a specific date (1865) for when coffee eclipsed tea, directly addressing the query, though it frames this as the completion of a shift that began earlier.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses reasons to switch from coffee to tea but does not provide a historical date for when society switched from tea to coffee.",
+          "quote": "Why you should consider switching from coffee to tea Both drinks have their benefits, though the more subtle tea may offer more.",
+          "verdict_reason": "The snippet addresses the topic of switching between coffee and tea but offers health advice rather than the historical timeline requested by the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses the comparison between coffee and tea regarding their impact on civilization.",
+          "quote": "YouTube Coffee vs. Tea: Which Fueled Civilization More?",
+          "verdict_reason": "The snippet addresses the same entities (coffee and tea) and their historical relationship but lacks the specific date or context of a switch requested by the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Americans switched from tea to coffee as a patriotic alternative following the Boston Tea Party in December 1773.",
+          "quote": "December 1773: colonists threw 342 chests of British East India Company tea into Boston Harbor as protest against British taxation. The act made drinking British tea politically suspect for revolutionary-era Americans. Coffee, imported through different supply chains (often Caribbean and Latin American), became the patriotic alternative.",
+          "verdict_reason": "The snippet identifies December 1773 and the Boston Tea Party as the turning point for the switch, directly addressing the query's topic but providing a historical event rather than a specific administrative switch date.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_071",
+      "claim_index": 0,
+      "claim": "The provided documents do not contain the dates of birth of persons that played for Aldershot Town F.C",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.8,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Supporters established a new club named Aldershot Town following the original club's bankruptcy.",
+          "quote": "In response to the bankruptcy a group of supporters set up a new club, Aldershot Town, which started in the Isthmian League Division Three",
+          "verdict_reason": "The snippet confirms the entity Aldershot Town F.C. and its origin but provides no dates of birth for any players, making it relevant but incomplete.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Teddy Sheringham played for Aldershot on loan but does not provide his date of birth.",
+          "quote": "In 1984ΓÇô85, Aldershot took a young striker at the time on loan from Millwall ΓÇô Teddy Sheringham, the future England international player.",
+          "verdict_reason": "The snippet identifies a player (Teddy Sheringham) relevant to the query entity but fails to provide the requested date of birth, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Charles played for Aldershot Town F.C. during their first season back in the Football League and signed a contract in June 2010.",
+          "quote": "Charles was a regular starter for Aldershot Town, in their first season back in the Football League and he was rewarded with a double award",
+          "verdict_reason": "The snippet confirms a specific player (Charles) for the queried entity but lacks the requested date of birth, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet lists Anthony Charles, Anthony Straker, Danny Hylton, and Gary Abbott as players for Aldershot Town F.C. but does not provide their dates of birth.",
+          "quote": "Anthony Charles, Anthony Straker and Danny Hylton reached the landmark. Gary Abbott is, apart from Butler, the only Shots player to have ever scored over 100 goals for the club.",
+          "verdict_reason": "The snippet identifies specific players for the queried entity but lacks the requested dates of birth, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Gordon Atherton's career with Bury, Swindon Town, and Drumcondra, but does not mention Aldershot Town F.C. or provide evidence linking him to that specific club.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_086",
+      "claim_index": 1,
+      "claim": "However, the documents do not provide a definitive answer for the specific query",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.8,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Gas prices vary between stations because those in convenient locations or directly off highways tend to be more expensive than those slightly further away.",
+          "quote": "Shop around, because gas stations in traditionally convenient locations tend to have higher prices... Stations located directly off the highway will have more expensive prices",
+          "verdict_reason": "The snippet addresses the query by explaining location-based price differences but is incomplete as the text cuts off before fully detailing other factors like state taxes.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Gas stations can charge above-market prices in specific locations like near airport car rental returns or busy downtown business districts.",
+          "quote": "where you can charge above-market prices for fuel, such as near airport car rental returns or in the busy business district of a downtown area.",
+          "verdict_reason": "The snippet provides a specific reason for price differences (location-based pricing) but is an incomplete list of factors and appears as a fragment within a list of resources.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses business classification differences between store types, not the economic factors causing price variations between stations.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The price difference between cheaper and more expensive gas stations has increased over time, now often reaching 20 to 30 cents.",
+          "quote": "the difference in price for gasoline between the cheaper and more expensive stations has gotten larger lately. Its not uncommon for me to see a 20┬ó to 30┬ó difference between gas stations.",
+          "verdict_reason": "Snippet addresses the query by confirming price differences exist and have widened, but offers no explanation for why they occur.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Gas prices vary because areas with more stations have greater competition, and stations with added services like car washes can afford to sell gasoline at lower prices.",
+          "quote": "neighbourhoods have more gas stations than others which results in more competition among stations. This generally helps keep prices lower... Adding a car wash or convenience store to a gas station generates more income for the owner who can then afford to sell gasoline at a lower price.",
+          "verdict_reason": "The snippet explains specific factors causing price differences (competition density, ancillary services) but does not provide a comprehensive list of all reasons why prices differ between two specific stations.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

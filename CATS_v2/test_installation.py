@@ -87,6 +87,11 @@ if Path(".env").exists():
             print("  - OPENROUTER_API_KEY: Configured")
         else:
             print("  ⚠ OPENROUTER_API_KEY: Not configured")
+
+        if "DEEPSEEK_API_KEY" in content and "YOUR_KEY_HERE" not in content:
+            print("  - DEEPSEEK_API_KEY: Configured")
+        else:
+            print("  ⚠ DEEPSEEK_API_KEY: Not configured")
 else:
     print("  ✗ .env: MISSING")
     print("    Run: cp .env.example .env and configure API keys")
@@ -99,20 +104,22 @@ try:
     print("  - punkt tokenizer: OK")
 except Exception as e:
     print(f"  ✗ punkt tokenizer: FAILED ({e})")
-    print("    Run: python -c \"import nltk; nltk.download('punkt')\"")
+    print("    Run: python -c \"import nltk; nltk.download('punkt_tab')\"")
 
-# Test 7: Example data
-print("\n✓ Testing example data...")
-if Path("data/example_input.jsonl").exists():
-    print("  - example_input.jsonl: OK")
-    try:
-        from rag_eval import load_dataset
-        dataset = load_dataset("data/example_input.jsonl")
-        print(f"  - Loaded {len(dataset)} example samples")
-    except Exception as e:
-        print(f"  ✗ Failed to load example data: {e}")
+# Test 7: Canonical data assets
+print("\n✓ Testing canonical data assets...")
+benchmark_path = Path("data/benchmark/benchmark_final_v2_holdout_clean_736.jsonl")
+val_manifest_path = Path("data/splits/92p5_7p5/split_manifest.json")
+
+if benchmark_path.exists():
+    print("  - benchmark holdout: OK")
 else:
-    print("  ✗ example_input.jsonl: MISSING")
+    print("  ✗ benchmark holdout: MISSING")
+
+if val_manifest_path.exists():
+    print("  - canonical split manifest: OK")
+else:
+    print("  ✗ canonical split manifest: MISSING")
 
 # Summary
 print("\n" + "=" * 60)
@@ -121,6 +128,6 @@ print("=" * 60)
 print()
 print("Next steps:")
 print("1. Configure API keys in .env file")
-print("2. Run: python run_evaluation.py --input data/example_input.jsonl --committee default --max-samples 3")
+print("2. Run: python run_evaluation.py --input data/benchmark/benchmark_final_v2_holdout_clean_736.jsonl --committee default --max-samples 3")
 print("3. Check outputs/ for results")
 print()

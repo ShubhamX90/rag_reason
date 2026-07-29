@@ -1,0 +1,26 @@
+account=pabitra
+repo_root=/home/pabitra/rag-reason/CATS_v2
+run_label=benchmark_sft_missing8_qd_collect_20260708_r1
+manifest=tmp/sharanga_audits/remaining8_mistral_merge_manifest_20260709.txt
+
+qwen_server_job_cancelled=256749
+deepseek_server_job_running=255239
+
+bad_attempt:
+  mistral_server_job=257225
+  bad_gate_job=257226
+  bad_collect_merge_jobs=257227-257242
+  issue=resolver_returned_http://None:8004/v1_before_node_assignment
+
+clean_attempt:
+  mistral_server_job=257225
+  mistral_base_url=http://gpunode7:8004/v1
+  health_gate_job=257243
+  001 mistral_collect=257244 merge=257245 input=mistral7b/oracle_notes/minimal/sft/input.jsonl
+  002 mistral_collect=257246 merge=257247 input=qwen32b/e2e/strict/sft/input.jsonl
+  003 mistral_collect=257248 merge=257249 input=qwen32b/oracle_both/minimal/sft/input.jsonl
+  004 mistral_collect=257250 merge=257251 input=qwen32b/oracle_both/runtime/sft/input.jsonl
+  005 mistral_collect=257252 merge=257253 input=qwen32b/oracle_conflict/runtime/sft/input.jsonl
+  006 mistral_collect=257254 merge=257255 input=qwen7b/oracle_notes/minimal/sft/input.jsonl
+  007 mistral_collect=257256 merge=257257 input=qwen7b/oracle_notes/runtime/sft/input.jsonl
+  008 mistral_collect=257258 merge=257259 input=qwen7b/oracle_notes/strict/sft/input.jsonl

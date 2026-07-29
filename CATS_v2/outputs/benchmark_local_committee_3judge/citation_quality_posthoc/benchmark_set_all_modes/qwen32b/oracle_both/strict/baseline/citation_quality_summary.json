@@ -1,0 +1,1833 @@
+{
+  "variant": "benchmark_set_all_modes/qwen32b/oracle_both/strict/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_both/strict/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_both/strict/baseline/final/detailed_results.json",
+    "source_final_sha256": "431c14853108831086de103b0533d708c610dbd1d30df1f5ed8c875a8d6f0e3e",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen32b/oracle_both/strict/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen32b/oracle_both/strict/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1836,
+    "claims_with_citations": 1628,
+    "claims_with_committee_support_set": 1730,
+    "claims_with_any_approved_citation": 1506,
+    "claims_with_any_gold_positive_citation": 1627,
+    "committee_alignment_precision_macro": 0.8357493857493857,
+    "committee_alignment_precision_micro": 0.7849079025549613,
+    "gold_positive_citation_precision_macro": 0.9988022113022113,
+    "gold_positive_citation_precision_micro": 0.9985145573380867,
+    "soft_extra_citation_rate_micro": 0.21360665478312538,
+    "hard_negative_citation_rate_micro": 0.0014854426619132501,
+    "committee_support_citation_recall_macro": 0.8705202312138728,
+    "committee_support_citation_recall_micro": 0.8705202312138728,
+    "claims_with_any_soft_extra_rate": 0.2585995085995086,
+    "claims_with_any_hard_negative_rate": 0.002457002457002457,
+    "strict_committee_alignment_claim_rate": 0.6557734204793029,
+    "strict_gold_clean_claim_rate": 0.8186274509803921,
+    "strict_grounded_committee_clean_rate_all_claims": 0.6557734204793029,
+    "strict_grounded_gold_clean_rate_all_claims": 0.8186274509803921,
+    "total_cited_docs": 3366,
+    "total_approved_cited_docs": 2642,
+    "total_gold_positive_cited_docs": 3361,
+    "total_soft_extra_cited_docs": 719,
+    "total_hard_negative_cited_docs": 5
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "freshqa_c4976f8629cb",
+      "claim_index": 2,
+      "claim": "However, the specific weight data to determine the heaviest reptile is not provided in the retrieved evidence",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document is a YouTube video titled about the largest reptile in the world.",
+          "quote": "YouTube THE LARGEST REPTILE IN THE WORLD - YouTube",
+          "verdict_reason": "The snippet title addresses the query entity directly but lacks the specific name or weight data required to answer the question, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The saltwater crocodile is identified as the world's largest reptile.",
+          "quote": "The world's largest reptileis the saltwater crocodile (Crocodylus porosus)",
+          "verdict_reason": "Snippet identifies the largest reptile but uses 'largest' instead of 'heaviest' and lacks specific weight data to fully resolve the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that crocodiles are currently the largest reptiles on Earth, while identifying the green anaconda as the heaviest snake.",
+          "quote": "Currently, crocodiles are the largest reptiles on Earth; however, a variety of other reptiles grow to impressive sizes.",
+          "verdict_reason": "The snippet addresses the query by stating crocodiles are the largest reptiles but lacks specific weight data to confirm them as the heaviest, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The largest living reptiles are reticulated pythons and saltwater crocodiles, which can exceed 7 meters in length.",
+          "quote": "The largest living reptiles are the reticulated pythons (Python reticulatus) and saltwater crocodiles (Crocodylus porosus), which can grow to more than 7 meters (23 feet) as adults.",
+          "verdict_reason": "Snippet identifies candidates for largest reptile by length but does not specify which is heaviest, providing incomplete evidence for the weight-based query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document claims the Komodo dragon is the largest reptile in the world.",
+          "quote": "The Komodo is the largest reptile in the world, known as the Komodo dragon.",
+          "verdict_reason": "Snippet addresses the query entity but conflates 'largest' (length) with 'heaviest' (mass), providing incomplete evidence for the specific weight-based question.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_0a580da7f2cd",
+      "claim_index": 2,
+      "claim": "However, the specific context or date related to the phrase \"my mother said i never should set\" cannot be determined from the retrieved evidence",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The play My Mother Said I Never Should was first premiered at the Contact Theatre in Manchester in 1987.",
+          "quote": "John Yorke looks at Charlotte Keatley's play My Mother Said I Never Should, written aged just 25 and first premiered at the Contact Theatre in Manchester in 1987.",
+          "verdict_reason": "The snippet identifies the play's premiere date (1987) but does not provide the specific setting time or era where the story takes place, which the query likely seeks.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies a YouTube video featuring the audiobook preview of \"My Mother Said I Never Should\" by Charlotte Keatley.",
+          "quote": "YouTube My Mother Said I Never Should: A BBC Radio… by Charlotte Keatley · Audiobook preview - YouTube",
+          "verdict_reason": "The snippet confirms the existence of the work referenced in the query but provides no information regarding the specific line or context requested.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The play was first staged in Manchester in 1987.",
+          "quote": "My Mother Said I Never Should is a play in three acts written by Charlotte Keatley and first staged in Manchester in 1987.",
+          "verdict_reason": "The snippet identifies the play and provides its premiere date (1987), which partially addresses the query about 'when', though it does not explicitly confirm if this is the specific date the user's mother referenced.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The play was scheduled for performances in Japan and Australia in 1991.",
+          "quote": "MY MOTHER SAID I NEVER SHOULD has now been performed across Europe, in America and is scheduled for Japan and Australia in 1991.",
+          "verdict_reason": "The snippet addresses the play's timeline with a 1991 schedule but does not provide the specific date or context for the phrase 'said i never should set' requested in the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The play My Mother Said I Never Should was running at St James Theatre until May 21st, 2016.",
+          "quote": "St James Theatre Running until May 21st 2016 It's the first time Charlotte Keatley's play has been performed in London in 25 years",
+          "verdict_reason": "The snippet identifies the play and provides a specific past performance date, addressing the entity but failing to answer the likely intended question about the play's origin or general timeline due to being an older, specific review.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_002",
+      "claim_index": 2,
+      "claim": "Therefore, based on the available evidence, we cannot determine the specific publisher of \"A Song of Ice and Fire\"",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "HBO Productions purchased the television rights for the A Song of Ice and Fire series.",
+          "quote": "HBO Productions purchased the television rights for the \"A Song of Ice and Fire\" series in 2007",
+          "verdict_reason": "Snippet discusses the same entity but addresses TV rights rather than the book publisher, providing incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Fantasy Flight Games published a book of A Song of Ice and Fire illustrations.",
+          "quote": "Discovering one day in a library that Fantasy Flight Games published a book of A Song of Ice and Fire illustrations",
+          "verdict_reason": "Snippet identifies a publisher for an illustrated book related to the series, but does not confirm the publisher of the original songs or main book series.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies George R. R. Martin as the author of A Song of Ice and Fire but does not name the publisher.",
+          "quote": "George R. R. Martin's \"A Song of Ice and Fire\" (the basis of the American fantasy drama television series \"Game of Thrones\").",
+          "verdict_reason": "The snippet confirms the author and existence of the series but fails to provide the specific publisher requested, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The novel \"Fire and Ice\" was first published in hardcover by HarperCollins in the US on 27 March 2003.",
+          "quote": "\"Fire and Ice\" was first published in hardcover by HarperCollins in the US on 27 March 2003.",
+          "verdict_reason": "Snippet addresses a book titled \"Fire and Ice\" published by HarperCollins, which is relevant but likely refers to a different work than the queried \"A Song of Ice and Fire\" series, providing incomplete/conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The text states that A Song of Ice and Fire is a single story published in several volumes but does not name the publisher.",
+          "quote": "Martin does not consider \"A Song of Ice and Fire\" a \"series\" but a single story published in several volumes.",
+          "verdict_reason": "The snippet discusses the publication format of the specific work queried but fails to identify the publisher, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_025",
+      "claim_index": 3,
+      "claim": "However, the specifics of where the debt goes are not fully addressed in the retrieved evidence",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions workers taking over manufacturing to save companies from bankruptcy but does not define bankruptcy or explain where debt goes.",
+          "quote": "mentioned several examples of manufacturing being taken over by workers and restored to \" Health\", at least saved from bankrupcy.",
+          "verdict_reason": "The snippet references bankruptcy in the context of saving companies, addressing the entity, but fails to define the term or explain debt disposition.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet indicates that old tax debts can be discharged in Chapter 7 bankruptcy, though it cuts off before explaining if liens are released.",
+          "quote": "I live in wisconsin and iΓÇÖm going through chapter 7 bankrupcy and my tax debts are old enough to be discarged. Will my liens get released? If your tax debt",
+          "verdict_reason": "The snippet addresses bankruptcy and debt discharge directly but is incomplete and cuts off before fully answering where the debt goes or if liens are released.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document introduces personal bankruptcy as a process involving debt concerns but does not define it or explain where the debt goes.",
+          "quote": "Those who find the need to file often worry about how they will be able to pay debts and live their daily life.",
+          "verdict_reason": "The snippet addresses the same entity (bankruptcy) and mentions debt worries but fails to define bankruptcy or explain debt disposition, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions that increased costs can lead to bankruptcy, debt, and foreclosures, but does not define bankruptcy or explain where debt goes.",
+          "quote": "Because there's a potential for any increase in costs to then lead to bankrupcy, debt, foreclosures, that kind of stuff?",
+          "verdict_reason": "The snippet addresses the concepts of bankruptcy and debt in a specific context but fails to define bankruptcy or explain the fate of debt, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The English healthcare system prevents medical bankruptcy by ensuring citizens do not receive medical bills.",
+          "quote": "The citizens wonΓÇÖt see a single medical bill, the hospitals and their employees are owned by the government. ... No medical bills, no medical bankrupcy.",
+          "verdict_reason": "Snippet addresses 'medical bankruptcy' and implies debt elimination via no bills, but does not define general bankruptcy or explain where debt goes broadly.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_120",
+      "claim_index": 3,
+      "claim": "These differing perspectives highlight the complexity of the issue and the need for further research to clarify the mechanisms involved",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Stimulant medication helps individuals with ADHD improve functioning in school, work, family, and social life.",
+          "quote": "Stimulant medication helps youngsters and adults with ADHD do better in school, work, family and social life.",
+          "verdict_reason": "The snippet confirms stimulants help ADHD patients but does not explain the mechanism or address the 'reverse' effect query, making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Traditional ADHD treatments like Adderall and Ritalin are psycho-stimulant medications that have side effects and may require trying different options to find an effective one.",
+          "quote": "Traditional treatments, such as Adderall and Ritalin do have side effects. (Adderall is a psycho-stimulant prescription medication that contains amphetamine. Ritalin (methylphenidate) is also a pyscho-stimulant.)",
+          "verdict_reason": "The snippet identifies stimulants used for ADHD but does not explain the mechanism of reverse action or paradoxical effects, offering only partial context about the entities in the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Stimulant medication removes the need for children with ADHD to self-stimulate because it provides the stimulation they lack from non-stimulating activities.",
+          "quote": "If you give them a stimulant medication, they no longer have the need to self-stimulate.",
+          "verdict_reason": "The snippet addresses why stimulants work for ADHD but offers a behavioral explanation rather than the specific 'reverse' mechanism queried, making it relevant but incomplete.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Prescription stimulants for ADHD are chemically similar to recreational drugs and have similar physical and psychological effects on people with ADHD as on others.",
+          "quote": "Central nervous system stimulant drugs that are commonly prescribed for ADHD are chemically similar to recreational stimulants like amphetamines, cocaine and street ΓÇ£methΓÇ¥, and as a result have similar physical and psychological effects.",
+          "verdict_reason": "The snippet addresses the query by stating effects are similar, not reversed, providing conflict-bearing evidence regarding the user's premise, though it lacks a specific mechanistic explanation.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document characterizes ADHD as an adrenaline deficiency disorder that causes difficulty with monotonous tasks.",
+          "quote": "ADHD is recognized as an adrenaline deficiency disorder, which explains why afflicted individuals have trouble performing monotonous or tedious work.",
+          "verdict_reason": "The snippet addresses the mechanism of ADHD (adrenaline deficiency) relevant to the query but does not explain the specific 'reverse' effect of stimulants.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_148",
+      "claim_index": 4,
+      "claim": "However, the exact biological mechanism and determinants of developing allergies are not fully explained by the retrieved documents",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Portable nebulizers are used to treat asthma and allergy conditions.",
+          "quote": "both of these portable nebulizers work to treat asthma and allergy",
+          "verdict_reason": "Snippet confirms nebulizers treat allergies but fails to explain how allergies work or what causes them, addressing only a peripheral treatment aspect of the query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Itching is always present when a person has eye allergies, along with tearing and bloodshot eyes.",
+          "quote": "Itching is always present when a person has eye allergies. Tearing and bloodshot eyes are also common.",
+          "verdict_reason": "Snippet addresses allergy symptoms for a specific type (eye) but fails to explain the mechanism or determinants of developing allergies as requested.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document introduces the terms allergen free and allergy safe but does not define them or explain how allergies work.",
+          "quote": "Allergen Free ΓÇô What Does That Mean? The term ΓÇ£allergen freeΓÇ¥ is often spoken in the food allergy community.",
+          "verdict_reason": "Snippet addresses the topic of allergies and related terms but fails to explain mechanisms or determinants, offering only introductory context.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Allergy testing is required to determine what specific substances an individual is allergic to.",
+          "quote": "The only way to decide what an individual is allergic to is through taking an allergy test.",
+          "verdict_reason": "Snippet addresses allergy identification via testing but fails to explain the biological mechanism or genetic determinants requested in the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "An elimination diet helps determine which foods cause allergies by eliminating and reintroducing them to see what is well-tolerated.",
+          "quote": "An elimination diet is a short-term eating plan that eliminates certain foods that may be causing allergies and other digestive reactions ΓÇö then reintroduces the foods one at a time in order to determine which foods are, and are not, well-tolerated.",
+          "verdict_reason": "The snippet addresses how to identify specific food allergies but does not explain the biological mechanism of allergies or what determines susceptibility, making it incomplete for the full query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_194",
+      "claim_index": 4,
+      "claim": "However, the exact structural differences and comprehensive reasons for public disdain are not fully detailed in the retrieved evidence",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Sallie Mae loan approval depends on credit history and payment history but not on the credit score.",
+          "quote": "Approval depends on a variety of factors, including credit history, payment history, and existing debt, but it does not depend on your credit score.",
+          "verdict_reason": "Snippet addresses Sallie Mae loan criteria, offering a differentiating factor, but fails to explain why they are abhorred or provide a full comparison.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Sallie Mae undermined the federal program by paying colleges and loan officers to steer business to them and placing employees in university call centers.",
+          "quote": "Sallie Mae undermined the federal program with sheer marketing muscle. The company paid colleges to drop out of the federal program and make Sallie Mae the campus student loan provider.",
+          "verdict_reason": "Snippet addresses why Sallie Mae is criticized (unethical marketing) but lacks explanation of how their loans differ structurally from typical student loans.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Sallie Mae split from Navient in 2014 as a PR move to distance itself from a tarnished reputation.",
+          "quote": "In 2014, Sallie Mae split into two companies, creating a new company called \"Navient.\" This was a calculated PR move - an attempt by Sallie Mae to distance themselves from their tarnished name.",
+          "verdict_reason": "Snippet addresses why Sallie Mae is disliked (tarnished name) and its structure, but lacks specific details on how loans differ from typical ones.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Navient has separated from Sallie Mae and now services many loans originally taken out from Sallie Mae.",
+          "quote": "Navient has now departed from Sallie Mae and is a publicly traded company. It is expected to service more than 300 billion in student loans and many borrowers who took out Sallie Mae loans may now be under management by Navient.",
+          "verdict_reason": "The snippet addresses the entity and loan structure but fails to explain what makes the loans different or why they are abhorred, providing only partial context.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists financial metrics and operational data for Sallie Mae but does not explain what makes its loans different or why they are abhorred.",
+          "quote": "Operating expenses of SLM Corporation (Sallie Mae) from 2013 to 2017 (in million U.S. dollars) Value of net student loans at SLM Corporation (Sallie Mae) from 2010 to 2018",
+          "verdict_reason": "The snippet concerns the same entity (Sallie Mae) and provides relevant financial context, but it lacks the specific qualitative differences or reasons for public disdain requested in the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f4811561af0c",
+      "claim_index": 1,
+      "claim": "However, the documents do not explicitly confirm that the Dutch were the first to discover Australia",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Dutch explorer Willem Janszoon reached the western coast of Cape York Peninsula in 1606, marking an early European encounter with Australia.",
+          "quote": "In 1606, Willem Janszoon, who commanded the Duyfken, sailed south from the Dutch East Indies and reached the western coast of Cape York Peninsula.",
+          "verdict_reason": "The snippet confirms Dutch exploration of Australia starting in 1606 but does not explicitly resolve whether they were the absolute first discoverers, leaving room for prior claims.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "A Dutch merchant vessel named Koning Willem de Tweede was discovered off the coast of South Australia.",
+          "quote": "Marine archaeologists have discovered the long-lost Dutch merchant vessel Koning Willem de Tweede, which sank nearly 170 years ago off the coast of South Australia.",
+          "verdict_reason": "The snippet confirms Dutch maritime presence and a specific shipwreck discovery in Australia, providing partial evidence related to Dutch interaction with Australia, though it does not address the initial discovery of the continent.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The Dutch explored Australia and made the first recorded European landing there.",
+          "quote": "The Dutch had explored Australia from their bases in what's now Indonesia, including the first recorded European landing on Australia by Willem",
+          "verdict_reason": "Snippet confirms Dutch exploration and first landing but does not explicitly state they 'discovered' the continent, leaving the specific claim partially unresolved.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses the Dutch discovery, exploration, and mapping of Australia.",
+          "quote": "The Dutch Discovery, Exploration, & Mapping of Australia",
+          "verdict_reason": "The snippet explicitly addresses the Dutch discovery of Australia, providing direct but incomplete evidence regarding the query without confirming if they were the sole or first discoverers.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 1,
+      "claim": "This is confirmed by multiple sources, including",
+      "cited_docs": [
+        "d7",
+        "d10",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d7"
+      ],
+      "soft_extra_cited_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d7"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d7": {
+          "verdict": "supports",
+          "key_fact": "Boston College is a Jesuit university located in Chestnut Hill, Massachusetts.",
+          "quote": "\"Jesuit Ivy\" is the title of a commencement speech delivered at Boston College, a Jesuit university in Chestnut Hill, Massachusetts, United States.",
+          "verdict_reason": "The snippet directly confirms Boston College is a private Jesuit university in Chestnut Hill, Massachusetts, definitively answering the query's location question.",
+          "source_quality": "low"
+        },
+        "d10": {
+          "verdict": "supports",
+          "key_fact": "Boston College is located in Chestnut Hill, Massachusetts.",
+          "quote": "Chestnut Hill is best known as the home of Boston College, part of the Boston Marathon route, as well as the Collegiate Gothic canvas of landscape architect Frederick Law Olmsted.",
+          "verdict_reason": "The snippet directly confirms Boston College is located in Chestnut Hill, Massachusetts, answering the query's binary choice. Stanford University is not mentioned, implying it is not located there.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Boston College is a private research university located in Chestnut Hill, Massachusetts.",
+          "quote": "Boston College (also referred to as BC) is a private Jesuit Catholic research university located in the affluent village of Chestnut Hill, Massachusetts, United States",
+          "verdict_reason": "The snippet directly answers the query by confirming Boston College is a private research university in Chestnut Hill, Massachusetts, decisively resolving the either/or question.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Boston College is located in Chestnut Hill, Massachusetts and is a private research university.",
+          "quote": "Boston College has played their home games at Alumni Stadium in Chestnut Hill, Massachusetts since 1957.",
+          "verdict_reason": "The snippet directly confirms Boston College is located in Chestnut Hill, Massachusetts, answering the query's location question. Boston College is a known private research university, making it the correct answer to the either/or question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_6f8df54650a4",
+      "claim_index": 2,
+      "claim": "However, the exact count may vary due to changes in visa policies",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists numerous countries with specific passport validity requirements for US citizens but does not provide the total count of visa-free destinations.",
+          "quote": "In the absence of specific bilateral agreements, countries requiring passports to be valid for at least 6 more months on arrival include Afghanistan, Algeria, Anguilla, Bahrain, Bhutan, Botswana, British Virgin Islands, Brunei, Cambodia, Cameroon, Cape Verde, Cayman Islands, Central African Republic, Chad, Comoros, Costa Rica, Côte d'Ivoire, Curaçao, Ecuador, Egypt, El Salvador, Equatorial Guinea, Fiji, Gabon, Guinea Bissau, Guyana, Haiti, India, Indonesia, Iran, Iraq, Israel, Jordan, Kenya, Kiribati, Kuwait, Laos, Madagascar, Malaysia, Marshall Islands, Mongolia, Myanmar, Namibia, Nepal, Nigeria, Oman, Palau, Papua New Guinea, Peru, Philippines, Qatar, Rwanda, Samoa, Saudi Arabia, Singapore, Solomon Islands, Somalia, Sri Lanka, Sudan, Suriname, Tanzania, Thailand, Timor-Leste, Tokelau, Tonga, Turkey, Tuvalu, Uganda, United Arab Emirates, Vanuatu, Venezuela, and Vietnam.",
+          "verdict_reason": "The snippet addresses visa/passport requirements for US citizens (same entity) but details validity durations rather than the specific count of visa-free countries requested.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The Visa Waiver Program involves 42 countries that permit U.S. citizens to travel without a visa for business or tourism.",
+          "quote": "In return, those 42 countries must permit U.S. citizens and nationals to travel to their countries for a similar length of time without a visa for business or tourism purposes.",
+          "verdict_reason": "The snippet provides a specific count (42) of countries allowing visa-free travel for US citizens under VWP, directly addressing the query but potentially incomplete regarding non-VWP nations.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "American citizens can enter approximately 160 places without a visa or with visa-on-arrival options.",
+          "quote": "American citizens can enter some 160 places without having a visa in their US passport.",
+          "verdict_reason": "The snippet provides an approximate count (160) and clarifies it includes visa-on-arrival, which partially answers the query but lacks a precise 'visa-free' only count.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "U.S. passport holders can access around 179 destinations visa-free, via visa-on-arrival, or through electronic travel authorization.",
+          "quote": "According to global mobility data used by airlines and border authorities worldwide, U.S. passport holders can access around 179 destinations either visa-free, through visa-on-arrival systems, or via electronic travel authorization.",
+          "verdict_reason": "Snippet provides a relevant count (179) but aggregates visa-free, visa-on-arrival, and eTA, failing to isolate the specific 'visa-free' count requested.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_180f238d8296",
+      "claim_index": 4,
+      "claim": "While d2 and d3 provide additional context, they do not add new winners to the list . d4 and d5 offer complementary information but do not contradict the main list",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Australia, West Indies, India, Pakistan, and Sri Lanka are the five teams that have won the Cricket World Cup.",
+          "quote": "Australia has been the most successful of the five teams to have won the tournament, taking four titles. The West Indies and India have won twice, while Pakistan and Sri Lanka have each won once.",
+          "verdict_reason": "Snippet lists specific winning countries but is dated (stops at 2011), missing subsequent winners like England, thus partially supporting the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists West Indies, India, Australia, Pakistan, Sri Lanka, and England as winners of the Cricket World Cup between 1975 and 2019.",
+          "quote": "Cricket World Cup Winner: At a Glance\n|  |  |  |  |\n ---  --- |\n| Year | Hosted Country | Winner | Runner up |\n| 1975 | England | West Indies | Australia |\n| 1979 | England | West Indies | England |\n| 1983 | England | India | West Indies |\n| 1987 | India | Australia | England |\n| 1992 | Australia | Pakistan | England |\n| 1996 | India – Pakistan | Sri Lanka | Australia |\n| 1999 | England | Australia | Pakistan |\n| 2003 | South Africa | Australia | India |\n| 2007 | West Indies | Australia | Sri Lanka |\n| 2011 | India, Sri Lanka, Bangladesh | India | Sri Lanka |\n| 2015 | Australia, New Zealand | Australia | New Zealand |\n| 2019 | England, Wales | England | New Zealand",
+          "verdict_reason": "The snippet lists winners from 1975 to 2019, directly addressing the query but potentially missing tournaments held after 2019, making it incomplete for a current list.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists T20 World Cup winners including India, Pakistan, England, West Indies, Sri Lanka, and Australia, but does not address the ODI Cricket World Cup implied by the general query.",
+          "quote": "teams have lifted the trophy over the years, with the West Indies, England and India the only nations to have won it multiple times. India have won the most T20 World Cup titles (thrice)",
+          "verdict_reason": "Snippet provides evidence for T20 World Cup winners, which is a specific format. Since the query asks generally about 'the cricket world cup' (typically ODI), this is relevant but incomplete evidence regarding the full set of winners.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document is titled as a list of Cricket World Cup winners from 1975 to 2023.",
+          "quote": "Cricket World Cup Winners 1975-2023",
+          "verdict_reason": "The snippet contains a title indicating the document lists winners, which is directly relevant to the query, but the actual list of countries is not present in the provided text.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_041",
+      "claim_index": 1,
+      "claim": "This count is consistent across the retrieved documents, even though they do not directly state the total number",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The manuscript Minuscule 205 contains the New Testament with books ordered as Gospels, Acts, Catholic epistles, Pauline epistles, and Apocalypse.",
+          "quote": "The codex contains the text of the New Testament on 441 parchment leaves... The order of books: Gospels, Acts of the Apostles, Catholic epistles, Pauline epistles, and Apocalypse.",
+          "verdict_reason": "The snippet lists the categories of books in a specific New Testament manuscript but does not provide the total count requested by the query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions that certain ancient Jewish books are quoted in the New Testament but does not state the total number of New Testament books.",
+          "quote": "Enoch and Jubilees which are ancient Jewish books that only survived in Ge'ez but are quoted in the New Testament",
+          "verdict_reason": "The snippet discusses the New Testament in the context of the Ethiopian Bible canon but fails to provide the specific count of New Testament books requested.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the Old Testament contains 39, 46, or more books depending on the tradition.",
+          "quote": "The Old Testament contains 39 (Protestant), 46 (Catholic), or more (Orthodox and other) books, divided, very broadly, into the Pentateuch (Torah), the historical books, the \"wisdom\" books and the prophets.",
+          "verdict_reason": "The snippet discusses Bible book counts but only for the Old Testament, not the New Testament requested. It is relevant context but incomplete.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The manuscript Minuscule 51 contains the New Testament text except for the Book of Revelation.",
+          "quote": "The codex contains the text of the New Testament except Book of Revelation on 325 parchment leaves",
+          "verdict_reason": "The snippet discusses the contents of a specific New Testament manuscript but does not state the total number of books in the standard New Testament canon.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_042",
+      "claim_index": 2,
+      "claim": "However, the exact mechanism for why the water expands the crack laterally rather than freezing upward is not fully explained by the retrieved evidence",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Water expands when it freezes, and if trapped in bricks or mortar, it causes cracking.",
+          "quote": "Water expands when it freezes, and if it is trapped in the bricks or mortar, it cracks just a little.",
+          "verdict_reason": "The snippet confirms water expands when freezing in cracks, addressing the query's premise, but fails to explain the mechanism of why it expands the crack rather than freezing upward.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Water seeping into concrete expands when it freezes, resulting in cracks.",
+          "quote": "When it freezes, it will expand and result in cracks.",
+          "verdict_reason": "The snippet confirms water expands upon freezing in cracks but does not explain the mechanism of why it expands laterally rather than upward.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Water expands when it freezes inside rock cracks, enlarging them and allowing more water to penetrate deeper for future splitting.",
+          "quote": "When water gets into cracks in the rocks, this water expands during the freeze cycle, making the cracks bigger. Then when the cracks fill up with water in the thaw period.",
+          "verdict_reason": "The snippet confirms water expansion in cracks causes damage but does not explain the physical mechanism of why it expands laterally rather than upward, leaving the core 'why' question unanswered.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Water molecules in concrete expand by 9% when freezing, causing distress because there is no room for the increased volume.",
+          "quote": "When these water molecules freeze, they expand by 9%, and because there is no room for their increased volume, the concrete distresses.",
+          "verdict_reason": "The snippet confirms water expansion causes cracking but does not explain the specific mechanism of why cracks expand rather than water freezing upward.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_052",
+      "claim_index": 1,
+      "claim": "However, this information may be outdated compared to the current year the actual winner for the current year could be different",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Sven Davidson won the men's singles title at the 1957 French Championships.",
+          "quote": "Sven Davidson and Shirley Bloomer won the singles titles. Sven Davidson defeated Herbert Flam 6ΓÇô3, 6ΓÇô4, 6ΓÇô4",
+          "verdict_reason": "Snippet addresses the same entity (French Open men's winner) but provides historical 1957 data, not the current year requested.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Rafael Nadal won the 2008 French Open men's singles title by defeating Roger Federer.",
+          "quote": "Rafael Nadal claimed his fourth consecutive French Open crown... and in becoming the 2008 French Open champion",
+          "verdict_reason": "Snippet addresses the query entity (men's French Open winner) but provides data for 2008, which is likely superseded by the 'this year' (current) request.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Rod Laver won the men's singles title at the 1962 French Championships.",
+          "quote": "Rod Laver and Margaret Smith won the singles titles. Rod Laver (AUS) defeated Roy Emerson (AUS) 3ΓÇô6, 2ΓÇô6, 6ΓÇô3, 9ΓÇô7, 6ΓÇô2",
+          "verdict_reason": "Snippet addresses the same entity (French Open men's winner) but provides historical data from 1962, which is superseded evidence for a query about 'this year'.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Frank Parker won the men's singles title at the 1948 French Championships.",
+          "quote": "Frank Parker and Nelly Landry won the singles titles. Frank Parker defeated Jaroslav Drobn├╜ 6ΓÇô4, 7ΓÇô5, 5ΓÇô7, 8ΓÇô6",
+          "verdict_reason": "Snippet addresses the same entity (men's French Open winner) but provides data from 1948, which is superseded and does not answer 'this year'.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_095",
+      "claim_index": 2,
+      "claim": "This difference in outcomes is due to the nature of the damage: surgical removal allows for controlled regeneration, whereas alcohol-induced damage creates irreversible scarring",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Excess alcohol can damage liver cells and lead to scarring known as liver cirrhosis.",
+          "quote": "Excess alcohol can damage or even destroy your liver cells. Over time liver damage may lead to the building of fat in your liver which causes swelling or scarring of the liver, also called as liver cirrhosis.",
+          "verdict_reason": "The snippet confirms alcohol causes permanent scarring (cirrhosis), addressing half the query. It lacks information on liver regeneration, making it incomplete but directly relevant conflict-bearing evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Excessive alcohol overwhelms the liver, leading to scar tissue, fibrosis, and cirrhosis.",
+          "quote": "While serious liver damage, including the development of scar tissue, fibrosis and cirrhosis, is a common result of alcoholism",
+          "verdict_reason": "Snippet confirms alcohol causes permanent scarring (cirrhosis) but does not explain liver regeneration mechanisms, addressing only half the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Prolonged excessive alcohol drinking can permanently scar and damage the liver, resulting in cirrhosis.",
+          "quote": "Prolonged excessive alcohol drinking can also permanently scar and damage the liver resulting in liver cirrhosis.",
+          "verdict_reason": "The snippet directly confirms the query's premise about alcohol causing permanent scarring but provides no information regarding liver regeneration after donation.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Drinking excessive amounts of alcohol can cause progressive scarring of the liver.",
+          "quote": "Drinking excessive amounts of alcohol can cause the progressive scarring of liver",
+          "verdict_reason": "The snippet confirms alcohol causes liver scarring, addressing half the query, but lacks information on liver regeneration after donation.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_181",
+      "claim_index": 2,
+      "claim": "Therefore, based on the available evidence, the director of the new Blade Runner movie cannot be determined",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Shinichiro Watanabe directed the short film Blade Runner Black Out 2022, which is a prequel to Blade Runner 2049.",
+          "quote": "Blade Runner Black Out 2022 is a tech-noir cyberpunk anime short film directed by Shinichiro Watanabe.",
+          "verdict_reason": "Snippet identifies a director for a related Blade Runner short film, not the specific new movie queried, providing partial but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Shinichiro Watanabe directed the short film Blade Runner Black Out 2022, which is a prequel to Blade Runner 2049.",
+          "quote": "Blade Runner Black Out 2022 is a tech-noir cyberpunk anime short film directed by Shinichiro Watanabe.",
+          "verdict_reason": "Snippet identifies a director for a related Blade Runner short film/prequel, not the main 'new' movie queried, providing partial but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Luke Scott directed the film, while his father Ridley Scott directed the original and serves as executive producer on the sequel.",
+          "quote": "directed by Luke Scott, whose father Ridley Scott directed the original \"Blade Runner\" and is executive producer on the sequel \"Blade Runner 2049\".",
+          "verdict_reason": "Snippet identifies Luke Scott as director of a related film but discusses 'Blade Runner 2049' (a 2017 sequel), making it potentially outdated or ambiguous regarding a 'new' movie.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Kenji Kamiyama and Shinji Aramaki were announced to direct the anime series Blade Runner Black Lotus.",
+          "quote": "On November 29, 2018, it was announced that he and Shinji Aramaki will direct the initial season of \"Blade Runner ΓÇô Black Lotus\"",
+          "verdict_reason": "Snippet identifies directors for a specific Blade Runner anime series, which may address the query if it refers to this show, but lacks confirmation for a new feature film.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_0293a11bd364",
+      "claim_index": 1,
+      "claim": "While other documents provide additional context on language rankings, d1 offers the specific information needed to answer the query",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "English is ranked third with 380 million native speakers, but the data excludes total speakers including second-language users.",
+          "quote": "3. English — 380 Million Native Speakers If you're reading this article, you may be one of the 380 million-odd native English speakers, or one of the billion people who speak it as a second language.",
+          "verdict_reason": "Snippet addresses language rankings but provides data for native speakers only, not total speakers requested by the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists English and Mandarin Chinese as the top two languages by total speakers but cuts off before listing the third.",
+          "quote": "Top Languages by Total Speakers (L1 + L2)\n|  |  |  |\n --- \n| Rank | Language | Total Speakers (millions) |\n| 1 | English | ~1,450 |\n| 2 | Mandarin Chinese",
+          "verdict_reason": "The snippet addresses the query entity but is truncated, providing only ranks 1 and 2 while omitting the third largest language.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document is a YouTube video titled about the top 10 most spoken languages by total number of speakers.",
+          "quote": "YouTube Top 10 Most Spoken Languages by total number of Speakers in the World #shorts",
+          "verdict_reason": "The snippet indicates the document addresses the exact query topic but lacks the specific ranking data in the text to definitively answer which language is third.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_114b9082bc42",
+      "claim_index": 1,
+      "claim": "This date is consistently reported across multiple reliable sources",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley was discovered unconscious on August 16 and efforts to revive him failed, indicating his death occurred on that date.",
+          "quote": "On the afternoon of August 16, Presley was discovered unconscious in a bathroom of Graceland. Efforts by paramedics at the mansion failed to revive him, as did further attempts by doctors at Baptist Memorial Hospital.",
+          "verdict_reason": "The snippet explicitly states Presley was found unconscious on August 16 and could not be revived, directly answering the query about his death date.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "The world went into mourning on August 16, 1977, when the King of Rock 'n' Roll died at the age of 42.",
+          "verdict_reason": "The snippet explicitly states the date of Elvis Presley's death as August 16, 1977, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977, in Memphis, Tennessee.",
+          "quote": "Died\n+ August 16\n, \n1977\n+ Memphis, Tennessee, USA\n(cardiac arrhythmia)",
+          "verdict_reason": "The snippet explicitly states the date of death (August 16, 1977) in the personal details section, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_2877cf4bd00f",
+      "claim_index": 2,
+      "claim": "While other documents provide additional context, they do not contradict this age",
+      "cited_docs": [
+        "d5",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document provides family details and a 2020 status update for Donald Trump but does not state his age or birth date.",
+          "quote": "As of August 2020, Trump had five children and ten grandchildren.( Trump married his first wife, Ivana, a former model and Olympic skier from Czechoslovakia, in 1977.",
+          "verdict_reason": "The snippet concerns the correct entity but lacks the specific age or birth date requested, offering only partial biographical context.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Donald Trump as the 45th and 47th president of the United States but does not state his age.",
+          "quote": "Donald Trump 45th and 47th president of the United States Also known as: Donald John Trump",
+          "verdict_reason": "The snippet confirms the entity and role relevant to the query but lacks the specific age data requested, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states President Trump's chronological age is 80 based on a recent medical evaluation.",
+          "quote": "President Trump has the cardiac age of a 65-year-old. That's 14 years younger than his biological age.",
+          "verdict_reason": "Snippet confirms Trump's chronological age is 80 by stating his cardiac age (65) is 14 years younger, directly addressing the query but requiring simple arithmetic.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_fc07d4525dbf",
+      "claim_index": 1,
+      "claim": "However, there is a conflict due to outdated information, as some documents suggest a more restrictive policy under new leadership",
+      "cited_docs": [
+        "d4",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "COVID-19 vaccines are authorized for all children and adults ages 6 months and older in the United States.",
+          "quote": "COVID-19 vaccines are safe, effective, and authorized for all children and adults ages 6 months and older",
+          "verdict_reason": "The snippet explicitly states the authorization age lower bound (6 months), directly answering the query about the youngest eligible age.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Moderna's vaccine has full FDA approval for children as young as 6 months, though restricted to those with serious health problems.",
+          "quote": "Parents will still be able to seek out shots from rival drugmaker Moderna, the other maker of mRNA vaccines, which has full FDA approval for children as young as 6 months.",
+          "verdict_reason": "Snippet addresses the youngest eligible age (6 months) but describes a restricted, potentially superseded policy context, making it conflict-bearing rather than a definitive current answer.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The FDA authorized the Moderna vaccine for individuals ages 6 months and older, which is the youngest age group mentioned in the approval details.",
+          "quote": "Today's marketing authorizations cover the Moderna vaccine for people ages 6 months and older, Pfizer for people ages 5 and older, and Novavax for people ages 12 and older.",
+          "verdict_reason": "The snippet provides specific age authorizations (6 months+) but describes a contested, narrowed policy under new leadership that conflicts with broader historical eligibility, making it conflict-bearing rather than definitive.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 2,
+      "claim": "Stanford University is located in California, not Massachusetts",
+      "cited_docs": [
+        "d8"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d8": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "Stanford University (Stanford; officially Leland Stanford Junior University, colloquially the Farm) is a private research university in Stanford, California, adjacent to Palo Alto and between San Jose and San Francisco.",
+          "verdict_reason": "The query asks which university is in Chestnut Hill, Massachusetts. The snippet confirms Stanford is in California, not Massachusetts, providing no evidence for the queried location.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_150",
+      "claim_index": 2,
+      "claim": "Other documents discuss unrelated bands and musicians",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses Norm Fisher and his work with Bryan Adams but contains no mention of the band 'the Eagles' or any connection to them.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Brian O'Connor is the bass guitarist for the rock band Eagles of Death Metal.",
+          "quote": "Brian Scott O'Connor ... is best known for his role as bass guitarist for rock band Eagles of Death Metal.",
+          "verdict_reason": "Snippet identifies a bassist for 'Eagles of Death Metal', a distinct entity from the queried band 'the Eagles', providing related but non-decisive evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Chris Mostert is a saxophonist who played with the Eagles, not a bass player.",
+          "quote": "Chris Mostert Christiaan \"Chris\" Mostert is a Dutch saxophonist who has played with the Eagles during their \"Farewell 1 Tour\" in 2005.",
+          "verdict_reason": "Snippet addresses the query's entity (Eagles band members) but identifies a saxophonist, not the requested bass player, providing partial context.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet identifies the bass player for Queensrÿche, not the Eagles. It provides no evidence regarding the queried entity.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "Other sources list future years or are irrelevant, leading to a conflict due to misinformation",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.75,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover start dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover 2027: Begins Wednesday night, April 21 → Ends Thursday, April 29\n Passover 2028: Begins Monday night, April 10 → Ends Tuesday, April 18",
+          "verdict_reason": "The snippet addresses the query topic (Passover dates) but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover dates for the next several years\nPassover 2027: April 21-29\nPassover 2028: April 10-18\nPassover 2029: March 30 – April 7",
+          "verdict_reason": "The snippet addresses the query topic by listing Passover dates but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_6edf1477bd7e",
+      "claim_index": 0,
+      "claim": "The chorus of the song Space Bound by Eminem is sung by Steve McEwan . mentions the original version included a chorus but does not specify the singer, which aligns with the main answer. is irrelevant to the query",
+      "cited_docs": [
+        "d3",
+        "d4",
+        "d1",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.4,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Steve McEwen sang the chorus of the song Space Bound by Eminem.",
+          "quote": "Steve McEwen sung the chorus and him and Eminem produced the song",
+          "verdict_reason": "The snippet directly answers the query by explicitly naming Steve McEwen as the singer of the chorus.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet is a security CAPTCHA page blocking access to lyrics; it contains no information about the song, artist, or who sings the chorus.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The chorus of the song is sung by McEwan.",
+          "quote": "The chorus is sung by McEwan, who also provided the guitars.",
+          "verdict_reason": "The snippet directly answers the query by explicitly naming McEwan as the singer of the chorus.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Jim Jonsin stated the original version included a chorus but did not identify the singer in this snippet.",
+          "quote": "\"It was actually a full song with verses, b-section, chorus,\" Jonsin told MTV News of the original Eminem-less version.",
+          "verdict_reason": "The snippet discusses the song's chorus and structure, addressing the query's topic, but fails to name the specific singer, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The chorus of the song Space Bound is sung by Steve McEwan.",
+          "quote": "The chorus is sung by McEwan, who also provided guitars.",
+          "verdict_reason": "The snippet explicitly states that Steve McEwan sings the chorus, directly answering the user's query about who sings it.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

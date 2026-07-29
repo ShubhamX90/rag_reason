@@ -236,61 +236,9 @@ So again, the pattern is:
 - vote on the key decision
 - keep one coherent narrative from the strongest model on the winning side
 
-## Monolithic Multi-LLM Logic
-
-The monolithic strategy asks each model to do everything in one shot:
-
-- per-doc notes
-- conflict reasoning
-- final answer
-
-Then the committee merges those full outputs.
-
-Because the output contains several layers, the merge happens in pieces.
-
-## Monolithic: Per-document Notes
-
-For each `doc_id`, the pipeline compares the document-level note from each model.
-
-It votes on:
-
-- that document's `verdict`
-
-Then for that document, it takes the explanation fields from the highest-weight model that voted for the winning verdict.
-
-So per document, the final fields come from one winning-side model:
-
-- `key_fact`
-- `quote`
-- `verdict_reason`
-- `source_quality`
-
-This makes monolithic per-doc voting behave similarly to Stage 1 voting.
-
-## Monolithic: Final Answerability Direction
-
-For the final response side of the monolithic output, the pipeline votes on:
-
-- `expected_response.abstain`
-
-Then it adopts the broader answer package from the highest-weight model that voted for the winning abstain value.
-
-That means fields like these come from that winning-side model:
-
-- `conflict_reason`
-- final answer text
-- final evidence list
-- `abstain_reason`
-- `think`
-
-The per-doc notes are still replaced with the separately voted consensus notes described above.
-
-So monolithic merging is:
-
-1. vote document-by-document on `verdict`
-2. vote globally on `abstain`
-3. keep the strongest winning-side answer package
-4. replace its per-doc notes with the voted consensus per-doc notes
+Only the retained stagewise committee path is part of the clean repository.
+The older one-shot strategy has been moved under `legacies/` and is not part of
+the current reproduction path.
 
 ## Why Explanations Are Not Blended
 
@@ -356,4 +304,4 @@ The multi-LLM paradigm is:
 
 "Use weighted voting to choose the important structured decision, then take the full supporting explanation from the strongest model that agreed with that winning decision."
 
-That is the core logic repeated across both the stagewise and monolithic strategies.
+That is the core logic used throughout the retained stagewise workflow.

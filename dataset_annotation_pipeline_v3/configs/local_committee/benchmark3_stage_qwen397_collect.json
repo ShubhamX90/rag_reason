@@ -1,0 +1,19 @@
+{
+  "provider": "local_openai",
+  "response_cache_dir": "data/.llm_cache/local_committee_benchmark800_3model",
+  "cache_mode": "read_write",
+  "max_concurrent_requests": 1,
+  "judges": [
+    {
+      "model_id": "local/qwen3.5-397b-a17b",
+      "base_url": "http://127.0.0.1:8001/v1",
+      "base_url_env": "LOCAL_QWEN_BASE_URL",
+      "priority": 6,
+      "request_timeout": 900,
+      "extra_body": {
+        "response_format": {"type": "json_object"},
+        "chat_template_kwargs": {"enable_thinking": false}
+      }
+    }
+  ]
+}

@@ -1,0 +1,1857 @@
+{
+  "variant": "benchmark_set_all_modes/mistral7b/e2e/strict/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/mistral7b/e2e/strict/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/mistral7b/e2e/strict/baseline/final/detailed_results.json",
+    "source_final_sha256": "69960c87149b29c9570471915529cfd2f53e924c1fcb38ec8d93a71a5ae9a9c4",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/mistral7b/e2e/strict/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/mistral7b/e2e/strict/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1163,
+    "claims_with_citations": 729,
+    "claims_with_committee_support_set": 1031,
+    "claims_with_any_approved_citation": 649,
+    "claims_with_any_gold_positive_citation": 727,
+    "committee_alignment_precision_macro": 0.7636716963877458,
+    "committee_alignment_precision_micro": 0.7307940606843124,
+    "gold_positive_citation_precision_macro": 0.9934842249657064,
+    "gold_positive_citation_precision_micro": 0.9941897998708844,
+    "soft_extra_citation_rate_micro": 0.263395739186572,
+    "hard_negative_citation_rate_micro": 0.005810200129115558,
+    "committee_support_citation_recall_macro": 0.6294859359844811,
+    "committee_support_citation_recall_micro": 0.6294859359844811,
+    "claims_with_any_soft_extra_rate": 0.36899862825788754,
+    "claims_with_any_hard_negative_rate": 0.012345679012345678,
+    "strict_committee_alignment_claim_rate": 0.39208942390369733,
+    "strict_gold_clean_claim_rate": 0.5537403267411866,
+    "strict_grounded_committee_clean_rate_all_claims": 0.39208942390369733,
+    "strict_grounded_gold_clean_rate_all_claims": 0.5537403267411866,
+    "total_cited_docs": 1549,
+    "total_approved_cited_docs": 1132,
+    "total_gold_positive_cited_docs": 1540,
+    "total_soft_extra_cited_docs": 408,
+    "total_hard_negative_cited_docs": 9
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_1d741779a31e",
+      "claim_index": 2,
+      "claim": "It is recommended to consult a healthcare professional for personalized advice on artificial sweetener consumption",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Artificial sweeteners do not affect blood sugar levels and are safe for people with diabetes to consume.",
+          "quote": "Can People With Diabetes Have Artificial Sweeteners? Yes, they can. Artificial sweeteners are just as sweet ... but they have no calories and don't affect your blood sugar (glucose).",
+          "verdict_reason": "The snippet directly answers the query by confirming safety and explaining that artificial sweeteners do not impact blood glucose levels in diabetics.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Most artificial sweeteners are safe for use by individuals with diabetes.",
+          "quote": "Yes, you can use most artificial sweeteners if you have diabetes.",
+          "verdict_reason": "The snippet directly answers the query by confirming that most artificial sweeteners are usable for diabetics, providing decisive evidence from a high-quality medical source.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Recent studies indicate artificial sweeteners may worsen glycemic control by altering gut microbiota and affecting insulin secretion.",
+          "quote": "However, recent studies have shown that artificial sweeteners affect glucose absorption in the intestinal tract as well as insulin and incretin secretion in humans and animals.",
+          "verdict_reason": "The snippet directly addresses safety for diabetics but presents conflicting evidence (worsened control vs. previous beliefs) rather than a definitive yes/no answer.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The FDA deems synthetic sweeteners safe for consumption within acceptable daily intake limits, and they are considered beneficial for managing Type 2 Diabetes.",
+          "quote": "synthetic sweeteners are deemed safe for consumption by the U.S. Food and Drug Administration (FDA) when used within the acceptable daily intake (ADI).",
+          "verdict_reason": "Snippet confirms FDA safety status and potential benefits for diabetes management but notes the topic remains contentious, offering partial rather than definitive resolution.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document cites studies investigating artificial sweeteners' link to type 2 diabetes risk and vascular reactivity impairment.",
+          "quote": "Artificial sweeteners and risk of type 2 diabetes in the prospective NutriNet-Santé cohort. Diabetes Care. (2023) 46:1681–90.",
+          "verdict_reason": "Snippet lists relevant studies on sweeteners and diabetes/vascular health but provides only citations without specific safety conclusions for diabetics.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_049cc3f14d5e",
+      "claim_index": 0,
+      "claim": "The most recent ACM-ICPC World Finals results are not available in the provided documents",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "St. Petersburg National Research University ITMO won the 2012 ACM-ICPC World Finals gold medal.",
+          "quote": "2012 Gold: St. Petersburg National Research University ITMO (Russia) University of Warsaw (Poland) Moscow Institute of Physics & Technology (Russia)",
+          "verdict_reason": "Snippet provides 2012 winner data but predates the query's 'most recent' requirement, offering outdated conflict-bearing evidence rather than the current answer.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The University of Warsaw won the 2007 ACM-ICPC World Finals.",
+          "quote": "Gold medal 1 | Poland | University of Warsaw  (Warsaw Eagles):  Filip Wolski, Marcin Pilipczuk, Marek Cygan",
+          "verdict_reason": "Snippet provides results for 2004-2007, which are outdated relative to the 'most recent' query, but constitute conflict-bearing evidence about the same entity.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "St. Petersburg State University ranked first in the 49th ICPC World Finals in Baku.",
+          "quote": "| 1 | 91 St. Petersburg State University | 11 | 1478 | 2/255 | 2/53 | 0/-- | 1/37 | 3/150 | 1/20 | 3/298 | 2/195 | 1/42 | 2/81 | 3/128 | 1/19 | 21/11 |",
+          "verdict_reason": "The snippet provides the final scoreboard for the 49th ICPC World Finals, explicitly listing St. Petersburg State University as the rank 1 winner, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists winners from 2009 to 2012 but does not identify the most recent champion.",
+          "quote": "St. Petersburg Institute of Fine Mechanics and Optics won their fourth world championship, the most by any University at the time.",
+          "verdict_reason": "Snippet addresses the query entity but provides outdated data (ending in 2012), failing to answer the 'most recent' question while remaining conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document confirms the University of Minnesota has participated in multiple ICPC World Finals but does not identify the most recent winner.",
+          "quote": "Since 2002, the University of Minnesota has sent eight teams to the international final of the ICPC, to Hollywood, Prague, Tokyo, Florida, Warsaw, Saint Petersburg, Marrakech, and Phuket.",
+          "verdict_reason": "The snippet discusses the same entity (ICPC World Finals) and provides participation history, but fails to answer the specific query about the most recent winning institution.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_c264cb69676e",
+      "claim_index": 1,
+      "claim": "This joint structure is crucial for the functioning of the middle ear. Understanding these connections helps explain how hearing occurs in humans. The documents retrieved provide complementary information about the incudomalleolar joint, with some documents focusing on the type of joint and others discussing the function and structure of the ossicles",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The incus and malleus are connected by a synovial saddle joint.",
+          "quote": "The incus and malleus in the middle ear are connected by a synovial saddle joint, allowing for movement and transmission of sound vibrations.",
+          "verdict_reason": "The snippet directly answers the query by identifying the specific joint type (synovial saddle joint) connecting the incus and malleus.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The joint connecting the malleus and incus is a saddle-shaped synovial joint.",
+          "quote": "Between the malleus and incus is a saddle-shaped synovial joint, and at the joint between the incus and stapedius is a ball and socket joint.",
+          "verdict_reason": "The snippet explicitly identifies the specific type of joint (saddle-shaped synovial) connecting the malleus and incus, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The malleus articulates with the incus through a hinge joint.",
+          "quote": "The malleus articulates with the incus through the hinge joint and is attached to the tympanic membrane",
+          "verdict_reason": "The snippet explicitly states the joint type connecting the malleus and incus, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies the connection between the malleus and incus as the incudomalleolar joint but does not specify the anatomical type of joint.",
+          "quote": "The unique observation in this patient is that the inferior portion of the malleus-incus (incudomalleolar) joint is visible.",
+          "verdict_reason": "The snippet confirms the existence and name of the joint connecting the incus and malleus but fails to state the specific type of joint (e.g., synovial), making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The malleus articulates with the incus via a small synovial joint called the incudomalleolar joint.",
+          "quote": "On its posterior side, it articulates with the body of the incus posterolaterally by a small synovial joint: the incudomalleolar joint.",
+          "verdict_reason": "The snippet explicitly identifies the joint type (synovial) and name (incudomalleolar) connecting the malleus and incus, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_264e97231363",
+      "claim_index": 2,
+      "claim": "Chlorine can contribute to the problem by causing hair to become more porous and susceptible to absorbing copper",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Chlorine alone does not turn hair green; the green color results from copper bonding with chlorine to form a film on hair proteins.",
+          "quote": "Often the misconception to the hair turning green is the chlorine. It's not 100 just the chlorine though. It's also copper.",
+          "verdict_reason": "The snippet directly addresses the query by clarifying that chlorine is not the sole cause, identifying copper as the primary culprit, thus providing relevant but corrective evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Chlorine is not the culprit for green hair; rather, oxidized copper from algaecide causes the discoloration.",
+          "quote": "Contrary to popular belief, chlorine is not the culprit when it comes to blonde hair turning greenish after a swim. Chlorine actually works to lighten hair, which sets the stage for the real menace to step in: copper.",
+          "verdict_reason": "The snippet directly addresses the query by clarifying that copper, not chlorine, causes green hair, providing relevant but corrective evidence.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Chlorine does not turn hair green, but copper in pools can cause this effect.",
+          "quote": "Chlorine doesn't turn hair green. It can bleach it lighter shades, but doesn't do the green thing. That actually happened in the past with pools with copper",
+          "verdict_reason": "The snippet directly addresses the query by refuting chlorine as the cause and identifying copper as the actual cause, providing relevant but corrective evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hair turns green from oxidized hard metals like copper in pool water, not directly from chlorine itself.",
+          "quote": "Contrary to popular belief, the greening of hair from swimming pools is not caused by the chlorine in pool water... Your hair turns green from the presence of hard metals (copper, iron, and manganese, in particular) in the pool water.",
+          "verdict_reason": "The snippet directly addresses the query by clarifying that metals, not chlorine, cause the green color, providing relevant but corrective scientific evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_04e1627e9fc5",
+      "claim_index": 1,
+      "claim": "However, the documents do not provide a definitive answer on whether nematodes directly increase soil fertility or if their impact is indirect through nutrient cycling",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Some nematode species play essential roles in enhancing soil fertility.",
+          "quote": "The soil nematode community is highly diverse, with some nematode species playing essential roles in enhancing soil fertility.",
+          "verdict_reason": "The snippet confirms some species enhance fertility but implies not all do, offering partial rather than definitive support for the general query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Soil nematodes directly influence nutrient cycling by feeding on microorganisms and releasing nutrients available to plants.",
+          "quote": "Soil nematodes are key indicators of soil health and directly influence nutrient cycling. ... Both groups, by feeding on microorganisms, release nutrients available to plants.",
+          "verdict_reason": "The snippet confirms nematodes release nutrients, supporting fertility, but notes inorganic fertilizers can negatively affect them, making the evidence nuanced rather than a simple yes.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Nematodes enhance soil fertility by mediating the mineralization of nitrogen and phosphorus.",
+          "quote": "Nematodes play a crucial role in nutrient cycling by mediating the mineralisation of key elements, such as nitrogen (N) and phosphorus (P), thereby enhancing",
+          "verdict_reason": "The snippet directly states that nematodes enhance fertility through nutrient cycling and mineralization, decisively answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_2c0ea18839df",
+      "claim_index": 0,
+      "claim": "However, the evidence does not explicitly state whether all epigenetic changes are hereditary",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Epigenetic changes and inheritance facilitate the non-genetic transmission of acquired complex phenotypes from parents to offspring.",
+          "quote": "Such epigenetic changes and inheritance result in non-genetic transmission of acquired complex phenotypes from parents to offspring.",
+          "verdict_reason": "The snippet directly confirms that epigenetic changes involve inheritance from parents to offspring, answering the query affirmatively.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Current evidence suggests epigenetic information likely cannot survive the two rounds of demethylation that occur during mammalian reproduction.",
+          "quote": "To date, there is no evidence that epigenetic information can survive two rounds of this biochemical cleansing.",
+          "verdict_reason": "The snippet directly addresses the query by presenting expert skepticism and biological mechanisms against heritability, serving as conflict-bearing evidence despite not definitively resolving the scientific debate.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "A new study demonstrates that epigenetic modifications can be transmitted via sperm to offspring and grandoffspring, confirming transgenerational epigenetic inheritance.",
+          "quote": "A new study by researchers at UC Santa Cruz shows how a common type of epigenetic modification can be transmitted via sperm not only from parents to offspring, but to the next generation",
+          "verdict_reason": "The snippet directly answers the query by providing evidence that epigenetic changes are hereditary across multiple generations, specifically citing a study on transgenerational epigenetic inheritance.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_37ebad668bb7",
+      "claim_index": 2,
+      "claim": "The 10 times rule is mentioned for small models, but larger models may require more data when considering the number of columns as well",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The amount of data needed for machine learning varies based on project error tolerance and input diversity rather than being a fixed requirement.",
+          "quote": "different projects have different levels of tolerance for errors... The more uncontrolled the environment is, the more data you need for your ML project.",
+          "verdict_reason": "Snippet discusses factors determining data quantity but does not explicitly answer if data is always required, leaving the absolute necessity question partially unresolved.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Quality data is necessary for machine learning models to operate efficiently and improve over time.",
+          "quote": "Machine learning data analysis uses algorithms to continuously improve itself over time, but quality data is necessary for these models to operate efficiently.",
+          "verdict_reason": "The snippet asserts data is necessary for efficiency and improvement, addressing the query's core topic, but does not explicitly state if data is 'always' required in all possible ML contexts.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Machine learning models learn from data, which acts as a textbook of examples for the model to study.",
+          "quote": "But just like how we learn from experience, ML models learn from data. ... Think of training data as the \"textbook\" your machine learning model studies from.",
+          "verdict_reason": "The snippet confirms ML models learn from data but discusses data volume rather than explicitly stating if data is always strictly required, making it relevant but incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_c3f10dc1632d",
+      "claim_index": 0,
+      "claim": "Shanghai borders Zhejiang Province to the north",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Zhejiang Province borders Shanghai to the south, implying Shanghai is to Zhejiang's north, but the text does not explicitly name the province bordering Shanghai to the north.",
+          "quote": "Zhejiang Province ... borders the East China Sea to the east, Fujian to the south, Jiangxi and Anhui to the west, and Shanghai and Jiangsu to the north.",
+          "verdict_reason": "The snippet identifies Zhejiang's neighbors, stating Shanghai and Jiangsu are to Zhejiang's north. This implies Jiangsu borders Shanghai, but does not explicitly state which province is north of Shanghai, making it partial evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Shanghai borders the Yangtze River estuary to the north rather than naming a specific province.",
+          "quote": "It borders the estuary of Yangtze River to the north, Jiangsu and Zhejiang Provinces to the west and Hangzhou Bay to the south.",
+          "verdict_reason": "Snippet addresses the northern border but cites a river estuary instead of a province, providing incomplete evidence for the specific query.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states Shanghai borders Jiangsu and Zhejiang to the west but cuts off before specifying the northern border.",
+          "quote": "Bordering on Jiangsu and. Zhejiang provinces on the west, Shanghai is washed by the East China. Sea on the east and Hangzhou Bay on the south. North of the city",
+          "verdict_reason": "The snippet addresses the same entity and border context but is incomplete, cutting off exactly where the northern border information should appear.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_0025",
+      "claim_index": 1,
+      "claim": "However, there is some disagreement about other collaborators on the jingle",
+      "cited_docs": [
+        "d5",
+        "d7",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d6"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5",
+        "d6",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5",
+        "d7"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5",
+        "d7"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Pusha T claimed he wrote McDonald's 'I'm Lovin' It' jingle in the early 2000s while attempting to establish himself as a rapper.",
+          "quote": "Pusha T wrote McDonald's now-famous jingle in the early 2000s while trying to make it as an up-and-coming rapper, he claimed in a recent",
+          "verdict_reason": "The snippet attributes the jingle to Pusha T but frames it as a claim rather than established fact. It directly addresses the query but lacks definitive confirmation of authorship.",
+          "source_quality": "high"
+        },
+        "d7": {
+          "verdict": "partially supports",
+          "key_fact": "A marketing firm boss said rapper Pusha T composed the McDonald's jingle.",
+          "quote": "The boss of the marketing firm that made the McDonald's jingle says rapper Pusha T composed it.",
+          "verdict_reason": "The snippet directly addresses authorship of the McDonald's jingle, but attributes it via someone's statement rather than definitively establishing who wrote it.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Pusha T wrote the \"I'm Lovin' It\" jingle for McDonald's, as confirmed by his representative to Rolling Stone.",
+          "quote": "Pusha T wrote the ubiquitous \"I'm Lovin' It\" jingle for McDonald's, his representative confirmed to Rolling Stone.",
+          "verdict_reason": "The snippet directly answers the query by identifying Pusha T as the writer of the \"I'm Lovin' It\" jingle, with confirmation from his representative to a credible source.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_082db791e263",
+      "claim_index": 0,
+      "claim": "You must be at least 21 years old to buy a handgun in Florida and Colorado, according to the provided documents",
+      "cited_docs": [
+        "d1",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Federal law allows purchasing long guns like shotguns across state lines if the buyer is over 18, though some states have raised the age to 21.",
+          "quote": "It is legal to purchase long guns across state lines as long as you're over the age of 18.",
+          "verdict_reason": "Snippet provides the federal minimum age (18) for long guns but notes conflicting state laws raising it to 21, making it incomplete for a general answer.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Federal law allows individuals over 18 to own shotguns, but state regulations vary and may impose different age requirements.",
+          "quote": "The ATF has made it clear that individuals over 18 can own shotguns and rifles, but not pistols. ... States are able to further restrict the ability to purchase and own firearms.",
+          "verdict_reason": "Snippet provides the federal minimum age (18) for shotguns but explicitly states states can restrict further, making it incomplete for a general 'how old' query without a specific state.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Minimum age requirements for purchasing shotguns vary by state, with some states setting the age at 18 and others at 21.",
+          "quote": "Connecticut | 21 for handguns and semi-automatic centerfire rifles that has/accepts a 5+ round magazine; 18 for other rifles and shotguns",
+          "verdict_reason": "Snippet provides specific state-level data on shotgun purchase ages but lacks a single federal answer or complete list for all states.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_eeebc5ea5c4f",
+      "claim_index": 2,
+      "claim": "To find the U.S. dollar equivalent, we can convert the Philippine peso figure using the exchange rate at the time of the film's release",
+      "cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Inside Out 2 was the highest grossing international movie in the Philippines in 2024 with approximately 14.11 million U.S. dollars in revenue.",
+          "quote": "Inside Out 2 was the highest grossing international movie in the Philippines for the year 2024, with an estimated box office revenue of about 14 million U.S. dollars.",
+          "verdict_reason": "The snippet addresses the query but is limited to international films in 2024, not necessarily the all-time highest grossing or including local films.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The 2024 film Hello, Love, Again is the highest-grossing Philippine film with a box office of ₱1.6 billion.",
+          "quote": "| 2024 | Hello, Love, Again | ABS-CBN Studios, Star Cinema, GMA Pictures | ₱1.6 billion |",
+          "verdict_reason": "The snippet explicitly lists 'Hello, Love, Again' at the top of the highest-grossing films list with the highest monetary value (₱1.6 billion), directly answering the query.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "The movie 'Hello, Love, Again' is currently the highest-grossing Filipino film of all time with P930 million in worldwide box office earnings.",
+          "quote": "The movie 'Hello, Love, Again' is currently the highest-grossing Filipino film of all time with P930 million in worldwide box office earnings.",
+          "verdict_reason": "Relevant evidence: The movie 'Hello, Love, Again' is currently the highest-grossing Filipino film of all time with P930 million in worldwide box office earnings.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f7d6e484b579",
+      "claim_index": 0,
+      "claim": "1 playoff appearance in 1982",
+      "cited_docs": [
+        "d3",
+        "d5",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The document states the Sixers recently advanced to the second round of the NBA playoffs after beating the Celtics.",
+          "quote": "After a historic victory, the Philadelphia 76ers are moving onto the second round of the NBA playoffs to face the New York Knicks.",
+          "verdict_reason": "The snippet directly answers the query by describing a current/recent playoff appearance where the Sixers advanced to the second round.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The Philadelphia 76ers last won the Eastern Conference Finals in the 2000-01 season against the Milwaukee Bucks.",
+          "quote": "The Philadelphia 76ers won in the 2001 Eastern Conference Finals against the Milwaukee Bucks, 4 games to 3.",
+          "verdict_reason": "Snippet addresses the same entity and provides a specific playoff milestone (2001 ECF), but does not explicitly state the absolute last time the team made the playoffs, which could be later than 2001.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document notes the 76ers reached the 2001 finals but cuts off while discussing events after Allen Iverson was traded in 2006, failing to provide the most recent playoff appearance.",
+          "quote": "Iverson led the 76ers to the 2001 finals, but the franchise lost to the Lakers for a fifth time in the NBA's championship series. Iverson was traded away in 2006, and the",
+          "verdict_reason": "The snippet discusses the same entity and playoff history but is incomplete and outdated, cutting off in 2006 without answering when the *last* time they made the playoffs was.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_068",
+      "claim_index": 0,
+      "claim": "You should now change your selection to door 2 because the updated probability of the car being behind door 2 is 2/3, which is higher than the initial 1/3 probability of door 1",
+      "cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet argues that switching doors offers no advantage because both remaining doors appear to have an equal 1 in 2 chance of hiding the car.",
+          "quote": "Even if you notice that now there are only two doors, each door has a 1 in 2 chance of having the car behind it, i.e. they are equally likely.",
+          "verdict_reason": "The snippet addresses the exact query scenario but presents the common incorrect intuition against switching, serving as conflict-bearing evidence rather than a correct solution.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A user states it is to your advantage to switch doors because you aren't really losing anything by picking another door.",
+          "quote": "yeah it is to your advantage because you aren't really losing anything by picking another door. i mean you are either going",
+          "verdict_reason": "The snippet addresses the exact Monty Hall scenario and confirms switching is advantageous, but the reasoning is incomplete and the text cuts off before providing the full probabilistic explanation.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document describes a Bayesian calculation for the Monty Hall problem where the host reveals a goat behind Door 2 after the contestant picks Door 1.",
+          "quote": "Using Bayes to update odds host of the game show ΓÇ£LetΓÇÖs Make a Deal,ΓÇ¥ hides a car behind one of three doors and a goat behind each of the other two. The contestant picks Door No. 1, but before opening it, Mr. Hall opens Door No. 2 to reveal a goat.",
+          "verdict_reason": "The snippet addresses the same entity and logic (Monty Hall problem) but describes a scenario where Door 2 is opened, whereas the query specifies Door 3 is opened. It is relevant conflict-bearing evidence but does not directly answer the specific variable change requested.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_0875b5f3262a",
+      "claim_index": 2,
+      "claim": "The other documents do not provide any information about the obscenity of \"Howl\"",
+      "cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The text references the premise that Allen Ginsberg's poem Howl was deemed not obscene.",
+          "quote": "What were the negative effects of Allen Ginsberg's \"Howl\" being deemed not obscene",
+          "verdict_reason": "The snippet addresses the query by presupposing the poem was found not obscene, providing conflict-bearing evidence regarding the obscenity status without a direct ruling.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document notes that Allen Ginsberg's poem \"Howl\" was banned for obscenity and involved in a landmark court case protecting First Amendment rights.",
+          "quote": "Tags: aclu Allen Ginsberg Banned for obscenity City Lights Eric Drooker first amendment Howl obscenity case poetry Shigeyoshi Murao",
+          "verdict_reason": "The snippet confirms the poem was banned for obscenity and discusses the trial's legacy, providing direct but incomplete evidence regarding the specific question of whether the work is obscene.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_237adb87065f",
+      "claim_index": 1,
+      "claim": "While d3 suggests that land plants (embryophytes) appeared during the Silurian, it does not explicitly state that Cooksonia was the first land plant",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Small vascular plants appeared on land for the first time during the Silurian period.",
+          "quote": "On land, the first instances of terrestrialisation occurred during the Silurian. The first fungi began to appear on land, and small vascular plants appeared on land for the very first time.",
+          "verdict_reason": "The snippet explicitly states that small vascular plants appeared on land for the first time during the Silurian, directly answering the query about the birth of the first land plants.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Cooksonia is usually considered the oldest known land plant and appears in the Late Silurian, though controversial earlier fossils suggest plants may have existed in the Ordovician.",
+          "quote": "Cooksonia, on the left, has usually been considered the oldest known land plant. Fossils assigned to several species are known from North America, Europe, Asia, and Africa, and from both the Late Silurian and Early Devonian.",
+          "verdict_reason": "The snippet identifies Cooksonia as the oldest known land plant from the Silurian but notes controversial evidence suggesting an earlier Ordovician origin, making it relevant but not definitive support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_7998e59d9b97",
+      "claim_index": 2,
+      "claim": "The evidence is conflicting it is essential to consider both perspectives when making decisions about farming practices",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Organic farms are approximately 20% less efficient than conventional farms regarding crop yields.",
+          "quote": "When it comes to crop yields, organic farms are about 20% less efficient than conventional farms.",
+          "verdict_reason": "The snippet directly answers the query by stating organic farms are 20% less efficient in crop yields than conventional farms.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Organic yields are estimated to be 20-25% lower on average than conventional farming yields.",
+          "quote": "On average, organic yields are estimated to be about 20-25% lower than those from conventional farming, although this can be much higher or",
+          "verdict_reason": "Snippet provides direct quantitative evidence that organic farming is less efficient (lower yields), but the sentence is truncated, making the evidence incomplete.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f1932b75ace7",
+      "claim_index": 2,
+      "claim": "However, more research is needed to test the potential benefits and risks of bee venom for preventing or treating arthritis",
+      "cited_docs": [
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "A study indicates bee venom contains components with anti-inflammatory action.",
+          "quote": "According to one study, bee venom contains many components with anti-inflammatory action",
+          "verdict_reason": "Snippet provides relevant scientific evidence about bee venom's anti-inflammatory properties, addressing the query's mechanism, but does not explicitly confirm efficacy for treating arthritis.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Studies on bee stings are predominantly focused on investigating their effects on arthritis rather than lupus.",
+          "quote": "I learned that studies are predominantly focused on investigating the effects of bee stings on arthritis.",
+          "verdict_reason": "The snippet confirms research focus on bee stings for arthritis but explicitly states science hasn't cracked the question, offering no definitive answer.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f3b163170581",
+      "claim_index": 2,
+      "claim": "However, it is important to note that some creationist perspectives argue that humans and apes are separate creations",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Humans evolved from earlier apes that shared a common ancestor with other modern ape groups.",
+          "quote": "We evolved from earlier apes, which far enough back shared a common ancestor with groups that later became other modern types of apes: gorillas,",
+          "verdict_reason": "The snippet directly answers the query by stating humans evolved from earlier apes and clarifying the common ancestor relationship.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Humans and chimpanzees separated from a common ancestor 4–7 million years ago rather than humans evolving directly from modern apes.",
+          "quote": "Australopithecine (including the extinct biped ancestors of humans) separated from the Pan genus (containing chimpanzees and bonobos) 4–7 mya.",
+          "verdict_reason": "The snippet addresses the query by clarifying the evolutionary relationship (common ancestry vs. direct descent), providing relevant but nuanced scientific evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_114b9082bc42",
+      "claim_index": 1,
+      "claim": "According to , this event occurred confirms the date",
+      "cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "Assuming he didn't fake his death, he died August 16, 1977.",
+          "verdict_reason": "The snippet directly states the specific date of death requested in the query, providing a decisive answer despite the conditional phrasing.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Elvis Presley died on August 16, 1977.",
+          "quote": "IN LOVING MEMORY OF Elvis Aaron Presley ... January 8, 1935 – August 16, 1977",
+          "verdict_reason": "The snippet explicitly states the death date of Elvis Presley as August 16, 1977, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_3847b5cb9b42",
+      "claim_index": 1,
+      "claim": "Additionally, the Russo-Ukrainian War is now longer than the Soviet War against Hitler",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "The war between Russia and Ukraine is identified as the deadliest conflict Europe has seen since World War II.",
+          "quote": "The war between Russia and Ukraine, the deadliest conflict Europe has seen since World War II, marks its 1,000th day today.",
+          "verdict_reason": "The snippet explicitly identifies the Russia-Ukraine war as the deadliest conflict in Europe since WWII, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Russia's invasion of Ukraine is described as Europe's largest and bloodiest conflict since World War II.",
+          "quote": "As of January 12, that's the amount of time that's elapsed since Russia launched its all-out assault on Ukraine: Europe's largest, bloodiest conflict war since World War II.",
+          "verdict_reason": "The snippet explicitly identifies the Russia-Ukraine war as the largest conflict in Europe since WWII, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "freshqa_97f3c1fe1fd4",
+      "claim_index": 1,
+      "claim": "Eminem holds the world's record for fastest rap in a number one single with his verse in \"Godzilla,\" averaging 7.5 words per second",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Fallback: could not parse JSON from: { \"doc_id\": \"freshqa_97f3c1fe1fd4_doc_1\", \"verdict\": \"supports\", \"key_fact\":",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0099",
+      "claim_index": 1,
+      "claim": "The 2027 tournament will be the next one",
+      "cited_docs": [
+        "d4"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes a future 2027 Cricket World Cup event, not the latest/current champion. It provides no information about who won the most recent World Cup.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "However, some documents do not specify the start time, which is at sundown",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "healthcontradict_0060",
+      "claim_index": 0,
+      "claim": "A tepid sponge bath may not be effective for reducing fever in children, as research shows neither undressing nor sponging down with tepid water helps reduce fever. However, the snippet in does not discuss the effectiveness of a tepid sponge bath for reducing fever in children",
+      "cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1"
+      ],
+      "approved_cited_docs": [
+        "d1"
+      ],
+      "gold_positive_docs": [
+        "d1"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Research shows that sponging a child down with tepid water does not actually help reduce fever.",
+          "quote": "there's no need to undress your child or sponge them down with tepid water – research shows neither actually helps reduce fever",
+          "verdict_reason": "The snippet directly addresses the query by citing research evidence that tepid sponge baths are not effective for reducing fever in children.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses scarlet fever symptoms, diagnosis, and complications in children, but contains no information about fever reduction methods or tepid sponge baths.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_004",
+      "claim_index": 0,
+      "claim": "The St. Louis Cardinals have held spring training in both St. Petersburg, Florida and Mesa, Arizona, as suggested by the provided documents",
+      "cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.5,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The St. Louis Browns, not the Cardinals, trained in St. Petersburg starting in 1914.",
+          "quote": "drew in the city's first spring training tenant, the St. Louis Browns, in 1914. The club trained at Coffee Pot Park",
+          "verdict_reason": "Snippet discusses a St. Louis team's spring training history but refers to the Browns, not the Cardinals, providing related but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet exclusively discusses the Chicago Cubs' spring training location and management changes. It provides no information regarding the St. Louis Cardinals, making it irrelevant to the specific entity queried.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "Who plays Hopper on Orange is the New Black?\n- Hunter Emery, as supported by documents",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_086",
+      "claim_index": 3,
+      "claim": "Competition among stations in densely populated areas can help keep prices lower",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [
+        "d2"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Gas stations can charge above-market prices in specific locations like near airport car rental returns or busy downtown business districts.",
+          "quote": "where you can charge above-market prices for fuel, such as near airport car rental returns or in the busy business district of a downtown area.",
+          "verdict_reason": "The snippet provides a specific reason for price differences (location-based pricing) but is an incomplete list of factors and appears as a fragment within a list of resources.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses business classification differences between store types, not the economic factors causing price variations between stations.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Gas prices vary because areas with more stations have greater competition, and stations with added services like car washes can afford to sell gasoline at lower prices.",
+          "quote": "neighbourhoods have more gas stations than others which results in more competition among stations. This generally helps keep prices lower... Adding a car wash or convenience store to a gas station generates more income for the owner who can then afford to sell gasoline at a lower price.",
+          "verdict_reason": "The snippet explains specific factors causing price differences (competition density, ancillary services) but does not provide a comprehensive list of all reasons why prices differ between two specific stations.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0007",
+      "claim_index": 0,
+      "claim": "Google is an American multinational technology corporation its CEO is Sundar Pichai, as supported by documents",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "Snippet is corrupted/garbled with non-English text and metadata fragments. No coherent factual content about Google's ownership is extractable.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies Alphabet Inc. as a company and says Googleplex is home to Alphabet Inc.",
+          "quote": "image_caption = Googleplex, home to Alphabet Inc. in Mountain View, California | type = Public company|Public",
+          "verdict_reason": "This is a high-quality Wikipedia snippet about Alphabet Inc., the entity relevant to Google's ownership, but the excerpt does not explicitly state that Alphabet owns Google.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Google's parent company is Alphabet Inc., which owns Google as a wholly owned subsidiary since 2015.",
+          "quote": "Google's parent company Alphabet Inc. has been described as a Big Tech company. In 2015, Google was reorganized as a wholly owned subsidiary of Alphabet Inc.",
+          "verdict_reason": "The snippet directly answers the query by explicitly stating that Alphabet Inc. is Google's parent company and owns Google as a wholly owned subsidiary.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_022",
+      "claim_index": 1,
+      "claim": "However, it has since been used for other purposes, such as remote access and system manipulation and as a keyboard shortcut in software programs",
+      "cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [
+        "d4"
+      ],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 0.75,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Bill Gates stated that the design team did not want to provide a single button, leading to the three-key combination.",
+          "quote": "design didnΓÇÖt want to give us our single button,ΓÇ¥ Gates said at a Harvard University event at the time.",
+          "verdict_reason": "The snippet provides a direct quote from Bill Gates explaining the lack of a single-button option, which is relevant evidence for the query, though it is an older excerpt and may not cover the full technical history.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Attackers with network KVM access could send a Ctrl + Alt + Del sequence to a system.",
+          "quote": "If an attacker gain access to the network KVM, then they could send keystrokes to your system. They wouldn't have access to the power button, but they could send a Ctrl + Alt + Del sequence.",
+          "verdict_reason": "Snippet addresses Ctrl+Alt+Del usage in a security context but discusses remote attacks rather than explaining the historical reason for its use as an unlock mechanism.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM to reboot a computer or summon the task manager.",
+          "quote": "Control-Alt-Delete was invented in 1981 by David Bradley while working at IBM.[249] ... used to reboot a computer, and summon the task manager or operating system.",
+          "verdict_reason": "Snippet identifies the inventor and original technical purpose (reboot/task manager) but does not explain the specific reason for its adoption as a widespread 'unlock' mechanism.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet lists generic keyboard shortcuts for a specific workshop tool and does not address the query about the history or reason for the Control-Alt-Delete combination used to unlock computers.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ]
+}

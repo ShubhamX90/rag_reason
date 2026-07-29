@@ -1,0 +1,1441 @@
+{
+  "variant": "benchmark_set_all_modes/qwen32b/oracle_notes/strict/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_notes/strict/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen32b/oracle_notes/strict/baseline/final/detailed_results.json",
+    "source_final_sha256": "8aec56d8ea64e345677fad197f5d0276fb98216c7433a6f14367476ca61ad892",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen32b/oracle_notes/strict/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen32b/oracle_notes/strict/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1840,
+    "claims_with_citations": 58,
+    "claims_with_committee_support_set": 1736,
+    "claims_with_any_approved_citation": 49,
+    "claims_with_any_gold_positive_citation": 58,
+    "committee_alignment_precision_macro": 0.7227011494252874,
+    "committee_alignment_precision_micro": 0.6339869281045751,
+    "gold_positive_citation_precision_macro": 1.0,
+    "gold_positive_citation_precision_micro": 1.0,
+    "soft_extra_citation_rate_micro": 0.3660130718954248,
+    "hard_negative_citation_rate_micro": 0.0,
+    "committee_support_citation_recall_macro": 0.028225806451612902,
+    "committee_support_citation_recall_micro": 0.028225806451612902,
+    "claims_with_any_soft_extra_rate": 0.3793103448275862,
+    "claims_with_any_hard_negative_rate": 0.0,
+    "strict_committee_alignment_claim_rate": 0.01956521739130435,
+    "strict_gold_clean_claim_rate": 0.026630434782608695,
+    "strict_grounded_committee_clean_rate_all_claims": 0.01956521739130435,
+    "strict_grounded_gold_clean_rate_all_claims": 0.026630434782608695,
+    "total_cited_docs": 153,
+    "total_approved_cited_docs": 97,
+    "total_gold_positive_cited_docs": 153,
+    "total_soft_extra_cited_docs": 56,
+    "total_hard_negative_cited_docs": 0
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "hotpotqa_0062",
+      "claim_index": 1,
+      "claim": "The series is known for its satirical take on a variety of topics",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d8",
+        "d7",
+        "d4",
+        "d3",
+        "d10",
+        "d6"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d10",
+        "d2",
+        "d3",
+        "d4",
+        "d6",
+        "d7",
+        "d8",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d10",
+        "d2",
+        "d3",
+        "d4",
+        "d6",
+        "d7",
+        "d8"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d10",
+        "d2",
+        "d3",
+        "d4",
+        "d6",
+        "d7",
+        "d8"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet says South Park is an American animated television series created by Trey Parker and Matt Stone.",
+          "quote": "\"South Park\", an American animated television series created by Trey Parker and Matt Stone",
+          "verdict_reason": "It identifies South Park and its creators, matching the queried series, but it discusses season seven and does not mention Funnybot or season fifteen.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "South Park is an American animated television series created by Trey Parker and Matt Stone.",
+          "quote": "\"Major Boobage\" is the third episode in season 12 of the American animated television series \"South Park\". The episode was co-written by series creators Trey Parker and Matt Stone",
+          "verdict_reason": "Document confirms South Park is created by Trey Parker and Matt Stone, but addresses a different episode (season 12, not season 15) and does not mention \"Funnybot\".",
+          "source_quality": "high"
+        },
+        "d8": {
+          "verdict": "partially supports",
+          "key_fact": "South Park is an American animated television series created by Trey Parker and Matt Stone.",
+          "quote": "South Park\", an American animated television series created by Trey Parker and Matt Stone,",
+          "verdict_reason": "The snippet identifies South Park and its creators, matching the queried series, but it discusses season 10 and does not mention \"Funnybot\" or season 15 episode 2.",
+          "source_quality": "low"
+        },
+        "d7": {
+          "verdict": "partially supports",
+          "key_fact": "South Park is an American animated television series created by Trey Parker and Matt Stone.",
+          "quote": "Season nine of \"South Park\", an American animated television series created by Trey Parker and Matt Stone, began airing on March 9, 2005.",
+          "verdict_reason": "Document confirms South Park is created by Trey Parker and Matt Stone, but addresses season 9, not season 15 where 'Funnybot' appears. Same entity, wrong season.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet identifies South Park as an American animated television series created by Trey Parker and Matt Stone.",
+          "quote": "South Park\", an American animated television series created by Trey Parker and Matt Stone,",
+          "verdict_reason": "It names the series and its creators, matching the query’s target show, but it discusses season 12 and does not mention Funnybot or season 15 episode ordering.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "South Park is an American animated television series created by Trey Parker and Matt Stone.",
+          "quote": "South Park\", an American animated television series created by Trey Parker and Matt Stone,",
+          "verdict_reason": "The snippet identifies South Park and its creators, matching the query’s series, but it discusses season eight rather than stating that Funnybot is season fifteen’s second episode.",
+          "source_quality": "low"
+        },
+        "d10": {
+          "verdict": "partially supports",
+          "key_fact": "South Park is an animated television series created by Matt Stone and Trey Parker.",
+          "quote": "Eric Theodore Cartman, often referred to as just Cartman, is a main character in the animated television series \"South Park\", created by Matt Stone and Trey Parker",
+          "verdict_reason": "Snippet confirms South Park is created by Trey Parker and Matt Stone, but does not identify which series 'Funnybot' belongs to or confirm it is the second episode of season fifteen.",
+          "source_quality": "high"
+        },
+        "d6": {
+          "verdict": "partially supports",
+          "key_fact": "South Park is an American animated sitcom created by Trey Parker and Matt Stone, and the fifteenth season aired on Comedy Central from April 27, 2011 to November 16, 2011.",
+          "quote": "The fifteenth season of the American animated sitcom \"South Park\" began airing on Comedy Central on April 27, 2011 and ended on November 16, 2011. In response to reactions to the mid-season finale episode \"You're Getting Old\", which seemed to insinuate that creators Trey Parker and Matt Stone were wrapping up the series",
+          "verdict_reason": "Snippet confirms South Park is the series created by Trey Parker and Matt Stone and identifies season 15, but does not explicitly confirm that \"Funnybot\" is the second episode of that season.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_146",
+      "claim_index": 3,
+      "claim": "However, the specific steps of how these components work together to cool the air are not fully explained in the retrieved evidence",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d5",
+        "d4",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Ductless air conditioners are a type of air conditioner that uses an outdoor unit.",
+          "quote": "Ductless air conditioners are air conditioners that use an outdoor",
+          "verdict_reason": "Snippet addresses the query topic by defining a specific AC type but cuts off before explaining the cooling mechanism, providing only partial evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document explains that swamp coolers cool air by evaporating moisture from wet pads, but only mentions noise regarding air conditioner condensers.",
+          "quote": "1 Swamp coolers: A system for cooling the air in a home by passing warmer outdoor air over wet pads. This causes the moisture on the pads to evaporate, cooling the air.",
+          "verdict_reason": "The snippet discusses cooling systems but primarily defines swamp coolers, offering no direct explanation of the air conditioner cooling mechanism beyond a mention of condenser noise.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "An air conditioner is described as a complex device simplified into three sections: compressor, condenser, and an implied third section.",
+          "quote": "A complex device which has been simplified into 3 sections: compressor, condenser,",
+          "verdict_reason": "The snippet identifies key components (compressor, condenser) relevant to cooling but is incomplete, cutting off before explaining the mechanism or the third section.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists six types of air conditioners and notes that central air conditioners can cool homes efficiently.",
+          "quote": "There are six different types of air conditioners; Central Air Conditioning Air Conditioners, Ductless Air Conditioners, Split System Air Conditioners, Hybrid Air Conditioners, Portable Air Conditioners, and Window Air Conditioners. Most people go for Central Air Conditioning Air Conditioners as they can cool homes efficiently.",
+          "verdict_reason": "The snippet addresses the same entity (air conditioners) and mentions cooling efficiency but fails to explain the mechanism of how they cool air, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses air conditioner installation locations but does not explain the cooling mechanism.",
+          "quote": "Installing Air Conditioner Units How to Install an Air Conditioner The location for installing air conditioner units depend if you want to cool a single room or the whole house.",
+          "verdict_reason": "Snippet addresses the same entity (air conditioners) and goal (cooling) but discusses installation rather than the requested mechanism, making it incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_c479e83e408f",
+      "claim_index": 1,
+      "claim": "While other documents provide additional context and statistics, they do not alter the specific count provided",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document is a video compilation of Kylian Mbappé's Champions League goals for the 2025/26 season.",
+          "quote": "YouTube Kylian Mbappé - Every Champions League Goal 2025/26 - YouTube",
+          "verdict_reason": "The snippet identifies a source containing the relevant goal data for the specified season but does not explicitly state the total count in the text.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document references a video about Kylian Mbappé's 15 Champions League goals but does not specify the season or confirm the count for last season.",
+          "quote": "top-scorer-watch-kylian-mbappe-s-15-champions-league-goals-t",
+          "verdict_reason": "The snippet mentions Mbappé and a specific goal count (15) in a URL title, addressing the entity and topic, but lacks the specific season data required to fully answer the 'last season' query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document provides Kylian Mbappé's total Champions League goals and goals by club but does not explicitly state the number of goals scored in the specific last season.",
+          "quote": "OverallGames: 98 Goals: 70 By club Monaco: 9 games, 6 goals Paris: 64 games, 42 goals Real Madrid: 25 games, 22 goals",
+          "verdict_reason": "The snippet details total and per-club stats but lacks the specific seasonal breakdown requested, making it incomplete evidence for the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document references Kylian Mbappé reaching 60 Champions League goals but does not specify his goal count for last season.",
+          "quote": "kylian-mbappe-on-reaching-60-champions-league-goals",
+          "verdict_reason": "The URL confirms the entity and topic (Mbappé's UCL goals) but the snippet lacks the specific 'last season' statistic requested, offering only a career milestone context.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_099",
+      "claim_index": 1,
+      "claim": "The snippets offer various historical contexts and scheduling changes, but they do not pinpoint the specific year",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The 1981 strike cancelled 38 percent of the Major League schedule, indicating the season length was subject to change by that time.",
+          "quote": "The strike began on June 12 and forced the cancellation of 713 games (or 38 percent of the Major League schedule) in the middle of the regular season.",
+          "verdict_reason": "Snippet discusses the 1981 MLB season length and cancellations, providing context for the 162-game era but failing to state when the 162-game schedule began.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses MLB rule changes in 1969 but does not mention when the season expanded to 162 games.",
+          "quote": "history of Major League Baseball. Detroit Tigers pitcher Denny McLain won 31 games, making him the only pitcher to win 30 games in a season since Dizzy Dean in 1934.",
+          "verdict_reason": "The snippet addresses MLB history and the same era (late 1960s) as the 162-game expansion but lacks the specific fact, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The 1946 All-American Girls Professional Baseball League season utilized a 112-game schedule.",
+          "quote": "The eight teams competed through a 112 game schedule, while the final Shaugnessy playoffs faced season winner Racine against defending champion Rockford",
+          "verdict_reason": "Snippet addresses baseball season length (112 games in 1946) for a specific league, providing relevant but incomplete evidence regarding the query about the 162-game standard.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The 2014 season maintained the existing schedule format where teams played 19 games against division opponents, implying the 162-game structure was already in place.",
+          "quote": "No significant changes were made to the 2014 schedule. As was the case in 2013, each team played 19 games against each division opponent",
+          "verdict_reason": "Snippet addresses the schedule structure for 2014 but does not state when the 162-game season began, offering only indirect evidence about the existing format.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_b281f09f0959",
+      "claim_index": 1,
+      "claim": "McCarthy's actions and allegations significantly contributed to the fear and suspicion surrounding communism during this period",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists secondary sources and photographs identifying Senator Joseph R. McCarthy as the central figure of the McCarthy era and Red Scare.",
+          "quote": "Nightmare in Red: The McCarthy Era in Perspective by Richard M. Fried... The Politics of Fear: Joseph R. McCarthy and the Senate by Robert Griffith",
+          "verdict_reason": "The snippet strongly associates McCarthy with the era through titles and photos but lists sources rather than explicitly stating he started the Red Scare.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Roy Cohn served as chief counsel to Senator Joseph McCarthy during the Red Scare in the 1950s.",
+          "quote": "Roy Cohn, who served as a chief counsel to Senator Joseph McCarthy during the Red Scare in the 1950s and would later become a leading mob attorney.",
+          "verdict_reason": "The snippet identifies Joseph McCarthy as a central figure of the Red Scare but does not explicitly state he started it, providing relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Joseph McCarthy played a role in stoking fears of communism during the 1950s Red Scare.",
+          "quote": "Joseph McCarthy and his role in stoking fears of communism and its sympathizers during the 1950s.",
+          "verdict_reason": "The snippet identifies Joseph McCarthy's role in the 1950s Red Scare but does not explicitly state he 'started' it, making it partial evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_045",
+      "claim_index": 1,
+      "claim": "While other documents provide context about the character, they do not contradict the actress's identity",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Stifler's Mom appearing in a Mercedes-Benz coupe but does not name the actress who plays her.",
+          "quote": "a Mercedes-Benz coupe with darkened windows turns up, Finch approaches and it turns out Stifler's Mom has come after all.",
+          "verdict_reason": "The snippet confirms the character's presence in the film but fails to identify the actress, providing incomplete evidence for the specific query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet discusses Jennifer Pickett's role as a mother in Ferris Bueller's Day Off but does not mention Stifler's mom or American Pie.",
+          "quote": "Pickett, however, is best known to audiences for her lighter turn as Katie Bueller, Ferris Bueller's loving and unsuspecting mother, in the 1986 American comedy movie",
+          "verdict_reason": "The snippet discusses an actress playing a 'mom' role in a different movie, providing tangential but incomplete evidence regarding the specific query about Stifler's mom.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions Stifler's mom receiving sexual gratification from Noah Levenstein but does not name the actress who plays her.",
+          "quote": "In a mid-credits scene, Noah Levenstein receives sexual gratification from Stifler's mom at a movie theater.",
+          "verdict_reason": "The snippet discusses the character 'Stifler's mom' and her actions, confirming relevance to the entity, but fails to provide the specific actress's name requested by the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0010",
+      "claim_index": 1,
+      "claim": "This is confirmed by the historical context provided in other sources",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Activision Blizzard is listed as a subsidiary with an owner field present in the infobox, but the owner value is not populated in the provided snippet.",
+          "quote": "type = Subsidiary | traded_as = NASDAQ was|ATVI (2008–2023) | owner =",
+          "verdict_reason": "The snippet is about Activision Blizzard ownership structure but the owner field is empty. The document is clearly relevant to the query but does not provide the actual owner information needed to fully answer the question.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Activision Blizzard was traded on NASDAQ as ATVI from 2008 to 2023 and is described as a subsidiary.",
+          "quote": "type = Subsidiary | traded_as = NASDAQ was|ATVI (2008–2023)",
+          "verdict_reason": "Document is about Activision Blizzard but appears to be an older Wikipedia revision (timestamp 2025-06-14, but metadata indicates historical content). The snippet shows ATVI trading ended in 2023, suggesting ownership changed. Does not directly state current owner.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Bobby Kotick and a small group of investors bought Activision around 1991 for approximately $500,000.",
+          "quote": "the company was bought for around US$500,000 by Bobby Kotick and a small group of investors around 1991",
+          "verdict_reason": "Snippet addresses Activision's ownership history but does not answer current ownership of Activision Blizzard. It provides historical ownership information that is outdated relative to the query's present-tense framing.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_f7d6e484b579",
+      "claim_index": 1,
+      "claim": "While earlier documents mention playoff appearances up to 2001 , the most recent evidence indicates a more recent playoff appearance in the current season . also confirms their playoff participation in June 2021, suggesting that their most recent playoff appearance is likely within the past few years. provides historical context but does not affect the recent timeline",
+      "cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2",
+        "d3"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document notes the 76ers reached the 2001 finals but cuts off while discussing events after Allen Iverson was traded in 2006, failing to provide the most recent playoff appearance.",
+          "quote": "Iverson led the 76ers to the 2001 finals, but the franchise lost to the Lakers for a fifth time in the NBA's championship series. Iverson was traded away in 2006, and the",
+          "verdict_reason": "The snippet discusses the same entity and playoff history but is incomplete and outdated, cutting off in 2006 without answering when the *last* time they made the playoffs was.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The Philadelphia 76ers last won the Eastern Conference Finals in the 2000-01 season against the Milwaukee Bucks.",
+          "quote": "The Philadelphia 76ers won in the 2001 Eastern Conference Finals against the Milwaukee Bucks, 4 games to 3.",
+          "verdict_reason": "Snippet addresses the same entity and provides a specific playoff milestone (2001 ECF), but does not explicitly state the absolute last time the team made the playoffs, which could be later than 2001.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0166",
+      "claim_index": 1,
+      "claim": "While an older revision also mentions Narendra Modi as the incumbent Prime Minister, the newer revision ensures the information is current",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Narendra Modi is the incumbent Prime Minister of India, having held office since 26 May 2014.",
+          "quote": "incumbent = Narendra Modi acting = incumbentsince = 26 May 2014",
+          "verdict_reason": "Document identifies Narendra Modi as incumbent PM with tenure start date, but is an older Wikipedia revision (timestamp 2025-12-13) that may not reflect current status. Provides conflict-bearing evidence about the same entity.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_c3f10dc1632d",
+      "claim_index": 2,
+      "claim": "Although other documents provide partial information, they do not contradict this finding",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Shanghai borders the Yangtze River estuary to the north rather than naming a specific province.",
+          "quote": "It borders the estuary of Yangtze River to the north, Jiangsu and Zhejiang Provinces to the west and Hangzhou Bay to the south.",
+          "verdict_reason": "Snippet addresses the northern border but cites a river estuary instead of a province, providing incomplete evidence for the specific query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Jiangsu Province borders Shanghai Municipality.",
+          "quote": "Jiangsu Province borders Shanghai Municipality, and provinces of Zhejiang, Anhui, Shandong and Henan.",
+          "verdict_reason": "Snippet confirms Jiangsu borders Shanghai but lists multiple neighbors without specifying which is to the north, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Zhejiang Province borders Shanghai to the south, implying Shanghai is to Zhejiang's north, but the text does not explicitly name the province bordering Shanghai to the north.",
+          "quote": "Zhejiang Province ... borders the East China Sea to the east, Fujian to the south, Jiangxi and Anhui to the west, and Shanghai and Jiangsu to the north.",
+          "verdict_reason": "The snippet identifies Zhejiang's neighbors, stating Shanghai and Jiangsu are to Zhejiang's north. This implies Jiangsu borders Shanghai, but does not explicitly state which province is north of Shanghai, making it partial evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet states Shanghai borders Jiangsu and Zhejiang to the west but cuts off before specifying the northern border.",
+          "quote": "Bordering on Jiangsu and. Zhejiang provinces on the west, Shanghai is washed by the East China. Sea on the east and Hangzhou Bay on the south. North of the city",
+          "verdict_reason": "The snippet addresses the same entity and border context but is incomplete, cutting off exactly where the northern border information should appear.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_3781ac7b3ead",
+      "claim_index": 1,
+      "claim": "While other documents provide historical context and nominations, they do not contradict this fact",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The article discusses Tony Award nominations and events for 2026 but does not state the winner for Best Actor in a Musical.",
+          "quote": "Tony Award Nominations 2026: The Lost Boys and Schmigadoon! Lead the Pack as Major Rivals Score Big — See the Full List",
+          "verdict_reason": "The snippet addresses the same entity (Tony Awards) and category context but focuses on 2026 nominations rather than identifying a specific winner for Best Actor in a Musical.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists past winners for Best Actor in a Musical from 2006 to 2009, including Paulo Szot in 2008.",
+          "quote": "| 2008 | Best Performance by an Actor in a Leading Role in a Musical | Paulo Szot | Rodgers & Hammerstein's South Pacific | Award winner |",
+          "verdict_reason": "The snippet provides historical winners for the queried category but does not identify the current or most recent winner, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Jason Alexander won the 1989 Tony Award for Best Actor in a Musical.",
+          "quote": "Jason Alexander wins 1989 Tony Award for Best Actor in a Musical",
+          "verdict_reason": "Snippet confirms a specific year's winner but does not address the general or current winner implied by the query, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Jackman won a Tony Award for his role in The Boy from Oz.",
+          "quote": "In Broadway theatre, Jackman won a Tony Award for his role in The Boy from Oz.",
+          "verdict_reason": "Snippet identifies a specific actor (Jackman) who won a Tony, addressing the query entity, but lacks the specific category (Best Actor in a Musical) and year context.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_041",
+      "claim_index": 1,
+      "claim": "While other documents provide context about the New Testament, they do not directly state the total number of books",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.25,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document states the Old Testament contains 39, 46, or more books depending on the tradition.",
+          "quote": "The Old Testament contains 39 (Protestant), 46 (Catholic), or more (Orthodox and other) books, divided, very broadly, into the Pentateuch (Torah), the historical books, the \"wisdom\" books and the prophets.",
+          "verdict_reason": "The snippet discusses Bible book counts but only for the Old Testament, not the New Testament requested. It is relevant context but incomplete.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The manuscript Minuscule 205 contains the New Testament with books ordered as Gospels, Acts, Catholic epistles, Pauline epistles, and Apocalypse.",
+          "quote": "The codex contains the text of the New Testament on 441 parchment leaves... The order of books: Gospels, Acts of the Apostles, Catholic epistles, Pauline epistles, and Apocalypse.",
+          "verdict_reason": "The snippet lists the categories of books in a specific New Testament manuscript but does not provide the total count requested by the query.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The manuscript Minuscule 51 contains the New Testament text except for the Book of Revelation.",
+          "quote": "The codex contains the text of the New Testament except Book of Revelation on 325 parchment leaves",
+          "verdict_reason": "The snippet discusses the contents of a specific New Testament manuscript but does not state the total number of books in the standard New Testament canon.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet mentions that certain ancient Jewish books are quoted in the New Testament but does not state the total number of New Testament books.",
+          "quote": "Enoch and Jubilees which are ancient Jewish books that only survived in Ge'ez but are quoted in the New Testament",
+          "verdict_reason": "The snippet discusses the New Testament in the context of the Ethiopian Bible canon but fails to provide the specific count of New Testament books requested.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "wikirevision_0013",
+      "claim_index": 1,
+      "claim": "This is confirmed by the information provided in the retrieved documents",
+      "cited_docs": [
+        "d2",
+        "d1",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.3333333333333333,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "LinkedIn is a subsidiary company with key executives including Jeff Weiner as Executive Chairman and Daniel Shapero as CEO.",
+          "quote": "company_type = Subsidiary | key_people = Jeff Weiner small|(Executive Chairman) Daniel Shapero small|(CEO)",
+          "verdict_reason": "Snippet identifies LinkedIn as a subsidiary but does not explicitly state the parent company owner. Wikipedia infobox structure implies Microsoft ownership through context, but direct ownership statement is absent from snippet.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "LinkedIn is a subsidiary company with founders Reid Hoffman and Eric Ly, and is currently owned by Microsoft as indicated by its subsidiary status and Microsoft's 2025 annual report reference.",
+          "quote": "company_type = Subsidiary | founder = Reid Hoffman|Eric Ly",
+          "verdict_reason": "Snippet confirms LinkedIn's subsidiary status and founders but does not explicitly state current owner. Microsoft ownership is implied through subsidiary classification and revenue citation from Microsoft's 2025 report, but lacks direct ownership statement.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "Microsoft acquired LinkedIn in December 2016.",
+          "quote": "Microsoft acquired LinkedIn in December 2016.",
+          "verdict_reason": "The snippet directly answers who owns LinkedIn by stating Microsoft acquired it in December 2016. This is the current ownership information.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_42796b35e143",
+      "claim_index": 1,
+      "claim": "While d3 and d4 mention uncertainty about future seasons, they do not contradict the fact that three seasons have already been released . and confirm the existence of at least the first and third seasons, respectively, but do not provide the total count independently",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet confirms the existence and episode count of The Mandalorian season 1.",
+          "quote": "The release schedule for the eight episodes of The Mandalorian season 1 is: Tuesday November 12th, 3 a.m. PST.",
+          "verdict_reason": "The snippet addresses the same entity but only confirms season 1, leaving the total number of released seasons incomplete.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that The Mandalorian has 3 seasons and notes no plans for a fourth season have been revealed yet.",
+          "quote": "The Mandalorian has yet to reveal any plans for season 4... Seasons : 3",
+          "verdict_reason": "The snippet explicitly lists 3 seasons but frames this within a context where season 4 plans are unrevealed, making it potentially outdated or incomplete evidence for a 'how many released' query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists episodes for Season 3 of The Mandalorian but does not state the total number of released seasons.",
+          "quote": "EPISODES thumbnail - S3:E1 Chapter 17: The Apostate ... thumbnail - S3:E8 Chapter 24: The Return",
+          "verdict_reason": "The snippet confirms Season 3 exists by listing its episodes, addressing the entity, but fails to provide the total count of released seasons required to fully answer the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states there is no confirmed information on the total number of seasons for The Mandalorian.",
+          "quote": "There is no information regarding how many seasons The Mandalorian will run in total.",
+          "verdict_reason": "The snippet addresses the exact query about season count but explicitly states the information is unknown, making it conflict-bearing but incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_4e635a2542a8",
+      "claim_index": 1,
+      "claim": "While other documents mention different pianists for later quintets, the evidence clearly indicates that Red Garland was the pianist in the first quintet",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d5",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d1",
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Wynton Kelly played piano in the Miles Davis Quintet during their October 1960 Paris concerts.",
+          "quote": "Miles Davis (trumpet); Sonny Stitt (alto and tenor saxophones); Wynton Kelly (piano); Paul Chambers (bass); Jimmy Cobb (drums) Recording date 11 October 1960",
+          "verdict_reason": "The snippet identifies Wynton Kelly as the pianist for a 1960 quintet, which is relevant but likely not the 'first' quintet (1955-1957), making it incomplete evidence for the specific query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies Red Garland as the pianist in Miles Davis' 1955 band but does not explicitly label this group as his first quintet.",
+          "quote": "In 1955, Davis assembled his first important band with John Coltrane, Red Garland, Paul Chambers, and Philly Joe Jones",
+          "verdict_reason": "The snippet names Red Garland as the pianist in Davis' 1955 band, which is historically the first quintet, but the text calls it his 'first important band' rather than explicitly 'first quintet'.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses the Second Miles Davis Quintet rather than the first quintet requested.",
+          "quote": "Unlocking the Mysteries of the Second Miles Davis Quintet",
+          "verdict_reason": "Snippet addresses the same entity (Miles Davis quintets) but focuses on the second quintet, providing conflict-bearing context without answering the specific query about the first.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Red Garland is identified as the pianist for the Miles Davis Quintet on the 1957 album Relaxin'.",
+          "quote": "Again with John Coltrane's tenor sax and pianist Red Garland's trio with Paul Chambers on bass and Philly Joe Jones at the drums.",
+          "verdict_reason": "Snippet confirms Red Garland played piano in a 1957 Miles Davis Quintet lineup, which is relevant but does not explicitly confirm if this was the 'first' quintet.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_2150ef9a29c6",
+      "claim_index": 1,
+      "claim": "While other documents confirm the existence of official casualty lists and provide broader casualty estimates, the specific number of US casualties is clearly stated in the retrieved evidence",
+      "cited_docs": [
+        "d2",
+        "d4",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "approved_cited_docs": [
+        "d4",
+        "d5"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists specific casualty estimates for several nations but states that compiling total numbers is controversial and statistics are notoriously unreliable.",
+          "quote": "Historians often put forward many different estimates of the numbers killed and wounded during World War II. The authors of the _Oxford Companion to World War II_ maintain that \"casualty statistics are notoriously unreliable\".",
+          "verdict_reason": "The snippet addresses the query by providing partial data for specific countries but explicitly states that a single total figure is disputed and unreliable, thus only partially resolving the question.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The National Archives holds scanned World War II casualty lists created by the Departments of War and the Navy.",
+          "quote": "World War II Casualty Lists The Departments of War and the Navy created lists of casualties during World War II. The National Archives scanned those lists",
+          "verdict_reason": "Snippet confirms existence of official casualty lists but does not provide the specific total number of casualties requested in the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that World War II resulted in nearly 70 million deaths, including around 40 million civilians.",
+          "quote": "Casualties of World War II represent one of the most devastating human costs in history, with nearly 70 million deaths, including around 40 million civilians.",
+          "verdict_reason": "The snippet provides a total casualty estimate but does not isolate the specific number of US casualties requested by the query, though it mentions US figures later in the text.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document references a project to create a database of all 407,000 American WW2 military casualties.",
+          "quote": "Chip in to help Bill create the world's first complete, public (and free) database of all 407,000 American WW2 military casualties.",
+          "verdict_reason": "Snippet provides a specific casualty count (407,000) but limits it to American military casualties, whereas the query asks for total US casualties in WWII.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_04e1627e9fc5",
+      "claim_index": 3,
+      "claim": "Additionally, the impact of nematodes on soil fertility can vary based on the type of fertilization and environmental conditions",
+      "cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The study found that tillage and fertilization interactions significantly influence soil nematode abundance.",
+          "quote": "Our findings indicate that the interaction between tillage and fertilization significantly influenced the soil's total abundance of nematodes and trophic",
+          "verdict_reason": "Snippet addresses the same entity (nematodes/soil) and provides relevant findings on abundance drivers, but does not explicitly state whether nematodes increase fertility.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Soil nematodes directly influence nutrient cycling by feeding on microorganisms and releasing nutrients available to plants.",
+          "quote": "Soil nematodes are key indicators of soil health and directly influence nutrient cycling. ... Both groups, by feeding on microorganisms, release nutrients available to plants.",
+          "verdict_reason": "The snippet confirms nematodes release nutrients, supporting fertility, but notes inorganic fertilizers can negatively affect them, making the evidence nuanced rather than a simple yes.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_28e155139ec1",
+      "claim_index": 1,
+      "claim": "the latest version of Android is Android 16, which was released on December 2, 2025",
+      "cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d2"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "The latest version of Android is 16, released on June 10, 2025.",
+          "quote": "The Latest Version of Android is 16. Android 16 is the latest version of Android, and it was released on June 10, 2025.",
+          "verdict_reason": "The snippet explicitly states the latest Android version number and release date, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "The latest version of Android is Android 16, which was released on December 2, 2025.",
+          "quote": "The latest Android 16 release brings AI-powered notification tools, more advanced customization and stronger parental controls. Dec 02, 2025",
+          "verdict_reason": "The snippet explicitly identifies Android 16 as the latest release and provides a specific release date of December 2, 2025, directly answering the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_004",
+      "claim_index": 1,
+      "claim": "However, the exact location is not explicitly confirmed in the retrieved documents",
+      "cited_docs": [
+        "d4",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d4"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses spring training in Florida and mentions renovations to Pirate City, but does not explicitly state that the St. Louis Cardinals train there.",
+          "quote": "Florida. Only the Detroit Tigers in Lakeland (65 years), and the Philadelphia Phillies in Clearwater (64 years) have been in their Spring training locations longer.",
+          "verdict_reason": "Snippet discusses Florida spring training context and Pirate City (Cardinals' facility) but fails to explicitly name the St. Louis Cardinals or confirm their location.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The St. Louis Browns, not the Cardinals, trained in St. Petersburg starting in 1914.",
+          "quote": "drew in the city's first spring training tenant, the St. Louis Browns, in 1914. The club trained at Coffee Pot Park",
+          "verdict_reason": "Snippet discusses a St. Louis team's spring training history but refers to the Browns, not the Cardinals, providing related but incomplete evidence.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_081",
+      "claim_index": 2,
+      "claim": "Although other documents mention boiling water for ice cubes, they focus on safety aspects rather than clarity",
+      "cited_docs": [
+        "d2",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d2"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2"
+      ],
+      "soft_extra_cited_docs": [
+        "d1"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 1.0,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": true,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Boiling water before making ice cubes is recommended to avoid problems associated with tap water, though the text attributes this to bacteria rather than clarity.",
+          "quote": "ice cubes present the same problem that tap water does. You can make your own ice if you boil the water first.",
+          "verdict_reason": "The snippet addresses boiling water for ice to solve a tap water problem, but cites bacteria/safety rather than the physical clarity mechanism requested.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document advises remaking ice cubes with water that has been boiled.",
+          "quote": "Remake ice cubes with water that has been boiled.",
+          "verdict_reason": "The snippet confirms boiling water for ice cubes but lacks the explanation of why this prevents cloudiness, making it incomplete evidence for the query.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": []
+}

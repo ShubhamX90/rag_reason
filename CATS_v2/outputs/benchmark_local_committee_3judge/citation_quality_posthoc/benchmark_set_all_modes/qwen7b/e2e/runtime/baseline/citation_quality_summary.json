@@ -1,0 +1,1854 @@
+{
+  "variant": "benchmark_set_all_modes/qwen7b/e2e/runtime/baseline",
+  "provenance": {
+    "account": "kudhru",
+    "launch": "benchmark_baseline_48_20260705_r2",
+    "remote_cache": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/e2e/runtime/baseline/response_cache",
+    "source_final": "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/e2e/runtime/baseline/final/detailed_results.json",
+    "source_final_sha256": "eddeacb5b1539f493c885835acb22866987b8340a3a5650250869f05a2e1677d",
+    "provenance_type": "exact_cache_match"
+  },
+  "summary": {
+    "detailed_results_path": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/outputs/benchmark_local_committee_3judge/benchmark_set_all_modes/qwen7b/e2e/runtime/baseline/final/detailed_results.json",
+    "input_jsonl": "/Users/shubhammishra/Desktop/rag_reason-CATS_interactive/CATS_v2/inputs/prepped_model_eval_inputs/benchmark_set_all_modes/qwen7b/e2e/runtime/baseline/input.jsonl",
+    "total_samples": 736,
+    "total_claims": 1139,
+    "claims_with_citations": 641,
+    "claims_with_committee_support_set": 1004,
+    "claims_with_any_approved_citation": 582,
+    "claims_with_any_gold_positive_citation": 639,
+    "committee_alignment_precision_macro": 0.7161206448257931,
+    "committee_alignment_precision_micro": 0.6911519198664441,
+    "gold_positive_citation_precision_macro": 0.9944877795111804,
+    "gold_positive_citation_precision_micro": 0.9961046188091264,
+    "soft_extra_citation_rate_micro": 0.30495269894268223,
+    "hard_negative_citation_rate_micro": 0.0038953811908736783,
+    "committee_support_citation_recall_macro": 0.5796812749003984,
+    "committee_support_citation_recall_micro": 0.5796812749003984,
+    "claims_with_any_soft_extra_rate": 0.5039001560062403,
+    "claims_with_any_hard_negative_rate": 0.0093603744149766,
+    "strict_committee_alignment_claim_rate": 0.27480245829675154,
+    "strict_gold_clean_claim_rate": 0.5074626865671642,
+    "strict_grounded_committee_clean_rate_all_claims": 0.27480245829675154,
+    "strict_grounded_gold_clean_rate_all_claims": 0.5074626865671642,
+    "total_cited_docs": 1797,
+    "total_approved_cited_docs": 1242,
+    "total_gold_positive_cited_docs": 1790,
+    "total_soft_extra_cited_docs": 548,
+    "total_hard_negative_cited_docs": 7
+  },
+  "worst_soft_extra_examples": [
+    {
+      "sample_id": "conflictingqa_3f3c3399259a",
+      "claim_index": 3,
+      "claim": "A healthy lifestyle, including regular exercise and a balanced diet, remains the most effective way to reduce the risk of heart disease",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "There is no solid evidence that fish oil lowers heart disease risk, and high doses may increase atrial fibrillation risk.",
+          "quote": "But there's no solid evidence that it lowers your risk of heart disease, and it's not clear if fish oil supplements provide the same benefit as getting your fatty acid straight from the swimming source.",
+          "verdict_reason": "The snippet directly addresses the query by stating there is no solid evidence for risk reduction, providing conflict-bearing scientific evidence rather than a definitive support or irrelevant topic.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Fish oil supplements do not prevent heart attack or stroke, though high doses of purified EPA may lower cardiovascular events despite increasing atrial fibrillation risk.",
+          "quote": "consumers need to know that fish oil supplements do not prevent heart attack or stroke. ... high doses of purified EPA may lower cardiovascular events, but they do come with tradeoffs.",
+          "verdict_reason": "Snippet directly addresses the query with conflicting evidence: it negates general prevention claims but admits specific EPA benefits, representing conflict-bearing scientific evidence.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Accumulated evidence suggests fish oil may reduce cardiovascular event risks, though some studies show inconsistent results.",
+          "quote": "Accumulated evidence showed that fish oil supplementation may reduce the risk of cardiovascular events, and, in specific, it may have potential benefits... however, some studies yielded inconsistent results.",
+          "verdict_reason": "The snippet directly addresses the query by stating fish oil may reduce risk but explicitly notes inconsistent results, making it conflict-bearing evidence rather than a definitive support.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "High doses of fish oil supplements might increase the risk of bleeding and possibly increase the risk of stroke.",
+          "quote": "Taking high doses of fish oil supplements might increase the risk of bleeding and possibly increase the risk of stroke.",
+          "verdict_reason": "The snippet addresses heart disease risk factors by noting potential stroke risks and bleeding, providing relevant but incomplete and cautionary evidence rather than a direct answer on risk reduction.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "While eating fish reduces heart disease risk, the evidence for fish oil supplements remains uncertain.",
+          "quote": "Studies show incorporating fish into your diet is the most favorable way to increase consumption of omega-3 fatty acid. The jury is still out on taking fish oil supplements when it comes to heart health.",
+          "verdict_reason": "The snippet addresses the query directly but states that evidence for supplements is inconclusive ('jury is still out'), providing conflict-bearing evidence rather than a definitive answer.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_bea0b68b5d7f",
+      "claim_index": 2,
+      "claim": "However, they are better for the environment than single-use plastic straws, especially when used in short-term events or for cold drinks",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "A UK government assessment concluded that paper straws emit more greenhouse gases when rotting in landfills compared to plastic straws.",
+          "quote": "an assessment by the UK government also concluded that paper straws emit more greenhouse gases when they rot in landfill compared with plastic.",
+          "verdict_reason": "The snippet provides direct, conflict-bearing evidence regarding the query by citing a specific assessment where paper straws have higher emissions than plastic in landfills, though it notes the overall evidence is mixed.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that paper straws generate 44 times more greenhouse gas emissions than plastic straws.",
+          "quote": "straw is responsible for 44 times as many greenhouse gas emissions compared to a plastic one, while stainless steel straws emit 148 times as much.",
+          "verdict_reason": "The snippet provides specific comparative data on emissions for paper vs. plastic straws, directly addressing the query with conflicting evidence rather than a simple affirmation.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The production of paper straws consumes significant energy and emits greenhouse gases, challenging their eco-friendly status.",
+          "quote": "Paper straws aren't even eco-friendly. The process of making paper straws requires a lot of energy and results in the emission of greenhouse",
+          "verdict_reason": "Snippet directly addresses the query by providing contradictory evidence regarding the environmental friendliness of paper straws, fitting the benchmark rule for conflict-bearing scientific claims.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Paper straws may have a higher carbon footprint than plastic due to production factors, challenging their environmental superiority.",
+          "quote": "Paper straws may have a higher carbon footprint than plastic due to production factors.",
+          "verdict_reason": "The snippet directly addresses the query by presenting evidence that paper straws might be less environmentally friendly regarding carbon footprint, offering a conflicting but relevant perspective.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Paper straws are biodegradable and decompose naturally without leaving harmful residue, unlike plastic straws which take centuries to decompose.",
+          "quote": "First, they are biodegradable, meaning they decompose naturally without leaving harmful residue in the environment. ... Plastic straws ... take centuries to decompose, significantly contributing to ocean and land pollution.",
+          "verdict_reason": "Snippet directly compares environmental impacts (biodegradability vs. persistence) but lacks a definitive overall conclusion on which is 'more friendly' considering other factors mentioned.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_6af6e8cb8f34",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet suggests Queen Charlotte introduced the Christmas tree while Victoria and Albert popularized it.",
+          "quote": "I'm guessing that Queen Charlotte introduced the tree but Victoria and Albert through means of the media popularized it.",
+          "verdict_reason": "The snippet addresses the query by proposing a specific individual (Queen Charlotte) but frames it as a guess rather than a definitive fact, making it incomplete evidence.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Queen Charlotte, the German wife of George III, introduced the first known Christmas tree to the UK in December 1800.",
+          "quote": "the honour of establishing this tradition in the United Kingdom rightfully belongs to 'good Queen Charlotte', the German wife of George III, who set up the first known English tree at Queen's Lodge, Windsor, in December, 1800.",
+          "verdict_reason": "The snippet directly answers the query by identifying Queen Charlotte as the person who introduced the first known Christmas tree to the UK in 1800.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Queen Charlotte introduced the first recorded Christmas tree to the UK in 1800 at Queen's Lodge in Windsor.",
+          "quote": "The first record of this was in 1800 when Queen Charlotte merrily decorated a tree with candles and sweets in anticipation of a Christmas party at Queen's Lodge in Windsor.",
+          "verdict_reason": "The snippet directly identifies Queen Charlotte as introducing the first recorded Christmas tree to the UK in 1800, explicitly answering the query.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Charlotte of Mecklenburg-Strelitz, the German-born wife of George III, was the first to display a Christmas tree in Britain in 1800.",
+          "quote": "It was the German-born wife of George III who first displayed the decoration in Britain. Charlotte of Mecklenburg-Strelitz held a party in 1800 in which the tree had become the centrepiece of the festivities.",
+          "verdict_reason": "The snippet explicitly identifies Charlotte of Mecklenburg-Strelitz as the person who first displayed the Christmas tree in Britain in 1800, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Prince Albert introduced the Christmas tree to England in 1841 by bringing one from Germany to Windsor Castle.",
+          "quote": "The Christmas tree became popular in England in 1841 when Queen Victoria's husband, Prince Albert, brought a Christmas tree over from Germany and put it in Windsor Castle.",
+          "verdict_reason": "The snippet directly identifies Prince Albert as the person who brought the first Christmas tree to England in 1841, fully answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_864fc7e36714",
+      "claim_index": 1,
+      "claim": "Historically, the majority of immigrants lived in the Northeast and Midwest, but now about two-thirds of immigrants reside in the West and South",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "From 1965 to 2007, most immigrants came from Latin America (49%) or Asia (27%), with Mexico alone accounting for about 25%.",
+          "quote": "Most immigrants in this wave came from Latin America (49%) or Asia (27%). Mexico alone accounted for about 25% of these new immigrants.",
+          "verdict_reason": "Snippet provides specific origins for the 1965-2007 wave but cuts off before detailing the 'today' period requested by the implied current tense of the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document discusses shifts in where immigrants settle but explicitly states it is hard to predict where future groups may come from.",
+          "quote": "it's hard to predict where future groups of immigrants may come from, or how quickly that milestone will be reached.",
+          "verdict_reason": "The snippet addresses the topic of immigrant origins but explicitly states uncertainty about future sources, failing to provide the specific countries requested.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "In 2018, the top country of origin for new immigrants coming into the U.S. was China.",
+          "quote": "In 2018, the top country of origin for new immigrants coming into the U.S. was China, with 149,000 people, followed by India (129,000), Mexico (120,000) and the Philippines (46,000).",
+          "verdict_reason": "Snippet identifies top source countries for new arrivals in 2018, addressing the query's entity but providing specific year data rather than a general or current bulk statistic.",
+          "source_quality": "high"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Recent immigrants predominantly originate from South and Central America and the Caribbean, with Mexico, India, and China being the top three countries of origin.",
+          "quote": "Geographically, the new immigrants predominantly originate from South and Central America and the Caribbean, with nearly half of recent immigrants hailing from this region. The top three countries of origin were Mexico (13.19%), India (9.6%), and China (4.99%).",
+          "verdict_reason": "The snippet directly answers the query by identifying the primary regions and specific top countries of origin for recent immigrants.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Since 1965, about half of U.S. immigrants have come from Latin America and another quarter from Asia.",
+          "quote": "Since 1965, about half of U.S. immigrants have come from Latin America, with about a quarter from Mexico alone. About another quarter have come from Asia.",
+          "verdict_reason": "Snippet provides specific regional origins for immigrants since 1965 but does not explicitly name a single 'bulk' source or cover all time periods requested.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_9251c7a33ec5",
+      "claim_index": 5,
+      "claim": "Therefore, it is crucial to consult with a veterinarian to weigh the specific health risks and benefits for each individual pet",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Evidence indicates that spaying or neutering dogs correlates with both positive and adverse health effects, with risks potentially exceeding benefits for most male dogs.",
+          "quote": "The evidence shows that spay/neuter correlates with both positive AND adverse health effects in dogs. ... The number of health problems associated with neutering may exceed the associated health benefits in most cases.",
+          "verdict_reason": "The snippet directly addresses the query by confirming negative health impacts exist alongside benefits, providing conflict-bearing evidence rather than a simple yes/no answer.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Neutering disrupts hormonal feedback loops, causing luteinizing hormone levels to surge up to 30 times average concentrations, which researchers are investigating for potential links to cancer.",
+          "quote": "After sterilization, dogs can experience a surge in LH levels. This surge can reach as high as 30 times the average concentrations, particularly in males. Researchers are exploring if consistently high LH levels can harm different body parts.",
+          "verdict_reason": "The snippet directly addresses negative health impacts by citing a specific hormonal surge and ongoing research into cancer risks, providing conflict-bearing evidence alongside listed benefits.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Research indicates that spaying or neutering dogs can cause luteinizing hormone levels to rise up to 30 times higher, potentially contributing to diseases like urinary incontinence and lymphoma.",
+          "quote": "Dogs spayed or neutered can have LH levels up to 30 times higher than normal. Elevated LH may affect the thyroid, urinary tract, immune system, and even cancer development.",
+          "verdict_reason": "The snippet provides specific evidence of negative health impacts (elevated LH, disease risks) directly addressing the query, but represents ongoing research rather than a definitive final conclusion.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Spaying and neutering carry potential negatives including surgical risks, weight gain, and hormonal changes affecting metabolism and coat quality.",
+          "quote": "Potential Negatives to Consider\nWhile spaying and neutering offer numerous benefits, there are some potential drawbacks to consider:\n1. Surgical Risks: Like any surgical procedure, spaying and neutering carry risks such as bleeding, infection, and adverse reactions to anesthesia.",
+          "verdict_reason": "The snippet directly addresses the query by listing specific negative health impacts (surgical risks, weight gain, hormonal changes), providing conflict-bearing evidence without fully resolving the overall net impact.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_bac0f4d62f96",
+      "claim_index": 1,
+      "claim": "This topic remains under active debate in the scientific community",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "A cometary origin is ruled out for stony meteorite classes with gas-rich members, including carbonaceous chondrites.",
+          "quote": "It appears that a cometary origin can be ruled out for all stony meteorite clases that have gas-rich members. This includes carbonaceous chondrites.",
+          "verdict_reason": "The snippet directly addresses the query by ruling out cometary origins for specific meteorite types, providing conflict-bearing evidence that partially resolves the general question.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Cometary meteoroids make up 0% of fresh meteorites because they are too fragile to survive atmospheric entry.",
+          "quote": "It goes on to claim that cometary meteoroids make up about 95% of observed meteors, 38% of observed fireballs, and 0% of fresh meteorites.",
+          "verdict_reason": "The snippet directly addresses the query by stating cometary meteoroids constitute 0% of fresh meteorites due to fragility, providing specific evidence against the claim while acknowledging the topic is under debate.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that meteorites might originate from comets.",
+          "quote": "Meteorites might also come from comets.",
+          "verdict_reason": "The snippet directly addresses the query by stating meteorites might come from comets, but the use of 'might' and the truncated text make it incomplete evidence rather than a definitive confirmation.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Most scientists believe few, if any, large meteorites originate from comets, though comets contribute micrometeorites.",
+          "quote": "Comets are another potential source of primitive material, but most scientists think that few, if any, large meteorites come from comets.",
+          "verdict_reason": "The snippet directly addresses the query by stating the scientific consensus that comets rarely produce large meteorites, providing relevant but nuanced evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_f39c966c2ec1",
+      "claim_index": 1,
+      "claim": "This curse has been associated with numerous accidents and mishaps throughout the play's history, leading many to believe in its supernatural origins",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Sources list an accident where the male actor intended to play Lady Macbeth in the very first performance fell ill and died before appearing on stage.",
+          "quote": "Wikipedia and other sources (my theatre history books) list a number of such",
+          "verdict_reason": "Relevant evidence: Sources list an accident where the male actor intended to play Lady Macbeth in the very first performance fell ill and died before appearing on stage.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that some believe the play is cursed and lists historical accidents, but does not confirm if the curse existed from the very first performance.",
+          "quote": "Some people believe the play Macbeth is",
+          "verdict_reason": "The snippet discusses the curse and lists accidents but does not explicitly confirm or deny if the curse started from the first performance, making it relevant but incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The snippet claims the curse began when a witch coven objected to Shakespeare using their spells, causing the actor playing Lady Macbeth to die during the first performance.",
+          "quote": "The witch coven objected to Shakespeare's use of the spells and ended up cursing the play... During the first performance (around 1606), the actor playing Lady Macbeth died suddenly",
+          "verdict_reason": "The snippet directly addresses the query by claiming the curse originated at the first performance, but it presents unverified folklore rather than definitive historical fact.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Folklore states that Macbeth was cursed from the beginning because witches objected to Shakespeare using real incantations.",
+          "quote": "According to folklore, Macbeth was cursed from the beginning. A coven of witches objected to Shakespeare using real incantations, so they put a curse on the play.",
+          "verdict_reason": "The snippet directly answers the query by stating the folklore belief that the play was cursed from the beginning due to witches objecting to real incantations.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_e1a40e76ba15",
+      "claim_index": 0,
+      "claim": "The Bills vs. Bengals game on January 2, 2023, resumed play approximately 21 minutes after Damar Hamlin suffered cardiac arrest, which was around 8:11 PM MT",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "The game was suspended 21 minutes after the injury and officially suspended until further notice, rather than resuming play.",
+          "quote": "The game was suspended 21 minutes after the injury, and players walked off the field slowly. The game has been officially suspended until further notice, according to ESPN.",
+          "verdict_reason": "Snippet addresses the timeline but states the game was suspended indefinitely, contradicting the query's premise that it resumed, thus providing conflict-bearing evidence.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The game was temporarily suspended after Hamlin's collapse, but the snippet does not state when or if play resumed.",
+          "quote": "The crowd was told the game would be temporarily suspended and cheers erupted from the stands as players retreated to the tunnel.",
+          "verdict_reason": "The snippet addresses the same event and confirms suspension but lacks the specific resumption time requested, making it incomplete evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The game was indefinitely postponed with no immediate update on its future status.",
+          "quote": "There was no immediate update about the future status of the game.",
+          "verdict_reason": "Snippet addresses the game's status but states it was postponed with no resumption time, failing to answer the specific minutes query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The article states the NFL officially postponed the game at 8:11 PM MT after an hour of waiting, rather than resuming play.",
+          "quote": "After an hour of waiting and some members of the Bengals warming up to resume play, the NFL officially postponed the game at 8:11 PM MT, and would eventually cancel the game indefinitely.",
+          "verdict_reason": "The snippet addresses the same event and timeline but states the game was postponed/canceled rather than resumed, providing conflict-bearing evidence regarding the query's premise.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_720d8b210357",
+      "claim_index": 1,
+      "claim": "The exact number can vary based on the specific context and conditions of the cell",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d3",
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Humans activate between 30,000 and 50,000 DNA replication origins at each cell division.",
+          "quote": "At each cell division in humans, 30,000–50,000 DNA replication origins are activated, and it remains unclear how they are selected",
+          "verdict_reason": "The snippet directly answers the query by providing a specific numerical range (30,000–50,000) for DNA replication origins in humans, a key eukaryote.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Eukaryotic chromosomes require coordinated initiation of DNA replication from multiple origins due to their large genome size.",
+          "quote": "the entire genome is divided into multiple chromosomes... creating a problem for ensuring that all the DNA molecules on separate chromosomes are replicated only once per cell division cycle",
+          "verdict_reason": "The snippet confirms eukaryotes use 'multiple origins' but does not provide a specific count or range, making it relevant but incomplete for the 'how many' query.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "DNA replication in eukaryotic chromosomes initiates at multiple origins of replication.",
+          "quote": "DNA replication in eukaryotic chromosomes initiates at multiple origins of replication",
+          "verdict_reason": "The snippet directly answers the query by stating that eukaryotes have multiple origins of DNA replication.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Approximately 20 origins of DNA replication have been identified in complex eukaryotes.",
+          "quote": "At present, some 20 origins have been identified in complex eukaryotes (Fig. 1).",
+          "verdict_reason": "The snippet provides a specific count for 'complex eukaryotes' but does not answer for all eukaryotes generally, making it incomplete evidence for the broad query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_7916ffefdb99",
+      "claim_index": 1,
+      "claim": "While d5 suggests that Edward L. Thorndike might be more deserving, Watson remains the figure most commonly associated with the term",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d5"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "John B. Watson is regarded as the founder of behaviorism.",
+          "quote": "Watson is regarded as the founder of behaviorism.",
+          "verdict_reason": "The snippet directly states that Watson is regarded as the founder of behaviorism, which answers the query about the father of modern behaviorism.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "supports",
+          "key_fact": "John B. Watson is identified as the father of behaviorism within psychology.",
+          "quote": "Figure 1. John B. Watson is known as the father of behaviorism within psychology.",
+          "verdict_reason": "The snippet explicitly states that John B. Watson is known as the father of behaviorism, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "John B. Watson is regarded as the father of behaviorism due to his 1913 publication.",
+          "quote": "John B. Watson was a U.S. psychologist who is regarded as the father of behaviorism because of his publication from 1913, Psychology As The Behaviorist Views It.",
+          "verdict_reason": "The snippet explicitly identifies John B. Watson as the father of behaviorism, directly answering the query with a clear statement from the text.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "John B. Watson is often regarded as the father of behaviorism.",
+          "quote": "John B. Watson: Often regarded as the father of behaviorism, Watson advocated for a psychology based on observable behaviors.",
+          "verdict_reason": "The snippet explicitly identifies John B. Watson as the figure often regarded as the father of behaviorism, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "qacc_aaf0f638e99b",
+      "claim_index": 2,
+      "claim": "Drivers can be ticketed for driving at any speed if it is deemed unsafe for the current conditions by law enforcement",
+      "cited_docs": [
+        "d5",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Yellow speed limit signs are non-regulatory advisories indicating a safe speed for curves rather than enforceable limits.",
+          "quote": "The yellow signs you are referring to are what the Manual on Uniform Traffic Control Devices call 'Horizontal Alignment Signs,' and the plaques posted below or on the Horizontal Alignment Signs are called 'Speed Advisories,'",
+          "verdict_reason": "The snippet directly answers the query by defining yellow speed signs as non-regulatory 'Speed Advisories' that suggest safe speeds for curves but are not enforceable limits.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Advisory speeds ending in 5 are typically displayed in a yellow rectangle and suggest a comfortable speed for cornering in dry weather.",
+          "quote": "Suggested or advisory speeds are always found ending in 5. They are almost always for cornering and are either in a yellow rectangle, or attached to chevrons.",
+          "verdict_reason": "Snippet explains yellow rectangular signs with speeds ending in 5 are advisory for corners, but does not explicitly define a 'yellow 35 mph' sign or address the mph vs kph discrepancy.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Multiple forum users state that a yellow sign with a speed indicates a suggested, non-enforceable speed, though one user claims it is enforceable.",
+          "quote": "Yellow signs are suggested speeds. White signs are mandatory... Black on yellow = as stated earlier, suggested speed. It is not enforceable.",
+          "verdict_reason": "The snippet contains conflicting user opinions on whether the sign is suggested or enforceable, providing relevant but contradictory evidence rather than a definitive answer.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "A yellow sign with a 35 mph advisory warns of a low speed sharp right curve ahead and suggests reducing speed to 35 mph in ideal driving conditions.",
+          "quote": "The correct answer is that the sign warns of a low speed sharp right curve ahead, advising drivers to reduce their speed to 35 mph under ideal driving conditions.",
+          "verdict_reason": "The snippet directly answers the query by explaining the meaning of the specific sign described, including the significance of the yellow color and the 35 mph speed.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_ac7a73d20fdd",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Shay Mitchell, who plays Emily Fields, was 23 years old when the show's pilot aired in 2010.",
+          "quote": "Shay Mitchell was 23 when she portrayed 16-year-old Emily Fields. When the show's pilot aired in 2010, Mitchell was 23 years old",
+          "verdict_reason": "The snippet provides the actress's age at the show's start (2010) but does not state her current age or birth year required to calculate her present age.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states that Shay Mitchell, who plays Emily, was 25 years old at the time of the article's publication in early 2016.",
+          "quote": "Emily (Shay Mitchell)... The actress is now 25 years old, which is the closest she's been to her character in age.",
+          "verdict_reason": "The snippet provides Emily's age (25) but reflects a past timestamp (2016), making it outdated for a 'real life' current age query while still being relevant evidence.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Shay Mitchell, the actress who plays Emily Fields, is 39 years old.",
+          "quote": "Shay Mitchell\nShay Mitchell, 39\nEmily Fields",
+          "verdict_reason": "The snippet explicitly lists Shay Mitchell as the actress for Emily Fields and states her age as 39, directly answering the query about the real-life age of the actress playing Emily.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "A user estimates the character Emily is in her mid-20s.",
+          "quote": "Emily is really obviously in her mid-20s",
+          "verdict_reason": "Snippet addresses the character's age but offers a subjective estimate rather than the real-life actress's actual age requested.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_1d741779a31e",
+      "claim_index": 2,
+      "claim": "Therefore, it is recommended that individuals with diabetes consult their healthcare provider to determine the appropriate use of artificial sweeteners based on their specific health conditions and needs",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Recent studies indicate artificial sweeteners may worsen glycemic control by altering gut microbiota and affecting insulin secretion.",
+          "quote": "However, recent studies have shown that artificial sweeteners affect glucose absorption in the intestinal tract as well as insulin and incretin secretion in humans and animals.",
+          "verdict_reason": "The snippet directly addresses safety for diabetics but presents conflicting evidence (worsened control vs. previous beliefs) rather than a definitive yes/no answer.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Artificial sweeteners do not affect blood sugar levels and are safe for people with diabetes to consume.",
+          "quote": "Can People With Diabetes Have Artificial Sweeteners? Yes, they can. Artificial sweeteners are just as sweet ... but they have no calories and don't affect your blood sugar (glucose).",
+          "verdict_reason": "The snippet directly answers the query by confirming safety and explaining that artificial sweeteners do not impact blood glucose levels in diabetics.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Most artificial sweeteners are safe for use by individuals with diabetes.",
+          "quote": "Yes, you can use most artificial sweeteners if you have diabetes.",
+          "verdict_reason": "The snippet directly answers the query by confirming that most artificial sweeteners are usable for diabetics, providing decisive evidence from a high-quality medical source.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_7998e59d9b97",
+      "claim_index": 2,
+      "claim": "However, organic farming is also recognized for its sustainability benefits, such as reduced use of synthetic inputs and better soil health",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming has limited options for no-till techniques compared to conventional farming due to restrictions on synthetic herbicides.",
+          "quote": "Since herbicide applications cannot be widely adopted in organic farming (with some approved exceptions), options for no-till farming can be more limited",
+          "verdict_reason": "Snippet addresses efficiency-related methods (tillage) comparing organic and conventional systems but does not explicitly state overall efficiency levels or yield differences.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Organic farms are approximately 20% less efficient than conventional farms regarding crop yields.",
+          "quote": "When it comes to crop yields, organic farms are about 20% less efficient than conventional farms.",
+          "verdict_reason": "The snippet directly answers the query by stating organic farms are 20% less efficient in crop yields than conventional farms.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "Organic farming practices cannot compete with the crop yields of conventional systems.",
+          "quote": "Organic farming practices have more future value, contributing far less emissions during production processes, but yet cannot compete with the crop yields of conventional systems.",
+          "verdict_reason": "The snippet directly addresses the query by stating organic yields are lower than conventional, supporting the efficiency claim, though it also notes sustainability benefits.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "conflictingqa_8cf8ebb94554",
+      "claim_index": 3,
+      "claim": "Therefore, the decision to use a knee brace should be based on individual circumstances, such as the type of injury, the sport being played the advice of a healthcare provider",
+      "cited_docs": [
+        "d4",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d4"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "Prophylactic knee braces are designed to prevent injuries during contact sports and have proven effective for football players.",
+          "quote": "Prophylactic braces. These are designed to prevent injury to the knees during contact sports. ... Knee braces have proven to be a wise preventative measure in this particular sport.",
+          "verdict_reason": "The snippet directly addresses injury prevention for specific sports (football) but lacks broad evidence for all knee injuries, making it partially supportive.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "Studies suggest prophylactic braces can help relieve MCL strain and protect against reinjury, though other studies indicate no clinical benefits for some knee supports.",
+          "quote": "There are studies that suggest prophylactic braces can help relieve MCL strain and knee stiffness as well as protect against reinjury after a previous MCL injury.",
+          "verdict_reason": "The snippet addresses the query by presenting conflicting evidence: it notes studies showing benefits for specific brace types (prophylactic) while acknowledging other studies find no clinical benefits.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "There is no conclusive evidence supporting the effectiveness of knee braces for preventing injuries, and they are not recommended for regular use.",
+          "quote": "However, no conclusive evidence supports their effectiveness, and they are not recommended for regular use.",
+          "verdict_reason": "The snippet directly addresses the query by stating there is no conclusive evidence for prevention, providing conflict-bearing scientific evidence rather than a definitive support or irrelevant text.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_b0ffe73c1789",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d3"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Colleen Hoover has written a total of 34 books.",
+          "quote": "She has written in total of 34 books in the span of 9–10 years.",
+          "verdict_reason": "The snippet directly addresses the query with a specific count (34), but as a Quora answer without a timestamp, it may be outdated or incomplete compared to current official records.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Colleen Hoover has written 26 books, including 23 solo works and three co-authored with Tarryn Fisher.",
+          "quote": "Colleen Hoover has written 26 books. She penned 23 of them herself and teamed up with co-author Tarryn Fisher for the three-book Never Never series.",
+          "verdict_reason": "The snippet explicitly states the total number of books written by Colleen Hoover, directly answering the user's query with specific data.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists several specific books by Colleen Hoover but does not provide a total count of her published works.",
+          "quote": "Books by Colleen Hoover ... It Ends with Us ... Verity ... Ugly Love ... It Starts with Us ... Reminders of Him ... November 9",
+          "verdict_reason": "The snippet lists individual books by the queried author but lacks the specific total count requested, making it incomplete evidence.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_6cca7fdb9b41",
+      "claim_index": 0,
+      "claim": "CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d5"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "partially supports",
+          "key_fact": "One contributor claims the furthest point from the sea in Britain is just south of Church Flatts Farm, Coton.",
+          "quote": "Having lived at the furthest point from the sea for a number of years, the answer from one of the earlier correspondents was correct. It is actually just south of Church Flatts Farm, Coton.",
+          "verdict_reason": "The snippet provides specific candidate locations for the query but contains multiple contradictory claims without a definitive resolution, making it conflict-bearing evidence rather than a direct answer.",
+          "source_quality": "high"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Wikipedia identifies the point furthest from any ocean at coordinates 46°17′N 86°40′E.",
+          "quote": "According to Wikipedia the point furthest from any ocean is at 46°17′N 86°40′E",
+          "verdict_reason": "Snippet provides specific coordinates for the furthest point from the sea but cites a secondary source (Reddit) and lacks contextual confirmation of the location name.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "Church Flatts Farm is identified as the furthest point from the coast in the UK at 113km away.",
+          "quote": "One kilometre south-east is Church Flatts Farm, which is 113km (70 miles) from the nearest point on the coast",
+          "verdict_reason": "The snippet provides specific evidence about the furthest point from the sea (Church Flatts Farm) but notes the answer depends on definitions and contrasts it with other claims, making it conflict-bearing but not definitive.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_geo_c76a815bb275",
+      "claim_index": 2,
+      "claim": "These crops are valued for their economic importance and sustainability in tropical environments",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies jackfruit, breadfruit, and peach palm as prime crops for scaling forestry starch, complemented by coconut, acai, cinnamon, cacao, tropical avocado, pili nut, and mamey.",
+          "quote": "We have identified three prime crops for scaling forestry starch: jackfruit, breadfruit, and peach palm. An array of highly-valued and marketable specialty items could complement these crops, including coconut, acai, cinnamon, cacao, tropical avocado, pili nut, and mamey.",
+          "verdict_reason": "The snippet lists specific commercial tree crops but frames them within a specific 'forestry starch' model rather than providing a definitive global list of chief commercial tree crops.",
+          "source_quality": "low"
+        },
+        "d1": {
+          "verdict": "partially supports",
+          "key_fact": "The major commercial tree crops identified in the document include cocoa, rubber, oil palm, and timber.",
+          "quote": "suitable for the cultivation of the major commercial tree crops such as cocoa, rubber, oil palm and timber.",
+          "verdict_reason": "The snippet lists specific commercial tree crops but limits the scope to Liberia rather than providing a general global list requested by the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document identifies cocoa as a chief tree crop in Liberia by focusing on three key cocoa-producing counties.",
+          "quote": "It discusses selecting three key cocoa producing counties - Nimba, Lofa, and Bong - and choosing major and minor cocoa buying centers within each county.",
+          "verdict_reason": "The snippet addresses the query by identifying cocoa as a chief tree crop in Liberia, but it is incomplete as it does not list other potential chief crops or provide a comprehensive global/national list.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_7a7a7f43e575",
+      "claim_index": 1,
+      "claim": "However, it is important to note that San Jose is the most popular city name globally, with over 1,700 places named San Jose or San José worldwide",
+      "cited_docs": [
+        "d5",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [
+        "d4"
+      ],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d1",
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "supporting_doc_not_cited",
+      "doc_note_snapshot": {
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "According to World Atlas, Washington is the most common place name in the United States with 88 instances.",
+          "quote": "Washington is the most common, according to World Atlas, with 88 place names.",
+          "verdict_reason": "The snippet directly answers the query by identifying Washington as the most common city name and providing the specific count.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Washington is the most common city name in the US with 88 occurrences.",
+          "quote": "With 88 cities and towns named Washington across the country, it is the most common place name in the U.S.",
+          "verdict_reason": "The snippet explicitly identifies Washington as the most common place name with 88 occurrences, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Franklin (43), Clinton (39), and Georgetown (33) as common place names but does not explicitly identify the single most common city name overall.",
+          "quote": "Other common place names likely inspired by past statesmen are Franklin (as in Benjamin), with 43 copycat locations, and Clinton (a New York family with a vice president and two governors, and more) with 39.",
+          "verdict_reason": "Snippet provides counts for specific common names but fails to definitively answer which is the single most common city name, offering only partial evidence toward the query.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_d1bfc673775e",
+      "claim_index": 0,
+      "claim": "[CANNOT ANSWER, INSUFFICIENT EVIDENCE]",
+      "cited_docs": [
+        "d4",
+        "d5",
+        "d2"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": false,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 1.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "Rhys Ifans is the actor who played Eyeball Paul in Kevin and Perry go Large.",
+          "quote": "Rhys Ifans is best known for his role as Spike in Notting Hill, Jed Parry in Enduring Love and Eyeball Paul in Kevin and Perry go Large.",
+          "verdict_reason": "The snippet explicitly states that Rhys Ifans played the role of Eyeball Paul in the specified movie, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Rhys Ifans played the role of Eyeball Paul in the film Kevin & Perry Go Large.",
+          "quote": "Other film roles include: Eyeball Paul in Kevin & Perry Go Large (2000), Nigel in The Replacements (2000)",
+          "verdict_reason": "The snippet explicitly states that Rhys Ifans played Eyeball Paul in Kevin & Perry Go Large, directly answering the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Rhys Ifans plays the role of Eyeball Paul in Kevin & Perry Go Large.",
+          "quote": "Among Ifans' well-known roles are Eyeball Paul in Kevin & Perry Go Large",
+          "verdict_reason": "The snippet explicitly states that Rhys Ifans plays Eyeball Paul in the specified movie, directly answering the query.",
+          "source_quality": "low"
+        }
+      }
+    }
+  ],
+  "worst_hard_negative_examples": [
+    {
+      "sample_id": "trust_align_040",
+      "claim_index": 0,
+      "claim": "The first season of Anne with an E contains 26 episodes",
+      "cited_docs": [
+        "d1"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_eligible_docs",
+      "doc_note_snapshot": {
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet discusses the episode count for 'Mona the Vampire', not the queried show 'Anne with an E'. It provides no evidence about the target entity.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "trust_align_071",
+      "claim_index": 0,
+      "claim": "Gordon Atherton was born on 18 June 1934. CANNOT ANSWER, INSUFFICIENT EVIDENCE",
+      "cited_docs": [
+        "d3"
+      ],
+      "claim_has_committee_support_set": false,
+      "claim_has_approved_citation": false,
+      "claim_has_gold_positive_citation": false,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [],
+      "approved_cited_docs": [],
+      "gold_positive_docs": [
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d3"
+      ],
+      "committee_alignment_precision": 0.0,
+      "gold_positive_precision": 0.0,
+      "fg_supported": false,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "no_supporting_doc_found",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The snippet describes Gordon Atherton's career with Bury, Swindon Town, and Drumcondra, but does not mention Aldershot Town F.C. or provide evidence linking him to that specific club.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "situatedqa_temp_88ef1cfab62e",
+      "claim_index": 0,
+      "claim": "Hunter Emery plays the character of CO Rick Hopper in the television series Orange is the New Black",
+      "cited_docs": [
+        "d4",
+        "d3",
+        "d1",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d1",
+        "d3"
+      ],
+      "approved_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "gold_positive_docs": [
+        "d1",
+        "d3",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d1",
+        "d3"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d2",
+        "d4"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d4": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), while the snippet discusses a different character named 'Rick Hopper'. The entity mismatch makes this irrelevant.",
+          "source_quality": "low"
+        },
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "Hunter Emery plays the character CO Rick Hopper in a 2018 episode of Orange Is the New Black.",
+          "quote": "\"Orange Is the New Black\" Well This Took a Dark Turn (TV Episode 2018) - Hunter Emery as CO Rick Hopper.",
+          "verdict_reason": "Snippet identifies an actor for a character named Hopper, but specifies 'CO Rick Hopper' rather than the main character 'Joe Hopper', providing incomplete evidence for the query.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "supports",
+          "key_fact": "Hunter Emery portrays the character CO Rick Hopper in Orange is the New Black.",
+          "quote": "Hunter Emery is an American actor. He portrays CO Rick Hopper in Orange is the New Black.",
+          "verdict_reason": "The snippet directly identifies Hunter Emery as the actor playing CO Rick Hopper, fully answering the query.",
+          "source_quality": "low"
+        },
+        "d2": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks about the character 'Hopper' (Sam Healy's nickname), but the document discusses a different character named 'Rick Hopper'.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0063",
+      "claim_index": 1,
+      "claim": "Therefore, the private research university located in Chestnut Hill, Massachusetts is Boston College",
+      "cited_docs": [
+        "d8",
+        "d2"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7"
+      ],
+      "approved_cited_docs": [
+        "d2"
+      ],
+      "gold_positive_docs": [
+        "d10",
+        "d2",
+        "d5",
+        "d6",
+        "d7",
+        "d9"
+      ],
+      "gold_positive_cited_docs": [
+        "d2"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d8"
+      ],
+      "committee_alignment_precision": 0.5,
+      "gold_positive_precision": 0.5,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d8": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "Stanford University (Stanford; officially Leland Stanford Junior University, colloquially the Farm) is a private research university in Stanford, California, adjacent to Palo Alto and between San Jose and San Francisco.",
+          "verdict_reason": "The query asks which university is in Chestnut Hill, Massachusetts. The snippet confirms Stanford is in California, not Massachusetts, providing no evidence for the queried location.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "supports",
+          "key_fact": "Boston College is located in Chestnut Hill, Massachusetts and is a private research university.",
+          "quote": "Boston College has played their home games at Alumni Stadium in Chestnut Hill, Massachusetts since 1957.",
+          "verdict_reason": "The snippet directly confirms Boston College is located in Chestnut Hill, Massachusetts, answering the query's location question. Boston College is a known private research university, making it the correct answer to the either/or question.",
+          "source_quality": "high"
+        }
+      }
+    },
+    {
+      "sample_id": "hotpotqa_0025",
+      "claim_index": 0,
+      "claim": "Chang Ucchin was born during a time that ended with the conclusion of Japanese colonial rule in Korea . further confirms this by mentioning the end of Japanese occupation at the conclusion of World War II. provides additional context with the May 16 coup in 1961, which followed the end of Japanese rule",
+      "cited_docs": [
+        "d7",
+        "d5",
+        "d1"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": false,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d10",
+        "d5",
+        "d7"
+      ],
+      "approved_cited_docs": [
+        "d5",
+        "d7"
+      ],
+      "gold_positive_docs": [
+        "d10",
+        "d5",
+        "d7"
+      ],
+      "gold_positive_cited_docs": [
+        "d5",
+        "d7"
+      ],
+      "soft_extra_cited_docs": [],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.6666666666666666,
+      "gold_positive_precision": 0.6666666666666666,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d7": {
+          "verdict": "partially supports",
+          "key_fact": "Korea was under Japanese occupation from 1910 until 1945, when the Allied nations began disarmament of Japan at the conclusion of World War II.",
+          "quote": "Japan occupied Korea at this time and had been in control since 1910. In 1945, the decision was made to have American Marines forces oversee Japanese surrender and disarmament",
+          "verdict_reason": "The snippet establishes that Korea was under Japanese control ending in 1945 with WWII's conclusion, directly addressing the query's timeframe. However, it does not confirm Chang Ucchin's birth during this period.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "supports",
+          "key_fact": "Korea under Japanese rule ended at the conclusion of World War II in 1945.",
+          "quote": "Korea under Japanese rule began with the end of the short-lived Korean Empire in 1910 and ended at the conclusion of World War II in 1945.",
+          "verdict_reason": "The snippet directly answers the query by identifying that Korean rule under Japan ended with World War II's conclusion, the historical period during which Chang Ucchin was born.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "The coup rendered powerless the democratically elected government of Yun Bo-seon and ended the Second Republic",
+          "verdict_reason": "The snippet is about the 1961 May 16 coup and the Second Republic, not Chang Ucchin’s birth in Korea or the period during which he was born.",
+          "source_quality": "low"
+        }
+      }
+    },
+    {
+      "sample_id": "freshqa_122352ad92e3",
+      "claim_index": 1,
+      "claim": "Passover 2026 began at sundown on April 1",
+      "cited_docs": [
+        "d3",
+        "d1",
+        "d2",
+        "d4",
+        "d5"
+      ],
+      "claim_has_committee_support_set": true,
+      "claim_has_approved_citation": true,
+      "claim_has_gold_positive_citation": true,
+      "claim_has_soft_extra_citation": true,
+      "claim_has_hard_negative_citation": true,
+      "committee_approved_docs": [
+        "d3",
+        "d4"
+      ],
+      "approved_cited_docs": [
+        "d3",
+        "d4"
+      ],
+      "gold_positive_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "gold_positive_cited_docs": [
+        "d2",
+        "d3",
+        "d4",
+        "d5"
+      ],
+      "soft_extra_cited_docs": [
+        "d2",
+        "d5"
+      ],
+      "hard_negative_cited_docs": [
+        "d1"
+      ],
+      "committee_alignment_precision": 0.4,
+      "gold_positive_precision": 0.8,
+      "fg_supported": true,
+      "strict_committee_alignment_pass": false,
+      "strict_gold_clean_pass": false,
+      "reason": "single_doc_cited",
+      "doc_note_snapshot": {
+        "d3": {
+          "verdict": "partially supports",
+          "key_fact": "The document states Passover in 2026 begins on April 1, which may not correspond to the current year implied by the query.",
+          "quote": "The holiday of Passover begins before sundown on Wednesday, April 1, and ends after nightfall on Thursday, April 9, according to the Hebrew calendar.",
+          "verdict_reason": "Snippet provides specific dates for 2026, but the query asks about 'this year,' creating a potential temporal mismatch that prevents full support.",
+          "source_quality": "high"
+        },
+        "d1": {
+          "verdict": "irrelevant",
+          "key_fact": "",
+          "quote": "",
+          "verdict_reason": "The query asks for 'this year's' Passover, but the document exclusively provides dates for 2026. Without external context to confirm the current year is 2026, this is not meaningful evidence for the specific time-bound query.",
+          "source_quality": "high"
+        },
+        "d2": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover dates for the next several years\nPassover 2027: April 21-29\nPassover 2028: April 10-18\nPassover 2029: March 30 – April 7",
+          "verdict_reason": "The snippet addresses the query topic by listing Passover dates but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "low"
+        },
+        "d4": {
+          "verdict": "supports",
+          "key_fact": "This year's Passover starts on Thursday, April 2, 2026.",
+          "quote": "This year: Thu, Apr 2, 2026",
+          "verdict_reason": "The snippet explicitly states the start date for 'This year' as April 2, 2026, directly answering the query.",
+          "source_quality": "high"
+        },
+        "d5": {
+          "verdict": "partially supports",
+          "key_fact": "The document lists Passover start dates for future years from 2027 to 2040 but does not include the current year.",
+          "quote": "Passover 2027: Begins Wednesday night, April 21 → Ends Thursday, April 29\n Passover 2028: Begins Monday night, April 10 → Ends Tuesday, April 18",
+          "verdict_reason": "The snippet addresses the query topic (Passover dates) but only provides future years (2027+), failing to answer when 'this year's' Passover starts.",
+          "source_quality": "high"
+        }
+      }
+    }
+  ]
+}

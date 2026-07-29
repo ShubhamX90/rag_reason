@@ -1,12 +1,11 @@
 """
 src/parsers.py
 ==============
-Robust output parsers for each annotation stage and the monolithic strategy.
+Robust output parsers for each retained annotation stage.
 
 Stage 1  → JSON object per doc
 Stage 2  → JSON object {conflict_reason, answerable_under_evidence}
 Stage 3  → JSON object {expected_response, think}
-Monolithic → Text-mode output; parsed into the combined Stage 1+2+3 schema
 """
 
 from __future__ import annotations
@@ -21,7 +20,6 @@ from typing import Any, Dict, List, Optional, Tuple
 # ─────────────────────────────────────────────
 
 _FENCE_RE = re.compile(r"```(?:json)?", re.IGNORECASE)
-_CIT_RE   = re.compile(r"\[(d\d+)\]", re.IGNORECASE)
 _ABSTAIN  = "CANNOT ANSWER, INSUFFICIENT EVIDENCE"
 
 
@@ -139,50 +137,68 @@ def _extract_json_object(text: str) -> Optional[Dict[str, Any]]:
     return None
 
 
-def _extract_json_array(text: str) -> Optional[List[Any]]:
-    """Extract the first complete JSON array from text."""
+def _iter_json_objects(text: str) -> List[Dict[str, Any]]:
+    """Return all balanced JSON objects found in text, in order."""
     if not text:
-        return None
+        return []
     cleaned = _strip_fences(text)
+    objects: List[Dict[str, Any]] = []
+    i = 0
+    while i < len(cleaned):
+        start = cleaned.find("{", i)
+        if start == -1:
+            break
 
-    start = cleaned.find("[")
-    if start == -1:
-        return None
+        depth, end = 0, -1
+        in_str, esc = False, False
+        for j, ch in enumerate(cleaned[start:], start):
+            if esc:
+                esc = False
+                continue
+            if ch == "\\" and in_str:
+                esc = True
+                continue
+            if ch == '"':
+                in_str = not in_str
+                continue
+            if in_str:
+                continue
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    end = j
+                    break
 
-    depth, end = 0, -1
-    in_str, esc = False, False
-    for i, ch in enumerate(cleaned[start:], start):
-        if esc:
-            esc = False
-            continue
-        if ch == "\\" and in_str:
-            esc = True
-            continue
-        if ch == '"':
-            in_str = not in_str
-            continue
-        if in_str:
-            continue
-        if ch == "[":
-            depth += 1
-        elif ch == "]":
-            depth -= 1
-            if depth == 0:
-                end = i
-                break
+        if end == -1:
+            break
 
-    if end == -1:
-        return None
+        frag = cleaned[start:end + 1]
+        parsed = None
+        for attempt in (frag, _fix_trailing_commas(frag), _fix_json_control_chars(frag)):
+            try:
+                obj = json.loads(attempt)
+                if isinstance(obj, dict):
+                    parsed = obj
+                    break
+            except Exception:
+                pass
+        if parsed is not None:
+            objects.append(parsed)
+        i = max(end + 1, start + 1)
+    return objects
 
-    frag = cleaned[start:end + 1]
-    for attempt in (frag, _fix_trailing_commas(frag)):
-        try:
-            arr = json.loads(attempt)
-            if isinstance(arr, list):
-                return arr
-        except Exception:
-            pass
-    return None
+
+def _extract_stage3_json_object(text: str) -> Optional[Dict[str, Any]]:
+    """Extract the Stage-3 JSON object, preferring expected_response payloads."""
+    first = _extract_json_object(text)
+    if first is not None and isinstance(first.get("expected_response"), dict):
+        return first
+    for obj in _iter_json_objects(text):
+        if isinstance(obj.get("expected_response"), dict):
+            return obj
+    return first
 
 
 # ─────────────────────────────────────────────
@@ -377,7 +393,7 @@ def parse_stage3(raw: str) -> Tuple[Dict[str, Any], List[str]]:
     errors : list of validation error strings
     """
     # ── Attempt 1: direct JSON extraction (works for format A) ──
-    obj = _extract_json_object(raw)
+    obj = _extract_stage3_json_object(raw)
     if obj is not None and isinstance(obj.get("expected_response"), dict):
         # Successfully parsed — ensure think field is populated
         if not obj.get("think"):
@@ -394,7 +410,7 @@ def parse_stage3(raw: str) -> Tuple[Dict[str, Any], List[str]]:
         # Remove the <think>…</think> block so _extract_json_object
         # finds the actual response JSON instead of a doc-reasoning object.
         remainder = raw[think_match.end():]
-        obj = _extract_json_object(remainder)
+        obj = _extract_stage3_json_object(remainder)
         if obj is not None and isinstance(obj.get("expected_response"), dict):
             # Re-attach think content
             obj["think"] = f"<think>{think_content}</think>"
@@ -402,7 +418,7 @@ def parse_stage3(raw: str) -> Tuple[Dict[str, Any], List[str]]:
 
     # ── Attempt 3: last resort — try original extraction but accept it ──
     if obj is None:
-        obj = _extract_json_object(raw)
+        obj = _extract_stage3_json_object(raw)
 
     if obj is None:
         return {
@@ -429,238 +445,3 @@ def parse_stage3(raw: str) -> Tuple[Dict[str, Any], List[str]]:
         obj["think"] = f"<think>{think_content}</think>"
 
     return obj, errs
-
-
-# ─────────────────────────────────────────────
-#  Monolithic parser
-# ─────────────────────────────────────────────
-#
-# The monolithic prompt produces TEXT output:
-#
-#   <think>
-#   [ ...per-doc JSON array... ]
-#
-#   <ConflictType> — <conflict_reason>
-#   <1–2 conflict reasoning sentences>
-#
-#   <2+ final reasoning sentences>
-#   </think>
-#
-#   <FINAL ANSWER sentences with [dX] citations>
-#   [[END-OF-ANSWER]]
-#
-
-_THINK_RE   = re.compile(r"<think>(.*?)</think>", re.DOTALL | re.IGNORECASE)
-_LABEL_RE   = re.compile(r"^(.+?)\s*[\u2014\-]{1,2}\s*(.+)$", re.MULTILINE)
-_EOA_RE     = re.compile(r"\[\[END-OF-ANSWER\]\]", re.IGNORECASE)
-
-
-def parse_monolithic(
-    raw: str,
-    expected_doc_ids: Optional[List[str]] = None,
-) -> Tuple[Dict[str, Any], List[str]]:
-    """
-    Parse the full text-mode output from the monolithic prompt.
-
-    Returns
-    -------
-    (record, errors)
-    record : dict with keys:
-        per_doc_notes            : list  (Stage-1 equivalent)
-        conflict_type_label      : str   (extracted from label line)
-        conflict_reason          : str   (Stage-2 equivalent)
-        answerable_under_evidence: bool
-        expected_response        : dict  (Stage-3 equivalent)
-        think                    : str   (raw think block)
-    errors : list of validation error strings
-    """
-    errors: List[str] = []
-
-    # ── 1. Extract <think>…</think> ──
-    think_match = _THINK_RE.search(raw)
-    if not think_match:
-        errors.append("no <think>...</think> block found")
-        think_content = ""
-    else:
-        think_content = think_match.group(1)
-
-    # ── 2. Extract per-doc JSON array from think block ──
-    per_doc_notes = _parse_think_docs(think_content, errors)
-
-    # ── 3. Extract label line (ConflictType — conflict_reason) ──
-    conflict_type_label, conflict_reason = _parse_label_line(think_content, errors)
-    if conflict_type_label and conflict_type_label not in VALID_CONFLICT_TYPES:
-        errors.append(f"invalid ConflictType label line: {conflict_type_label!r}")
-        conflict_type_label = ""
-        conflict_reason = ""
-
-    # ── 4. Derive answerable_under_evidence from per_doc_notes ──
-    non_irr = [
-        d for d in per_doc_notes
-        if d.get("verdict") in ("supports", "partially supports")
-    ]
-    answerable = len(non_irr) > 0
-
-    # ── 5. Extract FINAL ANSWER (between </think> and [[END-OF-ANSWER]]) ──
-    answer_text, evidence_ids, abstain = _parse_final_answer(raw, think_match, errors)
-
-    # ── 6. Validate expected doc IDs ──
-    if expected_doc_ids:
-        parsed_ids = {d.get("doc_id", "") for d in per_doc_notes}
-        missing = set(expected_doc_ids) - parsed_ids
-        if missing:
-            errors.append(f"per_doc_notes missing doc_ids: {sorted(missing)}")
-
-    record = {
-        "per_doc_notes":             per_doc_notes,
-        "conflict_type_label":       conflict_type_label,
-        "conflict_reason":           conflict_reason,
-        "answerable_under_evidence": answerable,
-        "expected_response": {
-            "answer":        answer_text,
-            "evidence":      evidence_ids,
-            "abstain":       abstain,
-            "abstain_reason": None if not abstain else "Evidence insufficient per model reasoning.",
-        },
-        "think": f"<think>{think_content}</think>" if think_content else "",
-    }
-    return record, errors
-
-
-def _parse_think_docs(think_content: str, errors: List[str]) -> List[Dict[str, Any]]:
-    """Try to extract the JSON array of per-doc verdicts from think content."""
-    arr = _extract_json_array(think_content)
-    if arr is None:
-        errors.append("could not extract per-doc JSON array from think block")
-        return []
-    # Validate each entry minimally
-    notes = []
-    for i, item in enumerate(arr):
-        if not isinstance(item, dict):
-            errors.append(f"per_doc_notes[{i}] is not a dict")
-            continue
-        # Normalise field names (model may use slightly different keys)
-        item = _normalise_per_doc_note(item, i)
-        verdict = item.get("verdict", "")
-        quality = item.get("source_quality", "")
-        if verdict not in STAGE1_VALID_VERDICTS:
-            errors.append(f"per_doc_notes[{i}] invalid verdict: {verdict!r}")
-        if quality not in STAGE1_VALID_QUALITY:
-            errors.append(f"per_doc_notes[{i}] invalid source_quality: {quality!r}")
-        if verdict == "irrelevant":
-            if item.get("key_fact") or item.get("quote"):
-                errors.append(
-                    f"per_doc_notes[{i}] irrelevant verdict must have empty key_fact and quote"
-                )
-        else:
-            if not item.get("key_fact"):
-                errors.append(f"per_doc_notes[{i}] missing key_fact for non-irrelevant verdict")
-            if not item.get("quote"):
-                errors.append(f"per_doc_notes[{i}] missing quote for non-irrelevant verdict")
-        notes.append(item)
-    return notes
-
-
-def _normalise_per_doc_note(item: Dict, idx: int) -> Dict:
-    """Ensure standard field names for a per-doc note from monolithic output."""
-    # The monolithic prompt uses: doc_id, verdict, verdict_reason, key_fact, quote, source_quality
-    # Map any alternative keys
-    aliases = {
-        "id":           "doc_id",
-        "doc":          "doc_id",
-        "reason":       "verdict_reason",
-        "fact":         "key_fact",
-        "excerpt":      "quote",
-        "supporting_quote": "quote",
-        "quality":      "source_quality",
-    }
-    for old, new in aliases.items():
-        if old in item and new not in item:
-            item[new] = item.pop(old)
-
-    # Set defaults for missing fields
-    item.setdefault("doc_id",         f"d{idx+1}")
-    item.setdefault("verdict",         "irrelevant")
-    item.setdefault("verdict_reason",  "")
-    item.setdefault("key_fact",        "")
-    item.setdefault("quote",           "")
-    item.setdefault("source_quality",  "low")
-    return item
-
-
-def _parse_label_line(
-    think_content: str,
-    errors: List[str],
-) -> Tuple[str, str]:
-    """
-    Extract the '<ConflictType> — <conflict_reason>' label line from think content.
-    Returns (conflict_type_label, conflict_reason).
-    """
-    # First, prefer exact known conflict labels on their own line. This avoids
-    # accidentally grabbing JSON content such as `"quote": "... -- ..."` from
-    # the per-doc array.
-    label_prefixes = sorted(VALID_CONFLICT_TYPES, key=len, reverse=True)
-    dash_variants = ("\u2014", "--", "-")
-    for raw_line in think_content.splitlines():
-        line = raw_line.strip()
-        if not line:
-            continue
-        for label in label_prefixes:
-            if not line.startswith(label):
-                continue
-            rest = line[len(label):].lstrip()
-            for dash in dash_variants:
-                if rest.startswith(dash):
-                    conflict_reason = rest[len(dash):].strip()
-                    if conflict_reason:
-                        return label, conflict_reason
-
-    # Fallback: tolerate slightly malformed labels, but still reject obvious
-    # JSON field lines by excluding double-quoted prefixes and braces.
-    label_re = re.compile(
-        r"^([^\"\[\{\n][^\[\{\n]{2,80}?)\s*(?:\u2014|--|-)\s*(.{3,300})$",
-        re.MULTILINE,
-    )
-    m = label_re.search(think_content)
-    if m:
-        ct = m.group(1).strip().strip("<>")
-        cr = m.group(2).strip()
-        if ct and cr:
-            return ct, cr
-
-    errors.append("could not extract ConflictType label line from think block")
-    return "", ""
-
-
-def _parse_final_answer(
-    raw: str,
-    think_match,
-    errors: List[str],
-) -> Tuple[str, List[str], bool]:
-    """
-    Extract the final answer text, evidence doc IDs, and abstain flag.
-    """
-    if think_match:
-        after_think = raw[think_match.end():]
-    else:
-        after_think = raw
-
-    # Strip [[END-OF-ANSWER]] sentinel
-    eoa_match = _EOA_RE.search(after_think)
-    if eoa_match:
-        answer_text = after_think[:eoa_match.start()].strip()
-    else:
-        answer_text = after_think.strip()
-        if not answer_text:
-            errors.append("no final answer found after </think>")
-
-    # Check for abstain
-    abstain = _ABSTAIN in answer_text.upper()
-
-    # Extract [dX] citations
-    evidence_ids = list(dict.fromkeys(
-        m.group(1).lower()
-        for m in _CIT_RE.finditer(answer_text)
-    ))
-
-    return answer_text, evidence_ids, abstain
