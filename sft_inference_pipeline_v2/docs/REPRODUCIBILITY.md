@@ -12,6 +12,10 @@ This repository contains the current code, prompts, train/validation/benchmark d
 
 The included outputs are complete evaluation artifacts, not substitutes for an adapter release. Do not use archived historical adapters in `legacies/` to claim exact reproduction of the current results.
 
+## Standalone answer-only release
+
+[`answer_only_sft_export/`](../answer_only_sft_export/) is an active, self-contained release surface rather than a legacy snapshot. Its own README and reproduction guide document both the established updated answer-only workflow and the clean basic 862-example answer-only baseline. Use it when the answer-only pipeline is being reviewed or shared independently; its portable archive is [`answer_only_sft_export.zip`](../answer_only_sft_export.zip).
+
 ## 1. Prerequisites
 
 The retained launchers target a SLURM GPU cluster with Conda, CUDA 12.4-compatible PyTorch wheels, and Hugging Face access for the base models. Put the required base models under a directory of your choice:

@@ -12,6 +12,8 @@ Start with [the reviewer reproduction guide](docs/REPRODUCIBILITY.md). It identi
 | Trace-text SFT — Run L | boundary-rebalanced recipe | `final_model_outputs/llama8b/`, `final_model_outputs/mistral7b/` |
 | Answer-only SFT | updated 862/81 split, final-only + minimal mixture | `final_model_outputs/answer_only_sft/` |
 
+The self-contained, active answer-only release is [`answer_only_sft_export/`](answer_only_sft_export/). It contains the documented basic 862-example answer-only baseline, its standalone runners, validation, and retained artifacts. A portable copy is available as [`answer_only_sft_export.zip`](answer_only_sft_export.zip).
+
 The current held-out benchmark is `data/splits/benchmark_final_v2_holdout_clean_736.jsonl` (736 examples). Current train/validation backbone is 862/81; Run K adds 27 derived rows (889 train) and Run L adds 48 derived rows (910 train).
 
 ## Reproduce the current recipes
