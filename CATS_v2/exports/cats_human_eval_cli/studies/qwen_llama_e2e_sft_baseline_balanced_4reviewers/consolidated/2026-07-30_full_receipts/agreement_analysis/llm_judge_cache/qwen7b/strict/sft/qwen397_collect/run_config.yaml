@@ -1,0 +1,32 @@
+outputs_dir: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_rescheduled_from_pabitra_10_20260706/qwen7b/e2e/strict/sft/staged/qwen397_collect"
+report_md: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_rescheduled_from_pabitra_10_20260706/qwen7b/e2e/strict/sft/staged/qwen397_collect/eval_report.md"
+detailed_results_json: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_rescheduled_from_pabitra_10_20260706/qwen7b/e2e/strict/sft/staged/qwen397_collect/detailed_results.json"
+
+pipeline:
+  batch_size: 4
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "local_openai"
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 4
+    timeout_seconds: 900
+    response_cache_dir: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_sft_rescheduled_from_pabitra_10_20260706/qwen7b/e2e/strict/sft/response_cache"
+    cache_mode: "read_write"
+    judges:
+      - model_id: "local/qwen3.5-397b-a17b"
+        base_url: "http://gpunode7:8001/v1"
+        priority: 6
+        max_tokens: 400
+        request_timeout: 900
+        extra_body:
+          chat_template_kwargs:
+            enable_thinking: false

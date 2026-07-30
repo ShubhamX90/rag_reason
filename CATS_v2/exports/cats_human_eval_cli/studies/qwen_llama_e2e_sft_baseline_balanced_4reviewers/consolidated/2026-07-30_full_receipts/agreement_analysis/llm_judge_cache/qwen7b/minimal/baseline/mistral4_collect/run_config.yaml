@@ -1,0 +1,29 @@
+outputs_dir: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/e2e/minimal/baseline/staged/mistral4_collect"
+report_md: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/e2e/minimal/baseline/staged/mistral4_collect/eval_report.md"
+detailed_results_json: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/e2e/minimal/baseline/staged/mistral4_collect/detailed_results.json"
+
+pipeline:
+  batch_size: 4
+  verbose: true
+
+conflict_eval:
+  enable: true
+  use_judge_committee: true
+  correct_refusal_full_credit: true
+  require_cross_doc_verification: false
+  max_claims_per_answer: 8
+  allow_paraphrases: true
+
+  committee:
+    type: "local_openai"
+    voting_strategy: "weighted_majority"
+    max_concurrent_requests: 4
+    timeout_seconds: 900
+    response_cache_dir: "/scratch/kudhru/rag-reason/cats_outputs/benchmark_local_committee_3judge/benchmark_baseline_48_20260705_r2/qwen7b/e2e/minimal/baseline/response_cache"
+    cache_mode: "read_write"
+    judges:
+      - model_id: "local/mistral-small-4"
+        base_url: "http://gpunode6:18104/v1"
+        priority: 3
+        max_tokens: 400
+        request_timeout: 900

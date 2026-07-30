@@ -1,0 +1,159 @@
+{
+  "study_provenance": {
+    "study_name": "qwen_llama_e2e_sft_baseline_balanced_4reviewers",
+    "selection_seed": 20260715,
+    "selection_script": "analyze_human_eval_agreement.py",
+    "study_builder_script": "/Users/shubhammishra/Desktop/rag_reason/CATS_v2/exports/cats_human_eval_cli/scripts/build_balanced_qwen_llama_e2e_study.py",
+    "source_root_pattern": "inputs/prepped_model_eval_inputs/benchmark_set_all_modes/<model>/e2e/<prompt>/<train_type>/input.jsonl",
+    "source_task_variant": "e2e only",
+    "models": [
+      "qwen7b",
+      "llama8b"
+    ],
+    "prompts": [
+      "minimal",
+      "runtime",
+      "strict"
+    ],
+    "train_types": [
+      "sft",
+      "baseline"
+    ],
+    "selected_total": 350,
+    "review_target_total": 700,
+    "extra_cells": [
+      "qwen7b|minimal|baseline",
+      "llama8b|runtime|sft"
+    ],
+    "cell_targets": {
+      "llama8b|minimal|baseline": 29,
+      "llama8b|minimal|sft": 29,
+      "llama8b|runtime|baseline": 29,
+      "llama8b|runtime|sft": 30,
+      "llama8b|strict|baseline": 29,
+      "llama8b|strict|sft": 29,
+      "qwen7b|minimal|baseline": 30,
+      "qwen7b|minimal|sft": 29,
+      "qwen7b|runtime|baseline": 29,
+      "qwen7b|runtime|sft": 29,
+      "qwen7b|strict|baseline": 29,
+      "qwen7b|strict|sft": 29
+    },
+    "balanced_conflict_targets": {
+      "1": 70,
+      "2": 70,
+      "3": 70,
+      "4": 70,
+      "5": 70
+    },
+    "correct_refusal_exclusion": true,
+    "source_rows_file": "/Users/shubhammishra/Desktop/rag_reason/CATS_v2/exports/cats_human_eval_cli/studies/qwen_llama_e2e_sft_baseline_balanced_4reviewers/admin/selected_source_rows.jsonl",
+    "assignment_audit_file": "/Users/shubhammishra/Desktop/rag_reason/CATS_v2/exports/cats_human_eval_cli/studies/qwen_llama_e2e_sft_baseline_balanced_4reviewers/admin/assignment_audit.json"
+  },
+  "sample_subsets": {
+    "all_350": {
+      "sample_count": 350,
+      "distribution": {
+        "model": {
+          "llama8b": 175,
+          "qwen7b": 175
+        },
+        "prompt": {
+          "minimal": 117,
+          "runtime": 117,
+          "strict": 116
+        },
+        "train_type": {
+          "baseline": 175,
+          "sft": 175
+        },
+        "conflict_category_id": {
+          "1": 70,
+          "2": 70,
+          "3": 70,
+          "4": 70,
+          "5": 70
+        },
+        "conflict_type": {
+          "Complementary information": 70,
+          "Conflict due to misinformation": 70,
+          "Conflict due to outdated information": 70,
+          "Conflicting opinions or research outcomes": 70,
+          "No conflict": 70
+        }
+      }
+    },
+    "complete_300": {
+      "sample_count": 300,
+      "distribution": {
+        "model": {
+          "llama8b": 153,
+          "qwen7b": 147
+        },
+        "prompt": {
+          "minimal": 99,
+          "runtime": 101,
+          "strict": 100
+        },
+        "train_type": {
+          "baseline": 149,
+          "sft": 151
+        },
+        "conflict_category_id": {
+          "1": 63,
+          "2": 60,
+          "3": 58,
+          "4": 60,
+          "5": 59
+        },
+        "conflict_type": {
+          "Complementary information": 60,
+          "Conflict due to misinformation": 59,
+          "Conflict due to outdated information": 60,
+          "Conflicting opinions or research outcomes": 58,
+          "No conflict": 63
+        }
+      }
+    }
+  },
+  "descriptive_labels_complete_300": {
+    "human_behavior": {
+      "positive_reviews": 404,
+      "total_reviews": 600,
+      "positive_rate": 0.6733333333333333,
+      "unanimous_positive_samples": 180,
+      "unanimous_negative_samples": 76,
+      "split_samples": 44
+    },
+    "committee_behavior": {
+      "positive_samples": 213,
+      "total_samples": 300,
+      "positive_rate": 0.71
+    },
+    "human_str": {
+      "applicable_samples": 215,
+      "positive_reviews": 297,
+      "total_reviews": 430,
+      "positive_rate": 0.6906976744186046,
+      "unanimous_positive_samples": 138,
+      "unanimous_negative_samples": 56,
+      "split_samples": 21
+    },
+    "committee_str": {
+      "applicable_samples": 215,
+      "strict_positive_samples": 145,
+      "strict_positive_rate": 0.6744186046511628,
+      "soft_positive_samples": 147,
+      "soft_positive_rate": 0.6837209302325581
+    },
+    "human_fg": {
+      "claim_positive_reviews": 601,
+      "claim_total_reviews": 954,
+      "claim_positive_rate": 0.629979035639413,
+      "sample_level_mean_ratio": 0.6411111111111111
+    },
+    "committee_fg": {
+      "sample_level_mean_ratio": 0.6630555555555555
+    }
+  }
+}
