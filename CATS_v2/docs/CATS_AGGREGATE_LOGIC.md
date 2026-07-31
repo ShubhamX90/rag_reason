@@ -8,11 +8,11 @@ The aggregate is a secondary summary. The primary scientific results remain grou
 
 Implementation references:
 
-- [rag_eval/evaluator.py](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/rag_eval/evaluator.py:120)
-- [rag_eval/conflict_eval.py](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/rag_eval/conflict_eval.py:93)
-- [rag_eval/judge_prompts.py](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/rag_eval/judge_prompts.py:40)
-- [scripts/audit_cats_master_results.py](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/scripts/audit_cats_master_results.py:1)
-- [scripts/update_master_results_workbook.py](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/scripts/update_master_results_workbook.py:1)
+- [rag_eval/evaluator.py](../rag_eval/evaluator.py#L120)
+- [rag_eval/conflict_eval.py](../rag_eval/conflict_eval.py#L93)
+- [rag_eval/judge_prompts.py](../rag_eval/judge_prompts.py#L40)
+- [scripts/audit_cats_master_results.py](../scripts/audit_cats_master_results.py#L1)
+- [scripts/update_master_results_workbook.py](../scripts/update_master_results_workbook.py#L1)
 
 ## 1. Executive Summary
 

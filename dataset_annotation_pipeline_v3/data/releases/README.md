@@ -34,3 +34,11 @@ The annotation-pipeline source artifacts remain elsewhere in this repository:
 - `data/splits/92p5_7p5/`: internal validation split retained for committee runs
 - `data/benchmarks/final_benchmark_2026-06-22/`: internal benchmark-build
   artifact retained for pipeline reproducibility
+
+For detailed provenance, schema, distributions, source composition, and
+split-integrity guidance, see
+[`docs/TRAINING_DATASET_DESCRIPTION.md`](../../docs/TRAINING_DATASET_DESCRIPTION.md)
+and [`docs/BENCHMARK_DATASET_DESCRIPTION.md`](../../docs/BENCHMARK_DATASET_DESCRIPTION.md).
+For field definitions, JSONL loading guidance, and the different schemas used
+by the training and benchmark releases, see
+[`docs/DATA_FORMAT_AND_SCHEMA_REFERENCE.md`](../../docs/DATA_FORMAT_AND_SCHEMA_REFERENCE.md).

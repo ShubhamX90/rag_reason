@@ -6,9 +6,15 @@
 > Its judges are Qwen3.5-397B-A17B, Mistral Small 4, and
 > DeepSeek-R1-Distill-32B. The active judge tasks are Behavior Adherence,
 > committee Factual Grounding v2, and Single-Truth Recall. The root-level
-> [`prompts/`](prompts/) folder contains the latest paper-facing copies of those
+> [`prompts/`](../prompts/) folder contains the latest paper-facing copies of those
 > prompts. Older committee lanes and legacy scoring paths are not part of the
 > current 108-experiment master scope.
+
+For the logical, paper-facing explanation of why this committee exists, how its
+models and priorities should be interpreted, how each task-specific vote is
+computed, and what scientific limitations must be disclosed, see
+[`LOCAL_LLM_COMMITTEE_DESCRIPTION.md`](LOCAL_LLM_COMMITTEE_DESCRIPTION.md). This
+guide remains the operational companion for serving and reproduction.
 
 This repo can run the LLM judge committee against locally hosted
 OpenAI-compatible model servers. The intended servers are vLLM, SGLang,

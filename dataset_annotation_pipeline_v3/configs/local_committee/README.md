@@ -1,22 +1,23 @@
 # Local Committee Configs
 
-These JSON configs add a `local_openai` backend beside the existing OpenRouter
+These JSON configs add a `local_openai` backend beside the default OpenRouter
 committee. They do not change prompts, parsers, output schemas, or weighted
-voting semantics.
+voting semantics. The implementation detail and full reproducibility boundary
+are documented in [`docs/ANNOTATION_PIPELINE.md`](../../docs/ANNOTATION_PIPELINE.md).
 
-Committee priorities are normalized internally:
+There are two intentionally separate final-committee families. Priorities are
+normalized internally; do not apply the four-judge weights to the retained
+three-judge benchmark artifacts.
 
-| Model ID | Priority | Normalized weight |
-|---|---:|---:|
-| `local/qwen3.5-397b-a17b` | 4 | 0.500 |
-| `local/deepseek-r1-distill-32b` | 2 | 0.250 |
-| `local/gemma-4-31b` | 1 | 0.125 |
-| `local/mistral-small-4` | 1 | 0.125 |
+| Final config | Model priorities | Normalized weights | Retained use |
+|---|---|---|---|
+| `benchmark_stage_final_readonly.json` | Qwen 4, DeepSeek 2, Gemma 1, Mistral 1 | 0.500, 0.250, 0.125, 0.125 | Four-judge local validation/collection workflow. |
+| `benchmark3_stage_final_readonly.json` | Qwen 6, DeepSeek 2, Mistral 3 | 6/11, 2/11, 3/11 | Retained 800 non-refusal and 200 refusal local benchmark Stage-1/2 runs. |
 
 The `*_collect.json` configs contain one judge and are used while that model's
-server is running. `benchmark_stage_final_readonly.json` contains all four
-judges and is used only after cache collection; in `read_only` mode, a missing
-cache entry is a hard failure.
+server is running. Each `*_final_readonly.json` config contains its matching
+full committee and is used only after cache collection; in `read_only` mode, a
+missing cache entry is a hard failure.
 
 `max_tokens` is intentionally omitted in these configs. The stage scripts keep
 their original budgets:

@@ -38,6 +38,13 @@ Anything older, superseded, or mainly archival has been moved under `legacies/` 
 - Human eval package and latest study artifacts:
   - `exports/cats_human_eval_cli/`
 
+## Documentation
+
+- Repository entry point: `README.md`
+- Authored paper-facing documentation: `docs/`
+- Human-evaluation design and implementation: `docs/HUMAN_EVAL_LOGIC_AND_IMPLEMENTATION.md`
+- Latest human agreement report: `exports/cats_human_eval_cli/studies/qwen_llama_e2e_sft_baseline_balanced_4reviewers/consolidated/2026-07-30_full_receipts/agreement_analysis/agreement_report.md`
+
 ## Notes
 
 - The current train/val split is `609 / 49` in `data/splits/92p5_7p5/`.

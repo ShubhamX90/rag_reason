@@ -18,7 +18,7 @@ serving workflow, audit commands, and ACL-paper reporting requirements. The
 specialist documents linked below provide deeper detail for individual areas;
 this file defines how those documents fit together.
 
-For the curated submission-oriented repo layout and canonical current paths, see `CURRENT_REPO_MAP.md`.
+For the curated submission-oriented repo layout and canonical current paths, see `docs/CURRENT_REPO_MAP.md`.
 
 ## Research Motivation
 
@@ -397,7 +397,7 @@ For that reason, the research contribution of the repository is not just the fin
 
 ## Committee Rationale In The Research Design
 
-The current evaluation framework uses a judge committee for judgment-based metrics. The remote default is OpenRouter-backed, while the local path can use OpenAI-compatible servers for locally hosted models such as Qwen, DeepSeek distill, Gemma, and Mistral. See [LOCAL_COMMITTEE_GUIDE.md](LOCAL_COMMITTEE_GUIDE.md) for the local committee configs, staged response cache, and Sharanga deployment plan.
+The current evaluation framework uses a judge committee for judgment-based metrics. The remote default is OpenRouter-backed, while the local path can use OpenAI-compatible servers for locally hosted models such as Qwen, DeepSeek distill, Gemma, and Mistral. See [docs/LOCAL_COMMITTEE_GUIDE.md](docs/LOCAL_COMMITTEE_GUIDE.md) for the local committee configs, staged response cache, and Sharanga deployment plan.
 
 The purpose of this design is methodological robustness.
 
@@ -591,17 +591,22 @@ replacement for every specialized document. It gives enough context to
 understand the whole repository and points to the detailed sources that should
 be consulted for exact procedures:
 
-- `CATS_METRICS_METHODOLOGY.md`: implementation-locked metric definitions, formulas, denominators, edge cases, and paper-ready metric language.
-- `CATS_AGGREGATE_LOGIC.md`: current hierarchical CATS aggregate, rationale, reviewer objections, and balanced/prevalence definitions.
-- `LOCAL_COMMITTEE_GUIDE.md`: local judge models, prompts, serving, GPU placement, cache staging, Slurm orchestration, failure recovery, and ACL methods language.
+- `docs/CATS_METRICS_METHODOLOGY.md`: implementation-locked metric definitions, formulas, denominators, edge cases, and paper-ready metric language.
+- `docs/CATS_AGGREGATE_LOGIC.md`: current hierarchical CATS aggregate, rationale, reviewer objections, and balanced/prevalence definitions.
+- `docs/LOCAL_LLM_COMMITTEE_DESCRIPTION.md`: logical and scientific description of the local judge committee, its task-specific voting, defensibility, limitations, and ACL-ready methods language.
+- `docs/LOCAL_COMMITTEE_GUIDE.md`: local judge models, prompts, serving, GPU placement, cache staging, Slurm orchestration, failure recovery, and ACL methods language.
+- `docs/HUMAN_EVAL_LOGIC_AND_IMPLEMENTATION.md`: human-study design, reviewer judgment logic, receipt normalization, consolidation, IAA, human-committee agreement, committee-internal agreement, current denominators, and paper-ready limitations.
 - `prompts/`: latest local committee task prompts and the shared JSON-only system instruction.
-- `CURRENT_REPO_MAP.md`: curated canonical paths and main/legacy boundary.
+- `docs/CURRENT_REPO_MAP.md`: curated canonical paths and main/legacy boundary.
+- `docs/EVALUATOR_IMPLEMENTATION.md`: executable evaluator contract, input schema, per-sample call graph, cache/failure semantics, and output schema.
+- `docs/REPRODUCTION_AND_ARTIFACT_PROVENANCE.md`: end-to-end lineage from datasets and model exports through the 108-row scope, audits, post-hoc citation analysis, and workbook export.
+- `docs/ENVIRONMENT_AND_SETUP.md`: Python dependencies, secrets, NLTK data, local serving, human-review, workbook, and setup verification contracts.
 - `exports/cats_human_eval_cli/README.md`: human-evaluation CLI package and reviewer workflow.
 - `exports/cats_human_eval_cli/studies/qwen_llama_e2e_sft_baseline_balanced_4reviewers/consolidated/2026-07-30_full_receipts/agreement_analysis/agreement_report.md`: current human-human, human-committee, and committee-internal agreement analysis.
 - `legacies/README.md`: what was archived and how to produce a clean submission copy.
 
 Operational details are included here at a high level and linked in full from
-`LOCAL_COMMITTEE_GUIDE.md` so the root README can serve both as a research
+`docs/LOCAL_COMMITTEE_GUIDE.md` so the root README can serve both as a research
 overview and as the entry point for reproduction.
 
 ## Summary
@@ -692,13 +697,15 @@ dataset count.
 A paper author or reviewer should use the following reading order:
 
 1. This README for the end-to-end scientific and artifact map.
-2. CURRENT_REPO_MAP.md for canonical paths and legacy boundaries.
-3. CATS_METRICS_METHODOLOGY.md for every metric definition, formula, denominator, and limitation.
-4. CATS_AGGREGATE_LOGIC.md for the hierarchical CATS design and hostile-reviewer defenses.
-5. LOCAL_COMMITTEE_GUIDE.md for local judge prompts, serving, caching, Slurm, and reproduction.
-6. prompts/ for the current BA, FG-v2, STR, rubric, and JSON-system prompt copies.
-7. outputs/benchmark_local_committee_3judge/README.md for the benchmark output layout.
-8. exports/cats_human_eval_cli/README.md and REVIEWER_USER_MANUAL.md for the human-evaluation study package.
+2. docs/CURRENT_REPO_MAP.md for canonical paths and legacy boundaries.
+3. docs/CATS_METRICS_METHODOLOGY.md for every metric definition, formula, denominator, and limitation.
+4. docs/CATS_AGGREGATE_LOGIC.md for the hierarchical CATS design and hostile-reviewer defenses.
+5. docs/LOCAL_LLM_COMMITTEE_DESCRIPTION.md for the logical committee methodology and scientific rationale.
+6. docs/LOCAL_COMMITTEE_GUIDE.md for local judge prompts, serving, caching, Slurm, and reproduction.
+7. docs/HUMAN_EVAL_LOGIC_AND_IMPLEMENTATION.md for human-review logic, consolidation, agreement metrics, and paper-facing interpretation.
+8. prompts/ for the current BA, FG-v2, STR, rubric, and JSON-system prompt copies.
+9. outputs/benchmark_local_committee_3judge/README.md for the benchmark output layout.
+10. exports/cats_human_eval_cli/README.md and REVIEWER_USER_MANUAL.md for the human-evaluation study package.
 
 The specialist files are complementary, not competing descriptions. If a
 formula or implementation detail differs between a historical report and the
@@ -1017,7 +1024,7 @@ exist. Both are secondary summaries. The primary scientific evidence is the
 component metric profile.
 
 For the full mathematical specification, see
-CATS_METRICS_METHODOLOGY.md and CATS_AGGREGATE_LOGIC.md.
+docs/CATS_METRICS_METHODOLOGY.md and docs/CATS_AGGREGATE_LOGIC.md.
 
 ### 5.7 Executable edge-case contract
 
@@ -1134,7 +1141,7 @@ artifacts but are excluded from the 108-row master scope.
 ## 7. Local Committee Reproduction
 
 The complete local deployment and operational guide is
-LOCAL_COMMITTEE_GUIDE.md. The essential production protocol is summarized here.
+docs/LOCAL_COMMITTEE_GUIDE.md. The essential production protocol is summarized here.
 
 ### 7.1 All-at-once run
 
@@ -1283,6 +1290,10 @@ The normal reviewer sequence is:
 
 The reviewer manual remains the operational authority for reviewers. It should be
 read before launching any review session.
+
+For the full logical protocol, normalization rules, consolidation safeguards,
+agreement formulas, current study denominators, and paper-facing interpretation,
+see [`docs/HUMAN_EVAL_LOGIC_AND_IMPLEMENTATION.md`](docs/HUMAN_EVAL_LOGIC_AND_IMPLEMENTATION.md).
 
 ### 8.4 Human metrics and interpretation
 
@@ -1508,10 +1519,11 @@ error analysis.
 For an ACL artifact or reviewer-facing repository, include:
 
 - this README;
-- CURRENT_REPO_MAP.md;
-- CATS_METRICS_METHODOLOGY.md;
-- CATS_AGGREGATE_LOGIC.md;
-- LOCAL_COMMITTEE_GUIDE.md;
+- docs/CURRENT_REPO_MAP.md;
+- docs/CATS_METRICS_METHODOLOGY.md;
+- docs/CATS_AGGREGATE_LOGIC.md;
+- docs/LOCAL_COMMITTEE_GUIDE.md;
+- docs/HUMAN_EVAL_LOGIC_AND_IMPLEMENTATION.md;
 - prompts/;
 - exact active configs;
 - canonical benchmark data or documented access instructions;
@@ -1540,6 +1552,7 @@ Before final paper submission, confirm:
 - GR, BA, FG, STR, and Answer Quality denominators are reported.
 - CATS-Balanced and CATS-Prevalence are clearly labeled secondary summaries.
 - Human review coverage and agreement are reported separately from committee scores.
+- Human-human, human-committee, and committee-internal frames use explicitly named denominators.
 - All final numbers trace to audited source JSON and per-sample records.
 - Every local judge endpoint was tested with a real chat completion.
 - Any staged cache run used complete read-only final aggregation.
@@ -1551,10 +1564,12 @@ Before final paper submission, confirm:
 
 | Document | Use |
 | --- | --- |
-| CURRENT_REPO_MAP.md | Canonical current paths, counts, and legacy boundary |
-| CATS_METRICS_METHODOLOGY.md | Full formula-level metric specification and scientific defense |
-| CATS_AGGREGATE_LOGIC.md | CATS aggregate design, rationale, alternatives, and hostile-reviewer response |
-| LOCAL_COMMITTEE_GUIDE.md | Local judge deployment, serving, cache, Slurm, exact call graph, and ACL methods |
+| docs/CURRENT_REPO_MAP.md | Canonical current paths, counts, and legacy boundary |
+| docs/CATS_METRICS_METHODOLOGY.md | Full formula-level metric specification and scientific defense |
+| docs/CATS_AGGREGATE_LOGIC.md | CATS aggregate design, rationale, alternatives, and hostile-reviewer response |
+| docs/LOCAL_LLM_COMMITTEE_DESCRIPTION.md | Logical local committee design, task-specific weighting, scientific rationale, limitations, and ACL methods language |
+| docs/LOCAL_COMMITTEE_GUIDE.md | Local judge deployment, serving, cache, Slurm, exact call graph, and ACL methods |
+| docs/HUMAN_EVAL_LOGIC_AND_IMPLEMENTATION.md | Human study design, reviewer logic, receipt consolidation, IAA, committee concordance, denominators, and paper-ready interpretation |
 | prompts/README.md | Current local committee prompt bundle and template variables |
 | outputs/benchmark_local_committee_3judge/README.md | Benchmark output/cache layout |
 | exports/cats_human_eval_cli/README.md | Human-evaluation package capabilities and commands |

@@ -1,16 +1,17 @@
 # Multi-LLM Committee Logic
 
-This note explains the core idea behind the repository's multi-LLM annotation approach in plain language.
+This note explains the core idea behind the repository's multi-LLM annotation
+approach in plain language. For the exact current runners, prompt families,
+backends, historical-run provenance, validation limits, and reproducibility
+rules, read [`docs/ANNOTATION_PIPELINE.md`](docs/ANNOTATION_PIPELINE.md).
 
 ## Big Picture
 
-The pipeline supports two main annotation strategies:
-
-1. `3-stage`
-2. `Monolithic`
-
-For either strategy, the multi-LLM version does not trust a single model run.
-Instead, it sends the same task to a small committee of models and then merges their outputs in a structured way.
+The active repository supports one retained annotation strategy: the
+**three-stage** pipeline. Monolithic/one-shot code is preserved only under
+`legacies/` and is not part of the current workflow. The stagewise pipeline
+sends the same structured task to a small committee of models and merges their
+outputs in a structured way.
 
 The goal is:
 
@@ -50,7 +51,7 @@ Examples:
 
 - `verdict`
 - `answerable_under_evidence`
-- `conflict_type` in the refusal-mode Stage 2 path
+- `conflict_type` in the benchmark- and refusal-mode Stage 2 paths
 - `abstain`
 
 These are the fields that get voted on.
@@ -172,9 +173,11 @@ So here:
 - the label is voted
 - the explanation comes from the strongest model on the winning side
 
-### Refusal-mode Stage 2
+### Benchmark and refusal Stage 2 modes
 
-In refusal mode, the committee can also re-annotate the conflict type from evidence.
+In benchmark and refusal modes, the committee also classifies conflict type
+from evidence. Refusal mode uses a refusal-specific prompt that directs a
+non-answerable outcome; benchmark mode does not force that behavior.
 
 In that path, the committee votes on:
 

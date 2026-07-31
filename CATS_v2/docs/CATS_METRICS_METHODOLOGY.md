@@ -1,7 +1,7 @@
 # CATS v2 Metrics: Mathematical Definitions, Design Logic, and Scientific Defense
 
 This document is the companion metric-methodology note for
-[`CATS_AGGREGATE_LOGIC.md`](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/CATS_AGGREGATE_LOGIC.md).
+[`CATS_AGGREGATE_LOGIC.md`](CATS_AGGREGATE_LOGIC.md).
 That document focuses on the hierarchical CATS aggregate. This document explains
 the complete metric stack that produces the values shown in the master results
 workbook, including the grounded-refusal metrics, Behavior Adherence, Factual
@@ -716,7 +716,7 @@ and a harmonic mean for behavior plus Answer Quality.
 ## 11. Hierarchical CATS Summaries
 
 The full rationale and reviewer-facing defense are in
-[`CATS_AGGREGATE_LOGIC.md`](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/CATS_AGGREGATE_LOGIC.md).
+[`CATS_AGGREGATE_LOGIC.md`](CATS_AGGREGATE_LOGIC.md).
 The operational summary is included here so the workbook fields are
 self-contained.
 
@@ -956,7 +956,7 @@ performance under explicitly documented assumptions.
 - [`rag_eval/judge_committee.py`](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/rag_eval/judge_committee.py): judge voting and weighted support.
 - [`rag_eval/judge_prompts.py`](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/rag_eval/judge_prompts.py): behavior, FG, and STR rubrics.
 - [`rag_eval/evaluator.py`](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/rag_eval/evaluator.py): per-sample orchestration and aggregate calculations.
-- [`CATS_AGGREGATE_LOGIC.md`](/Users/shubhammishra/Desktop/rag_reason/CATS_v2/CATS_AGGREGATE_LOGIC.md): detailed CATS aggregate rationale and reviewer-facing defense.
+- [`CATS_AGGREGATE_LOGIC.md`](CATS_AGGREGATE_LOGIC.md): detailed CATS aggregate rationale and reviewer-facing defense.
 
 ## Appendix A. Implementation-Locked Formula Inventory
 

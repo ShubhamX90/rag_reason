@@ -1,11 +1,20 @@
 # Current CONFLICTS-style benchmark build
 
+> **Read the dataset card first.** The detailed current benchmark description,
+> release statistics, source provenance, refusal track, selection criteria, and
+> integrity notes are in [`BENCHMARK_DATASET_DESCRIPTION.md`](BENCHMARK_DATASET_DESCRIPTION.md).
+> The Tavily search/fetch/windowing protocol is in
+> [`TAVILY_RETRIEVAL_METHODOLOGY.md`](TAVILY_RETRIEVAL_METHODOLOGY.md). This
+> document is the concise operational build guide.
+
 This document describes the retained benchmark-build path. Older pilot, 650-query,
 and smoke-test artifacts are preserved under `legacies/` and are intentionally not
 part of the clean reproduction path.
 
 The reviewer-facing released benchmark is separate from these build artifacts:
-`data/releases/benchmark_dataset_v2/benchmark_final_v2_holdout_clean_736.jsonl`.
+`data/releases/benchmark_dataset_v2/benchmark_final_v2_holdout_clean_736.jsonl`
+(736 records). The complete current release is
+`data/releases/benchmark_dataset_v2/benchmark_final_v2.jsonl` (933 records).
 The files in this document remain important for reproducing how the annotation
 pipeline produced and filtered the internal benchmark candidate pool.
 
@@ -17,8 +26,9 @@ pipeline produced and filtered the internal benchmark candidate pool.
    workflow requires the reduced display set.
 4. Run first-pass human preselection and export the selected 800 non-refusal rows.
 5. Run the stagewise multi-LLM committee in benchmark mode on those 800 rows.
-6. Select the final non-refusal benchmark subset and combine it with the retained
-   200-row refusal benchmark to form the 1,000-row benchmark.
+6. Combine the retained 800 non-refusal and 200 refusal stagewise outputs to
+   form the 1,000-row internal build artifact. This historical artifact is not
+   the current 933-row release or its 736-row reviewer-facing holdout.
 
 Source-dataset membership is not a gold conflict label. Conflict type is assigned
 after retrieval because retrieved evidence may not preserve the source query's
