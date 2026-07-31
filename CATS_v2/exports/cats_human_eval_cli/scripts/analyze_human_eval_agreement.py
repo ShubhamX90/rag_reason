@@ -1656,6 +1656,12 @@ def build_markdown_report(metric_log: Dict[str, Any]) -> str:
     lines: List[str] = []
     lines.append("# Human Eval Agreement Report")
     lines.append("")
+    lines.append("## Scope Note")
+    lines.append("")
+    lines.append("- Unless explicitly marked as supplementary, all primary cross-system comparisons in this report are anchored on the **fully complete 300-sample double-reviewed subset**.")
+    lines.append("- That choice keeps the human-human, human-committee, and committee-internal comparisons aligned to the same cleanest available evaluation slice.")
+    lines.append("- The larger 350-sample selected pool is still reported where useful, but only as supplementary context because 50 of those samples are not fully double-reviewed by humans.")
+    lines.append("")
     lines.append("## Study Construction")
     lines.append("")
     lines.append(f"- Study snapshot label: `{DEFAULT_CONSOLIDATED_LABEL}`")
@@ -1856,66 +1862,71 @@ def build_markdown_report(metric_log: Dict[str, Any]) -> str:
     if committee_internal.get("available"):
         lines.append("## Committee Internal Agreement")
         lines.append("")
-        lines.append("### All 350 Selected Study Samples")
-        lines.append("")
-        if ci_all_behavior:
-            lines.append(
-                f"- Behavior: `n={ci_all_behavior['n_items']}`, Krippendorff alpha `{fmt(ci_all_behavior['krippendorff_alpha_nominal'])}`"
-            )
-        if ci_all_behavior_qm:
-            lines.append(
-                f"- Behavior, qwen vs mistral: agreement `{fmt(ci_all_behavior_qm['agreement'])}`, Cohen's kappa `{fmt(ci_all_behavior_qm['cohen_kappa'])}`"
-            )
-        if ci_all_behavior_qd:
-            lines.append(
-                f"- Behavior, qwen vs deepseek: agreement `{fmt(ci_all_behavior_qd['agreement'])}`, Cohen's kappa `{fmt(ci_all_behavior_qd['cohen_kappa'])}`"
-            )
-        if ci_all_behavior_md:
-            lines.append(
-                f"- Behavior, mistral vs deepseek: agreement `{fmt(ci_all_behavior_md['agreement'])}`, Cohen's kappa `{fmt(ci_all_behavior_md['cohen_kappa'])}`"
-            )
-        if ci_all_strict:
-            lines.append(
-                f"- STR strict: `n={ci_all_strict['n_items']}`, Krippendorff alpha `{fmt(ci_all_strict['krippendorff_alpha_nominal'])}`"
-            )
-        if ci_all_strict_qd:
-            lines.append(
-                f"- STR strict, qwen vs deepseek: agreement `{fmt(ci_all_strict_qd['agreement'])}`, Cohen's kappa `{fmt(ci_all_strict_qd['cohen_kappa'])}`"
-            )
-        if ci_all_soft and ci_all_soft.get('krippendorff_alpha_nominal') == ci_all_strict.get('krippendorff_alpha_nominal'):
-            lines.append("- STR soft matches STR strict exactly on this study slice, indicating no partial-recall boundary effect inside the cached judge outputs.")
-        if ci_all_fg_claim:
-            lines.append(
-                f"- FG claim-level: `n={ci_all_fg_claim['n_items']}`, Krippendorff alpha `{fmt(ci_all_fg_claim['krippendorff_alpha_nominal'])}`"
-            )
-        if ci_all_fg_claim_md:
-            lines.append(
-                f"- FG claim-level, mistral vs deepseek: agreement `{fmt(ci_all_fg_claim_md['agreement'])}`, Cohen's kappa `{fmt(ci_all_fg_claim_md['cohen_kappa'])}`"
-            )
-        if ci_all_fg_ratio_md:
-            lines.append(
-                f"- FG ratio, mistral vs deepseek: `n={ci_all_fg_ratio_md['n']}`, exact-match `{fmt(ci_all_fg_ratio_md['exact_match_rate'])}`, MAE `{fmt(ci_all_fg_ratio_md['mae'])}`, Pearson `{fmt(ci_all_fg_ratio_md['pearson_r'])}`"
-            )
-        lines.append("")
-        lines.append("### Fully Double-Reviewed 300-Sample Subset")
+        lines.append("### Primary: Fully Complete 300-Sample Subset")
         lines.append("")
         if ci_complete_behavior:
             lines.append(
                 f"- Behavior: `n={ci_complete_behavior['n_items']}`, Krippendorff alpha `{fmt(ci_complete_behavior['krippendorff_alpha_nominal'])}`"
             )
+        ci_complete_behavior_qm = find_committee_internal_pair(committee_internal, "complete_300", "behavior_binary", "qwen3.5-397b-a17b", "mistral-small-4")
+        ci_complete_behavior_qd = find_committee_internal_pair(committee_internal, "complete_300", "behavior_binary", "qwen3.5-397b-a17b", "deepseek-r1-distill-32b")
+        ci_complete_behavior_md = find_committee_internal_pair(committee_internal, "complete_300", "behavior_binary", "mistral-small-4", "deepseek-r1-distill-32b")
+        ci_complete_strict_qd = find_committee_internal_pair(committee_internal, "complete_300", "str_binary_strict", "qwen3.5-397b-a17b", "deepseek-r1-distill-32b")
+        ci_complete_fg_claim_md = find_committee_internal_pair(committee_internal, "complete_300", "fg_claim_binary", "mistral-small-4", "deepseek-r1-distill-32b")
+        if ci_complete_behavior_qm:
+            lines.append(
+                f"- Behavior, qwen vs mistral: agreement `{fmt(ci_complete_behavior_qm['agreement'])}`, Cohen's kappa `{fmt(ci_complete_behavior_qm['cohen_kappa'])}`"
+            )
+        if ci_complete_behavior_qd:
+            lines.append(
+                f"- Behavior, qwen vs deepseek: agreement `{fmt(ci_complete_behavior_qd['agreement'])}`, Cohen's kappa `{fmt(ci_complete_behavior_qd['cohen_kappa'])}`"
+            )
+        if ci_complete_behavior_md:
+            lines.append(
+                f"- Behavior, mistral vs deepseek: agreement `{fmt(ci_complete_behavior_md['agreement'])}`, Cohen's kappa `{fmt(ci_complete_behavior_md['cohen_kappa'])}`"
+            )
         if ci_complete_strict:
             lines.append(
                 f"- STR strict: `n={ci_complete_strict['n_items']}`, Krippendorff alpha `{fmt(ci_complete_strict['krippendorff_alpha_nominal'])}`"
             )
+        if ci_complete_strict_qd:
+            lines.append(
+                f"- STR strict, qwen vs deepseek: agreement `{fmt(ci_complete_strict_qd['agreement'])}`, Cohen's kappa `{fmt(ci_complete_strict_qd['cohen_kappa'])}`"
+            )
         if ci_complete_soft and ci_complete_soft.get('krippendorff_alpha_nominal') == ci_complete_strict.get('krippendorff_alpha_nominal'):
-            lines.append("- STR soft again matches STR strict exactly on the fully double-reviewed subset.")
+            lines.append("- STR soft matches STR strict exactly on this primary 300-sample slice, indicating no partial-recall boundary effect inside the cached judge outputs.")
         if ci_complete_fg_claim:
             lines.append(
                 f"- FG claim-level: `n={ci_complete_fg_claim['n_items']}`, Krippendorff alpha `{fmt(ci_complete_fg_claim['krippendorff_alpha_nominal'])}`"
             )
+        if ci_complete_fg_claim_md:
+            lines.append(
+                f"- FG claim-level, mistral vs deepseek: agreement `{fmt(ci_complete_fg_claim_md['agreement'])}`, Cohen's kappa `{fmt(ci_complete_fg_claim_md['cohen_kappa'])}`"
+            )
         if ci_complete_fg_ratio_md:
             lines.append(
                 f"- FG ratio, mistral vs deepseek: `n={ci_complete_fg_ratio_md['n']}`, exact-match `{fmt(ci_complete_fg_ratio_md['exact_match_rate'])}`, MAE `{fmt(ci_complete_fg_ratio_md['mae'])}`, Pearson `{fmt(ci_complete_fg_ratio_md['pearson_r'])}`"
+            )
+        lines.append("")
+        lines.append("### Supplementary: All 350 Selected Study Samples")
+        lines.append("")
+        if ci_all_behavior:
+            lines.append(
+                f"- Behavior: `n={ci_all_behavior['n_items']}`, Krippendorff alpha `{fmt(ci_all_behavior['krippendorff_alpha_nominal'])}`"
+            )
+        if ci_all_strict:
+            lines.append(
+                f"- STR strict: `n={ci_all_strict['n_items']}`, Krippendorff alpha `{fmt(ci_all_strict['krippendorff_alpha_nominal'])}`"
+            )
+        if ci_all_soft and ci_all_soft.get('krippendorff_alpha_nominal') == ci_all_strict.get('krippendorff_alpha_nominal'):
+            lines.append("- STR soft again matches STR strict on the larger 350-sample pool.")
+        if ci_all_fg_claim:
+            lines.append(
+                f"- FG claim-level: `n={ci_all_fg_claim['n_items']}`, Krippendorff alpha `{fmt(ci_all_fg_claim['krippendorff_alpha_nominal'])}`"
+            )
+        if ci_all_fg_ratio_md:
+            lines.append(
+                f"- FG ratio, mistral vs deepseek: `n={ci_all_fg_ratio_md['n']}`, exact-match `{fmt(ci_all_fg_ratio_md['exact_match_rate'])}`, MAE `{fmt(ci_all_fg_ratio_md['mae'])}`, Pearson `{fmt(ci_all_fg_ratio_md['pearson_r'])}`"
             )
         lines.append("")
     lines.append("## Individual Committee Judges")

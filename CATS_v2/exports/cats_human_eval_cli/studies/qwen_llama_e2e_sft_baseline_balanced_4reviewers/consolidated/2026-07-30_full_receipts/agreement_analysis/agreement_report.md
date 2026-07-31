@@ -1,5 +1,11 @@
 # Human Eval Agreement Report
 
+## Scope Note
+
+- Unless explicitly marked as supplementary, all primary cross-system comparisons in this report are anchored on the **fully complete 300-sample double-reviewed subset**.
+- That choice keeps the human-human, human-committee, and committee-internal comparisons aligned to the same cleanest available evaluation slice.
+- The larger 350-sample selected pool is still reported where useful, but only as supplementary context because 50 of those samples are not fully double-reviewed by humans.
+
 ## Study Construction
 
 - Study snapshot label: `2026-07-30_full_receipts`
@@ -132,26 +138,26 @@
 
 ## Committee Internal Agreement
 
-### All 350 Selected Study Samples
-
-- Behavior: `n=350`, Krippendorff alpha `0.470`
-- Behavior, qwen vs mistral: agreement `0.746`, Cohen's kappa `0.443`
-- Behavior, qwen vs deepseek: agreement `0.863`, Cohen's kappa `0.635`
-- Behavior, mistral vs deepseek: agreement `0.729`, Cohen's kappa `0.377`
-- STR strict: `n=250`, Krippendorff alpha `0.665`
-- STR strict, qwen vs deepseek: agreement `0.944`, Cohen's kappa `0.875`
-- STR soft matches STR strict exactly on this study slice, indicating no partial-recall boundary effect inside the cached judge outputs.
-- FG claim-level: `n=552`, Krippendorff alpha `0.880`
-- FG claim-level, mistral vs deepseek: agreement `0.951`, Cohen's kappa `0.892`
-- FG ratio, mistral vs deepseek: `n=350`, exact-match `0.931`, MAE `0.044`, Pearson `0.913`
-
-### Fully Double-Reviewed 300-Sample Subset
+### Primary: Fully Complete 300-Sample Subset
 
 - Behavior: `n=300`, Krippendorff alpha `0.457`
+- Behavior, qwen vs mistral: agreement `0.743`, Cohen's kappa `0.431`
+- Behavior, qwen vs deepseek: agreement `0.853`, Cohen's kappa `0.611`
+- Behavior, mistral vs deepseek: agreement `0.730`, Cohen's kappa `0.368`
 - STR strict: `n=215`, Krippendorff alpha `0.678`
-- STR soft again matches STR strict exactly on the fully double-reviewed subset.
+- STR strict, qwen vs deepseek: agreement `0.944`, Cohen's kappa `0.874`
+- STR soft matches STR strict exactly on this primary 300-sample slice, indicating no partial-recall boundary effect inside the cached judge outputs.
 - FG claim-level: `n=477`, Krippendorff alpha `0.871`
+- FG claim-level, mistral vs deepseek: agreement `0.950`, Cohen's kappa `0.886`
 - FG ratio, mistral vs deepseek: `n=300`, exact-match `0.930`, MAE `0.045`, Pearson `0.906`
+
+### Supplementary: All 350 Selected Study Samples
+
+- Behavior: `n=350`, Krippendorff alpha `0.470`
+- STR strict: `n=250`, Krippendorff alpha `0.665`
+- STR soft again matches STR strict on the larger 350-sample pool.
+- FG claim-level: `n=552`, Krippendorff alpha `0.880`
+- FG ratio, mistral vs deepseek: `n=350`, exact-match `0.931`, MAE `0.044`, Pearson `0.913`
 
 ## Individual Committee Judges
 

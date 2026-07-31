@@ -117,6 +117,359 @@ def _safe_ctype(raw: Any, conflict_type_string: Any = None) -> int:
     return 1
 
 
+def _geometric_mean(values: List[float]) -> float:
+    """Geometric mean on [0, 1] scores with explicit zero handling."""
+    if not values:
+        return 0.0
+    vals = [float(v) for v in values]
+    if any(v <= 0.0 for v in vals):
+        return 0.0
+    return float(np.exp(np.mean(np.log(vals))))
+
+
+def _harmonic_mean(values: List[float]) -> float:
+    """Harmonic mean on non-negative [0, 1] scores with zero handling."""
+    if not values:
+        return 0.0
+    vals = [float(v) for v in values]
+    if any(v <= 0.0 for v in vals):
+        return 0.0
+    return float(len(vals) / sum(1.0 / v for v in vals))
+
+
+def _stored_behavior_consensus(res: Dict[str, Any]) -> float | None:
+    """Recover continuous committee support from a stored per-sample result.
+
+    New runs store ``behavior_consensus_score`` directly. Older results contain
+    committee vote totals, which are sufficient to reconstruct the weighted or
+    raw support fraction. A final binary behavior score is the last-resort
+    compatibility fallback for artifacts without vote details.
+    """
+    direct = res.get("behavior_consensus_score")
+    if direct is not None:
+        return max(0.0, min(1.0, float(direct)))
+
+    details = res.get("behavior_details") or {}
+    committee = details.get("committee_details") or {}
+    weighted_for = committee.get("weighted_for")
+    weighted_against = committee.get("weighted_against")
+    if weighted_for is not None and weighted_against is not None:
+        total_weight = float(weighted_for) + float(weighted_against)
+        if total_weight > 0:
+            return max(0.0, min(1.0, float(weighted_for) / total_weight))
+
+    votes_for = committee.get("votes_for", details.get("votes_for"))
+    total_votes = committee.get("total_votes", details.get("total_votes"))
+    if votes_for is not None and total_votes:
+        return max(0.0, min(1.0, float(votes_for) / float(total_votes)))
+
+    if res.get("behavior_score") is not None:
+        return max(0.0, min(1.0, float(res["behavior_score"])))
+    return None
+
+
+def _legacy_flat_cats_score(
+    gr_component: float,
+    behavior: float,
+    behavior_n: int,
+    factual_grounding: float,
+    factual_grounding_n: int,
+    single_truth_recall: float,
+    single_truth_recall_n: int,
+) -> float:
+    """Legacy flat CATS retained for backward comparison."""
+    parts = [float(gr_component)]
+    if behavior_n > 0:
+        parts.append(float(behavior))
+    if factual_grounding_n > 0:
+        parts.append(float(factual_grounding))
+    if single_truth_recall_n > 0:
+        parts.append(float(single_truth_recall))
+    return float(np.mean(parts)) if parts else 0.0
+
+
+CATS_AGGREGATE_VERSION = "cats_h_gated_harmonic_v1"
+
+
+def aggregate_sample_results(
+    sample_results: List[Dict[str, Any]],
+) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
+    """Aggregate per-sample results into overall and per-type summaries.
+
+    Primary component metrics remain separate:
+    - decision correctness (`gr_accuracy` per example; dataset-level `gr_f1` reported separately)
+    - behavior adherence
+    - factual grounding
+    - single-truth recall
+
+    Secondary CATS summaries are constructed from per-example hierarchical scores:
+    - answer quality is fused per example as sqrt(FG * STR) when STR applies, else FG
+    - decision correctness is a gate;
+    - answerable examples use a harmonic fusion of continuous behavior consensus
+      and answer quality;
+    - correct refusals contribute their per-example decision-correctness score;
+    - per-type CATS is the arithmetic mean of complete example-level scores;
+    - CATS-Prevalence is the arithmetic mean across all examples;
+    - CATS-Balanced averages decision-balanced conflict-type scores, while the
+      older equal-type-only diagnostic is retained as cats_type_balanced_score.
+
+    The legacy flat average is also retained for comparison as
+    `cats_flat_legacy_score`.
+    """
+    empty_bucket = {
+        "n": 0,
+        "correct_refusals": 0,
+        "gr_accuracy": [],
+        "behavior": [],
+        "behavior_n": 0,
+        "behavior_consensus": [],
+        "behavior_consensus_n": 0,
+        "factual_grounding": [],
+        "factual_grounding_n": 0,
+        "single_truth_recall": [],
+        "single_truth_recall_n": 0,
+        "answer_quality": [],
+        "answer_quality_n": 0,
+        "cats_example_scores": [],
+        "cats_answerable_scores": [],
+        "cats_answerable_n": 0,
+        "cats_refusal_required_scores": [],
+        "cats_refusal_required_n": 0,
+        "cats_unscorable_n": 0,
+        "pred_answered_list": [],
+        "gold_answerable_list": [],
+    }
+
+    overall = {k: ([] if isinstance(v, list) else 0) for k, v in empty_bucket.items()}
+    overall["cats_aggregate_version"] = CATS_AGGREGATE_VERSION
+    per_type: Dict[str, Dict[str, Any]] = {}
+
+    pred_list: List[bool] = []
+    gold_list: List[bool] = []
+
+    for res in sample_results:
+        ctype_key = str(res["conflict_type"])
+        bucket = per_type.setdefault(
+            ctype_key,
+            {k: ([] if isinstance(v, list) else 0) for k, v in empty_bucket.items()},
+        )
+
+        overall["n"] += 1
+        bucket["n"] += 1
+
+        if res.get("correct_refusal", False):
+            overall["correct_refusals"] += 1
+            bucket["correct_refusals"] += 1
+
+        gr_acc = float(res["gr_accuracy"])
+        overall["gr_accuracy"].append(gr_acc)
+        bucket["gr_accuracy"].append(gr_acc)
+
+        behavior_applicable = bool(res.get("behavior_applicable", True))
+        if behavior_applicable:
+            behavior_score = float(res["behavior_score"])
+            overall["behavior"].append(behavior_score)
+            bucket["behavior"].append(behavior_score)
+            overall["behavior_n"] += 1
+            bucket["behavior_n"] += 1
+            behavior_consensus_score = _stored_behavior_consensus(res)
+            if behavior_consensus_score is not None:
+                overall["behavior_consensus"].append(behavior_consensus_score)
+                bucket["behavior_consensus"].append(behavior_consensus_score)
+                overall["behavior_consensus_n"] += 1
+                bucket["behavior_consensus_n"] += 1
+        else:
+            behavior_score = None
+            behavior_consensus_score = None
+
+        factual_grounding_applicable = bool(res.get("factual_grounding_applicable", True))
+        if factual_grounding_applicable:
+            factual_grounding_score = float(res["factual_grounding_score"])
+            overall["factual_grounding"].append(factual_grounding_score)
+            bucket["factual_grounding"].append(factual_grounding_score)
+            overall["factual_grounding_n"] += 1
+            bucket["factual_grounding_n"] += 1
+        else:
+            factual_grounding_score = None
+
+        single_truth_applicable = bool(res.get("single_truth_applicable", True))
+        if single_truth_applicable:
+            single_truth_score = float(res["single_truth_recall_score"])
+            overall["single_truth_recall"].append(single_truth_score)
+            bucket["single_truth_recall"].append(single_truth_score)
+            overall["single_truth_recall_n"] += 1
+            bucket["single_truth_recall_n"] += 1
+        else:
+            single_truth_score = None
+
+        answer_quality_score = None
+        if factual_grounding_score is not None:
+            if single_truth_score is not None:
+                answer_quality_score = _geometric_mean([factual_grounding_score, single_truth_score])
+            else:
+                answer_quality_score = factual_grounding_score
+
+            overall["answer_quality"].append(answer_quality_score)
+            bucket["answer_quality"].append(answer_quality_score)
+            overall["answer_quality_n"] += 1
+            bucket["answer_quality_n"] += 1
+
+        # CATS-Harmonized: decision is a gate, not a cube-root component.
+        # Correct refusals are intentionally decision-only: answer-content and
+        # behavior metrics are not applicable to a required refusal.
+        cats_example_score: float | None
+        if res.get("correct_refusal"):
+            cats_example_score = float(gr_acc)
+        else:
+            if behavior_consensus_score is not None and answer_quality_score is not None:
+                cats_example_score = float(gr_acc) * _harmonic_mean(
+                    [behavior_consensus_score, answer_quality_score]
+                )
+            elif behavior_consensus_score is not None:
+                cats_example_score = float(gr_acc) * behavior_consensus_score
+            elif answer_quality_score is not None:
+                cats_example_score = float(gr_acc) * answer_quality_score
+            else:
+                cats_example_score = float(gr_acc)
+
+        if cats_example_score is None:
+            overall["cats_unscorable_n"] += 1
+            bucket["cats_unscorable_n"] += 1
+        else:
+            overall["cats_example_scores"].append(cats_example_score)
+            bucket["cats_example_scores"].append(cats_example_score)
+            if bool(res.get("gold_answerable", True)):
+                overall["cats_answerable_scores"].append(cats_example_score)
+                bucket["cats_answerable_scores"].append(cats_example_score)
+                overall["cats_answerable_n"] += 1
+                bucket["cats_answerable_n"] += 1
+            else:
+                overall["cats_refusal_required_scores"].append(cats_example_score)
+                bucket["cats_refusal_required_scores"].append(cats_example_score)
+                overall["cats_refusal_required_n"] += 1
+                bucket["cats_refusal_required_n"] += 1
+
+        if "pred_answered" in res and "gold_answerable" in res:
+            pred = bool(res["pred_answered"])
+            gold = bool(res["gold_answerable"])
+            pred_list.append(pred)
+            gold_list.append(gold)
+            bucket["pred_answered_list"].append(pred)
+            bucket["gold_answerable_list"].append(gold)
+
+    def finalize_bucket(bucket: Dict[str, Any], *, use_gr_f1_in_legacy: bool) -> Dict[str, Any]:
+        if bucket["n"] == 0:
+            return bucket
+
+        for key in (
+            "gr_accuracy",
+            "behavior",
+            "factual_grounding",
+            "single_truth_recall",
+            "answer_quality",
+            "cats_example_scores",
+            "behavior_consensus",
+            "cats_answerable_scores",
+            "cats_refusal_required_scores",
+        ):
+            vals = bucket[key]
+            bucket[key] = float(np.mean(vals)) if vals else 0.0
+
+        pt_pred = bucket.pop("pred_answered_list", [])
+        pt_gold = bucket.pop("gold_answerable_list", [])
+        if pt_pred:
+            pt_gr = compute_f1_gr(pt_pred, pt_gold)
+            bucket["gr_f1"] = pt_gr["f1"]
+        else:
+            bucket["gr_f1"] = bucket["gr_accuracy"]
+
+        bucket["cats_scored_n"] = bucket["n"] - bucket["cats_unscorable_n"]
+        bucket["cats_complete"] = (
+            bucket["cats_unscorable_n"] == 0
+            and bucket["cats_scored_n"] == bucket["n"]
+            and bucket["n"] > 0
+        )
+        bucket["cats_score"] = (
+            float(np.mean(bucket["cats_example_scores"]))
+            if bucket["cats_example_scores"] else 0.0
+        )
+        bucket["cats_prevalence_score"] = bucket["cats_score"] if bucket["cats_complete"] else None
+        bucket["cats_answerable_score"] = (
+            float(np.mean(bucket["cats_answerable_scores"]))
+            if bucket["cats_answerable_n"] > 0 else None
+        )
+        bucket["cats_refusal_required_score"] = (
+            float(np.mean(bucket["cats_refusal_required_scores"]))
+            if bucket["cats_refusal_required_n"] > 0 else None
+        )
+        subgroup_scores = [
+            value for value in (
+                bucket["cats_answerable_score"],
+                bucket["cats_refusal_required_score"],
+            ) if value is not None
+        ]
+        bucket["cats_decision_balanced_score"] = (
+            float(np.mean(subgroup_scores))
+            if bucket["cats_complete"] and subgroup_scores else None
+        )
+        gr_component = bucket["gr_f1"] if use_gr_f1_in_legacy else bucket["gr_accuracy"]
+        bucket["cats_flat_legacy_score"] = _legacy_flat_cats_score(
+            gr_component=gr_component,
+            behavior=bucket["behavior"],
+            behavior_n=bucket["behavior_n"],
+            factual_grounding=bucket["factual_grounding"],
+            factual_grounding_n=bucket["factual_grounding_n"],
+            single_truth_recall=bucket["single_truth_recall"],
+            single_truth_recall_n=bucket["single_truth_recall_n"],
+        )
+        return bucket
+
+    overall = finalize_bucket(overall, use_gr_f1_in_legacy=False)
+    per_type = {k: finalize_bucket(v, use_gr_f1_in_legacy=False) for k, v in per_type.items()}
+
+    empty_type_keys = [
+        key for key, bucket in per_type.items()
+        if bucket.get("cats_scored_n", 0) == 0
+    ]
+    overall["cats_empty_type_n"] = len(empty_type_keys)
+    overall["cats_empty_type_keys"] = empty_type_keys
+    overall["cats_complete"] = bool(overall["cats_complete"] and not empty_type_keys)
+
+    gr_dataset = compute_f1_gr(pred_list, gold_list) if pred_list else {}
+    if gr_dataset:
+        overall["gr_f1"] = gr_dataset["f1"]
+
+    overall["cats_prevalence_score"] = overall["cats_score"] if overall["cats_complete"] else None
+    sorted_types = sorted(per_type.items(), key=lambda item: int(item[0]))
+    type_scores = [bucket["cats_score"] for _, bucket in sorted_types]
+    decision_balanced_type_scores = [
+        bucket["cats_decision_balanced_score"]
+        for _, bucket in sorted_types
+        if bucket["cats_decision_balanced_score"] is not None
+    ]
+    overall["cats_type_balanced_score"] = (
+        float(np.mean(type_scores))
+        if overall["cats_complete"] and type_scores and len(type_scores) == len(sorted_types)
+        else None
+    )
+    overall["cats_balanced_score"] = (
+        float(np.mean(decision_balanced_type_scores))
+        if overall["cats_complete"] and len(decision_balanced_type_scores) == len(sorted_types)
+        else None
+    )
+    overall["cats_flat_legacy_score"] = _legacy_flat_cats_score(
+        gr_component=overall.get("gr_f1", overall["gr_accuracy"]),
+        behavior=overall["behavior"],
+        behavior_n=overall["behavior_n"],
+        factual_grounding=overall["factual_grounding"],
+        factual_grounding_n=overall["factual_grounding_n"],
+        single_truth_recall=overall["single_truth_recall"],
+        single_truth_recall_n=overall["single_truth_recall_n"],
+    )
+
+    return overall, per_type, gr_dataset
+
+
 class EnhancedEvaluator:
     """Enhanced evaluation orchestrator with multi-judge support."""
 
@@ -258,19 +611,13 @@ class EnhancedEvaluator:
         gr_acc = gr_accuracy_from_flags(pred_answered, gold_answerable)
 
         # Correct refusal: the model refused AND the question was genuinely unanswerable.
-        # Behavior, factual grounding, and STR are not meaningful here — the model did
-        # the right thing (GR=1.0), so we do not call the committee and exclude these
-        # samples from the three sub-metric averages and from the CATS denominator.
+        # Answer-content and behavior metrics are intentionally not applicable;
+        # the aggregate represents this example through decision correctness only.
         correct_refusal = (not gold_answerable) and (not pred_answered)
 
         if correct_refusal:
-            beh_score = 0.0  # placeholder — not counted in average
-            beh = {
-                "adherent": None,
-                "rationale": "N/A — correct refusal; sample excluded from behavior average",
-                "skipped": "correct_refusal",
-                "committee_details": None,
-            }
+            beh_score = 0.0
+            behavior_consensus_score = None
             fg_score = 0.0  # placeholder — not counted in average
             fg_result = {
                 "grounding_ratio": None,
@@ -282,6 +629,12 @@ class EnhancedEvaluator:
             st_score = 0.0
             st_result = {"recall": 0.0, "skipped": "correct_refusal"}
             st_applicable = False
+            beh = {
+                "adherent": None,
+                "rationale": "N/A — correct refusal; excluded from behavior average",
+                "skipped": "correct_refusal",
+                "committee_details": None,
+            }
             beh_applicable = False
             fg_applicable = False
         else:
@@ -297,6 +650,7 @@ class EnhancedEvaluator:
                 retrieved_docs=retrieved_docs,
             )
             beh_score = 1.0 if beh["adherent"] else 0.0
+            behavior_consensus_score = float(beh.get("consensus_score", beh_score))
             beh_applicable = True
 
             # --- Metric 3: factual grounding (committee, v2 / FG-v3).
@@ -342,6 +696,7 @@ class EnhancedEvaluator:
             "gr_accuracy": gr_acc,
             "behavior_score": beh_score,
             "behavior_applicable": beh_applicable,
+            "behavior_consensus_score": behavior_consensus_score,
             "behavior_details": beh,
             "factual_grounding_score": fg_score,
             "factual_grounding_applicable": fg_applicable,
@@ -352,141 +707,8 @@ class EnhancedEvaluator:
         }
 
     def _aggregate_results(self, sample_results: List[Dict[str, Any]]) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
-        """Aggregate per-sample results.
-
-        Returns (overall, per_type, gr_dataset_metrics).
-
-        Applicability rules:
-        - gr_accuracy       : all samples
-        - behavior          : excluded when correct_refusal=True
-        - factual_grounding : excluded when correct_refusal=True
-        - single_truth_recall: excluded when single_truth_applicable=False
-                               (Type 3 or no gold answer)
-
-        correct_refusal (gold_answerable=False AND pred_answered=False) means the
-        model did the right thing — its GR=1.0 counts, but the other three metrics
-        are structurally uninformative and must not drag the averages down.
-
-        CATS score is the mean of whichever sub-metrics have at least one
-        applicable sample, so correct refusals do not inflate a denominator they
-        don't contribute to.
-        """
-        empty_bucket = {
-            "n": 0,
-            "correct_refusals": 0,
-            "gr_accuracy": [],
-            "behavior": [],
-            "behavior_n": 0,
-            "factual_grounding": [],
-            "factual_grounding_n": 0,
-            "single_truth_recall": [],
-            "single_truth_recall_n": 0,
-            # Per-bucket pred/gold lists for per-type GR F1 (N13 fix).
-            "pred_answered_list": [],
-            "gold_answerable_list": [],
-        }
-
-        overall = {k: ([] if isinstance(v, list) else 0) for k, v in empty_bucket.items()}
-        per_type: Dict[str, Dict[str, Any]] = {}
-
-        pred_list: List[bool] = []
-        gold_list: List[bool] = []
-
-        for res in sample_results:
-            ctype_key = str(res["conflict_type"])
-            bucket = per_type.setdefault(
-                ctype_key,
-                {k: ([] if isinstance(v, list) else 0) for k, v in empty_bucket.items()},
-            )
-
-            overall["n"] += 1
-            bucket["n"] += 1
-
-            if res.get("correct_refusal", False):
-                overall["correct_refusals"] += 1
-                bucket["correct_refusals"] += 1
-
-            # GR accuracy: always included.
-            overall["gr_accuracy"].append(res["gr_accuracy"])
-            bucket["gr_accuracy"].append(res["gr_accuracy"])
-
-            # Behavior: excluded for correct refusals.
-            if res.get("behavior_applicable", True):
-                overall["behavior"].append(res["behavior_score"])
-                bucket["behavior"].append(res["behavior_score"])
-                overall["behavior_n"] += 1
-                bucket["behavior_n"] += 1
-
-            # Factual grounding: excluded for correct refusals.
-            if res.get("factual_grounding_applicable", True):
-                overall["factual_grounding"].append(res["factual_grounding_score"])
-                bucket["factual_grounding"].append(res["factual_grounding_score"])
-                overall["factual_grounding_n"] += 1
-                bucket["factual_grounding_n"] += 1
-
-            # Single-truth recall: excluded when not applicable (Type 3 / no gold / correct refusal).
-            if res.get("single_truth_applicable", True):
-                overall["single_truth_recall"].append(res["single_truth_recall_score"])
-                bucket["single_truth_recall"].append(res["single_truth_recall_score"])
-                overall["single_truth_recall_n"] += 1
-                bucket["single_truth_recall_n"] += 1
-
-            if "pred_answered" in res and "gold_answerable" in res:
-                pred_list.append(bool(res["pred_answered"]))
-                gold_list.append(bool(res["gold_answerable"]))
-                # Also track per-bucket for per-type F1 (N13 fix).
-                bucket["pred_answered_list"].append(bool(res["pred_answered"]))
-                bucket["gold_answerable_list"].append(bool(res["gold_answerable"]))
-
-        def finalize(b: Dict[str, Any]) -> Dict[str, Any]:
-            if b["n"] == 0:
-                return b
-            for k in ("gr_accuracy", "behavior", "factual_grounding", "single_truth_recall"):
-                vals = b[k]
-                b[k] = float(np.mean(vals)) if vals else 0.0
-            # N13 fix: compute per-bucket GR F1 so per-type CATS is semantically
-            # consistent with overall CATS (which uses dataset-level F1, not accuracy).
-            pt_pred = b.pop("pred_answered_list", [])
-            pt_gold = b.pop("gold_answerable_list", [])
-            if pt_pred:
-                pt_gr = compute_f1_gr(pt_pred, pt_gold)
-                b["gr_f1"] = pt_gr["f1"]
-                gr_cats_component = pt_gr["f1"]
-            else:
-                gr_cats_component = b["gr_accuracy"]
-            # CATS: mean of whichever sub-metrics had at least one applicable sample.
-            cats_parts = [gr_cats_component]
-            if b["behavior_n"] > 0:
-                cats_parts.append(b["behavior"])
-            if b["factual_grounding_n"] > 0:
-                cats_parts.append(b["factual_grounding"])
-            if b["single_truth_recall_n"] > 0:
-                cats_parts.append(b["single_truth_recall"])
-            b["cats_score"] = float(np.mean(cats_parts))
-            return b
-
-        overall = finalize(overall)
-        per_type = {k: finalize(v) for k, v in per_type.items()}
-
-        gr_dataset = compute_f1_gr(pred_list, gold_list) if pred_list else {}
-
-        # Recompute overall CATS using dataset-level GR F1 instead of sample-averaged accuracy.
-        # F1 penalises both false positives (answering unanswerable) and false negatives (refusing
-        # answerable), while accuracy can be gamed by the class distribution.
-        # Per-type cats_score retains accuracy (no per-type F1 without separate tracking).
-        if gr_dataset:
-            gr_f1 = gr_dataset["f1"]
-            overall["gr_f1"] = gr_f1
-            cats_parts = [gr_f1]
-            if overall["behavior_n"] > 0:
-                cats_parts.append(overall["behavior"])
-            if overall["factual_grounding_n"] > 0:
-                cats_parts.append(overall["factual_grounding"])
-            if overall["single_truth_recall_n"] > 0:
-                cats_parts.append(overall["single_truth_recall"])
-            overall["cats_score"] = float(np.mean(cats_parts))
-
-        return overall, per_type, gr_dataset
+        """Aggregate per-sample results using example-level hierarchical CATS."""
+        return aggregate_sample_results(sample_results)
 
     def _write_markdown_report(self, path: str, res: Dict[str, Any]) -> None:
         Path(path).parent.mkdir(parents=True, exist_ok=True)
@@ -498,6 +720,11 @@ class EnhancedEvaluator:
                 return float(val)
             except Exception:
                 return 0.0
+
+        def _score_text(val: Any) -> str:
+            if val is None:
+                return "UNAVAILABLE (no computable example-level score)"
+            return f"{_safe_fmt(val):.3f}"
 
         lines: List[str] = []
         lines.append("# CATS v2.0 Evaluation Report\n\n")
@@ -513,25 +740,32 @@ class EnhancedEvaluator:
             if n_correct_refusals:
                 lines.append(
                     f"**Correct Refusals**: {n_correct_refusals} "
-                    f"(GR=1.0 only; excluded from behavior/grounding/recall averages)\n\n"
+                    f"(answer-content metrics not applicable; CATS uses decision correctness)\n\n"
                 )
             lines.append(f"**GR Accuracy**: {_safe_fmt(o['gr_accuracy']):.3f}"
                          f" (over {n_total} samples)\n\n")
             if "gr_f1" in o:
-                lines.append(f"**GR F1** *(used in CATS)*: {_safe_fmt(o['gr_f1']):.3f}\n\n")
+                lines.append(f"**GR F1**: {_safe_fmt(o['gr_f1']):.3f}\n\n")
             lines.append(f"**Behavior Adherence**: {_safe_fmt(o['behavior']):.3f}"
                          f" (over {o.get('behavior_n', n_total)} applicable samples)\n\n")
+            lines.append(f"**Behavior Consensus**: {_safe_fmt(o.get('behavior_consensus', 0.0)):.3f}"
+                         f" (over {o.get('behavior_consensus_n', 0)} samples)\n\n")
             lines.append(f"**Factual Grounding**: {_safe_fmt(o['factual_grounding']):.3f}"
                          f" (over {o.get('factual_grounding_n', n_total)} applicable samples)\n\n")
             lines.append(f"**Single-Truth Recall**: {_safe_fmt(o['single_truth_recall']):.3f}"
                          f" (over {o.get('single_truth_recall_n', 0)} applicable samples)\n\n")
+            lines.append(f"**Answer Quality Pillar** *(FG fused with STR where applicable)*: "
+                         f"{_safe_fmt(o.get('answer_quality', 0.0)):.3f}"
+                         f" (over {o.get('answer_quality_n', 0)} applicable samples)\n\n")
 
-            cats_score = _safe_fmt(o.get("cats_score", 0.0))
             lines.append("-" * 80 + "\n\n")
-            lines.append(f"### CATS Score: {cats_score:.3f}\n\n")
+            lines.append("### Secondary CATS Summaries\n\n")
+            lines.append(f"- **CATS-Prevalence**: {_score_text(o.get('cats_prevalence_score'))}\n")
+            lines.append(f"- **CATS-Balanced**: {_score_text(o.get('cats_balanced_score'))}\n")
+            lines.append(f"- **CATS completeness**: {o.get('cats_complete', False)}\n")
+            lines.append(f"- **Unscorable examples**: {o.get('cats_unscorable_n', 0)}\n")
             lines.append(
-                f"*(average of {len([x for x in [True, o.get('behavior_n',0)>0, o.get('factual_grounding_n',0)>0, o.get('single_truth_recall_n',0)>0] if x])} "
-                f"applicable sub-metrics)*\n\n"
+                "- These are example-level gated/harmonic summaries, not flat averages of the four primary metrics.\n\n"
             )
             lines.append("-" * 80 + "\n\n")
 
@@ -566,18 +800,24 @@ class EnhancedEvaluator:
             for t, b in sorted(res["conflict_per_type"].items()):
                 lines.append(f"### Type {t}: {conflict_types.get(str(t), 'Unknown')}\n\n")
                 lines.append(f"- **Samples**: {b['n']}"
-                             + (f" ({b['correct_refusals']} correct refusals excluded from sub-metrics)" if b.get('correct_refusals') else "")
+                             + (f" ({b['correct_refusals']} correct refusals; decision-only CATS contribution)" if b.get('correct_refusals') else "")
                              + "\n")
                 if b['n'] < 5:
                     lines.append(f"  - ⚠️  n<5: numbers below are noisy\n")
                 lines.append(f"- **GR Accuracy**: {_safe_fmt(b['gr_accuracy']):.3f}\n")
                 if "gr_f1" in b:
-                    lines.append(f"- **GR F1** *(used in CATS)*: {_safe_fmt(b['gr_f1']):.3f}\n")
+                    lines.append(f"- **GR F1**: {_safe_fmt(b['gr_f1']):.3f}\n")
                 lines.append(f"- **Behavior**: {_safe_fmt(b['behavior']):.3f} (n={b.get('behavior_n', b['n'])})\n")
                 lines.append(f"- **Grounding**: {_safe_fmt(b['factual_grounding']):.3f} (n={b.get('factual_grounding_n', b['n'])})\n")
                 lines.append(f"- **Recall**: {_safe_fmt(b['single_truth_recall']):.3f}"
                              f" (n={b.get('single_truth_recall_n', 0)})\n")
-                lines.append(f"- **CATS**: {_safe_fmt(b.get('cats_score', 0.0)):.3f}\n\n")
+                lines.append(f"- **Answer Quality Pillar**: {_safe_fmt(b.get('answer_quality', 0.0)):.3f}"
+                             f" (n={b.get('answer_quality_n', 0)})\n")
+                lines.append(f"- **Type CATS Score**: {_score_text(b.get('cats_prevalence_score'))}\n")
+                lines.append(f"- **Type CATS completeness**: {b.get('cats_complete', False)}\n")
+                lines.append(f"- **Answerable CATS**: {_score_text(b.get('cats_answerable_score'))}\n")
+                lines.append(f"- **Refusal-required CATS**: {_score_text(b.get('cats_refusal_required_score'))}\n")
+                lines.append(f"- **Decision-balanced Type CATS**: {_score_text(b.get('cats_decision_balanced_score'))}\n\n")
 
         if "cost_summary" in res:
             lines.append("\n" + "=" * 80 + "\n\n")

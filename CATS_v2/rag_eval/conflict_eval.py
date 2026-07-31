@@ -17,7 +17,12 @@ Authors: Enhanced by Claude AI
 import asyncio
 import re
 from typing import Dict, Any, List, Optional
-from .judge_prompts import behavior_judge_prompt, single_truth_recall_prompt, nli_prompt, fg_committee_prompt
+from .judge_prompts import (
+    behavior_judge_prompt,
+    single_truth_recall_prompt,
+    nli_prompt,
+    fg_committee_prompt,
+)
 from .judge_committee import JudgeCommittee, JudgeClient, CommitteeDecision
 from .logging_config import logger
 
@@ -120,6 +125,7 @@ async def committee_behavior_adherence(
             "votes_against": 0,
             "total_votes": 0,
             "skipped": "empty_answer",
+            "consensus_score": 0.0,
             "committee_details": None,
         }
 
@@ -137,6 +143,7 @@ async def committee_behavior_adherence(
             "total_votes": decision.total_votes,
             "skipped": None,
             "all_failed": decision.all_failed,
+            "consensus_score": _committee_consensus_score(decision),
             "committee_details": decision.to_dict(),
         }
     except Exception as e:
@@ -150,8 +157,24 @@ async def committee_behavior_adherence(
             "votes_against": 0,
             "total_votes": 0,
             "skipped": "committee_error",
+            "consensus_score": 0.0,
             "committee_details": None,
         }
+
+
+def _committee_consensus_score(decision: CommitteeDecision) -> float:
+    """Return continuous committee support for adherence in [0, 1].
+
+    Weighted committees expose weighted vote totals; unweighted committees
+    fall back to the raw vote fraction. This preserves disagreement such as
+    2/3 instead of collapsing every majority into a binary 1.
+    """
+    weighted_total = float(decision.weighted_for) + float(decision.weighted_against)
+    if weighted_total > 0:
+        return float(decision.weighted_for) / weighted_total
+    if decision.total_votes > 0:
+        return float(decision.votes_for) / float(decision.total_votes)
+    return 0.0
 
 
 # --------------------

@@ -110,6 +110,7 @@ Instructions:
 - If the answer is a refusal ("CANNOT ANSWER" / "INSUFFICIENT EVIDENCE") AND the retrieved evidence genuinely does not support an answer, treat the refusal as adherent.
 - If the answer clearly follows the expected behavior for this conflict type, set "adherent": true.
 - If the answer clearly violates or ignores the expected behavior, set "adherent": false.
+- Do not use answerability correctness, factual entailment, citation validity, unsupported-claim detection, or single-truth recall as hidden behavior criteria. Those are separate metrics.
 - Ignore factual correctness; only judge how the answer behaves relative to the rubric.
 - The "rationale" should briefly cite the key aspects of the answer's behavior.
 - The "confidence" should reflect how certain you are in YOUR adherent decision, between 0.0 (coin flip) and 1.0 (clearly correct call). Use 0.5 if you are uncertain.
